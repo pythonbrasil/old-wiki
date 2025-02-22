@@ -1,0 +1,57 @@
+#pragma section-numbers off
+= Python Brasil =
+
+Este site, foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma. Ele utiliza o software MoinMoin que é um Wiki inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente.
+
+= Destaque da Semana =
+
+["PythonComADO"] - por WashingtonCoutinhoCorrêaJr - Excelente tutorial que fala sobre Python acessando banco de dados via ADO do Windows.
+
+= Notícias =
+
+   * '''[[DateTime(2003-12-13T12:00:00)]] - Lunatic Python foi lançado!''': Realmente o GustavoNiemeyer está com tudo. Não bastasse ele ser um dos brasileiros que contribuem com a distribuição oficial de Python ainda sobra tempo pra ele desenvolver alguns projetos paralelos. Este é para quem gosta de Python e também gosta de Lua (Linguagem de programação criada no Brasil). Para dar uma conferida no resultado: https://moin.conectiva.com.br/LunaticPython.
+
+   * '''[[DateTime(2003-12-12T12:00:00)]] - Back to the Future II "2o Python-lunch no SDSL"''': 6a-feira, dia 12, estaremos lá de novo, e combinamos um local de encontro mais preciso: a portaria do bloco E da FEEC, que fica bem  próxima do local dos mini-cursos e na frente da banquinha da livraria  Tempo Real. Entre 12:00 e 12:30 estaremos esperando formar um grupo para escolher onde almoçar.
+
+   * '''[[DateTime(2003-12-05T12:00:00)]] - Python versão 2.3.3 release candidate 1 liberada''' - A versão é uma correção de vários bugs na versão 2.3.2, incluindo alguns problemas sérios com weakrefs e garbage colector, além de várias correções em módulos da biblioteca padrão. http://www.python.org/2.3.3/
+
+   * '''[[DateTime(2003-12-10T12:00:00)]] - Back to the Future: Almoço durante SDSL''' - Toda comunidade Pythonica está convidada a participar de um (ou vários) almoço de confraternização durante o [http://rau-tu.ccuec.unicamp.br/sdsl/ SDSL] em Campinas no período de 9 a 12/12/2003. Podemos (e devemos) usar este espaço para conciliar a agenda dos diversos participantes. Ponto de encontro sugerido: Entrada principal da FEEC - Faculdade de Eng.Elétrica e de Computação, onde estará sendo realizado o evento. Horário de encontro: 12:00 (tolerância de 15 min -- já prevendo à fome). Quasiquer outras sugestões...isto é um Wiki!
+
+   * '''[[DateTime(2003-12-03T20:00:00)]] - Quem quer dinheiro?''' - A [http://www.markshuttleworth.com/bounty.html Fundação Shuttleworth] está a procura de interessados em projetos Python para financiar. O valor destinado a esses financiamentos chegam a $100mil. A página deles tem mais detalhes de como participar da seleção dos projetos.
+
+   * '''[[DateTime(2003-11-30T18:00:00)]] - Versão nova do txt2tags''' - Saiu a versão 1.7 do Txt2Tags, o conversor de textos legitimamente brasileiro que faz parte do projeto GNU.
+ 
+   * '''[[DateTime(2003-11-30T13:00:00)]] - Domínio!''' - Finalmente! Após dias de briga com minha máquina que queimou, consegui colocá-la para funcionar e poder dar uma 'arrumada' aqui na casa para podermos lançar finalmente o ''pythonbrasil.com.br''. Agora eu peço a ajuda de vocês para divulgarem a nossa página em sites de notícias, amigos, parentes, empresários. Então está dado o recado, a partir de hoje a casa do Python no Brasil fica em: http://www.pythonbrasil.com.br. Assim que me sobrar um tempinho extra eu providencio a organização das contas de e-mail para a galera.
+
+Leia mais em NotíciasAntigas.
+
+= Seções =
+
+Aqui estão algumas das seções desse site. Se você gostaria de sugerir outras é só entrar em contato com o WikiMaster mais próximo.
+
+   * PerguntasFrequentes - Perguntas e Respostas frequentes.
+   * DocumentaçãoPython - Documentação, Livros, Manuais, Tutoriais e afins.
+   * ArtigosTutoriais - Artigos e Tutoriais sobre Python.
+   * CookBook - Trechos de códigos úteis.
+   * ComoUsarWiki - Como usar esse site. Introdução Rápida.
+   * SoftwarePython - Módulos, Editores e Ferramentas para desenvolvimento Python, bem como projetos desenvolvidos por brasileiros. {UPDATE}
+   * EmpresasPython - Empresas Brasileiras que já usam Python para aumentar seus lucros :)
+   * OutrosGruposUsuários - Outros sites de grupos de usuários Python.
+   * OportunidadesDeEmprego - Vamos fazer a nossa parte no 'espetáculo do crescimento'. Empregue-se e ofereça empregos. Alguns recadinhos profissionais também estão aqui.
+   * LivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+
+= Como Participar =
+
+Você pode participar da comunidade PythonBrasil diretamente aqui no site, através da lista de discussão ou via IRC.
+
+=== Lista de Discussão ===
+
+Existem duas listas: a python-br@yahoogroups.com que é a mais povoada e com mais
+movimento e a python-brasil@yahoogrupos.com.br, que foi criada depois,
+porque a senha de administração da python-br foi perdida, ocasionando alguns SPAMs
+eventuais na lista. Na dúvida, se cadastre nas duas. E observe que a python-br fica
+no yahoogroups.com (americano) e o python-brasil fica no yahoogrupos.com.br (brasileiro).
+
+=== Canais de IRC ===
+
+O canal oficial do Python no Brasil é o #python-br do irc.freenode.org mas também tem uma galerinha esperta que frequenta o #python da irc.brasnet.org.

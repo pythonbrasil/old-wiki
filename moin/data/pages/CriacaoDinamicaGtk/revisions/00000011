@@ -1,0 +1,10 @@
+= Criação Dinâmica de Objetos GTK =
+Esse pequeno estudo mostra como criar objetos GTK dinâmicamente em Python utilizando-se do módulo gtk.glade, entretanto a mesma idéia de aplicação poderá ser feita sem o auxilio do glade.
+
+{{attachment:imagem.jpg}}
+
+[[attachment:Fonte]]
+
+
+----
+''Mateus Henrique Brum < mateushenriquebrum (at) gmail (dot) com >''

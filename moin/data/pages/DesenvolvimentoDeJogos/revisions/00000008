@@ -1,0 +1,20 @@
+Essa página reúne informações sobre como desenvolver jogos usando Python. Você também pode saber mais sobre o assunto e trocar idéias com pessoas interessadas no grupo [http://groups.google.com.br/group/python-gamedev-brasil python-gamedev-brasil] no [http://groups.google.com Google Groups].
+
+A comunidade está desenvolvendo um CursoDeJogos EAD a ser ministrado em breve. Acompanhe a formação do curso na página.
+
+[[TableOfContents]]
+
+== Bibliotecas e Frameworks ==
+ * PyGame
+ * PyGlet
+ * [http://home.gna.org/oomadness/en/soya/index.html Soya3D] - Biblioteca para criação de jogos 3D escrita usando [http://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex/ Pyrex].
+ * [http://panda3d.org/ Panda3D] - Uma engine 3D escrita em C++ com bindings para Python. Apesar de poder ser usada diretamente com C++ toda a documentação e os exemplos usam Python. Ela foi desenvolvida pelo [http://www.etc.cmu.edu/ CarnegieMellon's Entertainment Technology Center] em parceria com a Disney e já foi usada para desenvolver jogos comerciais como [play.toontown.com/ Toon Town] e [http://apps.pirates.go.com/pirates/v3/welcome Pirates of the Caribbean Online].
+ * [http://www.renpy.org Ren'Py] - Uma engine de novelas visuais escrita em Python. Possui sua própria linguagem de script para criação das novelas. É muito fácil de usar e tem uma licensa bastante permissiva: jogos feitos em Ren'Py podem ser vendidos livremente. A própria aplicação gera pacotes standalone para Linux, MacOS e Windows. Para interações mais complexas a linguagem de script dedicada pode ser extendida com trechos de Python, inclusive usando PyGame para criação de mini-games.
+
+== Artigos ==
+ * GameLoop - comparativo de maneiras de implementar o laço principal de um jogo.
+ * GameDesign - uma introdução ao Game Design por Paulo Barbeiro.
+ * [http://www.chrishecker.com/Rigid_Body_Dynamics Rigid Body Dynamics] - página com uma série de 4 artigos escritos por [http://en.wikipedia.org/wiki/Chris_Hecker Chris Hecker] sobre dinâmica de corpos rígidos para jogos. Escritos no final de 96 / início de 97 quando ainda não existiam diversas engines físicas largamente disponíveis. Excelente introdução para quem quer aprender como implementar física em games.
+
+== Tutoriais ==
+ * [http://www.gustavobarbieri.com.br/jogos/jogo/doc/  Introdução a programação de jogos] por Gustavo Barbieri

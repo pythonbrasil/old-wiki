@@ -1,0 +1,60 @@
+[[HTML(<script type="text/javascript"><!--function PesquisaFirefox(nomeDoSite, enderecoDoIcone) { var dir = enderecoDoIcone.split('/'); var imgFile = dir.pop(); var path = dir.join('/') + '/'; var splitedImgFile = imgFile.split('.'); splitedImgFile.pop(); var srcFile = splitedImgFile.join('.') + '.src'; try { window.sidebar.addSearchEngine(path + srcFile, path + imgFile, nomeDoSite, 'Campo de pesquisa do Firefox'); } catch(ex) { window.alert('Esta pesquisa é um recurso para usuários do browser Firefox.\r\nInstale-o gratuitamente em http://br.mozdev.org'); }}--></script>)]]
+
+[[HTML(<a href="javascript:PesquisaFirefox('Python Brasil (Nabble)', 'http://python.projects.postgresql.org/images/python.png')">Instalar a pesquisa</a> no seu browser.)]]
+
+Plugin do Firefox para realizar buscas no histórico da lista PythonBrasil.
+
+Permite fazer a pesquisa diretamente a partir da janela de busca que se encontra no canto superior direito do Firefox e que normalmente está com o ícone do Google.
+
+Basta copiar o código abaixo e salvar com o nome: '''pythonBrasil.src''' no diretório ''searchplugins'' do seu Firefox:
+
+{{{
+ # Python Brasil - History Message Search for Mozilla
+ # Official Group: http://www.pythonbrasil.com.br
+ #
+ # Created:  July 09, 2006
+ # Last Updated: July 09, 2006
+ #
+ # Author: Marco André Lopes Mendes
+ # Website: http://www.pythonbrasil.com.br/moin.cgi/MarcoAndreLopesMendes
+ # E-mail: marcoandre@gmail.com
+ #
+ # Language: Portuguese (Brazilian)
+ # Tested Support: Mozilla Firefox 1.5.0.4
+ #
+ # TODO:
+ #  - Search icon (16x16).
+
+ <search
+ 	version="7.1"
+ 	name="Python Brasil (Nabble)"
+ 	description="Python Brasil - History Message Search for Mozilla"
+ 	action="http://www.nabble.com/forum/Search.jtp"
+ 	searchForm="http://www.nabble.com/Python---Brasil-f13844.html"
+ 	method="GET"
+         queryCharset="UTF-8"
+ >
+ 	
+ 	<input name="forum" value="13844">
+ 	<input name="local" value="y">
+ 	<input name="query" user>
+ </search>
+}}}
+
+''' Localização da pasta''' 
+
+ * No '''Windows XP''', por padrão, esta pasta fica em "C:\Arquivos de programas\Mozilla Firefox\searchplugins". 
+
+ * No  '''Linux''', por padrão, esta pasta fica em "/usr/lib/firefox-1.5.0.4/searchplugins".
+
+
+Ou descompacte o arquivo que já tem o ícone e o .src juntos na pasta citada acima.
+
+ * attachment:pythonbrasil.zip -- Com o logo antigo -- ''cobrinha verde''
+ * attachment:pythonbrasilNovo.zip -- Com o logo novo -- ''cobrinhas azul e amarela''
+
+A pesquisa é feita no servidor Nabble, que mostra as mensagens em formato de fórum. É uma boa opção pra quem costuma pesquisar com frequência na lista. Funciona bem e torna a pesquisa muito rápida.
+
+Thread com este plugin: http://www.nabble.com/Pesquisando-no-histrico-da-lista-a-partir-do-Firefox-tf1913053.html
+
+Para colocar um ícone ao lado da opção de busca, basta salvar um ícone de 16x16 pixels na mesma pasta e com o mesmo nome. 

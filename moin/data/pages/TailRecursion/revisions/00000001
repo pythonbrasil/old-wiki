@@ -1,0 +1,89 @@
+== Tail Recursion Elimination ==
+por JoaoBueno, em 24/04/09
+
+Tail Recursion Elimination é uma forma de otimização utilizada em algumas linguagens funcionais para evitar o crescimento da stack frame numa função recursiva - permitindo funções que se chamam recursivamente milhares de vezes. Nas primerias implementações, isso era certamente relevante uma vez que muitas tarefas cotidianas poderiam exigir que uma função se chamasse mais vezes do que as máquinas tinham bytes de memoria.
+
+Em problemas teóricos de computação, funções que podem se chamar infindas vezes também são comuns.
+
+Na vida real, numa linguagem de alto nível, nós usamos um loop interagindo em uma lista e não precismaos de Tail Recursion Elimination. Como o BDLF descreve muito bem neste [[http://neopythonic.blogspot.com/2009/04/tail-recursion-elimination.html][post aqui]] (por acaso de dois dias atrás).
+
+Mas python é tão bacana, que mesmo você não precisando de tail recursion pra nada, pode "fazer com que exista" na linguagem com poucas linhas de código, só de farra.
+
+Eu fiz aqui (e quando fui comemorar, a priemria coisa que fizeram foi me mostrarem o post do Guido acima  --- fiquei triste, ams aidna assim esse código pode servir pra alguem algum dia, nem que seja pra estudar decoradores, ou pra uma prova de conceito qualquer)
+
+{{{
+from threading import currentThread
+
+class TailRecursiveCall(Exception):
+    pass
+
+def tailrecursive(f):
+    class Rec_f(object):
+        def __init__(self):
+            self.tr_d = {}
+    
+        def __call__(self, *args, **kw):
+            self.args = args
+            self.kw = kw
+            thread = currentThread()
+            if thread not in self.tr_d:
+                self.tr_d[thread] = {}
+                self.tr_d[thread]["depth"] = 0
+                
+            self.tr_d[thread]["depth"] += 1
+            self.tr_d[thread]["args"] = args
+            self.tr_d[thread]["kw"] = kw
+            depth =  self.tr_d[thread]["depth"]
+            if depth > 1:
+                raise TailRecursiveCall
+            over = False
+            while not over:
+                over = True
+                args = self.tr_d[thread]["args"]
+                kw = self.tr_d[thread]["kw"]
+                #print "meta depth: %d" % depth
+                try:
+                    result = f (*args, **kw)
+                except TailRecursiveCall:
+                    self.tr_d[thread]["depth"] -= 1
+                    over = False
+            self.tr_d[thread]["depth"] -= 1
+            return result
+    
+    return Rec_f()
+
+
+def fatorial (n):
+    if n == 1:
+        return 1
+    return n * fatorial(n -1)
+
+
+@tailrecursive
+def tail_fatorial (n, a=1):
+    if n == 1:
+        return a * 1
+    return tail_fatorial(n -1, n * a)
+
+
+if __name__ == "__main__":
+        
+    try:
+        print "999! %d" % fatorial(999)
+        print "2000! %d" % fatorial (2000)
+    except RuntimeError, error:
+        print "Fatorial normal quebrou: %s " % str(error)
+
+
+    try:
+        print "999! %d" % tail_fatorial(999)
+        print "2000! %d" % tail_fatorial (2000)
+    except RuntimeError, error:
+        print "Fatorial tail tambem quebrou: %s" %str(error)
+    
+}}}
+
+(fiz o código teoricamente "threadsafe", mas na verdade nao cheguei a testar com threads)
+É importante usa-lo com cuidado - só é aplicável a funções cuja expressão de "return" contenha apenas uma chamada a própria função.  Mas ai pronto: você fica livre do limte de Maximum Recursion Depth do python para essas funções, e pode começar a traduzir seu codigo erlang direto pra python,e  pythoniza-lo num segundo passo.
+
+Voltar ao CookBook

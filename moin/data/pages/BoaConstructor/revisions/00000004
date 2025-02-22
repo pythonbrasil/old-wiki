@@ -1,0 +1,20 @@
+#pragma section-numbers off
+= BoaConstructor =
+
+Ótimo editor para criar interfaces gráficas para os seus programas Python. Muito parecido com o ambiente de trabalho do Delphi/Kylix, o BoaConstructor cria automaticamente os códigos em Python, a medida que você vai "desenhando" as janelas. OBS: Você precisará das extensões [http://www.wxpython.org/ wxPython] para utilizar o Boa Constructor.
+
+   * '''Prós:''' Estável, cheio de controles para adicionar às janelas e rápido.
+   * '''Contras:''' Ele não cria um atalho nem algo do tipo, você tem que encontrá-lo na pasta python22\Lib\site-packages\wxPython\tools\boa.
+
+== Ficha técnica ==
+
+URL: http://boa-constructor.sourceforge.net/ [[BR]]
+Licença: GPL
+
+== Tela ==
+
+attachment:screenshotBoa.png
+
+----
+
+Washington Coutinho Corrêa Jr

@@ -1,0 +1,45 @@
+''Infelizmente ainda não está pronto, é um "vaporware" :( Mas '''você''' que domina Python pode ajudar a fazê-lo acontecer. Bom, por que mais um guia? Primeiro, os guias que estão no site são resumidos e falam apenas de poucos tópicos, falta um documento para realmente iniciar pessoas a linguagem Python, de forma efetiva.
+Um guia de introdução, ensinando a baixar e usar um pouco
+da linguagem, o "feijão com arroz" é um primeiro passo para termos mais gente
+envolvida e um trampolim para a pessoa buscar mais informações
+em outros tutorais.
+Eu pretendo escrever aqui este guia, mas que não seja o "guia do Rudá",
+espero que todos possam contribuir (inclusive se os autores
+de outros IntrosPython aqui permitirem, ripar o conteúdo e mover para este documento). Aliás,
+uma pequena crítica, não sou contra identificar o autor de um documento,
+é respeito ao autor, mas eu noto que não estamos "botando o dedo" no documento dos outros, alterando, contribuído, criticando,
+por mais que se tenha um autor de um documento definido, isto aqui é um Wiki! Vamos rabiscar, mexer, comentar! Não sejamos tímidos. :)''
+
+= Guida de Introdução A Linguagem Python =
+
+Este é o Guia do PythonBrasil para uma rápida introdução a linguagem Python.
+
+== O que é Python? ==
+== O que eu posso fazer com Python? ==
+== O que eu não posso fazer com Python? ==
+== Por que eu deveria usar Python e não Perl, Java ou outra linguagem? ==
+== Aonde eu adquiro o Python? ==
+=== Linux ===
+=== Windows ===
+=== Macintosh ===
+
+== Entendendo Python ==
+
+== Tipos de dados, constantes, variáveis e expressões ==
+=== Tipos simples (números, strings) ===
+=== Tipos agrupados (listas, tuplas, dicionários) ===
+== Estuturas de controle ==
+    * if
+    * while
+    * break/continue
+=== Iteradores (aka for) ===
+=== Tratamento de erros e Excessões) ===
+=== Módulos ===
+=== Classes ===
+
+
+''Pretendo deixar um aplicativo de exemplo para sintetizar tudo. Uma idéia que me ocorreu agora é fazer um programinha gráfico (usando tk) de perguntas e repostas (quiz). Não sei se é confundir muito botar tk no meio, mas creio que se a pessoa entendeu o tutorial vai ser capaz de entender um pouco do código, mesmo porque com o quiz eu posso usar dicionários, listas, abrir/fechar arquivos (aka usar módulos), talvez usar classes e mostrar um exemplo prático que teoricamente rodaria em todas as plataformas''.
+
+----
+
+RudaMoura

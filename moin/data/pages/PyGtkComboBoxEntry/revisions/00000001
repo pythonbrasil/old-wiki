@@ -1,0 +1,169 @@
+#pragma section-numbers off
+= Receita: Várias Rotinas Usando ComboBoxEntry no PyGtk =
+
+Exemplo de várias rotinas de comboboxentry para usar no seu aplicativo.
+
+== Código ==
+
+{{{
+#!python
+#-*- encoding: utf8 -*-
+
+##
+# Esse programa é livre, você pode distribuir e/ou modifica-lo sob os
+# termos da licença geral publica GNU publicada pela fundação de software
+# livre (Free Software Foundation),  contida na segunda versão da licença
+# ou (em sua opinião) outra versão mais recente.
+# Esse programa é distribuído na esperança de ser útil e satisfatório,
+# mas DESTITUÍDO DE QUALQUER GARANTIA, destituído igualmente da
+# COMPATIBILIDADE DE MÁQUINA ou CONVENIÊNCIA PARA PROPÓSITOS
+# PARTICULARES. Veja a licença geral publica GNU para opter mais detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+##
+
+###############################################################################
+## Nome do Arquivo: utilitario
+## Autor: Guedes, Maurilio<billguedes>
+## Data da Criação: 26/11/2004
+## Data da Modificação: 03/07/2005
+## Finalidade: Funções úteis do dia-a-dia
+##
+##
+##
+###############################################################################
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+
+def combo_entry_autocompletar(combo, coluna= 0, caracter= 1):
+	'''
+	Uso: combo_entry_autocompletar(combo, coluna, tecla)
+	combo -> ponteiro do comboboxentry
+	coluna -> número da coluna que usará o autocomplemento
+	caracter -> apartir de quantos e caracteres digitados ocorerá o autocomplemento
+
+	Adiciona o recurso de autocomplemento no comboboxentry
+	'''
+	
+	completar= gtk.EntryCompletion()
+	completar.set_model(combo.get_model())
+	completar.set_minimum_key_length(caracter)
+	completar.set_text_column(coluna)
+	combo.child.set_completion(completar)
+
+def combo_entry_selecao(combo, retorno_coluna= 0, coluna= 0):
+	'''
+	Uso: combo_entry_selecao(combo, retorno_coluna= 0, coluna= 0)
+	combo -> ponteiro do comboboxentry
+	retorno_coluna -> número da coluna para retorno
+	coluna -> número da coluna que será comparada
+	
+	Seleciona o texto do registro atual no comboboxentry
+	'''
+	
+	texto = combo.child.get_text()
+	lista= combo.get_model()
+	if texto:
+		for registro in lista:
+			if registro[coluna] == texto: return registro[retorno_coluna]
+	combo.child.grab_focus()
+#	combo.child.select_region(0, -1)
+
+        # Rotina vista em http://www.pythonbrasil.com.br/moin.cgi/PyGtkMensagens
+	mensagem_erro('Você Deve Escolher um Item da Lista!')
+	return 0
+
+def combo_entry_selecionar(texto, combo, coluna= 0):
+	'''
+	Uso: combo_entry_selecionar(texto,combo, coluna)
+	texto -> texto a ser selecionado no comboboxentry
+	combo -> ponteiro do comboboxentry
+	coluna -> número da coluna que será comparada
+	
+	Seleciona o texto no comboboxentry
+	'''
+	
+	indice= 0
+	modelo= combo.get_model()
+	for registro in modelo:
+		if registro[coluna] == texto:
+			combo.set_active(indice)
+			break
+		indice+= 1
+
+def carregar_data(dia, mes, ano):
+	'''
+	Uso: carregar_data(dia, mes, ano)
+	dia -> ponteiro do comboboxentry referente ao dia
+	mes -> ponteiro do comboboxentry referente ao mês
+	ano -> ponteiro do comboboxentry referente ao ano
+
+	Carrega o dia, mês e ano nos comboboxentry correspondente
+	'''
+	
+	modelo= gtk.ListStore(str)
+	for i in range(1, 32):
+		texto= str('%02.f') % i
+		modelo.append([texto])
+	dia.set_model(modelo)
+	
+	modelo= gtk.ListStore(str, str)
+	modelo.append(['Janeiro', '01'])
+	modelo.append(['Fevereiro', '02'])
+	modelo.append(['Março', '03'])
+	modelo.append(['Abril', '04'])
+	modelo.append(['Maio', '05'])
+	modelo.append(['Junho', '06'])
+	modelo.append(['Julho', '07'])
+	modelo.append(['Agosto', '08'])
+	modelo.append(['Setembro', '09'])
+	modelo.append(['Outubro', '10'])
+	modelo.append(['Novembro', '11'])
+	modelo.append(['Dezembro', '12'])
+	mes.set_model(modelo)
+	
+	modelo= gtk.ListStore(str)
+	for i in range(1900, 2100):
+		modelo.append([i])
+	ano.set_model(modelo)
+	
+	combo_entry_autocompletar(dia)
+	combo_entry_autocompletar(mes)
+	combo_entry_autocompletar(ano)	
+	
+def carregar_semana(combo):
+	'''
+	Uso: carregar_semana(combo)
+	combo -> ponteiro do comboboxentry
+	
+	Carrega os dias da semana no combo especificado
+	'''
+
+	modelo= gtk.ListStore(str, str)
+	modelo.append(['Domingo', '1'])
+	modelo.append(['Segunda-Feira', '2'])
+	modelo.append(['Terça-Feira', '3'])
+	modelo.append(['Quarta-Feira', '4'])
+	modelo.append(['Quinta-Feira', '5'])
+	modelo.append(['Sexta-Feira', '6'])
+	modelo.append(['Sábado', '7'])
+	combo.set_model(modelo)
+	combo_entry_autocompletar(combo)
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+No momento sem exemplo.
+}}}
+
+== Agradecimento ==
+Agradeço ao amigo Antonio Prado pela ajuda em algumas rotinas.
+
+Volta para CookBook.
+
+----
+
+Guedes, Maurilio <billguedes.python at terra.com.br>

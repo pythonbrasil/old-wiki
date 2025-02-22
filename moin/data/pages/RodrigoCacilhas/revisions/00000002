@@ -1,0 +1,49 @@
+Quem sou eu?
+
+== Pessoal ==
+
+ * Nome: Rodrigo Cacilhas
+
+ * Nascimento: 20 de novembro de 1975, Petrópolis/RJ
+
+ * Introdução à informática em 1985, à programação em 1987.
+
+ * Ensino Fundamental: completo em 1990 no C. C. S. Judas Tadeu, Petrópolis.
+
+ * Ensino Médio: completo em 1993 no C. E. D. Pedro II, Petrópolis.
+
+ * Ensino Superior: cursando Formação em Tecnologia da Informação e da Comunicação (FORTIC) pelo ISTCC-P [http://www.lncc.br/ist/].
+
+ * E-mail: <cacilhas (a) conservbr com br>.
+
+== Profissional ==
+
+ * Migração da estrutura Windows de ''gateway'' da SerraOn Line Informática para GNU/Linux em 2003. Manutenção e eventuais alterações desta estrutura desde então, inclusive depois de a estrutura da empresa ter sido adquirida pela Quatra Telecom.
+
+ * Participação no projeto de implementação do Software Livre na Prefeitura Municipal de Petrópolis como analista de infraestrutura entre agosto de 2004 e setembro de 2006.
+
+ * Implantação e manutenção dos serviços ''web'', correio e base de dados, entre outros, nos dois projetos anteriores.
+
+ * Diversos ''scripts'' de automação de serviços, como ''backup'', monitoramento de rede e envio automatizado de mensagens, usando principalmente bash e Python.
+
+== Técnico ==
+
+ * Implementação e manutenção de soluções de correio eletrônico usando Sendmail ou Postfix, f-prot ou ClamAV, AMaViS, SpamAssassin e procmail. Configuração de Sendmail via M4 ou diretamente via sendmail.cf.
+
+ * Implementação e manutenção de soluções de gerenciamento de base de dados usando MySQL e SQLite. Manutenção de PostgreSQL.
+
+ * Implementação e manutenção de QoS por meio de HTB ou usando a solução proprietária WT da DEVEL-IT.
+
+ * Implementação e manutenção de serviço ''web'' padrão LAMP, tanto LAM-PHP quanto LAM-Python (Spyce).
+
+ * Implementação e manutenção de serviço ''web'' padrão Zope.
+
+ * Instalação e gerenciamento de sistema operacional *nix-like.
+
+ * Conhecimento de programação em Python e Shell script; experiência com programação PHP4, Perl e Ruby; conhecimentos básicos de C, Lua, Tcl/Tk e Structured BASIC.
+
+ * Conhecimento de uso de expressões regulares, tanto BRE quanto ERE.
+
+== Outro ==
+
+Veja em: [http://www.conservbr.com.br/~rodrigocacilhas/pt-br/cv.html]

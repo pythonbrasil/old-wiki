@@ -1,0 +1,50 @@
+Conversão do Código de Pedro Werneck em http://www.pythonbrasil.com.br/moin.cgi/VerificadorDeCpf .
+
+Este código roda no Zope sem problemas.
+
+{{{
+## Script (Python) "valida_CPF"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=cpf
+##title=
+##
+#Baseado no CÃ³digo de Pedro Werneck
+#http://www.pythonbrasil.com.br/moin.cgi/VerificadorDeCpf
+#Adaptado para o Zope por Fernado Correa e Rodrigo Reis
+
+msg = "CPF/CNPJ incorreto!"
+
+if not cpf.isdigit():
+    """ Verifica se o CPF contem pontos e hifens """
+    cpf = cpf.replace(".", "")
+    cpf = cpf.replace("-", "")
+
+
+if len(cpf) < 11:
+    """ Verifica se o CPF tem 11 digitos """
+
+if len(cpf) > 11:
+    """ CPF tem que ter 11 digitos """
+
+selfcpf = map(int, cpf)
+
+cpf = selfcpf[:9]
+
+while len(cpf) < 11:
+
+    r =  sum([(len(cpf)+1-i)*v for i,v in [(x,cpf[x]) for x in range(len(cpf))]]) % 11
+    
+    if r > 1:
+        f = 11 - r
+    else:
+        f = 0
+    cpf.append(f)
+    
+       
+return bool(cpf == selfcpf)
+
+}}}

@@ -1,0 +1,85 @@
+<<TableOfContents()>>
+
+Esta página é uma cópia local da pesquisa dos IDEs mais utilizados para programar em Python.
+A pesquisa foi realizado no final de 2012, por LucianoRamalho, na lista [[http://groups.google.com/group/python-brasil|Python-Brasil]].
+
+Os resultados originais podem ser acessados [[http://code.google.com/p/propython/source/browse/fundamentos/tabular/pesquisa-ide/tabulacao.txt|aqui]].
+
+[[https://groups.google.com/d/topic/python-brasil/sOratpcjJA8/discussion|Mensagem original]]
+
+454 pessoas responderam a pesquisa entre 27/12/2012 12:27:24 e 04/01/2013 8:22:41. 
+
+
+= Sistema Operacional de Desenvolvimento =
+
+||Número de Respostas||Percentual||Sistema||
+||<)>271||<)>59.7%||GNU/Linux||
+||<)>112||<)>24.7%||Mac OSX||
+||<)>65||<)>14.3%||Windows||
+||<)>5||<)>1.1%||*BSD||
+||<)>1||<)>0.2%||misto linux/windows||
+
+
+= Editor/IDE Principal =
+
+||Número de Respostas||Percentual||Editor/IDE||
+||<)>140||<)>30.8%||Sublime Text||
+||<)>87||<)>19.2%||vim||
+||<)>74||<)>16.3%||PyCharm||
+||<)>39||<)>8.6%||Eclipse + PyDev||
+||<)>16||<)>3.5%||Aptana||
+||<)>15||<)>3.3%||Gedit||
+||<)>14||<)>3.1%||Emacs e derivados||
+||<)>12||<)>2.6%||Geany||
+||<)>9||<)>2.0%||Komodo Edit (gratuito)||
+||<)>7||<)>1.5%||NotePad++ (software livre para Windows)||
+||<)>7||<)>1.5%||Kate e derivados||
+||<)>5||<)>1.1%||WingIDE||
+||<)>5||<)>1.1%||TextMate||
+||<)>5||<)>1.1%||Spyder||
+||<)>4||<)>0.9%||Netbeans||
+||<)>4||<)>0.9%||IDLE||
+||<)>2||<)>0.4%||PsPad *||
+||<)>1||<)>0.2%||joe *||
+||<)>1||<)>0.2%||Visual Studio||
+||<)>1||<)>0.2%||Smultron||
+||<)>1||<)>0.2%||SciTE *||
+||<)>1||<)>0.2%||PyScripter *||
+||<)>1||<)>0.2%||NinjaIDE *||
+||<)>1||<)>0.2%||Komodo IDE (pago)||
+||<)>1||<)>0.2%||Jape *||
+||<)>1||<)>0.2%||BBEdit *||
+||<)>0||<)>0.0%||TextPad||
+||<)>0||<)>0.0%||NotePad2 (software livre para Windows)||
+||<)>0||<)>0.0%||NotePad (acessório incluído no Windows)||
+||<)>0||<)>0.0%||Kdevelop||
+||<)>0||<)>0.0%||JEdit||
+
+
+= Editor/IDE Secundário =
+
+||Número de Respostas||Percentual||Editor/IDE||
+||<)>140||<)>30.8%||vim||
+||<)>104||<)>22.9%||Sublime Text||
+||<)>104||<)>22.9%||Gedit||
+||<)>87||<)>19.2%||Eclipse + PyDev||
+||<)>67||<)>14.8%||NotePad++ (software livre para Windows)||
+||<)>48||<)>10.6%||PyCharm||
+||<)>46||<)>10.1%||Aptana||
+||<)>46||<)>10.1%||(não informado)||
+||<)>36||<)>7.9%||TextMate||
+||<)>32||<)>7.0%||IDLE||
+||<)>31||<)>6.8%||Geany||
+||<)>26||<)>5.7%||Netbeans||
+||<)>21||<)>4.6%||Komodo Edit (gratuito)||
+||<)>21||<)>4.6%||Kate e derivados||
+||<)>18||<)>4.0%||Emacs e derivados||
+||<)>17||<)>3.7%||Visual Studio||
+||<)>13||<)>2.9%||WingIDE||
+||<)>8||<)>1.8%||Spyder||
+||<)>8||<)>1.8%||NotePad (acessório incluído no Windows)||
+||<)>5||<)>1.1%||Kdevelop||
+||<)>3||<)>0.7%||JEdit||
+||<)>2||<)>0.4%||NotePad2 (software livre para Windows)||
+||<)>1||<)>0.2%||TextPad||
+||<)>1||<)>0.2%||Komodo IDE (pago)||

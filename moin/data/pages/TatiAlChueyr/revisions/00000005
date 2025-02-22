@@ -1,0 +1,21 @@
+##master-page:HomepageTemplate
+#format wiki
+== Tatiana Al-Chueyr Pereira Martins ==
+ . Email: [[MailTo(tmartins | at | SPAMFREE cenpra DOT gov DOT br)]]
+== Ocupações ==
+ . Engenheira de Computação (em andamento... neste ano me formo!)
+ Programadora do Software InVesalius
+== Programas em Python ==
+=== Sistemas distribuídos ===
+Projetos elaborados para a disciplina de graduação MC705 (Laboratório de Sistemas Distribuídos) oferecidos pelo professor Ricardo Anido do Instituto de Computação da UNICAMP. A página da disciplina pode ser vista em [1], onde há o detalhamento do que se esperava de cada laboratório. [[AttachList]]
+
+'''Projeto1 -'''Sistema Cliente/Servidor que implementa Ordenação Total de mensagens em um Sistema Distribuído. [2]
+
+'''Projeto2 -'''Sistema Cliente/Servidor que implementa Algoritmo Clássico de Exclusão Mútua. Este algoritmo foi proposto em [3] por Carvalho e Roucariol.
+
+=== Referências ===
+ 1. Página da Disciplina de Laboratório de Distribuídos: http://www.ic.unicamp.br/~ranido/mc705/
+ 1. J. M. Chang & N. F. Maxemchuk, Reliable broadcast protocols, ACM Transaction on Computer Sytems, 2(3):251--273, agosto 1984.
+ 1. On mutual exclusion in computer networks, Communications da ACM, Fev83.
+----
+CategoryTemplate

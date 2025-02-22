@@ -1,0 +1,26 @@
+O exemplo abaixo foi extraído do histórico de uma lista de discussões (http://listas.aditel.org/archivos/python-es/2004-November/011008.html) e não consegui identificar o autor original. Este exemplo utiliza as extensões win32 para Python do Mark Hammond que podem ser encontradas em http://starship.python.net/crew/mhammond/win32/.
+
+Essa extensão win32 para Python realmente é muito útil e completa e pode se tornar uma fantástica ferramenta para desenvolvedores Windows.
+
+{{{
+#!python
+# coding: iso-8859-1
+#
+# Usando o módulo o framework win32
+# http://starship.python.net/crew/mhammond/win32/
+# para imprimir no Windows
+#
+# Exemplo tirado de:
+# http://listas.aditel.org/archivos/python-es/2004-November/011008.html
+#
+
+import win32print
+
+defprt = win32print.GetDefaultPrinter()
+prt = win32print.OpenPrinter(defprt)
+
+win32print.StartDocPrinter(prt, 1, ("Nome do Job", None, None))
+win32print.WritePrinter(prt, "Olá mundo!\r\n"+'\f') # CRLF+FF
+win32print.EndDocPrinter(prt)
+win32print.ClosePrinter(prt)
+}}}

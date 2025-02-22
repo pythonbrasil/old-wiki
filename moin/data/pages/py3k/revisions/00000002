@@ -1,0 +1,66 @@
+== Documentação Python 3.1.1 ==
+Esforço pessoal de tradução da documentação python 3.1.1.
+
+Bem vindo! Esta é a documentação de Python 3.1.1, última atualização Jan 22, 2010.
+
+'''Partes da documentação:'''
+
+ '''[[py3k/whatsnew/3.1|O que há de Novo em 3.1?]]'''
+  . ou [[py3k/whatsnew-all|todos os documentos "O que há de Novo"]] desde 2.0
+
+ ''' [[py3k/tutorial/index|Tutorial]] '''
+  . comece aqui
+
+ ''' [[py3k/using/index|Usando Python]] '''
+  . como usar Python em diferentes plataformas
+
+ ''' [[py3k/library/index|Referência da Biblioteca]] '''
+  . mantenha isso bem perto
+
+ ''' [[py3k/reference/index|Referência da Linguagem]] '''
+  . descreve a sintaxe e os elementos da linguagem
+
+ ''' [[py3k/howto/index|Python HOWTOs]] '''
+  . documentos aprofundados em tópicos específicos
+ 
+ ''' [[py3k/extending/index|Extendendo e Embutindo]] '''
+  . tutorial para programadores C/C++
+
+ ''' [[py3k/c-api/index|Python/C API]] '''
+  . referência para programadores C/C++
+
+ ''' [[py3k/install/index|Instalando Módulos Python]] '''
+  . informação para instaladores & sys-admins
+
+ ''' [[py3k/distutils/index|Distribuindo Módulos Python]] '''
+  . compartilhando módulos com outros
+
+ ''' [[py3k/documenting/index|Documentando Python]] '''
+  . guia para autores de documentação
+
+'''Índices e tabelas:'''
+
+ '''[[py3k/modindex|Índice Global de Módulos]]'''
+  . acesso rápido a todos os módulos
+
+ '''[[py3k/geniundex|Índice Geral]]'''
+  . todas as funções, classes e termos
+
+ '''[[py3k/glossary|Glossário]]'''
+  . os termos mais importantes explicados
+ 
+ '''Página de busca''' (será que pode ser implementado?)
+  . busque nesta documentação
+
+ '''[[py3k/contents|Tabela Completa do Conteúdo]]'''
+  . lista todas as seções e subseções
+ 
+'''Meta informação:'''
+
+ '''[[py3k/bugs|Reportando bugs]]'''
+
+ '''[[py3k/about|Sobre esta Documentação]]'''
+
+ '''[[py3k/license|História e Licença de Python]]'''
+
+ '''[[py3k/copyright|Copyright]]'''

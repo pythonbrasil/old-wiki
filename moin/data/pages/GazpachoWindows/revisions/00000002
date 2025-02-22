@@ -1,0 +1,59 @@
+Pequeno tutorial de como instalar o Gazpacho no Windows escrito pelo Luciano Pacheco.
+
+Segue ele:
+
+"""
+
+Baixei a versão do repositório e funcionou.
+
+Mas pode ser que ocorra alguns problemas, pois esta é a versão de desenvolvimento.
+
+Segue um mini tutorial de como baixar a versão de desenvolvimento. Me avise se funcionar ou não.
+
+1 - Baixar e instalar cliente do svn (Subversion):
+
+1.1 Baixar do seguinte site:
+
+http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=91
+
+     arquivo: svn-1.2.3-setup.exe
+
+1.2 Instalá-lo:
+      
+**Preste atenção onde vai ser instalado o Subversion, você vai precisar do caminho dele no próximo passo.
+
+1.3 No prompt de comandos (DOS) e ditite:
+     
+** coloque no comando abaixo o caminho de instalação do subversion, mais (+) a subpasta "\bin" set path=%path%;"c:\arquivos de
+programas\subversion\bin"
+
+
+2 - Baixar e instalar o gazpacho:
+
+2.1 Remover caso exista a pasta, (pode ser mover) ;)
+     
+** PYTHONROOT = A pasta de instalação do Python (no meu caso é "C:\python23")PYTHONROOOT\site-packages\gazpacho
+
+2.2 Baixando via svn:
+
+Vá para a pasta abaixo:
+     cd PYTHONROOT\Lib\site-packages
+
+Digite o comando abaixo:
+     svn co http://svn.sicem.biz/gazpacho/trunk gazpacho
+
+Será baixados vários arquivos e vai dar uma mensagem parecida com:
+     Gerado c?\195?\179pia de trabalho para revis?\195?\163o 1813.
+
+2.3 Executando:
+      Basta executar o arquivo
+
+PYTHONROOT\Lib\site-packages\gazpacho\bin\gazpacho
+      C:\Python23\Lib\site-packages>python
+gazpacho\bin\gazpacho
+
+
+Inté,
+
+Luciano Pacheco
+"""

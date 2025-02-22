@@ -1,0 +1,23 @@
+= Registrando seu ''nickname'' =
+
+== O registro ==
+
+Para acessar a rede FreeNode não é necessário fazer nenhum tipo de registro ou cadastro. Mas, o canal #python-br permite somente leitura desta forma. Para perguntar ou interagir com o canal é necessário que assim que registremos um nickname. Desse modo, esse nome, essa identidade só poderá ser usada pelo seu registrante, permitindo que você interaja com outras pessoas podendo ser reconhecido.
+
+Para registrar um nickname, use o comando:
+
+/msg NickServ register <sua_senha> <seu_email>
+
+Substitua os termos <sua_senha> e <seu_email>, respectivamente, por uma senha e um endereço de e-mail válido. Você receberá um e-mail de confirmação em poucos minutos. Siga as instruções contidas nele. Vale lembrar que a senha é sensível à letras maiúsculas/minúsculas, ou seja, "Senha" e "senha" são diferentes.
+
+== Identificando seu ''nickname'' ==
+
+O serviço responsável por gerenciar a identificação de usuários chama-se Nickserv. Assim, para utilizar o seu nickname de agora em diante, você precisará se identificar por essa senha toda vez que acessar a rede.
+
+Para isso, basta digitar:
+
+/msg NickServ identify <sua_senha>
+
+Por padrão, os outros usuários presentes na rede não irão receber suas mensagens privadas enquanto seu nickname não estiver identificado junto ao Nickserv.
+
+'''IMPORTANTE:''': Sua senha deve ser digitada exclusivamente em comandos que iniciem por /msg NickServ. Qualquer mensagem, por mais real que pareça, solicitando que você digite sua senha em outras circunstâncias, como em outros comandos, e-mails ou sites são tentativas de roubar sua senha.

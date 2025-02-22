@@ -1,0 +1,113 @@
+= CherryPy com mod_WSGI =
+Esta "receita de bolo" ensina passo a passo como configurar o servidor web Apache para executar aplicações em CherryPy.
+
+== Introdução: ==
+De acordo com com o servidor de hospedagem [[http://www.locaweb.com.br|LocaWeb]] a pricipal vantagem de se usar mod_WSGI e não mod_Python, como a maioria das empresas de hospedagem, é a diminuição do tráfego de dados pois o mod_WSGI carrega toda a aplicação na memória do servidor assim ele transmite mais rápido e consumindo menos banda. Mas em desvantagem é que ocupa muita memória o que se torna um problema para os servidores de hospedagem.
+
+Recomendo que instale o mod_WSGI somente para testes em máquinas locais pois o CherryPy já possui um servidor embutido assim você poupa um pouco de memória.
+
+Apesar de que os softwares foram utilizados sobre plataforma Win32 nada impede a configuração em Linux ou outra plataforma pois a configuração é a mesma o que diferencia é só o processo de instalação.
+
+== Ferramentas Utilizadas (Windows): ==
+ * Interpretador: Python 2.5.4
+ * Servidor Web: Apache 2.2.11 (win32)
+ * Módulo WSGI para Apache: mod_wsgi 2.0
+ * Framework web para Python: CherryPy 3.1.1
+
+Presumamos que você já tenha o [[http://www.apache.org|Apache]] instalado e o [[http://code.google.com/p/modwsgi/|módulo do WSGI]] compilado caso não tenha recomendo a instalação do [[http://www.apachefriends.org/pt_br/xampp.html|XAMPP]] pois ele já vem tudo que é preciso. O mod_WSGI pode ser encontrado em http://code.google.com/p/modwsgi/ lá à links dos binários para Windows.
+
+== Primeiro Passo - Carregar Módulo ==
+Certifique-se que o mod_wsgi.so esteja na pasta padrão de módulos do apache, geralmente existe uma pasta nomeada como "module" dentro da pasta onde se encontra o executável do Apache (ex.: c:\xampp\apache\modules) é lá que ele deve ficar.
+
+Abra o arquivo principal de configuração do Apache "httpd.conf" no seu editor favorito e localize a linha "LoadModule" e após a última linha que contenha esta instrução coloque:
+
+{{{
+}}}
+{{{
+LoadModule wsgi_module modules/mod_wsgi.so
+}}}
+Esta instrução é vital para que o módulo possa ser carregado pelo Apache.
+
+== Segundo Passo - Dando Permissões de Acesso ==
+Caso sua aplicação se encontre no diretório root do servidor (ex.: c:/apache/htdocs; /home/public_html; etc.) pule para o terceiro passa. Mas por motivos de segurança nunca as coloque nesses locais.
+
+Ainda no httpd.conf adicione uma linha em branco no final do arquivo e adicione a seguinte instrução:
+
+{{{
+<Directory "dir">
+    AllowOverride None
+    Options None
+    Order allow,deny
+    Allow from all
+</Directory>
+}}}
+Troque o ''"dir"'' pela localização do diretório onde se encontra sua aplicação. É preferível que ''"dir"'' esteja entre aspas.
+
+Ex.: Sua aplicação se encontra em ''c:/wsgi-bin/cherry.py'' logo ''"dir"'' será ''"c:/wsgi-bin"''.
+
+== Terceiro Passo: "Dizendo" ao Apache onde se encontra sua aplicação ==
+Agora neste último passo dizemos ao Apache onde se encontra a sua aplicação para a sua execução no navegador.
+
+Ainda no httpd.conf no final do arquivo e em uma linha em branco digite:
+
+{{{
+WSGIScriptAlias / c:/wsgi-bin/cherry.py
+}}}
+Onde:
+
+ * "/" é o ponto de montagem no navegador: ex.: Se colocamos /cherry a aplicação será vista em www.seusite.com/cherry; se colocamos apenas / ela será executada na raiz do site, ou seja, quando os visitantes acessarem www.seusite.com eles imediatamente visualizarão sua aplicação.
+ * c:/wsgi-bin/cherry.py é onde se encontra a sua aplicação no servidor.
+
+Agora salve este arquivo e reinicie o Apache
+
+{{{
+}}}
+== Exemplo de uso ==
+De acordo com o site do mod_wsgi as instruções nas linhas de '''2 à 13''' são requeridas para manter o funcionamento da aplicação CherryPy com mod_WSGI. Por isso você deve colocá-las no início de cada aplicação principal que trabalhe com CherryPy. Não garanto o funcionamento correto de suas aplicações sem essas linhas.
+
+{{{#!python
+# -*- coding: iso-8859-1 -*-
+import sys
+sys.stdout = sys.stderr
+
+import atexit
+import threading
+import cherrypy
+
+cherrypy.config.update({'environment': 'embedded'})
+
+if cherrypy.engine.state == 0:
+    cherrypy.engine.start(blocking=False)
+    atexit.register(cherrypy.engine.stop)
+
+# Sua aplicação
+
+class OlaMundo(object):
+    def index(self):
+        return '''<html>
+        <head>
+                <title>Ol&aacute; Mundo!</title>
+        </head>
+        <body>
+                <font face=\"verdana\" color=\"red\">
+                        <h1 align=\"center\">Ol&aacute; mundo!!!!</h1>
+                </font>
+        </body>
+</html>'''
+    index.exposed = True
+
+application = cherrypy.Application(OlaMundo(), None)
+}}}
+== Considerações Finais ==
+Adcione todas as suas aplicações em uma única pasta se possível. Mas você não precisa nescessariamente colocar todos os módulos na mesma pasta crie outras pastas dentro da pasta padrão para suas aplicações CherryPy para organizar suas aplicações
+
+Repita a terceira etapa sempre que for adcionar uma nova aplicação mas lembre de especificar pontos de montagens diferentes para não haver um erro.
+
+Caso se por algum motivo não possa colocar suas aplicações na mesma pasta repita novamente o segundo passo sem apagar os anteriores.
+
+Qualquer dúvida manda para a lista de discursão do Python Brasil ou tire suas dúvidas no chat do IRC.
+
+Volta para CookBook.
+
+----
+[[mailto:vambboy.work@gmail.com|Ivanildo Filho]]

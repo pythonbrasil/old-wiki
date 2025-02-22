@@ -1,0 +1,6 @@
+#acl ProfessoresPythonGroup:read,write,revert,admin,delete All:read
+= Professores de Python =
+
+   * MarcoAndréLopesMendes
+   * RodrigoSenra
+   * OsvaldoSantana

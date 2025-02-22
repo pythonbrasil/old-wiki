@@ -1,0 +1,66 @@
+#pragma section-numbers off
+= Como Usar o Wiki =
+
+Essa página é uma introdução rápida de como usar um sistema Wiki (sistema no qual este site é baseado). Não é um tutorial completo sobre o assunto mas já deve ajudar os iniciantes.
+
+[[TableOfContents]]
+
+== Conceitos ==
+
+Nesta seção estarei explicando alguns conceitos sobre o Wiki.
+
+=== Wiki ===
+
+O conceito de Wiki foi criado por Ward Cunningham visando o desenvolvimento de um site onde os próprios usuários pudessem gerar conteúdo. Ele implementou um software em Perl bastante simples e a partir daí vários clones de sua idéia surgiram. Um deles é o !MoinMoin que é usado nesse site por ser escrito todo em Python.
+
+Uma das idéias do Wiki é a de poder linkar assuntos muito facilmente e muito rapidamente. Para isso foi criado o conceito de !WikiName. Um !WikiName é formada por duas ou mais palavras iniciadas por maiúsculas com o restante em minúsculas. Essas palavras não tem espaço entre elas: Por exemplo: !NomeDaPágina, !OutroNome, e assim por diante. 
+
+Quando um !WikiName é colocado na página o sistema imediatamente cria um link para ele.
+
+== Navegando ==
+
+Navegar por um Wiki é igual a navegar por uma página qualquer. Além disso todas as páginas apresentam uma barra de ferramentas na parte superior que possibilitam as seguintes operações:
+   * Atualização - Recarrega a página atual.
+   * Impressão - Gera uma versão para impressão da página.
+   * XML - Retorna uma versão XML da página.
+   * Assinatura - Permite que o sistema envie um e-mail para o endereço especificado sempre que uma alteração na página for efetuada.
+   * Editar - Permite a edição da página. Veja na seção Edição abaixo.
+   * Informações - Informações sobre a página.
+   * Diferenças - Diferenças da página após editada.
+   * Procurar - Procura páginas que referenciam a atual.
+   * Ajuda - Páginas de Ajuda.
+
+== Editando ==
+
+Todos podem editar as páginas do Wiki. Para isso basta clicar no link !EditText no rodapé de cada página e editar o conteúdo. Para editar um Wiki você tem alguns 'comandos' para formatação. Tem um resumo deles no rodapé da tela de edição e uma listagem deles em HelpContents.
+
+=== Criando uma página nova ===
+
+Para criar uma página nova os procedimentos são os seguintes:
+
+   1. Editar uma página existente e adicionar o !WikiName que levará até a página nova. Ex: {{{  * PaginaNova - Essa página... }}}
+   2. Gravar as mudanças da página.
+   3. O Link para a !PaginaNova vai aparecer em vermelho (indicando que a página ainda não existe)
+   4. Para criar a página é só clicar no link.
+   5. Aparecerá uma tela com as opções "Create Page" para criar uma página em branco e "...Template" para criar páginas usando algum template pré-existente.
+   6. Dê preferência a um Template e caso não exista um template bom sugira a criação de um para o WikiMaster
+   7. Edite sua página nova (usando os 'comandos' de formatação) e pronto.
+
+== Política de Boa Vizinhança ==
+
+Um Wiki é um espaço extremamente democrático que permite que '''todos''' modifiquem. Por isso é necessário respeitar algumas regrinhas da política da boa vizinhança:
+
+   * Nunca remova conteúdo sem autorização do autor da página, a menos que seja conteúdo nocivo ao site (como palavrões, atos de vandalismo e afins)
+   * Sempre que adicionar um conteúdo a uma página identifique que foi você quem escreveu. Existe uma macro no !MoinMoin que é a {{{ [[FootNote(autor)]]}}} que pode ser usada para esse fim.
+   * Não faça bagunça. Tente ser organizado. Como? Usando Templates pré-existentes, criando !WikiNames coerentes, acertando páginas que fujam do padrão, acertando erros de português (seus e dos outros), ...
+   * Não cometa atos de vandalismo. Se o trabalho de manutenção do site ficar muito maior do que os benefícios dele eu serei obrigado a fechar a edição apenas para um grupo restrito de usuários e esse não é o espírito de um Wiki.
+   * Sempre que for remover um link para uma página do Wiki lembre de colocá-lo no PáginasPerdidas.
+   * Crie sempre !WikiNames com acentos nas palavras que os possuem. O MoinMoin reconhece caracteres acentuados.
+
+== Dicas & Recomendações ==
+
+   * Quando colocar o seu endereço de e-mail aqui use coisas como: fulano arroba dominio (.) com ponto br no lugar de fulano@dominio.com.br. Isso evitará que os robozinhos caça-emails dos spammers te localizem na web.
+
+----
+
+OsvaldoSantanaNeto

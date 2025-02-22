@@ -1,0 +1,35 @@
+Uma dica legal para quem gosta de xeretar no ambiente interativo do Python é fazer a tecla <TAB> complentar automagicamente nomes de funções, métodos e outros.
+
+Como se faz isso? É simples. Acompanhe.
+
+Ponha no seu ''$HOME/.bash_profile'' ou ''$HOME/.profile'' (conforme o caso):
+{{{
+export PYTHONSTARTUP="$HOME/.pythonrc"
+}}}
+
+Agora edite o arquivo ''$HOME/.pythonrc'' e acrescente as seguintes linhas:
+{{{
+import readline
+import rlcompleter
+readline.parse_and_bind('tab: complete')
+}}}
+
+Abra um novo shell, rode o Python e faça o seguinte teste:
+
+{{{
+>>> import sys
+>>> sys.<TAB><TAB>
+sys.__class__             sys.argv                  sys.maxint
+sys.__delattr__           sys.builtin_module_names  sys.maxunicode
+...
+}}}
+
+Use então sys.ar<TAB> para complentar sys.argv, iqual ao comportamento do Bash ou de outros aplicativos que usam a biblioteca readline.
+
+NOTAS:
+  * A variável de ambiente ''$PYTHONSTARTUP'' deve conter o nome de um arquivo que o Python vai ler e interpretar antes de entrar no prompt interativo. Neste caso, escolhi o nome .pythonrc mas poderia ser qualquer outro.
+
+  * Se não funcionar, veja se a variável $PYHTONSTARTUP está definida com ''echo $PYTHONSTARTUP''. Lembre-se que o .bash_profile (ou .profile) é lido só pelo shell de login, isso quer dizer que se você entrou no ambiente gráfico, editou o arquivo e abriu um novo shell para testar é bem provável que não funcione, saia do seu ambiente, entre novamente e teste novamente.
+
+--[[BR]]
+RudaMoura

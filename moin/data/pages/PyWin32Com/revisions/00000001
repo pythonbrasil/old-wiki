@@ -1,0 +1,82 @@
+#pragma section-numbers off
+= Receita: PyWin32Com =
+
+Exemplo simples de um componente COM em Python. O componente estará disponível pelo nome especificado em _reg_prog_id_ (no caso, Python.Teste) e um novo _reg_clsid_ pode ser obtido pelo método CreateGuid() do módulo pythoncom. Os métodos expostos pelo componente são listados em _public_methods_ (nesse caso, apenas teste). A primeira vez em que o módulo for executado ele se auto-registrará no sistema e só estará disponível após esse procedimento ser realizado pelo menos uma vez.
+
+== Código ==
+
+{{{
+#!python
+class Teste:
+    _public_methods_ = ['teste']
+    _reg_progid_ = "Python.Teste"
+    _reg_clsid_ = '{8DD31796-D958-4A2D-B3E6-F81754A759CB}'
+
+    def teste(self, x):
+        return x**2
+
+if __name__=="__main__":
+    import win32com.server.register
+    win32com.server.register.UseCommandLine(Teste)
+}}}
+
+== Exemplo de uso (em Python) ==
+
+{{{
+#!python
+from win32com import client
+
+obj = client.Dispatch('Python.Teste')
+print obj.teste(2)
+}}}
+
+== Exemplo de uso (em VB6) ==
+
+{{{
+Set obj = CreateObject("Python.Teste")
+MsgBox obj.teste(2)
+}}}
+
+== Exemplo de uso (em Perl) ==
+
+{{{
+use Win32::OLE;
+
+my $obj = Win32::OLE->new('Python.Teste');
+print $obj->teste(2);
+}}}
+
+== Exemplo de uso (em Delphi 7) ==
+
+{{{
+// Adicione ComObj na cláusula Uses
+var obj : Variant;
+begin
+  obj := CreateOleObject('Python.Teste');
+  ShowMessage(IntToStr(obj.teste(2)));
+end;
+}}}
+
+== Exemplo de uso (em Ruby) ==
+
+{{{
+require 'win32ole'
+
+k = WIN32OLE.new('Python.Teste')
+puts k.teste(2)
+}}}
+
+== Exemplo de uso (em Lua com LuaCOM) ==
+
+{{{
+require("luacom")
+
+obj = luacom.CreateObject("Python.Teste")
+print(obj:teste(2))
+}}}
+
+Volta para CookBook.
+
+----
+
+WashingtonCoutinhoCorrêaJr

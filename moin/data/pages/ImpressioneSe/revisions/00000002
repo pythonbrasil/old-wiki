@@ -1,0 +1,8 @@
+Descreva ImpressioneSe aqui.
+
+
+[[HTML(<embed style="width:400px; height:326px;" id="VideoPlayback" align="middle" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=2319421608007584215&hl=en" quality="best" bgcolor="#ffffff" scale="noScale" salign="TL"  FlashVars="playerMode=embedded"> </embed>)]]
+
+
+
+[[HTML(<object width="425" height="350"> <param name="movie" value="http://www.youtube.com/v/a4pP_AM-AmE"> </param> <embed src="http://www.youtube.com/v/a4pP_AM-AmE" type="application/x-shockwave-flash" width="425" height="350"> </embed> </object>)]]

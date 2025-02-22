@@ -1,0 +1,21 @@
+[http://pyfile.sourceforge.net/images/pygame.gif]
+
+PyGame (http://www.pygame.org) é um módulo Python que fornece a API da biblioteca [http://www.libsdl.org SDL] (feita em C) e mais algumas funcionalidades para a programação gráfica, em especial jogos.
+
+Provê facilidades tais como Sprites, Render Groups, deteção de colisão básica (retângulos) e muito mais.
+
+'''É multi plataforma! Funciona em Linux, Windows, Sun, MacOS, BeOS, ...'''
+
+== Tutoriais Oficiais Traduzidos para o português ==
+ * PyGameIntro - Introdução ao PyGame
+ * [http://lameiro.redirectme.net/mediawiki/index.php/O_guia_do_Newbie_do_Pygame O guia do Newbie do Pygame] - Artigo com dicas gerais sobre o uso do PyGame
+ * ImportandoInicializando - Como importar e inicializar o PyGame
+== Tutoriais e Textos sobre o PyGame ==
+ * http://palestras.gustavobarbieri.com.br/pygame/ Palestra apresentada no PyConDay-2005, apresenta os elementos básicos do pygame, como superfícies e profundidades de cor, rectângulos, display, elementos de desenho, imagens, transformações, tratadores de eventos, mixer de som, Sprites e Sprite Groups. Deve ser consultado por quem nunca desenvolveu jogos em nenhuma plataforma e deseja aprender esta.
+== Livros ==
+ * GameProgrammingWithPython
+== Códigos de Exemplo ==
+ * http://www.gustavobarbieri.com.br/jogos/jogo.tar.gz Introdução à Programação de Jogos, passo a passo de uma versão básica até uma versão "jogável". Acompanha documentação.
+ * http://www.gustavobarbieri.com.br/jogos/pingpong.tar.bz2 Jogo de Ping Pong bem simples, aprox. 450 linhas com comentários + linhas em branco.
+ * http://www.gustavobarbieri.com.br/jogos/pingpong-net.tar.bz2 Versão do Ping Pong usando XMLRPC, aprox 900 linhas, com comentários + linhas em branco.
+ * [http://invasores.sourceforge.net Invasores] jogo implementado em Pygame com o objetivo de mostrar como é facil criar jogos em Python. O codigo está em português (NiloMenezes).

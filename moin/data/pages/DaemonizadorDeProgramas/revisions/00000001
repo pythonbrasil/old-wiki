@@ -1,0 +1,101 @@
+#pragma section-numbers off
+= Receita: Daemonizador de Programas =
+
+Um daemon (ou dæmon) é um processo que roda desconectado de um terminal, com sua entrada e saídas padrões direcionadas para algo inofensivo (/dev/null neste caso), este processo roda em ''background'' e geralmente é responsável por algum processo cliente/servidor.
+
+== Código ==
+
+{{{
+#!python
+# daemon.py
+"""Robusto daemonizador de programas.
+
+Baseado em
+  http://starship.python.net/crew/jjkunce/python/daemonize.py
+  http://www.noah.org/python/daemonize.py
+"""
+
+import sys
+import os
+
+try:
+    MAXFD = os.sysconf('SC_OPEN_MAX')
+except:
+    MAXFD = 256
+
+def daemonize(stdin='/dev/null', stdout='/dev/null', stderr='/dev/null',
+              newhome='/', closeall=1):
+    try:
+        pid = os.fork()
+        if pid > 0:
+            sys.exit(0)
+    except OSError, e:
+        sys.stderr.write("o primeiro fork falhou: (%d) %s\n" %
+                         (e.errno, e.errstr))
+        sys.exit(1)
+
+    os.setsid()
+    os.chdir(newhome)
+    os.umask(0)
+
+    try:
+        pid = os.fork()
+        if pid > 0:
+            sys.exit(0)
+    except OSError, e:
+        sys.stderr.write("o segundo fork falhou: (%d), %s\n" %
+                         (e.errno, e.errstr))
+        sys.exit(1)
+
+    fin = open(stdin, 'r')
+    fout = open(stdout, 'a+')
+    ferr = open(stderr, 'a+', 0)
+    os.dup2(fin.fileno(), sys.stdin.fileno())
+    os.dup2(fout.fileno(), sys.stdout.fileno())
+    os.dup2(ferr.fileno(), sys.stderr.fileno())
+
+    if closeall:
+        for i in range(3, MAXFD):
+            try:
+                os.close(i)
+            except:
+                pass
+
+def test():
+    import time
+    daemonize()
+    while 1:
+        time.sleep(10)
+
+if __name__ == '__main__':
+    test()
+
+}}}
+
+== Exemplo de uso ==
+
+Neste exemplo, o teste.py funcionára como um daemon que gravará de 10 em 10 segundos a data atual no arquivo {{{/var/tmp/teste.dat}}}. Ao executar este script o mesmo parecerá que terminou de executar, mas na verdade estará rodando em ''background''. Procure o processo com {{{ps axu | grep teste.py}}}. Acompanhe sua execução com {{{tail -f /var/tmp/teste.dat}}}.
+
+{{{
+#!python
+#!/usr/bin/env python
+# teste.py
+
+import time
+import daemon
+
+if __name__ == '__main__':
+    daemon.daemonize()
+    f = open('/var/tmp/teste.dat', 'a')
+    while 1:
+        f.write(time.asctime() + '\n')
+        f.flush()
+        time.sleep(10)
+}}}
+
+
+Volta para CookBook.
+
+----
+
+RudaMoura.

@@ -1,0 +1,77 @@
+#pragma section-numbers off
+= Script para Desligar máquinas Linux =
+
+A idéia destes dois scripts é criar uma forma fácil e segura de, a partir de um servidor poder desligar outras máquinas. Foi criado para suprir uma necessidade bem específica minha. Um dos meus servidors Linux fica conectado a um nobreak gerenciável, via conexão serial. Quando a carga deste nobreak está chegando ao fim ele avisa este servidor, que envia um comando via rede para os outros servidores que são desligados antes que a energia acabe.
+
+Nos servidores que serão desligados, o script servidor_shutdown.py é executado na inicialização, da seguinte forma:
+
+{{{
+servidor_shutdown.py x.x.x.x &
+}}}
+
+onde x.x.x.x é o endereço IP do servidor ligado ao nobreak. Somente através deste endereço IP é permitido o desligamento da máquina.Quando este comando é executado, o script fica "ouvindo" em uma porta TCP, a 50007.
+
+Quando o nobreak avisa à máquina que a energia está acabando, esta executa o comando:
+
+{{{
+cliente_shutdown.py z.z.z.z 
+}}}
+
+onde z.z.z.z é o endereço IP da máquina q será desligada. O script envia um comando para a porta 50007 da máquina a ser desligada, que verifica se o IP e o comando recebido são os permitidos e desliga-se.
+
+Utilizando regras de firewall para controlar o acesso a esta porta TCP apenas ao endereço IP permitido é possível desligar todos os servidores de uma maneira segura.
+
+= Códigos =
+
+== servidor_shutdown.py ==
+
+{{{
+#!/usr/bin/python
+import socket
+import sys
+import commands
+
+HOST= ''
+PORT = 50007
+SERVER_VALIDO = sys.argv[1]
+
+s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+s.bind((HOST, PORT))
+s.listen(1)
+conn, addr = s.accept()
+tmp = addr[0].find(SERVER_VALIDO)
+if tmp == 0:
+	print 'Servidor OK'
+else:
+	print 'Servidor inválido', addr[0]
+	sys.exit()
+while 1:
+	data = conn.recv(1024)
+	if not data: break
+	tmp = data.find('Desligar')
+	if tmp == 0:
+		print commands.getstatusoutput("/sbin/shutdown -h now")
+	conn.send(data)
+conn.close()
+}}}
+
+== cliente_shutdown.py ==
+
+{{{
+#!/usr/bin/python
+import socket
+import sys
+
+HOST= sys.argv[1]
+PORT=50007
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
+s.send('Desligar')
+data = s.recv(1024)
+s.close()
+print 'Desligando Servidor', data
+}}}
+
+----
+
+EltonLuisMinetto

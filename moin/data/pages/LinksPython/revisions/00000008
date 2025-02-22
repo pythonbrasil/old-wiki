@@ -1,0 +1,45 @@
+Inclua nesta seção links interessantes e artigos externos que falam sobre Python e suas técnicas.
+
+[[TableOfContents]]
+
+== Documentação ==
+ * A documentação básica, busque sempre aqui primeiro - http://docs.python.org
+ * !CherryPy for CGI programmers -  http://www-128.ibm.com/developerworks/opensource/library/os-cherrypy/
+ * Building and filling out templates with Python and Cheetah - http://www-128.ibm.com/developerworks/opensource/library/os-cherrypy/
+ * Charming Python: Scaling a new PEAK -  http://www-128.ibm.com/developerworks/library/l-cppeak2/?ca=dnt-637
+ * Python Tutorials - http://www.awaretek.com/tutorials.html - Uma das maiores coleções de Tutoriais sobre Python organizada na Web.
+ * Documentação Django Framework - http://www.djangoproject.com/documentation/
+ * Python SOAP libraries, Part 1 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries/page1.html
+ * Python SOAP libraries, Part 2 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-2/page1.html
+ * Python SOAP libraries, Part 3 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-3/page1.html
+ * Python SOAP libraries, Part 4 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-4/page1.html
+ * Python SOAP libraries, Part 5 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-5/page1.html
+ 
+
+== Notícias ==
+
+ * Planet Python - http://www.planetpython.org/ e http://planet.python.org
+   Agregador de ''blogs'' sobre Python.
+ * !PythonWare Daily - http://www.pythonware.com/daily/
+   Site com links, normalmente diários, de projetos ou artigos relacionado a Python
+
+== Blogs ==
+
+ * Pythonologia - http://pythonologia.blogspot.com/
+   'Blog' do OsvaldoSantanaNeto que fala sobre Python e algumas outras coisas não relacionadas.
+
+== Miscelâneos ==
+
+ * Cookbook - http://aspn.activestate.com/ASPN/Python/Cookbook/
+   Esse é "O Cookbook". Uma preciosa coletânea de dicas, programas e técnicas sobre Python.
+
+== Python Gtk ==
+
+ * Tutorial oficial - http://www.pygtk.org/tutorial.html
+   Tutorial oficial do PyGtk. Um pouco antigo, versão 2.4 ainda, mas básico para quem queira aprender.
+ * Outros artigos - http://www.pygtk.org/articles.html
+ * Tutorial LibGlade aqui do site mesmo - http://www.pythonbrasil.com.br/moin.cgi/LibGlade
+ * Desenvolvimento rápido com Glade e Python, artigo do LinuxJornal - http://www.linuxjournal.com/article/7421
+ * FAQ do PyGTK no site da Async, excelente - http://www.async.com.br/faq/pygtk/index.py?req=index
+ * Instalando o pyGTK e o Glade no Windows - http://www.pythonbrasil.com.br/moin.cgi/PyGtkWin
+ * Internacionalizar programas em pyGTK - http://www.pythonbrasil.com.br/moin.cgi/InternacionalizePyGtk

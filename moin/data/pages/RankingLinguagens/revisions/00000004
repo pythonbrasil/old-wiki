@@ -1,0 +1,83 @@
+#pragma section-numbers off
+= Receita: Ranking de Linguagens do SourceForge =
+
+
+Script útil para mostrar que Python é uma linguagem bastante 
+usada no desenvolvimento de software livre. 
+
+O site !SourceForge.net publica uma 
+[http://sourceforge.net/softwaremap/trove_list.php?form_cat=160 relação] 
+com linguagens de programação
+e número de projetos hospedados com cada uma delas. Na página do SF, a 
+listagem é alfabética por linguagem. Este script busca a relação e 
+gera uma listagem ordenada por número de projetos, em ordem decrescente. 
+
+== Código ==
+
+{{{
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*- 
+
+'''
+A função buscar() acessa a página do SourceForge.net que relaciona
+o número de projetos por linguagem de programação, e retorna uma 
+lista de tuplas (numero_de_projetos, linguagem), ordenada por 
+numero_de_projetos decrescente.
+
+Quando acionado como programa principal, este módulo emite a 
+listagem em stdout, com campos delimitados por tab.
+'''
+
+import re
+from urllib import urlopen
+
+URL_FONTE = 'http://sourceforge.net/softwaremap/trove_list.php?form_cat=160'
+
+TABELA = r'''<b>Programming Language</b><br>(.*?)</td>'''
+
+#               &nbsp; Ada</a> <i>(72 projects)</i>
+LINGUAGEM = r'''&nbsp; ([^<]+)</a>\s*<i>\((\d+) projects\)</i>'''
+                
+re_tabela = re.compile(TABELA, re.IGNORECASE|re.DOTALL)
+re_linguagem = re.compile(LINGUAGEM, re.IGNORECASE|re.DOTALL)
+
+def buscar():
+    # teste local: html = open('trove_list.php.html').read()
+    html = urlopen(URL_FONTE).read()
+    miolo = re.search(re_tabela,html).group(1)
+    achados = re.findall(re_linguagem, miolo)
+    lista = [(int(projs), ling) for (ling, projs) in achados]
+    lista.sort()
+    lista.reverse()
+    return lista
+    
+def main():    
+    lista = ['%5d\t%s' % item for item in buscar()]
+    print '\n'.join(lista)
+    
+if __name__=='__main__':
+    main()
+
+}}}
+
+O arquivo resultante fica assim:
+
+{{{
+12279	C
+12112	C++
+10519	Java
+ 7963	PHP
+ 5108	Perl
+ 2820	Python
+ 1661	Visual Basic
+ 1502	JavaScript
+ 1324	Delphi/Kylix
+ 1287	Unix Shell
+[...]
+}}}
+
+Volta para CookBook.
+
+----
+
+LucianoRamalho

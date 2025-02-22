@@ -1,0 +1,202 @@
+#pragma section-numbers off
+= Receita: ProcessandoJpeg =
+
+Script que vasculha arquivos .jp(e)g e .bmp do diretório atual e processa cada imagem, salvando-a numa subpasta 'novo'. Exibe um resumo estatístico no fim
+
+Utilizei Python v2.4 e a biblioteca PIL v1.1.5 (Python Image Library)
+
+== Código ==
+
+{{{
+#!/usr/bin/env python
+
+"""
+Autor: Gustavo Serra Scalet <gsscalet at gmail dot com>
+Licença: GPL
+
+Descrição: Script que processa todas os arquivos jpeg (e bmp, se desejável) da 
+pasta atual e salva em jpeg com compressão escolhida (padrão 75%) na pasta 
+'novo', que será criada caso não exista
+"""
+
+# Opções:
+# Qualidade padrão de compressão (1-100)
+QualPadrao = 75
+# mude o valor 'True' para 'False' caso a resposta seja 'não'
+# Converter arquivos Bmp?
+PegaBmp = True
+
+class Foto(object):
+	from time import time
+	
+	def __init__(self):
+		print u"""Autor: Gustavo Serra Scalet <gsscalet at gmail dot com>
+Licença: GPL\n"""
+		
+	def __del__(self, txt = ''):
+		print u'\nPressione Enter para sair'
+		raw_input()
+		
+	def Termina(self, txt):
+		from sys import exit
+		print txt
+		exit()
+		
+	def Configura(self, origem, destino):
+		self.Origem = origem
+		self.Destino = destino
+		print u'Entre com a qualidade (1-100), pressione enter para o padrão %d%%' % QualPadrao
+		q = raw_input()
+		if not q:
+			q = QualPadrao
+		elif int(q) > 100 or int(q) < 1:
+			self.Termina(u'*** Qualidade %d impossível!' % int(q))
+		self.Qualidade = int(q)
+	
+	def PegaOriDest(self, i):
+		from re import match
+		
+		# remove o diretório origem e o separador do nome do arquivo
+		file = i[len(self.Origem)+1:]
+		ThisOri = self.Origem + '/' + file
+		# arquivo termina com bmp, mude a extensão
+		if match('.*\.[bB][mM][pP]$', i):
+			ThisDest = self.Destino + '/' + file[0:-3] + 'jpg'
+		elif match('.*\.[jJ][pP][eE]?[gG]$', i):
+			ThisDest = self.Destino + '/' + file
+		return (ThisOri, ThisDest)
+		
+	def Legivel(self, tam):
+		i = 1
+		cont = 0
+		lista = ['b', 'kb', 'Mb', 'Gb']
+		while int(i) < abs(tam):
+			ret =  '%(tam).1f %(not)s' % {'tam' : tam / i, 'not' : lista[cont]}
+			i = i * 1024.0
+			cont = cont + 1
+		return ret
+
+	def Tam(self, arquivo):
+		from os.path import getsize
+		
+		tam = getsize(arquivo)
+		return tam
+	
+	def TamDir(self):
+		velho = 0
+		novo = 0
+		for i in self.arquivos:
+			(ThisOri, ThisDest) = self.PegaOriDest(i)
+			velho = velho + self.Tam(ThisOri)
+			novo = novo + self.Tam(ThisDest)
+		return (velho, novo)
+
+		
+	def pTempo(self, ThisOri, ThisDest, ThisTempo):
+		print '%(ONome)s (%(OTam)s)=> %(DNome)s (%(DTam)s) em %(Tempo)s s' % {
+			'ONome' : ThisOri,
+			'OTam' : self.Legivel(self.Tam(ThisOri)),
+			'DNome' : ThisDest,
+			'DTam' : self.Legivel(self.Tam(ThisDest)),
+			'Tempo' : ThisTempo,
+			}
+		
+	def ProcessaJpeg(self, ThisOri, ThisDest):
+		from PIL import Image
+		
+		ThisInicio = self.time()
+		ThisFoto = Image.open(ThisOri)
+		ThisFoto.save(ThisDest, "JPEG", quality=self.Qualidade)
+		ThisTempo = '%.03f' % (self.time() - ThisInicio)
+		self.pTempo(ThisOri, ThisDest, ThisTempo)
+		
+	def PegaArquivos(self):
+		from glob import glob
+		
+		fp = self.Origem
+		self.arquivos = glob(fp + '/*.[jJ][pP][gG]')
+		self.arquivos.extend(glob(fp + '/*.[jJ][pP][eE][gG]'))
+		if PegaBmp:
+			self.arquivos.extend(glob(fp + '/*.[bB][mM][pP]'))
+	
+	def SalvaDir(self):
+		from glob import glob
+		from os import mkdir
+		
+		inicio = self.time()
+		
+		# criará o self.arquivos
+		self.PegaArquivos()
+
+		# não foi achado arquivo para ser processado, exibindo msg de ajuda e finalizando
+		if not self.arquivos:
+			self.Termina(u"Uso: Ponha todas as fotos que deseja processar na pasta atual, o resultado será gravado na pasta '%s' (que será criada caso não exista)\n" % self.Destino)
+		
+		# caso nao haja o diretorio Destino, crie-o
+		if not glob(self.Destino):
+			mkdir(self.Destino)
+			
+		print u"Convertendo as fotos do diretório atual para a pasta '%(pasta)s' com qualidade %(qualidade)d%%:\n" % {
+			'pasta' : self.Destino,
+			'qualidade' : self.Qualidade,
+			}
+		# processa todo e cada arquivo
+		for i in self.arquivos:
+			(ThisOri, ThisDest) = self.PegaOriDest(i)
+			self.ProcessaJpeg(ThisOri, ThisDest)
+		
+		fim = self.time()
+		
+		# imprime resumo das operações
+		tempo = fim - inicio
+		if tempo >= 60:
+			tempo = str(int(tempo/60)) + ' min e ' + '%.03f' % tempo.__mod__(60) + ' s'
+		else:
+			tempo = '%.03f' % tempo + ' s'
+		(velho, novo) = self.TamDir()
+		return (u"""\n*** Transformações realizadas com sucesso em %(tempo)s
+    Espaço economizado: %(velho)s - %(novo)s = %(dif)s""" % {
+			'tempo' : tempo,
+			'velho' : self.Legivel(velho),
+			'novo' : self.Legivel(novo),
+			'dif' : self.Legivel(velho - novo),
+			})
+
+# Rotina principal
+
+foto = Foto()
+# Diretório origem e destino das fotos
+foto.Configura(origem = '.', destino = 'novo')
+# salvando as fotos do diretório
+msg = foto.SalvaDir()
+foto.Termina(msg)
+}}}
+
+== Exemplo de uso ==
+
+Supondo o nome do script como processaJpeg, basta fazer isso em uma pasta com fotos
+{{{
+$ python processaJpeg
+Autor: Gustavo Serra Scalet <gsscalet at gmail dot com>
+Licença: GPL
+
+Entre com a qualidade (1-100), pressione enter para o padrão 75%
+
+Convertendo as fotos do diretório atual para a pasta 'novo' com qualidade 75%:
+
+./Kill Bill 1024.jpg (210.5 kb)=> novo/Kill Bill 1024.jpg (36.9 kb) em 0.378 s
+./revolta.jpg (48.3 kb)=> novo/revolta.jpg (36.4 kb) em 0.145 s
+./Treine Aikido.bmp (2.3 Mb)=> novo/Treine Aikido.jpg (51.6 kb) em 0.189 s
+
+*** Transformações realizadas com sucesso em 0.747 s
+    Espaço economizado: 2.5 Mb - 124.8 kb = 2.4 Mb
+
+Pressione Enter para sair
+
+}}}
+
+Gustavo Serra Scalet <gsscalet at gmail dot com>
+
+Volta para CookBook.
+
+----

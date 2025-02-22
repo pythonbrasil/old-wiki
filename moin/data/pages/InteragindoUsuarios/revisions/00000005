@@ -1,0 +1,159 @@
+#pragma section-numbers off
+= Interagindo com o usuario e mais variaveis =
+
+Àpos o nosso último artigo acredito que podemos ir em frente e sermos mais complexos. Vamos programar então.
+
+Vamos para um exemplo de um programa realmente complexo:
+ 
+{{{
+#!python
+print "Alto La!"
+s = raw_input("Quem deseja passar? ")
+print "Você pode passar,", s
+}}}
+
+Quando eu executo o resultado é:
+
+{{{
+Alto La!
+Quem deseja passar? Josh
+Você pode passar, Josh
+}}}
+
+Oras temos um procedimento novo no codigo acima! :) É o raw_input que é uma função padrão do Python que requisita do usuario uma string, em suma pede pra ele digitar algo que é tratado como uma string (ou seja, texto), isso é util para interagir com o usuario. Também perceba que o programa "para" quando é chamada a função raw_input ele espera o pressionamento da tecla Enter para prosseguir e imprimir na tela "Você pode passar" mais o que você digitou, que no caso deve ter sido seu nome.
+
+Obviamente pegar informações do usuario sem ter aonde guardá-la é inútil, é ai que entram em cena as variáveis. No código exemplo anterior 's' é uma variável que quarda os dados que você digitou quando o raw_input solicitou. Como vocês já sabem variáveis são como "caixas" que podem guardar valores. (Se você não lembra como usar variáveis volte ao artigo anterior).
+
+E mais um exemplo: 
+
+{{{
+#!python
+num = input("Digite um número: ")
+str = raw_input("Digite uma string: ")
+print "num =", num
+print "A variável num é do tipo: ", type(num)
+print "num * 2 =", num * 2
+print "str =", str
+print "str é do tipo: ", type(str)
+print "str * 2 =", str * 2
+}}}
+
+Meu resultado foi:
+
+{{{
+Digite um número: 12.34
+Digite uma string: Hello
+num = 12.34
+A variável num é do tipo: <type 'float'>
+num * 2 = 24.68
+str = Hello
+str é do tipo: <type 'string'>
+str * 2 = HelloHello
+}}}
+
+Observe a diferença entre input, pelo qual "num" foi pega, e raw_input, pela qual a string foi pega. Originalmente raw_input retorna uma string que depois pode ser convertida, pra integer, float, etc (não abordaremos isso ainda), e input retorna um número. Obs: ele também suporta strings mas é algo pouco usual logo não vamos abordar.. 
+
+A segunda parte do programa usa a função embutida (a função é integrante do Python, é padrão). Numeros são do tipo integer ou float (que são abreviações para "integer" e "floating point" respectivamente). Strings são do tipo string. Integers e floats podem ser trabalhados em funções matemáticas, já strings não podem. Observe também que quando você multiplica dois números, de qualquer tipo, ocorre a multiplicação normal. Enquanto uma string quando é multiplicada ela é repetida pelo número que foi multiplicada (Observe no código a linha: str * 2 = !HelloHello).
+
+As operações com strings são diferentes das com números observem os códigos abaixo:
+
+{{{
+"This"+" "+"is"+" joined."
+Resulta em:
+'This is joined.'
+
+"Ha, "*5
+Resulta em:
+'Ha, Ha, Ha, Ha, Ha, '
+
+"Ha, "*5+"ha!"
+Resulta em:
+'Ha, Ha, Ha, Ha, Ha, ha!'
+}}}
+
+Aqui está uma mini-lista de algumas operações com strings: 
+
+||Operação||Simbolo||Exemplo||
+||Repetição||*||"i"*5 == "iiiii"||
+||Concatenação||+||"Hello, " + "World!" == "Hello, World!"||
+
+Exemplos:
+
+{{{
+#!python
+# Calcula o tempo num problema com distância e velocidade
+print "Insira uma velocidade e uma distância."
+speed = input("Velocidade: ")
+distance = input("Distância: ")
+print "Tempo:", distance / speed
+# OBS: Caso você digite 0 no input da velocidade
+# Um erro será 'raised' pois 0 não pode ser divisor
+# esse tema será abordado em breve não ligue ainda para isso.
+}}}
+
+Quando executado: 
+
+{{{
+Insira uma velocidade e uma distância.
+Velocidade: 5 <enter>
+Distância: 10 <enter>
+Tempo: 2
+}}}
+
+{{{
+Insira uma velocidade e uma distância.
+Velocidade: 3.52 <enter>
+Distância: 45.6 <enter>
+Tempo: 12.9545454545
+}}}
+
+{{{
+#!python
+# Calcula a área e o perímetro de um retângulo.
+print "Insira as informações do retângulo."
+length = input("Comprimento: ") # note nós usamos o input em via de forçar a utilização de números
+width = input("Largura: ")       # novamente input, sacou?
+print "Área:", length * width
+print "Perímetro:", 2 * length + 2 * width
+}}}
+
+Quando executado:
+
+{{{
+Insira as informações do retângulo.
+Comprimento: 4 <enter>
+Largura: 3 <enter>
+Area: 12
+Perímetro: 14
+}}}
+
+{{{
+Insira as informações do retângulo.
+Comprimento: 2.53 <enter>
+Largura: 5.2 <enter>
+Area: 13.156
+Perímetro: 15.46
+}}}
+
+=== Exercício de casa :) ===
+
+Escreve um programa que solicite duas strings e dois números do usuários, concatene (junte as sem espaço) e mostra na tela, e na linha seguinte mostrar o resultado da multiplicação dos dois números. 
+
+Solução do exercício de casa:
+
+{{{
+#!python
+# Solução do exercício de casa
+n1 = input("Entre com o primeiro número: ")
+n2 = input("Entre com o segundo número: ")
+string1 = raw_input("Entre com a primeira string: ")
+string2 = raw_input("Entre com a segunda string: ")
+print string1 + string2
+print n1 * n2
+}}}
+
+----
+
+ralobao@click21.com.br 
+
+Revisão e formatação: OsvaldoSantanaNeto

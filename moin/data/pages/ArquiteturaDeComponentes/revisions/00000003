@@ -1,0 +1,71 @@
+= Uma arquitetura de componentes em Python =
+
+'''Autor:''' Lennart Regebro - 19/nov/2007
+
+Ao construir grandes frameworks você muitas vezes deseja que tudo seja facilmente plugável e extensível. Os objetos precisam ser capazes de interagir uns com os outros mesmo quando esta interação não está prevista inicialmente. Criar este tipo de flexibilidade não é muito difícil, especialmente em uma linguagem dinâmica como Python, mas se você tem que criar um framework para plug-ins toda vez que precisa de um, você acaba não fazendo isso a menos que seja realmente muito necessário.
+
+Assim, é bom ter uma forma padrão para a interação entre objetos e para que eles possam se inspecionar, e uma forma que você possa usar toda vez que precisar. Resumindo, o você precisa de uma arquitetura de componentes. Felizmente, já existe uma para Python, que foi bem implementada, bem testada e vem sendo usada há anos. Seu nome é Zope Component Architecture.
+
+Ah, sim, já posso ouvir você: "Eca! Zope não... Isso só específico para Zope, não é pythonico, só serve para a Web, é cheio de XML. Argh!". Mas você estaria errado. A única coisa não pythonica e "webby" da Zope Component Architecture é que seus módulos se chamam zope.algo. Mas os módulos têm esse nome porque foram escritos pela Zope Corp. Sim, é verdade que o Zope usa XML em sua linguagem de configuração orientada a aspectos. Veja bem, na orientação a aspectos é desejável ter uma linguagem específica para conectar os componentes, e a do Zope é ZCML. Mas a arquitetura de componentes não exige ZCML de nenhuma maneira. É totalmente baseada em Python (exceto por algumas partes escritas em C para maior performance, mas elas também possuem implementações alternativas em Python). 
+
+Vamos ver um exemplo realmente estúpido de como usar a arquitetura de componentes. Vamos criar um componente que seja capaz de fazer aritmética com inteiros. Sim, é bem estúpido, porque sempre existiram jeitos de fazer isso em Python, mas foi a melhor idéia que eu tive. Primeiro, a gente define como a aparência externa do componente de aritmética, sua interface:
+
+{{{
+#!python
+from zope import interface, component
+
+class IOperacoesInteiros(interface.Interface):
+
+    def somar(a, b):
+        """soma dois inteiros"""
+
+    def subtrair(a, b):
+        """subtrai dois inteiros"""
+
+    def multiplicar(a, b):
+        """multiplica dois inteiros"""
+
+    def dividir(a, b):
+        """divide dois inteiros"""
+}}}
+
+É uma convenção chamar as interfaces de IAlgumaCoisa, por isso temos IOperacoesInteiros. Não é um erro de digitação. ;-)
+Uma vez que temos uma interface, criamos um componente que a implementa a interface, e podemos instanciá-lo:
+
+{{{
+#!python
+class Calculadora:
+
+    interface.implements(IOperacoesInteiros)
+
+    def somar(self, a, b):
+        return a + b
+
+    def subtrair(self, a, b):
+        return a - b
+
+    def multiplicar(self, a, b):
+        return a * b
+
+    def dividir(self, a, b):
+        return a//b
+
+calc = Calculadora() # sem usar a AC
+}}}
+
+Agora podemos efetuar uma divisão com a calculadora diretamente digitando apenas calc.dividir(23,5), mas este não é o estilo de programação de componentes. Para usar a arquitetura de componentes, precisamos registrar o componente:
+
+{{{
+#!python
+component.provideUtility(Calculator())
+}}}
+
+Agora, quem precisar fazer operações com inteiros pode encontrar o componente que presta este serviço:
+
+{{{
+#!python
+calc = component.getUtility(IOperacoesInteiros)
+print "Divisão:", calc.dividir(23, 5)
+}}}
+
+Observe que você não precisa conhecer o componente, mas apenas a interface. Isto significa que qualquer um pode implementar o componente para você usar. É claro que quando se trata de algo tão banal quanto somar e dividir isto é inútil, mas você pode por exemplo criar uma interface para componentes que conversam com bancos de dados SQL, e então plugar uma utility para cada modelo de banco de dados diferente. Você pode ter quantos componentes quiser, todos implementando a mesma interface, e se eles forem registrados com nomes diferentes você pode escolher na configuração da sua aplicação qual deles deseja usar. Você tem componentes plugáveis, de um jeito muito fácil.

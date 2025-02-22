@@ -1,0 +1,414 @@
+'''libglade 2.4.0 tutorial versão 0.1'''
+
+''Wilson Freitas''
+
+Última atualização: 21.08.2004
+
+[[TableOfContents]]
+
+= 1. Prefácio =
+== 1.1. Motivação ==
+A maior motivação para escrever esse primeiro tutorial foi: eu quero
+contribuir com Software Livre e quero fazer parte da comunidade, quero
+aprender e produzir, quero disseminar informação. Bem, como eu já tinha isso
+em mente, fui ao V FISL 2004, onde assisti uma palestra muito interessante
+sobre como ser um desenvolvedor de software livre, ministrada pelo Kiko e o
+Kov, dois grandes desenvolvedores e figuras da comunidade. Depois da
+apresentação, procurei os dois e falei: "eu quero ajudar". Simples assim. Foi
+aí que o Kiko falou que eu poderia contribuir com o projeto PyGTK e que seria
+interessante começar escrevendo um tutorial sobre libglade. E cá estou
+escrevendo sobre libglade.  Antes disso, eu nunca havia usado o Glade, a
+libglade e também as bibliotecas GTK+ e GNOME. Já programava em Python e C o
+que facilitou alguma coisa. Depois de algumas semanas estudando essas
+bibliotecas, me senti finalmente seguro para escrever essa documentação. Espero
+que seja útil para alguém assim como foi importante para mim escrevê-la. Me
+coloco a disposição para dúvidas, sugestões e correções. Por favor, me ajude a
+tornar esse documento cada vez mais útil.
+
+Quero registrar aqui o agradecimento ao Kiko e ao Kov pela oportunidade. Do
+coração, valeu a força.
+
+= 2. Introdução =
+== 2.1. Do que estamos falando? ==
+O assunto aqui é Libglade. Libglade é uma biblioteca que permite carregar uma
+interface gráfica (GUI) a partir de um arquivo XML e conecta os ''signal''
+''haldlers'' as funções de ''callback''. A libglade foi desenvolvida por JAMES HENSTRIDGE,
+mesmo autor do PYGTK, o binding de _GTK+ para PYTHON.
+
+A libglade foi originalmente desenvolvida em C e já existem ''bindings'' para
+diversas linguagens (Python, C++, Java), contudo o foco deste tutorial é
+mostrar o uso da libglade com Python e PyGTK
+
+Um bom exemplo do poder da libglade é o Glade3 que está sendo completamente
+reescrito e não trará mais geração de código, a solução adotada foi o uso da
+libglade interpretando o XML gerado. Outros grandes projetos como o
+Gnumeric e o Evolution já usam a libglade.
+
+Esse tutorial foi desenvolvido com:
+
+ * libglade-2.4.0
+ * glade-2.6.0
+ * pygtk-2.2.0
+ * python-2.3.3-r1
+ * gtk+-2.4.1
+ * gnome-2.6
+
+sobre gentoo linux 2004.1.
+
+Este documento está em desenvolvimento, atualizações podem ser encontradas
+na minha [http://econofisica.com.br/people/wilson/ página pessoal].
+
+Para maiores detalhes a respeito de PyGTK, aconselho o
+[http://www.pygtk.org/pygtk2tutorial/index.html PyGTK 2.0 Tutorial] escrito por
+John Finlay, é o documento ''must read'' sobre o assuto.
+
+= 3. Iniciando =
+== 3.1. Glade e a janela vazia ==
+Antes de começar qualquer coisa com libglade, precisamos de um XML que
+descreva um interface. Para isso usei o Glade.
+
+ [glade-empty-session-screenshot.png] 
+
+Essa é uma sessão bastante imediata do glade. Basicamente, criei um
+projeto GTK+ e adicionei um objeto gtk.Window a ele. Ao salvar esse projeto,
+ele gera o seguinte arquivo XML.
+
+{{{
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
+                                                                                                                                            
+<glade-interface>
+                                                                                                                                            
+<widget class="GtkWindow" id="window1">
+  <property name="visible">True</property>
+  <property name="title" translatable="yes">window1</property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+                                                                                                                                            
+  <child>
+    <placeholder/>
+  </child>
+</widget>
+                                                                                                                                            
+</glade-interface>
+}}}
+
+Isso já é o suficiente para vermos como funciona a libglade. O programa abaixo
+lê o arquivo XML e carrega a interface.
+
+{{{
+#!/usr/bin/python
+
+import gtk, gtk.glade
+
+gtk.glade.XML("empty.glade")
+gtk.main()
+}}}
+
+Essa é a interface gerada por esse programa de 4 linhas.
+
+[empty-window.png]
+
+Todo o trabalho sujo é feito pela classe {{{gtk.glade.XML}}}. Nela é feito o
+parse do XML e os objetos são carregados e estão prontos para serem
+manipulados.
+
+Note que, ao fechar a janela, o programa ainda fica rodando, para finalizar
+basta digitar <Crtl-C> no console onde foi executado o programa. Isso acontece
+porque não foi feito nenhum tratamento de sinais no programa.
+
+== 3.2. Fechando a janela ==
+Para fechar a janela deve-se tratar o sinal que é disparado quando ela é
+destruída. Para isso, selecione a aba de sinais no Glade, escolha qual sinal
+quer tratar, nesse caso é {{{destroy}}} e informe qual é o {{{handler}}} para esse
+sinal.
+
+ [empty-window-signals.png] 
+
+O {{{handler}}} deve ser mapeado com uma função ou método de uma classe, e esse
+será executado quando o sinal for disparado. O código com o tratamento de
+sinais fica:
+
+{{{
+#!/usr/bin/python
+
+import gtk, gtk.glade
+
+dic = { "gtk_main_quit" : gtk.mainquit }
+
+gladefile = gtk.glade.XML("empty.glade")
+gladefile.signal_autoconnect(dic)
+
+gtk.main()
+}}}
+
+Olhando novamente para a chamada {{{gtk.glade.XML("empty.glade")}}}, 
+observa-se que um objeto é retornado. Esse objeto é o {{{GladeXML}}} que é
+identificado pela variável {{{gladefile}}}. Através desse objeto, tem-se acesso a
+toda estrurura montada no XML. O método {{{signal_autoconnect}}} recebe
+mapeamento das funções de ''callback'' com os ''handlers''.  É exatamente na
+chamada a {{{signal_autoconnect}}} que a libglade conecta o programa a interface
+fazendo com que os sinais sejam tratados da maneira definida.
+
+Execute e veja que o programa agora é encerrado normalmente, executando a
+função {{{gtk_main_quit}}} quando o sinal {{{destroy}}} é disparado.  Sei que não
+é de nenhuma utilidade uma janela vazia que fecha, mas entenda que a interface
+foi criada sem nenhuma interação com ''widgets'' e todo o trabalho de criar a
+estrutura da interface gráfica fica a cargo do glade e da libglade. E
+convenhamos que a criação da interface na mão é um pé saco, mesmo em Python
+:). Note que com a libglade é possível alterar a interface gráfica quantas
+vezes se fizer necessário, sem precisar recompilar o código para isso. É
+simples, rápido e limpo. O lema aqui é: '''Quanto menos código melhor.'''
+
+= 4. Seguindo adiante =
+Ousando um pouco mais agora e com o intuito de levar a bancarrota os bancos de
+investimento, vamos construir uma calculadora de investimentos chamada
+InvestCalc. Ela calcula os dividendos de um investimento, para isso basta
+fornecer o montante investido mensalmente ou anualmente, a taxa de juros e o
+período de duração do investimento que ela informa o valor obtido no
+investimento.  Segue uma amostra da interface desenvolvida no Glade.
+
+ [investcalc-glade.png] 
+
+Para calcular o valor obtido, é preciso obter as referências para os
+''widgets'' de entrada de dados ({{{gtk.Entry}}}, {{{gtk.Combo}}},
+{{{gtk.SpinButton}}}). Isso é feito através do seguinte método:
+
+{{{
+widget = gladefile.get_widget('widget_name')
+}}}
+
+Onde {{{gladefile}}} é uma referência para {{{gtk.glade.XML}}} e {{{widget_name}}} é
+o nome dado ao ''widget'' no Glade. 
+
+ [glade-widget-name.png] 
+
+no XML fica assim:
+
+{{{
+...
+      <child>
+	<widget class="GtkEntry" id="entry_amount">
+	  <property name="visible">True</property>
+...
+}}}
+
+o código para obter as referências dos ''widgets'' de entrada de dados fica:
+
+{{{
+w_duration = gladefile.get_widget('spinbutton_duration')
+w_return_rate = gladefile.get_widget('entry_return')
+w_amount = gladefile.get_widget('entry_amount')
+w_total_investment = gladefile.get_widget('label_total_investment')
+w_duration_period = gladefile.get_widget('combo_duration_period')
+w_amount_period   = gladefile.get_widget('combo_amount_period')
+help_dialog = gladefile.get_widget('dialog_help')
+}}}
+
+Obtidas as referências, vem o tratamento de sinais. Como foi visto
+anteriormente, o sinal também é associado ao ''widget'' através do Glade, só
+precisa informar qual sinal e o nome do ''handler'' para ele. Veja na figura
+que o sinal {{{clicked}}} do ''widget'' {{{button_calculate}}} está associado ao
+''handler'' {{{on_button_calculate_clicked}}}.
+
+ [investcalc-button-signal.png] 
+
+Agora só precisa associar o sinal a uma função de ''callback'' no programa. Isso é
+feito colocando o ''handler'' como chave em um dicionário e a função como
+valor. Esse dicionário é passado como parâmetro para o método que faz a
+auto-conexão dos sinais.
+
+{{{
+...
+def on_button_calculate_clicked(*args):
+	import math
+	# entry boxes
+	amount = float(w_amount.get_text())
+	return_rate = float(w_return_rate.get_text())
+	# spin button
+	duration = w_duration.get_value_as_int()
+	# combo boxes
+	duration_period = w_duration_period.entry.get_text()
+	amount_period = w_amount_period.entry.get_text()
+
+	if duration_period == 'Years':
+		duration *= 12
+	return_rate /= 100
+
+	total = 0.0
+	for i in range(duration):
+		if amount_period == 'Year':
+			if i%12 == 0:
+				total += (total*return_rate) + amount
+			else:
+				total += total * return_rate
+		else:
+			total += (total*return_rate) + amount
+
+	# label
+	w_total_investment.set_text('$ %.2f' % total)
+
+dic = { 'on_window1_destroy' : lambda win: gtk.main_quit(),
+        'on_button_calculate_clicked' : on_button_calculate_clicked,
+...
+
+gladefile.signal_autoconnect(dic)
+}}}
+
+Toda vez que o botão ''Calculate'' for clicado a função
+{{{on_button_calculate_clicked}}} será executada e o valor obtido inpresso na
+label. Veja o InvestCalc em ação:
+
+ [screenshot-investcalc.png] 
+
+Atente para o uso dos ''widgets'' que foram obtidos anteriormente. Os valores
+foram capturados das caixas de texto e ''combo boxes'', calculados e impressos em
+um ''label''. Todos esse objetos, assim como toda a interface, foram instanciados
+pela libglade. Pode-se mudar os botões e os demais ''widgets'' de posição e não
+mexer em uma linha sequer de código. Pode-se mudar todo o ''design'' sem precisar
+recompilar o programa. Lembre-se '''Quanto menos código, melhor.'''
+
+== 4.1. Colocando uma caixa de diálogo ==
+Toda aplicação que se preze deve ter uma caixa de diálogo com pelo menos o
+nome do autor. Pois bem, para incluir essa caixa criei o botão {{{button_help}}}
+e associei ao sinal {{{clicked}}} o ''handler'' {{{on_button_help_clicked}}}. No
+Glade, criei uma caixa de diálogo chamada {{{dialog_help}}} com um botão
+'''Close'''. A esse botão associei o seu sinal {{{clicked}}} ao ''handler''
+{{{on_closebutton_dialog_clicked}}}. Criei as duas funções ''callback'' e e as
+adicionei ao dicionário para a auto-conexão, como segue:
+
+{{{
+def on_button_help_clicked(*args):
+	help_dialog.show()
+
+def on_closebutton_dialog_clicked(*args):
+	help_dialog.hide()
+
+dic = { 'on_window1_destroy' : lambda win: gtk.main_quit(),
+        'on_button_calculate_clicked' : on_button_calculate_clicked,
+        'on_button_help_clicked' : on_button_help_clicked,
+        'on_closebutton_dialog_clicked' : on_closebutton_dialog_clicked }
+
+gladefile.signal_autoconnect(dic)
+}}}
+
+ao clicar no botão ''Help'' aparecerá:
+
+ [screenshot-investcalc-dialog.png] 
+
+o código na integra:
+
+{{{
+#!/usr/bin/python
+
+import gtk
+import gtk.glade
+
+gladefile = gtk.glade.XML('investcalc.glade')
+
+# widgets
+
+w_duration = gladefile.get_widget('spinbutton_duration')
+w_return_rate = gladefile.get_widget('entry_return')
+w_amount = gladefile.get_widget('entry_amount')
+w_total_investment = gladefile.get_widget('label_total_investment')
+w_duration_period = gladefile.get_widget('combo_duration_period')
+w_amount_period   = gladefile.get_widget('combo_amount_period')
+help_dialog = gladefile.get_widget('dialog_help')
+
+# callback functions
+
+def on_button_calculate_clicked(*args):
+	import math
+	amount = float(w_amount.get_text())
+	return_rate = float(w_return_rate.get_text())
+	duration = w_duration.get_value_as_int()
+	duration_period = w_duration_period.entry.get_text()
+	amount_period = w_amount_period.entry.get_text()
+
+	if duration_period == 'Years':
+		duration *= 12
+	return_rate /= 100
+
+	total = 0.0
+	for i in range(duration):
+		if amount_period == 'Year':
+			if i%12 == 0:
+				total += (total*return_rate) + amount
+			else:
+				total += total * return_rate
+		else:
+			total += (total*return_rate) + amount
+
+	w_total_investment.set_text('$ %.2f' % total)
+
+def on_button_help_clicked(*args):
+	help_dialog.show()
+
+def on_closebutton_dialog_clicked(*args):
+	help_dialog.hide()
+
+dic = { 'on_window1_destroy' : lambda win: gtk.main_quit(),
+        'on_button_calculate_clicked' : on_button_calculate_clicked,
+        'on_button_help_clicked' : on_button_help_clicked,
+        'on_closebutton_dialog_clicked' : on_closebutton_dialog_clicked }
+
+gladefile.signal_autoconnect(dic)
+
+gtk.main()
+}}}
+
+= 5. Para Contribuir =
+Este documento, assim como muitos outros software livres, foi criado por
+voluntários. Se existe algum tópico a respeito do tema que este documento não
+contempla, por favor ajude a mantê-lo completo enviando essas informações ou
+escrevendo você mesmo uma seção ou trecho de alguma seção.
+
+Atente para o fato de que esse documento é livre e qualquer conteúdo
+adicionado a ele também deverá ser.
+
+Se você realmente quiser contribuir, envie um email para Wilson Freitas
+<wilson freitas (a) econofisica com br>.
+
+Obrigado.
+
+= 6. Créditos =
+Agora eu vou falar sobre os que ou o que tornou esse documento possível:
+
+ * Christian Robottom Reis <kiko (a) async com br> e Gustavo Noronha <kov (a) debian org> pela oportunidade de contribuir.
+ * Jonh Finlay, <finlay (a) moeraki com> pelo maravilhoso tutorial de PyGTK.
+ * Gustavo Noronha, <kov (a) debian org> por fazer a revisão, I hope!
+ * txt2tags, [http://txt2tags.sf.net] por me fazer não precisar usar as horríveis markup languages.
+ * Lissandra pelo carinho.
+ * Pedrinho pelo bom humor.
+
+E todos os que eu espero que leiam e ajudem a contribuir com esse documento.
+
+= 7. Copyright =
+Libglade Tutorial (C) 2004 Wilson Freitas.
+
+Esse documento está licenciado sob a ''GNU Free Documentation License'', publicada
+pela ''Free Software Foundation''.
+
+È permitido distribuir cópias deste manual desde que forneça o ''Copyright'' em
+todas as cópias.
+
+Se você pretende incluir este documento em alguma publicação, por favor
+contate o responsável e nós trabalharemos para garantir que todo
+documento esteja atualizada e de acordo com as informações disponíveis.
+
+= 8. Referências =
+ * Página do Libglade, [http://www.jamesh.id.au/software/libglade/]
+ * Guia de referência Libglade, [http://developer.gnome.org/doc/API/libglade/libglade.html]
+ * Artigo do Linux Journal é uma das melhores referências sobre o assunto. [http://www.linuxjournal.com/article.php?sid=6586]
+ * Outro artigo do Linux Journal. Este fala mais sobre Glade, mas vale uma conferida. [http://www.linuxjournal.com/article.php?sid=7421]
+ * Tutorial de PyGTK, definitivamente '''O Tutorial''' sobre o assunto. [http://www.pygtk.org/pygtk2tutorial/index.html]
+ * Glade, porque sem ele não tem conversa. [http://glade.gnome.org]

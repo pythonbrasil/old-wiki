@@ -1,0 +1,34 @@
+== Python v3.0.1 documentation ==
+Bem vindo! Esta é a documentação da linguagem Python 3.0.1, atualizada em 07/Jun/2009.
+
+'''Partes desta Documentação:'''
+
+ * [[Python-3.0/whatsnew|O que há de Novo em Python 3.0?]]'' ou todos os documentos'' "O que há de novo" ''desde a versão 2.0''
+ * [[Python-3.0/tutorial|Tutorial]] ''comece aqui''
+ * [[Python-3.0/using|Usando Python]]  ''como usar Python em diferentes plataformas''
+ * [[Python-3.0/library|Referência da Biblioteca]] ''mantenha isso bem perto de você''
+ * Language Reference describes syntax and language elements
+ * Python HOWTOs in-depth documents on specific topics
+ * Extending and Embedding tutorial for C/C++ programmers
+ * Python/C API reference for C/C++ programmers
+ * Installing Python Modules information for installers & sys-admins
+ * Distributing Python Modules sharing modules with others
+ * Documenting Python guide for documentation authors
+
+'''Índices e tabelas:'''
+
+ * Global Module Index quick access to all modules
+ * General Index all functions, classes, terms
+ * Glossary the most important terms explained
+ * Search page search this documentation
+ * Complete Table of Contents lists all sections and subsections
+
+'''Meta informação:'''
+
+ * Reporting bugs
+ * About the documentation
+ * History and License of Python
+ * Copyright
+
+
+----

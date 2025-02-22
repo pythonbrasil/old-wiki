@@ -1,0 +1,54 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+O Python Brasil reune grupos de usuários em todo o Brasil interessados em difundir e divulgar a linguagem de programação [http://python.org Python], abrigando em seu domínio todo o material editado sobre esta linguagem em nosso idioma (português do Brasil). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva conteúdo rapidamente.
+
+= Convocação para Assembléia =
+
+Está disponível no site da [http://associacao.pythonbrasil.org Associação Python Brasil] a convocação para a Assembléia que acontecerá no dia 29 de agosto às 19hs00 em Joinville, SC.
+
+= PyConBrasil 3 =
+
+Os preparativos para a [http://www.pyconbrasil.com.br PyConBrasil 3] estão de vento em popa. A [http://pyconbrasil.com.br/sobre-o-evento/chamada-de-trabalhos/ chamada para trabalhos] e o período de [http://pyconbrasil.com.br/sobre-o-evento/inscricao/ inscrições] já estão abertos. Não perca o maior evento relacionado à Python da américa latina:
+
+'''[http://www.pyconbrasil.com.br PyConBrasil 3][[BR]]
+Encontro brasileiro da comunidade Python[[BR]]
+30 de agosto a 1 de setembro[[BR]]
+Joinville - SC - SOCIESC'''
+
+= NOVIDADE! =
+
+Durante o FISL8.0 fizemos o anúncio do projeto de criação da [http://associacao.pythonbrasil.org Associação Python Brasil] que irá agregar toda a comunidade Python incluindo os usuários de tecnologias desenvolvidas nessa linguagem, como Zope, Plone, Turbogears, Django, etc.
+
+Entre as principais funções da associação estarão a promoção da linguagem e de atividades relacionadas a ela bem como a proteção de marcas e domínios existentes.
+
+A associação também será responsável pela organização da PyConBrasil.
+
+= Seções interessantes =
+
+   * DocumentacaoPython - Dezenas de tutoriais e artigos sobre Python para os mais diversos níveis de aprendizado.
+   * CookBook - Exemplos e trechos de códigos úteis.
+   * PerguntasFrequentes - Respostas às perguntas mais freqüentes.
+   * ComoUsarWiki - dicas para quem deseja usar o nosso Wiki.
+
+
+= Participe da comunidade =
+
+== Lista de Discussão ==
+
+Assine a lista de discussões e participe da comunidade. Preencha o formulário abaixo e responda ao e-mail de confirmação que você receberá.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+/!\ '''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existem também outras ListasDeDiscussao  sobre projetos relacionados a Python e tecnologias derivadas.
+
+== Canal de IRC ==
+
+O canal oficial da PythonBrasil é o #python-br do irc.freenode.org.
+
+= Outros =
+   * GrupoDeUsuarios - Coloque a cidade e o estado a que vc pertence e nos ajude a georeferenciar a comunidade.
+   * CaixaDeSugestoes - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PaginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuarios - Outros sites de grupos de usuários Python.

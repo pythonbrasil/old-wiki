@@ -1,0 +1,41 @@
+#pragma section-numbers off
+= Receita: Py2ExeCom =
+
+Exemplo de como gerar componentes COM que poderão ser utilizados por outras linguagens de programação, através do módulo Py2Exe. É possível gerar vários componentes ao mesmo tempo, bastando adicioná-los na lista passada em "com_server" (dessa maneira módulos em comum só estarão uma vez no pacote final). Veja PyWin32Com para um exemplo de um componente COM criado com o módulo PyWin32.
+
+== Código ==
+
+{{{
+#!python
+from distutils.core import setup
+import py2exe
+import sys
+
+sys.argv.append('py2exe')
+
+class Target:
+    def __init__(self, **kw):
+        self.__dict__.update(kw)
+
+opcoes = {'py2exe': {'compressed': 1,
+                     'optimize': 2,
+                     'excludes': ["pywin", "pywin.debugger", "pywin.debugger.dbgcon", "pywin.dialogs", "pywin.dialogs.list"],
+                     'packages': ['encodings']}
+         }
+
+alvo = Target(modules=['arquivo'],
+              version='1.0',
+              description='Descricao',
+              create_dll=True,
+              create_exe=False)
+
+setup(zipfile = "lib/shared.zip",
+      com_server=[alvo],
+      options=opcoes)
+}}}
+
+Volta para CookBook.
+
+----
+
+WashingtonCoutinhoCorrêaJr

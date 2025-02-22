@@ -1,0 +1,74 @@
+== Exercícios com Funções: Proposta de Soluções ==
+
+Esta página contém algumas propostas de soluções para os exercícios da [[ExerciciosFuncoes|Lista 6: Funções]].
+
+ * Exercício 1
+ {{{#!python
+ def exercicio1(n):
+     for i in range(1, n+1):
+         for j in range(i):
+             print i,         # print j times the number i in the same line 
+         print                # print a new line
+
+ }}}
+
+ Proposta por HenriqueBaggio
+
+{{{#!python
+def ed(n):
+	for i in range(n+1):
+		print(str(i)*i) 
+}}}
+
+ Proposta por RogerioDuarte
+
+ * Exercício 2
+ {{{#!python
+ def exercicio2(n):
+     for i in range(1, n+1):
+         for j in range(i):
+             print j,          # print a line with 0 1 ... i 
+         print                 # print a new line
+
+ }}}
+
+ Proposta por HenriqueBaggio
+
+ * Exercício 3
+ {{{#!python
+ def exercicio3(a, b, c):
+     return a + b + c
+ }}}
+
+ Proposta por IuriSilvio
+
+ * Exercício 4
+ {{{#!python
+ def exercicio4(n):
+     return 'P' if n > 0 else 'N'
+ }}}
+
+ * Exercício 8
+ {{{#!python
+ def exercicio8(n):
+     s = str(n)
+     return len(s)
+ }}}
+
+ * Exercício 9: A ideia nesse exercicio é que, para um dado digito numa posição i do número de entrada, ele terá o seu valor multiplicado por 10**i no número de saída.
+ {{{#!python
+ def reverso(n):
+     s = str(n)       # converte o numero para uma string
+     l = 0
+     for x in range(len(s)):
+         l += int(s[x]) * (10**x)
+     return l
+ }}}
+ 
+ Proposta por HenriqueBaggio
+
+ {{{#!python
+ def reverso(n):
+     str(n)[::-1]
+ }}}
+ Proposta por IuriSilvio

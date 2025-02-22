@@ -1,0 +1,128 @@
+Essa é para você, que fica desesperado em ter que digitar aquele MALDITO 'self' no início de todos seus métodos. Seus problemas acabaram! Você jamais terá de se preocupar em digitar aqueles quatro caracteres na definição de método novamente. Claro que você terá de se preocupar com muitas outras coisas, mas isso é um mero detalhe.
+
+Basta salvar o código abaixo em um módulo, importar a classe NoSelfType para seu módulo e definir a variável '__metaclass__ = NoSelfType' no início. 
+
+OBS: aos desavisados, esse código é uma brincadeira, feita para mostrar como retirar o self é algo muito mais complicado do que parece! Não vá utilizá-lo em código real!
+
+
+{{{
+#!python
+
+
+
+import opcode
+import types
+
+
+locals().update(opcode.opmap)
+
+
+def noself(func, inst):
+    code = func.func_code
+    argdefs = func.func_defaults
+
+    argcount = code.co_argcount
+    nlocals = code.co_nlocals
+    stacksize = code.co_stacksize
+    flags = code.co_flags
+    codestring = code.co_code
+    constants = code.co_consts
+    names = code.co_names
+    varnames = code.co_varnames
+    filename = code.co_filename
+    name = code.co_name
+    firstlineno = code.co_firstlineno
+    lnotab = code.co_lnotab
+    freevars = code.co_freevars
+    cellvars = code.co_cellvars
+
+    varnames = varnames + ('self',)
+    constants = constants + (inst,)
+    nlocals += 1
+
+
+    bcode = map(ord, code.co_code)
+    bcode = [LOAD_CONST,
+             len(constants)-1,
+             0,
+             STORE_FAST,
+             len(varnames)-1,
+             0] + bcode
+
+
+    itercode = iter(enumerate(bcode))
+    earg = 0
+    while 1:
+        try:
+            i, op = itercode.next()
+            if op >= opcode.HAVE_ARGUMENT:
+                oparg = itercode.next()[1] + itercode.next()[1]*256 + earg
+                if op == LOAD_GLOBAL:
+                    if names[oparg] == 'self':
+                        bcode[i] = LOAD_FAST
+                        bcode[i+1] = len(varnames)-1
+                        bcode[i+2] = 0
+        except StopIteration:
+            break
+
+    codestring = ''.join(map(chr, bcode))
+
+
+
+    ncode = types.CodeType(argcount, nlocals, stacksize, flags, codestring, constants, names, varnames, filename, name, firstlineno, lnotab, freevars, cellvars)
+    nfunc = types.FunctionType(ncode, func.func_globals, func.func_name, argdefs, func.func_closure)
+
+    return nfunc
+
+
+class NoSelfMethod(object):
+    def __init__(self, func, instance=None, cls=None):
+        self.im_func = func
+        self.im_self = instance
+        self.im_class = cls
+
+    def __get__(self, obj, cls):
+        return NoSelfMethod(self.im_func, obj, cls)
+
+    def __call__(self, *args, **kwds):
+        if self.im_self is None:
+            return self.im_func(*args, **kwds)
+        else:
+            func = noself(self.im_func, self.im_self)
+            return func(*args, **kwds)
+
+
+class NoSelfType(type):
+    def __new__(mcls, name, bases, dic):
+        for k, v in dic.items():
+            if callable(v):
+                dic[k] = NoSelfMethod(v)
+
+        return type.__new__(NoSelfType, name, bases, dic)
+        
+
+def test():
+
+    class C(object):
+        __metaclass__ = NoSelfType
+
+        def __init__(a, b, c=None):
+            print 'Look mom... no self!'
+            print 'I am', self, 'they called me with', a, b, c
+
+        def m(obj):
+        
+            assert obj is self
+
+
+    o = C(1, 2, c='foo')
+    o.m(o)
+        
+        
+if __name__ == '__main__':
+    test()
+
+
+
+
+}}}

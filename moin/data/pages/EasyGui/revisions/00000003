@@ -1,0 +1,38 @@
+Tkinter é uma toolkit legal. O problema com ela é que ela é um tanto quanto complexa demais para iniciantes, por ser event-oriented e coisas assim.
+EasyGui é um módulo que contém vários diálogos pré-definidos usando Tkinter. A idéia é usar esses diálogos como funções, retornando as escolhas feitas neles pelos usuários.
+
+O criador da EasyGui é [[http://www.ferg.org/|Stephen Ferg]], o mesmo autor de PensandoEmTkinter.
+
+A página do projeto é [[http://www.ferg.org/easygui/|esta]], onde você pode conseguir a última versão(0.72 enquanto escrevo).
+
+{{{
+#!python
+# Exemplo descaradamente copiado da pagina do projeto e adaptado pelo autor
+
+import easygui, sys
+
+easygui.msgbox("Hello, world!")
+
+while 1:
+
+  msg ="Qual o seu sabor favorito?"
+  title = "Uma pesquisa sobre sorvetes"
+  choices = ["Baunilha", "Chocolate", "Morango", "Flocos"]
+  choice = easygui.choicebox(msg, title, choices)
+
+  # note a conversao para string de choice abaixo, 
+  # porque o usuario pode ter cancelado a escolha,
+  # dessa forma o resultado seria None
+  easygui.msgbox("Voce escolheu: " + str(choice), " como resultado da pesquisa.")
+
+	
+
+  msg = "Voce gostaria de continuar?"
+  title = "Confirmacao"
+  if easygui.ccbox(msg, title):     # Um dialogo "Continue/Cancel"
+    pass  # Se o luser escolher continue, o dialogo retorna "true"
+  else:
+    sys.exit(0)           # do contrario...
+}}}
+
+CarlosMoraisDosSantos

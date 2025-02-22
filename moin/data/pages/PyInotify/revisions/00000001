@@ -1,0 +1,72 @@
+O PyInotify é um módulo que permite acesso ao sub-sistema "inotify" do Linux - isso permite a monitoração em tempo real de mudanças em quaisquer arquivos gravados.
+
+O exemplo aqui é quase idêntico ao que está na documentação do módulo em http://pyinotify.sourceforge.net/ - mas com uma daptação mais prática: 
+As ersões mais novas do plug-in de Flash da Adobe usam um truque para evitar que o usuário tenha acesso a um vídeo assistido na Web: o plugin flash cria um arquivo, e o apaga em seguida -- e continua a execução do programa com uma referência ao arquivo deletado - desta forma o própro processo tem acesso pleno ao arquivo, e mais ninguém pode te-lo.
+
+Neste uso do pyinotify, o eento de criação do arquivo é interceptado, e nesse momento se cria  um hard-link para o mesmo. Quando o Flash remove o arquivo logo em seguida, o arquivo permanece disponível com o nome criado no hard-link.
+
+Esse script demonstra algumas das possibilidades do inotify, e assegura que o usuário tenha controle do seu computador, podendo assistir videos que já viu da internet semt er que baixa-los de novo toda vez que quiser ve-los.
+
+{{{
+
+#! /usr/bin/env python
+# coding: utf-8
+
+"""
+
+Saves a file of every flash plugin video played on a Linux system 
+while it is running. Saved files are kept on /tmp/video*flv
+
+"""
+# Authors: from the documentation of pyinotify - http://pyinotify.sourceforge.net/
+# modified to save copies of videos displayed on Flash Plugins for browsers
+
+# This script is freely distributable and modifiable.
+
+import os
+from pyinotify import WatchManager, Notifier, ProcessEvent
+import pyinotify
+
+import time, random
+import os
+
+
+mask = pyinotify.IN_DELETE | pyinotify.IN_CREATE  # watched events
+
+wm = WatchManager()
+
+class PTmp(ProcessEvent):
+    def process_IN_CREATE(self, event):
+        path = os.path.join(event.path, event.name)
+        print "Create: %s" %  os.path.join(event.path, event.name)
+        if event.name.startswith("Flash"):
+            tt = time.localtime()
+            new_name = "video-%02d:%02d:%02d-%02d-%02d-%04d-%d.flv" %(tt.tm_hour, tt.tm_min, tt.tm_sec,
+                    tt.tm_mday, tt.tm_mon, tt.tm_year, random.randint(0,1000))
+            new_path = os.path.join(event.path, new_name)
+            os.link(path, new_path)
+        
+    def process_IN_DELETE(self, event):
+        print "Remove: %s" %  os.path.join(event.path, event.name)
+
+notifier = Notifier(wm, PTmp())
+
+wdd = wm.add_watch('/tmp', mask, rec=False)
+
+while True:  # loop forever
+    try:
+        # process the queue of events as explained above
+        notifier.process_events()
+        if notifier.check_events():
+            # read notified events and enqeue them
+            notifier.read_events()
+        # you can do some tasks here...
+    except KeyboardInterrupt:
+        # destroy the inotify's instance on this interrupt (stop monitoring)
+        notifier.stop()
+        print "Flash video logger stopped"
+        break
+
+}}}
+
+CookBook

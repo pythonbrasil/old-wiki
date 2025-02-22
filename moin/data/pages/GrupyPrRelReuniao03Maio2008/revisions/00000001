@@ -1,0 +1,39 @@
+-- Informações sobre o encontro
+
+ * 03/05/2008 (Sábado): Sprint BeautifulSoup, Inscrições limitadas, até 5!
+  * Endereço: AV. Pref. Omar Sabbag, 947. Jardim Botânico
+  * Horário: das 14:00h até 19:00h ou até aguentarmos. :)
+  * [http://maps.google.com.br/maps?f=q&hl=pt-BR&geocode=&q=AV.+Pref.+Omar+Sabbag,+947.+Jardim+Bot%C3%A2nico+&sll=-25.347158,-49.238658&sspn=0.009444,0.018132&ie=UTF8&ll=-25.441666,-49.248426&spn=0.002359,0.004533&t=h&z=18 Mapa]
+  * GrupyPrListaPresencaSprint03Maio
+
+-- Relatório do encontro
+--- Inttrodução ---
+A atividade de sprint é um evento de programação com foco em um problema que dura de 2 a 3 dias e utiliza técnicas de desenvolvimento extremo. Planejamos o nosso sprint inicialmente para nor reunirmos e iniciar um hábito de nos encontrarmos de vez em quando e com frequencia, além de experimentar essa modalidade de apoio a software livre. A idéia proposta é de melhorar a performance da biblioteca BeautifulSoup. A biblioteca BeautifulSoup é usada para tratar arquivos xml e html[http://www.crummy.com/software/BeautifulSoup/ Pag. do Projeto]. Esta página pretende documentar a experiência, sugerir maneiras de organizar um sprint e sobre as ferramentas e sobre a biblioteca BeautifulSoup. Consiste dessa introdução, uma breve ata, avaliação da experiência, sugestões e ao final a conclusão. 
+
+--- Ata ---
+Reunimos à partir das 14:00 h de sábado, dia 03 de maio, Éverton Medeiros, Luiz Carlos Geron, Ramiro Batista da Luz e Wilian Alves Souza no escritório do Luiz. Fizemos uma pequena apresentação sobre a biblioteca e começamos a pesuisa. O Luiz estudou o código da biblioteca, enquanto os outros ficaram pesquisando implementações de XPath em python, e possiveis substitutos à biblioteca sgmllib, usada pela biblioteca BeautifulSoup. Durante o tempo que estivemos pesquisando fomos olhando juntos e discutindo algumas coisas relacionadas às possibilidades de implantação. Trocamos experiencias sobre ferramentas e encontramos um script de benchmarch para algumas bibliotecas de parser html/xml num blog[http://www.oluyede.org/blog/2007/08/25/sgml-python-parsers-benchmark/ sgml benchmark], lendo o blog com mais calma achei outro link interessante de outro blog[http://blog.ianbicking.org/2008/03/30/python-html-parser-performance/ html parser performance]. 
+
+--- Avaliação ---
+Avaliamos o encontro como bom. Não podemos dizer que foi ótimo e produtivo, mas também não foi ruim. Trocamos experiências, estudamos juntos, tomamos refrigerante, contamos piadas, enfim foi divertido e aprendemos muito ao mesmo tempo. Além de ter a oportunidade de participar de um pequeno sprint pudemos observar como funciona e como achamos que deveria funcionar. Todas essas coisas vamos abordar nas sugestões. 
+
+--- Sugestões ---
+
+Algumas das ferramentas usadas e que gostaríamos de sugerir pois são bacanas.
+
+    * htop Um top melhorado, muito bacana com muitas opções diferenciadas em relação ao top comum.
+    * KCacheGrind Muito legal, apresenta em modo gráfico informações relacionadas ao profile de execução de programa[http://kcachegrind.sourceforge.net/cgi-bin/show.cgi Pag. do projeto].
+    * cProfile Opção para geração de profile, para rodar é só usar:
+
+       python -m cProfile programa.py
+
+    * lsprofcalltree.py Outra opção para profile, útil para gerar saída para o KCacheGrind[http://www.gnome.org/~johan/lsprofcalltree.py Script].
+    * cElementTree Opção de biblioteca para parser HTML em substituição à sgmllib, pelas pesquisas tem possibilidade de ser mais rápida.
+    * 4Suite Outra opção de biblioteca para substituir a sgmllib.
+    * ipython Interpretador python com recursos adicionais como complemento por TAB e diversas macros úteis.
+
+Aprendemos com nossa experiência que a preparação é muito importante. Estudar a biblioteca, olhar o código, documentação para desenvolvedores, buscar opções e idéias de implementação, combinar com os outros participantes os caminhos que serão tomados, para aproveitar bem o tempo em desenvolvimento. Além disso é importante lembrar que um sprint tem duração de 2 ou três dias, nós nos reunimos por cerca de 5 horas. 
+
+Uma outra idéia é que o sprint tem um coordenador, alguém que é responsável por buscar informações sobre a biblioteca, pesquisar algumas opções e coordenar a disseminação das informações e também as atividades do sprint. Um secretário para ir reunindo informações e documentando o encontro, além de escrever o relatório do encontro é importante também.
+
+--- Conclusão ---
+Concluímos que o encontro foi bom e ainda pode gerar resultados, tivemos um nivelamento inicial do conhecimento dos participantes sobre a biblioteca, aprendemos uns com os outros e fortalecemos nossa amizade. Esse tipo de experiencia é muito gratificante pois a troca de conhecimento e a convivencia traz um sentimento de que saímos do encontro diferentes do que quando chegamos, para melhor.

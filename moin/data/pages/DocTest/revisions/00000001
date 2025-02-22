@@ -1,0 +1,19 @@
+DocTest - teste automatizado de módulos utilizando DocStrings.
+
+Você que é bom programador e cuidadoso, aposto que procuras documentar
+direito o código que escreves. A linguagem Python é bem amiga nesse aspecto,
+com a utilização de DocStrings. Por exemplo:
+
+{{{#!python
+def fat(n):
+  """Calcula o fatorial de n.
+  >>> f(0)
+  1
+  >>> f(5)
+  120
+  """
+  if x == 0:
+    return 1
+  else:
+    return x * f(x-1)
+}}}

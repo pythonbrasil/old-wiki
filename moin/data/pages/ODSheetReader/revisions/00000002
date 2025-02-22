@@ -1,0 +1,61 @@
+= Leitor de planilhas ODS =
+(por JoaoSOBueno)
+
+Este trechode código - plenamente funcional - pode ler os conteúdos de planilha no Open Document Format - como criado pelo OpenOffice, BROffice, KOffice, MsOffice 2009.1, Google Docs. (Note que ele lê o conteúdo pré-calculado da planhilha, não reavaliando as fórmulas)
+
+Os dados ficam disponíveis numa estrutura de listas tridimensional em Python
+
+{{{
+# !/usr/bin/python
+# coding: utf-8
+
+import sys
+from xml.etree import ElementTree as ET
+from zipfile import ZipFile
+from pprint import pprint
+# AUTHOR: João S. O. Bueno
+# Copyright: Fundação CPqD 2010
+
+# License: LGPL v3.0
+
+def get_content(name):
+    z = ZipFile(name)
+    return z.read("content.xml")
+
+class Parser(object):
+    levels = {0: "table", 1:"table-row", 2: "table-cell", 3:"p"}
+    def __init__(self, name):
+        xml = get_content(name)
+        self.parse(ET.fromstring(xml))
+
+    def parse(self, xml):
+        self.content = self.deep_parse(xml, [])
+        return self.content
+
+    def deep_parse(self, xml, content, level=0):
+        for child in xml:
+            if child.tag.endswith(self.levels[level]):
+                if level == 3:
+                    content = child.text
+                else:
+                    content.append(self.deep_parse(child, [], level + 1))
+            else:
+                self.deep_parse(child, content, level)
+        return content
+
+def main(name):
+    parser = Parser(name)
+    pprint (parser.content)
+
+if __name__=="__main__":
+    try:
+        main(sys.argv[1])
+    except IndexError:
+        sys.stderr.write("Please, pass the spreadsheet file name as a parameter to this script")
+        sys.exit(1)
+
+
+}}}
+
+----
+Voltar ao CookBook 

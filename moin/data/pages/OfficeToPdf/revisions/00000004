@@ -1,0 +1,300 @@
+Programa para conversão de arquivos do Microsoft Office (Word e Excel) para {{{PDF}}} através do PDFCreator.
+
+== Código ==
+
+{{{
+#!python
+# -*- coding: ISO-8859-1 -*-
+
+# Autor: Juracy Filho <juracy AT gmail (DOT) com>
+# Data: 01 de dezembro de 2005
+# OfficeToPDF.py
+#   Automação do processo de geração de PDF (e outros formatos também) a partir
+#   de arquivos Microsoft Word e Excel através do PDFCreator
+#
+# Versão: 1.1
+#
+# Requerimentos:
+#   Microsoft Windows (testado apenas no Windows 2000)
+#   Microsoft Word e/ou Microsoft Excel (testado apenas no Office 2000)
+#   Python 2.4 (provavelmente funcionará em versões anteriores, porém, não testado)
+#   pywin32 - http://starship.python.net/crew/mhammond/win32/
+#   PDFCreator 0.8.1 RC 9 ou superior - http://sector7g.wurzel6.de/pdfcreator/
+#          não funciona com a versão 0.8 e anteriores pela falta do suporte a COM
+
+import win32com.client as com
+from win32print import GetDefaultPrinter, SetDefaultPrinter
+from pythoncom import PumpWaitingMessages
+from pywintypes import com_error
+from time import sleep, clock
+import os
+import sys
+
+# Constantes
+PrinterName = 'PDFCreator'
+SleepTimeToWait = 0.5
+WaitTimeOut = 45 # segundos
+
+MicrosoftWordCOMClass = 'Word.Application'
+MicrosoftExcelCOMClass = 'Excel.Application'
+PDFCreatorCOMClass = 'PDFCreator.clsPDFCreator'
+
+class OLEServerNotFound(Exception):
+    warning = 'Servidor COM %s não encontrado, ou não pôde ser instanciado'
+
+class OLEWrapper(object):
+    """Manipulador padrão para conversão através de OLE Automation"""
+    def __init__(self, OLEClass):
+        try:
+            self.OLEServer = com.Dispatch(OLEClass)
+        except com_error:
+            raise OLEServerNotFound, OLEServerNotFound.warning % OLEClass
+
+    def __del__(self):
+        if hasattr(self, 'OLEServer'):
+            self.OLEServer = None
+
+class WordWrapper(OLEWrapper):
+    """Manipulador para o Microsoft Word"""
+    def __init__(self):
+        OLEWrapper.__init__(self, MicrosoftWordCOMClass)
+
+    def __del__(self):
+        if hasattr(self, 'OLEServer'):
+            self.OLEServer.Quit(False)
+        OLEWrapper.__del__(self)
+
+    def convert(self, filename):
+        """Função para executar a conversão
+
+        Chamada: obj.convert(nome_do_arquivo.doc)
+        Passos:
+          1 - Abrir o arquivo
+          2 - Definir a impressora correta
+          3 - Mudar opções do Word
+          4 - Imprimir
+          5 - Voltar a impressora default
+          6 - Fechar o arquivo"""
+
+        # Abrindo o arquivo
+        self.OLEServer.Documents.Open(FileName = filename, ReadOnly = True,
+                                      Revert = False, AddToRecentFiles = False)
+
+        # Guardando informações
+        current_printer = GetDefaultPrinter()
+        current_printreverse = self.OLEServer.Options.PrintReverse
+
+        SetDefaultPrinter(PrinterName)
+        self.OLEServer.Selection.GoTo(What = 1, Which = -1)
+        self.OLEServer.Options.PrintReverse = False
+        self.OLEServer.ActiveDocument.PrintOut(Background = False)
+
+        # Restaurando
+        self.OLEServer.Options.PrintReverse = current_printreverse
+        SetDefaultPrinter(current_printer)
+
+        # Fechando
+        self.OLEServer.ActiveDocument.Close(False)
+
+class ExcelWrapper(OLEWrapper):
+    """Manipulador para o Microsoft Excel"""
+    def __init__(self):
+        OLEWrapper.__init__(self, MicrosoftExcelCOMClass)
+
+    def __del__(self):
+        if hasattr(self, 'OLEServer'):
+            self.OLEServer.Quit()
+        OLEWrapper.__del__(self)
+
+    def convert(self, filename):
+        # Abrindo o arquivo
+        self.OLEServer.Workbooks.Open(Filename = filename, ReadOnly = True, AddToMru = False)
+
+        # Guardando informações
+        current_printer = GetDefaultPrinter()
+
+        SetDefaultPrinter(PrinterName)
+        self.OLEServer.ActiveWorkbook.PrintOut(Copies = 1)
+
+        # Restaurando
+        SetDefaultPrinter(current_printer)
+
+        # Fechando
+        self.OLEServer.ActiveWorkbook.Close(False)
+
+class PDFCreatorNotFound(Exception):
+    warning = 'Não foi possível instanciar o PDFCreator, ' + \
+              'provavelmente não está instalado, ' + \
+              'ou é uma versão anterior a 0.8.1'
+
+class PDFCreatorNoStart(Exception):
+    warning = 'Não foi possível iniciar o PDF Creator'
+
+class PDFCreator(object):
+    formats = {'pdf': 0, 'png': 1, 'jpg': 2, 'bmp': 3, 'pcx': 4, 'tif': 5, 'ps': 6, 'eps': 7}
+    def __init__(self):
+        try:
+            self.OLE = com.DispatchWithEvents(PDFCreatorCOMClass, PDFCreatorEvents)
+        except com_error:
+            raise PDFCreatorNotFound, PDFCreatorNotFound.warning
+
+        self.OutputDirectory = os.getcwd()
+        self.processos = 0
+        self.started = False
+
+    def start(self):
+        if not self.started:
+            self.started = True
+            if not self.OLE.cStart('/NoProcessingAtStartup'):
+                if not self.OLE.cStart('/NoProcessingAtStartup', True):
+                    raise PDFCreatorNoStart, PDFCreatorNoStart
+            self.Options = self.OLE.cOptions
+
+    def __del__(self):
+        # Libera o servidor COM do PDFCreator, somente se tiver sido instanciado
+        if hasattr(self, 'OLE'):
+            if self.started:
+                self.OLE.cCloseRunningSession()
+                self.OLE.cClose()
+            self.OLE = None
+
+        # Libera o PDFCreatorOptions (caso o PDFCreator tenha sido iniciado - start)
+        if hasattr(self, 'Options'):
+            self.Options = None
+
+    def SetOptions(self, filename, format):
+        self.Options.AutosaveDirectory = self.OutputDirectory
+        self.Options.UseAutosave = 1
+        self.Options.UseAutosaveDirectory = 1
+        self.Options.AutosaveFormat = self.formats[format]
+        self.Options.AutosaveFilename = '%s.%s' % (os.path.splitext(filename)[0], format)
+        # TODO: Colocar mais opções inerentes a formato, como DPI, Compressão, etc.
+        self.OLE.cOptions = self.Options
+
+    def wait(self):
+        """Aguardar finalização da conversão"""
+        start = clock()
+        while pdf.processos > 0:
+            if clock() - start > WaitTimeOut:
+                raise Exception, 'Tempo de espera máximo atingido: %d segundos' % WaitTimeOut
+            sleep(SleepTimeToWait)
+            PumpWaitingMessages()
+
+class PDFCreatorEvents(object):
+    errors = {
+        -2: 'Evento desconhecido',
+        -1: 'Erro de teste para o evento',
+         1: 'O ActiveX-Server ainda não foi iniciado! Por favor use a função "cStart()" para inicia-lo!',
+         2: 'Uma instância do PDFCreator já está rodando. Não é permitido mais que uma instância de cada vez!',
+         3: 'Nome de opção desconhecida', # Unknown Options Name '%1' in '%2'! 
+         4: 'Erro no ghostscript', #Ghostscript Error: '%1'! 
+         5: 'Arquivo não encontrado', #The file '%1' could not be found! 
+         6: 'Um caminho ou arquivo válido não foi informado'} #No valid path or filename '%1' was given! 
+
+    def OneReady(self):
+        print "Arquivo %s gerado com sucesso !" % os.path.split(pdf.OLE.cOutputFilename)[1]
+        pdf.processos -= 1
+
+    def OneError(self):
+        if pdf.OLE.cError.Number != 2: # Caso 2 utiliza o que está iniciado na memória
+            print "PDFCreator Error: ", self.errors[pdf.OLE.cError.Number]
+            # Mensagem de erro original
+            #print pdf.OLE.cError.Number, pdf.OLE.cError.Description
+
+# Instância única para referenciar o PDFCreator
+try:
+    pdf = PDFCreator()
+except PDFCreatorNotFound, mensagem:
+    print mensagem
+    sys.exit(1) # PDFCreator not found
+
+
+def DispatcherOLE(arquivo):
+    """Função de dispatch para a classe correta conforme a extensão do arquivo"""
+    OLEServers = {'.doc': WordWrapper, '.xls': ExcelWrapper}
+    extensao = os.path.splitext(arquivo.lower())[1]
+
+    if extensao in OLEServers:
+        return OLEServers[extensao]()
+    else:
+        raise Exception, 'Tipo de documento (%s) não suportado' % extensao
+
+def ConvertFile(filename):
+    print "Convertendo", os.path.split(filename)[1]
+    server = DispatcherOLE(filename)
+
+    if not pdf.started:
+        pdf.start()
+
+    pdf.OLE.cClearCache()
+    # Pode-se usar qualquer formato listado em PDFCreator.formats além do PDF
+    pdf.SetOptions(os.path.split(filename)[1], 'pdf') 
+    pdf.OLE.cPrinterStop = True
+    pdf.processos += 1
+
+    try:
+        server.convert(filename)
+    finally:
+        pdf.OLE.cPrinterStop = False
+
+def AskForFiles():
+    import win32ui
+    import win32con
+
+    tipos = ['Documentos do Microsoft Word (*.doc)|*.doc',
+             'Planilhas do Microsoft Excel (*.xls)|*.xls',
+             '|']
+
+    while True:
+        dlg = win32ui.CreateFileDialog(1, None, None, 
+                    (win32con.OFN_FILEMUSTEXIST|
+                     win32con.OFN_EXPLORER|
+                     win32con.OFN_ALLOWMULTISELECT),
+                    '|'.join(tipos))
+        dlg.SetOFNTitle('Arquivo para converter')
+
+        if dlg.DoModal() != win32con.IDOK:
+            break
+
+        BatchProcess(dlg.GetPathNames())
+
+    if pdf.processos > 0:
+        print "Esperando finalização..."
+        pdf.wait()
+
+def BatchProcess(filenames):
+    for filename in filenames:
+        try:
+            if os.path.exists(filename):
+                ConvertFile(filename)
+                pdf.wait()
+            else:
+                print 'O arquivo %s não pôde ser encontrado' % filename
+        except Exception, mensagem:
+            print 'O arquivo %s não pôde ser convertido\nErro: %s' % (filename, mensagem)
+            pdf.processos = 0
+
+if __name__ == '__main__':
+    #O OutputDirectory pode ser alterado para definir o diretório de gravação
+    #pdf.OutputDirectory = r'c:\temp'
+
+    if len(sys.argv) > 1:
+        BatchProcess(sys.argv[1:])
+    else:
+        AskForFiles()
+}}}
+
+== Exemplo de uso ==
+
+O exemplo de uso já está na própria rotina (no final para ser mais exato).
+
+Esta rotina faz uso extensivo de acesso a servidores {{{COM}}}. E já funciona muito bem com Microsoft Word e Excel, porém, é facilmente adaptável para outros servidores.
+
+== Recursos úteis na rotina ==
+ * Acesso a servidores {{{COM}}}
+ * Manipulação de callbacks (eventos) de servidores {{{COM}}}
+ * Troca da impressora padrão
+ * Diálogo de abertura de arquivos - {{{MFC}}}
+ * Liberação da MFC para processar os eventos da fila: {{{PumpWaitingMessages}}}
+
+Volta para CookBook.

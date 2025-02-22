@@ -1,0 +1,379 @@
+#pragma section-numbers off
+= Receita: TkShisenSho =
+
+
+Em uma noite de insônia brincando com os joguinhos do KDE, achei o Shisen-Sho, uma variação do Mahjongg. O problema é que fiquei viciado nisso, um dia viajei, em um lugar com computador só com Windows, acabei resolvendo aproveitar melhor algumas horas de insônia e fazer um em Python e Tkinter. Tem alguns bugs, não marca tempo nem placar, mas funciona. O algoritmo para encontrar a rota correta (baseado no A*) pode servir para alguém, e o código é um exemplo razoável do poder do Canvas da Tkinter.
+
+
+== Código ==
+{{{
+#!python
+#!/usr/bin/env python
+
+
+import random
+import math
+
+from Tkinter import *
+
+import Image
+import ImageTk
+import ImageEnhance
+import itertools
+
+
+SIZE = [(16, 8), (20, 10), (26, 14), (28, 16), (32, 18)]
+CELLSIZE = 40, 56
+IMAGE = 'kmahjongg.bmp'
+PATHTIME = 200
+GRAVITY = True
+
+
+def load_images():
+    w, h = 40, 56
+    base = Image.open(IMAGE)
+    cells = []
+    for x in range(0, 9*w, w):
+        for y in range(0, 3*h, h):
+            im = base.crop((x, y, x+w, y+h))
+            cells.append(im)
+    for x in range(0, 8*w, w):
+        for y in range(3*h, 4*h, h):
+            im = base.crop((x, y, x+w, y+h))
+            cells.append(im)
+    for x in range(0, 7*w, w):
+        for y in range(4*h, 5*h, h):
+            im = base.crop((x, y, x+w, y+h))
+            cells.append(im)
+    assert len(cells) == 42
+    return cells
+
+
+class Cell(object):
+    def __init__(self, board, x, y):
+        self.board = board
+        self.x = x
+        self.y = y
+        self.content = None
+        self.tag = None
+
+        w, h = self.board.cellsize
+        self.center = (x*w + w/2), (y*h + h/2)
+        x0 = self.x * w
+        y0 = self.y * h
+        x1 = (self.x+1) * w
+        y1 = (self.y+1) * h
+        self.coords = (x0, y0, x1, y1)
+        
+    def __repr__(self):
+        return '<%r, %r>'%(self.x, self.y)
+
+    def set(self, content):
+        self.content = content
+        self.board.itemconfig(self.tag, image=content[0])
+
+    def clear(self):
+        self.content = None
+        self.board.itemconfig(self.tag, image='')
+
+    def light(self):
+        if self.content is not None:
+            self.board.itemconfig(self.tag, image=self.content[1])
+
+    def dark(self):
+        if self.content is not None:
+            self.board.itemconfig(self.tag, image=self.content[0])
+
+    def draw(self):
+        if self.tag is None:
+            self.tag = self.board.create_image(self.center)
+
+    def neighbors(self):
+        # return adjacent cells 
+        for v in (-1, 1):
+            x = self.x + v
+            y = self.y + v
+
+            if 0 <= x < self.board.w:
+                cell = self.board[x, self.y]
+                yield cell
+
+            if 0 <= y < self.board.h:
+                cell = self.board[self.x, y]
+                yield cell
+
+    def routes(self, dest):
+        # get route from self to dest
+        
+        #create a list paths
+        paths = []
+        #add the start node self to paths giving it one element
+        paths.append((self,))
+
+        #Until first path of paths ends with dest, or paths is empty
+        while paths and paths[0][-1] is not dest:
+            #extract the first path from paths
+            first = paths.pop(0)
+            #extend the path one step to all empty neighbors
+            #create X new paths
+            #reject all paths with loops
+            new = [first+(n,) for n in first[-1].neighbors() if n not in first and (n.content is None or n is dest)]
+            
+            #filter out paths with more than n turns
+            new = filter(self.lines, new)
+
+            #add each remaining new path to paths
+            paths.extend(new)
+
+            #sort paths by distance to goal
+            paths.sort(key=lambda p: self.dist(p[-1], dest))
+            
+
+
+        return paths
+
+    def dist(self, s, d):
+        x = abs(s.x - d.x)
+        y = abs(s.y - d.y)
+        h = math.sqrt(x**2 + y**2)
+        return h
+        
+        
+    def lines(self, path):
+        n = 3
+        i = 0
+
+        b = path[0]
+        x = False
+        y = False
+        for a in path[1:]:
+            if a.x == b.x:
+                if not x:
+                    x = True
+                    i += 1
+            else:
+                x = False
+
+            if a.y == b.y:
+                if not y:
+                    y = True
+                    i += 1
+            else:
+                y = False
+
+            b = a
+
+            if i > n:
+                return False
+        return True
+            
+
+        
+
+class Board(Canvas):
+    def __init__(self, parent):
+        Canvas.__init__(self, parent)
+        self.parent = parent
+        self.size = w, h = SIZE[3]
+        self.w = w
+        self.h = h
+        self.cellsize = CELLSIZE
+
+        self.cells = [Cell(self, x, y) for x in range(w) for y in range(h)]
+        self.tags = {}
+
+        self.src = None
+
+        self._images = None
+        self.images = None
+        self.aimages = None
+
+        self.setup()
+        self.reset()
+
+    def setup(self):
+        self._images = load_images()
+        self.images = [ImageTk.PhotoImage(img) for img in self._images]
+        self.aimages = [ImageTk.PhotoImage(ImageEnhance.Brightness(img).enhance(1.2)) for img in self._images]
+        
+        self['width'] = self.cellsize[0] * self.w
+        self['height'] = self.cellsize[1] * self.h
+        self['bg'] = '#00aa00'
+
+        for c in self.cells:
+            c.draw()
+            self.tags[c.tag] = c
+
+        self.bind('<Button-1>', self.lclick)
+        self.bind('<Button-3>', self.rclick)
+        self.parent.bind('h', self.givehint)
+
+    def reset(self):
+        ncells = (self.w-2) * (self.h-2)
+        nimgs = ncells/4
+
+        simgs = itertools.cycle(zip(self.images, self.aimages)[:nimgs])
+        
+        imgs = []
+        while len(imgs) < ncells:
+            x = simgs.next()
+            imgs.append(x)
+            imgs.append(x)
+
+        random.shuffle(imgs)
+
+        assert len(imgs) == ncells, (nimgs, len(imgs), ncells)
+
+        for x in range(1, self.w-1):
+            for y in range(1, self.h-1):
+                self[x, y].set(imgs.pop())
+
+        assert len(imgs) == 0
+
+    def __getitem__(self, i):
+        x, y = i
+        if not x < self.w:
+            raise IndexError('x=%s'%x)
+        if not y < self.h:
+            raise IndexError('y=%s'%y)
+        c = y + (self.h * x)
+        return self.cells[c]
+
+    def draw_path(self, path, fill='red'):
+        coords = [cell.center for cell in path]
+        return self.create_line(coords, fill=fill, width=2)
+
+    def clear_cells(self, path, src, dest):
+        print 'clear'
+        self.delete(path)
+        src.dark()
+        dest.dark()
+        src.clear()
+        dest.clear()
+        if GRAVITY:
+            self.drop_cells(src.x)
+            self.drop_cells(dest.x)
+
+    def drop_cells(self, col):
+        for row in reversed(range(1, self.h-1)):
+            x, y = col, row
+            a = self[x, y]
+            b = self[x, y-1]
+            if a.content is None and b.content is not None:
+                a.set(b.content)
+                b.clear()
+
+    def lclick(self, event=None):
+        x = self.canvasx(event.x)
+        y = self.canvasy(event.y)
+        w, h = self.cellsize
+        rx, ry = int(x/w), int(y/h)
+        print rx, ry
+        cell = self[rx, ry]
+        if cell.content is not None:
+            self.clickcell(cell)
+
+    def clickcell(self, cell):
+
+        cell.light()
+
+        if self.src is None:
+            self.src = cell
+
+        elif self.src is cell:
+            self.src.dark()
+            self.src = None
+
+        elif self.src.content != cell.content:
+            print "Contents don't match!"
+            self.src.dark()
+            cell.dark()
+            self.src = None
+
+        else:
+            paths = self.src.routes(cell)
+            if not paths:
+                print 'No path!'
+                self.src.dark()
+                cell.dark()
+            else:
+                path = paths[0]
+                tag = self.draw_path(path)
+                self.after(PATHTIME, self.clear_cells, tag, self.src, cell)
+            self.src = None
+        
+    def rclick(self, event=None):
+        x = self.canvasx(event.x)
+        y = self.canvasy(event.y)
+        w, h = self.cellsize
+        rx, ry = int(x/w), int(y/h)
+        print rx, ry
+        cell = self[rx, ry]
+        self.cellhint(cell, show=True)
+
+    def cellhint(self, cell, delay=0.5, show=False):
+        if cell.content is not None:
+            # find a cell with same contents
+            for other in self.cells:
+                if other is cell:
+                    continue
+                if cell.content == other.content:
+                    paths = cell.routes(other)
+                    if paths:
+                        if show:
+                            p = paths[0]
+                            tag = self.draw_path(p, fill='blue')
+                            self.after(int(delay*1000), self.delete, tag)
+                        return other
+            else:
+                return False
+                    
+    def givehint(self, event=None, show=True):
+        for cell in self.cells:
+            if cell.content is not None:
+                other = self.cellhint(cell, delay=1, show=show)
+                if other:
+                    return cell, other
+        else:
+            print 'No more moves possible. Game Over!'
+
+
+
+
+
+### Gui
+
+class MainWindow(Tk):
+    def __init__(self):
+        Tk.__init__(self)
+
+        self.build()
+
+
+    def build(self):
+        self.board = Board(self)
+        self.board.pack(expand=1, fill=BOTH)
+        
+
+        
+
+
+if __name__ == '__main__':
+    root = MainWindow()
+    root.mainloop()
+
+        
+    
+
+
+}}}
+
+Imagem com as peças, do jogo original para o KDE, liberada sob GPL: 
+
+{{http://www.pedrowerneck.net/img/kmahjongg.bmp}}
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

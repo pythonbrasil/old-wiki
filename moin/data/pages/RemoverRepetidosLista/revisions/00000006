@@ -1,0 +1,45 @@
+Função para remover elementos repetidos de uma lista.
+Retorna uma nova lista.
+
+== Código ==
+
+{{{
+#!python
+
+def RemoveRepetidosLista(l):
+    # cria um dicionario em branco
+    dict = {}
+    # para cada valor na lista l
+    for word in l:
+        # adiciona ao dicionario: valor:1
+        # note que se for repetido o valor somente sobrescreve ele :)
+        dict[word] = 1
+    # retorna uma copia das 'keys'
+    l[:] = dict.keys()
+    return l
+
+}}}
+
+Como é costume em Python, aqui está um outro jeito, que funciona em uma única linha. Observe que a informação da ordem dos elementos é perdida, pois a conversão passa por um dicionário (que não guarda a informação em ordem, mas garante a unicidade) e depois retorna a uma lista. Logo, é mais útil para se obter um conjunto em forma de lista do que para se obter uma lista ordenada:
+
+{{{
+#!python
+# lista é uma lista com elementos repetidos.
+dict(zip(lista, lista)).keys()
+}}}
+
+A partir do Python 2.4 é possível utilizar-se do tipo de dados "Set", que obedece as restrições de conjuntos matemáticos, para obter o mesmo rapidamente, mas também com o problema de alterar a ordem dos elementos.
+{{{
+#!python
+lista_sem_repeticoes = list(set(lista_com_repeticoes))
+}}}
+
+
+== Exemplo de uso ==
+
+{{{
+#!python
+lista_nova_sem_repeticao = RemoveRepetidosLista(lista)
+}}}
+
+Volta para CookBook.

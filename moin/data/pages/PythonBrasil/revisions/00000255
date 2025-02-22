@@ -1,0 +1,53 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+Este site foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma (português). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente. Veja o ComoUsarWiki para aprender a usá-lo.
+
+= Artigos & Palestras =
+
+   * 28/08/2006 - [http://webinsider.uol.com.br/index.php/2006/08/28/python-e-opcao-para-desenvolvimento-web/ Python como opção para desenvolvimento web (WebInsider)]
+   * 18/09/2006 - Apresentação: Python e Maemo com Osvaldo Santana Neto e Gustavo Barbieri na Livraria Cultura de Recife no dia 09 de setembro de 2006 às 18hs (antes de ir ligue para a livraria confirmando. Tel.: (81) 2102-4033) Mais informações no site da [http://www.livrariacultura.com.br/scripts/cultura/eventos/palestras.asp?local=3&sPagina=2#1625 Livraria Cultura].
+
+= II PyCon Brasil =
+
+A II !PyCon Brasil,  realizado em Brasília nos dias 1 e 2 de junho, foi um sucesso total! Para saber como foi o evento, veja as seguintes referências:
+
+  * http://pyconbrasil.com.br/downloads/videos/ (Vídeos do evento)
+  * http://pyconbrasil.com.br/sobre/fotos
+  * http://del.icio.us/marcoandre/PyConBrasil
+  * http://www.flickr.com/photos/dtremea/sets/72157594158790791/
+  * http://www.flickr.com/photos/46925292@N00/tags/pycon2br/
+
+= Iniciantes =
+
+Leitura recomendada para aqueles que têm interesse ou são iniciantes na linguagem Python:
+
+   * InstalandoPythonNoWindows - Dica de como instalar o Python no Windows XP.
+   * AprendaProgramar - Aprenda a Programar com a linguagem Python.        
+   * ListaDeExercicios - Para quem quer se exercitar e não sabe por onde começar.
+   * DocumentacaoPython - Dezenas de tutoriais e artigos sobre Python para os mais diversos níveis de aprendizado.
+   * CookBook - Exemplos e trechos de códigos úteis.
+   * PerguntasFrequentes - Respostas às perguntas mais freqüentes.
+
+= Como Participar =
+
+Você pode participar da comunidade PythonBrasil diretamente aqui no site, através da lista de discussão ou via IRC.
+
+=== Lista de Discussão ===
+
+A lista oficial do site é: python-brasil@yahoogrupos.com.br ([http://br.groups.yahoo.com/group/python-brasil/ página principal]). Para se cadastrar na python-brasil, envie email (com qualquer conteúdo/assunto) para python-brasil-subscribe@yahoogrupos.com.br ou preencher o formulário abaixo. Feito isso você receberá um e-mail de confirmação. É só responder a esse e-mail e pronto.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+/!\ '''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existe ainda uma lista chamada python-br que está sendo desativada. Se você tem conta nesta lista, por favor migre para a lista python-brasil. Pedimos a todos pythonistas e curiosos que não remetam e-mails para a lista python-br! Ela não tem como ser moderada ou gerenciada devido a um problema de autenticação.
+
+=== Canal de IRC ===
+
+O canal oficial do '''Python''' no Brasil é o #python-br do irc.freenode.org.
+
+=== Outros ===
+
+   * CaixaDeSugestoes - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PaginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuarios - Outros sites de grupos de usuários Python.

@@ -1,0 +1,150 @@
+= Receita: Renderizador HTML em Tkinter =
+
+O seguinte código implementa um renderizador de textos HTML ultra-simples utilizando o toolkit Tkinter. Ele não é muito capaz, não se dá bem com textos com formatações muito complexas, não lida com imagens nem tabelas. No entanto, para textos simples, seu desempenho é bastante adequado, e é fácil extendê-lo para conter mais tags.
+
+Além disso, é um bom exemplo de uma classe que não se daria bem sem herança múltipla. O renderizador é (precisa ser) uma widget que mostra textos, mas também precisa ser capaz de ler e entender HTML. Assim sendo, a classe é derivada tanto de um Text do Tkinter quanto de um HTMLParser, da biblioteca padrão.
+
+== Código ==
+
+{{{
+#!python
+from Tkinter import *
+from tkSimpleDialog import *
+from HTMLParser import HTMLParser
+
+class HTMLRender(Text, HTMLParser):
+
+    # Aqui definimos as tags alinhadas:
+    __inline = [ "b", "i", "strong" ]
+
+    # Aqui definimos as tags que geram seus próprios blocos
+    __block = [ "h1", "h2", "h3", "p", "dl", "dt", "dd" ]
+
+    # Aqui algumas tags comuns em HTML que não vamos renderizar
+    __ignore = [ "body", "html", "div" ]
+
+    # Formatos/fontes aplicadas a cada tag:
+    __formats = {
+        'h1': { 'font': ("Helvetica", "16", "bold"), 'justify': CENTER },
+        'h2': { 'font': ("Helvetica", "12", "bold"), 'justify': CENTER },
+        'h3': { 'font': ("Helvetica", "10", "bold italic")} ,
+        'dt': { 'font': ("Helvetica", "10", "bold") } ,
+        'b': { 'font': ("Helvetica", "10", "bold") },
+        'i': { 'font': ("Helvetica", "10", "italic") },
+        'strong': { 'font': ("Helvetica", "10", "bold italic") },
+        'default': { 'font': ("Helvetica", "10"), 'foreground': 'red'  },
+    }
+
+    def __init__(self, *cnf, **kw):
+        """
+        Inicializa o HTMLRender, inicializando pelas classes-mãe.
+        O dicionário __tags contém uma lista das tags presentes no
+        texto e suas posições, para podermos alocar as formatações.
+        O __index é a posição de inserção do texto na widget.
+        """
+        Text.__init__(self, *cnf, **kw)
+        HTMLParser.__init__(self)
+        self.__tags = { }
+        self.__index = 0
+
+    def insert(self, text):
+        """
+        A classe Text utiliza a interface insert para inserir texto
+        na widget, enquanto a classe HTMLParser utiliza feed. Este
+        método se sobrepõe ao método de Text, de tal maneira que a
+        inserção do texto causa a sua interpretação pelo parser.
+        """
+        self.feed(text)
+
+    def handle_starttag(self, tag, attr):
+        """
+        Aqui manuseamos cada uma das tags abertas, aplicando a
+        formatação adequada.
+        """
+        if tag == "dd":               # hack para finalizar definicao
+            self.handle_endtag("dt")  # isso é feio, encontre outra solução
+
+        # Se a tag deve ser ignorada, nada deve ser feito.
+        if tag in self.__ignore:
+            pass
+        # Se a tag cria um bloco, inserimos quebras de parágrafo
+        # no texto para simular o efeito.
+        elif tag in self.__block:
+            Text.insert(self, INSERT, "\n\n")
+
+        # Inserimos a posição da tag no texto no dicionário para
+        # marcarmos a posição em que a formatação deve ser aplicada.
+        if tag in self.__tags:
+            self.__tags[tag].append(self.index(INSERT))
+        else:
+            self.__tags[tag] = [ self.index(INSERT) ]
+
+    def handle_data(self, data):
+        """
+        Este método recebe os dados de uma tag, que, tipicamente,
+        é texto a ser renderizado. Simplesmente inserimos o texto
+        na widget. No entanto, os renderizadores de HTML devem
+        tratar espaços contíguos e caracteres de tabulação e quebra
+        de página como um simples espaço em branco. Na primeira
+        linha nós fazemos esse serviço.
+        """
+        data = ' '.join(data.split()) + ' '
+        Text.insert(self, INSERT, data)
+
+    def handle_endtag(self, tag):
+        """
+        Aqui as tags são fechadas. Suas posições são encontradas
+        e as formatações são aplicadas. O processo consiste em
+        recuperar a posição inicial em que a formatação deve ser
+        aplicada (obtida em handle_starttag), obter a posição
+        atual (após o texto ter sido inserido em handle_data),
+        inserir os marcadores do Text e aplicar a formatação. O
+        processo é extremamente simples.
+        """
+        try:
+            start = self.__tags[tag].pop()
+            end = self.index(INSERT)
+            tag_name = "Tag%05d" % self.__index
+            self.__index = self.__index + 1
+            self.tag_add(tag_name, start, end)
+            self.tag_config(tag_name, **self.__formats[tag])
+            return
+        except KeyError:
+            pass
+
+# E é isso aí: 105 linhas, incluindo comentários!!!
+}}}
+
+== Exemplo de uso ==
+
+Eu criei esta widget para renderizar texto de ajuda em uma aplicação simples. O trecho de código que pode ser utilizado para testar esse renderizador está abaixo:
+
+{{{
+#!python
+app = Tk() # Criamos uma aplicacao Tk...
+
+# Note que todas as propriedades de um Text estão
+# disponíveis. Cuidado, pois alguns efeitos colaterais
+# meio esquisitos podem aparecer.
+text = HTMLRender(app, font = ("Helvetica", "10", ""), wrap = WORD)
+text.insert(open("docs/help.html").read())
+
+# Uma barra de rolagem pode ser bastante útil (mas os
+# detalhes fogem ao escopo deste receitinha:
+sb = Scrollbar(app , orient = VERTICAL, command = text.yview)
+text.configure(state = DISABLED, yscrollcommand = sb.set)
+
+# E, claro, precisamos colocar a widget em seu lugar.
+text.grid(row = 1, column = 1, sticky = N+W+E+S)
+sb.grid(row = 1, column = 2, sticky = N+S)
+
+# Por fim, executamos:
+app.mainloop()
+
+}}}
+
+Volta para CookBook.
+
+----
+
+por AlexandreNalon

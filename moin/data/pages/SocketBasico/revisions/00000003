@@ -1,0 +1,163 @@
+= Receita: SocketBasico =
+Esta receita é baseada em um material que preparei para uso em aulas para demostrar a programação básica para redes usando socket com a intensão de ser uma "prova de conceitos" sobre o TCP/UDP.
+
+== Estrutura Básica de Programas para Rede ==
+ * O Python implementa a interface de rede utilizando os fundamentos da API de Socket.
+ * Todo socket pode estar em modo ativo ou passivo.
+ * Quando ele é criado ele esta no modo ativo.
+ * Para o servidor poder ficar “escutando” um porta é necessário colocar o socket do servidor em modo passivo.
+ * Seqüência no Cliente:
+  1. Se foi fornecido um nome de hospedeiro converter em endereço IP;
+  1. Se foi fornecido um nome de protocolo de transporte converter em número;
+  1. Criar o socket (função socket);
+  1. Conecta com o servidor (função connect);
+  1. Enviar/Receber dados (permanecer nesse passo enquanto tiver dados para enviar/receber);
+  1. Fechar o socket.
+ * Seqüência no Servidor:
+  1. Se foi fornecido um nome de protocolo de transporte converter em número;
+  1. Criar o socket (função socket);
+  1. Coloca um endereço local, endereço IP e porta, no socket (função bind);
+  1. Instrui o sistema operacional para colocar o socket em modo passivo (função listen);
+  1. Aceita uma nova conexão (função accept);
+  1. Enviar/Receber dados (permanecer nesse passo enquanto tiver dados para enviar/receber);
+  1. Fechar o socket.
+  1. Volta ao passo 5 para aceitar outra conexão.
+ * Os passos 4 e 5 do servidor são feito quando utilizamos protocolo de transporte orientado a conexão (TCP).
+ * O servidor tipicamente fica em laço infinito aceitando novas conexões.
+ * Enquanto o servidor atende uma conexão ele fica dedicado a ela. Para evitar isso é possível fazer um passo intermediário entre o 5 e o 6 para criar um novo processo ou thread para tratar da nova conexão que esta chegando. Com isso o processo/thread pai fica somente recebendo as conexões e o processo/thread filho trata das requisições dos clientes.
+== Cliente e Servidor com UDP ==
+=== Cliente UDP ===
+{{{
+#!python
+import socket
+HOST = '192.168.1.10'  # Endereco IP do Servidor
+PORT = 5000            # Porta que o Servidor esta
+udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+dest = (HOST, PORT)
+print 'Para sair use CTRL+X\n'
+msg = raw_input()
+while msg <> '\x18':
+    udp.sendto (msg, dest)
+    msg = raw_input()
+udp.close()
+}}}
+=== Servidor UDP===
+
+{{{
+#!python
+import socket
+HOST = ''              # Endereco IP do Servidor
+PORT = 5000            # Porta que o Servidor esta
+udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+orig = (HOST, PORT)
+udp.bind(orig)
+while True:
+    msg, cliente = udp.recvfrom(1024)
+    print cliente, msg
+udp.close()
+}}}
+== Cliente e Servidor com TCP ==
+=== Cliente TCP ===
+{{{
+#!python
+import socket
+HOST = '127.0.0.1'     # Endereco IP do Servidor
+PORT = 5000            # Porta que o Servidor esta
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+dest = (HOST, PORT)
+tcp.connect(dest)
+print 'Para sair use CTRL+X\n'
+msg = raw_input()
+while msg <> '\x18':
+    tcp.send (msg)
+    msg = raw_input()
+tcp.close()
+}}}
+=== Servidor TCP ===
+{{{
+#!python
+import socket
+HOST = ''              # Endereco IP do Servidor
+PORT = 5000            # Porta que o Servidor esta
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+orig = (HOST, PORT)
+tcp.bind(orig)
+tcp.listen(1)
+while True:
+    con, cliente = tcp.accept()
+    print 'Concetado por', cliente
+    while True:
+        msg = con.recv(1024)
+        if not msg: break
+        print cliente, msg
+    print 'Finalizando conexao do cliente', cliente
+    con.close()
+}}}
+== Servidor TCP Concorrente ==
+{{{
+#!python
+import socket
+import os
+import sys
+HOST = ''              # Endereco IP do Servidor
+PORT = 5000            # Porta que o Servidor esta
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+orig = (HOST, PORT)
+tcp.bind(orig)
+tcp.listen(1)
+while True:
+    con, cliente = tcp.accept()
+    pid = os.fork()
+    if pid == 0:
+        tcp.close()
+        print 'Conectado por', cliente
+        while True:
+            msg = con.recv(1024)
+            if not msg: break
+            print cliente, msg
+        print 'Finalizando conexao do cliente', cliente
+        con.close()
+        sys.exit(0)
+    else:
+        con.close()
+}}}
+== Usando Thread para Concorrência ==
+{{{
+#!python
+import socket
+import thread
+
+HOST = ''              # Endereco IP do Servidor
+PORT = 5000            # Porta que o Servidor esta
+
+def conectado(con, cliente):
+    print 'Conectado por', cliente
+
+    while True:
+        msg = con.recv(1024)
+        if not msg: break
+        print cliente, msg
+
+    print 'Finalizando conexao do cliente', cliente
+    con.close()
+    thread.exit()
+
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+orig = (HOST, PORT)
+
+tcp.bind(orig)
+tcp.listen(1)
+
+while True:
+    con, cliente = tcp.accept()
+    thread.start_new_thread(conectado, tuple([con, cliente]))
+
+tcp.close()
+
+}}}
+
+Volta para CookBook.
+
+----
+MarcioMinicz

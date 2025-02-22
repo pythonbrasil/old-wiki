@@ -1,0 +1,148 @@
+#pragma section-numbers off
+
+= Gerando Password =
+
+''Essa descrição foi criada por FelipeLessa com alguns comentários do RodrigoNishino (aparece com um * na frente). Veja a seção Autor abaixo.''
+
+O programa Pass Generator cria senhas aleatórias a partir de uma série de caracteres. Os caracteres que serão usados para criar a senha e o número de caracteres da mesma são selecionados pelo usuário.
+
+Para a criação da senha em si é usada a função padrão do python random.choice(), que escolhe (óbvio, não? :) ) um item de uma sequência aleatoriamente, sendo que a sequência em questão são os caracteres em si. Por isso o programa não leva em consideração senhas muito fáceis ou dificeis que ocasinalmente possam ser criadas.
+
+A interface é construída em anygui. Pegue-o para as plataformas *nix e Windows em [http://anygui.sourceforge.net/ anygui.sf.net].
+
+Nesta "nova versão" a interface foi totalmente remodelada, permitindo que a função '''handler_buttonsgenerate()''' fosse inutilizada pois não estava funcionando (sem motivo aparente). O código está mais simples também.
+
+
+
+== Código ==
+
+{{{
+#!python
+#!/usr/bin/env python
+# Pass Generator - V 1.5
+# Rodrigo Calanca Nishino
+# 
+# Programa simples que gera passwords
+# Atenção: Ele usa o anygui (anygui.sourceforge.net)
+#
+# ChangeLog:
+#  - Modificado por RodrigoNishino (2004/02/15):
+#     o Interface redesenhada.
+#     o Codigo foi simplificado.
+#  - Modificado por FelipeLessa para (2004/01/23):
+#     o Não aceitar números negativos. Obrigado por mostrar o problema RodrigoNishino.
+#     o Unificar funções que tratam os sinais recebidos pelos botões. Aquilo realmente era uma repetição.
+#  - Modificado por FelipeLessa para (2004/01/19):
+#     o Possibilitar a importação do arquivo sem que a instalação do anygui seja necessária.
+#  - Modificado por FelipeLessa para (2004/01/17):
+#     o Otimizar conjuntos de letras.
+#     o Utilizar "".join ao invés de laço for em password() . 
+#     o Retirar tag coding visto que quando o código for copiado & colado do Wiki ele pode ser alterado.
+#     o Texto que aparece por padrão deve corresponder ao especificado no início do arquivo.
+#     o Adicionada a possibilidade de importar arquivo sem abrir a janela.
+#     o Modificações menores.
+
+
+# Import's
+try:
+    import anygui as gui
+    anygui_disponivel = True   # Caso alguém queira a função apenas e não tenha o anygui.
+except ImportError:
+    print "AVISO: Desabilitando interface gráfica."
+    anygui_disponivel = False
+
+from random import choice
+
+### Função por onde todo o programa se desenrola
+
+def cria(**kwds):
+    carac = ""
+    # Usei "abcd ...." ao invés de string.lowercase por que está acontecendo algum bug ...
+    AoMenosUm = 0 # Solução utilizada para evitar bug quando nenhum dos checkboxes foi marcado
+    if Check_az.on == 1:
+        carac = carac + "abcdefghijklmnopqrstuvwxyz"
+        AoMenosUm = 1
+    if Check_AZ.on == 1:
+        carac = carac + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        AoMenosUm = 1
+    if Check_09.on == 1:
+        carac = carac + "0123456789"
+        AoMenosUm = 1
+    if AoMenosUm:
+        tamanho = TamanhoTField.text
+        int_tamanho = int(tamanho)
+        if int_tamanho < 5:
+            Texto.text = "Tamanho muito pequeno"
+        else:
+            final = ""
+            for p in range(int_tamanho):
+                final = str(final) + str(choice(carac))
+            Texto.text = final #pega a variável final e põe dentro de Texto.text
+    else:
+        Texto.text = "Parametros invalidos"
+       
+    
+###
+### Interface Gráfica
+###
+
+if anygui_disponivel:
+
+    Programa = gui.Application()
+
+    Janela = gui.Window(title="PassGenerator")
+    Janela.size = 180, 105
+
+    Texto = gui.TextField()
+    Texto.width = Janela.width
+    Texto.hstretch = 1
+    Janela.add(Texto)
+
+    OKButton = gui.Button(text="Criar Senha")
+    OKButton.width = Janela.width - 20
+    OKButton.hstretch = 1
+    Janela.add(OKButton, top=(Texto, 5), left = 10)
+    gui.link(OKButton, cria)
+
+    Check_az = gui.CheckBox(text="a-z")
+    Check_az.width = 60
+    Check_az.on = 1
+    Janela.add(Check_az, top=(OKButton, 5), left = 5)
+
+    Check_AZ = gui.CheckBox(text="A-Z")
+    Check_AZ.width = 60
+    Janela.add(Check_AZ, top=(OKButton, 5), left=(Check_az, 5))
+
+    Check_09 = gui.CheckBox(text="0-9")
+    Check_09.width = 60
+    Janela.add(Check_09, top=(OKButton, 5), left=(Check_AZ, 5))
+
+    TamanhoLabel = gui.Label(text="Tamanho")
+    TamanhoLabel.width = 50
+    Janela.add(TamanhoLabel, top=(Check_az, 5), left = 5)
+
+    TamanhoTField = gui.TextField()
+    TamanhoTField.width = 50
+    TamanhoTField.height = 17
+    TamanhoTField.text = "5"
+    Janela.add(TamanhoTField, top=(Check_az, 5), left=(TamanhoLabel, 5))
+
+    Programa.add(Janela)
+
+    if __name__=="__main__":
+        Programa.run()
+
+}}}
+
+== Autor ==
+
+''Felipe, escreva aqui alguma coisa sobre essa aplicação. Conte um pouco da história dela e fale um pouco sobre o funcionamento dela também. -- OsvaldoSantanaNeto''
+
+Eu não sou o autor do Pass Generator, devo deixar claro, e sim Rodrigo Calanca Nishino, como descrito no cabeçalho do programa. Ele aparentemente não criou uma descrição para este aplicativo e, a pedidos de OsvaldoSantanaNeto, eu criei uma simples baseada no código (para dizer a verdade, nem cheguei a rodar o programa visto que não possuo o anygui no meu computador). Rodrigo, se você vier aqui de novo, por favor faça as alterações necessárias. -- FelipeLessa
+
+"Antes de tudo, gostaria de agradecer ao FelipeLessa pelos trechos de código, aprendi novas coisas com a colaboração dele. O programa surgiu para mostrar para um colega meu que Python poderia fazer programas gráficos também. Como eu sou um newbie em Python , meu primeiro script imprimia na tela um monte de texto randômico ... (acredite eu sou fissurado neste módulo random) e para não perder as raízes ... decidi fazer meu primeiro programa gráfico semelhante ao meu primeiro script. Ele me garantiu que se ele tentasse fazer este mesmo programa em VB ele seria no mínimo umas 3 vezes maior. 
+
+O programa não é lá uma maravilha, particularmente eu questiono a aplicabilidade dele, porém baseado no que eu aprendi nele, pretendo construir aplicações maiores ou pelo menos mais úteis que o PassGenerator (aliás esse nome é horrível). Sem dúvida que se não fosse graças PythonBrasil eu não teria sequer me metido com interfaces gráficas... permaneceria no meu programa de escrever coisas randomicas na tela" -- RodrigoNishino
+----
+
+FelipeLessa

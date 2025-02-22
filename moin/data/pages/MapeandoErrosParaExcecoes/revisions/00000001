@@ -1,0 +1,159 @@
+#pragma section-numbers off
+= Receita: Mapeando Números de Erro (errno) para exceções =
+
+Há casos em que é interessante ter uma hieraraquia de exceções para vários tipos de erros relacionados que podem ocorrer quando lidamos com chamadas do sistema operacional. Podemos mapear esses erros diretamente para exceções específicas usando uma classe especialmente projetada para isso. Aqui temos um exemplo de uma hierarquia de exceções e uma classe que automaticamente mapeia erros de sockets para suas respectivas exceções:
+
+== Código ==
+
+
+{{{
+#!python
+class Error(Exception):
+    """Exceção base da hierarquia"""
+
+class SocketError(Error):
+    """Um erro ocorreu com um socket"""
+
+class ConnectionError(SocketError):
+    """Um erro ocorreu com a conexão"""
+
+class ClientClosed(ConnectionError):
+    """-1"""
+
+class AddressAlreadyInUse(ConnectionError):
+    """errno: 98"""
+
+class AddressNotAvailable(ConnectionError):
+    """errno: 99"""
+
+class NetworkIsDown(ConnectionError):
+    """errno: 100"""
+
+class NetworkUnreachable(ConnectionError):
+    """errno: 101"""
+
+class NetworkReset(ConnectionError):
+    """errno: 102"""
+
+class ConnectionAborted(ConnectionError):
+    """errno: 103"""
+
+class ConnectionResetByPeer(ConnectionError):
+    """errno: 104"""
+
+class NoBufferSpaceAvailable(ConnectionError):
+    """errno: 105"""
+
+class SocketIsConnected(ConnectionError):
+    """errno: 106"""
+
+class NotConnected(ConnectionError):
+    """errno: 107"""
+
+class TCPTimeOut(ConnectionError):
+    """errno: 110"""
+
+class ConnectionRefused(ConnectionError):
+    """errno: 111"""
+
+class HostIsDown(ConnectionError):
+    """errno: 112"""
+
+class HostUnreachable(ConnectionError):
+    """errno: 113"""
+
+class ConnectionAlreadyInProgress(ConnectionError):
+    """errno: 114"""
+
+# Mapa dos códigos de erro para as exceções:
+
+_connErrorMap = {-1:ClientClosed,
+                 98:AddressAlreadyInUse,
+                 99:AddressNotAvailable,
+                 100:NetworkIsDown,
+                 101:NetworkUnreachable,
+                 102:NetworkReset,
+                 103:ConnectionAborted,
+                 104:ConnectionResetByPeer,
+                 105:NoBufferSpaceAvailable,
+                 106:SocketIsConnected,
+                 107:NotConnected,
+                 110:TCPTimeOut,
+                 111:ConnectionRefused,
+                 112:HostIsDown,
+                 113:HostUnreachable,
+                 114:ConnectionAlreadyInProgress}
+
+# Classe especial que mapeia os códigos para as exceções:
+
+class MapSocketError(ConnectionError):
+    def __init__(self, reason):
+	# reason é uma tupla ou lista contendo (código de erro,
+	# mensagem de erro)
+        code, msg = reason
+	# caso o erro não exista, ConnectionError é usada
+        exc = _connErrorMap.get(code, ConnectionError)
+        self.__class__ = exc
+        ConnectionError.__init__(self)
+
+
+#Testando o funcionamento da classe:
+
+if __name__ == "__main__":
+
+    for code, exc in _connErrorMap.items():
+        try:
+            raise MapSocketError((code, ""))
+        except exc:
+            print "OK - ", exc
+        except:
+            print "FALHOU - ", exc
+}}}
+
+== Exemplo de uso ==
+
+Aqui temos um exemplo de uso num objeto socket usado em um servidor. Não precisamos nos preocupar com qual exceção devemos levantar em cada erro. Basta passar o código de erro e a classe faz o resto.
+
+{{{
+#!python
+import socket
+from Error import MapSocketError
+
+class ServerSocket:
+
+    def __init__(self, addr):
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)        
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.fileno = self.socket.fileno
+
+    def bind(self, host, port):
+        try:
+            self.socket.bind((host, port))
+            self.addr = (host, port)
+        except socket.error, reason:
+            raise MapSocketError(reason.args)
+
+    def listen(self, backlog=1):
+        try:
+            self.socket.listen(backlog)
+        except socket.error, reason:
+            raise MapSocketError(reason.args)
+
+    def accept(self):
+        try:
+            sock, addr = self.socket.accept()
+            return sock, addr[0], addr[1]
+        except socket.error, reason:
+            raise MapSocketError(reason.args)
+
+}}}
+
+Depois, na utilização da classe Server''''''Socket, podemos capturar as exceções individualmente, de acordo com o código de erro, ou podemos usar a classe base da hierarquia, Connection''''''Error.
+            
+----
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

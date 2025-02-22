@@ -1,0 +1,123 @@
+Script para pegar a programação do dia da TV fechada (cabo) no site http://www.hagah.com.br
+
+O script faz uso do BeautifulSoup para fazer o parsing da página. 
+
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import urllib2
+from BeautifulSoup import BeautifulSoup
+from datetime import datetime
+x = datetime.now()
+hoje = x.strftime('%d/%m/%Y')
+print hoje
+
+canais = [
+["MDO","A & E Mundo"],
+#["APL","Animal Planet"],
+#["LOC","Animax"],
+["UNO","AXN"],
+#["BAN","Bandeirantes"],
+#["BBC","BBC World"],
+#["BIT","Bloomberg"],
+#["BMG","Boomerang"],
+#["CBR","Canal Brasil"],
+#["FUT","Canal Futura"],
+#["CAR","Cartoon Network"],
+#["MAX","Cinemax"],
+#["MXE","Cinemax e"],
+#["CLI","Clima Tempo"],
+#["CNE","CNN Espanhol"],
+#["CNN","CNN International"],
+#["CNT","CNT"],
+#["DWL","Deutsche Welle"],
+#["DIS","Discovery Channel"],
+#["HEA","Discovery Home & Health"],
+#["DIK","Discovery Kids"],
+#["TRV","Discovery Travel & Living"],
+#["DNY","Disney Channel"],
+#["EET","E! Entertainment "],
+#["ESB","ESPN Brasil"],
+#["ESP","ESPN International"],
+#["EUR","EuroChannel"],
+#["FAS","Fashion TV"],
+#["GLS","For Man"],
+#["FOX","Fox"],
+#["FLI","Fox Life"],
+#["FNE","Fox News"],
+["CFX","FX"],
+#["GLN","Globo News"],
+#["GNT","GNT"],
+["HAL","Hallmark"],
+#["HBO","HBO"],
+#["HBE","HBO e"],
+#["HFA","HBO Family"],
+#["HFE","HBO Family e"],
+#["HPL","HBO Plus"],
+#["HPE","HBO Plus e"],
+#["KID","Jetix"],
+#["MAP","Max Prime"],
+#["MPE","Max Prime e"],
+#["MGM","MGM"],
+#["MTV","MTV Brasil"],
+#["MTH","MTV Hits"],
+#["MSW","Multishow"],
+#["SUP","National Geographic"],
+#["NIC","Nickelodeon"],
+["TRA","People+Arts"],
+#["PLA","Playboy TV"],
+#["RAI","RAI (italiano)"],
+#["POA","RBS TV"],
+#["REC","Record"],
+#["RTV","Rede TV"],
+#["VDA","Rede Vida"],
+#["NAC","Sesc TV"],
+#["HOT","Sexy Hot"],
+#["SHO","Shoptime"],
+#["SIC","SIC Internacional"],
+["SET","Sony Entertainment Television"],
+#["SPE","Speed Channel"],
+#["SPO","SPORTV"],
+#["SP2","SPORTV 2"],
+#["TC2","Telecine Action"],
+#["TC5","Telecine Cult"],
+#["TC3","Telecine Light"],
+#["TC4","Telecine Pipoca"],
+#["TC1","Telecine Premium"],
+#["TGC","The Golf Channel"],
+#["HIS","The History Channel"],
+#["TNT","TNT"],
+#["TCM","Turner Classic Movies"],
+#["CAM","TV Câmara"],
+#["CNV","TV Canção Nova"],
+#["CUL","TV Cultura"],
+#["ESC","TV Escola"],
+#["JUS","TV Justiça"],
+#["RTB","TV Rá Tim Bum"],
+#["SEN","TV Senado"],
+#["TVV","TV Terra Viva"],
+#["TED","TVE Brasil"],
+#["TVE","TVE Internacional"],
+#["TV5","TV5MONDE"],
+#["USA","Universal Channel"],
+#["VH1","VH1"],
+["WBT","Warner"]
+]
+
+for canal in canais:
+    url="http://www.hagah.com.br/programacao-tv/jsp/default.jsp?uf=1&local=1&regionId=1&action=programacao_canal&canal=%s&operadora=14&data=%s" % (canal[0],hoje)
+    pagina = urllib2.urlopen(url)
+    print "***** %s *****" % canal[1]
+    conteudo = BeautifulSoup(pagina.read(), fromEncoding="iso-8858-1")
+    tabela = conteudo.findAll(id='grade canal')
+    linhas = conteudo.findAll('tr')
+    for linha in linhas: 
+        dado = linha.findAll('td')
+        hora = dado[0]
+        if dado[1].findAll('strong'):
+            programa=dado[1].findAll('strong')
+	    for item in programa:
+	        if item:
+                    print "%s |%s " % (hora.contents[0],item.contents[0])
+    print "----------------------------------------------------------------------------------------------------"
+}}}

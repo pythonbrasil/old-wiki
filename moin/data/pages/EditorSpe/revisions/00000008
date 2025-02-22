@@ -1,0 +1,19 @@
+#pragma section-numbers off
+= Editor SPE =
+
+Editor de textos inicialmente desenvolvido para criar scripts Python para o Blender. É muito bom, fácil de usar e de interface realmente agradável.
+
+   * '''Prós:''' Usa wxPython (wxWindow), logo, é bastante leve. Rápido e sem complicações. Tem auto-completion, e class-browse.
+   * '''Contras:''' Não tem integração com controles de versão.
+
+== Ficha técnica ==
+
+URL: http://spe.pycs.net/ [[BR]]
+Licença: GPL
+
+== Tela ==
+
+attachment:spe.png
+
+----
+daniel santos

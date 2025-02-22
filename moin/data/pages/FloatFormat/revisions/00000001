@@ -1,0 +1,44 @@
+#pragma section-numbers off
+= Receita: FloatFormat =
+
+Função para formatar um número inteiro...
+
+== Código ==
+
+{{{
+#!python
+
+# function to format a float number
+def FloatFormat(Number,DigitsBeforeDot=None,DigitsAfterDot=None):
+    NumberString = str(Number)
+    list = NumberString.split('.')
+    try:
+        FirstPart = list[0][0:DigitsBeforeDot]
+        SecondPart = list[1][0:DigitsAfterDot]
+    except:
+        pass
+    return float(FirstPart+'.'+SecondPart)
+
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+
+# usage example
+a = FloatFormat(254.1231,2,1)
+print "a",a
+b = FloatFormat(254.1231,1,3)
+print "b",b
+c = FloatFormat(254.1231,3,6)
+print "c",c
+
+print a + b + c
+}}}
+
+Volta para CookBook.
+
+----
+
+ralobao

@@ -1,0 +1,58 @@
+= PyCon Brasil =
+
+Esta página será um repositório (temporário) para coletar informações sobre a organização do primeiro evento de Python no Brasil, extensível a América do Sul.
+
+== Sugestão de Nomes para a Conferência ==
+
+   * "PyConBR" 
+   * "!PyConPt-br"
+   * "!PyConBrasil"
+   * "PyConSA"
+   * "!LatinPy"
+   * "!PloZoPy"
+   * "!PloneZoPy"
+
+''Prefiro nomes que façam referência ao Plone, ao Zope e ao Python àqueles que falem apenas de Python, apesar de achar que vai ser um pouco difícil a gente achar um nome com uma sonoridade boa misturando tudo isso. :) Uma alternativa pode ser colocar o Zope e o Plone no "subtítulo" da conferência. -- OsvaldoSantanaNeto''
+
+''Acredito que o Nome !PyConBrasil é muito sugestivo. Outro nome bom eu acho que !PyConLatinAmerica. Temos que fazer o nome python estar em evidência. -- FabioRizzo''
+
+== Sugestão de Data/Local ==
+
+  * (Jean Ferri) - Sendo no período 22 a 29 julho 2005, não seria melhor uma conferência em paralelo com o sexto FISL?
+
+  * (Sidney da Silva) - O congresso da SBC 2005 sera na Unisinos. Seria tempo suficiente pra organizar algo. http://www.inf.unisinos.br/servicos/noticias/mostra.php?codigo=18&chamada=SBC+2005
+
+  * (fielcomunista) a proposta da SBC-unisinos conflita com a data do VI FISL e dividiriamos a comunidade - poderiamos realizar nossa PyCon dois dias antes do FISL em POA mesmo e ganhar gás para o fórum.
+
+=== Patrocínio ===
+ 
+Nome de possíveis nomes para pesquisar:
+
+   * Serpro
+   * Conectiva
+   * Haxent
+   * Async
+   * Hiper e o pessoal da Simples
+   * COOP (Cooperatia de Consumo)
+
+A lista não é completa, adicionem mais nomes que forem lembrando.
+
+=== Voluntários para Comissão de Organização ===
+
+   * RodrigoSenra
+   * OsvaldoSantanaNeto
+   * FabioRizzo
+   * RudaMoura
+   * JoseRamalhoJunior (fielcomunista)
+
+=== Outras tarefas ===
+
+   * Contactar os organizadores do 6o FISL (parceira, auxílio, conselho)
+   * Levar a discussão para um âmbito + amplo: zope-pt, python-brasil, cabal, etc (quando + consolidado)
+   * Pescar listas de discussão !PloneZoPy no mercosul e fazer contato com a galera.
+
+''Acho que levar essa discussão à python-cabal pode ser feita agora mesmo. Lá estão os maiores interessados em organizar um evento desse tipo. Alguém tem algo contra? -- OsvaldoSantanaNeto''
+
+=== Algumas informações ===
+
+''Conversei com o organizador do I Seminário Mono Brasil que foi realizado em Curitiba em uma estrutura com 2 salas para treinamento com datashows, 1 auditório para palestras de tamanho semelhante ao que usamos no V FISL para reunir o pessoal do Python/Zope/Plone equipado com Datashow e uma garota para recepcionar/organizar as atividades. O evento durou 3 dias e custou cerca de: R$ 3.000,00 -- OsvaldoSantanaNeto''

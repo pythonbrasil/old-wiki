@@ -1,0 +1,67 @@
+= Receita: Python no lugar de Shell Script =
+
+=== Apresentado originalmente como palestra relâmpago na PyConBrasil 2008 ===
+Por JoaoBueno
+
+Há vários motivos para se usar um script shell em vez de um script python, as vezes.
+
+
+'''No entanto, as vezes, há mais motivos ainda para se usar um script Python no lugar de um script shell''' 
+e o único motivo pelo qual não fazemos isso é por que tem que ser feitas algumas chamadas a comandos externos, e termos que escrever """os.system("comando [parametros"]) """ em vez de simplesmente 
+"""comando [parâmetros]"""
+
+Seus problemas acabaram!!!!
+
+Uam implementeação microscópica de um factory em python permtie que você
+use construções do tipo
+
+{{{
+sh.ls()
+sh.ps("aux")
+sh.iptables("-t nat -L")
+}}}
+
+em vez de suas contrapartes embrulhadas em os.system (ou popen)
+
+E tudo o que voce tem que fazer é incorporar
+
+{{{
+
+import os
+
+class Cmd(object):
+   def __init__(self, cmd):
+       self.cmd = cmd
+   def __call__(self, *args):
+       return os.system("%s %s" % (self.cmd, " ".join(args)))
+
+class Sh(object):
+    def __getattribute__(self, attribute):
+        return Cmd(attribute)
+
+sh = Sh()
+
+}}}
+
+ao seu código. Depois disso os exemplos acima funcionarão.
+(seu script ficará ainda mais compacto e legível se você colocar essas classes utliitárias num módulo separado)
+
+Explicando a mágica:
+a classe "Sh" - da qual não precisa haver mas de uma instância, re-escreve o método que recuperar atributos da classe. Ao tentar achar um atributo de um objeto dessa classe, o método 
+__getattribute__ é chamado, com o nome do atributo como parâmetro.
+
+Em um objeto normal, o valor do atributo é procurado no dicionario interno da classe. Mas é possível criar atributos dinãmicamente. No caso, se a idéia fosse simplesemente executar um comando externo sem parâmetro algum, a classe já poderia retornar simplesmente os.system(atributo)  - e nesse caso, simplesmente """sh.ls"""  já executaria o comando externo "ls" . 
+
+Mas queremos ir além e passar parâmetros. Então o nosso __getattribute__ não faz a chamada ao processo externo. Em vez disso ele cria um objeto dinâmicamente da classe "cmd" que pode ser chamado - como qualquer objeto em python cuja classe defina o método "__call__". Esse objeto tem como atributo, em sua criação, o nome do comando externo. 
+
+O python então recupera um objeto executável no __getattribute__  e como esse objeto é seguido de parênteses - que é a sintaxe para execução do objeto, a função __call__ do mesmo é chamada. 
+
+Exemplo: 
+o interpretador encontra
+{{{
+sh.ps("aux")
+}}}
+Então ele sabe que vai precisar fazer uma chamada ao atributo "ps"  do objeto "sh". Ele primerioo precisa obter o objeto "ps" - - fz então a chaamda ao __getattribute__,  que por sua vez, cria uma nova instâncuia da classe Cmd, que registra que seu atributo cmd é "ps". Com esse objeto  cmd em mãos, o python faz a chamada ao mesmo, o que executa o método __call__ . Esse por sua vez, chama o processo externo, concatenando o nome do executável e os parâmetros, e retorna o valor de retorno de os.system
+
+ 
+Atente que  o os.system nesse exemplo é muito bonito para voê ver a  execução no terminal interativo - se você  no entanto usar os.popen, em vez de os.system, ainda obtém de volta a saída do programa para stdout, permitindo que seu script python tenha todas as funcionalidades que teria com um pipe ("|") , mas de forma mais legível. Na verdade, se a saída do comando chamado for textual, as chances são de que você possa processar essa saída sem chamar nenhum outro comando externo - enquanto que um shell script exigiria chamadas a processos awk, cut ou grep para separar os valores interessantes.

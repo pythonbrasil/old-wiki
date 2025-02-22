@@ -1,0 +1,35 @@
+#pragma section-numbers off
+= Você ainda não contribuiu? =
+
+Você ainda não contribuiu com um artigo para a nossa seção DocumentacaoPython? Nem com um trecho de código para nosso CookBook? O que você está esperando? Fique famoso! Apareça no Google!
+
+Gostaria de contribuir mas não sabe como? É simples! basta ler nosso ComoUsarWiki e pronto. O site é aberto para a contribuição de todos.
+
+Gostaria de contribuir mas não sabe com o que? É simples também! Sabe aquele scriptzinho que você acha 'bobo' e que está guardado num canto de seu disco rígido? Então! Publique ele aqui. Ele pode ser 'bobo' para você, mas muito útil para outra pessoa. E aquela tradução daquele e-mail esclarecedor, artigo, livro, tutorial sobre Python? Ótimo! A nossa seção DocumentacaoPython vai recebê-la de braços abertos.
+
+Gostaria de contribuir mas ainda é novato? Também não tem problema. Navegue pelo Wiki, encontre erros de digitação, português, formatação, bugs nos códigos, links quebrados ou falhas no sistema e comunique (ou corrija você mesmo) ao WikiMaster que ele vai agradecer.
+
+Gostaria apenas de comentar um artigo, ou agradecer o autor? Simples! Edite a página e acrescente no rodapé da mesma o seguinte texto:
+
+{{{
+----
+''Este artigo é fantástico! Minha vida mudou depois de lê-lo! -- UsuárioEternamenteGrato''
+
+''O trecho "...bla bla bla bla..." tem quatro "blas" e deveria ter apenas três -- UsuárioRealmenteAtento''
+}}}
+
+É simples assim. Existem mil maneiras de contribuir com o PythonBrasil, basta disposição. E se não quiser contribuir e apenas acompanhar as páginas, fique a vontade também. Até dando Hits na nossa página você contribui.
+
+== Divulgando e fazendo propaganda ==
+
+Uma forma de contribuir para o site é divulgando ele. Comente com seus amigos, linke sua página para a nossa, sugira como notícia em seu site de notícia favorito.
+
+Colocar o botão do site na sua página também é uma forma de divulgar o site e de dizer que você é um programador Python.
+
+{{{
+<a href="http://www.pythonbrasil.com.br">
+<img src="http://www.pythonbrasil.com.br/pybutton.png" border="0" alt="PythonBrasil" />
+</a>
+}}}
+
+attachment:pybutton.png

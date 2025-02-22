@@ -1,0 +1,8 @@
+#pragma section-numbers off
+= OpenOffice =
+
+Suíte de escritórios. Disponibiliza ferramentas como: Editor de Textos, Planilha Eletrônica, Gerador de Apresentações, Editor de páginas Web, entre outras.
+
+É possível usar Python para automatizar tarefas com o OpenOffice. Para mais informações dê uma olhada no tutorial PythonUno.
+
+Mais informações no [http://www.openoffice.org site oficial] do OpenOffice.

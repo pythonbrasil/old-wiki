@@ -1,0 +1,47 @@
+Webware http://www.webwareforpython.org/
+
+= O que é? =
+
+É uma suíte OO para desenvolvimento web.
+O Webware tem uma série de componentes (chamados de Kits),
+O WebKit é um servidor de aplicações para web.
+
+= Aonde eu baixo? =
+
+A última versão disponível (0.8.1) encontra-se em
+
+http://prdownloads.sourceforge.net/webware/Webware-0.8.1.tar.gz?download
+
+= Como eu instalo? =
+
+{{{
+$ cd /usr/local (/opt ou aonde for mais adequado)
+$ tar zxvf Webware-0.8.1.tar.gz
+$ cd Webware-0.8.1/
+$ python install.py
+}}}
+e depois digite a senha-mestre do webware.
+Não é legal manter os dados da página com o webware, por isso
+
+{{{
+$ python bin/MakeAppWorkDir.py /home/ruda/MyPage
+}}}
+Substitua {{{/home/ruda/MyPage}}} para onde for mais adequado.
+
+Preciso do Apache? '''Sim''' para uso no mundo real. '''Não''' se quiser
+apenas testar ou conhecer o webware, tem um servidor pequeno para isso.
+
+= Adaptadores =
+
+  * wkcgi é um CGI feito em C. É uma forma legal de usar o Webware.
+
+{{{
+$ cd WebKit/Adapters/wkcgi
+$ make
+$ cp wkcgi /var/www/cgi-bin/wkcgi.cgi
+}}}
+
+  * OneShot.cgi semelhante ao Webkit.cgi, muito útil durante a fase
+de desenvolvimento pois as páginas não são persistentes elas são
+sempre relidas.
+

@@ -1,0 +1,249 @@
+#pragma section-numbers off
+= Benchmark Ad Hoc =
+
+Eis alguns resultados de benchmark "ad hoc" comparando PHP, Python e Python com psyco:
+
+== Fibonacci 300.000 vezes ==
+
+O código fonte usado foi:
+
+{{{
+#!python
+def f(x):
+    a, b = 0, 1
+    n = 0
+    while n < x:
+        a, b = b, a+b
+        n += 1
+    return a
+ 
+for i in range(0, 300000):
+    f(40)
+}}}
+
+A versão PHP é muito mais deselegante, porque não suporta a atribuição recíproca. Seria possível fazer algo semelhante usando list() e array(), mas seria mais lento. Então usamos o seguinte código:
+
+{{{
+function f($x) {
+    $a = 0;
+    $b = 1;
+    $n = 0;
+    while ($n < $x) {
+        $tmp = $a;
+        $a = $b;
+        $b = $tmp + $b;
+        $n += 1;
+    }
+    return $a;
+}
+ 
+set_time_limit(0);
+for ($i = 0; $i < 300000; $i++) {
+    f(40);
+}}}
+
+O set_time_limit() se deve ao fato do PHP morrer após trinta segundos de execução, o que ocorreu nesse teste.
+
+Os resultados foram:
+
+|| '''Python''' || '''Python com Psyco''' || '''PHP''' ||
+|| 16s || 1.1s || 31s ||
+
+Como pode-se notar, a performance do PHP foi sofrível, o Python foi lento e o Python com Psyco teve performance excelente.
+
+== Concatenação de strings 300.000 vezes ==
+
+O código fonte usado foi:
+
+{{{
+#!python
+def f():
+    a = ''
+    for i in range(300000):
+        a += 'a'
+f()
+}}}
+
+E a versão PHP:
+
+{{{
+function f() {
+    $a = "";
+    for ($i=0; $i < 300000; $i++) {
+        $a .= "a";
+    }
+}
+ 
+f();
+}}}
+
+Note que a versão PHP é mais feia porque PHP é naturalmente mais feio :)
+
+Os resultados foram:
+
+|| '''Python''' || '''Python com Psyco''' || '''PHP''' ||
+|| 4m21s || 0.108s || 0.771s ||
+
+O resultado do Python padrão foi deplorável. A performance piora muito quando aumenta-se a quantidade de concatenações. Fazer três vezes o teste com 100.000 concatenações é muito mais rápido que fazer o teste com 300.000 concatenações. Esse foi o resultado mais desastroso do teste.
+
+Por outro lado, o Python com Psyco deu mais uma vez a vitória ao Python, rodando sete vezes mais rápido que o código em PHP.
+
+A vantagem do Psyco sobre o Python normal e sobre o PHP é incrível. O Psyco dá voltas em torno do CPython e do PHP.
+
+== Apêndice: C++ contra Psyco ==
+
+Fizemos comparação de C++ (compilado com g++, então dá um desconto) com Psyco.
+
+=== Fibonacci ===
+
+O código C++ usado foi:
+
+{{{
+int f(int x) {
+    int a = 0;
+    int b = 1;
+    int n = 0;
+    int tmp;
+    while (n < x) {
+            tmp = a;
+            a = b;
+            b = tmp + b;
+            n += 1;
+    }
+    return a;
+}
+
+void main(void) {
+    int i;
+    for (i=0; i<300000; i++) {
+        f(40);
+    }
+}
+}}}
+
+O código Python não foi modificado. O código foi compilado com o g++ usando o flag -O6.
+
+|| '''C++''' || '''Psyco''' ||
+|| 0.061s || 1.1s ||
+
+Não tem nem comparação a versão C++. Logicamente os tipos usados em C++ são todos primitivos.
+
+=== Concatenação ===
+
+O código C++ de concatenação usado foi o seguinte:
+
+{{{
+#include <string>
+ 
+void f() {
+    std::string a = "";
+    for (int i=0; i < 300000; i++) {
+        a = a + "a";
+    }
+}
+
+void main(void) {
+        f();
+}
+}}}
+
+|| '''C++''' || '''Psyco''' ||
+|| 4m33s || 0.108s ||
+
+O Psyco deu voltas em torno da versão C++: o código compilado com g++ demorou 2572 vezes mais que versão Python. Com certeza há algo de errado com o g++/bibliotecas/qualquer coisa que nos impedem de considerar esse resultado típico. A irregularidade apresentada é do mesmo tipo que o Python rodando sem o Psyco: a partir de determinado número de concatenações, o resultado degrada muito rapidamente.
+
+Embora essa versão seja mais parecida com o que a versão Python faz, há uma maneira de otimizar o código que aumenta em muito a performance do código C++. Basta fazer a concatenação usando o operador {{{+=}}}:
+
+{{{
+a += "a";
+}}}
+
+|| '''C++''' || '''Psyco''' ||
+|| 0m0.093 || 0.108s ||
+
+Esse resultado é um pouco mais próximo do esperado. A performance do Psyco foi praticamente igual a C++, o que é um feito considerando que a versão Python tem que iniciar o intepretador, importar um módulo, etc. antes de começar a rodar.
+
+== Apêndice: Java vs Psyco ==
+
+
+=== Fibonacci ===
+
+O código fonte Java usado foi:
+
+{{{
+public class teste1 {
+
+    public static void main(String args[]) {
+        for(int x = 0; x < 300000; ++ x) {
+                f(40);
+        }
+    }
+
+public static long f(long x)
+{
+        long a = 0;
+        long b = 1;
+        long n = 0;
+
+        while (n < x) {
+                long tmp;
+                tmp = a + b;
+                a = b;
+                b = tmp;
+                ++n;
+        }
+
+        return a;
+}
+
+}
+}}}
+
+Estaremos postando os resultados logo.
+
+|| '''Java (IBM)''' || '''Java (Sun)''' || '''Psyco''' ||
+|| ||  || 1.1s ||
+
+=== Concatencação ===
+
+O código fonte do concatenador Java usado foi:
+
+{{{
+public class teste2 {
+    public static void main(String args[]) {
+        f();
+    }
+
+public static void f()
+{
+        String a = "";
+        for (int j=0; j < 30; j++) {
+                for (int i=0; i < 10000; i++) {
+                        a += "a";
+                }
+        }
+}
+
+}
+}}}
+
+Estamos compilando resultados. O teste de concatenar strings demorou 16m59s (horroroso) quando executado com o JRE da IBM. Estamos esperando o JRE da Sun rodar, mas já adiantamos que vai ser uma piada.
+
+|| '''Java (IBM)''' || '''Java (Sun)''' || '''Psyco''' ||
+|| 16m59s || || 0.108s ||
+
+== Comentários finais ==
+
+Apesar dos resultados mostrarem uma ampla vantagem do Python com Psyco, que empata tecnicamente com C++, tem-se que fazer menção ao fato de que todos os benchmarks são mentirosos.
+
+O que torna esse curioso é que a origem dele (em formato diferente, por iniciativa do epx) foi comparar Java e C++. Não houve um esforço para beneficiar Python.
+
+Logicamente as implementações não são as mais rápidas possível. A versão C++ seria muito mais rápida se alocasse previamente toda a memória e escrevesse diretamente ao invés de usar um objeto, mas queríamos exercitar o sistema de objetos. Nesse ponto PHP foi beneficiado no concatenador por ter um tipo string primitivo ao contrário das outras linguagens.
+
+O benchmark revelou dois casos patológicos: a concatenação de strings com Python sem Psyco e de C++ (g++ na verdade) usando soma de objeto com caracter. PHP foi a implementação mais regular. As execuções dos concatenadores Java foram horrorosas, mas aparentemente há um objeto diferente que implementa String e que facilita concatenações. Como não demos essa folga para outras linguagens, também não demos para Java. Talvez isso seja injusto.
+
+Colaboraram com os testes (mas não são culpados por eles): epx, GustavoNiemeyer, SergioBruder, RudaMoura
+
+----
+
+GuilhermeManika

@@ -1,0 +1,154 @@
+'''Internacionalizando programas feitos com PyGtk e Libglade'''
+
+''Pedro Kröger''
+
+Última atualização: 02.10.2004
+
+[[TableOfContents]]
+
+= 1. Introdução =
+
+Se você tem escrito programas usando o PyGtk e libglade (veja tutorial
+em LibGlade) pode ter interesse em torná-los internacionalizados. Ou
+seja, a linguagem do programa (o menu, mensagens de texto, etc.) será
+definida pela locale do sistema.
+
+= 1.1 Breve introdução à internacionalização =
+
+= 1.2 Ferramentas utilizadas =
+
+ * PyGtk
+ * Glade
+ * Python 2.3
+ * GNU gettext
+ * Gtk+ 2.4.1
+ * Libglade 2.4.0
+
+= 2. Extraindo as mensagens do Glade =
+
+Você precisará do intltool, um utilitário para internacionalizar
+documentos em XML. Se você usa Debian basta digitar:
+
+{{{
+apt-get install intltool
+}}}
+
+O programa intltool-extract extrai as strings de um arquivo glade (no
+exemplo "meuprograma.glade" e gera um arquivo .h (no exemplo
+"meuprograma.glade.h"):
+
+{{{
+intltool-extract --type="gettext/glade" meuprograma.glade
+}}}
+
+Você não precisa editar esse arquivo (.h), ele será lido pelo xgettext. 
+
+= 3. Gerando o arquivo de tradução =
+
+{{{
+xgettext -k_ -kN_ -o messages.pot *.py *.h
+}}}
+
+vai criar um arquivo de tradução "messages.pot" a partir dos códigos
+fonte de python e dos arquivos .h gerados pelo intltool-extract. 
+
+= 4. Criando arquivos de tradução =
+
+Para que seja possível criar traduções para diferentes línguas é
+necessário criar um arquivo para cada uma. Isso é feito com
+msginit. Nesse exemplo ele cria o arquivo pt_BR.po adequado para a
+tradução para o português brasileiro:
+
+{{{
+msginit -i messages.pot -l pt_BR
+}}}
+
+Tendo traduzido o arquivo pt_BR.po é necessário gerar o arquivo que
+será usado pelo programa:
+
+{{{
+msgfmt pt_BR.po -o po/pt/LC_MESSAGES/meuprograma.mo
+}}}
+
+Não importa o nome do diretório onde você coloque o arquivo *.mo, mas
+a estrutura desse diretório tem que ser
+<diretório>/<locale>/LC_MESSAGES/<nome-do-programa>.mo. Onde <locale>
+é algo como pt ou pt_BR.
+
+= 5. Fazendo seu programa reconhecer as traduções =
+
+Tipicamente um programa de python usando o libglade terá strings para
+serem traduzidas tanto no programa python quanto no arquivo
+glade. Para lidar com as strings na parte em python pode-se usar o
+módulo gettext. Todas as strings a serem traduzidas deverão usar o
+método gettext desse módulo:
+
+{{{
+#!python
+print gettext.gettext("Texto a ser traduzido")
+}}}
+
+Porém é muito mais prático usar o formato _(<string>), mas para isso
+deve-se definir _ como gettext.gettext:
+
+{{{
+#!python
+_ = gettext.gettext
+
+print _("Texto a ser traduzido")
+}}}
+
+O local padrão para os arquivos com mensagens de tradução é geralmente
+"/usr/share/locale", mas enquanto estiver desenvolvendo seu programa é
+bastante útil tê-los em um diretório local, algo como "i18n" ou "po":
+
+{{{
+#!python
+APP='meuprograma'
+DIR='po'
+}}}
+
+Um exemplo mais completo ficaria como:
+
+{{{
+#!python
+import gettext
+
+APP='meuprograma'
+DIR='po'
+
+gettext.bindtextdomain(APP, DIR)
+gettext.textdomain(APP)
+
+_ = gettext.gettext
+
+gtk.glade.bindtextdomain(APP, DIR)
+gtk.glade.textdomain(APP)
+
+gui = gtk.glade.XML("meuprograma.glade")
+.....
+}}}
+
+
+= 6. Contribuições =
+
+Esse texto ainda está sendo escrito, por favor não deixe de mandar
+correções e sugestões para kroger em pedrokroeger.net.
+
+= 7. Copyright =
+
+(C) 2004 Pedro Kroger.
+
+Esse documento está licenciado sob a ''GNU Free Documentation
+License'', publicada pela ''Free Software Foundation''.
+
+É permitido distribuir cópias deste manual, desde que se forneça o
+''Copyright'' em todas as cópias.
+
+Se você pretende incluir este documento em alguma publicação, por favor
+contate o responsável e nós trabalharemos para garantir que todo
+documento esteja atualizada e de acordo com as informações disponíveis.
+
+= 8. Links =
+
+http://www.async.com.br/faq/pygtk/index.py?req=show&file=faq22.002.htp

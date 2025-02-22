@@ -1,0 +1,39 @@
+#pragma section-numbers off
+= Receita: FloatFormat =
+
+Função para formatar um número inteiro, se assemelha a {{{"%n.mf" % x}}}, onde {{{n}}} é o {{{DigitsBeforeDot}}}, {{{m}}} é o {{{DigitsAfterDot}}} e {{{x}}} é o número.
+
+== Código ==
+
+{{{
+#!python
+def FloatFormat(Number, DigitsBeforeDot=None, DigitsAfterDot=None):
+    NumberString = str(Number)
+    list = NumberString.split('.')
+    try:
+        FirstPart = list[0][0:DigitsBeforeDot]
+        SecondPart = list[1][0:DigitsAfterDot]
+    except:
+        pass
+    return float(FirstPart+'.'+SecondPart)
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+a = FloatFormat(254.1231, 2, 1)
+print "a:", a 
+
+b = FloatFormat(254.1231, 1, 3)
+print "b:", b
+
+c = FloatFormat(254.1231, 3, 6)
+print "c:", c
+}}}
+
+Volta para CookBook.
+
+----
+
+ralobao, FelipeLessa

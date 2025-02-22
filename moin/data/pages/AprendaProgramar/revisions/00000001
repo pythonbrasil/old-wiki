@@ -1,0 +1,667 @@
+= Aprenda a programar =
+
+''por Luciano Ramalho'' (original disponível em: http://www.magnet.com.br/classic/aprendaprog/)
+
+[[TableOfContents]]
+
+== Capítulo 0 ==
+
+=== Porque aprender a programar? ===
+
+A razão fundamental, que nos motivou a produzir este tutorial, é uma só: programar é divertido. É claro que nem todo mundo vai concordar com isso, assim como muita gente não acha graça nenhuma em jogar xadrez ou explorar cavernas. Ao contrário do xadrez e da espeleologia, a programação também é uma habilidade que tem forte demanda no mercado de trabalho.
+
+Mas a dura realidade é que somente com centenas ou milhares de horas de experiência programando é que você estará apto a incluir essa disciplina em seu currículo e se dar bem em uma entrevista de emprego. Portanto nosso objetivo aqui é bem mais modesto do que transformar você em um programador profissional. O que estamos te oferecendo é uma introdução suave a esse tópico fascinante. Ao final, esperamos que você descubra se tem a vocação e a motivação necessárias para criar softwares, como hobby ou profissão.
+
+Antes de começar, apenas um aviso: o prazer de construir um programa pode causar dependência psicológica. Não é apenas por dinheiro que programadores do mundo inteiro varam noites escrevendo código.
+
+=== Material necessário ===
+
+Para acompanhar esse tutorial você precisará de um computador qualquer onde tenha instalado um interpretador da linguagem Python. Na página http://www.python.org/download/ você encontra links para baixar o interpretador adequado para o seu computador. No caso do Windows, o download da versão atual tem cerca de 5MB, pois inclui também a linguagem Tcl e o pacote de programação gráfica Tk. Se você usa Linux, existe uma alta probabilidade de já ter o interpretador instalado. Experimente digitar "python" no seu shell.
+
+=== Porquê Python ===
+
+Nossa meta não é mostrar como se programa em uma linguagem específica, mas sim como se programa de uma forma geral. Ou seja, a linguagem para nós será um veículo, e não o destino. Mesmo assim, pensamos bastante antes de escolher a linguagem Python para os exemplos desse tutorial.
+
+Centenas de linguagens já foram criadas desde que o computador eletrônico foi inventado nos anos 40. Algumas já são línguas mortas. Outras, como C++ e Java, são peças fundamentais no desenvolvimento da economia digital. No entanto, a complexidade dessas duas linguagens nos motivou a descartá-las, e focalizar o universo das chamadas linguagens de "scripting", que são mais simples e se prestam a um estilo de programação informal, mais sintonizado com um tutorial como esse.
+
+As três linguagens de scripting mais populares atualmente são JavaScript, VBScript e Perl. Todas são utilizadas na construção de web-sites dinâmicos. As duas primeiras praticamente não têm aplicação fora desse domínio, e por isso foram descartadas. É que, embora seja nosso objetivo abordar também esse tópico, achamos que é complexo demais para começar, especialmente devido à dificuldade de se diagnosticar erros de programação em páginas dinâmicas. E Perl é uma linguagem esquisita demais, criada para agradar programadores tarimbados e hackers, segundo seu próprio criador.
+
+Felizmente, bem perto de Perl no mapa das linguagens modernas existe uma outra, não tão conhecida, mas igualmente poderosa. Seu nome é uma homenagem ao grupo humorístico inglês Monty Python, adorado por geeks de todo o mundo. Apesar da associação cômica, Python vem sendo usada em projetos sérios por entidades como Yahoo, NASA, InfoSeek, MCI Worldcom, IBM e Hiway, a maior empresa de hospedagem de web-sites do mundo. É tambem a base do Zope, a mais sofisticada plataforma para construção de web-applications disponível hoje como open-source.
+
+Apesar de sua sintaxe simples e clara, Python oferece os seguintes recursos disponíveis também em linguagens mais complicadas como Java e C++:
+
+    * programação orientada a objetos (incluindo herança múltipla, conceito apenas parcialmente presente em Java)
+    * exceções, um moderno mecanismo para o tratamento de erros
+    * módulos, uma forma inteligente de acessar e organizar código a ser reutilizado
+    * coleta de lixo automática, sistema que elimina os erros causados pelo acúmulo de dados inúteis na memória do computador (característica presente também em Java, mas não em C++)
+    * recursos avançados de manipulação de textos, listas e outras estruturas de dados
+    * possibilidade de executar o mesmo programa sem modificações em várias plataformas de hardware e sistemas operacionais (uma virtude de Java, mas difícil de se conseguir em C++) 
+
+Em resumo, Python nos oferece uma sintaxe simples mas ao mesmo tempo suporta a maior parte das características importantes de linguagens modernas e amplamente utilizadas como Java, C++, Perl e VBScript. Por esse motivos acreditamos que seja a melhor escolha para quem quer começar a programar hoje.
+
+== Capítulo 1 ==
+
+=== Abrindo e fechando o interpretador ===
+
+A melhor forma de aprender e a programar é usando um interpretador em modo interativo. Dessa forma você pode digitar comandos linha por linha, e observar a cada passo o como o computador interpreta e executa esses comandos.
+
+Para fazer isso em Python, há duas maneiras: você pode executar o interpretador em modo texto (chamado "Python (command line)" no Windows), ou usar o IDLE, que é um interpretador baseado em janelas. Se você usa Windows, escolha o IDLE para acompanhar esse tutorial.
+
+Seja qual for o interpretador que você escolheu, ao executá-lo você verá uma mensagem com informações de ''copyright'' mais ou menos como essa:
+
+{{{
+Python 1.5.2 (#0, Apr 13 1999, 10:51:12) [MSC 32 bit (Intel)] on win32
+Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+>>>
+}}}
+
+O símbolo "{{{>>>}}}" exibido pelo interpretador é o que os americanos chamam de "''prompt''", que alguns traduzem equivocadamente por "aviso", mas nós vamos chamar de "deixa" (em teatro, o termo "''prompt''" é a deixa que indica ao ator a hora de dizer ou fazer algo; em computação, o ''prompt'' informa o usuário que o sistema está pronto para receber um novo comando).
+
+Para sair do interpretador você pode fechar a janela do IDLE, ou teclar {{{[CTRL]+[D]}}} (no IDLE ou no interpretador em UNIX) ou {{{[CTRL]+[Z]}}} e então {{{[ENTER]}}} (no interpretador DOS).
+
+=== Uma calculadora melhor ===
+
+Vamos então aproveitar a deixa e escrever algo. Experimente escrever uma expressão aritmética bem simples, como {{{2+2}}}:
+
+{{{
+>>> 2+2
+4
+>>>
+}}}
+
+A resposta é reconfortante: para Python, {{{2+2}}} é igual a 4. Você pode experimentar outras expressões mais complexas, mas é bom saber que os quatro operadores básicos em Python (e em quase todas as linguagens modernas) são esses:
+
+   * {{{+}}} adição
+   * {{{-}}} subtração
+   * {{{*}}} multiplicação
+   * {{{/}}} divisão
+
+Se você quiser operar com números decimais, deve usar o ponto e não a vírgula como separador decimal:
+
+{{{
+>>> 1.23 * 0.45
+0.5535
+>>>
+}}}
+
+Em muitas linguagens de programação, assim como em Python, os números inteiros têm um tratamento especial. Isso fica evidente quando fazemos uma divisão:
+
+{{{
+>>> 7/2
+3
+>>>
+}}}
+
+Em vez de 3,5, o resultado foi 3. Isso acontece sempre que todos os números de uma expressão são inteiros. Neste caso, Python imagina que se deseja um resultado inteiro também (esse comportamento estranho na realidade é muito conveniente em programação). Para indicar que você deseja resultados não-inteiros, use um ponto decimal em algum dos operandos:
+
+{{{
+>>> 7.0/2
+3.5
+>>> 7/2.0
+3.5
+>>> 7/2.
+3.5
+>>>
+}}}
+
+Note que basta digitar um ponto após o número.
+
+Você pode digitar espaços entre os números e operadores para fazer uma expressão longa ficar mais legível. Veja esse exemplo:
+
+{{{
+>>> 1 + 2 * 3
+7
+>>>
+}}}
+
+Note que o interpretador Python é mais esperto que uma calculadora comum. Ele sabe que a multiplicação deve ser efetuada antes da adição. Se você teclar a mesma expressão em uma calculadora qualquer obterá o resultado 9, que é incorreto. Em Python, se você realmente deseja efetuar a soma antes da multiplicação, precisa usar parênteses:
+
+{{{
+>>> (1 + 2) * 3
+9
+>>>
+}}}
+
+Ao contrário do que você aprendeu na escola, aqui os símbolos [] e {} não servem para agrupar expressões dentro de outras expressões. Apenas parênteses são usados:
+
+{{{
+>>> ( 9 - ( 1 + 2 ) ) / 3.0
+2.0
+>>> ( 9 - 1 + 2 ) / 3.0
+3.33333333333
+>>>
+}}}
+
+'''DICA:''' Se você escrever algo que o interpretador não reconhece, verá na tela uma mensagem de erro. Não crie o mau hábito de ignorar essas mensagens, mesmo que elas pareçam difíceis de entender num primeiro momento. A única vantagem de cometer erros é aprender com eles, e se a preguiça o impedir de ler as mensagens, seu aprendizado será bem mais lento.
+
+Veja aqui como decifrar as mensagens de erro do Python.
+
+==== Como ler uma mensagem de erro ====
+
+A dura realidade é que um programador profissional passa boa parte de sua vida caçando erros, e por isso é fundamental saber extrair o máximo de informações das mensagens resultantes.
+
+A essa altura você talvez já tenha provocado um erro para ver o que acontece. Vamos fazer isso agora, e aprender a ler as mensagens resultantes. Pode parecer perda de tempo, mas é importantíssimo saber interpretar as mensagens de erro porque a melhor forma de aprender a programar é experimentando, e ao experimentar você certamente vai provocar muitos erros.
+
+Como exemplo, vamos digitar uma expressão aritmética sem sentido:
+
+attachment:img_01_01.gif
+
+No interpretador IDLE você verá apenas o sinal de divisão assinalado em vermelho e a mensagem {{{SyntaxError: invalid syntax}}}, erro de sintaxe inválida.
+
+No interpretador de linha de comando você verá uma mensagem mais longa:
+
+{{{
+>>> 7 + / 2
+  File "", line 1
+    7 + / 2
+        ^
+SyntaxError: invalid syntax
+>>>
+}}}
+
+A primeira linha da mensagem de erro informa o arquivo onde ocorreu o erro: {{{File "", line 1}}}
+
+Quando você está usando o interpretador em modo interativo essa informação é inútil, mas ao trabalhar com programas extensos ela se torna indispensável. As próximas duas linhas indicam onde ocorreu o erro:
+
+{{{
+    7 + / 2
+        ^
+}}}
+
+Note que o símbolo ^ está apontando exatamente a posição do sinal /. Foi a partir desse ponto que a expressão deixou de fazer sentido para o interpretador.
+
+Agora vamos provocar um outro tipo de erro:
+
+{{{
+>>> 7/0
+Traceback (innermost last):
+  File "", line 1, in ?
+    7/0
+ZeroDivisionError: integer division or modulo
+>>>
+}}}
+
+Só mais tarde poderemos explicar completamente a primeira linha de uma mensagem como essa, mas a parte mais importante é a última linha, que nesse caso é bem fácil de entender: {{{ZeroDivisionError: integer division or modulo}}}
+
+Do lado esquerdo aparece o nome do erro: {{{ZeroDivisionError}}}, ou erro de divisão por zero. Após o sinal : vem informações adicionais sobre o contexto onde ocorreu o erro: em uma divisão inteira ou modulo (em inglês, modulo é o nome do operador {{{%}}}, que apresentamos acima). O {{{/}}} e o {{{%}}} são os dois operadores que podem causar um {{{ZeroDivisionError}}}.
+	
+=== Conversor de dólares ===
+
+Digamos que você tem uma loja de discos importados, e precisa constantemente converter dólares em reais. O valor do dólar para venda em 20/05/1999 é de 1.686. Para converter US$9,95 e US$11,95 em reais você pode digitar:
+
+{{{
+>>> 9.95 * 1.686
+16.7757
+>>> 11.95 * 1.686
+20.1477
+>>>
+}}}
+
+Mas há uma forma melhor: em vez de digitar o valor 1.686 o tempo todo, você pode armazenar esse valor na memória do computador, assim:
+
+{{{
+>>> d = 1.686
+>>>
+}}}
+
+Note que o interpretador não respondeu nada (a menos que você tenha cometido um erro), mas ele guardou o número em uma posição de sua memória, e associou o símbolo "d" a essa posição. Agora, fica mais confortável converter dólares em reais:
+
+{{{
+>>> 9.95 * d
+16.7757
+>>> 11.95 * d
+20.1477
+>>> 5 * d, 7 * d, 9 * d
+(8.43, 11.802, 15.174)
+>>>
+}}}
+
+No último caso, convertemos de uma vez só os valores 5, 7 e 9 em dólares. E se a cotação do dólar mudou para 1.61? Basta armazenar o novo número e refazer os cálculos:
+
+{{{
+>>> d = 1.61
+>>> 5 * d, 7 * d, 9 * d
+(8.05, 11.27, 14.49)
+>>>
+}}}
+
+Se estiver usando o IDLE, você não precisa digitar a segunda linha novamente. Clique sobre a linha que digitamos no exemplo anterior e tecle {{{[ENTER]}}}. A linha será reproduzida na última deixa, e bastará um novo {{{[ENTER]}}} para processá-la.	
+
+=== Tabela de preços em dólares e reais ===
+
+Agora vamos mostrar como o interpretador Python é muito mais poderoso que uma calculadora. Imagine que em sua loja de discos importados você tem um balcão de ofertas com discos de $4 até $9. Se quisesse fazer uma tabela de preços em reais você poderia digitar:
+
+{{{
+>>> 4*d, 5*d, 6*d, 7*d, 9*d
+(6.44, 8.05, 9.66, 11.27, 14.49)
+>>>
+}}}
+
+Mas isso é um tanto chato e repetitivo, além do que o resultado não é muito apresentável. Em programação, sempre que você fizer algo repetitivo é porque não encontrou ainda a melhor solução. Lidar com séries de números é uma atividade comum, e Python pode ajudar muito nesses casos. Digite o seguinte:
+
+{{{
+>>> lista = [5,6,7,8,9]
+>>>
+}}}
+
+Aqui nós criamos uma lista de preços na memória do computador e associamos o nome "lista" a esses dados. Em seguida, digite o seguinte (você terá que teclar {{{[ENTER]}}} duas vezes ao final dessa linha; depois saberá porque).
+
+{{{
+>>> for p in lista: p * d
+
+8.05
+9.66
+11.27
+12.88
+14.49
+>>>
+}}}
+
+Aqui nós instruímos o interpretador a fazer os seguintes passos: - para cada item sucessivo da lista: - associe o nome p ao item em questão - calcule p * d
+
+Agora digamos que você tem discos com valores de 4 a 15 dólares. Você poderia digitar a lista de novo, mas a coisa começa a ficar repetitiva novamente. Há uma forma melhor. A linguagem Python possui uma palavra chamada "{{{range}}}" que serve para gerar faixas de números. Vamos usar essa palavra. Digite:
+
+{{{
+>>> range
+<built-in function range>
+>>>
+}}}
+
+Quando você digita o nome de uma função sem fornecer dados, Python limita-se a dizer a que se refere o nome. Nesse caso: "{{{built-in function range}}}", ou função embutida {{{range}}}. Isso quer dizer que a palavra {{{range}}} é o nome de uma função, um tipo de comando que produz resultados a partir de dados fornecidos. E trata-se ainda de uma função embutida, ou seja, incluída no próprio interpretador (a maioria das funções da linguagem Python não são embutidas, mas fazem parte de módulos que o programador precisa chamar explicitamente; isso será explicado depois.
+
+Acabamos de dizer que uma função "produz resultados a partir de dados fornecidos", então vamos fornecer algum dado para ver que resultados a função range produz. Digite "{{{range(5)}}}" e veja o que acontece:
+
+{{{
+>>> range(5)
+[0, 1, 2, 3, 4]
+>>>
+}}}
+
+Quando apenas um dado é fornecido, {{{range}}} gera uma lista de números de zero até o número anterior ao valor fornecido. É um comportamento um pouco estranho, mas útil em programação (o primeiro item de uma série, na maioria das linguagens, é o item número zero; isso será discutido mais profundamente quando aprendermos mais sobre listas.
+
+Agora digamos que eu queira uma sequência a partir de 2, e não zero. Digite:
+
+{{{
+>>> range(2,5)
+[2, 3, 4]
+>>>
+}}}
+
+Agora para obter a lista de valores de discos podemos digitar:
+
+{{{
+>>> range(4,16)
+[4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+>>>
+}}}
+
+E usando o comando for, calcular de uma só vez todos os valores convertidos:
+
+{{{
+>>> for p in range(4,16): p * d
+
+6.44
+8.05
+9.66
+11.27
+12.88
+14.49
+16.1
+17.71
+19.32
+20.93
+22.54
+24.15
+>>>
+}}}
+
+Mas o ideal mesmo era ter os valores em dólares e reais lado a lado. Isso é fácil:
+
+{{{
+>>> for p in range(4,16): p, p * d
+
+(4, 6.44)
+(5, 8.05)
+(6, 9.66)
+(7, 11.27)
+(8, 12.88)
+(9, 14.49)
+(10, 16.1)
+(11, 17.71)
+(12, 19.32)
+(13, 20.93)
+(14, 22.54)
+(15, 24.15)
+>>>
+}}}
+
+Resumindo o que foi feito até aqui, com apenas duas linhas de código em Python, você pode gerar tabelas de conversão de qualquer tamanho. Experimente:
+
+{{{
+>>> d = 1.686
+>>> for p in range(50,150): p, p * d
+}}}
+
+Parabéns, você acaba de construir seu primeiro programa!
+
+== Capítulo 2 ==
+
+=== Introdução ===
+
+No final do primeiro capítulo desse curso digitamos o seguinte programa diretamente no interpretador Python:
+
+{{{
+>>> d = 1.686
+>>> for p in range(50,150): print p, p * d
+}}}
+
+O resultado desta seqüência de comandos é uma longa lista de números em duas colunas. Sabemos que a primeira coluna da esquerda contém preços em dólar e a outra, em reais. Mas nada na listagem indica isto. Observe esse trecho:
+
+{{{
+95 160.17
+96 161.856
+97 163.542
+98 165.228
+99 166.914
+100 168.6
+101 170.286
+102 171.972
+103 173.658
+104 175.344
+105 177.03
+}}}
+
+Aqui podemos observar outras deficiências: as colunas não estão corretamente alinhadas, e os valores em reais aparecem com uma, duas ou três casas decimais. Como se trata de uma tabela de preços, os valores em ambas colunas deveriam ter sempre duas casas decimais. Vamos fazer algumas melhorias em nosso programa gerador de tabelas de preços.
+
+=== Quatro tipos de dados ===
+
+Para evitar aquele degrau na segunda coluna entre o 99 e o 100, precisamos fazer um pequeno desvio para começar a aprender a lidar com textos, além de números. Digite eu = seguido do seu nome entre aspas:
+
+{{{
+>>> eu = 'Fulano'
+}}}
+
+Você tem que digitar as aspas para evitar um erro. As aspas podem ser 'simples' ou "duplas". Python guardará uma cópia do seu nome na memória do computador, e associará o identificador eu a esse dado. Agora basta digitar eu para ver o seu nome.
+
+{{{
+>>> eu
+'Fulano'
+>>>
+}}}
+
+Antes havíamos criado a variável d referindo-se à cotação do dólar, e no capítulo anterior também criamos uma variável chamada lista, contendo uma lista de valores. Agora criamos a variável eu para se referir ao seu nome. Estes são exemplos de três tipos de dados que Python é capaz de processar. Você pode saber o tipo de uma variável ou estrutura de dados usando a função type. Veja estes exemplos:
+
+{{{
+>>> eu = 'Luciano'
+>>> d = 1.902
+>>> type(eu)
+<type 'string'>
+>>> type(d)
+<type 'float'>
+>>>
+}}}
+
+Python acaba de nos dizer que a variável eu é do tipo 'string' (uma cadeia de caracteres) e d é do tipo 'float', palavra que se pronuncia como "flôut" e que é uma abreviação do termo técnico "floating point number" ou número de ponto flutuante. Este nome estranho tem origem no fato de que em certas linguagens, como Cobol ou Clipper, os números tem pontos decimais em uma posição fixa. No caso de Python, C++, Java e outras linguagens modernas, o ponto normalmente não é fixo, mas sim "flutuante".
+
+Vejamos mais alguns tipos de dados:
+
+{{{
+>>> type(1)
+<type 'int'>
+>>> type(1.)
+<type 'float'>
+>>> type([1,2,3])
+<type 'list'>
+>>>
+}}}
+
+Observe que o número 1 não é 'float', mas 'int'. Já o número 1. seguido de um ponto decimal é considerado um 'float'. Como já dissemos no primeiro capítulo, inteiros e floats têm tratamento diferente em Python e na maioria das linguagens modernas. Uma divisão de inteiros (como 7/2), sempre fornece um resultado inteiro (3, nesse exemplo). O próximo dado testado é uma lista, [1,2,3], que Python chama de 'list'.
+
+Agora, experimente fazer esses dois testes:
+
+{{{
+>>> type(range)
+<type 'builtin_function_or_method'>
+>>> type(range(4,7))
+<type 'list'>
+>>>
+}}}
+
+Ao perguntarmos qual é o tipo associado ao nome range, Python responde: 'builtin_function_or_method'. Também já vimos isso no capítulo anterior: o nome range refere-se a uma função embutida no próprio interpretador. No teste seguinte, fornecemos argumentos para a função range, e assim produzimos um resultado (neste caso, a lista [4,5,6], que foi criada na memória do seu computador, mas não foi exibida). É sobre este resultado que a função type foi aplicada, retornando a informação de que se trata de um dado do tipo 'list'. Ou seja, range é uma expressão do tipo builtin_function_or_method, mas range(4,7) é uma expressão do tipo 'list'. Faz sentido? Se não faz, escreva reclamando!
+
+Cada tipo de dados suporta operações diferentes. Faça algumas experiências e analise os resultados:
+
+{{{
+>>> n1 = 10
+>>> n2 = 20
+>>> n1 + n2
+30
+>>> n1 = 'abacate'
+>>> n2 = 'banana'
+>>> n1 + n2
+'abacatebanana'
+>>> n2 + n1
+'bananaabacate'
+>>>
+}}}
+
+Por exemplo, o operador + realiza uma soma quando aplicado a dados numéricos, mas quando aplicado a dados do tipo string, o sinal + faz uma operação de concatenação (junção de duas seqüências de caracteres). Agora experimente isto:
+
+{{{
+>>> x = 3.
+>>> x * 5
+15.0
+>>> 'x' * 5
+'xxxxx'
+>>>
+}}}
+
+Note que x e 'x' são coisas totalmente diferentes. x é o nome de uma variável que neste momento se refere ao valor 3. (um float). O resultado de x * 5 é 15.0 (outro float, como era de se esperar). Já 'x' é uma string com um caractere. Quando o sinal * é aplicado entre uma string e um número inteiro, Python realiza uma operação de repetição. Como você pode notar, os operadores + e * fazem coisas diferentes dependendo dos tipos de dados fornecidos na expressão.
+
+É um prazer trabalhar com Python porque se trata de uma linguagem muito coerente. Observe:
+
+{{{
+>>> [1,2] + [3,4]
+[1, 2, 3, 4]
+>>> '12' * 3
+'121212'
+>>> [1,2] * 3
+[1, 2, 1, 2, 1, 2]
+>>>
+}}}
+
+No primeiro exemplo, vemos o operador + concatenando duas listas. Os outros dois exemplos mostram a operação de repetição. Note que '12' não é um número, mas uma string composta pelos caracteres '1' e '2'. Para Python, strings e listas têm muito em comum: ambas são seqüências de itens. Enquanto strings são seqüências de caracteres, listas são seqüências de itens quaisquer. Nos dois casos, concatenação e repetição funcionam de forma logicamente idêntica.
+
+=== Enfeitando a tabela ===
+
+Agora que sabemos sobre alguns tipos de dados, e que os operadores funcionam de forma diferente conforme os dados da expressão, estamos prontos para aperfeiçoar nosso gerador de tabelas usando o poderoso operador '%', que em Python não tem nada a ver com porcentagens. Para ver como ele funciona, vamos criar uma string como esta:
+
+{{{
+>>> msg = 'um dólar vale %f real.'
+>>>
+}}}
+
+Agora vamos ver o que acontece quando chamamos a variável msg:
+
+{{{
+>>> msg
+'um d\363lar vale %f real.'
+>>>
+}}}
+
+Python representa varíaveis string dessa forma: entre aspas simples, e trocando os acentos por códigos especiais (estamos falando do código ASCII em notação octal, algo que explicaremos depois). Se você quiser exibir o conteúdo de msg de forma mais apresentável, use o comando print:
+
+{{{
+>>> print msg
+um dólar vale %f real.
+>>>
+}}}
+
+OK, é hora de explicar porque colocamos esse estranho %f dentro da mensagem. Trata-se de um marcador de posição para sinalizar onde Python deverá inserir um número quando quisermos imprimir a mensagem com o valor da cotação. Experimente digitar o seguinte:
+
+{{{
+>>> d = 1.902
+>>> print msg % d
+um dólar vale 1.902000 real.
+>>>
+}}}
+
+Veja o que aconteceu: Python substituiu a marca %f pelo valor da variável d. É assim que funciona: a partir de uma string com marcas de posição e um ou mais valores, o operador % produz uma nova string com os valores inseridos nas respectivas posições. Veja agora um exemplo com dois valores:
+
+{{{
+>>> msg2 = 'Um dólar vale %f real e um real vale %f dólar.'
+>>> print msg2 % (d, 1/d)
+Um dólar vale 1.902000 real e um real vale 0.525762 dólar.
+>>>
+}}}
+
+Note que os valores d e 1/d estão entre parênteses. Isso é obrigatório quando queremos passar mais de um valor para o operador % (uma sequência de valores entre parênteses é um "tuplo", um tipo especial de lista que explicaremos em um outro capítulo).
+
+O símbolo %f serve para informar a Python que o valor a ser inserido naquela posição é um float. Se você quiser limitar o número de casas após o ponto decimal, basta usar um formato como esse:
+
+{{{
+>>> d = 1.685
+>>> '%.2f' % d
+'1.69'
+>>>
+}}}
+
+Após o marcador %, a indicação .2 determina que devem aparecer duas casas decimais após o ponto. Note que o resultado é arredondado: 1.685 virou 1.69. Vamos usar esse recurso na nossa tabela:
+
+{{{
+>>> for p in range(4,16):  print 'US$ %.2f = R$ %.2f' % (p,p*d)
+   
+   
+US$ 4.00 = R$ 6.74
+US$ 5.00 = R$ 8.43
+US$ 6.00 = R$ 10.12
+US$ 7.00 = R$ 11.80
+US$ 8.00 = R$ 13.49
+US$ 9.00 = R$ 15.17
+US$ 10.00 = R$ 16.86
+US$ 11.00 = R$ 18.55
+US$ 12.00 = R$ 20.23
+US$ 13.00 = R$ 21.92
+US$ 14.00 = R$ 23.60
+US$ 15.00 = R$ 25.29
+>>>
+}}}
+
+Está quase linda. Falta só consertar o degrau que acontece entre a linha do 9 e do 10. No marcador de posição você também pode colocar um número à esquerda do ponto para definir a largura total do espaço que será reservado. Na faixa de preços de 4 a 15, os maiores valores tem cinco caracteres de comprimento (incluindo o ponto decimal), por isso vamos usar '%6.2f'. Agora podemos fazer uma versão bem melhor da tabela:
+
+{{{
+>>> for p in range(4,16):  print 'US$ %5.2f = R$ %5.2f' % (p,p*d)
+   
+US$  4.00 = R$  6.74
+US$  5.00 = R$  8.43
+US$  6.00 = R$ 10.12
+US$  7.00 = R$ 11.80
+US$  8.00 = R$ 13.49
+US$  9.00 = R$ 15.17
+US$ 10.00 = R$ 16.86
+US$ 11.00 = R$ 18.55
+US$ 12.00 = R$ 20.23
+US$ 13.00 = R$ 21.92
+US$ 14.00 = R$ 23.60
+US$ 15.00 = R$ 25.29
+>>>
+}}}
+
+=== Entendendo melhor o for ===
+
+Como você percebeu, no comando for tudo aquilo que aparece após os sinal ":" é repetido várias vezes, uma vez para cada item da lista de valores indicada após a palavra in. Mas os comandos a serem repetidos podem ser vários, e na maioria das vezes não são escritos na mesma linha que o for, como temos feito, mas sim em linhas subseqüentes.
+
+O comando for é algo que chamamos de "estrutura de controle", que serve para determinar a forma de execução de um comando ou de uma seqüência de comandos, às vezes chamada de um "bloco". Em outras linguagens, os blocos são delimitados por marcadores especiais. Java, Perl e C++ usam os sinais { e } para este fim. Pascal e Delphi usam as palavras BEGIN e END. Além desses marcadores exigidos pelas linguagens, os programadores usam também o recurso da recurso da endentação, ou seja, o recuo em relação à margem esquerda, para tornar mais fácil a visualização da estrutura do programa. Veja este exemplo em Perl:
+
+{{{
+for ($i = 0; $i < 5; $i++) {    
+    $v = $i * 3; 
+    print "$v\n";
+}
+}}}
+
+Atenção: isto é Perl, e não Python.
+
+Aqui, os comandos {{{$v = $i * 3;}}} e {{{print "$v\n";}}} formam o bloco que está sobre o controle do comando for, ou seja, os dois comandos serão executados repetidamente. O programa equivalente em Python é escrito assim:
+
+{{{
+>>> for i in range(5):
+...    v = i * 3
+...    print v
+}}}
+
+Em nossa opinião, o código em Python é bem mais legível. Para sinalizar quais comandos fazem parte do bloco que está sob o controle do for, apenas a endentação é utilizada. Se você está usando o IDLE, esse recuo acontece automaticamente quando uma linha de comando termina com o sinal ':', que em Python sempre indica o início de um bloco. No interpretador Python invocado a partir da linha de comando no DOS ou em UNIX, a indentação não é automática. Você precisa digitar ao menos um espaço em branco ou, melhor ainda, um {{{[TAB]}}}, para evitar uma mensagem de erro como essa:
+
+{{{
+>>> for i in range(5):
+... print i
+  File "", line 2
+    print i
+        ^
+SyntaxError: invalid syntax
+}}}
+
+Note que o interpretador está reclamando de sintaxe inválida, e apontando (^) para a primeira palavra do bloco que deveria estar recuado. Veja a mesma coisa, com a segunda linha recuada com a tecla {{{[TAB]}}}:
+
+{{{
+>>> for i in range(5):
+...     print i
+...
+0
+1
+2
+3
+4
+>>>
+}}}
+
+Já deve ter ficado claro porque era preciso digitar dois {{{[ENTER]}}} depois do for nos exemplos anteriores: é que, no modo interativo, o interpretador Python espera uma linha em branco para sinalizar o final de uma série de comandos que formam um bloco dentro de uma estrutura de controle.
+
+Agora que entendemos o conceito de bloco, podemos enfeitar ainda mais a nossa tabela colocando um segundo comando print dentro do nosso for:
+
+Veja este exemplo:
+{{{
+>>> for p in range(9,13):
+...    print 'US$ %5.2f = R$ %5.2f' % (p, p * d)
+...    print '-' * 20
+...   
+US$  9.00 = R$ 15.17
+--------------------
+US$ 10.00 = R$ 16.85
+--------------------
+US$ 11.00 = R$ 18.54
+--------------------
+US$ 12.00 = R$ 20.22
+--------------------
+>>>
+}}}
+
+
+=== A outra face do % ===
+
+Antes de encerrar este capítulo, vale a pena contar que, assim como o + e o *, o operador '%' também tem dupla personalidade. Quando aplicado sobre dois números, que podem ser inteiros ou floats, o '%' retorna o resto da divisão inteira do primeiro pelo segundo. Veja só:
+
+{{{
+>>> 6 % 3
+0
+>>> 7 % 3
+1
+>>> 8 % 3
+2
+>>> 9 % 3
+0
+>>>
+}}}
+
+Explicando: 6 / 3 dá 2, e o resto é 0; a divisão inteira de 7 / 3 também dá 2, mas o resto é 1. Esta operação é chamada de "modulo" em inglês. Sua principal utilidade é determinar se um número é múltiplo de outro. Nos exemplos acima, o resultado de 6 % 3 e 9 % 3 é zero, porque 6 e 9 são múltiplos de 3.
+
+No próximo capítulo vamos começar a elaborar programas mais extensos. O modo interativo, que temos usado até agora, vai continuar sendo útil para testarmos novas idéias e observar o comportamento de funções e módulos do Python rapidamente. Mas, a partir da próxima sessão, vamos começar a gravar nossos programas para uso posterior, em vez de digitá-los diretamente no interpretador. E vamos também descobrir como solicitar informações do usuário, de forma que os programas possam ser utilizados por pessoas que não sabem programar e preferem ficar longe de um interpretador interativo.
+
+== Capítulo 3 ==
+
+=== Introdução ===
+
+Depois de dois capítulos bem básicos, é hora de engatar uma segunda e começar a criar programas mais dignos desse nome. Não vamos desprezar o que fizemos até aqui, digitando diretamente na deixa do interpretador Python. Ao contrário: tenha sempre em mente que você pode usá-lo para esclarecer aquela dúvida rápida ou mesmo localizar um bug escondido em um sistema complexo. A maioria das outras linguagens não oferece um ambiente para execução imediata de comandos como o Python. Uma exceção famosa é a linguagem Logo, onde o interpretador interativo serve justamente para facilitar a aprendizagem da programação por tentativa e erro.
+
+Mas a partir de agora vamos atacar programas mais extensos, e não vamos querer digitá-los linha por linha no modo interativo. Em vez disso, vamos escrever os comandos em um editor de textos, salvar o arquivo, e mandar o interpretador Python ler o programa salvo.
+

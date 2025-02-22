@@ -1,0 +1,1301 @@
+= PyGObject, sinais e propriedades =
+
+<<TableOfContents>>
+
+Python é uma linguagem de programação com suporte a orientação a objetos, mas C não tem essa funcionalidade. Como C é uma linguagem muito utilizada e orientação a objetos é um paradigma popular, os desenvolvedores da GLib (a biblioteca faz-tudo do projeto GNU) criaram um sistema de objetos para C chamado GObject. GObject é base de várias aplicações e bibliotecas importantes, como [[http://gtk.org/|GTK+]] e [[http://gstreamer.freedesktop.org/|GStreamer]].
+
+Existe um ''binding'' de GObject para Python, chamado PyGObject. Você pode se questionar qual o sentido de portar um sistema de objetos de uma biblioteca em C para uma linguagem que já tenha suporte a orientação a objetos. Uma razão é que várias bibliotecas foram construídas sobre GObject, e possuir um ''binding'' de GObject para Python permite que essa grande quantidade de bibliotecas esteja acessível à linguagem. Além disso, pode-se imaginar que só alguém que trabalhe na construção desses ''bindings'' obterá alguma vantagem em conhecer PyGObject. Isso não é verdade: PyGObject provê uma série de ferramentas que podem ser bem interessantes de utilizar.
+
+= Sinais =
+
+É natural se perguntar quais vantagens podem se tirar de um sistema de objetos alienígena quando Python já oferece um suporte tão poderoso a orientação a objetos. De fato, a maior parte das vezes é mais adequado utilizar o próprio sistema de objetos de Python, mas GObject oferece várias funcionalidades que os objetos em Python não possuem. Dessas, destacaremos duas: sinais e propriedades notificadoras.
+
+Sinais são a base de um sistema de comunicação assíncrona. Se você já trabalhou com GTK+, certamente já conhece um pouco sobre seu funcionamento. ''Grosso modo'', sinais são gatilhos em um objeto aos quais podemos associar funções para serem executadas. Quando ativamos tal gatilho, todas as funções associadas ao gatilho são executadas uma a uma. Por exemplo, quando criamos um botão em PyGTK e conectamos uma função ao evento '''clicar no botão''', estamos associando uma função a um sinal. GTK+ fica esperando que "coisas aconteçam" na interface gráfica. Quando algo acontece, GTK+ emite um sinal, e todas as funções associadas são executadas em seqüência.
+
+Se você fizer classes herdando da classe '''GObject''' do módulo '''gobject''', você pode definir seus próprios sinais, com seus parâmetros e ordem de execução. Um exemplo ajudará a compreender melhor como os sinais funcionam.
+
+== A classe Counter ==
+
+Vamos fazer uma classe que "conte" de zero até um valor ''n'', esperando um segundo entre cada número. A idéia é que cada instância dessa classe será associada a um valor, que será o alvo final da contagem. A classe terá também um método '''run()''', que iniciará a contagem. A princípio, vamos fazer apenas uma classe de Python comum:
+
+{{{#!python
+import time
+
+class Counter(object):
+
+    def __init__(self, value):
+        self.value = value
+
+    def run(self):
+        for i in xrange(0, self.value+1): # De 0 ate o valor
+            print i
+            time.sleep(1) # Espera um segundo
+}}}
+
+A classe '''Counter''' é bem simples, e parece bem funcional mas, se pensarmos bem, ela não é muito útil. O problema é que só podemos utilizá-la para imprimir o número de segundos passados na contagem, mas podemos querer fazer várias outras coisas com uma "lógica" semelhante. E se quisermos contar do valor até zero, como nas decalagens de foguetes de filmes? E se quisermos apenas informar o tempo passado quando o número de segundos passados for primo? E se, ao invés de escrever o número na tela, quisermos mostrar ele, digamos, num rótulo de uma aplicação GTK+ ou Tkinter? E se não quisermos mostrar o valor mas, por outro lado, executar uma outra operação qualquer? Nossa classe é limitada porque apenas imprime os valores, e vamos tentar remediar isso usando os sinais de GObject.
+
+== Convertendo a classe Counter para uma classe de GObject ==
+
+O primeiro passo para usar sinais em uma classe é transformá-la em uma classe herdeira da classe '''GObject'''. Devemos então importar o módulo '''gobject''':
+
+{{{#!python
+import time
+import gobject
+
+class Counter(gobject.GObject):
+}}}
+
+Agora vem a parte mais complicada, que é declarar os sinais. Antes, temos de entender um pouco mais como funcionam os sinais.
+
+== Como funcionam os sinais ==
+
+Toda vez que um sinal é emitido. uma série de fechamentos (''closures'' em inglês) conectados a ele é executada. Um ''fechamento'' (nesse contexto) é o conjunto formado por uma função de ''callback'', parâmetros opcionais passados pelo usuário do sinal e uma função de ''housekeeping''. Bem, aqui não falaremos sobre os parâmetros opcionais nem sobre a função de ''housekeeping'', então nossos sinais vão trabalhar apenas com as funções de ''callback'', e usaremos tanto o termo ''callback'', quanto fechamento para se referir a mesma coisa.
+
+Existem dois tipos de fechamentos: ''fechamentos de classe'' e ''fechamento de usuário''. O fechamento de classe é um método da classe que sempre é executado quando um objeto da classe emite um sinal. Ele é opcional, e o veremos mais tarde. O fechamento de usuário (assim chamado porque é o usuário da classe que deve defini-lo) é mais flexível, e pode ser associado a um objeto específico. Quando queremos associar uma função de ''callback'' a um sinal, estamos ''conectando'' a função ao sinal, e a transformando num fechamento de usuário.
+
+Pois bem, a um sinal não podemos conectar qualquer função. O sinal exige que uma função conectada a ele tenha uma certa assinatura e retorne um determinado tipo. Nossos callbacks, nesse texto, não retornarão nenhum valor significativo, de modo que sempre retornarão '''None'''. Para nós, o que mais interessa são os argumentos do sinal.
+
+Por fim, GObject permite que definamos o momento em que o fechamento de classe será executado. Uma vez que um sinal tenha sido emitido, ocorrem vários estágios durante os quais os fechamentos de classe podem executados. Você pode fazer com que o fechamento de classe seja executado antes ou depois dos ''callbacks'' conectados,  ou ainda permitir que os usuários escolham isso. Como, por ora, não trabalharemos com fechamentos de classes, a ordem em que eles serão executados é irrelevante, mas ainda assim devemos defini-la. Optaremos então pela opção mais flexível e comum (conforme explicaremos depois): os fechamentos de classes serão executados por padrão após os fechamentos de usuários.
+
+Agora, mãos à obra!
+
+== Declarando a assinatura de um sinal ==
+
+Em PyGObject, a assinatura dos sinais é definida através de um atributo de classe chamado '''_''''''_gsignals_''''''_'''. '''_''''''_gsignals_''''''_''' é um dicionário, no qual as chaves são o nome dos sinais e o valor associado à chave é uma tupla descrevendo a assinatura do sinal. Essa tupla possui três valores: o primeiro é uma constante para informar a ordem de execução do fechamento de classe; o segundo, o tipo a ser retornado pelo fechamento; por fim, o terceiro valor deve ser uma tupla especificando os tipos dos argumentos do sinal. Tanto o valor de retorno, quanto os tipos dos argumentos podem ser especificados tanto por uma constante que defina o tipo (da família de constantes '''gobject.TYPE_*'''), quanto por algumas classes Python, ou mesmo por uma instância de uma classe herdeira de GObject.
+
+Queremos que nosso contador emita um sinal no lugar de imprimir um número. Esse sinal deverá ter como parâmetro o número de segundos passados (i.e., o valor que atualmente a classe imprime). Vamos chamar o sinal de ''''value-counted''''. Desse modo, nossa nova classe seria definida, até agora, assim:
+
+{{{#!python
+import time
+import gobject
+
+class Counter(gobject.GObject):
+    __gsignals__ = {
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                gobject.TYPE_NONE,
+                (gobject.TYPE_INT,)
+        )
+    }
+}}}
+
+Note como o tipo de retorno ('''gobject.TYPE_NONE''') e o tipo do argumento único do sinal ('''gobject.TYPE_INT''') são constantes identificadoras de tipo definidas por GObject. Também seria possível definir o sinal, passando, no lugar das constantes, classes de Python correspondentes. Se o fizéssemos, a assinatura do sinal ficaria assim:
+
+{{{#!python
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                None,
+                (int,)
+        )
+}}}
+
+Esse método, porém, vale apenas para algumas poucas classes nativas de Python, e para classes que herdem de '''gobject.GObject'''.
+
+Note também como o argumento do sinal é único, logo damos uma tupla unitária para defini-lo, e não apenas o tipo. Se não houvesse argumento nenhum, teríamos de pôr uma tupla vazia no seu lugar. Jamais faça algo como:
+
+{{{#!python
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                gobject.TYPE_NONE,
+                (gobject.TYPE_INT)
+        )
+}}}
+
+pois, nesse caso, o valor passado não é uma tupla, mas sim a constante identificadora do tipo apenas.
+
+== Emitindo um sinal ==
+
+Agora, vamos reimplementar os métodos de nossa antiga classe Counter para tirarem proveito do sinal declarado. O método '''Counter._'''_'''_init_'''_'''()''', por exemplo, terá de chamar o método  '''gobject.GObject.'''_'''_init_'''_'''()''', afinal nosso '''Counter''' também é um '''GObject''' e precisa ser inicializado:
+
+{{{#!python
+    def __init__(self, value):
+        gobject.GObject.__init__(self)
+        self.value = value
+}}}
+
+Mais interessante, porém, será o método '''Counter.run()'''. Ao invés de simplesmente imprimir o número de segundos passados, vamos fazer com que o método emita um sinal. Fazemos isso utilizando o método '''gobject.Gobject.emit()'''.
+
+{{{#!python
+    def run(self):
+        for i in xrange(0, self.value+1): # De 0 ate o valor
+            self.emit('value-counted', i)
+            time.sleep(1) # Espera um segundo
+}}}
+
+Repare na assinatura do método '''gobject.GObject.emit()'''. O primeiro argumento é o nome do sinal (no caso, '''"value-counted"'''). Os demais argumentos serão os argumentos passados para o sinal. Como nosso sinal '''"value-counted"''' espera apenas um argumento (um número inteiro), o método '''gobject.GObject.emit()''' possuirá apenas um único argumento a mais, que será o número de segundos já passados.
+
+Nossa declaração de classe ficará assim:
+
+{{{#!python
+import time
+import gobject
+
+class Counter(gobject.GObject):
+
+    __gsignals__ = {
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                gobject.TYPE_NONE,
+                (gobject.TYPE_INT,)
+        )
+    }
+
+    def __init__(self, value):
+        gobject.GObject.__init__(self)
+        self.value = value
+
+    def run(self):
+        for i in xrange(0, self.value+1): # De 0 ate o valor
+            self.emit('value-counted', i)
+            time.sleep(1) # Espera um segundo
+}}}
+
+= Tratamento de sinais com callbacks de usuário =
+
+Para os sinais serem realmente úteis, temos de ''conectar'' ''callbacks'' aos sinais.
+
+== Conectando um callback a um sinal ==
+
+Comecemos por uma tarefa simples: vamos imprimir o número de segundos que cada sinal emite. Para isso, salve a nossa classe num arquivo '''counter.py''' e em outro arquivo, que vamos chamar de '''use1.py''', defina uma função '''print_seconds''' como a que se segue:
+
+{{{#!python
+def print_seconds(counter, seconds):
+    print i
+}}}
+
+Importemos então nosso módulo '''counter.py''', e criemos uma instância de '''Counter''''. Uma vez criada a instância, podemos, enfim, conectar ''callbacks'' (no caso, nossa função '''print_seconds'''') aos sinais que tal instância emitirá. Enfim, nosso programinha '''use1.py''' ficará assim:
+
+{{{#!python
+from counter import Counter
+
+# Note que a função espera um argumento antes de 'seconds'. Esse
+# argumento será o objeto que emitiu o sinal. Voltaremos a ele em
+# breve
+def print_seconds(counter, seconds):
+    print i
+
+c = Counter(20)
+# Aqui declaramos que, toda vez que o sinal 'value-counted'
+# for emitido, a funcao print_seconds deve ser invocada e
+# receberá como argumento os argumentos do sinal.
+c.connect('value-counted', print_seconds)
+c.run()
+}}}
+
+Agora, vamos supor que queiramos, além de informar quantos segundos se passaram, informar também que o número de segundos passado é primo. Não sei por que iríamos querer fazer isso, mas certamente não é difícil e ''sequer precisamos alterar a função '''print_seconds()''''':
+
+
+{{{#!python
+from counter import Counter
+
+def print_seconds(counter, seconds):
+    print seconds
+
+def is_prime(n):
+	divisors = [j+1 for j in xrange(0, n) if (n) % (j+1) == 0]
+	return len(divisors) == 2
+
+def report_prime(counter, seconds):
+    if is_prime(seconds):
+        print "(%d is a prime number)" % seconds
+
+c = Counter(20)
+
+c.connect('value-counted', print_seconds)
+c.connect('value-counted', report_prime)
+c.run()
+}}}
+
+A saída é algo mais ou menos como:
+
+{{{
+$ python primes.py
+0
+1
+2
+(2 is a prime number)
+3
+(3 is a prime number)
+[...]
+18
+19
+(19 is a prime number)
+20
+}}}
+
+A "magia" dos sinais é que podemos conectar quantas funções forem necessárias, sem ter de alterar código em nenhum outra função. Isso é especialmente bom para separar porções de código que não são relacionadas mas que incidentalmente devem ser executadas dada uma mesma condição.
+
+== Recuperando o objeto que emitiu o sinal ==
+
+Você deve ter notado que as funções que conectamos ao sinal possuem dois argumentos. O argumento que chamamos de ''seconds'', já sabemos que corresponde ao valor que foi emitido junto com o sinal. O primeiro argumento, que chamamos de ''counter'', é o objeto que emitiu o sinal.
+
+Suponha, por exemplo, que queiramos fazer um contador regressivo. Além de ser um exemplo muito mais legal que os anteriores, já que lembra decolagem de foguetes e viradas de ano, um contador regressivo permite que vejamos como podemos utilizar o objeto que emitiu o sinal. O desafio, nesse caso, é que, supondo que façamos um contador que contará de um valor ''n'' até zero, ele deve começar a imprimir os valores a partir de ''n'', e não de zero. Então, ao invés de imprimirmos o valor que foi enviado junto com o sinal, imprimiremos o valor que está no campo '''value''' do objeto '''Counter''' subtraído do valor emitido. Como código vale mais que palavras, escreva em um arquivo '''regressive.py''' o código abaixo e veja como o ''callback'' tira proveito do objeto passado como argumento:
+
+{{{#!python
+from counter import Counter
+
+def regressive_count(counter, number):
+    print counter.value - number
+
+c = Counter(10)
+c.connect('value-counted', regressive_count)
+c.run()
+}}}
+
+Novamente, não mexemos no código da classe '''Counter'''.
+
+== Desconectando um callback de um sinal ==
+
+Assim como podemos conectar vários ''callbacks'' a um sinal, também podemos desconectar cada um deles. Para fazer isso, precisamos do ''identificador do callback''. Esse identificador é o valor retornado pelo método '''GObject.connect()'''. Uma vez que tenhamos tal valor, podemos desconectar o ''callback'' correspondente com o método '''GObject.disconnect()'''.
+
+Considere o código abaixo. Ele é uma versão ''trialware'' de nosso '''regressive.py'''. Nessa versão, nós desconectamos o ''callback'' quando faltam apenas três segundos para terminar a contagem. A função, nesse caso, espera que uma variável global '''handler''' contenha um identificador que possa ser usado para desconectar um ''callback'' de um sinal - o que a função conectada fará quando chegar no momento planejado. Como a variável '''handler''' é, logo depois, iniciada com o valor retornado pela conexão do mesmo ''callback'', o ''callback'' desconecta a ele mesmo. Salve o código abaixo em '''trialregressive.py''' e teste:
+
+{{{#!python
+from counter import Counter
+
+stop_at = 3
+
+def trial_regressive_count(counter, number):
+    global handler_id
+    diff = counter.value - number
+    if diff > stop_at:
+        print diff
+    else:
+    	   print 'For printing all seconds, BUY our PREMIUM edition!'
+    	   counter.disconnect(handler_id)
+
+c = Counter(10)
+handler_id = c.connect('value-counted', trial_regressive_count)
+c.run()
+}}}
+
+A saída será:
+
+{{{
+$ python trialregressive.py 
+10
+9
+8
+7
+6
+5
+4
+For printing all seconds, BUY our PREMIUM edition!
+}}}
+
+== Passando mais argumentos que a assinatura  ==
+
+Uma função de ''callback'' deve esperar todos os argumentos de um sinal, mas pode esperar argumentos adicionais depois do último argumento do sinal. Nesse caso, quando a função for conectada, o método '''gobject.GObject.connect()''' deve receber os argumentos após o nome da função.
+
+Para ver  como isso funciona, vamos fazer uma nova versão do nosso programa ''trialware''. Nós vamos pegar o código que fizemos em '''regressive.py''', só que, ao invés de reescrever a função '''regressive_counting()''', faremos outra função que irá desconectar '''regressive_counting()''' na hora certa. Essa função será outro ''callback'' para o sinal '''"value-counted"''' (lembre-se, podemos conectar vários ''callbacks'' a um mesmo sinal), de modo que deverá esperar como argumentos, necessariamente, o objeto '''Counter''' emissor e o número de segundos passado. Entretanto, essa função também esperará um argumento a mais, que será o identificador do ''callback'' a ser desconectado. Esse identificador deverá ser passado como parâmetro para o método '''gobject.GObject.connect()'''.
+
+{{{#!python
+from counter import Counter
+
+stop_at = 3
+
+def regressive_count(counter, number):
+    print counter.value - number
+
+def implement_trial_limitation(counter, number, handler_id):
+    if counter.value - number == stop_at + 1:
+        print 'For printing all seconds, BUY our PREMIUM edition!'
+        counter.disconnect(handler_id)
+
+c = Counter(10)
+handler_id = c.connect('value-counted', regressive_count)
+c.connect('value-counted', implement_trial_limitation, handler_id)
+c.run()
+}}}
+
+A saída será:
+
+{{{
+$ python trialregressive.py 
+10
+9
+8
+7
+6
+5
+4
+For printing all seconds, BUY our PREMIUM edition!
+}}}
+
+== Verificando se o callback ainda está conectado ==
+
+Às vezes, queremos desconectar um determinado ''callback'' mas não sabemos se isso já foi feito. Se tentarmos desconectar um ''callback'' já desconectado, PyGObject vai imprimir um alerta, afinal, é bem provável que algo esteja errado. Podemos verificar se o ''callback'' correspondente a um identificador já foi desconectado, porém, com o método '''gobject.GObject.handler_is_connected()'''.
+
+Digamos que queremos que nosso contador, agora, imprima a mensagem '''"For printing all seconds, BUY our PREMIUM edition!"''' todas as vezes em que não imprimiria os números contados, para que seja ainda mais irritante. Podemos alterar a função '''implement_trial_limitation()''' para, primeiro, desconectar o ''callback'' que imprime os números e depois apenas imprimir a mensagem. Como devemos desconectar o sinal só uma vez, a função agora verificará se o ''callback'' ainda está conectado.
+
+{{{#!python
+from counter import Counter
+
+stop_at = 3
+
+def regressive_count(counter, number):
+    print counter.value - number
+
+def implement_trial_limitation(counter, number, handler_id):
+    if not counter.value - number > stop_at:
+        print 'For printing all seconds, BUY our PREMIUM edition!'
+        if counter.handler_is_connected(handler_id):
+            counter.disconnect(handler_id)
+
+c = Counter(10)
+handler_id = c.connect('value-counted', regressive_count)
+c.connect('value-counted', implement_trial_limitation, handler_id)
+c.run()
+}}}
+
+
+== Bloqueando sinais ==
+
+Nem sempre, porém, queremos apenas desconectar um ''callback''. É comum, por exemplo, fazer um ''callback'' parar de ser executado durante um período e torná-lo "ativo" depois desse período. Seria semanticamente equivalente a desconectar o ''callback'' durante um tempo e, depois, conectá-lo novamente. até poderíamos implementar essa funcionalidade assim, mas PyGObject oferece uma ferramenta mais eficiente e prática: os métodos '''gobject.GObject.handler_block()''' e '''gobject.GObject.handler_unblock()'''.
+
+Esses métodos vêm a calhar na nossa busca por um ''software'' cada vez mais irritante. Vamos fazer nosso ''trialware'' parar de imprimir os números no meio da contagem, e retomar a contagem a dois segundos do final. Para isso, vamos ''bloquear'' o ''callback''.
+
+{{{#!python
+from counter import Counter
+
+stop_at = 7
+restart_at = 3
+
+def regressive_count(counter, number):
+    print counter.value - number
+
+def implement_trial_limitation(counter, number, handler_id):
+    diff = counter.value - number
+    if diff == stop_at:
+        counter.handler_block(handler_id)
+    elif stop_at > diff > restart_at:
+        print 'For printing all seconds, BUY our PREMIUM edition!'
+    elif diff == restart_at:
+        print 'For printing all seconds, BUY our PREMIUM edition!'
+        counter.handler_unblock(handler_id)
+
+
+c = Counter(10)
+handler_id = c.connect('value-counted', regressive_count)
+c.connect('value-counted', implement_trial_limitation, handler_id)
+c.run()
+}}}
+
+Veja como ficou a saída:
+
+{{{
+$ python trialregressive.py 
+10
+9
+8
+7
+For printing all seconds, BUY our PREMIUM edition!
+For printing all seconds, BUY our PREMIUM edition!
+For printing all seconds, BUY our PREMIUM edition!
+For printing all seconds, BUY our PREMIUM edition!
+2
+1
+0
+}}}
+
+= Closures de classe =
+
+Por vezes, é necessário que uma classe execute uma determinada ação sempre que um sinal é emitido, independentemente de haver algum callback conectado ao sinal. Em outras palavras: toda vez que qualquer objeto da classe emitir um sinal, tal ação deve ser executada. Eventualmente poderíamos fazer uma função para responder ao sinal e conectá-la no método '''_''''''_init_''''''_''''''()''', mas PyGObject possui uma alternativa mais prática e segura para se fazer isso: os ''closures'' ou '' ''callbacks'' de classe''.
+
+''Closures'' de classe são métodos especiais que são automaticamente associados a um sinal. Toda vez que o sinal é emitido, em qualquer instância da classe, o ''closure'' de classe é executado.
+
+== Declarando um callback de classe ==
+
+Declarar um callback de classe é simples: basta declarar um método cujo nome siga a forma '''do_<nome_do_sinal_alterado>''', onde '''<nome_do_sinal_alterado>''' é o nome do sinal, substituindo os hífens por ''underscores''.
+
+Para entender como funciona os fechamentos de classe, vamos fazer uma nova versão de nossa classe '''Counter''', que chamaremos de '''LoggedCounter'''. Essa versão salvará um ''log'' dos segundos contados em um arquivo chamado '''loggedcounter.log'''. Poderíamos usar herança, mas, em prol da clareza, vamos definir uma nova classe do zero e salvá-la no arquivo '''loggedcounter.py''':
+
+{{{#!python
+import time
+import gobject
+
+class LoggedCounter(gobject.GObject):
+
+    __gsignals__ = {
+        'value-counted' : (
+            gobject.SIGNAL_RUN_LAST, 
+            gobject.TYPE_NONE, 
+            (gobject.TYPE_INT,)
+        )
+    }
+
+    def __init__(self, value):
+        gobject.GObject.__init__(self)
+        self.logfile = open('loggedcounter.log', 'a')
+        self.value = value
+
+    def do_value_counted(self, second):
+        moment = time.strftime("[%Y-%m-%d %H:%M]")
+        logline = "%s Counted %d\n" % (moment, second)
+        self.logfile.write(logline)
+
+    def run(self):
+        for i in xrange(0, self.value+1): # De 0 ate o valor
+            self.emit('value-counted', i)
+            time.sleep(1) # Espera um segundo
+}}}
+
+Vamos ver como isso funciona? Reimplementemos nosso antigo '''regressive.py''', agora no arquivo '''loggedregressive.py''', e usando a classe '''LoggedCounter''':
+
+{{{#!python
+from loggedcounter import LoggedCounter
+
+def regressive_count(counter, number):
+    print counter.value - number
+
+c = LoggedCounter(10)
+c.connect('value-counted', regressive_count)
+c.run()
+}}}
+
+A saída do programa foi idêntica ao antigo '''regressive.py''':
+
+{{{
+$ python loggedregressive.py
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+}}}
+
+Agora, porém, foi criado um arquivo '''loggedregressive.log'''. Seu conteúdo, aqui em minha máquina, foi:
+
+{{{
+[2008-01-10 11:01] Counted 0
+[2008-01-10 11:01] Counted 1
+[2008-01-10 11:01] Counted 2
+[2008-01-10 11:01] Counted 3
+[2008-01-10 11:01] Counted 4
+[2008-01-10 11:01] Counted 5
+[2008-01-10 11:01] Counted 6
+[2008-01-10 11:01] Counted 7
+[2008-01-10 11:01] Counted 8
+[2008-01-10 11:01] Counted 9
+[2008-01-10 11:01] Counted 10
+}}}
+
+== Definido a ordem de execução ==
+
+Conforme dissemos lá em cima, é possível definir em que momento um fechamento de classe pode ser executado, isto é, se o fechamento de classe vai ser executado antes ou depois dos ''callbacks'' conectados pelo usuário. Já aprendemos como fazer o fechamento de classe ser executado depois dos ''callbacks'' de usuário, mas não vimos o resultado disso. Como exemplo, então, faremos duas classes, que chamaremos de '''RunLastPrinter''' e '''RunFirstPrinter'''. Ambas terão um sinal '''printing-required''', que não receberá parâmetro algum, mas que, em uma, será registrado com a constante '''gobject.SIGNAL_RUN_LAST''' e em outra, será registrado com a constante '''gobject.SIGNAL_RUN_FIRST'''. Salvaremos esse código num arquivo '''printers.py'''.
+
+{{{
+#!python
+import gobject
+
+class RunLastPrinter(gobject.GObject):
+    __gsignals__ = {
+        'printing-required' : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ())
+    }
+    def do_printing_required(self):
+        print 'RunLastPrinter class closure printing'
+
+class RunFirstPrinter(gobject.GObject):
+    __gsignals__ = {
+        'printing-required' : (gobject.SIGNAL_RUN_FIRST, gobject.TYPE_NONE, ())
+    }
+
+    def do_printing_required(self):
+        print 'RunFirstPrinter class closure printing'
+
+}}}
+
+Usando o código de '''printers.py''', testamos o seguinte ''script'':
+
+{{{
+#!python
+import printers
+
+def user_callback(printer):
+    print '%s User callback printing' % printer.__class__.__name__
+    rlp = printers.RunLastPrinter()
+    rlp.connect('printing-required', user_callback)
+    rlp.emit('printing-required')
+    print
+    rfp = printers.RunFirstPrinter()
+    rfp.connect('printing-required', user_callback)
+    rfp.emit('printing-required')
+}}}
+
+A saída do código acima foi:
+
+{{{
+RunLastPrinter User callback printing
+RunLastPrinter class closure printing
+
+RunFirstPrinter class closure printing
+RunFirstPrinter User callback printing
+}}}
+
+Note como, quando o sinal é emitido por um objeto da classe '''RunLastPrinter''', o ''callback'' de classe é executado depois do ''callback'' de usuário. Quando o sinal é emitido pela instância de  '''RunFirstPrinter''', o fechamento de classe é executado antes do ''callback'' de usuário.
+
+== Conectando callbacks com método connect_after() ==
+
+
+Lá em cima, dissemos que declarar um sinal que rode o fechamento de classe depois dos ''callbacks'' de usuário é mais ''flexívei'', mas não explicamos por quê. Declarar um sinal como '''gobject.SIGNAL_RUN_LAST''', na verdade, permite que ''callbacks '' de usuário sejam executados tanto ''antes'' quanto ''depois'' do fechamento de classe. Se os ''callbacks'' são conectados com o método '''connect()''', eles serão executados ants do ''callback'' de classe; entretanto, se forem conectados com o método '''connect_after()''', serão executados depois do ''callback'' de classe. Desse modo, o ''script'' abaixo
+
+{{{
+#!python
+import printers
+
+def common_callback(printer):
+    print '%s User callback connected as usual' % printer.__class__.__name__
+
+def after_callback(printer):
+    print '%s User callback connected "after"' % printer.__class__.__name__
+
+rlp = printers.RunLastPrinter()
+rlp.connect('printing-required', common_callback)
+rlp.emit('printing-required')
+print
+# Novo, para "limpar" os callbacks
+rlp = printers.RunLastPrinter()
+rlp.connect_after('printing-required', after_callback)
+rlp.emit('printing-required')
+print
+#Agora, todos juntos!
+rlp = printers.RunLastPrinter()
+rlp.connect('printing-required', common_callback)
+rlp.connect_after('printing-required', after_callback)
+rlp.emit('printing-required')
+}}}
+
+será
+
+{{{
+RunLastPrinter User callback connected as usual
+RunLastPrinter class closure printing
+
+RunLastPrinter class closure printing
+RunLastPrinter User callback connected "after"
+
+RunLastPrinter User callback connected as usual
+RunLastPrinter class closure printing
+RunLastPrinter User callback connected "after"
+}}}
+
+Se o sinal fosse declarado com '''gobject.SIGNAL_RUN_FIRST''', como na classe '''RunFirstPrinter''', não seria possível fazer um ''callback'' ser executado antes do fechamento de classe. Veja o ''script'' abaixo, no qual apenas trocamos as classes '''RunLastPrinter''' por '''RunFirstPrinter''':
+
+{{{
+#!python
+import printers
+
+def common_callback(printer):
+    print '%s User callback connected as usual' % printer.__class__.__name__
+
+def after_callback(printer):
+    print '%s User callback connected "after"' % printer.__class__.__name__
+
+rfp = printers.RunFirstPrinter()
+rfp.connect('printing-required', common_callback)
+rfp.emit('printing-required')
+print
+# Novo, para "limpar" os callbacks
+rfp = printers.RunFirstPrinter()
+rfp.connect_after('printing-required', after_callback)
+rfp.emit('printing-required')
+print
+#Agora, todos juntos!
+rfp = printers.RunFirstPrinter()
+rfp.connect('printing-required', common_callback)
+rfp.connect_after('printing-required', after_callback)
+rfp.emit('printing-required')
+}}}
+
+
+A saída do ''script'' é
+
+{{{
+RunFirstPrinter class closure printing
+RunFirstPrinter User callback connected as usual
+
+RunFirstPrinter class closure printing
+RunFirstPrinter User callback connected "after"
+
+RunFirstPrinter class closure printing
+RunFirstPrinter User callback connected as usual
+RunFirstPrinter User callback connected "after"
+}}}
+
+== A ordem de execução gobject.SIGNAL_RUN_CLEANUP ==
+
+Assim como a ordem de execução '''gobject.SIGNAL_RUN_FIRST''' força que o ''callback'' de classe seja executado antes dos ''callbacks'' de usuário, é possível declarar que o fechamento de classe de um sinal deverá ocorrer necessáriamente após a execução de todos os ''callbacks'' de usuário. Para isso, usamos a ordem de execução '''gobject.SIGNAL_RUN_CLEANUP'''. Como o  nome da constante deixa claro, essa ordem de execução foi primariamente pensada para fazer o ''clean-up'', a "limpeza" do que os ''callbacks'' executaram.
+
+Para testá-la, escrevemos um arquivo '''printers2.py''' que declara uma nova classe Printer, previsivelmente chamada '''RunCleanUpPrinter'''. Seu código segue abaixo. Note que alteramos a ordem de execução na declaração do sinal.
+
+{{{
+#!python
+import gobject
+
+class RunCleanUpPrinter(gobject.GObject):
+    __gsignals__ = {
+        'printing-required' : (gobject.SIGNAL_RUN_CLEANUP, gobject.TYPE_NONE, ())
+    }
+
+def do_printing_required(self):
+    print 'RunCleanUpPrinter class closure printing'
+
+Reescrevemos os ''scripts'' de exemplo acima utilizando a nova classe...
+
+import printers2
+
+def common_callback(printer):
+    print '%s User callback connected as usual' % printer.__class__.__name__
+
+def after_callback(printer):
+    print '%s User callback connected "after"' % printer.__class__.__name__
+
+rcp = printers2.RunCleanUpPrinter()
+rcp.connect('printing-required', common_callback)
+rcp.emit('printing-required')
+print
+# Novo, para "limpar" os callbacks
+rcp = printers2.RunCleanUpPrinter()
+rcp.connect_after('printing-required', after_callback)
+rcp.emit('printing-required')
+print
+#Agora, todos juntos!
+rcp = printers2.RunCleanUpPrinter()
+rcp.connect('printing-required', common_callback)
+rcp.connect_after('printing-required', after_callback)
+rcp.emit('printing-required')
+}}}
+
+...e a saída foi
+
+{{{
+RunCleanUpPrinter User callback connected as usual
+RunCleanUpPrinter class closure printing
+
+RunCleanUpPrinter User callback connected "after"
+RunCleanUpPrinter class closure printing
+
+RunCleanUpPrinter User callback connected as usual
+RunCleanUpPrinter User callback connected "after"
+RunCleanUpPrinter class closure printing
+}}}
+
+= Propriedades =
+
+Além de sinais, outra funcionalidade bastante atraente dos GObjects são as ''propriedades''.
+
+Propriedades são uma espécie de interface para valores. Elas permitem impor restrições e associar sinais à mudança de certos atributos. De maneira simplificada, propriedades seriam análogas - não surpreendentemente - às ''properties'' de Python, ou mais precisamente, a ''descriptors'', e seriam usadas quando meros atributos não são suficientes.
+
+A diferença mais visível entre propriedades de PyGObject e atributos é a maneira como seus valores são acessados. Numa classe ''normal'', que utiliza atributos, eles são acessados assim:
+
+{{{#!python
+    p = Person()
+    p.name = 'Cibelle'
+    p.age = 23
+    # ... doing stuff ...
+    years = p.age
+}}}
+    
+Se '''Person''' fosse, na verdade, um GObject e os atributos fossem, na verdade, propriedades de GObject, a sintaxe seria a seguinte:
+
+{{{#!python
+    p = Person()
+    p.set_property('name', 'Cibelle')
+    p.set_property('age', 23)
+    # ... doing stuff ...
+    years = p.get_property('age')
+}}}
+    
+Há também outra sintaxe disponível, que coloca as propriedades como atributos do atriboto '''props''' do GObject:
+
+{{{#!python
+    p = Person()
+    p.props.name = 'Cibelle'
+    p.props.age = 23
+    # ... doing stuff ...
+    years = p.props.age
+}}}
+    
+São sintaxes mais complexas, mas permitem utilizar todas as funcionalidades de propriedades, que veremos aqui.
+
+== Declarando uma propriedade ==
+
+Assim como sinais, propriedades precisam ser declaradas. A maneira de declará-las é semelhante à usada para sinais: em um atributo de classe colocamos um dicionário no qual chaves são associadas a tuplas que, enfim, definirão as características das propriedades. Nesse caso, o atributo de classe se charmará '''_''''''_gproperties_''''''_''', as chaves do dicionário serão o nome dos atributos e o conteúdo da tupla variará de acordo com o tipo do atributo.
+
+O primeiro elemento da tupla de declaração é o tipo da propriedade. Os tipos podem ser declarados assim como foram na assinatura dos sinais: você pode utilizar as constantes '''gobjec.TYPE_*''', algumas classes de Python ou classes GObject. O segundo elemento da tupla é uma ''string'' com uma descrição curtíssima, usualmente chamada de ''nick name''. O terceiro elemento é outra descrição, ainda curta, mas mais clara, geralmente em forma de uma frase só. 
+
+O ''último'' elemento, que não necessáriamente será o quarto, é um conjunto de ''flags'' que descrevem algumas características da propriedade. Dessas ''flags'', veremos, a princípio, as ''flags'' '''gobject.PARAM_READABLE''', '''gobject.PARAM_WRITABLE''' e '''gobject.PARAM_READWRITE''', que definirão, respectivamente, que a propriedade pode ser lida, alterada ou tanto lida quanto alterada. No caso, não faz muito sentido utilizar várias ''flags'', já que só veremos essas, que são redundantes, mas, se fôssemos utilizar outras ''flags'' (como e. g. '''gobject.PARAM_CONSTRUCT'''), poderíamos utilizar vários valores "unindo-os" com a operação "''or'' bit a bit". Por exemplo, a ''flag'' '''gobject.PARAM_READWRITE''' é efetivamente equivalente a '''gobject.PARAM_READABLE | gobject.PARAM_WRITABLE'''.
+
+Entre o terceiro valor e o último, pode haver mais valores, dependendo do tipo da propriedade. Os tipos numéricos '''gobject.TYPE_*CHAR''', '''gobject.TYPE_*INT*''', '''gobject.TYPE_*LONG''', '''gobject.TYPE_FLOAT''' e '''gobject.TYPE_DOUBLE''', por exemplo, esperarão três valores entre o terceiro item e o último, que são, na ordem, o menor valor aceito para a propriedade, o maior valor aceito para a propriedade e o valor padrão da propriedade, quando não for inicializada. Os tipos '''gobject.TYPE_BOOLEAN''', '''gobject.TYPE_ENUM''', '''gobject.TYPE_FLAGS''' e '''gobject.TYPE_STRING''' esperam só um outro valor entre o terceiro e o último, que é o valor padrão. Os demais tipos, '''gobject.TYPE_PARAM''', '''gobject.TYPE_BOXED''', '''gobject.TYPE_POINTER''' e '''gobject.TYPE_OBJECT''' não esperam mais nenhum parâmetro, de modo que o último valor da tupla é realmente o quarto.
+
+Como essa longa descrição deve soar confusa, vamos a um exemplo.
+
+== A classe Person ==
+
+Vamos trabalhar com um novo desafio nesse exemplo. Vamos fazer um banco de dados de pessoas, no qual registraremos o nome e a data de nascimento das pessoas, e do qual podemos recuperar a idade delas. A princípio, a maneira mais natural de representar esses dados é com uma classe como a que se segue:
+
+{{{#!python
+import datetime
+
+class Person(object):
+    def __init__(self, name, birthday):
+        self.name = name
+        self.birthday = birthday
+
+    def get_age(self):
+        now = datetime.datetime.now()
+        delta = now - self.birthday
+        # Essa não é uma maneira correta de calcular
+        # idade mas serve para o exemplo
+        return delta.days / 365
+}}}
+
+De fato, essa é a maneira mais simples de fazer isso, mas também poderíams fazer com PyGObject e propriedades. Primeiro, teríamos de fazer com que a classe '''Person''' herdasse de '''gobject.GObject''':
+
+{{{#!python
+import datetime
+import gobject
+
+class Person(gobject.GObject):
+}}}
+
+Nesse caso, seria interessante que fizéssemos com que o nome, a data de nascimento e a idade fossem propriedades do objeto. O nome e a data de nascimento poderiam ser alterados, mas não faria sentido alterar a idade, naturalmente. Teríamos então de declarar as propriedades através do atributo de classe '''_''''''_gproperties_''''''_''', conforme descrevemos acima. A declaração ficaria mais ou menos assim:
+
+{{{#!python
+import datetime
+import gobject
+
+class Person(gobject.GObject):
+    # As declarações vão dentro desse atributo
+    __gproperties__ = {
+        'name' : (
+                gobject.TYPE_STRING,
+                'Person name',
+                'The name of the person',
+                '', # O valor padrão é string vazia
+                gobject.PARAM_READWRITE
+            ),
+        'birthday' : (
+                gobject.TYPE_PYOBJECT, # Conterá um datetime
+                'Person birthday',
+                'The day when the person has been born',
+                gobject.PARAM_READWRITE # Note, nenum valor padrão
+            ),
+        'age' : (
+                gobject.TYPE_INT,
+                'Person age',
+                'How old the person is',
+                0,     # Valor mínimo
+                200,   # Valor máximo
+                0,     # Valor padrão
+                gobject.PARAM_READABLE # Não pode ser escrita
+            )
+    }
+}}}
+
+== Armazenando e recuperando valores de propriedades ==
+
+Assim como as ''properties'' de Python, propriedades de PyGObject não armazenam valores por si só: é preciso armazená-los de alguma forma em algum lugar, e recuperá-los quando necessário.
+
+Um exemplo deixará isso mais claro. Na classe '''Person''', as propriedades ''''name'''' e ''''birthday'''' podem tanto ser lidas quanto escritas. Entretanto, quando atribuímos um valor a essas propriedades esse valor não é automaticamente armazenado - nós precisamos armazenar esse valor em algum lugar. Minha sugestão é armazená-los em atributos do objeto chamados '''name''' e '''birthday''' (originalidade não conta pontos, ''sir''). Vamos, então, atribuir os valores adequados no método '''_''''''_init_''''''_'''() da classe:
+
+{{{#!python
+def __init__(self, name, birthday):
+    gobject.GObject.__init__(self)
+    self.name = name
+    self.birthday = birthday
+}}}
+
+Nesse momento, não existe nenhuma relação entre a propriedade ''''name'''' e o atributo '''name''', nem entre a propriedade ''''birthday'''' e o atributo '''birthday'''. Atribuir valores a essas propriedades não alterará o valor dos atributos, e recuperar o valor das propriedades tampouco retornaria o valor dos atributos - na verdade, no estágio atual, essas operações gerariam um erro. Para fazer com que a operação de alterar a propriedade altere os atributos e a operação de recuperar as propriedades retorne os atributos, precisamos definir os métodos '''do_get_property()''' e '''do_set_property()'''.
+
+== Os métodos do_get_property() e do_set_property() ==
+
+Para que propriedades possam receber valores e retornar valores, é necessário definir os métodos '''do_set_property()''' (que atribui valores a propriedades) e '''do_get_property()''' (que retorna valores de propriedade. O método '''do_set_property()''' deve esperar dois argumentos além do '''self.''' O primeiro argumento é um ''especificador de parâmetro'' que trará alguns dados necessários sobre a propriedade, como, por exemplo, o nome; o segundo argumento é o valor a ser atribuído à propriedade. O método '''do_get_property()''' apenas o especificador de parâmetro como argumento.
+
+Na nossa classe, queremos que os valores atribuídos às proporiedades ''''name'''' e ''''birthday'''' sejam armazenados nos atributos de objeto '''name''' e '''birthday'''. Nosso método '''do_set_property()''' será então assim:
+
+{{{#!python
+    def do_set_property(self, property_spec, value):
+        # Podemos recuperar o nome da propriedade a partir do especificador
+        # no atributo 'name' dele.
+        if property_spec.name == 'name': # Se a propriedade é o nome
+            self.name = value       # atribua valor a self.name;
+        elif property_spec.name == 'birthday': # se é a data de nascimento
+            self.birthday = value   # atribua a self.birthday
+}}}
+            
+Também queremos ler os valores das propriedades, então definimos o método '''do_get_property()''' abaixo:
+
+{{{#!python
+    def do_get_property(self, property_spec):
+        if property_spec.name == 'name': # Se a propriedade é o nome
+            return self.name        # retorne o valor de self.name;
+        elif property_spec.name == 'birthday': # se é a data de nascimento
+            return self.birthday    # retorne o valor de self.birthday
+}}}
+
+Nossa classe está ''quase'' pronta. Só falta retornar o valor da propriedade ''''age'''' - como ela é uma propriedade somente para leitura, não precisamos prover uma maneira de lhe atribuir um valor. Como na classe original, recuperaremos o valor a partir da data de nascimento (usando inclusive o mesmo algoritmo incorreto). Basta, então, adicionar mais um '''elif''' à cadeia já presente no nosso método:
+
+{{{#!python
+    def do_get_property(self, property_spec):
+        if property_spec.name == 'name': # Se a propriedade é o nome
+            return self.name        # retorne o valor de self.name;
+        elif property_spec.name == 'birthday': # se é a data de nascimento
+            return self.birthday    # retorne o valor de self.birthday
+        elif property_spec.name == 'age':
+            now = datetime.datetime.now()
+            delta = now - self.birthday
+            return delta.days / 365
+}}}     
+        
+O resultado final, que salvaremos no arquivo '''person.py''' para usar nos próximos exemplos, é:
+
+{{{#!python
+# -*- coding: utf-8 -*-
+import datetime
+import gobject
+
+class Person(gobject.GObject):
+    # As declarações vão dentro desse atributo
+    __gproperties__ = {
+        'name' : (
+                gobject.TYPE_STRING,
+                'Person name',
+                'The name of the person',
+                '', # O valor padrão é string vazia
+                gobject.PARAM_READWRITE
+            ),
+        'birthday' : (
+                gobject.TYPE_PYOBJECT, # Conterá um datetime
+                'Person birthday',
+                'The day when the person has been born',
+                gobject.PARAM_READWRITE # Note, nenum valor padrão
+            ),
+        'age' : (
+                gobject.TYPE_INT,
+                'Person age',
+                'How old the person is',
+                0,     # Valor mínimo
+                200,   # Valor máximo
+                0,     # Valor padrão
+                gobject.PARAM_READABLE # Não pode ser escrita
+            )
+    }
+
+    def __init__(self, name, birthday):
+        gobject.GObject.__init__(self)
+        self.name = name
+        self.birthday = birthday
+    
+    def do_set_property(self, property_spec, value):
+        # Podemos recuperar o nome da propriedade a partir do especificador
+        # no atributo 'name' dele.
+        if property_spec.name == 'name': # Se a propriedade é o nome
+            self.name = value       # atribua valor a self.name;
+        elif property_spec.name == 'birthday': # se é a data de nascimento
+            self.birthday = value   # atribua a self.birthday
+    
+    def do_get_property(self, property_spec):
+        if property_spec.name == 'name': # Se a propriedade é o nome
+            return self.name        # retorne o valor de self.name;
+        elif property_spec.name == 'birthday': # se é a data de nascimento
+            return self.birthday    # retorne o valor de self.birthday
+        elif property_spec.name == 'age':
+            now = datetime.datetime.now()
+            delta = now - self.birthday
+            return delta.days / 365
+}}}
+
+
+== Lendo e alterando propriedades ==
+
+Definida a classe, podemos instanciá-la e brincar com suas propriedades. Por exemplo, vamos fazer um programa simples, '''someone.py''', que lerá os dados de uma pessoa, criará o objeto '''person.Person''' e depois imprimirá os valores. Primeiro, fazemos uma função que leia os dados e instancie '''person.Person:'''
+
+{{{#!python
+import datetime
+
+from person import Person
+
+def read_person():
+    name = raw_input('Nome: ')
+    birth_string = raw_input('Data de nascimento (dd/mm/yyyy): ')
+    # Divide em uma lista de strings
+    splitted = birth_string.split('/')
+    day, month, year = [int(string) for string in splitted]
+    birthday = datetime.datetime(year=year, month=month, day=day)
+    person = Person(name, birthday)
+    return person
+}}}
+
+Agora, fazemos uma função que receba uma "pessoa" e imprima seus dados:
+
+{{{#!python
+def print_person(person):
+    print 'Nome: %s' % person.get_property('name')
+    # É preciso formatar o objeto datetime
+    birth_string = person.get_property('birthday').strftime('%d/%m/%Y')
+    print 'Data de nascimento: %s' % birth_string
+    print 'Idade: %d' % person.get_property('age')
+}}}
+    
+Vamos, por fim, chamar as funções:
+
+{{{#!python
+person = read_person()
+print_person(person)
+}}}
+
+O programa completo segue abaixo:
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import datetime
+
+from person import Person
+
+def read_person():
+    name = raw_input('Nome: ')
+    birth_string = raw_input('Data de nascimento (dd/mm/yyyy): ')
+    # Divide em uma lista de strings
+    splitted = birth_string.split('/')
+    day, month, year = [int(string) for string in splitted]
+    birthday = datetime.datetime(year=year, month=month, day=day)
+    person = Person(name, birthday)
+    return person
+
+def print_person(person):
+    print 'Nome: %s' % person.get_property('name')
+    # É preciso formatar o objeto datetime
+    birth_string = person.get_property('birthday').strftime('%d/%m/%Y')
+    print 'Data de nascimento: %s' % birth_string
+    print 'Idade: %d' % person.get_property('age')
+
+person = read_person()
+print_person(person)
+}}}
+
+Poderíamos, naturalmente, usar a outra sintaxe de acesso a propriedades. Desse modo, '''print_person''' seria assim:
+
+{{{#!python
+def print_person(person):
+    # Note a diferença
+    print 'Nome: %s' % person.props.name
+    # É preciso formatar o objeto datetime
+    birth_string = person.props.birthday.strftime('%d/%m/%Y')
+    print 'Data de nascimento: %s' % birth_string
+    print 'Idade: %d' % person.props.age
+}}}
+
+Agora, depois de imprimirmos os dados, vamos dar a opção ao usuário de alterar algum deles. Vamos criar a função '''alter_person''':
+
+{{{#!python
+def alter_person(person, name, birth_string):
+    if name != ''':
+        person.set_property('name', name)
+    if birth_string != ''':
+        splitted = birth_string.split('/')
+        day, month, year = [int(string) for string in splitted]
+        birthday = datetime.datetime(year=year, month=month, day=day)
+        person.set_property('birthday', birthday)
+}}}
+        
+Nosso novo programa será, então:
+
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import datetime
+
+from person import Person
+
+def read_person():
+    name = raw_input('Nome: ')
+    birth_string = raw_input('Data de nascimento (dd/mm/yyyy): ')
+    # Divide em uma lista de strings
+    splitted = birth_string.split('/')
+    day, month, year = [int(string) for string in splitted]
+    birthday = datetime.datetime(year=year, month=month, day=day)
+    person = Person(name, birthday)
+    return person
+
+def print_person(person):
+    print 'Nome: %s' % person.get_property('name')
+    # É preciso formatar o objeto datetime
+    birth_string = person.get_property('birthday').strftime('%d/%m/%Y')
+    print 'Data de nascimento: %s' % birth_string
+    print 'Idade: %d' % person.get_property('age')
+
+def alter_person(person, name, birth_string):
+    if name != ''':
+        person.set_property('name', name)
+    if birth_string != ''':
+        splitted = birth_string.split('/')
+        day, month, year = [int(string) for string in splitted]
+        birthday = datetime.datetime(year=year, month=month, day=day)
+        person.set_property('birthday', birthday)
+
+person = read_person()
+print_person(person)
+name = raw_input('Novo nome? ')
+birth_string = raw_input('Nova data de nascimento? ')
+alter_person(person, name, birth_string)
+print_person(person)
+}}}
+
+Novamente, poderíamos usar a sintaxe '''.props''':
+
+{{{#!python
+def alter_person(person, name, birth_string):
+    if name != ''':
+        person.props.name = name
+    if birth_string != ''':
+        splitted = birth_string.split('/')
+        day, month, year = [int(string) for string in splitted]
+        birthday = datetime.datetime(year=year, month=month, day=day)
+        person.props.birthday = birthday
+}}}
+
+que o programa funcionaria perfeitamente.
+
+Agora que já sabemos como alterar valores de propriedades, vamos modificar nosso método '''Person._''''''_init_''''''_()''' para que altere as propriedades em si, e não os atributos. Conforme veremos à frente, essa forma possui bastante vantagens:
+
+{{{#!python
+    def __init__(self, name, birthday):
+        gobject.GObject.__init__(self)
+        self.set_property('name', name) 
+        self.set_property('birthday', birthday)
+}}}
+
+
+== Atribuindo valores a propriedades em construtures ==
+
+Existe uma terceira maneira de atribuir valor a propriedades, com o método '''gobject.GObject._''''''_init_''''''_()'''. Quando invocamos esse método, podemos passar parâmetros nomeados que inicializem as propriedades. Assim como o método '''Person._''''''_init_''''''_()''' abaixo
+
+{{{#!python
+    def __init__(self, name, birthday):
+        gobject.GObject.__init__(self)
+        self.set_property('name', name) 
+        self.set_property('birthday', birthday)
+}}}
+
+equivale a 
+
+{{{#!python
+    def __init__(self, name, birthday):
+        gobject.GObject.__init__(self)
+        self.props.name = name
+        self.props.birthday = birthday
+}}}
+        
+também podemos implementar o método de maneira muito mais objetiva:
+
+{{{#!python
+    def __init__(self, name, birthday):
+        gobject.GObject.__init__(self, name=name, birthday=birthday)
+}}}
+
+= Funcionalidades de propriedades de PyGObject =
+
+Produzimos um monte de código para usar propriedades, mas não vimos nenhuma grande vantagem até o momento. Vamos ver, então, o que propriedades têm de interessante.
+
+== A classe Complex ==
+
+Para estudarmos melhor algumas funcionalidades das propriedades em PyGObject, vamos criar uma nova classe.
+
+Considere uma classe que represente números complexos. Se formos representar seus valores com propriedades de GObject, essa classe teria quatro candidatas a propriedades: a parte real do número, a parte imaginária do número, o módulo do número e o argumento do número. Assim, poderíamos ter a seguinte declaração:
+
+{{{#!python
+import math
+import gobject
+
+class Complex(gobject.GObject):
+    __gproperties__ = {
+        # Parte real
+        'real' : (
+                gobject.TYPE_DOUBLE,
+                'Real part',
+                'The real part of the complex number',
+                -float("infinity"), float("infinity"), 0,
+                gobject.PARAM_READWRITE
+            ),
+        # Parte imaginária
+        'imaginary' : (
+                gobject.TYPE_DOUBLE,
+                'Imaginary part',
+                'The imaginary part of the complex number',
+                -float("infinity"), float("infinity"), 0,
+                gobject.PARAM_READWRITE
+            ),
+        # Módulo do número, igual a sqrt(real**2+imaginary**2)
+        'modulus' : (
+                gobject.TYPE_DOUBLE,
+                'The number modulo',
+                'The modulo of the complex number',
+                -float("infinity"), float("infinity"), 0,
+                gobject.PARAM_READABLE
+            ),
+        # Argumento do número, igual a arctg(real/imaginary)
+        'argument' : (
+                gobject.TYPE_DOUBLE,
+                'The number argument',
+                'The argument of the complex number, in radians',
+                0, math.pi*2, 0, # Valores possívels para ângulos
+                gobject.PARAM_READABLE
+            )
+    }
+}}}
+ 
+Definimos um método '''_''''''_init_''''''_()''':
+
+{{{#!python
+    def __init__(self, real=0, imaginary=0):
+        gobject.GObject.__init__(self, real=real, imaginary=imaginary)
+}}}
+
+E os métodos '''do_set_property()''' e '''do_get_property()''', que usarão os métodos auxiliares '''_get_modulus()''' e '''_get_argument()''':
+
+{{{#!python
+    def do_set_property(self, property_specs, value):
+        if property_specs.name == 'real':
+            self._real = value
+        elif property_specs.name == 'imaginary':
+            self._imaginary = value
+
+    def do_get_property(self, property_specs):
+        if property_specs.name == 'real':
+            return self._real
+        elif property_specs.name == 'imaginary':
+            return self._imaginary
+        elif property_specs.name == 'modulus':
+            return self._get_modulus()
+        elif property_specs.name == 'argument':
+            return self._get_argument()
+}}}
+
+Agora, precisamos dos métodos  '''_get_modulus()''' e '''_get_argument()'''. Abaixo segue a implementação deles. Não são exatamente o melhor exemplo de cálculo numérico que você verá por aí, mas servirão para nosso exemplo:
+
+{{{#!python
+    def _get_modulus(self):
+        return math.sqrt(self._real**2+self._imaginary**2)
+
+    def _get_argument(self):
+        if self._real != 0:
+            arc = math.atan(self._imaginary/self._real)
+            if self._real > 0 and self._imaginary > 0:
+                return arc
+            elif self._real < 0 and self._imaginary > 0:
+                return math.pi - arc
+            elif self._real < 0 and self._imaginary < 0:
+                return math.pi + arc
+            elif self._real > 0 and self._imaginary < 0:
+                return 2*math.pi - arc
+            else:
+                if self._real > 0:
+                    return 0
+                else:
+                    return math.pi
+        else:
+            if self._imaginary > 0:
+                return math.pi/2
+            elif self._imaginary < 0:
+                return 3*math.pi/2
+            else:
+                return 0
+}}}
+
+Uma vez definida tal classe, vamos salvá-la no arquivo '''complex.py''', para facilitar nosso estudo. 
+
+== Restrições ==
+
+Certamente, um dos pontos interessantes das propriedades de PyGObject são as restrições que elas permitem impor a valores.
+
+=== Restrição de tipo ===
+
+Um aspecto que pode interessar a alguns programadores são as restrições de tipo e intervalo que se podem fazer a propriedades. Nossa classe '''Complex''', por exemplo, só aceita que sejam atribuídos a suas propriedades '''real''' e '''imaginary''' valores de ponto flutuante.
+
+Agora que a classe está criada e salva, vamos trabalhar com ela no terminal interativo. Abra um ''prompt'' do interpretador Python e importe a classe:
+
+{{{#!python
+    >>> from complex import Complex
+}}}
+
+Agora, vamos criar um novo objeto '''Complex''' e dar uma olhada nas suas propriedades de PyGObject:
+
+{{{#!python
+    >>> from complex import Complex
+    >>> c = Complex()
+    >>> c.props.real
+    0.0
+    >>> c.props.imaginary
+    0.0
+    >>> c.props.modulus
+    0.0
+    >>> c.props.argument
+    0.0
+}}}
+
+Como se vê, é um objeto bem ''sem graça''. Vamos mudar o valor das propriedades '''real''' e '''imaginary''':
+
+{{{#!python
+    >>> c.props.real = 3.0
+    >>> c.props.imaginary = 4.0
+    >>> c.props.real
+    3.0
+    >>> c.props.imaginary
+    4.0
+}}}
+    
+Nenhum erro ocorreu. Agora, e se tentássemos atribuir, digamos, uma ''string'' às propriedades?
+
+{{{#!python
+    >>> c.props.real = '3.0'
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in ?
+    TypeError: could not convert argument to correct param type
+}}}
+
+As propriedades não aceitam valores de tipos incompatíveis! No exemplo acima, uma exceção é lançada quando tentamos atribuir uma ''string'' a uma propriedade que espera um número de ponto flutuante. Em outras palavras, as propriedades de PyGObject são estaticamente tipadas. Pode não ser algo muito ''pythônico'', mas há bastante gente que gosta desse tipo de coisa...
+
+A tipagem estática das propriedades é bastante flexível, porém. Quando a conversão de um tipo para outro não oferece riscos de exceções, ela geralmente é feita automaticamente. Por exemplo, retornando rapidamente à nossa classe '''Person''', podemos atribuir os mais diversos valores ao nome de um objeto '''Person''' sem problemas:
+
+{{{#!python
+    >>> from person import Person
+    >>> from datetime import datetime
+    >>> birthday = datetime(year=1983, month=11, day=30)
+    >>> p = Person('Bárbara', birthday)
+    >>> p.props.name
+    'B\xc3\xa1rbara'
+    >>> p.props.name = 2
+    >>> p.props.name
+    '2'
+    >>> p.props.name = Person
+    >>> p.props.name
+    "<class 'person.Person'>"
+}}}
+    
+A razão para isso ser permitido é simples: qualquer objeto em Python pode ser convertido para ''string''. Do mesmo modo, se atribuíssemos a uma propriedade do tipo '''gobject.PARAM_INT''' um número de ponto flutuante, o número seria convertido para um inteiro.
+
+Também é possível evitar a tipagem estática das propriedades utilizando o tipo '''gobject.TYPE_PYOBJECT''', que aceita valores de qualquer tipo de Python. Cremos que, se você vai utilizar propriedades de GObject, é mais interessante declarar um tipo bem definido. Entretanto, essa tipagem dinâmica às vezes é útil, ou mesmo necessária. Por exemplo, na classe '''Person''' precisávamos guardar uma data, mas não existe tal tipo definido em GObject. Por vezes, é necessáriodeclarar propriedades que conteriam inteiros muito grandes como '''gobject.TYPE_PYOBJECT''', pois os valores superavam as faixas de '''gobject.TYPE_*INT*'''.
+
+=== Restrição de leitura e escrita ===
+
+Podemos especificar se uma propriedade pode ser lida, escrita, ou ambas. Já criamos tanto propriedades que podiam ser lidas e escritas (como as propriedades ''''name'''' e ''''birthday'''' de '''person.Person''' e ''''real'''' e ''''imaginary'''' de '''complex.Complex''') quanto propriedades que podem apenas ser lidas (como ''''age'''' em '''person.Person''' e ''''modulus'''' e ''''argument'''' em '''complex.Complex'''). Evidentemente, tentar alterar o valor de uma propriedade somente-leitura resulta em um lançamento de exceção:
+
+{{{#!python
+    >>> dt = datetime(year=1982, month=8, day=29)
+    >>> p = Person(name='Kely', birthday=dt)
+    >>> p.props.age
+    25
+    >>> p.props.age = 26
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in ?
+    TypeError: property 'age' is not writable
+}}}
+    
+Geralmente, as propriedades somente-leitura são funções do estado do objeto, isto é, podem ser deduzidas dos valores que o objeto já possui. Propriedades somente-escrita são mais raras, mas podem ser úteis para definir configurações. Propriedades leitura-e-escrita são bastante intuitivas e usadas.

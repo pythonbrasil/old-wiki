@@ -1,0 +1,49 @@
+Quem já oferece cursos de Python no mercado está convidado a ajudar na organização da [[http://www.pythonbrasil.org.br/2011/|PythonBrasil 7]] ministrando mini-cursos antes do início da conferência.
+
+== Premissas ==
+
+ * toda a receita será revertida para ajudar a custear o evento PythonBrasil
+ * os cursos acontecerão nos dias 27 e 28 de outubro, em horário diurno
+ * todos os cursos terão duração de 4h
+ * poderão haver cursos sequenciais, ex. Django Introduório (4h) e Django Dicas e Truques (4h)
+
+=== Questões em aberto ===
+
+ * custo dos cursos para inscritos na PythonBrasil
+ * custo dos cursos para não inscritos na PythonBrasil
+ * o local e o número de salas disponível ainda está sendo negociado
+ * o preço dos cursos não está definido
+
+== Instrutores ==
+
+Se você é voluntário para ser instrutor em um curso, coloque seu nome, iniciais, e temas que tem interesse em ministrar e aqui:
+
+ * Adriano Petrich (AdP): Django
+ * Alvaro Justen (AJ): Introdução a Arduino, Introdução a Python, Python para sysadmins
+ * Anderson Peixoto (AnP): Fuzzing - Encontrando Bugs em Software
+ * Bruno Gola (BG): posso ajudar em python, tdd, django, sysadmins, scrapping, etc. Disponbilidade: não muita.
+ * Bruno Rocha (BR): web2py
+ * Capi Etheriel (CE): web scraping (extrair dados de sites na Web)
+ * Luciano Ramalho (LR): Python avançado
+ * Marcel Caraciolo (MC): Computação Científica com Python (Scipy,Numpy e Matplotlib). Disponibilidade: Noturno.
+ * Osvaldo Santana (OS): Python Básico, Django Básico, TDD com Python. Disponibilidade: dia todo
+
+== Ementa de cursos ==
+
+ * Marcel Caraciolo (MC): [[http://dl.dropbox.com/u/1977573/ementa_mc.txt| Computação Científica com Python ]]
+ * Osvaldo Santana (OS): [[http://triveos.ludeos.com.br/product/python-curso-completo/|Python Básico]], [[http://triveos.ludeos.com.br/product/django-basico/|Django Básico]] e [[http://www.slideshare.net/osantana/tdd-com-python|TDD com Python]]
+ * Bruno Rocha (BR): [[http://www.cursodepython.com.br/grade#web2py-basico | web2py básico e intermediário (4hs cada módulo)]]
+
+== Grade de cursos ==
+
+=== 27/set ===
+
+||'''horário'''||'''sala'''||'''mini-curso (4h)'''||'''instrutor'''||Requisitos||
+||*||'''1'''||Python Básico||Osvaldo Santana||Programação Básica (em qualquer linguagem)||
+||*||'''1'''||Django Básico||Osvaldo Santana||Conhecimentos em Python||
+||*||'''1'''||TDD com Python||Osvaldo Santana||Conhecimentos em Python||
+
+||*||'''1'''||web2py básico - Conhecendo o framework||Bruno Rocha||Conhecimentos em Python||
+||*||'''1'''||web2py intermediário - Dicas produtivas||Bruno Rocha||Conhecimentos em web2py||
+
+||*||'''2'''||Plone para surfistas||Fulano de Tal||

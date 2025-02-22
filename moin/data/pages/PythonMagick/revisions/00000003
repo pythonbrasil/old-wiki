@@ -1,0 +1,38 @@
+= PythonMagick =
+(por JS)
+
+PythonMagick é a  biblioteca para Python do ImageMagick - o famoso pacote livre que inclui executáveis como o "convert" e o "mogrify", que são formas rápidas e práticas de transformar vários arquivos de imagem em lote.
+
+Eu mesmo já fiz alguns scripts em python que invocam diretamente esses executáveis - nunca tinha me interessado em instalar os wrappers para python da biblioteca em si.
+
+Bom, hoje resolvi fazer isso, e o que encontrei foi uma documentação nula de como instalar o PythonMagick. Na verdade, dá pra dizer que PythonMagick não é o nome da biblioteca, é o que voce tem que fazer para instalar. :-)
+
+Então vamos lá. Você precisa de:
+ * tarball do Python Magick. Pegue em http://www.imagemagick.org/download/python/
+ * Construtor de pacotes "scons". A minha distro tinha um pacote disso, senão, você busca em: http://scons.sourceforge.net/
+ * Boost - uma biblioteca que simplifica os wrappings de coisas em C++ em python. Minha distro tinha os pacotes boost, boost-devel. Senão, busque em http://www.boost.org
+ * Bibliotecas de desenvolvimento do ImageMagick em si. Ou você instala o ImageMagick dos fontes, ou tem que instalar os pacotes com os headerfiles correspondentes. Aqui são ImageMagick-devel e ImageMagick-c++-devel   
+
+-----
+Isso feito, ao descompactar o tarball do PythonMagic você não vê setup.py, não vê MakeFile, nao vê README, não vê nada. Por isso estou escrevendo isso aqui.
+
+A única coisa que tem lá é um arquivo SConstruct. Bom, esse "SConstruct" funciona como um Makefile, mas do tal utilitário "scons" (vide acima). Ë só editar esse SConstruct para apontar para os diretórios corretos no seu sistema, e chamar o programa "scons". No meu caso, tive que mudar as referências do boost de "/usr/local/include/boost-versao" para "/usr/include/boost", e, não sei por que cargas da água ele faz referência a uma biblioteca "libboost_python_gcc" - só que ela se chama apenas"liboost_python" (com extensão .so, e fica no diretório /usr/lib (ou /usr/local/lib, dependendo de como você instalar o boost).
+
+Com essas coisas no lugar, o PythonMagick foi construído com sucesso, bastando executar "scons" no diretório onde ele foi descompactado.
+
+Surpresa: também não há nenhuma opção de instalação. :-) . Mas isso é mais fácil. Dentro do diretório PythonMagick, há um outro diretório PythonMagick. Este segundo contm os arquivos __init__.py e _PythonMagick.py - basta copiar esse diretório todo para o site-packages do Python. (em geral, em usr/lib/python-2.4/site-packages).
+
+Agora é so executar o Python e importar 
+'''import PythonMagick'''
+
+Ainda não pesquisei a API, mas é bem direta -
+i = PythonMagick.Image ("arquivo.png"), abre o arquivo do disco e o carrega como um objeto python.
+
+O objeto i tem centenas de métodos para dar informações ou executar operações na imagem - rediemnsioanmento, filtros, etc... e por fim, o método "write":
+
+i.write ("outroarquivo.png")  salva o arquivo no disco.
+
+-----
+É isso aí, agora é só você usar, descobrir mais detalhes e escrever aqui!
+----
+CategoryCategory

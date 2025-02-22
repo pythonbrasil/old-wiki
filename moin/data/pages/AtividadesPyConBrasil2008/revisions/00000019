@@ -1,0 +1,187 @@
+## page was renamed from Mais
+Durante o PyConBrasil 2008 serão oferecidos as seguintes atividades paralelas:
+
+Mini-cursos
+ * Criando Plug-ins em python para o GIMP
+ * Introdução ao Python
+Tutoriais
+ * Plone 3: uma solução de ECM ?
+ * Coding Dojo Python
+
+Caso você tenha interesse em participar de algum dos mini-curso ou tutorial, edite esta página e coloque o seu nome em um dos espaços marcados como '''(livre)''' abaixo. São 25 vagas disponíveis para cada mini-curso e 40 vagas para os tutoriais, onde o critério de seleção é a ordem de inscrição.
+
+No início dos treinamentos a lista de inscrição será conferida e caso tenhamos ausências, as vagas serão redistribuídas aos presentes no local.
+
+Cada tutorial ou mini-curso custará 10 reais, que poderá ser pago no site do PyConBrasil até o dia do evento, conforme instruções a serem divulgadas.
+
+== Mini-curso de Introdução ao Python ==
+'''Sábado, dia 20/09, das 09:00 às 12:00''', por LucianoRamalho
+
+Aprenda Python de forma rápida. A idéia é passar pelo tutorial do Python, e quem sabe algumas partes do Diving Into Python dependendo do tempo alocado.
+
+Só pra lembrar o tutorial do Python é voltado pra quem já programa em alguma linguagem ou tem pelo menos os conceitos de programação estruturada e lógica, mas tirando isso não precisa ter conhecimento nenhum da linguagem. A parte a ser adicionada no treinamento são mais exercícios para fixação dos conteúdos. 
+
+|| '''Num''' || '''25 Vagas para participantes do PyConBrasil''' ||
+|| 1 || MauroCavalcanti ||
+|| 2 || Maurício Neves ||
+|| 3 || (livre) ||
+|| 4 || (livre) ||
+|| 5 || (livre) ||
+|| 6 || (livre) ||
+|| 7 || (livre) ||
+|| 8 || (livre) ||
+|| 9 || (livre) ||
+|| 10 || (livre) ||
+|| 11 || (livre) ||
+|| 12 || (livre) ||
+|| 13 || (livre) ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+
+----
+
+== Mini-Curso de Criando Plug-ins em Python para o GIMP ==
+'''Sexta, dia 19/09, das 9:00 às 12:00''', por João Sebastião de Oliveira Bueno
+
+A possibilidade de criar plug-ins em Python para o GIMP existe há vários anos. Esse treinamento visa capacitar os alunos a entenderem como os scripts são organizados, do que são capazes e qual a API do GIMP disponível para plug-ins em Python.
+
+Ao final do mesmo, os alunos devem ser capazes de criarem seus próprios plug-ins para automatizar tarefas de edição de imagens, processar imagens em lote, ou criar padrões e efeitos programáticamente usando o GIMP. Além das aplicações práticas, é uma boa oportunidade para ver como Python pode ser usado em aplicações reais com o uso de poucas linhas de código.
+
+|| '''Num''' || '''25 Vagas para participantes do PyConBrasil''' ||
+|| 1 || (livre) ||
+|| 2 || (livre) ||
+|| 3 || (livre) ||
+|| 4 || (livre) ||
+|| 5 || (livre) ||
+|| 6 || (livre) ||
+|| 7 || (livre) ||
+|| 8 || (livre) ||
+|| 9 || (livre) ||
+|| 10 || (livre) ||
+|| 11 || (livre) ||
+|| 12 || (livre) ||
+|| 13 || (livre) ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+
+----
+
+== Tutorial de Plone 3: uma solução de ECM ? ==
+'''Sexta, dia 19/09, das 9:00 às 12:00''', por Marcello Bax
+
+O tutorial tem como objetivo mostrar como é possível implementar com o Plone um portal corporativo utilizando-se de software livre, de forma integrada com o ambiente Windows, proprietário. Por tratar-se do ambiente presente na grande maioria das empresas e organizações da atualidade, um portal que atenda a especificidades do gerenciamento de informação neste contexto, de forma integrada, é fortemente representativo. Com efeito, a integração dos conteúdos no portal com o ambiente Windows, no cliente e não no servidor, não é trivial.
+
+Mostra-se que implantando o portal nesse contexto a empresa avança consideravelmente com relação à gestão da informação. Para tal iremos focar nos principais aspectos positivos que decorrem da implantação de um portal de intranet / extranet nesse contexto, i.e. integração com Windows e com o Office ou outras aplicações de escritório; controle de edição compartilhada (com check-in e check-out); acesso universal ao acervo pela internet; uso de metadados e automação de processos via workflow.
+
+|| '''Num''' || '''40 Vagas para participantes do PyConBrasil''' ||
+|| 1 || (livre) ||
+|| 2 || (livre) ||
+|| 3 || (livre) ||
+|| 4 || (livre) ||
+|| 5 || (livre) ||
+|| 6 || (livre) ||
+|| 7 || (livre) ||
+|| 8 || (livre) ||
+|| 9 || (livre) ||
+|| 10 || (livre) ||
+|| 11 || (livre) ||
+|| 12 || (livre) ||
+|| 13 || (livre) ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+|| 26 || (livre) ||
+|| 27 || (livre) ||
+|| 28 || (livre) ||
+|| 29 || (livre) ||
+|| 30 || (livre) ||
+|| 31 || (livre) ||
+|| 32 || (livre) ||
+|| 33 || (livre) ||
+|| 34 || (livre) ||
+|| 35 || (livre) ||
+|| 36 || (livre) ||
+|| 37 || (livre) ||
+|| 38 || (livre) ||
+|| 39 || (livre) ||
+|| 40 || (livre) ||
+
+----
+
+== Tutorial de Coding Dojo Python ==
+'''Sábado, dia 20/09, das 14:00 às 17:00''', por Hugo Corbucci
+
+Um coding dojo http://www.codingdojo.org é uma sessão aberta onde o público participa em pares, ao vivo, codificando um software de escopo reduzido. Os pares trabalham por alguns minutos conectados a um projetor e discutem projeto e implementação à medida que avançam.  Ao fim do tempo trocam-se os pares e o desafio continua! 
+
+Nesta sessão faremos um coding dojo épico cobrindo 2 problemas: um em Python puro, e um usando infraestrutura gráfica. Tanto ninjas em Python quanto iniciantes se divertirão, e são igualmente bem-vindos.
+
+|| '''Num''' || '''40 Vagas para participantes do PyConBrasil''' ||
+|| 1 || BrunoGola ||
+|| 2 || FelipeFerreriTonello ||
+|| 3 || (livre) ||
+|| 4 || (livre) ||
+|| 5 || (livre) ||
+|| 6 || (livre) ||
+|| 7 || (livre) ||
+|| 8 || (livre) ||
+|| 9 || (livre) ||
+|| 10 || (livre) ||
+|| 11 || (livre) ||
+|| 12 || (livre) ||
+|| 13 || (livre) ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+|| 26 || (livre) ||
+|| 27 || (livre) ||
+|| 28 || (livre) ||
+|| 29 || (livre) ||
+|| 30 || (livre) ||
+|| 31 || (livre) ||
+|| 32 || (livre) ||
+|| 33 || (livre) ||
+|| 34 || (livre) ||
+|| 35 || (livre) ||
+|| 36 || (livre) ||
+|| 37 || (livre) ||
+|| 38 || (livre) ||
+|| 39 || (livre) ||
+|| 40 || (livre) ||

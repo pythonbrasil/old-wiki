@@ -1,0 +1,113 @@
+[[TableOfContents(2)]]
+
+== SaoPy: a conferência para divulgar Python em São Paulo ==
+
+O Grupo de Usuários de Python de SP (GruPy-SP) realiza encontros regulares desde 2007, mas este é diferente por dois motivos:
+
+  * é voltado para pessoas que ainda não programam em Python profissionalmente
+
+  * está sendo organizado com o apoio da Faculdade Impacta
+
+== Data e Local ==
+
+As palestras serão no dia 09/Ago/2008 na Faculdade Impacta da Av. Paulista 1009, no 9º andar (metrô Trianon Masp)
+
+== Programação ==
+
+||09:00||||CRENDENCIAMENTO||
+||09:30||Show Pyrotécnico||Rodrigo Senra||
+||10:15||Orientação a Objetos em Python||Luciano Ramalho||
+||11:00||||INTERVALO||
+||11:10||Django & Google App Engine||Andrews Medina||
+||11:55||Aplicações Desktop||George Kussumoto||
+||12:40||||ALMOÇO||
+||14:00||Programação de Games||Bruno Gola||
+||14:45||Aplicações Científicas||José Alexandre Nalon||
+||15:30||Administração de sistemas com Python e Mechanize||Juliano Martinez||
+||16:15||||INTERVALO||
+||16:25||O que o Python faz quando você não está olhando||Pedro Werneck||
+||17:10||Palestras-relâmpago||Comunidade Python||
+||17:55||||ENCERRAMENTO||
+
+== Palestras e palestrantes ==
+
+=== Show Pyrotécnico ===
+
+Um espetáculo de luz, som e spam, spam, spam.
+
+==== palestrante: Rodrigo Senra ====
+
+ * Engeheiro de Computação e Mestre pelo IC - Unicamp e doutorando na  
+   mesma instituição.
+ * Projetista e desenvolvedor sênior na GPr Sistemas desde 1996.
+ * Projetista e desenvolvedor na HI Tecnologia desde 2008.
+ * Participante ativo da comunidade de SL e entusiasta de Python.
+
+----
+
+=== Orientação a Objetos em Python ===
+
+Python não força o programador a pensar em objetos, mas eles fazem parte da linguagem desde o início, incluindo conceitos avançados como sobrecarga de operadores, herança múltipla e introspecção. Com sua sintaxe simples, é muito natural aprender orientação a objetos em Python através de exemplos, pois existem classes prontas e fáceis de usar para acessar bancos de dados, montar aplicações gráficas, processar XML e realizar inúmeras outras tarefas.
+
+==== palestrante: Luciano Ramalho ====
+
+Desenvolvedor Python desde 1998 e atual presidente da Associação Python Brasil, foi diretor técnico do Brasil Online (Abril S/A), um dos portais pioneiros na Web em nosso país.  Foi fundador da Hiperlógica, instrutor na Simples Consultoria e é sócio da Occam, todas elas empresas especializadas no desenvolvimento de sistemas usando tecnologia Python.
+
+----
+=== Django & Google App Engine ===
+
+Django é um framework feito em Python para desenvolvimento para Web. E o Google App Engine (GAE) é uma maneira simples de hospedar suas aplicações web na infra-estrutura do Google. Esta palestra mostrará como o Django e o GAE funcionam com muito código explícito.
+
+
+==== palestrante: Andrews Medina ====
+
+É professor universitário, programador, estusiasta da linguagem Python e do framework Django e é ativo na comunidade dessas ferramentas no Brasil.
+
+----
+=== Aplicações Desktop ===
+
+Spam, spam, spam
+
+==== palestrante: George Kussumoto ====
+
+Ni!
+
+----
+=== Programação de Games ===
+
+==== palestrante: Bruno Gola ====
+
+----
+=== Aplicações Científicas ===
+
+==== palestrante: José Alexandre Nalon ====
+
+----
+=== Administração de sistemas com Python e Mechanize ===
+
+==== palestrante: Juliano Martinez ====
+
+----
+=== O que o Python faz quando você não está olhando ===
+
+==== palestrante: Pedro Werneck ====
+
+
+----
+=== Palestras-relâmpago ===
+Uma das melhores tradições da comunidade Python em todo o mundo: palestras sobre qualquer tema, com ou sem slides, em prosa ou poesia, com duração limitadas rigorosamente a 5 minutos cada uma. O moderador da sessão tem a permissão de interromper rudemente o palestrante que exceder o seu tempo, e a platéia costuma ser implacável também. Grandes inovações técnicas e algumas das melhores piadas de qualquer evento de Python aparecem nas palestras-relâmpago. Uma sessão imperdível!
+
+==== palestrante: você! ====
+As palestras-relâmpago são abertas a quem se inscrever para falar no próprio dia do evento. Como temos 45 minutos, teremos espaço para 8 palestras de 5 minutos (já reservando algum tempo para a troca de palestrantes).
+
+----
+
+== Créditos e agradecimentos ==
+
+=== Apoio e divulgação: Impacta ===
+
+Coordenação do local: Roberto Rodrigues Junior (Impacta)
+
+=== Coordenação técnica: GruPy-SP e Associação Python Brasil ===
+
+Coordenação do programa: Bruno Gola, Leandro Lameiro, Luciano Ramalho, Pedro Werneck

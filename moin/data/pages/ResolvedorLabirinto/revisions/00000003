@@ -1,0 +1,315 @@
+## page was renamed from Labirinto
+Este código utiliza recursão para resolver um labirinto.
+
+O mapa deve ser dado em formato texto, vide exemplo no fim do código.
+
+A versão mais atual encontra-se em: http://gsbarbieri.sytes.net/labirinto.py
+
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# -*- mode: python -*-
+
+
+# Configuração de caracteres do mapa
+parede     = '#'
+corredor   = '.'
+percorrido = '='
+errado     = 'x'
+solucao    = '@'
+entrada    = 'E'
+saida      = 'S'
+
+
+class Labirinto( object ):
+    def __init__( self ):
+        self.mapa    = None
+        self.entrada = None
+        self.saida   = None
+    # __init__()
+
+
+    def le_mapa( self, texto ):
+        """Lê um mapa, este deve ter uma entrada e uma saída."""
+        self.mapa = texto.split( '\n' )
+
+        for i, l in enumerate( self.mapa ):
+            # encontra entrada:
+            p = l.find( entrada )
+            if p >= 0:
+                self.entrada = ( i, p )
+            # encontra saida:
+            p = l.find( saida )
+            if p >= 0:
+                self.saida = ( i, p )
+
+            # converte string para lista
+            self.mapa[ i ] = list( l )
+
+        if not self.entrada:
+            raise ValueError( "O mapa não possui uma entrada!" )
+        if not self.saida:
+            raise ValueError( "O mapa não possui uma saída!" )
+    # le_mapa()
+
+
+    def le_mapa_arquivo( self, arquivo ):
+        """Lê um mapa de um arquivo"""
+        f = open( arquivo )
+        self.le_mapa( f.read() )
+        f.close()
+    # le_mapa_arquivo()
+
+
+
+    def __str__( self ):
+        m = []
+        for l in self.mapa:
+            m.append( ''.join( l ) )
+        return '\n'.join( m )
+    # __str__()
+
+
+    def resolve( self ):
+        """Resolve o labirinto, tenta encontrar a saída.
+
+        Se a saída foi encontrada, retorna True, caso contrário False.
+        """
+        def posicao_valida( linha, coluna ):
+            "Função utilizada para conferir se a posição está dentro do mapa"
+            if linha > len( self.mapa ) or \
+                   coluna > len( self.mapa[ linha ] ):
+                "Posição inválida, sai fora do mapa"
+                return False
+            else:
+                return True
+        # posicao_valida()
+
+
+        def encontra_saida( linha, coluna ):
+            """Função recursiva para encontrar a saída."""
+
+            if self.mapa[ linha ][ coluna ] == saida:
+                "Caso base da recursão, estamos em cima da saída"
+                return True
+            else:
+                """Marque como percorrido e entre em recursão
+
+                No caso iremos pela direita, depois para cima, para esquerda e
+                então para baixo.
+
+                Lembrando que isto é uma recursão e que marcamos nosso caminho,
+                temos magicamente a lembrança dos caminhos já testados.
+                """
+                self.mapa[ linha ][ coluna ] = percorrido
+                achou = False
+
+                if not achou and \
+                       posicao_valida( linha, coluna + 1 ) and \
+                       self.mapa[ linha ][ coluna + 1 ] in ( corredor, saida ):
+                    """Ainda não encontrou e
+                    a posição à direita é corredor ou é a saída.
+                    Prossiga pela direita."""
+                    achou = encontra_saida( linha, coluna + 1 )
+
+                if not achou and \
+                       posicao_valida( linha - 1, coluna ) and \
+                       self.mapa[ linha - 1 ][ coluna ] in ( corredor, saida ):
+                    """Ainda não encontrou e
+                    a posição acima é corredor ou é a saída.
+                    Prossiga para cima."""
+                    achou = encontra_saida( linha - 1, coluna )
+
+                if not achou and \
+                       posicao_valida( linha, coluna - 1 ) and \
+                       self.mapa[ linha ][ coluna - 1 ] in ( corredor, saida ):
+                    """Ainda não encontrou e
+                    a posição à esquerda é corredor ou é a saída.
+                    Prossiga para esquerda."""
+                    achou = encontra_saida( linha, coluna - 1 )
+
+                if not achou and \
+                       posicao_valida( linha + 1, coluna ) and \
+                       self.mapa[ linha + 1 ][ coluna ] in ( corredor, saida ):
+                    """Ainda não encontrou e
+                    a posição abaixo é corredor ou é a saída.
+                    Prossiga para baixo."""
+                    achou = encontra_saida( linha + 1, coluna )
+
+                # Caso o caminho adotado foi correto, marque como solução
+                # senão marque como errado
+                if achou:
+                    self.mapa[ linha ][ coluna ] = solucao
+                else:
+                    self.mapa[ linha ][ coluna ] = errado
+                    
+                return achou
+        # encontra_saida()
+        
+        return encontra_saida( self.entrada[ 0 ], self.entrada[ 1 ] )
+    # resolve()
+# Labirinto
+
+
+# Exemplo de uso:
+l = Labirinto()
+l.le_mapa(
+    """
+############## ####################
+#E.#.S#..#...###.....#.#..........#
+#..#.............###.#............#
+##...##...######## #...#..........# 
+##############     ################
+""" )
+print l
+print "achou?",l.resolve()
+print l
+}}}
+
+=== Resolvendo com A* ===
+
+Contribuição de João Paulo Farias:
+
+{{{
+#!python
+#!/usr/bin/python
+# -*- coding: iso-8859-1 -*-
+
+""" Implementação do algoritmo AStar utilizando uma Priority Queue.
+
+Foi escrito para a solução de labirintos, encontrando o menor caminho
+para sair de E e chegar a S. O labirinto é composto por:
+   # significando que não pode andar nesta posição
+   . significando que pode andar nesta posição
+   E ponto de início (Entrada)
+   S ponto de destino (Saída)
+
+"""
+
+import Queue, bisect
+
+class PriorityQueue(Queue.Queue):
+  def _put(self, item):
+    bisect.insort(self.queue, item)
+    
+
+def AStar(mapa):
+  """ Algoritmo AStar.
+
+  mapa deve ser um vetor de strings ou uma matriz de caracteres de
+  tamanho NxM.
+  """
+  # listas do algoritmo AStar
+  aberta = PriorityQueue(0)
+  fechada = [] # PriorityQueue(0)
+  
+  n = len(mapa)    #linhas
+  m = len(mapa[0]) #colunas
+ 
+  # procurar pela entrada e saída
+  entrada = None
+  saida = None
+  for i, linha in enumerate(mapa):
+    for j, char in enumerate(linha):
+      if char == 'E':
+        entrada = [i, j]
+      elif char == 'S':
+        saida = [i, j]
+
+  # ajuda a calcular a distância
+  def dist(orig, dest):
+    return abs(orig[0] - dest[0]) + abs(orig[1] - dest[1])
+
+  # retorna os vizinhos de um nó no mapa, caso possa caminhar por eles
+  def vizinhos(no):
+    pos = no.pos
+    res = []
+    if pos[0] > 0 and mapa[pos[0]-1][pos[1]] in ('.','S'): # tenta ir para cima
+      novo = No([pos[0]-1, pos[1]], no, no.g+1, dist([pos[0]-1,pos[1]], saida))
+      res.append(novo)
+    if pos[0] < n-1 and mapa[pos[0]+1][pos[1]] in ('.','S'): # tenta ir para baixo
+      novo = No([pos[0]+1, pos[1]], no, no.g+1, dist([pos[0]+1,pos[1]], saida))
+      res.append(novo)
+    if pos[1] > 0 and mapa[pos[0]][pos[1]-1] in ('.','S'): # tenta ir para esquerda
+      novo = No([pos[0], pos[1]-1], no, no.g+1, dist([pos[0],pos[1]-1], saida))
+      res.append(novo)
+    if pos[1] < m-1 and mapa[pos[0]][pos[1]+1] in ('.','S'): # tenta ir para direita
+      novo = No([pos[0], pos[1]+1], no, no.g+1, dist([pos[0],pos[1]+1], saida))
+      res.append(novo)
+    return res 
+ 
+  # representação de cada nó do AStar
+  class No(object):
+    def __init__(self, pos=None, pai=None, g=0, h=0):
+      self.pos = pos
+      self.pai = pai
+      self.g = g
+      self.h = h
+
+    def __eq__(self, other):
+      return self.pos == other.pos
+
+    def __ne__(self, other):
+      return self.pos != other.pos
+
+    def __le__(self, other):
+      return self.g+self.h <= other.g+other.h
+
+    def __ge__(self, other):
+      return self.g+self.h >= other.g+other.h
+
+    def __str__(self):
+      return 'pos = %s, g = %d, h = %d' % (self.pos, self.g, self.h)
+    
+  at = No()
+  at.h = dist(entrada, saida)
+  at.pos = entrada[:]
+  at.pai = None
+  aberta.put(at, False)
+  mapa1 = [list(l) for l in mapa]
+  achou = False
+  while not aberta.empty():
+    at = aberta.get(False)
+    fechada.append(at)
+    if at.pos == saida: # achou
+      achou = True
+      break
+    viz = vizinhos(at)
+    for no in viz:
+      if not no in fechada:
+        if not no in aberta.queue:
+          aberta.put(no)
+
+  # reconstrução do caminho
+  if achou:
+    caminho = [at.pos]
+    while True:
+      at = at.pai
+      if at is None:
+        break
+      caminho.insert(0, at.pos)
+    print caminho
+  else:
+    print 'Caminho não encontrado'
+
+AStar([
+  '##########',
+  '#E..#...S#',
+  '#..#.#..##',
+  '#.......##',
+  '##########'])
+
+AStar([
+  '############## ####################',
+  '#E.#.S#..#...###.....#.#..........#',
+  '#..#.............###.#............#',
+  '##...##...######## #...#..........#',
+  '##############     ################'])
+  
+}}}
+João Paulo Farias
+
+-------------
+
+
+Por GustavoBarbieri.

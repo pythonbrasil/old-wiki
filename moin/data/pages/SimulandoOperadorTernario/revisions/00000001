@@ -1,0 +1,32 @@
+#pragma section-numbers off
+= Receita: Simulando o Operador Ternário =
+
+Às vezes pode ser desejável fazer testes simples, seguidos de uma atribuição. Existem várias maneiras de se fazer isso, como por exemplo:
+
+{{{
+#!python
+
+if variavel == 5:
+  valor = "cinco"
+else:
+  valor = "nem faço idéia..."
+
+}}}
+
+Uma maneira mais curta seria:
+
+{{{
+#!python
+
+valor = ("nem faço idéia", "cinco")[variavel == 5]
+
+}}}
+
+Como esse tipo de teste vai ser sempre false ou true (0 ou 1), ''valor'' irá assumir o valor do primeiro elemento da tupla se a condição for falsa, e o segundo valor, se a condição for verdadeira. Ou seja: o primeiro elemento dessa tupla deve ser o resultado para a condição ''falsa''.
+
+
+Volta para CookBook.
+
+----
+
+LeandroPereira

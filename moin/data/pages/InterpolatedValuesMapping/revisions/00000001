@@ -1,0 +1,110 @@
+== Mapeamento com valroes interopolados ==
+por JoaoBueno
+
+Uma coisa bem simples de se fazer em Python é criar novos tipos de dados que usem os métodos especiais definidos no data model para prover funcionalidades novas ( e consistentes).
+
+Por exemplo, se queremos fazer uma interpolação de valores a partir de um conjunto finito de pontos, podemos criar uma classe que carregue um conjutno inicial de pontos,
+e escreva o método "__getitem__" (e somente esse método é necessário), de forma que se for solicitado um valor intermediário da tabela carregada originalmente, ele possa usa-la para calcular esse valor em tempo real e retorna-lo ao requisitante de forma completamente transparente.
+
+Para a parte da aplicação que fizer uso desse objeto, será como se ele fosse um "dicionário com todos os vlaores intermediários possíveis".
+
+É claro que se pode sofisticar bastante a coisa - trago um exemplo bem fatorado e expandido apartir de u7ma necessidade exposta na lista python-brasil hoje (18-06-2009) pelo Helberg - a classe faz exatamente o que descrevo para uma tabela de data-hora e temperaturas:
+
+{{{
+# -*- coding: utf-8 -*-
+from datetime import datetime
+import time
+
+class InterpolatedTimeTable(object):
+    def __init__(self, time_temperature_list=[]):
+        """
+            time_temperature_list should be a sequence of strings like:
+
+             ("2009-06-03 15:00:00  18.40",
+              "2009-06-03 18:00:00  21.00",
+              "2009-06-01 18:00:00  24.70")
+             Where the last parameter is a temperature measurement,
+             from which it will be able to return a linearly interpolated 
+             temperature coputed from the given values for anuy datetime
+             object inside the given range
+        """
+        self.table = {}
+        for line in time_temperature_list:
+            self.add_line(line, reindex = False)
+        self.reindex()
+         
+    def add_line(self, line, reindex = True):
+        date_time_str, temp = line.rsplit(None, 1)
+        date_time_obj = self.str_to_datetime(date_time_str.strip())
+        self.table[date_time_obj] = float(temp)
+        if reindex:
+            self.reindex()
+             
+    def reindex(self):
+        self.table_indexes = sorted(self.table.keys())
+             
+
+    def str_to_datetime(self, date_time_str):
+        time_struct = time.strptime(date_time_str, "%Y-%m-%d %H:%M:%S")
+        return datetime(*(time_struct[:6]))
+
+    def __getitem__(self, date_time_obj):
+        if isinstance(date_time_obj, str):
+            date_time_obj = self.str_to_datetime(date_time_obj)
+        if date_time_obj in self.table:
+            return self.table[date_time_obj]
+        prev_dt = self.find_previous_dt(date_time_obj)
+        next_dt = self.find_next_dt(date_time_obj)
+        
+        table_time_delta = float((next_dt - prev_dt).seconds)
+        requested_item_time_delta = (date_time_obj - prev_dt).seconds
+        value = self.table[prev_dt] + (requested_item_time_delta * 
+                    (self.table[next_dt] - self.table[prev_dt]) /
+                 table_time_delta
+                )
+        return value
+    
+    def find_previous_dt(self, target_dt):
+        return self._find_dt(target_dt, True)
+        
+    def find_next_dt(self, target_dt):
+        return self._find_dt(target_dt, False)
+    
+    def _find_dt(self, target_dt, previous):
+        for i, dt in enumerate(self.table_indexes):
+            if dt > target_dt:
+                if previous:
+                    if i >= 1:
+                        return self.table_indexes[i - 1]
+                    else:
+                        raise IndexError("datetime out of range for interpolation %s" %target_dt)
+                else: #finding_next_dt
+                    return dt
+        else:
+            raise IndexError("datetime out of range for interpolation %s" %target_dt)
+        
+if __name__ == "__main__":
+    #teste:
+    sample_data = """\
+| 2009-06-03 15:00:00 | 18.40 |
+| 2009-06-03 18:00:00 | 21.00 |
+| 2009-06-01 18:00:00 | 24.70 |
+| 2009-05-25 01:00:00 | 18.70 \
+"""
+    sample_data = sample_data.replace("|", "").split("\n")
+    table = InterpolatedTimeTable(sample_data)
+    test_pattern = ("2009-06-03 15:00:00",
+                    "2009-06-03 16:00:00",
+                    "2009-06-03 17:00:00",
+                    "2009-06-03 17:30:00",
+                    "2009-06-03 17:55:00",
+                    "2009-06-03 18:00:00",
+                    # "2005-07-13 00:00:00" #value out of range. uncomment for testing
+                    )
+    for dt in test_pattern:
+        print "%s - %.2f" % (dt, table[dt])
+    
+
+}}}
+
+Voltar ao CookBook

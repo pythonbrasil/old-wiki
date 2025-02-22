@@ -1,0 +1,123 @@
+'''Versão:''' 0.1[[BR]]
+'''Autor:''' Cleber de Jesus santos[[BR]]
+'''Email:''' cleber37 (arroba) hotmail (ponto) com[[BR]]
+
+== Sobre o autor ==
+
+Me chamo Cleber de Jesus Santos, muitos até devem ter ouvido falar de mim, atuei nos Telecentros de São Paulo ministrando aulas de Linux (Debian), o básico da coisa né :), no começo achei tudo tão chato que nem queria continuar no projeto dos Telecentros, por que tinha uma senha chamada {{{root}}}, que me impedia de descobrir o que era o Linux, e como eu não tinha computador em casa as coisas ficavam muito difícil. Por incrível que pareça sempre gostei de desafios do tipo mexer e aprender. Acho que foi isso que fez eu me descobrir.
+
+Com o tempo fui descobrindo coisas incríveis sobre o Linux e quando li em uma revista, chamada Seleções, um pouco da história sobre o criador do Linux eu achei super 10 (tenho a revista guardada ainda). A partir daí comecei a me tornar um fã de Linux. Quando descobri o que era software livre, que maravilha, fiquei facinado, tanto quanto ver um terminal aberto com belos comandos. huummm... Conheci pessoas maravilhosas das quais me tornei fã de carteirinha: Sérgio Amadeu com quem tive o enorme prazer de trabalhar e ser amigo; Beatriz Tibiriça (Beá) pessoa super maravilhosa; Marcelo Tossatti; Richard Stallman, dentre muitos outros...
+
+O mais legal foram as pessoas que durante o tempo me deram o maior apoio. Tem muitas coisas que se eu fosse escrever aqui não chegaria onde quero, mas vamos lá.
+
+Conheci um amigo chamado Federico que também não fica para trás no Software Livre, ele me apresentou um doido chamado Luiz Pasquall que me falou do Python (eu falo doido por que ele me fez mudar muito em questão ao que eu pensava sobre Python :) ) e até ai eu estava programando e ministrando aulas de Tcl/Tk. Ele me mostrou Python e eu realmente não havia gostado muito, não sei dizer o porque, mas  aquilo não me chamava a atenção (acho que porque eu estava muito fascinado pelo Tcl/Tk). Fui fazer um curso com um cara, que hoje posso dizer também sou fã, chamado Luciano Ramalho (ele é muito conhecido na comunidade Python). Quando comecei a falar com ele já fiquei pasmo. O cara manja muito e acabou me falando mais sobre Python. Comecei a falar muito de TCL/TK para ele (tipo querendo tirar a Banana do macaco :) ). Durante um das maravilhosas aula dele, ele virou para mim e disse: "Eu passo para Python qualquer programa que você fizer em Tcl/Tk, e ainda comento as linhas para você ver o quanto é fácil programar em Python". Cara, aquilo para mim foi um desafio, sobre o qual eu comentei com o Luiz e com o Federico, e isso fez com que os dois ficassem falando: "E aí Cleber, não vai fazer o programinha em Tcl? Cade? Desistiu do desafio?" :)
+
+E não que foi o primeiro desafio que eu não encarei? Mas por uma boa causa: comecei a ver Python, até por que eles me fizeram gostar da cobra (sem maldade :) ), essa breve introdução sobre mim é apenas para lançar este documento onde espero que todos ajudem a desenvolver.
+
+''Deixei o seu testemunho aqui, mas o pessoal já tinha iniciado uma página +/- com essa mesma idéia que você teve. Ela já está um pouco mais adiantada e seria legal se você contribuisse com ela no lugar de começar algo semelhante. Mas... se quiser levar esta página adiante é só mandar bala (A página que me refiro é a IntroPython) -- OsvaldoSantanaNeto''[[BR]]
+
+''Acho que devemos tentar manter este daqui, derrepente aparecem mais colaboradores e mude o conteúdo... :) Cleber J Santos''
+
+== Sobre o Documento ==
+
+A idéia é que iniciantes em Python escrevam neste documento o que estão aprendendo em Python. Isso é uma forma de iniciantes discutirem ao invés de postar em listas. Sou iniciante e gostaria de aprender tal coisa, eu não vou me dizer um iniciante até por que para quem conheceu Luiz Pasquall e teve aula com Luciano Ramalho e ainda falar que é iniciante tem de ser internado. (me internem com um computador por favor... :) ).
+
+== Onde baixar o Python ==
+
+Existe versões de python para Unix, Windows e Mac, essas versões podem ser baixada no site oficial do [http://www.python.org/ Python]. Para instalar os arquivos e a biblioteca padrão basta ir para http://www.python.org/download/.
+
+== Começando ==
+
+Após ter instalado o python vamos ao que nos interessa de verdade, execute o python no console e vamos brincar...
+
+{{{
+>>> print "Olá, Mundo"
+Olá, mundo
+>>>
+}}}
+
+Que maravilha hein? Agora vamos ver algumas coisas que todos estão cansados de saber, variável e expressões:
+
+{{{
+#!python
+X = 3              # Isso é uma variável com um valor do tipo INT
+Y = 'Exemplo bobo' # Isso é uma variável com um valor do tipo STRING
+}}}
+
+O interpretador já sabe que X é um inteiro e que Y é uma ''String'', mas isso não impede que possamos atribuir novos valores a essa variáveis, como exemplo:
+
+{{{
+#!python
+X = "Tudo mudou"   # Isso é uma variável com um valor do tipo STRING
+Y = 3.2            # Isso é uma variável com um valor do tipo FLOAT
+}}}
+
+Viu! Como o X já diz, tudo mudou, ou seja agora temos o X como String e o Y agora é um ponto Flutuante, claro que isso é muito comum acontecer, e claro também que se abusarmos disso nosso programa acaba ficando confuso, abaixo alguns exemplos e explicações;
+
+{{{
+#!python
+A = 1                      # inteiro
+B = 3.5                    # real ou ponto flutuante
+C = "Algum texto"          # String
+D = [3, 5, 7]              # lista com elementos inteiros
+E = [3, 'slackware', 5.9]  # lista mista
+F = (3, 5, 9, 'Slackware') # isso se chama tupla, é como uma lista,
+                           # mas não pode ser mudada
+G = {
+      'documento' : 'tutorial',
+      'autor' : 'Cleber de Jesus Santos'
+    }                      # Isso é um dicionário
+}}}
+
+Nada complicado, tudo muito simples não é mesmo, até aqui tudo bem, vou colocar mais este aqui em baixo, acho importante:
+
+== Estruturas de controle ==
+
+{{{if...elif...else}}}
+
+Claro que isso muitos devem saber né, então apenas iremos ver algumas coisas simples de como pedem ser aplicados, dai se alguém tiver dúvidas basta selecionar o local, colocar a cor verde e abaxo colocar um * com a dúvida.
+
+{{{
+#!python
+meuNome = 'Cleber' # Variável String
+seuNome = 'João'   
+minhaIdade = 20    # Variável inteiro
+suaIdade   = 33
+
+if seuNome == meuNome:
+    print 'Nós temos nomes iguais'
+elif suaIdade == minhaIdade:
+    print 'Nossas idades são iguais'
+else:
+    print 'Somos diferentes'
+}}}
+
+Ja perceberam que em Python não usamos "{" e "}" para limitar as condições?[[BR]]
+
+Como eu estava dizendo, python se diferencia de php por exemplo que usa '''{''' e '''}''' para limitar as condições usadas, no python se torna tudo mais fácil exemplos abaixo....[[BR]]
+
+'''Exemplo em python'''
+{{{
+#!python
+euUso = 'Linux'
+
+if not euUso== 'Linux':
+    print 'Então você usa outro OS'
+else:
+    print 'Linux é minha vida...!'
+}}}
+
+'''Exemplo usando php...!'''
+
+{{{
+euUso = 'Linux'
+
+if ($euUso != 'Linux'){
+  print 'Então você usa outro OS'
+} // '''Na verdade as chaves não são necessárias aqui [neste caso] :)'''
+else {
+ print 'Linux é minha vida...!'
+}// '''Idem ao meu ultimo comentário'''
+}}}
+
+Notem que o número de linhas aumentam, e que temos que limitar as condições com o uso de chaves, não que eu não goste de php, mas em python se torna tudo mais simples... :) Cleber de Jesus Santos

@@ -1,0 +1,11 @@
+##master-page:HomepageTemplate
+#format wiki
+== Hugo Corbucci ==
+
+Email: <<MailTo(hugo.corbucci AT SPAMFREE gmail DOT com)>>
+
+Sou aluno de mestrado no IME/USP (Instituto de Matemática e Estatística de USP) com tema "Aplicação de métodos ágeis em open source". Iniciei e continuo trabalhando no projeto "Archimedes - The Open CAD" e fiz uma série de podcasts sobre Smalltalk & Squeak.
+Também sou fundador do Dojo São Paulo com o DaniloSato e a MarianaBravo e atualmente organizo a reunião com outros voluntários. Já participei de Coding Dojos na França e na Agile 2008 onde apresentamos nosso artigo. Graças aos Dojos, aprendi várias linguagens como Python, Ruby, Erlang e Haskell. Também tive a oportunidade de desenvolver uma pequena biblioteca de testes unitários para C e a trabalhar com diferentes repositórios de versão.
+  
+----
+CategoryHomepage

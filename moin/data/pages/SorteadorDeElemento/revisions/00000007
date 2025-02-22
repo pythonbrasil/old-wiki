@@ -1,0 +1,174 @@
+= Receita: Sorteador de Elementos =
+
+Na empresa onde trabalho temos o hábito de promover sorteios para a distribuição de brindes que ganhamos em feiras, congressos e coisas do tipo. Recentemente ganhei um convite do Gmail e resolvi sortear entre o pessoal aqui da empresa. Para isso fiz o programinha abaixo... Sintam-se à vontade para melhorar ele :)
+
+== Código ==
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding: ISO-8859-1 -*-
+
+
+from inscritos import inscritos
+
+from Tkinter import *
+from Dialog import Dialog
+import time
+import random
+
+class MainFrame(Frame):
+    def __init__(self, parent=None):
+        Frame.__init__(self, parent)
+        self.master.title("Sorteia")
+        self.text = StringVar()
+        self.nome = StringVar()
+        self.createWidgets()
+        self.pack(padx=10, pady=10)
+
+
+    def createWidgets(self):
+        panel1 = Frame(self)
+        nomeL = Label(panel1, text="Nome:")
+        nomeL.pack(side=LEFT)
+        self.nomeE = Entry(panel1, \
+            textvariable=self.nome, width=50)
+        self.nomeE.pack(side=LEFT)
+        self.nomeE.bind("<Return>", self.addEnter)
+        addB = Button(panel1, text="  +  ", \
+                      command=self.adicionar)
+        addB.pack(side=LEFT)
+        subB = Button(panel1, text="  -  ", \
+                      command=self.remover)
+        subB.pack(side=LEFT)
+        panel1.pack(side=TOP)
+
+        panel2 = Frame(self)
+
+        scrollbar = Scrollbar(panel2, orient=VERTICAL)
+        self.listbox = Listbox(panel2, \
+                       yscrollcommand=scrollbar.set, \
+                       font=("Tahoma", 10, "bold"))
+        self.listbox.pack(side=LEFT, fill=BOTH, expand=1)
+        scrollbar.config(command=self.listbox.yview)
+        scrollbar.pack(side=RIGHT, fill=Y)
+
+        panel2.pack(side=TOP, fill=BOTH, \
+                              expand=Y, pady=10)
+
+        panel3 = Frame(self)
+
+        sorteiaB = Button(panel3, text="Sorteia",\
+                          font=("Tahoma", 10, "bold"), \
+                          command=self.sorteia)
+
+        sorteiaB.pack(side=TOP, fill=BOTH, expand=Y)
+
+        nomeSorteadoT = Label(panel3, \
+                             textvariable=self.text, \
+                             font=("Tahoma", 20, "bold"))
+        nomeSorteadoT.pack(side=TOP, fill=BOTH, \
+                             expand=Y, pady=20)
+
+        self.nomeSorteadoT = nomeSorteadoT
+
+        panel3.pack(side=TOP, fill=BOTH, expand=Y)
+        random.shuffle(inscritos)
+        for nome in inscritos:
+                self.listbox.insert(END, nome)
+
+
+    def sorteia(self):
+        listaSorteia = self._getLista()
+        random.shuffle(listaSorteia)
+        self.nomeSorteadoT['fg'] = 'black'
+        if not listaSorteia:
+            return
+
+        t = 0
+
+        while len(listaSorteia) > 1:
+            nome = random.choice(listaSorteia)
+            self.after(t, self.text.set, nome)
+            t += 1000 / len(listaSorteia)
+            listaSorteia.remove(nome)
+
+        sorteado = listaSorteia.pop()
+        self.after(t, self.fimSorteio, sorteado)
+
+    def fimSorteio(self, sorteado):
+        self.text.set(sorteado)
+        self.nomeSorteadoT['fg'] = 'red'
+        self.bell()
+
+    def _getLista(self):
+        listbox = self.listbox
+
+        lista = [listbox.get(i) for i in range(listbox.size())]
+        return lista
+
+    def adicionar(self):
+        nome = self.nome.get()
+        if not len(nome):
+            Dialog(self, title="Erro!", \
+                         text="Nome inválido", \
+                         bitmap='error', \
+                         default=0, \
+                         strings=('OK',))
+            return
+
+        if nome in self._getLista():
+            Dialog(self, title="Erro!", \
+                         text="Já cadastrado", \
+                         bitmap='error', \
+                         default=0, \
+                         strings=('OK',))
+            return
+
+        self.listbox.insert(END, nome)
+        self.limpaCampos()
+
+    def addEnter(self, ev):
+        self.adicionar()
+
+    def remover(self):
+        self.listbox.delete(ANCHOR)
+
+    def limpaCampos(self):
+        self.nome.set("")
+        self.nomeE.focus()
+
+
+
+def main():
+    frm = MainFrame()
+    frm.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+}}}
+
+Arquivo: *inscritos.py*
+
+{{{
+inscritos = ["Charles Babbage",
+             "Alan Turing",
+             "Ada Lovelace"]
+}}}
+
+''Uma das coisas que tentei fazer e não consegui é um 'efeito visual' que faça com que os nomes fiquem passando antes de parar no nome realmente sorteado. Eu fiz mudar mas a tela não atualizava. Alguém sabe como fazer isso? -- OsvaldoSantanaNeto''
+
+''Bom... passatempo pra manhã de domingo. :) Ele embaralha a lista de nomes, expõe eles na Label por um tempo igual a 1s / comprimento da lista (assim dá um efeito de "desaceleração" quando o sorteio ocorre). A cada vez que faz isso, retira um dos nomes da lista, embaralha e começa tudo de novo. Quando restar só um nome (o sorteado) ele exibe o nome na Label, muda a cor pra vermelho e emite um sinal (só pra ter certeza). -- PedroWerneck''
+
+
+''Página atualizada para representar as modificações feitas para o sorteio da II PyConBrasil. Retiramos o shuffle (que tornava a aplicação muito lenta) e utilizamos o choice para sortear cada um dos nomes da lista. -- EricoAndrei''
+
+''Versão utilizada para os sorteios na PyConBrasil[3]. Foi feito o embaralhamento, com shuffle, da lista de nomes em dois momentos: Na alimentação do listbox e antes de qualquer sorteio. Foi demandado que o sorteador retire da listbox os nomes já sorteados, a fim de evitar que um mesmo nome seja sorteado duas vezes em uma mesma execução do programa. -- EricoAndrei''
+
+
+Volta para CookBook.
+
+----
+
+OsvaldoSantanaNeto

@@ -1,0 +1,135 @@
+O GruPy-SP é o Grupo de Usuários Python do Estado de São Paulo.
+
+O grupo começou em Novembro de 2007 e desde então mantemos a tradição de um encontro por mês, alternando fins de semana com dias de semana. Já fizemos reuniões na capital e em Santos, e existem planos para que ocorram reuniões em outras cidades do estado (como Campinas em maio).
+
+Você pode acompanhar as ações do GruPy-SP na [[http://groups.google.com/group/grupy-sp|lista de discussão]].
+
+Desde fevereiro fazemos relatos dos nossos encontros no blog [[http://python-groups.blogspot.com/|python-groups]] junto com outros grupos de usuários Python.
+
+O GruPy-SP organiza anualmente o SaoPy, um evento criado para divulgar o uso de Python.
+
+
+== Próximos encontros ==
+
+=== Abril de 2009 ===
+
+ * '''Data''': Sábado, dia 25
+ * '''Local''': [[HackLab]] - R Dona Germaine Burchard, 511 - Água Branca - [[http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=R+Dona+Germaine+Burchard,+511+-+S%C3%A3o+Paulo+-+SP&sll=-23.530721,-46.672951&sspn=0.006591,0.013947&ie=UTF8&t=h&z=17&iwloc=A|Mapa]]
+ * '''Horário''': A partir das 09h00
+ * Planejando na [[http://groups.google.com/group/grupy-sp|lista de discussão]].
+ 
+==== Infra ====
+
+Teremos cadeiras, poltronas, mesas e wifi :)
+ 
+==== Atividades ====
+
+ * Python Bug Day ([[http://wiki.python.org/moin/PythonBugDay]])
+ * Bate papo sobre a PyCon 2009.
+
+== Reuniões passadas ==
+
+=== Março de 2009 ===
+
+ * '''Data''': Segunda-feira, dia 30
+ * '''Local''': [[http://www.omalleysbar.net/|O'Malley's]] - Alameda Itú 1529, Jardins (esquina com a R. Consolação).
+ * '''Horário''': A partir das 19:00.
+
+=== Fevereiro de 2009 ===
+
+ * '''Data''': Sexta-feira, 20 de Fevereiro
+ * '''Local''': Bar São Cristóvão. R. Aspicuelta, 533, Vila Madalena. A partir das 19:30.
+ * [[GruPySPFevereiro2009]]
+
+=== Janeiro de 2009 ===
+
+ * '''Data''': 19 a 25
+ * '''Local''': Campus Party
+
+=== Dezembro de 2008 ===
+
+ * '''Data''': dia 12 de Dezembro à partir das 18 horas
+ * '''Local''': Escritório do Yahoo! em São Paulo
+ * '''Mais informações''': [[GruPySPYahoo ]]
+
+=== Novembro de 2008 ===
+
+ '''Comemoração de um ano de encontros do GruPy-SP'''
+
+ * '''Data''': dia 14 de Novembro às 20 horas.
+ * '''Local''': Degas Pizzaria, Rua Teodoro Sampaio, 568
+
+=== Outubro ===
+
+ * '''Data''': dia 10 de Outubro a partir das 19 horas.
+ * '''Local''':  Rua Harmonia, 506 - Vila Madalena
+
+=== Setembro ===
+
+ * PyConBrasil 2008 - Rio de Janeiro
+
+=== Agosto ===
+
+ * '''SP Python Day: a conferência para divulgar Python em São Paulo'''
+ * '''Mais informações: SaoPy
+
+=== Julho ===
+
+ * '''Bate papo sobre projetos colaborativos dos membros do grupo'''
+ * '''Data:''' 19/07/2008
+ * '''Local:''' N'o café - Rua Harmonia, 506
+ * '''Coordenação do Local:''' Luciano Ramalho
+
+=== Junho ===
+ * '''Python Bug Day'''
+ * '''Data:''' 21/06/2008
+ * '''Local:''' Google São Paulo (Av. Brig. Faria Lima, 3900 - 4o andar)
+ * '''Coordenação do Local:''' Rodolpho Eckhardt
+
+=== Maio ===
+ * '''Data:''' 30/05/2008
+ * '''Local:''' Centro de Computação da Unicamp, em Campinas
+ * '''Coordenação:''' TatiAlChueyr e RodrigoSenra
+ * '''Apoio:''' JoaoBueno, GustavoScalet, MiguelFilho
+
+==== Material ====
+
+ * '''Introdução a Python''', GustavoScalet (20 min) [[attachment:Introdução_a_Python_-_GrupySP_(30_05_2008).pdf|Slides]] [[attachment:Introdução_a_Python_-_GrupySP_(30_05_2008).tex|Fonte LaTeX]]
+ * '''Seu projeto para o mundo''': Como empacotar sua aplicação feita em Python nos formatos. RPM e DEB. MiguelFilho (20min) [[attachment:grupysp-pacotes.tar.gz|Splides/Exemplos]] [[http://video.google.com/videoplay?docid=-1956931061322641888&hl=en|Video]]
+ 
+=== Abril ===
+
+Não houve encontro em Abril, nos reunimos "informalmente" no [[http://fisl.softwarelivre.org.br/9.0/www|FISL 9.0]] em Porto Alegre.
+
+=== Dia 24/03/2008 no Google em São Paulo (Av. Brig. Faria Lima, 3900 - 4o Andar) ===
+
+Coordenação do local e do programa: Rodolpho Henrique Orlovsky Eckhardt
+
+[[http://python-groups.blogspot.com/2008/04/v-grupy-sp-meeting-in-so-paulo-march.html|Relato no python-groups]]
+
+=== Dia 22 e 23/02/2008 em Santos ===
+ * Responsável pelo local: Sandro e Ricardo
+ * Responsável pela programação: Sandro e Ricardo
+[[http://python-groups.blogspot.com/2008/04/iv-grupy-sp-meeting-in-santos-feb-22.html|Relato no python-groups]]
+
+[[http://picasaweb.google.com/guinody/GrupySPSantosFevereiroDe2008?authkey=JsQFzDTedYY|Fotos do evento]]
+
+=== Dia 22/01/2008 na Livraria Cultura do Conjunto Nacional (Rua Augusta x Av. Paulista) ===
+ * Responsável pelo local: LucianoRamalho
+ * Responsável pela programação: BrunoGola
+
+==== Vídeos das palestras realizadas ====
+ * [[http://video.google.com/videoplay?docid=-9174018775255486687|Coding DOJO]] - Hugo Corbucci (Pageview = 111, Download = 20 até 20/02/2008)
+ * [[http://video.google.com/videoplay?docid=-4731696367176083343|Mapeamento objeto-relacional com Python]] - Leandro Lameiro (Pageview = 78, Download = 3 até 20/02/2008)
+
+=== Dia 08/12/2007 no Campus Santo Amaro do Centro Universitário SENAC ===
+ * Responsável pelo local: BrunoGola
+ * Responsável pela programação: MauroBeraldi e Alberto Fabiano
+
+==== Vídeos das palestras realizadas ====
+ * [[http://video.google.com/videoplay?docid=5303962278151147403|Uma arquitetura de componentes em Python]] - LucianoRamalho (Pageview = 317, Download = 50 até 20/02/2008)
+ * [[http://video.google.com/videoplay?docid=-9021161105352496888|InVesalius - Por dentro do software de imagens médicas - parte 1]] - TatiAlChueyr (Pageview = 50, Download = 19 até 20/02/2008)
+ * [[http://video.google.com/videoplay?docid=-4069975514578548584|InVesalius - por dentro do software de imagens médicas - parte 2]] - TatiAlChueyr (Pageview = 88, Download = 19 até 20/02/2008)
+
+=== Dia 13/11/2007 na pizzaria Degas (Rua Teodoro Sampaio) ===
+ * Responsável pelo local: LucianoRamalho

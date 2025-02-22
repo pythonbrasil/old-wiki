@@ -1,0 +1,40 @@
+Uma discussão na lista sobre Python X Perl, desembocou na comparação CPAN X Cheeseshop.
+
+A partir disso o LeonardoSantagada e o NiltonVolpato iniciaram praticamente um Brainstorm das funcionalidades desejadas para um novo "instalador e/ou import" para o Python.
+
+Essa página foi criada com o intuito de reunir essas idéias, para elas não serem esquecidas no histórico da Lista
+
+== Santagada Iniciou ==
+
+O que eu queria pro python é que '''python eggs''' fossem a mesma coisa que '''ruby gems''' no '''ruby''' e o '''cpan''' no '''perl'''. Tem que vir funcionando direto quando tu instala a linguagem, e todos os módulos tinham que ser distribuidos assim.
+
+Ahh e permitir a instalação no diretório do usuário se ele não tiver permissão de root (usando aqueles esquemas que o Ian Bicking anda trabalhando).
+
+Algo parecido com a resolução de dependências de '''Java''' para alguns programas que eu usei que foram feitos para '''Java Web Start''', tu iniciava um programa e ele declara o que
+precisa, se tu não tem ele baixa e pronto.
+Coloca um call-back para o SO do usuário ver se ele tem aquela versão e aquela biblioteca nos repositórios, ou então baixa o '''egg''' do '''cheeseshop'''.
+
+Precisamos também da possibilidade de múltiplas versões de uma biblioteca instalada ao mesmo tempo.
+
+ * '''Reumindo em tópico'''
+  * Ser '''built-in''', ou seja, vir de fábrica. ;)
+  * Pemitir instalar no home do usuário quando não tem privilégios suficientes no SO
+  * Resolução de dependências
+  * Permitir múltiplas versões do mesmo pacote
+  * Permitir um gancho (hook) para o sistema operacional poder instalar os seus pacotes (apt, rpm, etc) caso ele tenha a versão que o programa pediu
+
+== Volpato Completou ==
+
+Dentre as funcionalidades que deveriam estar agregadas a essa idéia,certamente deveriam estar incluídas:
+
+ * um '''eggs''' melhorado já distribuído como módulo '''padrão''', que substituiria o '''distutils''';
+ * assinatura criptográfica em módulos para garantir a origem (''não obrigatória'');
+ * oficializar o uso do __version__ em módulos e pacotes (''ou algo semelhante''), ou melhor, oficializar um conjunto de '''meta-dados por pacote''';
+ * recurso '''default da linguagem''' (ou módulo da biblioteca padrão) para permitir instalar '''versões diferentes''' de módulos e pacotes e '''requisitar versões compatíveis''' com a sua aplicação;
+ * download transparente de dependências;
+ * diretório default para instalar pacotes de usuário comum (sem precisar configurar explicitamente);
+
+
+Eu acho que isso poderia vir junto com o Python 3, mas acho que nesse momento isso já tem pouca probabilidade de acontecer...
+
+A menos que tudo seja implementado como um módulo que seja incluído na biblioteca padrão, sem alterar a lógica do import da linguagem, mas talvez modificando-a explicitamente quando se importasse esse tal módulo.

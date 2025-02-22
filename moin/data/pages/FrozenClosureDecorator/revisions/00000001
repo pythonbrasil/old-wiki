@@ -1,0 +1,140 @@
+== Decorator para Congelamento de Closures ==
+por JoaoBueno em 16/06/2009
+
+Melhor usar a breve definição do LucianoRamalho ontem na lista
+do que tentar descrever de novo:
+    ''"""Uma closure (clausura ou fechamento) é uma estrutura de dados que
+armazena a definição de uma função juntamente com o ambiente onde ela
+foi definida, ou seja as variáveis que existem no momento em que é
+definida a função. Isso permite que a função acesse estas variáveis
+posteriormente, quando for invocada, mesmo que o escopo onde as
+variáveis foram definidas não exista mais."""'' (LucianoRamalho, lista python-brasil, 15/06/2009)
+
+Bom, um detalhe em Python é que as closures funcionam "bem demais" - e, com frequencia
+isso pode ser uma armadilha - por exemplo, ao se tentar uma lista de 10 funções, em que cada uma
+recebe um parâmetro e devolve esse parâmetro multiplicado pela sua posição na lista -
+
+Pode-se pensar a principio em algo como:
+
+{{{
+def cria_vetor():
+    v = []
+    for i in range(10):
+        def f(x):
+            return x * i
+        v.append(f)
+    return v
+}}}
+(eu sei que dá pra usar list comprehension ou lambdas, mas como estou apresentando um decorator aqui,
+não seria um bom exemplo)
+
+Bom, acontece que todas as funções na lista v se comportam como se o valor de "i" fosse "9" -
+ou seja, o último valor assumido por "i" no contexto onde as funções "f" foram criadas:
+    
+{{{
+>>> v[9](10)
+90
+>>> v[0](10)
+90
+
+}}}
+
+Ordinariamente, isso é evitado envelopando-se cada função que vai existir fora do 
+contexto onde foi criada, precisando de valores locais instântaneos, dentro de um 
+contexto separado: ou seja, uma função de fábrica de funções que só existe momentaneamente
+para conter o closure de cada função que vai no vetor final:
+    
+{{{
+def cria_vetor():
+    v = []
+    for i in range(10):
+        def g(i):
+            def f(x):
+                return x * i
+            return f
+        v.append(g(i))
+    return v
+}}}
+(dica para a vida real (ex.: TKinter, QT4): verifique a função "partial" do módulo functools)
+
+Ora - colocar uma função "wrapper" para modificar o comportamento de uma função
+desejada, é, a primeira vista, exatamente o motivo de decorators existirem.
+
+Então resolvi criar o decorator freeze_context, que faz exatamente isso e funciona:
+{{{
+def cria_vetor():
+    v = []
+    for i in range(10):
+        @freeze_context
+        def f(x):
+            return x * i
+        v.append(f)
+    return v
+}}}   
+
+Só que até chegar ai, tive que descer fundo em como o python cria as tais closures,
+e como contorna-las.  Não foram poucas surpresas - entre as quais descobri que um dos
+atributos do objeto função, func_closures, é uma tupla de objetos "cell"  que justamente
+contem os valores das variáveis no contexto externo _e_  '''não pode ser criado''' a partir de
+código python. (Quer dizer, não sem roubar).
+
+Bom, se roubar é necessário para criar as tais "cells", então roubemos. O código do
+@freeze_context :
+    
+{{{
+    
+from types import FunctionType
+from inspect import stack
+
+
+# All this just to break again one
+# of the things they surely strugled the most 
+# to fix in Python
+
+def freeze_context(func):
+    #retrieve the context in which the original function was created
+    context_frame = stack()[-2][0]
+    if func.func_closure is None:
+        return func
+    # check the clousre vars and copy its values at the time 
+    # of the function creation
+    freeze_variables = func.func_code.co_freevars
+    freeze_values = dict([(freevar, context_frame.f_locals[freevar])
+                           for freevar in freeze_variables])
+    # now, we have to build a function within a closure in a string that uses
+    # the same variables and instaciate it with "exec" so that 
+    # Python generates a func_closure tuple for us
+    factory_header = "def factory(%s):\n" % ",".join(freeze_variables)
+    factory_body = """    def func():\n        return %s\n"""  % ",".join(freeze_variables)
+    factory_footer = """    return func\n"""
+    factory_str = factory_header + factory_body + factory_footer
+    
+    exec(factory_str)
+    trunk_cell_function = factory(**freeze_values)
+    
+    reforged_function = FunctionType(func.func_code, 
+                                     context_frame.f_globals,
+                                     func.func_name,
+                                     func.func_defaults,
+                                     trunk_cell_function.func_closure)
+    return reforged_function
+
+
+def test_0(n):
+    v = []
+    for i in range(n):
+        @freeze_context
+        def f(x):
+            return i * x
+        v.append(f)
+    return v
+    
+v = test_0(10)
+
+v[9](10)
+
+v[2](10)
+
+}}}
+
+Voltar ao CookBook

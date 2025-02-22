@@ -1,0 +1,5 @@
+Escrevi esse módulo para facilitar a vida dos usuários ao lidar com CPF, Cnpj, Placas de Carro. Ainda está bemmmm novinho, mas espero que com a ajuda da comunidade ele cresça e apareça =)
+
+O download pode ser feito aqui.
+
+A documentação está dentro das próprias classes, métodos, além de elas serem auto-exemplifiadas, pois os testes são feitos usando o módulo doctest.

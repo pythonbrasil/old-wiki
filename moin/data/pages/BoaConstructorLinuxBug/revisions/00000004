@@ -1,0 +1,11 @@
+Recebi um Email sobre um possível BUG no Boa Constructor, quando um desenvolvedor estava criando o seu software no Windows, usando:
+
+  * Python
+  * wxPython
+  * BoaConstructor
+
+Quando este desenvolvedor foi verificar o software no linux, alguns controles não funcionaram tão perfeitamente. 
+
+== os Bugs ==
+
+  1. As janelas MDI, que no Windows funcionavam bem (em modo Modal), se tornaram abas no Linux. Estarei mostrando o screenshot em breve.

@@ -1,0 +1,18 @@
+= Casos de Sucesso =
+== No Brasil ==
+ * Sistemas de Geração e Administração de Cadastro Escolar para MEC [[http://www.serpro.gov.br|SERPRO/RJ]]
+ * Servidor de controle do firewall na StarOne/Embratel - RJ [[http://www.gpr.com.br|GPr]]
+ * Servidor MRCP para a biblioteca de síntese de Voz do CPqD [[http://www.gpr.com.br|GPr]]
+ * Sistema de supote à caça de pornografia em Intranets para Eaton Truck [[http://www.gpr.com.br|GPr]]
+ * Emulador de Terminais no rastreamento de cargas para Controlsat [[http://www.gpr.com.br|GPr]]
+ * Relação de casos de uso de Python/Zope/Plone [[http://www.tchezope.org/divulgacoes/relacao_casos_uso|TcheZope.org]]
+ * Links de sites que usam Python/Zope/Plone [[http://www.tchezope.org/links|TcheZope.org]]
+ * Softwares livres desenvolvidos para o Legislativo Brasileiro [[http://www.interlegis.gov.br/produtos_servicos|Interlegis]]
+ * Site [[http://www.globo.com/|Globo.com]] que usa Python/Django
+ * Sites [[http://caras.uol.com.br/|caras.com.br]], [[http://rollingstone.com.br/|rollingstone.com.br]], [[http://trivela.uol.com.br/|trivela.com.br]], [[http://tazio.uol.com.br/|tazio.com.br]], que usam: Django 1.2 ou 1.3, Django-haystack + Solr para buscas, Memcached, nginx e uWSGI.
+ * Quoisque para entretenimento/educação que usa QRCodes, Python e Web2py, integrando-se com a web [[http://labs.agenciax4.com.br/qrscreen|QR Screen]] [[http://www.sala.org.br/tv-sala/qr-code-tecnologia-criatividade|O que é o QR Screen]]
+ * Esquadrão Verde Tang (Rede social para criança) [[http://esquadraoverdetang.com.br|esquadraoverdetang.com.br]]
+ * [[http://ecolog.sourceforge.net/|Projeto ECOLOG]]: Sistema Gerenciador de Bancos de Dados para Levantamentos Ecológicos de Campo e Inventários de Biodiversidade 
+
+== Mais casos ==
+ * http://www.python.org/about/success

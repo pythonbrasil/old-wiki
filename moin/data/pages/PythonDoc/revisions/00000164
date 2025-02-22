@@ -1,0 +1,297 @@
+#pragma section-numbers off
+= Python Doc =
+
+Projeto de tradução da [http://www.python.org/doc/ documentação oficial] do Python para o português.
+
+|| Coordenador || PedroWerneck ||
+|| Tradutores  || AlexandreNalon, FelipeLessa, OsvaldoSantanaNeto, RafaelAlmeida, RenataPalazzo, RodrigoSenra, PedroDeMedeiros ||
+|| Revisores   || PedroWerneck, OsvaldoSantanaNeto ||
+|| Página do Projeto || http://www.codigolivre.org.br/projects/pythondoc/ ||
+
+[[TableOfContents]]
+
+== Inscrição no Projeto ==
+
+ * Inscreva-se no http://codigolivre.org.br;
+
+ * Entre em contato com o coordenador do projeto em pythondoc-brasil-admin@server.codigolivre.org.br informando seu nome de usuário, disponibilidade de horas semanais e função (tradutor e/ou revisor, discriminando entre revisão semântica e revisão gramatical, se for o caso)
+
+ * Assine a lista de discussão em: http://server.codigolivre.org.br/mailman/listinfo/pythondoc-brasil 
+
+
+== Obtendo os Arquivos do Projeto ==
+
+<!> AVISO: O http://codigolivre.org.br está passando por alguns problemas e no momento o cvs não funciona corretamente. 
+
+Se você pretende apenas pegar os arquivos do projeto, e não colaborar enviando alterações, periodicamente é criado um arquivo compactado com todos os arquivos do projeto em [http://cvs.codigolivre.org.br/cvstarballs/pythondoc-cvsroot.tar.gz].
+
+Você também pode obter os arquivos via CVS:
+
+
+{{{
+cvs -d:pserver:USUARIO@cvs.pythondoc.codigolivre.org.br:/home/cvsroot login
+}}}
+
+ * Se esta for a primeira vez que você estiver entrando, baixe os arquivos:
+
+{{{
+cvs -d:pserver:USUARIO@cvs.pythondoc.codigolivre.org.br:/home/cvsroot co pythondoc
+}}}
+
+ * Sincronize seus arquivos locais com o repositório:
+
+{{{
+cvs -d:pserver:USUARIO@cvs.pythondoc.codigolivre.org.br:/home/cvsroot update
+}}}
+
+ * Enviar suas correções/alterações para o repositório (para executar esta operação é necessário estar dentro do diretório {{{pythondoc}}}):
+
+{{{
+cvs -d:pserver:USUARIO@cvs.pythondoc.codigolivre.org.br:/home/cvsroot commit NOMEDOARQUIVO
+}}}
+
+ * Desconectar do repositório:
+
+{{{
+cvs -d:pserver:USUARIO@cvs.pythondoc.codigolivre.org.br:/home/cvsroot logout
+}}}
+
+== Lista de Discussão ==
+
+Os arquivos da lista de discussão do projeto encontram-se em: http://codigolivre.org.br/pipermail/pythondoc-brasil/
+
+== Dicionário de Termos ==
+
+O dicionário com as traduções de termos técnicos encontra-se em ["Dicionário"] e no arquivo DICIONARIO do código fonte da documentação.  
+
+== Nomes dos Manuais Traduzidos ==
+
+||||||<tablewidth="100%" #C0C0C0>'''Nomes dos Manuais'''||
+||'''Diretório'''||'''Título Original'''||'''Título Traduzido'''||
+||api||Python/C API Reference Manual||Manual de Referência da API Python/C||
+||ext||Extending and Embedding the Python Interpreter||Estendendo e Embutindo o Interpretador Python||
+||lib||Python Library Reference||Referência da Biblioteca Python||
+||ref||Python Reference Manual||Manual de Referência Python||
+||tut||Python Tutorial||Tutorial Python||
+||||||* Falta a definição dos outros títulos||
+
+== Arquivos ==
+
+Ao começar a trabalhar na tradução de um arquivo, siga os seguintes passos:
+
+ * Adicione o nome do arquivo no campo '''Arquivo''' da tabela, caso ele ainda não exista;
+
+ * Altere a cor do campo '''Status''' para amarelo (FFFF80) e mantenha-o atualizado com a sua tradução;
+
+ * Coloque o número da versão atual no campo '''Versão''' e mantenha-o atualizado a cada ''commit''. Normalmente, ao iniciar a tradução de um arquivo, essa número de versão é 1.1. Você pode obtê-lo através do comando {{{cvs status ARQUIVO}}};
+
+ * Coloque seu nome (''wikiname'', apontando para sua página no PythonBrasil) no campo '''Responsável''';
+
+ * Altere a cor do campo '''Início''' para amarelo (FFFF80) e coloque a data do início da tradução no formato dd/mm/aaaa;
+
+ * Altere a cor do campo '''Entrega Prevista:''' para amarelo (FFFF80) e coloque uma estimativa da data em que você acredita que o arquivo estará pronto. 
+
+Quando terminar a tradução de um arquivo, siga os seguintes passos:
+
+ * Altere a cor do campo '''Status''' para verde (80FF80) e seu valor para 100%;
+
+ * Coloque o número da versão final no campo '''Versão'''. Você pode obtê-lo através do comando {{{cvs status ARQUIVO}}};
+
+ * Altere a cor dos campos '''Início''' e '''Entrega Prevista''' para verde (80FF80). Substitua a data do campo '''Entrega Prevista''' pelo ícone {{{(./)}}};
+
+
+Ao começar a trabalhar na revisão de um arquivo, siga os seguintes passos:
+
+ * Adicione o nome do arquivo no campo '''Arquivo''' da tabela, caso ele ainda não exista;
+
+ * Altere a cor do campo '''Status''' da revisão sendo realizada (semântica ou gramatical) para amarelo (FFFF80) e mantenha-o atualizado com a sua tradução;
+
+ * Coloque seu nome (''wikiname'', apontando para sua página no PythonBrasil) no campo '''Responsável''' apropriado.
+
+
+/!\ Cuidado para não alterar a formatação das tabelas durante a edição.
+
+=== Prioridades ===
+
+{1} Tradução dos arquivos restantes do ''Manual de Referência Python'': ref3.tex e ref5.tex
+
+{2} Revisão dos arquivos do ''Manual de Referência Python''.
+
+{3} Verificação e correção de possíveis erros do ''Manual de Referência Python'' durante a conversão de TeX para HTML e PDF.
+
+==== Tradução ====
+
+
+XXXX
+
+
+==== Revisão Semântica ====
+
+Pede-se aos revisores tomar um cuidado especial com os seguintes detalhes:
+
+
+ * Coerência dos termos traduzidos com os termos presentes no arquivo DICIONARIO.
+
+ * Se possível, revisar o arquivo acompanhando o arquivo original. attachment:pythondoc_original.tar.gz
+
+ * O código Tex. Por exemplo, apenas os títulos de seções são traduzidos, não suas referências (por isso é importante ter o original por perto).
+
+ * Termos em inglês. Termos em inglês usados corriqueiramente (como "string") devem acompanhar sua tradução entre parênteses na primeira aparição no arquivo. Termos usados esporadicamente devem estar enfatizados (usando \emph{termo}).
+
+ * Termos em inglês cuja tradução em português soe estranha ou muito fora do comum para programadores experientes devem vir acompanhados na primeira aparição no arquivo do original enfatizado e entre colchetes, por exemplo: compreensão de lista [\emph{list comprehension}].
+
+
+==== Revisão Gramatical ====
+
+XXXX
+
+
+=== Manual de Referência Python ===
+
+||||||||||||<tablewidth="100%" #C0C0C0>'''Status da Tradução'''                                                           ||
+|| '''Arquivo'''      ||'''Status''' ||'''Versão'''||'''Responsável'''       || '''Início'''      ||'''Entrega Prevista:'''||
+||ref/ref.tex         ||<#80FF80>100%||1.5         ||OsvaldoSantanaNeto      ||<#80FF80> (./)     ||<#80FF80> (./)         ||
+||ref/ref1.tex        ||<#80FF80>100%||1.6         ||OsvaldoSantanaNeto      ||<#80FF80> (./)     ||<#80FF80> (./)         ||
+||ref/ref2.tex        ||<#80FF80>100%||1.9         ||PedroWerneck            ||<#80FF80> (./)     ||<#80FF80> (./)         ||
+||ref/ref3.tex        ||<#FFFF80>50% ||1.8         ||<#FF8080>               ||<#FF8080>          ||<#FF8080>              ||
+||ref/ref4.tex        ||<#80FF80>100%||1.8         ||RafaelAlmeida           ||<#80FF80> (./)     ||<#80FF80> (./)         ||
+||ref/ref5.tex        ||<#80FF80>100%||1.8         ||RenataPalazzo           ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||ref/ref6.tex        ||<#80FF80>100%||1.4         ||PedroWerneck            ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||ref/ref7.tex        ||<#80FF80>100%||1.2         ||PedroWerneck            ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||ref/ref8.tex        ||<#80FF80>100%||1.2         ||PedroWerneck            ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da Revisão                                        '''||
+||<|2>'''Arquivo'''||||'''Revisão Semântica'''                 ||||'''Revisão Gramatical'''         ||
+||                      '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável''' ||
+||ref/ref.tex         ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref1.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref2.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref3.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref4.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref5.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref6.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref7.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref8.tex        ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+
+
+=== Tutorial Python ===
+
+||||||||||||<tablewidth="100%" #C0C0C0>'''Status da Tradução'''                                                            ||
+|| '''Arquivo'''      ||'''Status'''||'''Versão''' ||'''Responsável'''       || '''Início'''      ||'''Entrega Prevista:'''||
+||tut/glossary.tex    ||<#FFFF80>34%||1.3          ||PedroWerneck            ||<#80FF80> (./)     ||<#FFFF80> <!>          ||
+||tut/tut.tex         ||<#FFFF80>75%||1.1          ||RodrigoSenra            ||<#80FF80> (./)     ||<#FFFF80> <!>          ||
+
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da Revisão                                        '''||
+||<|2>'''Arquivo'''||||'''Revisão Semântica'''                 ||||'''Revisão Gramatical'''         ||
+||                      '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável''' ||
+||tut/glossary.tex    ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||tut/tut.tex         ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+
+=== Referência da Biblioteca Python ===
+
+
+||||||||||||<tablewidth="100%" #C0C0C0>'''Status da Tradução'''                                                            ||
+|| '''Arquivo'''      ||'''Status''' ||'''Versão'''||'''Responsável'''       || '''Início'''        ||'''Entrega Prevista:'''||
+||lib/asttable.tex    ||<#80FF80>100%||1.3         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/compiler.tex    ||<#80FF80>100%||1.4         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/distutils.tex   ||<#80FF80>100%||1.3         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/email.tex       ||<#80FF80>100%||1.3         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/email-dir.py    ||<#80FF80>100%||1.3         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/email-mime.py   ||<#80FF80>100%||1.2         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/email-simple.py ||<#80FF80>100%||1.3         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/email-unpack.py ||<#80FF80>100%||1.3         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/emailcharsets.tex ||<#80FF80>100%||1.2       ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/emailencoders.tex ||<#80FF80>100%||1.2       ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/emailexc        ||<#80FF80>100%||1.2         ||AlexandreNalon          ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/lib.tex         ||<#80FF80>100%||1.4         ||FelipeLessa             ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||lib/libaifc.tex     ||<#80FF80>100%||1.4         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libal.tex       ||<#80FF80>100%||1.3         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/liballos.tex    ||<#80FF80>100%||1.3         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libamoeba.tex   ||<#80FF80>100%||1.3         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libanydbm.tex   ||<#80FF80>100%||1.3         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libconsts.tex   ||<#80FF80>100%||1.2         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libexcs.tex     ||<#FFFF80>52% ||1.2         ||FelipeLessa             ||<#FFFF80> 09/04/2004 ||<#FFFF80> /!\          ||
+||lib/libfuncs.tex    ||<#80FF80>100%||1.6         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libintro.tex    ||<#80FF80>100%||1.3         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libobjs.tex     ||<#80FF80>100%||1.3         ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+||lib/libstdtypes.tex ||<#80FF80>100%||1.10        ||FelipeLessa             ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da Revisão                                        '''||
+||<|2>'''Arquivo'''||||'''Revisão Semântica'''               ||||'''Revisão Gramatical'''           ||
+||                      '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável''' ||
+||lib/asttable.tex    ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||lib/compiler.tex    ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||lib/distutils.tex   ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||lib/email.tex       ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/email-dir.py    ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/email-mime.py   ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/email-simple.py ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/email-unpack.py ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/lib.tex         ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||lib/libaifc.tex     ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||lib/libal.tex       ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/liballos.tex    ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||lib/libamoeba.tex   ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/libanydbm.tex   ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/libconsts.tex   ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/libexcs.tex     ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/libfuncs.tex    ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||lib/libintro.tex    ||<#80FF80>100%||OsvaldoSantanaNeto      ||<#80FF80> 100% ||OsvaldoSantanaNeto||
+||lib/libobjs.tex     ||<#80FF80>100%||OsvaldoSantanaNeto      ||<#80FF80> 100% ||OsvaldoSantanaNeto||
+||lib/libstdtypes.tex ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ref/ref5.tex        ||<#FFFF80>44% ||RenataPalazzo           ||<#FF8080> 0%   || -                ||
+||lib/libexcs.tex     ||<#FF8080>0%  ||FelipeLessa             ||<#FF8080> 0%   || -                ||
+
+=== Estendendo e Embutindo o Interpretador Python ===
+
+||||||||||||<tablewidth="100%" #C0C0C0>'''Status da Tradução'''                                                            ||
+|| '''Arquivo'''      ||'''Status'''||'''Versão''' ||'''Responsável'''       || '''Início'''      ||'''Entrega Prevista:'''||
+||ext/ext.tex         ||<#80FF80>100%||1.3         ||PedroDeMedeiros         ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||ext/building.tex    ||<#80FF80>100%||1.3         ||PedroDeMedeiros         ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||ext/embedding.tex   ||<#80FF80>100%||1.4         ||PedroDeMedeiros         ||<#80FF80> (./)       ||<#80FF80> (./)         ||
+||ext/extending.tex   ||<#80FF80>100%||1.10        ||PedroDeMedeiros         ||<#80FF80> (./) ||<#80FF80> (./)         ||
+||ext/newtypes.tex    ||<#FF8080>0%  ||1.1         ||PedroDeMedeiros         ||<#FFFF80> 01/05/2004 ||<#FFFF80> /!\          ||
+||ext/windows.tex     ||<#80FF80>100%||1.4         ||PedroDeMedeiros         ||<#80FF80> (./)  ||<#80FF80> (./)         ||
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da Revisão                                        '''||
+||<|2>'''Arquivo'''||||'''Revisão Semântica'''                 ||||'''Revisão Gramatical'''         ||
+||                      '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável''' ||
+||ext/ext.tex         ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ext/building.tex    ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ext/embedding.tex   ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ext/extending.tex   ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ext/newtypes.tex    ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+||ext/windows.tex    ||<#FF8080>0%  || -                      ||<#FF8080> 0%   || -                ||
+
+
+== Comentários e Observações dos Tradutores ==
+
+''Revisores, por favor me avisem de erros meus. :) -- FelipeLessa''
+
+''Acho que existe um erro na ref4: "It is illegal to unbind a name that is referenced by an enclosing scope; the compiler will report a !SyntaxError.". Se alguém tiver mais informações, me avise. -- RafaelAlmeida''
+
+''Talvez alguma palavra-chave do LaTeX tenha sido traduzida por engano. -- FelipeLessa''
+
+''Felipe, eu conheço LaTeX sim. Quando eu disse pra usarem {{{\emph{}}}} é porque é a forma correta de se fazer isso. -- OsvaldoSantanaNeto''
+
+''Não tive resposta no #python-br, então pergunto aqui: aquelas BNFnotations que tem no ref5, elas devem ser traduzidas? Ou melhor, o que deve ser traduzido e o que não deve? -- RafaelAlmeida''
+
+''Eu acho que em trechos de código ou 'verbatim' a gente deve traduzir apenas os comentários e mais nada. Mantemos as mensagens e nomes de variáveis intactos. No caso das BNFs, seria interessante mantê-las como estão -- OsvaldoSantanaNeto''
+
+''Como traduzir Python? Às vezes o texto se refere a linguagem Python (a qual eu chamo de "a Python"), noutras, o interpretador Python (o qual eu chamo de "o Python"). Mas geralmente eu coloco isso por extenso ("o interpretador Python" ou "a linguagem Python"), só fazendo essas abreviações quando estiver ficando redundante demais -- PedroDeMedeiros''
+
+''"Embutido" não soa muito bem em alguns contextos, especialmente quando o texto simplifica o termo colocando só "Embedding" ao invés de especificar o que, onde e como. Quando o texto faz isso, eu prefiro substituir o termo por "acoplamento", que soa mais natural -- PedroDeMedeiros''
+----
+
+AlexandreNalon[[BR]]
+FelipeLessa[[BR]]
+GuilhermeManika[[BR]]
+OsvaldoSantanaNeto[[BR]]
+PedroDeMedeiros[[BR]]
+PedroWerneck[[BR]]
+RafaelAlmeida[[BR]]
+RenataPalazzo[[BR]]
+RudaMoura[[BR]]
+e outros

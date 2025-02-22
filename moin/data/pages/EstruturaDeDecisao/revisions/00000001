@@ -1,0 +1,130 @@
+ListaDeExercicios
+ 1. EstruturaSeqüêncial
+ 1. EstruturaDeDecisão
+ 1. EstruturaDeRepetição
+ 1. ListasETuplas
+
+== Estrutura de Decisão ==
+
+ 1. Faça um Programa que peça dois números e imprima o maior deles.
+
+ 1. Faça um Programa que peça um valor e mostre na tela se o valor é positivo ou negativo.
+
+ 1. Faça um Programa que peça um número inteiro e determine se ele é par ou impar.
+
+ 1. Faça um Programa que peça um número e informe se o número é inteiro ou decimal.
+
+ 1. Faça um Programa que leia 2 números e em seguida pergunte ao usuário qual operação ele deseja realizar. O resultado da operação deve ser acompanhado de uma frase que diga se o número é:
+  a. par ou ímpar;
+  a. positivo ou negativo;
+  a. inteiro ou decimal.
+
+ 1. Faça um Programa que verifique se uma letra digitada é vogal ou consoante.
+
+ 1. Faça um Programa que peça um número e se este número for par, transforme-o em impar e vice-versa
+
+ 1. Faça um Programa que peça para entrar com um ano com 4 dígitos e determine se o mesmo é ou não bissexto.
+
+ 1. Faça um Programa que verifique se uma letra digitada é "F" ou "M". Conforme a letra escrever: F - Feminino, M - Masculino, Sexo Inválido.
+
+ 1. Faça um Programa que leia 3 números e mostre o maior e o menor deles. Utilizar inteiros entre 0 e 65535 (unsignedint).
+
+ 1. Faça um Programa que pergunte em que turno você estuda. Peça para digitar M-matutino ou V-Vespertino ou N- Noturno. Imprima a mensagem Bom Dia!, Boa Tarde! ou Boa Noite! ou Valor Inválido!, conforme o caso.
+
+ 1. Faça um Programa que leia um número e exiba o dia correspondente da semana. (1-Domingo, 2- Segunda, etc.), se digitar outro valor deve aparecer valor inválido.
+
+ 1. Faça um Programa que tendo como dados de entrada o preço de custo de um produto e um código de origem, emita o preço junto de sua procedência. Caso o código não seja nenhum dos especificados, o produto deve ser classificado como importado. Código de origem: 1 - Sul, 2 - Norte 3 - Leste, 4 - Oeste, 5 ou 6 - nordeste 7 ou 8 Centro-oeste.
+
+ 1. Altere o programa que calcula a média do aluno (Exercício 4), e mostre a mensagem de acordo com a média. De 0 a 3 - Reprovado, de 3 a 6.9  Em Exame, de 7 a 10 - Aprovado
+
+ 1. Faça um Programa para efetuar o diagnóstico de um paciente. O programa deverá perguntar:
+  a. infecção nos pulmões (0 = ausente, 1 = presente)
+  a. temperatura (0 = normal, 1 = anormal)
+  a. corisa (0 = ausente, 1 = presente)
+  a. espirros (0 = ausente, 1 = presente)
+  Se o paciente tiver infecção nos pulmões e temperatura anormal, o diagnóstico é pneumonia.  
+  Se o paciente tiver apenas um sintoma, qualquer deles, o diagnóstico é gripe. Se o paciente tiver dois ou mais sintomas, que não seja simultaneamente, infecção nos pulmões.
+
+ 1. Faça um Programa que peça os 3 lados de um triângulo. O programa deverá informar se os valores podem ser um triângulo. Indique, caso os lados formem um triângulo, se o mesmo é: equilátero, isósceles ou escaleno.
+
+ 1. Faça um Programa que calcule uma equação do 2o. grau, na forma x2+bx+c. O programa deve fazer todas as consistências de dados e informar caso o usuário entre com dados errados. Deve ainda informar se o delta é positivo ou negativo, e os valores de X quando existirem.
+
+ 1. Faça um Programa que seja capaz de concluir qual dentre os animais seguintes foi escolhido, através de perguntas e respostas. Animais possíveis: leão, cavalo, homem, macaco, morcego, baleia, avestruz, pingüim, pato, águia, tartaruga, crocodilo e cobra.
+  Exemplo:
+  {{{
+  Utilize (1-SIM / 0-NAO)
+  É mamífero? 1
+  É quadrúpede? 1
+  É carnívoro? 0
+  É herbívoro? 1
+  Então o animal escolhido foi: cavalo
+  }}}
+ Utilize as seguintes classificações:
+
+ Mamíferos	>>	quadrúpede	>>	carnívoro	>>	leão
+
+ Herbívoro	>>	cavalo
+
+ Bípede		>>	onívoro		>>	homem
+
+ Frutífero	>>	macaco
+
+ Voadores	>> 	morcego
+
+ Aquáticos	>>	baleia
+
+ Aves		>>	não voadoras	>>	tropical		>>	avestruz
+
+ Polar		>>	pingüim
+
+ Nadadoras	>>	pato
+
+ De rapina	>>	águia
+
+ Répteis	>> 	com casco	>>	tartaruga
+
+ Carnívoros	>>	crocodilo
+
+ Sem patas	>>	cobra
+ 
+ 1. Faça um Programa que peça um número correspondente a um determinado ano e em seguida informe se este ano é ou não bissexto.
+
+ 1. Faça um Programa que peça uma data no formato dd/mm/aaaa e determine se a mesma é uma data válida.
+
+ 1. Faça um Programa que leia um número inteiro menor que 1000 e imprima a quantidade de centenas, dezenas e unidades do mesmo.  
+ Observando os termos no plural a colocação do "e", da vírgula entre outros.
+ 
+ Exemplo:
+  a. 326 = 3 centenas, 20 dezenas e 6 unidades
+  a. 12  = 1 dezena e 2 unidades
+
+ Testar com: 326, 300, 100, 320, 310,305, 301, 101, 311, 111, 25, 20, 10, 21, 11, 1, 7 e 16
+
+ 1. Faça um Programa para ler três idades de alunos e seguir as seguintes instruções:
+  a. Se a média de idade dos alunos é inferior de 25, apresentar a mensagem "Turma Jovem";
+  a. Se a média de idade dos alunos é entre 25 e 40, apresentar a mensagem "Turma Adulta";
+  a. Se a média de idade dos alunos é acima de 40 anos, apresentar a mensagem "Turma Idosa".
+
+ 1. Faça um Programa para controle de temperatura de um forno que derrete alumínio. O programa deverá perguntar qual temperatura que o alumínio deverá ser trabalhado e operar nas seguintes condições:
+  a. Se temperatura for inferior ou igual 500o C enviar uma mensagem para tela "Temperatura Inválida";
+  a. Se temperatura for menor do que 700o C enviar uma mensagem para tela "Aquecimento Ligado em 100%";
+  a. Se temperatura for menor do que 735o C enviar uma mensagem para tela "Aquecimento Ligado em 50%"; 
+  a. Se temperatura for maior ou igual 735o C enviar uma mensagem para tela "Aquecimento Desligado";
+  a. Se temperatura for maior do que 780o C enviar uma mensagem para tela "SUPERAQUECIMENTO";
+  a. Os valores digitados devem ser inteiros e inferiores de 1000.
+
+ 1. Faça um Programa para aplicar em um carro, responsável pela seleção automática de marchas (o usuários deve digitar a velocidade) nas seguintes condições:
+  a. Quando a velocidade estiver menor do que 30 km/h envie para o centro da tela o número 1.
+  a. Quando a velocidade estiver 30 km/h e 40 km/h (menor do que 40 km/h) envie para o centro da tela o número 2.
+  a. Quando a velocidade estiver entre 40 km/h e 60 km/h (menor do que 60 km/h) envie para o centro da tela o número 3.
+  a. Quando a velocidade estiver entre 60 km/h e 80 km/h (menor do que 80 km/h) envie para o centro da tela o número 4.
+  a. Quando a velocidade estiver acima de 80 km/h envie para o centro da tela o número 5.
+
+ 1. Uma determinada empresa vende uma máquina que possui seis motores. Um de 20 CV, dois de 1 CV, e três de 5 CV, que custam 1500, 300 e 600 reais respectivamente cada motor. Existe a necessidade de saber quantos motores deverão ser comprados de cada modelo e quanto custará esta compra. Para isto elabore um programa que:
+  a. Pergunte quantas máquinas serão vendidas;
+  a. Calcule e apresente na tela a quantidade de motores que deverão ser comprados de cada modelo;
+  a. Calcule e apresente na tela o custo total por máquina e o custo total de todos os motores.
+
+ 1. Faça um Programa para um caixa eletrônico. O programa deverá perguntar ao usuário a valor do saque e depois informar quantas notas de cada valor serão fornecidas. As notas disponíveis serão as de 1, 5, 10, 50 e 100 reais. O valor mínimo é de 10 reais e o máximo de 600 reais. O programa não deve se preocupar com a quantidade de notas existentes na máquina.
+   a. Exemplo 1: Para sacar a quantia de 256 reais, o programa fornece duas notas de 100, uma nota de 50, uma nota de 5 e uma nota de 1;
+   a. Exemplo 2: Para sacar a quantia de 399 reais, o programa fornece três notas de 100, uma nota de 50, quatro notas de 10, uma nota de 5 e quatro notas de 1.

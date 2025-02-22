@@ -1,0 +1,367 @@
+== Introdução ==
+
+O projeto TemplatesGenéricos visa disponibilizar uma biblioteca geral para expressar estruturas de dados complexas em código Python. Trata-se ainda de uma abordagem experimental. O conceito básico é simples:
+
+{{{
+class Pessoa(GenericTemplate):
+    nome = 'José da Silva'
+    class endereco(GenericTemplate):
+        rua = 'Rua das Bobos, 0'
+        cidade = 'Patópolis'
+    class documentos(GenericTemplate):
+        cpf = '00.000.000-00'
+        rg  = '0.000.000'
+}}}
+
+A princípio, o template acima é bastante similar a qualquer outro escrito em XML, ou em um dicionário Python. Qual seriam as vantagens, então?
+
+  * '''Legibilidade''': o código em Python é bem estruturado e legível. Já o código em XML não é tão legível, e é mais difícil de editar manualmente. O dicionário também se torna confuso, porque muitas definições ficam dentro de strings, o que polui o código com aspas e chaves que não são nada 'pitônicas';
+  * '''Integração''': o código pode residir dentro de um arquivo convencional Python. Não há necessidade de ler a descrição de outro lugar.
+  * '''Orientação a objeto''': é muito fácil criar novas classes e construir estruturas dinâmicas e inteligentes, que processam os atributos de forma automatizada. Estas estruturas podem ser herdadas e reutilizadas dentro do ambiente normal de programação Python.
+
+== Aplicações ==
+
+O sistema foi criado a partir de uma idéia ambiciosa: um ambiente de desenvolvimento de aplicações comerciais, capaz de converter definições de telas de entrada em múltiplos formatos de saída. Para viabilizar o desenvolvimento, optamos pelo crescimento gradual. A biblioteca de templates está sendo focada em duas aplicações até o momento:
+
+ * '''Templates para Web''': permite a especificação de páginas com layouts complexos, incluindo forms de entrada de dados. A descrição final é facilmente legível, e o uso de objetos facilita a composição de telas complexas, com vários elementos, em tempo de execução.
+ Exemplos:
+ {{{
+ class Page(htmlcontainer.HtmlPage):
+     class head(htmlcontainer.HtmlPage.head):
+         stylesheet = CSSStyleSheet
+     class body(htmlcontainer.HtmlPage.body):
+         contents = """
+         Hello World!
+         """
+
+ class FormEdicaoUsuario(Form):
+     title = 'Dados do usuário'
+     class dadosbasicos(Panel):
+         style    = 'form-section'
+         apelido  = EditBox(caption = 'Identificação', size = 15)
+         senha    = EditBox(caption = 'Senha', size = 10, password = True)
+         nome     = EditBox(caption = 'Nome completo', size = 40)
+     class endereco(Panel):
+         style    = 'form-section'
+         endereco = EditBox(caption = 'Endereço', size = 40)
+         bairro   = EditBox(caption = 'Bairro', size = 40)
+         cidade   = EditBox(caption = 'Cidade', size = 40)
+     class extras(Panel):
+         style    = 'form-section'
+         observacao= EditBox(caption = 'Observações',
+                             multiline= True, rows = 10, cols = 40)
+ }}}
+ * '''Arquivos de inicialização (.ini)''': permite a especificação de uma estrutura de arquivo de inicialização .ini, com a divisão em seções. Cada atributo pode ter seu tipo e um valor default definido de forma simples e legível:
+ {{{
+ class SimpleIni(IniFile):
+    class server(IniSection):
+        socketPort = TypedAttribute(8080)
+        threadPool = TypedAttribute(10)
+    class staticContent(IniSection):
+        bitmaps = TypedAttribute('c:/work/sidercom/bitmaps')
+    class session(IniSection):
+        storageType = TypedAttribute('ram')
+ }}}
+
+ O tipo TypedAttribute é um atributo especial, que quando colocado dentro de um Template, gera automaticamente uma 'property' que checa o tipo do argumento. O tipo é inferido a partir do valor default. Assim, as seguintes atribuições serão tratadas de formas diferentes:
+ {{{
+ ini = SimpleIni()
+ ini.server.socketPort = 10     # aceito -> 10 é um inteiro
+ ini.staticContent.bitmaps = 0  # gera exceção -> 0 não é string
+ }}}
+
+== Funcionamento ==
+
+O sistema de templates depende de algumas regras básicas para garantir o funcionamento transparente. As regras são:
+
+ * Todas as classes aninhadas devem ser herdadas de Template. Classes não herdadas de Template poderão ser aninhadas, mas sem garantia de comportamento correto.
+ * Os atributos aninhados que não forem classes devem ser herdeiros de GenericAttribute. Esta classe já tem o código necessário para operar em conjunto com o GenericTemplate.
+ * Os atributos simples (strings, inteiros, etc.) podem ser especificados diretamente no código. A metaclasse que cria o GenericTemplate processa automaticamente estes valores, e os encapsula dentro de um atributo genérico (sem tipo).
+ * O TypedAttribute é um herdeiro do atributo genérico, que verifica o tipo do argumento nas chamadas ao método __set__.
+ * O sistema depende de '''auto-instanciamento''' das classes aninhadas. Por motivos diversos, é necessário que dentro de uma classe, todos os membros aninhados sejam também classes; e dentro de uma instância, todos os membros aninhados sejam instâncias. Isso é necessário para dar consistância ao sistema e evitar efeitos colaterais indesejados. Assim, ao inicializar uma classe (por exemplo, o SimpleIni() apresentado acima), todas as classes aninhadas serão automaticamente instanciadas, e a instância criada conterá somente instâncias.
+
+== Código fonte ==
+
+De que vale esta conversa sem o código fonte? (Ainda não coloquei a licença; preciso de ajuda com isso! aceito sugestões!)
+
+PS: os comentários e nomes estão em inglês. O código se propõe a ser de uso livre, e não faria sentido escrevê-lo em português. Espero que todos compreendam.
+
+{{{
+"""
+metatemplate.py -- template metaclass that can be used to customize
+any class to store user-defined attributes in the original definition
+order.
+
+"""
+
+import sys
+from inspect import isclass, isdatadescriptor
+from types import StringType, IntType, FloatType, ListType
+import itertools
+
+#----------------------------------------------------------------------
+# Debug constants. I don't intend to remove them, even from production
+# code, but I intend to use the logging module to print the messages
+
+debug_generic_attribute = 0
+debug_typed_attribute = 0
+debug_auto_instantiation = 0
+
+#----------------------------------------------------------------------
+# AbstractAttribute is the ancestor of all classes that can be used
+# in the metacontainer framework.
+
+class AbstractAttribute(object):
+    pass
+
+#----------------------------------------------------------------------
+# GenericAttribute is the ancestor of all simple elements that are
+# used as attributes of user defined Container subclasses
+#
+# GenericAttributes are simpler than full containers. They're both
+# derived from the same AbstractAttribute class, but GenericAttributes
+# have only a single value associated with them.
+#
+# When referred from a instance, the __get__ method returns the value
+# associated with the attribute. If called from the class, the __get__
+# method returns the property itself.
+
+class GenericAttribute(AbstractAttribute):
+    """ Generic attributes for generic containers """
+    def __init__(self, default = None):
+        self._seqno = next_attribute_id()
+        self.value = default
+    def __repr__(self):
+        return "<Attr '%s'>" % (self.__class__.__name__)
+    def __get__(self, instance, owner):
+        if debug_generic_attribute:
+            print "GET self:[%s], instance:[%s], owner:[%s]" % \
+                  (self, instance, owner)
+        if instance:
+            attrdict = instance.__dict__.setdefault('__attr__', {})
+            return attrdict.get(self.name, self.value)
+        else:
+            return owner
+    def __set__(self, instance, value):
+        if debug_generic_attribute:
+            print "SET self:[%s], instance:[%s], value:[%s]" % \
+                  (self, instance, value)
+        attrdict = instance.__dict__.setdefault('__attr__', {})
+        attrdict[self.name] = value
+
+class TypedAttribute(GenericAttribute):
+    """ Typed attributes for generic containers """
+    def __init__(self, default = None, mytype = None):
+        self._seqno = next_attribute_id()
+        self.value = default
+        if mytype:
+            if isclass(mytype):
+                self.mytype = mytype
+            else:
+                raise TypeError("Argument <mytype> expects None "
+                      "or a valid type/class")
+        else:
+            self.mytype = type(default)
+    def __repr__(self):
+        return "<TypedAttr '%s':%s>" % \
+               (self.__class__.__name__, self.mytype.__name__)
+    def __get__(self, instance, owner):
+        if debug_typed_attribute:
+            print "GET self:[%s], instance:[%s], owner:[%s]" % \
+                  (self, instance, owner)
+        if instance:
+            attrdict = instance.__dict__.setdefault('__attr__', {})
+            return attrdict.get(self.name, self.value)
+        else:
+            return self.value
+    def __set__(self, instance, value):
+        if debug_typed_attribute:
+            print "SET self:[%s], instance:[%s], value:[%s]" % \
+                  (self, instance, value)
+        if not isinstance(value, self.mytype):
+            # if it's a string, tries to convert to the correct
+            # target type (this is needed because most things read
+            # from files will be strings anyway)
+            if isinstance(value, StringType):
+                value = self.mytype(value)
+            else:
+                raise TypeError, "Expected %s attribute" % \
+                      self.mytype.__name__
+        attrdict = instance.__dict__.setdefault('__attr__', {})
+        attrdict[self.name] = value
+
+#----------------------------------------------------------------------
+# auxiliary functions
+
+next_attribute_id = itertools.count().next
+
+def getfields(dct):
+    """
+    takes a dictionary of class attributes and returns a decorated list
+    containing all valid field instances and their relative position.
+
+    """
+    for fname, fobj in dct.items():
+        if isinstance(fobj,GenericAttribute):
+            yield (fobj._seqno, (fname, fobj))
+        elif isclass(fobj) and issubclass(fobj,AbstractAttribute):
+            yield (fobj._seqno, (fname, fobj))
+        elif (fname[0] != '_'):
+            # conventional attributes from basic types are just stored
+            # as GenericAttributes, and put at the end of the list,
+            # in alphabetical order
+            if (isinstance(fobj,StringType) or
+                isinstance(fobj,IntType) or
+                isinstance(fobj,FloatType) or
+                isinstance(fobj,ListType)):
+                yield (sys.maxint, (fname, GenericAttribute(fobj)))
+            else:
+                yield (0, (fname, fobj))
+        else:
+            yield (0, (fname, fobj))
+
+def makefieldsdict(dct, bases):
+    # build the field list and sort it
+    fields = list(getfields(dct))
+    fields.sort()
+    # undecorate the list and build a dict that will be returned later
+    sorted_field_list = [field[1] for field in fields]
+    field_dict = dict(sorted_field_list)
+    # finds all attributes and nested classes that are containers
+    attribute_list = [field for field in sorted_field_list
+                      if (isinstance(field[1],AbstractAttribute) or
+                          (isclass(field[1]) and
+                           issubclass(field[1],AbstractAttribute)
+                     ))]
+    # check baseclasses for attributes inherited but not overriden
+    # !!WARNING: this code does not checks correctly for multiple
+    # base classes if there are name clashes between overriden
+    # members. This is not recommended anyway.
+    inherited = []
+    for baseclass in bases:
+        base_field_list = getattr(baseclass, '_fields', None)
+        # looks for a valid _fields attribute in an ancestor
+        if isinstance(base_field_list, ListType):
+            fnames = [f[0] for f in attribute_list]
+            for fname, fobj in base_field_list:
+                # checks for overriden attributes
+                if (fname in fnames):
+                    # overriden - inherited list contains the new value
+                    newobj = field_dict[fname]
+                    inherited.append((fname, newobj))
+                    # remove attribute and quick check field names list
+                    attribute_list.remove((fname, field_dict[fname]))
+                    fnames.remove(fname)
+                else:
+                    # copy the original entry into the inherited list
+                    inherited.append((fname, fobj))
+    field_dict['_fields'] = inherited + attribute_list
+    return field_dict
+
+#----------------------------------------------------------------------
+# MetaTemplate metaclass
+#
+# Most of the hard work is done outside the class by the auxiliary
+# functions makefieldsdict() and getfields()
+
+class MetaTemplate(type):
+    def __new__(cls, name, bases, dct):
+        # creates the class using only the processed field list
+        newdct = makefieldsdict(dct, bases)
+        newclass = type.__new__(cls, name, bases, newdct)
+        newclass._seqno = next_attribute_id()
+        newclass.name  = name
+        return newclass
+
+#----------------------------------------------------------------------
+# GenericTemplate superclass
+
+class GenericTemplate(AbstractAttribute):
+    __metaclass__ = MetaTemplate
+
+    def __init__(self):
+        """ instantiates all nested classes upon creation """
+
+        # builds a copy of the field list. this is needed to allow
+        # customizations of the instance not to be reflected in the
+        # original class field list.
+        self._fields = list(self.__class__._fields)
+
+        # auto instantiates nested classes and attributes
+        if debug_auto_instantiation:
+            print "AutoInstantiation <%s>: fieldlist = %s" % \
+                  (self.name, self._fields)
+        for fname, fobj in self._fields:
+            if isclass(fobj) and issubclass(fobj,Container):
+                # found a nested class
+                if debug_auto_instantiation:
+                    print "AutoInstantiation <%s>: field[%s] is a "
+                          "Container Subclass" % (self.name, fname)
+                fobj = fobj()
+                setattr(self, fname, fobj)
+            elif isinstance(fobj, AbstractAttribute):
+                # found an attribute instance
+                if debug_auto_instantiation:
+                    print "AutoInstantiation <%s>: field[%s] is an "
+                          "Attribute Instance" % (self.name, fname)
+                # removed: parent links are still being thought out,
+                # and I'm not even sure if they're a good idea
+                # setattr(fobj, 'parent', self)
+                setattr(fobj, 'name', fname)
+            else:
+                if debug_auto_instantiation:
+                    print "AutoInstantiation <%s>: field[%s] is "
+                          "unknown" % (self.name, fname)
+
+    def iterfields(self):
+        for fname, fobj in self._fields:
+            yield getattr(self, fname)
+
+    def __repr__(self):
+        return "<%s '%s'>" % (self.__class__.__name__, self.name,)
+}}}
+
+== Exemplo de aplicação: leitor de arquivos INI ==
+
+O exemplo de arquivos INI ainda está incompleto, mas já é capaz de ler arquivos usando a descrição dada pela classe. Há algumas situações que ainda não tem seu tratamento devidamente discutido; por exemplo, dentro de uma seção, podem existir subseções. O sistema ainda não sabe 'voltar' corretamente para a seção do nível anterior, dependendo da forma como o aninhamento for feito.
+
+{{{
+class IniSection(GenericTemplate):
+
+    re_section = re.compile(r'^\[(.*)\]')
+
+    def read(self, fileobj):
+        for line in fileobj:
+            line = line.strip()
+            if not line: continue
+            matchresult = self.re_section.match(line)
+            if matchresult:
+                sectionname = matchresult.group(1)
+                print "section: ", sectionname
+                if sectionname in self._fields:
+                    # found a known section
+                    section = getattr(self, sectionname, None)
+                    if isinstance(section, IniSection):
+                        section.read(fileobj)
+                    else:
+                        pass  #should raise a fatal exception
+                else:
+                    # found a unknown section, back to the previous level
+                    return
+            else:
+                # found an attribute
+                print line
+                name, value = line.split('=',1)
+                setattr(self, name, value)
+
+class IniFile(IniSection):
+    def load(self, fname=None):
+        if not fname:
+            fname = self.name + '.ini'
+        inifile = open(fname, 'r')
+        self.read(inifile)
+        inifile.close()
+
+    def save(self, fname):
+        pass
+}}}

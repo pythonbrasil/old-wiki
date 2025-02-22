@@ -1,0 +1,30 @@
+= Uma arquitetura de componentes em Python =
+
+''Lennart Regebro - 19/nov/2007''
+
+Ao construir grandes frameworks você muitas vezes deseja que tudo seja facilmente plugável e extensível. Os objetos precisam ser capazes de interagir uns com os outros mesmo quando esta interação não está prevista inicialmente. Criar este tipo de flexibilidade não é muito difícil, especialmente em uma linguagem dinâmica como Python, mas se você tem que criar um framework para plug-ins toda vez que precisa de um, você acaba não fazendo isso a menos que seja realmente muito necessário.
+
+Assim, é bom ter uma forma padrão para a interação entre objetos e para que eles possam se inspecionar, e uma forma que você possa usar toda vez que precisar. Resumindo, o você precisa de uma arquitetura de componentes. Felizmente, já existe uma para Python, que foi bem implementada, bem testada e vem sendo usada há anos. Seu nome é Zope Component Architecture.
+
+Ah, sim, já posso ouvir você: "Eca! Zope não... Isso só específico para Zope, não é pythonico, só serve para a Web, é cheio de XML. Argh!". Mas você estaria errado. A única coisa não pythonica e "webby" da Zope Component Architecture é que seus módulos se chamam zope.algo. Mas os módulos têm esse nome porque foram escritos pela Zope Corp. Sim, é verdade que o Zope usa XML em sua linguagem de configuração orientada a aspectos. Veja bem, na orientação a aspectos é desejável ter uma linguagem específica para conectar os componentes, e a do Zope é ZCML. Mas a arquitetura de componentes não exige ZCML de nenhuma maneira. É totalmente baseada em Python (exceto por algumas partes escritas em C para maior performance, mas elas também possuem implementações alternativas em Python). 
+
+Vamos ver um exemplo realmente estúpido de como usar a arquitetura de componentes. Vamos criar um componente que seja capaz de fazer aritmética com inteiros. Sim, é bem estúpido, porque sempre existiram jeitos de fazer isso em Python, mas foi a melhor idéia que eu tive. Primeiro, a gente define como a aparência externa do componente de aritmética, sua interface:
+
+{{{
+from zope import interface, component
+
+class IOperacoesInteiros(interface.Interface):
+
+    def somar(a, b):
+        """soma dois inteiros"""
+
+    def subtrair(a, b):
+        """subtrai dois inteiros"""
+
+    def multiplicar(a, b):
+        """multiplica dois inteiros"""
+
+    def dividir(a, b):
+        """divide dois inteiros"""
+}}}
+

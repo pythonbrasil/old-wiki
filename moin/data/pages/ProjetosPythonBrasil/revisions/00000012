@@ -1,0 +1,22 @@
+= Projetos Python Brasil =
+
+Nesta página serão colocados os projetos apoiados pelo PythonBrasil. Se você tiver algum projeto interessante que ajude a promover o uso da linguagem Python coloque-o aqui.
+
+== Aplicativos ==
+   * [[http://incubus.sf.net|Incubus Data Modeler]] - Incubus é um projeto com o objetivo de desenvolver uma ferramenta CASE livre (GPL) para modelagem de dados. Ela é desenvolvida em Python e Qt (PyQt) e o autor do projeto é brasileiro. 
+   * PythOnRpg - Iniciativa para criar um RPG em Python.
+   * [[http://paginas.terra.com.br/informatica/andref5/projeto1_1.htm|PyConnect]] - RAD para manipulação de Banco de Dados.
+
+== Documentação ==
+
+   * PythonDoc - tradução da [[http://www.python.org/doc|documentação oficial]] do Python.
+   * [[http://www.zorked.net/dive/toc/|Dive Into Python]] - tradução do livro [[http://www.diveintopython.org|Dive Into Python]] para português.
+   * IntroPython - O Guia da comunidade Python Brasil para iniciantes da linguagem Python.
+
+== Bibliotecas ==
+
+   * TemplatesGenericos - suporte a templates genéricos em Python usando estruturas de classes aninhadas
+
+== Eventos ==
+
+  * EncontroPzpFisl - inscrições temas de membros da comunidade que desejam apresentar algo sobre Python no FISL

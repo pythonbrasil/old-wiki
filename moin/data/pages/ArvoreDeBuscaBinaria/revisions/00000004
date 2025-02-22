@@ -1,0 +1,125 @@
+Classe que implementa de maneira simples uma Árvore de Busca Binária.
+
+{{{#!python
+#!/usr/bin/python
+#
+# BSTree.py
+
+class BSTree:
+	"""
+	Author: Danillo Souza
+	Email: danillo012@gmail.com
+
+	DESCRIPTION
+		Class that implements Binary Search Tree functionality.
+
+	TODO
+		* improve the 'view' method to be more legible and nice;
+	"""
+	def __init__(self, content=None):
+		"""
+		Initialize the tree with a valid value(can't be None).
+		"""
+		if not content: self.content = 0
+		else: self.content = content
+		
+		self.lnode = None
+		self.rnode = None
+
+	def add(self, content=None):
+		"""
+		Add an element to the tree. In the right if the value if is bigger than the
+		actual, and in the left if its less than the actual.
+		"""
+		if not content: return -1
+
+		if content > self.content:
+			if self.rnode: self.rnode.add(content)
+			else: self.rnode = BSTree(content)
+
+		if content <= self.content:
+			if self.lnode: self.lnode.add(content)
+			else: self.lnode = BSTree(content)
+
+	def view(self, level=1):
+		"""
+		Print the tree on the screen.
+		"""
+		arrow = "---" * level
+		print "|%s>%s" % (arrow, self.content)
+
+		if self.rnode: self.rnode.view(level+1)
+		if self.lnode: self.lnode.view(level+1)
+
+		return
+
+	def size(self):
+		"""
+		Returns the size of the tree.
+		"""
+		tsize = 1
+
+		if self.rnode: tsize += self.rnode.size()
+		if self.lnode: tsize += self.lnode.size()
+
+		return tsize
+
+	def min(self):
+		"""
+		Returns the minimum value of the tree.
+		"""
+		while (self.lnode):
+			self = self.lnode
+		
+		return self.content
+
+	def max(self):
+		"""
+		Returns the maximum value of the tree.
+		"""
+		while (self.rnode):
+			self = self.rnode
+		
+		return self.content
+
+	def search(self, element=None):
+		"""
+		Returns the level of the element on the tree.
+		"""
+		if not element: return -1
+
+		level = 1
+
+		while (1):
+			if not self: return -1
+			if (not self.lnode) and (not self.rnode): return -1
+
+			if self.content == element: break
+
+			if self.content <= element: self = self.rnode
+			else: self = self.lnode
+
+			level += 1
+
+		return level
+}}}
+
+Exemplo de funcionamento:
+
+{{{#!python
+#!/usr/bin/python
+import BSTree
+from random import randint
+
+tree = BSTree(50)
+for i in range(100):
+	tree.add(randint(1, 100))
+tree.view()
+
+print '=' * 25
+print "Min: %d" % tree.min()
+print "Max: %d" % tree.max()
+
+sort = randint(1, 100)
+print "%d found in %d level." % (sort, tree.search(sort))
+}}}

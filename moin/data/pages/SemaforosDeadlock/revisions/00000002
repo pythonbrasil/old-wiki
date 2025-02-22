@@ -1,0 +1,278 @@
+= Receita: SemaforosDeadlock =
+
+Abaixo estão pequenos exemplos do uso de semáforos e como não deixar ocorrer deadlock.
+
+Esses códigos criei para demonstrar os conceitos básicos, para a utilização em um curso de Sistemas Operacionais.
+
+== Semáforos para cuidar da Seção Crítica de um Programa ==
+
+{{{
+#!python
+# -*- coding: ISO-8859-1 -*-
+
+import thread
+import time, random
+
+s = thread.allocate_lock()
+
+def tempo(i):
+   t = random.randint(3,7)
+   print "Processo %i dormindo por %i" %(i, t)
+   time.sleep(t)
+
+def thread1():
+   while True:
+      print "Processo 1 - Adquirindo semáforo"
+      s.acquire()
+      print "Processo 1 - Seção crítica"
+      tempo(1)
+      print "Processo 1 - Liberando semáforo"
+      s.release()
+      print "Processo 1 - seção não crítica"
+      tempo(1)
+
+def thread2():
+   while True:
+      print "Processo 2 - Adquirindo semáforo"
+      s.acquire()
+      print "Processo 2 - Seção crítica"
+      tempo(2)
+      print "Processo 2 - Liberando semáforo"
+      s.release()
+      print "Processo 2 - seção não crítica"
+      tempo(2)
+
+thread.start_new_thread(thread1, ())
+thread.start_new_thread(thread2, ())
+
+while 1: pass
+
+}}}
+
+O programa acima é funcional, mas pode ocorrer travamentos devido a tentativas de acessos simultâneos aos recursos.
+
+== Deadlock com Semáforos ==
+
+{{{
+#!python
+# -*- coding: ISO-8859-1 -*-
+
+import thread
+import time, random
+
+s1 = thread.allocate_lock()
+s2 = thread.allocate_lock()
+
+def tempo(i):
+   t = random.randint(1,5)
+   print "Processo %i dormindo por %i" %(i, t)
+   time.sleep(t)
+
+def thread1():
+   print "Processo 1 - Adquirindo semáforo S1"
+   s1.acquire()
+   time.sleep(1)
+   print "Processo 1 - Adquirindo semáforo S2"
+   s2.acquire()
+   print "Processo 1 - Seção crítica"
+   tempo(1)
+   print "Processo 1 - Liberando semáforos"
+   s1.release()
+   s2.release()
+   print "Processo 1 - seção não crítica"
+   tempo(1)
+
+def thread2():
+   print "Processo 2 - Adquirindo semáforo S2"
+   s2.acquire()
+   time.sleep(1)
+   print "Processo 2 - Adquirindo semáforo S1"
+   s1.acquire()
+   print "Processo 2 - Seção crítica"
+   tempo(2)
+   print "Processo 2 - Liberando semáforos"
+   s2.release()
+   s1.release()
+   print "Processo 2 - seção não crítica"
+   tempo(2)
+
+thread.start_new_thread(thread1, ())
+thread.start_new_thread(thread2, ())
+
+while 1: pass
+
+}}}
+
+= Problemas Clássicos de Sincronismo =
+
+== Buffer Limitado ==
+
+{{{
+#!python
+# -*- coding: ISO-8859-1 -*-
+import thread
+import time, random
+import threading
+
+class BufferLimitado:
+   TAM_BUFFER = 5
+   mutex  = threading.Semaphore(1)
+   empty  = threading.Semaphore(TAM_BUFFER)
+   full   = threading.Semaphore(0)
+   buffer = range(TAM_BUFFER)
+   cheio  = 0
+   livre  = 0
+
+   def insert(self, item):
+      self.empty.acquire()
+      self.mutex.acquire()
+      self.buffer[self.livre] = item
+      self.livre = (self.livre + 1) % self.TAM_BUFFER
+      self.mutex.release()
+      self.full.release()
+
+   def remove(self):
+      self.full.acquire()
+      self.mutex.acquire()
+      item = self.buffer[self.cheio]
+      self.cheio = (self.cheio + 1) % self.TAM_BUFFER
+      self.mutex.release()
+      self.empty.release()
+      return item
+
+b = BufferLimitado()
+
+def produtor():
+   while True:
+      time.sleep(random.randint(1, 10) / 100.0)
+      item = time.ctime()
+      b.insert(item)
+      print "Produtor produziu:", item, b.livre, b.cheio
+
+def consumidor():
+   while True:
+      time.sleep(random.randint(1, 10) / 100.0)
+      item = b.remove()
+      print "Consumidor consumiu:", item, b.livre, b.cheio
+
+thread.start_new_thread(produtor, ())
+thread.start_new_thread(consumidor, ())
+
+while 1: pass
+}}}
+
+
+== Leitores-Escritores ==
+
+{{{
+#!python
+# -*- coding: ISO-8859-1 -*-
+import thread
+import time, random
+import threading
+
+class BancoDados:
+   contLeitor = 0
+   mutex      = threading.Semaphore(1)
+   bd         = threading.Semaphore(1)
+
+   def acquireReadLock(self):
+      global contLeitor
+      self.mutex.acquire()
+      self.contLeitor += 1
+
+      # É o primeiro leitor?
+      if self.contLeitor == 1:
+         self.bd.acquire()
+
+      self.mutex.release()
+
+   def releaseReadLock(self):
+      global contLeitor
+      self.mutex.acquire()
+      self.contLeitor -= 1
+
+      # É o último leitor?
+      if self.contLeitor == 0:
+         self.bd.release()
+
+      self.mutex.release()
+
+   def acquireWriteLock(self):
+      self.bd.acquire()
+
+   def releaseWriteLock(self):
+      self.bd.release()
+
+bd = BancoDados()
+
+def escritor(e):
+   while True:
+      time.sleep(random.randint(1, 5))
+      bd.acquireWriteLock()
+      print "Escritor %i - escrevendo..." %e
+      time.sleep(random.randint(1, 5))
+      bd.releaseWriteLock()
+      print "Escritor %i - parou de escrever." %e
+
+def leitor(l):
+   while True:
+      time.sleep(random.randint(1, 10))
+      bd.acquireReadLock()
+      print "Leitor %i - lendo..." %l
+      time.sleep(random.randint(1, 5))
+      bd.releaseReadLock()
+      print "Leitor %i - parou de ler." %l
+
+for i in range(2):
+   print "Escritor", i
+   thread.start_new_thread(escritor, tuple([i]))
+for i in range(3):
+   print "Leitor", i
+   thread.start_new_thread(leitor, tuple([i]))
+
+
+while 1: pass
+}}}
+
+
+== Filósofos na Mesa de Jantar ==
+
+{{{
+#!python
+# -*- coding: ISO-8859-1 -*-
+import thread
+import time, random
+import threading
+
+garfo = list()
+for i in range(5):
+   garfo.append(threading.Semaphore(1))
+
+def filosofo(f):
+   f = int(f)
+   while True:
+      # garfo da esquerda
+      garfo[f].acquire()
+      # garfo da direita
+      garfo[(f + 1) % 5].acquire()
+      print "Filósofo %i comendo..." %f
+      time.sleep(random.randint(1, 5))
+      garfo[f].release()
+      garfo[(f + 1) % 5].release()
+      print "Filósofo %i pensando..." %f
+      time.sleep(random.randint(1, 10))
+
+for i in range(5):
+   print "Filósofo", i
+   thread.start_new_thread(filosofo, tuple([i]))
+
+while 1: pass
+}}}
+
+
+Volta para CookBook.
+
+----
+
+MarcioMinicz

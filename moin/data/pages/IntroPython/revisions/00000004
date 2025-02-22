@@ -1,0 +1,76 @@
+''Infelizmente ainda não está pronto, é um "vaporware" :( Mas '''você''' que domina Python pode ajudar a fazê-lo acontecer. Bom, por que mais um guia? Primeiro, os guias que estão no site são resumidos e falam apenas de poucos tópicos, falta um documento para realmente iniciar pessoas a linguagem Python, de forma efetiva.
+Um guia de introdução, ensinando a baixar e usar um pouco
+da linguagem, o "feijão com arroz" é um primeiro passo para termos mais gente
+envolvida e um trampolim para a pessoa buscar mais informações
+em outros tutorais.
+Eu pretendo escrever aqui este guia, mas que não seja o "guia do Rudá",
+espero que todos possam contribuir (inclusive se os autores
+de outros IntrosPython aqui permitirem, ripar o conteúdo e mover para este documento). Aliás,
+uma pequena crítica, não sou contra identificar o autor de um documento,
+é respeito ao autor, mas eu noto que não estamos "botando o dedo" no documento dos outros, alterando, contribuído, criticando,
+por mais que se tenha um autor de um documento definido, isto aqui é um Wiki! Vamos rabiscar, mexer, comentar! Não sejamos tímidos. :)''
+
+= Guia de Introdução A Linguagem Python =
+
+Este é o Guia do PythonBrasil para uma rápida introdução a linguagem Python.
+
+== O que é Python? ==
+== O que eu posso fazer com Python? ==
+
+Um monte de coisas! Testar idéias de programação; automatizar tarefas repetitivas (manipulação de texto, cópia de arquivos, outras); criar programas em modo texto; programas em modo gráfico; programas que para a rede e a internet; etc.
+
+== O que eu não posso fazer com Python? ==
+== Por que eu deveria usar Python e não Perl, Java ou outra linguagem? ==
+
+Python e Perl são linguagens com propósitos bastante parecidos. Uma vantagem do Python é a sua regularidade e facilidade de leitura (e se você já programou em Perl, sabe que isso é importante! Alguém tem/quer exemplos?).
+
+Python e Java são linguagens bem diferentes, o que torna a comparação difícil ou sem signficado. Python sugere um desenvolvimento rápido, do tipo "editar-executar" (Python compila automaticamente quando executamos o programa). Já Java ("Já Java", hahaha) exige que o programador declare tipos, visibilidade de funções, separe cada classe (pública) em arquivos diferentes, e o desenvolvimento é do tipo "editar-compilar-executar" (ainda que o arquivo gerado tenha que ser interpretado...). Outra vantagem do Python que me vem à mente agora são suas estruturas de dados (p.ex.: listas e dicionários). Java usa classes para prover essas funcionalidades, mas geralmentes são necessários muito mais comandos (e ''casts'') para obter o mesmo resultado.
+
+== Aonde eu adquiro o Python? ==
+
+O site oficial é: [http://python.org]
+
+=== Linux ===
+
+Além da opção de ir ao site oficial, o Python geralmente já vem com o sistema ou a distribuição tem um pacote pronto pra instalar.
+
+=== Windows ===
+
+No site ofical tem um instalador pra Windows que é muito simples! Nem parece que está instalando uma linguagem de programação...
+
+=== Macintosh ===
+
+== Entendendo Python ==
+
+== Tipos de dados, constantes, variáveis e expressões ==
+
+=== Tipos simples (números, strings) ===
+
+=== Tipos agrupados (listas, tuplas, dicionários) ===
+
+== Estuturas de controle ==
+    * if
+    * while
+    * break/continue
+
+=== Iteradores (estrutura "for") ===
+
+== Tratamento de erros e exceções ==
+
+== Módulos ==
+
+Uma das características que me surpreendeu foi a facilidade de criar módulos simples. Por exemplo, se você quer criar chamado ''funcoesuteis'', é só criar um arquivo chamado ''funcoesuteis.py'' no mesmo diretório do seu programa principal. Nesse arquivo, coloque todos os '''def'''s e '''class'''es que quiser. No programa que for usar esse módulo, é só colocar {{{import funcoesuteis}}} e usar as funções como {{{funcoesuteis.funcao1()}}}, {{{funcoesuteis.funcao2()}}}, etc. Se quiser poupar digitação, use a forma {{{from funcoesuteis import funcao1, funcao2}}} e chame as funções diretamente: {{{funcao1()}}}, {{{funcao2()}}}.
+
+(Melhorar: exemplos mais completos, descrição menos concisa e mais fácil de seguir, talvez explicar packages).
+
+== Classes ==
+
+== Um exemplo Completo ==
+
+''Pretendo deixar um aplicativo de exemplo para sintetizar tudo. Uma idéia que me ocorreu agora é fazer um programinha gráfico (usando tk) de perguntas e repostas (quiz). Não sei se é confundir muito botar tk no meio, mas creio que se a pessoa entendeu o tutorial vai ser capaz de entender um pouco do código, mesmo porque com o quiz eu posso usar dicionários, listas, abrir/fechar arquivos (aka usar módulos), talvez usar classes e mostrar um exemplo prático que teoricamente rodaria em todas as plataformas''.
+
+(Sugestão: Coloca o programa sim! Assim o tutorial "cresce" junto com o leitor, em vez de ficar só no conhecimento básico - tem é que mergulhar fundo!)
+
+----
+
+RudaMoura

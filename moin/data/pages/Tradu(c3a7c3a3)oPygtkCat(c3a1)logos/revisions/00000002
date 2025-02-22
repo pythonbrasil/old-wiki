@@ -1,0 +1,116 @@
+Catálogos para traduzir o Tutorial PyGTK
+
+== Catálogos ==
+[[TableOfContents]]
+
+=== Índice ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/pygtk2-tut.HEAD.pt_BR.po pygtk2-tut] || 100% || LuizArmesto || Concluído ||
+=== Capítulo 1 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/Introduction.HEAD.pt_BR.po Introduction] || 100% || MayronCachina || Concluído ||
+=== Capítulo 2 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/GettingStarted.HEAD.pt_BR.po GettingStarted] || 51% || EliezerRiani || Traduzindo ||
+=== Capítulo 3 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/MovingOn.HEAD.pt_BR.po MovingOn] || 0% || DanielCassiano || Traduzindo/Convertendo ||
+=== Capítulo 4 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/PackingWidgets.HEAD.pt_BR.po PackingWidgets] || 0% || IgorMontagner || Traduzindo/Convertendo ||
+=== Capítulo 5 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/WidgetOverview.HEAD.pt_BR.po WidgetOverview] || 0% || LeonardoAndrade || Traduzindo/Convertendo ||
+=== Capítulo 6 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/ButtonWidget.HEAD.pt_BR.po ButtonWidget] || 0% || MarceloAndrade || Convertendo ||
+=== Capítulo 7 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/Adjustments.HEAD.pt_BR.po Adjustments] || 0% ||  ||  ||
+=== Capítulo 8 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/RangeWidgets.HEAD.pt_BR.po RangeWidgets] || 0% ||  ||  ||
+=== Capítulo 9 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/MiscellaneousWidgets.HEAD.pt_BR.po MiscellaneousWidgets] || 0% ||  ||  ||
+=== Capítulo 10 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/ContainerWidgets.HEAD.pt_BR.po ContainerWidgets] || 0% ||  ||  ||
+=== Capítulo 11 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/MenuWidget.HEAD.pt_BR.po MenuWidget] || 0% ||  ||  ||
+=== Capítulo 12 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/DrawingArea.HEAD.pt_BR.po DrawingArea] || 0% ||  ||  ||
+=== Capítulo 13 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/TextViewWidget.HEAD.pt_BR.po TextViewWidget] || 0% ||  ||  ||
+=== Capítulo 14 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/TreeViewWidget.HEAD.pt_BR.po TreeViewWidget] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/TreeModel.HEAD.pt_BR.po TreeModel] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/GenericTreeModel.HEAD.pt_BR.po GenericTreeModel] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/GenericCellRenderer.HEAD.pt_BR.po GenericCellRenderer] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/CellRenderers.HEAD.pt_BR.po CellRenderers] || 0% ||  ||  ||
+=== Capítulo 15 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/NewWidgetsAndObjects.HEAD.pt_BR.po NewWidgetsAndObjects] || 0% ||  ||  ||
+=== Capítulo 16 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/NewInPyGTK24.HEAD.pt_BR.po NewInPyGTK24] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/UIManager.HEAD.pt_BR.po UIManager] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/FileChooser.HEAD.pt_BR.po FileChooser] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/ExpanderWidget.HEAD.pt_BR.po ExpanderWidget] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/EntryCompletion.HEAD.pt_BR.po EntryCompletion] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/ComboBoxAndComboBoxEntry.HEAD.pt_BR.po ComboBoxAndComboBoxEntry] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/ColorButtonAndFontButton.HEAD.pt_BR.po ColorButtonAndFontButton] || 0% ||  ||  ||
+|| [http://luiz.armesto.googlepages.com/ActionsAndActionGroups.HEAD.pt_BR.po ActionsAndActionGroups] || 0% ||  ||  ||
+=== Capítulo 17 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/UndocumentedWidgets.HEAD.pt_BR.po UndocumentedWidgets] || 0% ||  ||  ||
+=== Capítulo 18 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/SettingWidgetAttributes.HEAD.pt_BR.po SettingWidgetAttributes] || 0% ||  ||  ||
+=== Capítulo 19 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/TimeoutsIOAndIdleFunctions.HEAD.pt_BR.po TimeoutsIOAndIdleFunctions] || 0% ||  ||  ||
+=== Capítulo 20 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/AdvancedEventAndSignalHandling.HEAD.p.po AdvancedEventAndSignalHandling] || 0% ||  ||  ||
+=== Capítulo 21 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/ManagingSelections.HEAD.pt_BR.po ManagingSelections] || 0% ||  ||  ||
+=== Capítulo 22 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/DragAndDrop.HEAD.pt_BR.po DragAndDrop] || 0% ||  ||  ||
+=== Capítulo 23 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/GtkRcFiles.HEAD.pt_BR.po GtkRcFiles] || 0% ||  ||  ||
+=== Capítulo 24 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/Scribble.HEAD.pt_BR.po Scribble] || 0% ||  ||  ||
+=== Capítulo 25 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/TipsForWritingPygtkApplications.HEAD..po TipsForWritingPygtkApplications] || 0% ||  ||  ||
+=== Capítulo 26 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/Contributing.HEAD.pt_BR.po Contributing] || 0% ||  ||  ||
+=== Capítulo 27 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/Credits.HEAD.pt_BR.po Credits] || 0% ||  ||  ||
+=== Capítulo 28 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/Copyright.HEAD.pt_BR.po Copyright] || 0% ||  ||  ||
+=== Apêndice A ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/GtkSignals.HEAD.pt_BR.po GtkSignals] || 0% ||  ||  ||
+=== Apêndice B ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://luiz.armesto.googlepages.com/CodeExamples.HEAD.pt_BR.po CodeExamples] || 0% ||  ||  ||
+
+
+== Legenda ==
+ * '''Concluído''': A tradução do catálogo está completa;
+ * '''Revisando''': Alguém pegou o catálogo para procurar por erros;
+ * '''Traduzindo''': Alguém já está trabalhando nesse catálogo, escolha outro ou entre em contato com o tradutor;
+ * '''Convertendo''': A tradução foi feita em outro formato e está sendo convertida para o catálogo.

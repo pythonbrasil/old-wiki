@@ -1,0 +1,22 @@
+== Candidatos: ==
+
+[[http://pt.wikipedia.org/wiki/Mark_Shuttleworth  | Mark Shuttleworth]]: Desenvolvedor sul-africano que se tornou milionário depois de vender sua empresa de segurança de Internet, a Thawte, para a Verisign. Em 2002 tornou-se o primeiro sul-africano a ir ao espaço, lançado na nave russa Soyuz TM-34, pagando 20 milhões de dólares pela aventura. Fundou a Canonical Ltd, responsável pelo desenvolvimento das distribuições Ubuntu, Kubuntu, Edubuntu e Xubuntu. É um grande incentivador da linguagem Python, largamente utilizada na Canonical.
+
+[[http://bitbucket.org/hpk42/ | Holger Krekel]]: Criador da pylib e um dos desenvolvedores do pypy. Anda trabalhando bastante no py.execnet que é uma forma de montar grids com python (inclusive pythons diferentes como cpython com jython e ironpython).
+
+[[http://bitbucket.org/ianb/ | Ian Biking]]: É o cara que esta envolvido em quase tudo ligado a internet com python, tem uma dezena de projetos.
+
+[[http://dev.pocoo.org | George Brandl]]: É um dos desenvolvedores do grupo Pocoo que, entre outras coisas, desenvolveu: Jinja, Pygments, Sphinx e
+o framework Werkzeug.
+
+[[http://tarekziade.wordpress.com/ | Tarek Ziade]] O cara que finalmente teve 'coragem' de atacar o problema de empacotamento do Python. Através do distribute, está tentando congregar as diversas iniciativas relacionadas ao assunto. Está a procura de voluntários, dicas e feedback sobre o que está fazendo.
+
+[[http://blog.kiwitobes.com/ |Toby Segaran]]: Não tem relação direta com o projeto do Python mas usa código Python em quase todos os exemplos de seus livros: "Programming Collective Inteligence", "Programming the
+Semantic Web" e "Beaultiful Data". Pode ser interessante ter uma palestra 'importada' de um assunto que não seja diretamente relacionada à Python.
+
+[[http://www2.warwick.ac.uk/fac/sci/moac/currentstudents/peter_cock/ | Peter Cock]]: projeto [[http://www.biopython.org |biopython ]]. 
+
+[[http://www.dabeaz.com/|Dave Beazley]]: O cara que esclareceu alguns pontos interessantes sobre o GIT e que gerou muita discussão ano passado. Trabalhou com SWIG e PLY, tem um histórico interessante, além de ser autor de livro.
+
+[[http://blog.leahculver.com/about.html | Leah Culver]]:
+Engenheira de software especializada em desenvolvimento de aplicações web e no framework Django. Co-fundadora da rede social Pownce.

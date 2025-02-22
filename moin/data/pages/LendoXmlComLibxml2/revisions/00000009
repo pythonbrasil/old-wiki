@@ -1,0 +1,92 @@
+#pragma section-numbers off
+= Receita: LendoXmlComLibxml2 =
+
+ Todo o manejo de XML no GNOME é feito a través da libxml, 
+ com ele podemos ler e modificar arquivos XML.
+
+Vejamos um exemplo.
+
+= O arquivo XML =
+
+{{{
+<?xml version="1.0"?>
+<story>
+	<storyinfo>
+		<author>John Fleck</author>
+		<datewritten>June 2, 2002</datewritten>
+		<keyword>example keyword</keyword>
+	</storyinfo>
+	<body>
+		<headline>This is the headline</headline>
+		<para>This is the body text.</para>
+	</body>
+</story>
+}}}
+
+== Código ==
+
+{{{
+#!python
+
+import sys
+
+import libxml2
+
+def parseStory (cur):
+
+	cur = cur.children
+
+	while cur != None:
+		if cur.name == "keyword":
+			print "Keyword: %s" % cur.getContent()
+		cur = cur.next
+	sys.exit(0)
+
+# Le arquivo xml do disco
+doc = libxml2.parseFile("sample_Document.xml")
+
+# Testa se o arquivo existe , se não existir fecha
+# o socket com arquivo e sai com erro.
+if doc == None:
+	print "Document not parsed successfully."
+	doc.freeDoc()
+	sys.exit(1)
+
+# Pega o elemento Root neste caso vai ser "<story>"
+cur = doc.getRootElement()
+
+# Testa se a variável "cur" está vazia se estiver
+# o documento deve estar vazio.
+if cur == None:
+	print "Empty Document."
+	doc.freeDoc()
+	sys.exit(1)
+# E ainda testa se o nó root do documento é mesmo o
+# nó "<story>"
+if cur.name != "story":
+	print "Document of the wrong type, root node != story"
+	doc.freeDoc()
+	sys.exit(1)
+
+# Pega o nó filho de "<story>" para nós "<storyinfo>"
+cur = cur.children
+
+# Enquanto "cur" não estiver vazia loop ou seja pegue todos
+# os <storyinfo>.
+while cur != None:
+	if cur.name == "storyinfo":
+                # Se for "<storyinfo>" chama a função "parseStory"
+                # que vai pegar os valores internos dele.
+		parseStory(cur)
+	cur = cur.next
+doc.freeDoc()
+}}}
+
+Você pode ver o codigo C em [http://www.xmlsoft.org/tutorial/apc.html Libxml Tutorial por John Fleck]
+
+
+Volta para CookBook.
+
+----
+
+WiliamAlvesDeSouza -- (waa) -- wiliamsouza83(arroba)gmail(ponto)com

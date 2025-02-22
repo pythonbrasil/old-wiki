@@ -1,0 +1,152 @@
+'''Internacionalizando programas feitos com PyGtk e LibGlade'''
+
+''Texto original: Pedro Kröger <pedrokroeger.net>''
+
+''Revisado por: Leandro Mattioli''
+
+Última atualização: 16.11.2008
+
+<<TableOfContents>>
+
+= Introdução =
+Este pequeno tutorial mostra como utilizar a internacionalização (i18n) em aplicações feitas Python que utilizam PyGtk e LibGlade. Com a internacionalização, o idioma do programa é definido em tempo de execução, de acordo com variáveis do sistema. As etapas aqui descritas servem para qualquer sistema operacional GNU/Linux baseado na distribuição Debian, como por exemplo o Ubuntu.
+
+= Pré-requisitos =
+Este tutorial parte do princípio que o leitor esteja familiarizado com algum ambiente GNU/Linux baseado no Debian GNU/Linux (ou o próprio Debian, é claro). Além disso, o tutorial supõe que o leitor já tenha uma aplicação feita em PyGtk e LibGlade.
+
+= Breve introdução à internacionalização =
+(em construção...)
+
+= Ferramentas utilizadas =
+ * Python 2.5
+ * Gtk+
+ * PyGtk
+ * Glade
+ * LibGlade
+ * GNU gettext
+ * intltool
+
+Os 6 primeiros itens já vêm configurados por padrão praticamente em todas as distribuições Linux atuais. Caso seja necessário instalar o intltool no Debian, basta executar os seguintes comandos:
+
+{{{
+su
+apt-get install intltool
+}}}
+O primeiro comando irá solicitar a senha do usuário root.
+
+Para o Ubuntu Linux, o comando apropriado é:
+
+{{{
+sudo apt-get install intltool
+}}}
+O comando solicitará a senha do usuário.
+
+= Modificando o código da sua aplicação =
+Algumas pequenas modificações serão feitas, conforme exemplo abaixo:
+
+{{{
+#!/usr/bin/env python 
+# -*- coding: utf-8 -*-
+
+"""Exemplo para i18n.
+
+    OBS.: Não tente executar isto! O código é apenas ilustrativo.
+
+"""
+
+import gettext
+import pygtk
+pygtk.require("2.0")
+import gtk, gtk.glade
+
+APP = 'nomedoprograma'
+DIR = 'locale'
+
+gettext.bindtextdomain(APP,DIR)
+gettext.textdomain(APP) _ = gettext.gettext
+
+print _("String em português 1")
+print _("String em português 2")
+
+gtk.glade.bindtextdomain(APP,DIR)
+gtk.glade.textdomain(APP)
+
+....
+
+}}}
+
+As variáveis APP e DIR serão utilizadas para buscar um arquivo de tradução para o programa. Em tempo de execução, um arquivo <DIR>/<locale>/LC_MESSAGES/<APP>.mo será procurado, onde <locale> é um indicador do idioma, como pt_BR.
+
+Costuma-se utilizar o símbolo "_" para representar o método gettext.gettext . Desta forma as strings que deverão ter suporte à internacionalização terão a forma _("string que pode ser traduzida").
+
+Durante o desenvolvimento do programa, é comum usar a variável DIR com o valor 'locale' ou 'po'. No entanto, é mais apropriado usar uma pasta do sistema específica para isto. Da mesma forma que binários do usuário vão para /usr/bin, os arquivos de tradução geralmente vão para /usr/share/locale.
+
+O arquivo gerado pelo Glade não será alterado.
+
+= Extraindo as mensagens do Glade =
+O programa intltool-extract extrai as strings de um arquivo do tipo GladeXML (no exemplo "interface.glade" e gera um arquivo .h (no exemplo, "interface.glade.h"):
+
+{{{
+intltool-extract --type="gettext/glade" interface.glade
+}}}
+
+= Gerando o arquivo de tradução =
+Copie todos os arquivos com extensões py e o arquivo .h gerado pelo intltool para uma mesma pasta. Se os arquivos estão codificados em ASCII, execute o seguinte comando:
+
+{{{
+xgettext -k_ -kN_ -o mensagens.pot *.py *.h
+}}}
+Caso os arquivos estejam codificados, por exemplo, em utf-8, o comando será:
+
+{{{
+xgettext --from-code=utf-8 -k_ -kN_ -o mensagens.pot *.py *.h
+}}}
+Caso tudo ocorra com sucesso, um arquivo de tradução chamado mensagens.pot será gerado.
+
+Mais informações sobre o comando xgettext podem ser encontradas nas páginas de manual:
+
+{{{
+man xgettext
+}}}
+= Criando arquivos de tradução =
+Para que seja possível criar traduções para outros idiomas é necessário criar os chamados arquivos PO para cada idioma. Para criar o primeiro arquivo PO, com a língua nativa da aplicação (no nosso exemplo, português brasileiro), usaremos o comando msginit:
+
+{{{
+msginit -i mensagens.pot -l pt_BR
+}}}
+O arquivo pt_BR.po gerado será usado pela equipe de tradutores para gerar arquivos PO para outros idiomas. No entanto, para utilizá-lo no programa, iremos "compilá-lo" para um arquivo MO.
+
+{{{
+msgfmt pt_BR.po -o po/pt_BR/LC_MESSAGES/nomedomeuprograma.mo
+}}}
+A estrutura de diretórios deve existir para que seja possível gerar o arquivo de saída (.mo).
+
+Você poderia salvar o arquivo mo em outra pasta, mas os últimos níveis de diretórios devem ser: <locale>/LC_MESSAGES/, onde <locale> é uma sigla que representa o idioma utilizado, como por exemplo pt_BR.
+
+= Finalizando =
+Após todos os processos descritos anteriormente, a aplicação deverá conter, além dos códigos em Python e do arquivo GladeXML, os arquivos de extensão mo, na pasta apropriada (vide variáveis APP e DIR). A estrutura recomendada para todos as arquivo é:
+
+ * /usr/bin/nome-do-programa.py
+ * /usr/share/locale/pt_BR/LC_MESSAGES/nome-do-programa.mo
+ * /usr/share/locale/en/LC_MESSAGES/nome-do-programa.mo
+ * ...(outros idiomas)...
+ * /usr/share/nome-do-programa/glade/interface.glade
+ * ...(outros itens associados a entradas de menu, ícones, documentação, etc.)...
+
+É interessante guardar o PO gerado para que a equipe de tradutores possa gerar outros catálogos de mensagens baseados no original. Então, estes arquivos são compilados e os arquivos MO de saída são inseridos na aplicação. Há editores apropriados para a edição destes catálogos de mensagens, como o poEdit.
+
+= Copyright =
+(C) 2004 Pedro Kroger.
+
+Esse documento está licenciado sob a ''GNU Free Documentation License'', publicada pela ''Free Software Foundation''.
+
+É permitido distribuir cópias deste manual, desde que se forneça o ''Copyright'' em todas as cópias.
+
+Se você pretende incluir este documento em alguma publicação, por favor contate o responsável e nós trabalharemos para garantir que todo documento esteja atualizado e de acordo com as informações disponíveis.
+
+= Links =
+
+ * http://www.async.com.br/faq/pygtk/index.py?req=show&file=faq22.002.htp
+ * http://wiki.laptop.org/go/Python_i18n
+ * http://www.python.org/doc/2.5.2/lib/node731.html
+ * http://www.learningpython.com/2006/12/03/translating-your-pythonpygtk-application/

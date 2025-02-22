@@ -1,0 +1,110 @@
+== Mac ==
+
+ Normalmente o Mac já vem com as ferramentas necessárias para trabalhar com códigos (svn, gcc, vim, etc...)
+
+ Caso não esteja instalado tem no CD ou DVD do SO tem e é só instalar.
+
+=== Verificando as ferramentas básicas. ===
+
+ Para verificar se or programas estão instalados:
+{{{
+svn --version
+gcc --version
+make --version
+}}}
+ 
+ Se aparecer alguma mensagem como a abaixo, quer dizer que você não tem o programa instalado e será necessário instalá-lo:
+{{{
+gcc: command not found
+}}}
+ Não irei cobrir a instalação desses programas.
+
+
+=== Baixando os fontes ===
+ Para baixar a versão '''2.6''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/projects/python/trunk
+}}}
+ Isso irá criar o diretório '''trunk''' no diretório onde foi executado o comando.
+
+ Para baixar a versão '''3k''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/python/branches/py3k
+}}}
+ Isso irá gerar o diretório '''py3k''' no diretório onde foi executado o comando.
+
+=== Configurando e Compilando ===
+
+ Bom agora já tá fácil! Basta entrar no diretório '''trunk''' ou '''py3k''' e executar:
+{{{
+./configure
+make
+}}}
+
+ Isso irá compilar o Python na respectiva versão.
+
+ Para rodar o seu novo interpretador bastas:
+{{{
+./python.exe
+}}}
+
+
+== Win ==
+
+ Diferente do Mac o Windows não trás quase nada de útil! :) 
+
+ 
+=== Instalando as ferramentas básicas. ===
+
+Instalar [http://subversion.tigris.org/ Subversion], baixe o instalador http://subversion.tigris.org/files/documents/15/41687/svn-1.4.6-setup.exe
+ 
+Basta seguir o instalador.
+ 
+Instalar o [http://www.microsoft.com/express/download/ Visual C++ Express Edition 2008].
+ 
+Basta seguir o instalador, não precisa instalar o SQL nem o MSDN, como sugerido no instalador. E aguarde sentado, pois isso consome 1.1Gb no disco que será devidamente baixado durante a intalação.
+ 
+
+Para verificar se o svn está instalado e funcionando.
+{{{
+svn --version
+}}}
+ 
+ Se aparecer alguma mensagem como a abaixo, quer dizer que você não tem o programa instalado e será necessário instalá-lo:
+{{{
+svn: command not found
+}}}
+
+=== Baixando os fontes ===
+
+ Crie uma pasta sem pontos e nem espaços em todo o nome, por exmpelo '''c:\pysrc''' 
+ 
+ Pelo prompt do DOS, vá para essa pasta '''cd c:\pysrc''' 
+
+ Para baixar a versão '''2.6''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/projects/python/trunk
+}}}
+ Isso irá criar o diretório '''trunk''' no diretório onde foi executado o comando.
+
+ Para baixar a versão '''3k''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/python/branches/py3k
+}}}
+ Isso irá gerar o diretório '''py3k''' no diretório onde foi executado o comando.
+
+=== Compilando ===
+
+Agora para compilar abra o Microsoft Visual C++ 2008 Express Edition e vá em '''''File >> Open >>> Project/Solution'''.
+
+ * Abra o arquivo: '''C:\pysrc\trunk\PCbuild\python.vcproj''' ou '''C:\pysrc\py3k\PCbuild\python.vcproj''' 
+  
+
+ * Depois de abrir os projetos basta teclar '''[F7]'''.
+
+Isso irá compilar o Python na respectiva versão.
+
+Para rodar o seu novo interpretador basta executar o arquivo:
+{{{
+C:\pysrc\trunk\PCbuild\python_d.exe
+}}}

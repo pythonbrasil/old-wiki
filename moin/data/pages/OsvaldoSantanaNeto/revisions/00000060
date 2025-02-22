@@ -1,0 +1,32 @@
+#acl OsvaldoSantanaNeto:read,write All:read
+
+== Links ==
+
+ * [http://www.pythonologia.org/ Blog]
+ * [http://www.slideshare.net/osantana Palestras]
+
+== Tarefas de Administração do Site ==
+
+Algumas das tarefas para a manutenção aqui do site:
+
+   * Verificar todas as alterações do dia em MudançasRecentes
+   * Acertar problemas de formatação das páginas
+   * Verificar as Páginas OrphanedPages, WantedPages e PáginasAbandonadas por links quebrados e/ou Páginas sem referência
+   * Verificar a página PageSize à procura de páginas ques estejam ocupando muito espaço
+   * Sempre que necessário adicionar administradores em AdminGroup
+   * Verificar estatísticas do site em http://www.pythonbrasil.com.br/stats/ e em EventStats
+   * Verificar páginas à procura de google-spammers e fechar a página com ACLs:
+      * ACL para administração: {{{#acl All:read AdminGroup:read,write,delete,revert,admin}}}
+   * Verificar ParceriaLinuxMall
+   * Usar a ferramenta para [attachment:WWW-Yahoo-Groups-1.91.tar.bz2 baixar histórico da lista].
+
+== Tradução (incompleta) do Moin ==
+
+O arquivo potfile com a tradução do moin para pt_BR (que está incompleta) pode ser baixada [attachment:pt.po aqui]. Caso você traduza mais mensagens agradeceria se você enviasse para meu e-mail pessoal.
+
+== Scripts Greasemonkey ==
+
+Os scripts [https://addons.mozilla.org/en-US/firefox/addon/748 Greasemonkey] abaixo podem ser usados por quem usa o GMail no Firefox para participar da lista de discussões da PythonBrasil. Elas removem as propagandas do Y! automaticamente ao responder ao e-mail e habilitam o suporte à bottom-posting:
+
+ * attachment:gmailbottompostinginrepl.user.js
+ * attachment:gmailremoveyahoolinks.user.js

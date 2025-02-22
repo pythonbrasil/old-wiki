@@ -1,0 +1,3 @@
+#pragma section-numbers offEsta "receita de bolo" ensina passo a passo como você configurar o servidor web Apache com o módulo para o protocolo WSGI mod_wsgi.
+== 1º Passo - Configurando o httpd.conf ==
+Baixe a versão mais recente do mod_wsgi em http://code.google.com/p/modwsgi/

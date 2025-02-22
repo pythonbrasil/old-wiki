@@ -1,0 +1,628 @@
+[[TableOfContents]]
+
+== Funciona! ==
+O tutorial original em inglês de Storm está incluso no código-fonte em tests/tutorial.txt, para que ele possa ser testado e atualizado.
+
+== Importando ==
+Vamos começar importando alguns nomes para o namespace.
+
+{{{
+#!python
+>>> from storm.locals import *
+>>>
+}}}
+== Definição básica ==
+Agora definiremos um tipo com algumas propriedades descrevendo a informação que estamos para mapear.
+
+{{{
+#!python
+>>> class Person(object):
+...     __storm_table__ = "person"
+...     id = Int(primary=True)
+...     name = Unicode()
+}}}
+Perceba que não tem definição-storm de classe base ou construtora.
+
+== Criando um banco de dados e um armazém (store) ==
+Ainda não temos ninguém com quem conversar, então vamos definir na memória um banco de dados SQLite para usar e um armazém (store) utilizando aquela banco de dados.
+
+{{{
+#!python
+>>> database = create_database("sqlite:")
+>>> store = Store(database)
+>>>
+}}}
+Suportam-se três banco de dados até o momento: SQLite, MySQL e PostgreSQL. O parâmetro passado para `create_database()` é um URI, como o seguinte:
+
+{{{
+database = create_database("scheme://nomeusario:senha@nomehost:porta/nome_banco")
+}}}
+O scheme pode ser "sqlite", "postgres", ou "mysql".
+
+Agora temos que criar a tabela que realmente irá guardar os dados para nossa classe.
+
+{{{
+#!python
+>>> store.execute("CREATE TABLE person "
+...               "(id INTEGER PRIMARY KEY, name VARCHAR)")
+<storm.databases.sqlite.SQLiteResult object at 0x...>
+}}}
+Recebemos um resultado de volta, mas não vamos nos preocupar com isso agora. Poderíamos também usar `noresult=True` para evitar o resultado inteiro.
+
+== Criando um objeto ==
+Vamos criar um objeto da classe definida.
+
+{{{
+#!python
+>>> joe = Person()
+>>> joe.name = u"Joe Johnes"
+>>> print "%r, %r" % (joe.id, joe.name)
+None, u'Joe Johnes'
+}}}
+Até agora esse objeto não tem conexão com o banco de dados. Vamos adicioná-lo ao armazém que criamos acima.
+
+{{{
+#!python
+>>> store.add(joe)
+<Person object at 0x...>
+>>> print "%r, %r" % (joe.id, joe.name)
+None, u'Joe Johnes'
+}}}
+Repare que o objeto não foi alterado, mesmo depois de ser adicionado ao armazém. Isso porque ele ainda não foi sincronizado.
+
+== Armazenagem de um objeto ==
+Uma vez que o objeto é adicionado ao armazém (store) ou dele buscado, já podemos conhecer sua relação com aquele armazém. Podemos facilmente verificar a qual armazém um objeto está ligado.
+
+{{{
+>>> Store.of(joe) is store
+True
+>>> Store.of(Person()) is None
+True
+}}}
+== Procurando um objeto ==
+Agora, o que aconteceria se realmente pedíssemos ao armazém que nos desse a pesoa de nome ''Joe Johnes''?
+
+{{{
+#!python
+>>> person = store.find(Person, Person.name == u"Joe Johnes").one()
+>>> print "%r, %r" % (person.id, person.name)
+1, u'Joe Johnes'
+>>>
+}}}
+A pessoa está lá!  É, tá, você estava esperando isso. :)
+
+Também podemos buscar o objeto usando sua chave primária.
+
+{{{
+#!python
+>>> store.get(Person, 1).name
+u'Joe Johnes'
+}}}
+== Cacheando comportamento ==
+Uma coisa interessante é que a pessoa é o Joe na verdade, certo? Nós simplesmente adicionamos esse objeto, então se só há um Joe, por que haveria dois objetos? Não há.
+
+{{{
+#!python
+>>> person is joe
+True
+}}}
+O que está acontecendo por detrás da cortina é que cada armazém possui um cache de objeto. Quando um objeto é ligado ao armazém, ele estará cacheado no armazém enquanto houver referência ao objeto em algum lugar, ou enquanto o objeto não estiver sincronizado (tiver alterações não sincronizadas).
+
+Storm se assegura de que ao menos um certo número de objetos recentemente usados fiquem na memória dentro da transação, de modo que objetos usados com freqüência não sejam buscados no banco de dados muitas vezes.
+
+== Sincronizando ==
+Quando tentamos encontrar Joe no banco de dados pela primeira vez, percebemos que a propriedade 'id' foi atribuída magicamente. Isso ocorreu porque o objeto foi sincronizado implicitamente de forma que a operação afetaria da mesma maneira qualquer alteração pendente.
+
+Sincronizações também podem se dar explicitamente.
+
+{{{
+#!python
+>>> mary = Person()
+>>> mary.name = u"Mary Margaret"
+>>> store.add(mary)
+<Person object at 0x...>
+>>> print "%r, %r" % (mary.id, mary.name)
+None, u'Mary Margaret'
+>>> store.flush()
+>>> print "%r, %r" % (mary.id, mary.name)
+2, u'Mary Margaret'
+}}}
+== Alterando objetos com Store ==
+Além de comumente alterar objetos, também podemos nos aproveitar do fato de que objetos estão atados a um banco de dados para alterá-los usando expressões.
+
+{{{
+#!python
+>>> store.find(Person, Person.name == u"Mary Margaret").set(name=u"Mary Maggie")
+>>> mary.name
+u'Mary Maggie'
+}}}
+Essa operação irá atingir cada objeto correspondente no banco de dados, bem como objetos que estiverem ativos na memória.
+
+== Efetivando ==
+Tudo o que fizemos até agora está dentro da transação. A partir de agora, podemos tornar essas mudanças, e qualquer mudança não efetivada, persistente por meio da efetivação delas, ou podemos desfazer tudo por meio da ''rolagem de volta''.
+
+Iremos efetivá-las, com algo tão simples quanto
+
+{{{
+#!python
+>>> store.commit()
+>>>
+}}}
+Isso foi fácil. Tudo está do mesmo modo em que estava, mas agora as mudanças estão lá "de verdade".
+
+== ''Rolagem de volta'' ==
+Abortar mudanças é igualmente fácil.
+
+{{{
+#!python
+>>> joe.name = u"Tom Thomas"
+>>>
+}}}
+Vejamos se essas mudanças estão realmente sendo levadas em conta pelo Storm e pelo banco de dados.
+
+{{{
+#!python
+>>> person = store.find(Person, Person.name == u"Tom Thomas").one()
+>>> person is joe
+True
+}}}
+Sim, elas estão. Agora, o passo mágico (música de suspense, por favor).
+
+{{{
+#!python
+>>> store.rollback()
+>>>
+}}}
+Erm.. Não aconteceu nada?
+
+Na verdade, algo aconteceu.. com Joe. Ele está de volta!
+
+{{{
+#!python
+>>> print "%r, %r" % (joe.id, joe.name)
+1, u'Joe Johnes'
+}}}
+== Construtores ==
+Então, estamos trabalhando demais só com pessoas. Vamos introduzir um novo tipo de dado em nosso modelo: empresas. Para as empresas usaremos um construtor, somente para diversão. Será a classe de empresa mais simples que você já viu:
+
+{{{
+#!python
+>>> class Company(object):
+...     __storm_table__ = "company"
+...     id = Int(primary=True)
+...     name = Unicode()
+...
+...     def __init__(self, name):
+...         self.name = name
+}}}
+Note que o parâmetro construtor não é opcional. Ele poderia se quiséssemos, mas nossas empresas sempre têm nomes.
+
+Vamos adicionar as tabelas para isso.
+
+{{{
+#!python
+>>> store.execute("CREATE TABLE company "
+...               "(id INTEGER PRIMARY KEY, name VARCHAR)", noresult=True)
+}}}
+Então, crie uma nova empresa.
+
+{{{
+>>> circus = Company(u"Circus Inc.")
+>>> print "%r, %r" % (circus.id, circus.name)
+None, u'Circus Inc.'
+}}}
+O `id` está ainda indefinido porque não sincronizamos ele. Na verdade, nós nem ainda '''adicionamos''' a empresa ao armazém. Faremos isso em breve. Veja só.
+
+== Referências e Subclasses ==
+Agora queremos admitir alguns empregados em nossa empresa. Melhor que refazer a definição de pessoa, manteremos ela como está, uma vez que ela é genérica, e criaremos uma nova subclasse dela para empregados, o que inclui um campo extra: o id da empresa.
+
+{{{
+#!python
+>>> class Employee(Person):
+...     __storm_table__ = "employee"
+...     company_id = Int()
+...     company = Reference(company_id, Empresa.id)
+...
+...     def __init__(self, name):
+...         self.name = name
+}}}
+Preste atenção por um instante na definição. Repare que ela define o que já está na pessoa, e introduz o `company_id`, e uma propriedade `company`, que é uma referência para outra classe. Ela também possui um construtor, mas que deixa a empresa sozinha.
+
+Como de costume, precisamos de uma tabela. SQLite não tem idéia do que é uma chave estrangeira, então não iremos nos preocupar em defini-la.
+
+{{{
+#!python
+>>> store.execute("CREATE TABLE employee "
+...               "(id INTEGER PRIMARY KEY, name VARCHAR, company_id INTEGER)",
+...               noresult=True)
+}}}
+Vamos dar vida a Ben agora.
+
+{{{
+#!python
+>>> ben = store.add(Employee(u"Ben Bill"))
+>>> print "%r, %r, %r" % (ben.id, ben.name, ben.company_id)
+None, u'Ben Bill', None
+}}}
+Podemos ver que eles não estão sincronizados ainda. Mesmo assim, podemos dizer que Bill trabalha no Circo.
+
+{{{
+#!python
+>>> ben.company = circus
+>>> print "%r, %r" % (ben.company_id, ben.company.name)
+None, u'Circus Inc.'
+}}}
+Claro, não temos ainda o id da empresa pois ele não foi sincronizado para o banco de dados ainda, e não atribuímos um id explicitamente. Storm ainda assim está mantendo a relação.
+
+Se de qualquer maneira a sincronização está pendente para o banco de dados (implícita ou explicitamente), os objetos obterão seus ids, e quaisquer referências são atualizadas da mesma forma (antes de serem sincronizadas).
+
+{{{
+#!python
+>>> store.flush()
+>>> print "%r, %r" % (ben.company_id, ben.company.name)
+1, u'Circus Inc.'
+}}}
+Estão ambos sincronizados para o banco de dados. Agora, perceba que a emrpresa Circus não foi adicionada explicitamente em qualquer momento. Storm fará isso automaticamente a objetos a que se fez referência, para ambos os objetos (àquele referido e ao referente).
+
+Vamos criar uma outra empresa para verificar algo. Dessa vez iremos sincronizar o armazém depois de adicioná-lo.
+
+{{{
+#!python
+>>> sweets = store.add(Company(u"Sweets Inc."))
+>>> store.flush()
+>>> sweets.id
+2
+}}}
+Legal, já obtivemos o id da nova empresa. Agora, o que aconteceria se mudássemos '''somente o id''' para a empresa de Ben?
+
+{{{
+#!python
+>>> ben.company_id = 2
+>>> ben.company.name
+u'Sweets Inc.'
+>>> ben.company is sweets
+True
+}}}
+Hah! '''Aquilo''' não era esperado, não é? ;-)
+
+Vamos efetivar tudo.
+
+{{{
+#!python
+>>> store.commit()
+>>>
+}}}
+== Relacionamentos muitos-para-um ==
+Então, enquanto nosso modelo diz que os empregados trabalham para uma única empresa (nós só concebemos pessoas normais aqui), as empresas podem naturalmente ter múltiplos empregados. Representamos isso em Storm usando um `conjunto de referências` (''reference set'').
+
+Não definiremos a empresa novamente. Em vez disso iremos adicionar um novo atributo à classe.
+
+{{{
+#!python
+>>> Empresa.employees = ReferenceSet(Empresa.id, Employee.company_id)
+>>>
+}}}
+Sem maiores complicações, já podemos ver quais empregados estão trabalhando para uma dada empresa.
+
+{{{
+#!python
+>>> sweets.employees.count()
+1
+>>> for employee in sweets.employees:
+...     print "%r, %r" % (employee.id, employee.name)
+...     print employee is ben
+...
+1, u'Ben Bill'
+True
+}}}
+Vamos criar um outro empregado, e adicioná-lo à Empresa, em vez de determinar a empresa no empregado (isso soa melhor, ao menos).
+
+{{{
+#!python
+>>> mike = store.add(Employee(u"Mike Mayer"))
+>>> sweets.employees.add(mike)
+>>>
+}}}
+Isso, é claro, significa que Mike está trabalhando por uma empresa, e isso então deveria ser refletido em tudo mais.
+
+{{{
+#!python
+>>> mike.company_id
+2
+>>> mike.company is sweets
+True
+}}}
+== Relacionamentos muitos-para-muitos e chaves compostas ==
+Queremos da mesma forma representar contadores (''accountants'') em nosso modelo. Empresas têm contadores, mas esses contadores também podem atender a muitas empresas, portanto representaremos isso usando muitos-para-um relacionamento.
+
+Vamos criar uma classe simples para usar com os contadores, e a classe de relacionamento.
+
+{{{
+#!python
+>>> class Accountant(Person):
+...     __storm_table__ = "accountant"
+...     def __init__(self, name):
+...         self.name = name
+>>> class CompanyAccountant(object):
+...     __storm_table__ = "company_accountant"
+...     __storm_primary__ = "company_id", "accountant_id"
+...     company_id = Int()
+...     accountant_id = Int()
+}}}
+Ei, nós só declaramos uma classe com uma chave composta!
+
+Agora, vamos usá-la para declarar o relacionamento muitos-para-muitos na empresa. Mais uma vez, iremos somente colar o novo atributo no objeto existente. Ele pode facilmente ser definido na hora da definição da classe. Depois veremos outra maneira para de fazer a mesma coisa.
+
+{{{
+#!python
+>>> Company.accountants = ReferenceSet(Company.id,
+...                                    CompanyAccountant.company_id,
+...                                    CompanyAccountant.accountant_id,
+...                                    Accountant.id)
+}}}
+Feito! A ordem em que cada atributo foi definido é importante, mas a lógica deve ser bem óbvia.
+
+Estamos deixando de lado algumas tabelas nesse momento.
+
+{{{
+#!python
+>>> store.execute("CREATE TABLE accountant "
+...               "(id INTEGER PRIMARY KEY, name VARCHAR)", noresult=True)
+...
+>>> store.execute("CREATE TABLE company_accountant "
+...               "(company_id INTEGER, accountant_id INTEGER,"
+...               " PRIMARY KEY (company_id, accountant_id))", noresult=True)
+}}}
+Vamos dar vida a dois contadores, e registrá-los em ambas empresas.
+
+{{{
+#!python
+>>> karl = Accountant(u"Karl Kent")
+>>> frank = Accountant(u"Frank Fourt")
+>>> sweets.accountants.add(karl)
+>>> sweets.accountants.add(frank)
+>>> circus.accountants.add(frank)
+>>>
+}}}
+É isso! De verdade! Repare que nós nem adicionamos eles ao armazém, pois isso acontece implicitamente quando se liga a outro objeto que já esteja no armazém, e desse modo não tivemos que que declarar o objeto de relacionamento, vez que é conhecido para o conjunto de referência.
+
+Podemos agora averiguá-los.
+
+{{{
+>>> sweets.accountants.count()
+2
+>>> circus.accountants.count()
+1
+}}}
+Mesmo que não tenhamos usado o objeto !CompanyAccountant explicitamente, podemos verificar se formos realmente curiosos.
+
+{{{
+#!python
+>>> store.get(CompanyAccountant, (sweets.id, frank.id))
+<CompanyAccountant object at 0x...>
+}}}
+Perceba que passamos um tupla para o método `get()` devido à chave composta.
+
+Se quiséssemos saber para quais empresas os contadores estão trabalhando, poderíamos facilmente definir a relação inversa.
+
+{{{
+#!python
+>>> Accountant.companies = ReferenceSet(Accountant.id,
+...                                     CompanyAccountant.accountant_id,
+...                                     CompanyAccountant.company_id,
+...                                     Company.id)
+>>> [company.name for company in frank.companies]
+[u'Circus Inc.', u'Sweets Inc.']
+>>> [company.name for company in karl.companies]
+[u'Sweets Inc.']
+}}}
+== Junções ==
+Já que obtivemos alguns dados legais para trabalhar, vamos tentar fazer algumas consulta interessantes.
+
+Vamos começar verificando quais empresas possuem ao menos um empregado de nome Ben. Temos ao menos duas maneiras de fazê-lo.
+
+Primeiramente, com uma junção implícita.
+
+{{{
+#!python
+>>> result = store.find(Company,
+...                     Company.company_id == Empresa.id,
+...                     Company.name.like(u"Ben %"))
+...
+>>> [company.name for company in result]
+[u'Sweets Inc.']
+}}}
+Dessa forma, podemos também fazer uma junção explícita. Isso é importante para um mapeamento complexo de junções SQL para consultas de Storm.
+
+{{{
+#!python
+>>> origin = [Company, Join(Employee, Employee.company_id == Company.id)]
+>>> result = store.using(*origin).find(Company, Employee.name.like(u"Ben %"))
+>>> [company.name for company in result]
+[u'Sweets Inc.']
+}}}
+Se já temos a empresa, e quiséssemos saber qual dos empregados tinha por nome Ben, seria ainda mais fácil.
+
+{{{
+#!python
+>>> result = sweets.employees.find(Employee.name.like(u"Ben %"))
+>>> [employee.name for employee in result]
+[u'Ben Bill']
+}}}
+== Sub-seleções ==
+Suponha que queiramos encontrar todos os contadores que não estão associados com a empresa. Podemos usar uma sub-seleção para obter o dado desejado.
+
+{{{
+#!python
+>>> laura = Accountant(u"Laura Montgomery")
+>>> store.add(laura)
+<Accountant ...>
+>>> subselect = Select(CompanyAccountant.accountant_id, distinct=True)
+>>> result = store.find(Accountant, Not(Accountant.id.is_in(subselect)))
+>>> result.one() is laura
+True
+>>>
+}}}
+== Ordenando e limitando resultados ==
+Ordenar e limitar resultados obtidos são certamente dentre outros o mais simples e ainda o mais desejado recurso para esse tido de ferramento, então queremos fazer isso de maneira bem fácil para entender e usar, é claro.
+
+Uma linha de código vale mais que mil palavras, então aqui estão alguns exemplos que demonstram como isso funciona:
+
+{{{
+>>> garry = store.add(Employee(u"Garry Glare"))
+>>> result = store.find(Employee)
+>>> [employee.name for employee in result.order_by(Employee.name)]
+[u'Ben Bill', u'Garry Glare', u'Mike Mayer']
+>>> [employee.name for employee in result.order_by(Desc(Employee.name))]
+[u'Mike Mayer', u'Garry Glare', u'Ben Bill']
+>>> [employee.name for employee in result.order_by(Employee.name)[:2]]
+[u'Ben Bill', u'Garry Glare']
+}}}
+== Múltiplos tipos com uma consulta ==
+Alguma vezes, pode ser interessante buscar mais que um objeto envolvido numa dada consulta. Imagine, por exemplo, que além de saber qual empresa tem um empregado por nome Ben, também queiramos saber quem é o empregado. Isso pode ser conseguido com uma consulta como a seguinte:
+
+{{{
+#!python
+>>> result = store.find((Company, Employee),
+...                     Employee.company_id == Company.id,
+...                     Employee.name.like(u"Ben %"))
+>>> [(company.name, employee.name) for company, employee in result]
+[(u'Sweets Inc.', u'Ben Bill')]
+}}}
+== A classe base de Storm ==
+Até aqui estivemos definindo nossos conjuntos de referência usando classes ou suas propriedades. Isso tem algumas vantagens, como ficar mais fácil debugar, mas também pode ter algumas desvantagens, como requerer que classes estejam presente no escopo local, o que potencialmente leva a importantes questões circulares.
+
+Para evitar isso tipo de situação, Storm suporta definir essas referências usando a versão ''stringficada'' da classe e dos nomes de propriedade. O único inconveniente de fazer isso é que todas as classes envolvidas devem herdar a classe base de `Storm`.
+
+Vamos definir algumas novas classes para mostrar isso. Para explicar esse ponto, faremos referência à classe antes que seja realmente definida.
+
+{{{
+#!python
+>>> class Country(Storm):
+...     __storm_table__ = "country"
+...     id = Int(primary=True)
+...     name = Unicode()
+...     currency_id = Int()
+...     currency = Reference(currency_id, "Currency.id")
+>>> class Currency(Storm):
+...     __storm_table__ = "currency"
+...     id = Int(primary=True)
+...     symbol = Unicode()
+>>> store.execute("CREATE TABLE country "
+...               "(id INTEGER PRIMARY KEY, name VARCHAR, currency_id INTEGER)",
+...               noresult=True)
+>>> store.execute("CREATE TABLE currency "
+...               "(id INTEGER PRIMARY KEY, symbol VARCHAR)", noresult=True)
+}}}
+Agora, vamos ver se funciona.
+
+{{{
+#!python
+>>> real = store.add(Currency())
+>>> real.id = 1
+>>> real.symbol = u"BRL"
+>>> brazil = store.add(Country())
+>>> brazil.name = u"Brazil"
+>>> brazil.currency_id = 1
+>>> brazil.currency.symbol
+u'BRL'
+}}}
+Questões!? ;-)
+
+== Carregando hook ==
+Storm permite às classes definir uns hooks um pouco diferentes chamados para atuar quando certas coisas acontecem. Um dos hooks interessantes disponíveis é o `__storm_loaded__`.
+
+Vamos trabalhar com ele. Iremos definir uma subclasse temporária da Pessoa para tanto.
+
+{{{
+#!python
+>>> class PersonWithHook(Person):
+...     def __init__(self, name):
+...         print "Creating %s" % name
+...         self.name = name
+...
+...     def __storm_loaded__(self):
+...         print "Loaded %s" % self.name
+>>> earl = store.add(PersonWithHook(u"Earl Easton"))
+Creating Earl Easton
+>>> earl = store.find(PersonWithHook, name=u"Earl Easton").one()
+>>> store.invalidate(earl)
+>>> del earl
+>>> import gc
+>>> collected = gc.collect()
+>>> earl = store.find(PersonWithHook, name=u"Earl Easton").one()
+Loaded Earl Easton
+}}}
+Note que na primeira procura, nada foi chamado, já que o objeto ainda estava na memória e cacheado. Portanto, nós invalidamos o objeto de cache interno de Storm e asseguramos, acionando um coletor de lixo, que estava fora-da-memória. Depois disso, o objeto teve que ser buscado do banco de dados novamente, e assim o hook foi chamado (e não o construtor!).
+
+== Executando expressões ==
+Storm também oferece um meio de executar expressões de uma maneira agnóstica de banco-de-dados, quando isso for necessário.
+
+Por exemplo:
+
+{{{
+#!python
+>>> result = store.execute(Select(Person.name, Person.id == 1))
+>>> result.get_one()
+(u'Joe Johnes',)
+}}}
+Esse mecanismo é usado internamente pelo próprio Storm para implementar formas de nível mais alto.
+
+== Auto-recarregar valores ==
+Storm oferece alguns valores especiais que podem ser atribuídos sob o controle dele. Um desses valores é o `AutoRelad`. Qunado usado, fará o objeto recarregar automaticamente o valor do banco de dados quando alcançado. Mesmo as chaves primárias podem se valer desse uso, como demonstrado acima.
+
+{{{
+>>> from storm.locals import AutoReload
+>>> ruy = store.add(Person())
+>>> ruy.name = u"Ruy"
+>>> print ruy.id
+None
+>>> ruy.id = AutoReload
+>>> print ruy.id
+4
+}}}
+Isso pode ser determinado como o valor padrão para qualquer atributo, fazendo o objeto ser lavado automaticamente se necessário.
+
+== Valores de expressão ==
+Ademais de auto-recarregar, é igualmente possível aplicar o que chamamos "expressões preguiçosas" a um atributo. Tais expressões são sincronizadas para o banco de dados quando o atributo é acessado, ou quando o objeto é sincronizado para o bando de dados (hora do INSERT/UPDATE).
+
+Por exemplo:
+
+{{{
+#!python
+from storm.locals import SQL
+>>> ruy.name = SQL("(SELECT name || ' Ritcher' FROM person WHERE id=4)")
+>>> ruy.name
+u'Ruy Ritcher'
+}}}
+Perceba que foi somente um exemplo do que '''pode''' ser feito. Não há necessidade de escrever sentenças de SQL dessa maneira se você não quiser. Você pode também usar expressões SQL baseada-em-classe proporcionada por Storm, ou ainda não usar nenhuma expressão.
+
+== Codinomes (''Aliases'') ==
+Então agora vamos dizer que queremos encontrar cada par de pessoas que trabalha para a mesma empresa. Eu não tenho idéia do porquê alguém iria '''querer''' fazer isso, mas é um bom caso para nós para exercitarmos os codinomes.
+
+Primeiro, importaremos `ClassAlias` para dentro do namespace local ("nota mental: isso deveria da mesma forma estar em storm.locals"), e criar uma referência para ele.
+
+{{{
+#!python
+>>> from storm.info import ClassAlias
+>>> AnotherEmployee = ClassAlias(Employee)
+}}}
+Legal, não é?
+
+Agora podemos facilmente fazer a consulta que queremos, de uma forma direta:
+
+{{{
+#!python
+>>> result = store.find((Employee, AnotherEmployee),
+...                     Employee.company_id == AnotherEmployee.company_id,
+...                     Employee.id > AnotherEmployee.id)
+>>> for employee1, employee2 in result:
+...     print (employee1.name, employee2.name)
+(u'Mike Mayer', u'Ben Bill')
+}}}
+Uou! O Mike e o Ben trabalham para a mesma empresa!
+
+(Questão para o leitor atento: por que "maior que" está sendo usado na consulta acima?)
+
+== Muito mais! ==
+Há muito mais sobre Storm a ser mostrado. Este tutorial é somente uma forma de iniciar em alguns dos conceitos. Se suas perguntas não forem respondidas em algum lugar por aí, sinta-se na liberdade de perguntá-las na lista de emails.

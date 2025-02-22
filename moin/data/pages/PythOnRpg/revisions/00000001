@@ -1,0 +1,23 @@
+Página dedicada ao esforço dos membros da lista de discução [http://br.groups.yahoo.com/group/python-brasil/ python-brasil] na criação de um Jogo de Role Play Online Maciço (''Massive Multi Online Role Playing Game'', ou ''MMORPG'').
+
+(Obviamente) ainda em construção.
+
+== O Título ==
+
+Como já citei na [http://br.groups.yahoo.com/group/python-brasil/ python-brasil], este nome (PythOnRPG) é somente provisório. Abro este espaço para que usuários possam dar sugestões de nomes mais criativos.
+Peço somente que lembrem-se do seguinte:
+ * O jogo será inicialmente em português (podemos usar o módulo gettext para realizar traduções para outros idiomas), portanto seria interessante um nome fácil de pronunciar e lembrar em nosso idioma.
+ * Nada com palavras como ''Demon'', ''Hell'', ''Inferno'', ''Dark'', ''Heaven'', e similares.
+ * Uma idéia: Algum nome baseado em outro idioma e com um significado. Como Inglês e Latin já estão meio 'batidos', estava pensando em utilizar algum título baseado no idioma Esperanto. Um bom lugar é para conseguir palavras em esperanto é: [http://www.lernu.net www.lernu.net]
+ * Outra idéia: retirar nomes e palavras de uma lingua não existente, como tantos autores de fantasia já fizeram. A não obediência a algo existente permite utilização de novos conceitos. [[FootNote(Adicionado por JoseJunior - 04/07/2005)]]
+
+Deixem suas sugestões de títulos aqui abaixo (ou enviem para [http://br.groups.yahoo.com/group/python-brasil/ lista]):
+ * ''(Sugestão aqui)''
+
+== Idéias ==
+
+Nesta parte serão descritas algumas das idéias propostas pelos usuários. Lembrando que podem (e irão) mudar de acordo com a opinião de outras pessoas, sugestões e com o decorrer do desenvolvimento:
+ * Casas e apartamentos (similar ao jogo [http://www.tibia.com Tibia]), cujos personagens, de posse de capital (no jogo) podem aluga-las (pagando certa quantia mensal de acordo com o tamanho e localização da mesma).
+ * Domesticação de animais e monstros (similar ao jogo [http://www.levelupgames.com.br Ragnarok]). Criaturas estas podem ser utilizadas para ajudar o jogador em batalhas, armazenar ítens ou serem controladas remotamente.
+ * Pano de fundo histórico com abertura de ''ganchos'' que possam ser usados em ''quests'' e no avanço da história fazendo do jogo constantemente evolutivo. [[FootNote(Adicionado por JoseJunior - 04/07/2005)]]
+ * ''(Deixe sua idéia aqui)''

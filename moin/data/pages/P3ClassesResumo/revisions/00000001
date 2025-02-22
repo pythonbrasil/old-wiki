@@ -1,0 +1,94 @@
+MarcoAndreLopesMendes
+
+'''Objetivos: '''
+
+A programação orientada a objetos (POO) é um meio diferente de pensar sobre programação. É uma metodologia moderna que foi abraçada pela indústria de software e é usada na criação da maioria dos software comerciais novos. O bloco básico de construção em POO é o objeto de software—freqüentemente chamados apenas de objeto. Agora, você dará seus primeiros passos em direção à compreensão da POO. Especificamente, você aprenderá a:
+
+ 1. Criar classes para definir objetos
+ 1. Escrever métodos e criar atributos para objetos
+ 1. Instanciar objetos a partir de classes
+ 1. Restringir o acesso a atributos do objeto
+
+A programação orientada a objetos (POO) encapsula (i.e., embrulha) dados (atributos) e funções (comportamentos) em componentes chamados de classes. Os dados e funções de uma classe intimamente estão ligados.
+
+Uma classe é como um desenho técnico. Usando um desenho técnico, um construtor pode construir uma casa. Usando uma classe, um programador podem criar um objeto (também chamado de uma instância).  
+
+Classes têm uma propriedade chamada de ocultação da informação. Embora objetos possam saber como comunicar-se através de interfaces bem-definidas, a um objeto normalmente não deve ser permitido saber
+como outro objeto é implementado — detalhes de implementação são escondidos dentro dos objetos.
+
+Em programação procedural, a unidade de programação é a função. Em programação orientada a objetos, a unidade de programação é a classe de quem objetos eventualmente são instanciados.  
+
+Programadores procedurais se concentram em escrever funções. Os verbos numa especificação de sistema ajudam o programador procedural a determinar o conjunto de funções que trabalharão juntos para implementar o sistema.
+ 
+Programadores de POO concentram-se em criar seus próprios tipos de dados definidos pelo usuário, chamados de classes. Os substantivos numa especificação de sistema ajudam o programador de POO a determinar o conjunto de classes que será usado para criar os objetos que trabalharão juntos para implementar o sistema.  
+
+Classes simplificam a programação porque os clientes necessitam estar preocupados só com as operações encapsuladas ou embutidas no objeto — a interface de objeto.  
+
+A palavra-chave class inicia uma definição de classe. A palavra-chave é seguida pelo nome da classe, que é seguido por um sinal de dois pontos (:). A linha que contém a palavra-chave class e o nome de classe é chamada de cabeçalho (header) da classe.  
+
+O corpo da classe é um bloco de código endentado que contém métodos e atributos que pertencem à classe.  
+
+Uma string de documentação opcional da classe descreve a classe. Se uma classe contém uma strings de documentação, a strings deve aparecer na linha ou linhas seguindo o cabeçalho da classe.  
+
+O método __init__ é o método construtor de uma classe. Um construtor é um método especial que executa cada vez um objeto de uma classe é criado. O construtor inicia os atributos do objeto e retorna None.
+
+Todos os métodos, incluindo construtores, devem especificar ao menos um parâmetro — a referência de objeto. Este parâmetro representa o objeto da classe para o qual o método é chamado. Os métodos devem usar a referência de objeto para acessar atributos e outros métodos que pertencem à classe.  
+Por convenção, o argumento de referência de objeto é chamado self.  
+Cada objeto tem o próprio namespace que contém os métodos do objeto e atributos. O construtor da classe começa com um objeto vazio (self) e adiciona atributos ao namespace do objeto. 
+ 
+Uma vez que uma classe foi definida, programas podem criar objetos dessa classe. Os programadores podem criar objetos como necessário. Isto é uma razão por que Python é dita ser uma linguagem extensível.  
+
+Um dos princípios fundamentais de um bom projeto de software é que o cliente não deve necessitar saber como uma classe é implementada para usar essa classe. O uso de módulos de Python facilita esta abstração de dados — um programa pode importar uma definição de classe e usar a classe sem saber como a classe é implementada. 
+
+Para criar um objeto de uma classe, simplesmente “chama-se” o nome da classe como se fosse uma função. Este chamado invoca o construtor da classe.  
+Classes e objetos de classes ambos têm atributos especiais que podem ser manipulados. Estes atributos, que Python cria quando uma classe é definida ou quando um objeto de uma classe é criado, fornecem informação sobre a classe ou
+objeto de uma classe a que eles pertencem.  
+
+O acesso direto aos dados do objeto pode deixar os dados num estado inconsistente.  
+
+A maioria das linguagens de programação orientadas a objetos permitem que um objeto se previna de que seus clientes acessem os dados do objeto diretamente. No entanto, em Python, o programador usa convenções de nomes de atributos para esconder os dados de clientes.  
+
+Embora um cliente possa acessar os dados do objeto diretamente (e talvez fazer com que os dados entrem em um estado inconsistente), um programador pode projetar classes para encorajar o uso correto. Uma técnica é fornecer métodos de acesso para a classe para que os dados da classe podem ser lidos e escritos numa maneira cuidadosamente controlada.  
+
+Quando uma classe define métodos de acesso, um cliente deve acessar atributos do objeto só por esses métodos de acesso.
+
+Classes freqüentemente fornecem métodos que permitem que os clientes coloquem ou recebam os valores dos atributos. Embora estes métodos não precisem ser chamados set e get, eles freqüentemente são. Métodos get também são chamados de métodos de pergunta.
+
+Um método set pode controlar o formato dos dados. 
+Um método set pode — e bem possivelmente devia — verificar tentativas de modificar o valor dos atributos. Isto assegura que o novo valor é apropriado para aquele item de dados.  
+
+Um método set pode especificar que uma mensagem de erro — chamada uma exceção — é levantado ao cliente quando as tentativas de cliente designar um valor inválido a um atributo.  
+
+Quando um autor de uma classe cria um atributo com um único sublinhado principal, o autor não quer que os usuários da classe acessem o atributo diretamente. Se um programa exige acesso aos atributos, o autor da classe fornece algum outro meio para fazer este acesso.  
+
+Em linguagens de programação tais como C + + e Java, uma classe pode declarar explicitamente que atributos ou métodos podem ser acessados por clientes da classe. Estes atributos ou métodos são chamados de públicos. Os atributos e métodos que não podem ser acessados por clientes da classe são chamados de privados.  
+
+Para prevenir o acesso indiscriminado a um atributo, coloque como prefixo ao nome do atributo dois __ ( caracteres de sublinhado). 
+
+Quando Python encontra um nome de atributo que começa com dois sublinhados, o interpretador previne o acesso indiscriminado aos dados. Ele muda o nome de um atributo por incluir informação sobre a classe a que o atributo pertence.  
+
+Construtores podem definir argumentos padrão que especificam valores iniciais para atributos do objeto, se o cliente não especifica um argumento no momento da construção.  
+
+Construtores podem definir argumentos de palavra-chave que capacitam o cliente a especificar valores para determinados argumentos.  
+
+Construtores fornecidos pelo programador que possuem valores padrão para todos os seus argumentos (ou que não exigem explicitamente nenhum argumento) também são chamados de construtores padrão.
+
+Se nenhum construtor é definido para uma classe, o interpretador cria um construtor padrão. No entanto, o esse construtor que Python fornece não executa nenhuma inicialização, então, quando um objeto é criado, não há garantia que o objeto esteja num estado coerente.  
+
+Um destruidor é executado quando um objeto é destruído (p.e., depois que não existe mais nenhuma referência ao objeto).
+
+Uma classe pode definir um método especial chamado __del__ que é executado quando a última referência a um objeto é removida ou sai do escopo. Um destruidor normalmente não especifica nenhum parâmetro além de self e retorna None.
+
+Um atributo de classe representa informação  da amplitude da classe (i.e., uma propriedade da classe, não de um objeto específico da classe).  
+
+Embora atributos de classe possam parecer como variáveis globais, cada atributo de classe reside no espaço de nome da classe em que é criado. Os atributos de classe devem ser iniciados uma vez (e só uma vez) na definição de classe.  
+
+Um atributo de classe pode ser acessado por qualquer objeto dessa classe. Os atributos de classe também existem mesmo quando nenhum objeto dessa classe existe. Acessar um atributo de classe quando nenhum objeto da classe existe, coloque como prefixo o nome de classe, seguido por um ponto, seguido pelo nome do atributo.  
+
+Programadores Python concentram-se em criar novas classes e em reutilizar classes da biblioteca padrão. Este tipo de reusabilidade de software agiliza o desenvolvimento de software poderoso e de alta-qualidade.  
+
+A biblioteca padrão capacita os desenvolvedores de Python a construir aplicações mais rápido através da reutilização de classes previamente existentes e extensamente testadas. 
+
+''' Referências '''
+
+ 1. Deitel, H. M. et ali. Python How to Program. Prentice Hall,2002

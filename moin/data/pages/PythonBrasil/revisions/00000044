@@ -1,0 +1,59 @@
+#pragma section-numbers off
+= Python Brasil =
+
+Este site, foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma. Ele utiliza o software MoinMoin que é um Wiki inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente.
+
+= Listas de Discussão =
+
+Existem duas listas: a python-br@yahoogrupos.com.br que é a mais povoada e com mais
+movimento e a python-brasil@yahoogrupos.com.br, que foi criada depois,
+porque a senha de administração da python-br foi perdida, ocasionando alguns SPAMs
+eventuais na lista. Na dúvida, se cadastre nas duas.
+
+= Notícias =
+
+   * '''[[DateTime(2003-11-17T21:00:00)]] - MoinMoin atualizado!''' - Atualizada a versão do MoinMoin usada. Agora, ao criar uma página, o autor pode definir regras para a alteração, leitura, remoção, ... para mais instruções de como isso funciona: HelpOnAccessControlLists.
+
+   * '''[[DateTime(2003-11-13T23:18:00)]] - Criado site da comunidade Python brasileira''' - A primeira página dedicada à comunidade brasileira de usuários de Python foi criada. Agora é com você usuário. É você quem manterá essa página viva e atualizada. E lembrem-se: qualquer dúvida ou problema entre em contato com o WikiMaster mais próximo.
+
+= Seções =
+
+Aqui estão algumas das seções desse site. Se você gostaria de sugerir outras é só entrar em contato com o WikiMaster mais próximo.
+
+   * PerguntasFrequentes - Perguntas e Respostas frequentes.
+   * DocumentaçãoPython - Documentação, Livros, Manuais, Tutoriais e afins.
+   * CookBook - Trechos de códigos úteis.
+   * ComoUsarWiki - Como usar esse site. Introdução Rápida.
+   * SoftwarePython - Módulos, Editores, Ferramentas para desenvolvimento Python.
+   * EmpresasPython - Empresas Brasileiras que já usam Python para aumentar seus lucros :)
+
+= Artigos =
+
+ Alguns artigos sobre python.
+
+   * IntroduçãoPythonRaLobao - Uma Simples introdução a programação Python (escrito por RaLobao)
+   * UsandoVariáveis - Artigo ensinando a usar as "variáveis" no Python, e expressões (escrito por RaLobao).
+   * InteragindoUsuário - Terceiro Artigo de Ra Lobao ensinando a usar as funções de stdin (entrada de dados).
+   * ProgramasCompativeisV15 - Como fazer programas compatíveis com o Python versão 1.5, que ainda é bastante usado (AurelioMarinhoJargas)
+   
+
+/!\ Inicialmente os artigos podem ser colocados aqui. Depois de um tempo eu vou movê-los para a página: ArtigosTutoriais.
+
+= Observações =
+
+Esse site é um Wiki e está aberto para a participação de todos. Sejam responsáveis e organizados que ele continuará sempre aberto para todos.
+
+= Livro de Visitas =
+
+Nesta seção, convidamos você Pythonista a assinar o livro de visita e 
+deixar aqui registrado a sua passagem pelo site PythonBrasil. Assim,
+teremos uma medida do interesse da comunidade brasileira nessa maravilhosa
+tecnologia:
+
+ * OsvaldoSantanaNeto (criador do site)
+ * Rodrigo Dias Arruda Senra
+ * Washington Coutinho Corrêa Jr
+ * Pedro Werneck
+ * Aurélio Marinho Jargas (http://aurelio.net)
+ * João Chaves Júnior
+ * Leslie Harlley Watter (http://lezz.org)

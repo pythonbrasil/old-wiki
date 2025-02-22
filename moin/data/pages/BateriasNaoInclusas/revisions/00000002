@@ -1,0 +1,94 @@
+#pragma section-numbers off
+= Quando as baterias não estão inclusas =
+
+Quando estamos desenvolvendo alguma solução na nossa linguagem preferida, algumas vezes precisamos de um recurso que não está implementado ou precisamos melhorar o desempenho de uma certa função.
+
+Em Python isso é muito simples, pois podemos criar módulos em outras linguagens e integrá-los como se fossem um módulo completo em Python.
+
+Um codigo em C/C++ que esteja pronto pode ser facilmente adaptado para ser chamado como se fosse uma função de um módulo em Python.
+
+Para mostrar o processo, vamos ver o código em C/C++ abaixo:
+
+{{{
+#
+# metodos.c
+#
+static PyObject *
+soma_int(PyObject *self, PyObject *args)
+{
+    int a, b, resultado;
+
+    if (!PyArg_ParseTuple(args, "(ii)", &a, &b))
+        return NULL;
+    if (&a == NULL)
+        return NULL;
+    if (&b == NULL)
+        return NULL;
+
+    resultado = a + b;
+
+    return Py_BuildValue("i", resultado);
+}
+
+static PyObject *
+soma_float(PyObject *self, PyObject *args)
+{
+    double a, b, resultado;
+
+    if (!PyArg_ParseTuple(args, "(dd)", &a, &b))
+        return NULL;
+    if (&a == NULL)
+        return NULL;
+    if (&b == NULL)
+        return NULL;
+
+    resultado = a + b;
+
+    return PyFloat_fromDouble(resultado);
+}
+}}}
+
+A primeira alteração é a inclusão da linha:
+
+{{{
+#include <Python.h>
+}}}
+
+Em seguida, é necessário criar duas funções que serão executadas quando o comando {{{import}}} for feito. A primeira é uma função que constrói uma tabela dos métodos disponíveis no módulo e a segunda é a função de inicialização.
+
+{{{
+static PyMethodDef MeusMetodos[] = {
+        {"soma_i", soma_int, METH_VARARGS, "Soma dois numeros inteiros."},
+        {"soma_f", soma_float, METH_VARARGS, "Soma dois numeros reais."},
+        {NULL, NULL, 0, NULL}   /* Obrigatório */
+};
+
+PyMODINIT_FUNC initmetodos(void) {
+        (void) Py_InitModule("metodos", MeusMetodos);
+};
+}}}
+
+Feitas essas alterações, é necessário compilar e linkar o novo módulo:
+
+{{{
+gcc -pthread -DNDEBUG -g -O3 -Wall -Wstrict-prototypes -fPIC -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -I/usr/include -I/usr/include/python2.3 -c metodos.c -o metodos.o
+gcc -pthread -shared metodos.o -L/usr/lib -lm -o metodos.so
+}}}
+
+A utilzação é como qualquer outro módulo:
+
+{{{
+>>> import metodos
+>>> dir(metodos)
+['__doc__', '__file__', '__name__', 'soma_f', 'soma_i']
+>>> metodos.soma_i(2, 3)
+5
+>>> metodos.soma_f(2.2, 3.3)
+5.5
+>>>
+}}}
+
+----
+
+MarcioMinicz
+

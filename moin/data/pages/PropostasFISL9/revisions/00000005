@@ -1,0 +1,5 @@
+Esta página serve para organizar as propostas de palestras da comunidade Python Brasil no FISL 9.0. A chamada de trabalhos está aberta até dia 15 de dezembro na página do [https://fisl.softwarelivre.org/9.0/papers/speaker/ FISL 9].
+|| '''Titulo''' || '''Palestrante(s)''' || '''Descrição''' ||
+|| Python no seu celular - PyS60 || BrunoGola e David Kwast || Apresentação básica sobre o uso de python em celulares Serie60 ||
+|| Grok: Zope 3 para homens das cavernas || Luciano Ramalho || Apresentação básica sobre o Grok, o framework que torna o desenvolvimento de sistemas com Zope 3 mais ágil e amigável. ||
+|| ISIS-NBP: Python no processamento de bibliotecas digitais || RodrigoSenra || O Ramalho é que é o especialista nessa área, eu sou apenas um curioso que está se aventurando nisso ;o). Mas a idéia é falar de um projeto em Python financiado pela Unesco para renovar a clássica plataforma ISIS criada a +d20 anos atrás e ainda muito utilizada por países da América Latina, África e Oriente Médio. ||

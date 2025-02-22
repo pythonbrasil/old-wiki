@@ -1,0 +1,45 @@
+Bases numéricas. Qual estudante de ciência da computação(ou mesmo qualquer outra coisa em informática) nunca achou uma estupidez converter decimal para binário, ou não amaldiçoa a humanidade por usar decimal ao invés de hexadecimal como padrão?
+
+Huh? não saca nada de binário? É uma base numérica simples. Por exemplo, quando você vai contar alguma coisa, você pensa em "1, 2, 3, 4, 5...". Isso é decimal, uma base numérica com 10 algarismos(0, 1, 2, 3, 4, 5, 6, 7, 8 e 9). Se você tem 9 + 1 coisas para contar, você "começa novamente" do 1, adicionando um 0 à direita dele, para obter um 10. Depois disse se chega na casa dos 80's, 10000000's and blah blah blah.
+
+Bináriamente falando, isso não é diferente. você tem 0, 1, 10, 11, 100... porque você não pode usar mais que dois algarismos. Assim:
+
+0 = 0
+
+1 = 1
+
+2 = 10
+
+3 = 11
+...
+Viu como não é difícil? O único problema é que isso é entediante, principalmente se você tem que converter números nas casas dos trilhões.[veja mais em http://en.wikipedia.org/wiki/Binary_numeral_system ]
+
+Pensando nisso, e inspirado por alguns exercícios do livro Thinking in C++, de Bruce Eckel, eu me inspirei para criar uma função que converte decimal para binário.
+
+{{{
+#!python
+def dectobin(n, call=1):
+        '''It takes "n" as a decimal and converts it
+           to binary, printing in the stdout.'''
+	if n < 2**call:
+		for acc in xrange(call-1, -1, -1):
+			if (n & (1 << acc)):
+				print '1',
+			else:
+				print '0',
+	else:
+		return dectobin(n, call+1)
+}}}
+
+Como podemos notar, a função chama a si mesma recursivamente se o número de dígitos(i.e.: o parâmetro call) não for suficiente para representar o número em binário.
+
+Detalhe para o uso dos bitwise operators, na expressão "if (n & (1 << acc))". 
+A expressão "x << y" retorna "x" com os dígitos em binário deslocados "y" casas à esquerda. 
+A expressão "x & y" realiza um "Bitwise AND"(também conhecido como Conjunção Lógica) entre os dois números. Um bitwise "AND" retorna uma operação lógica "E" entre os dois operandos em binário.
+Por exemplo: "0110 AND 0011" retorna "0010". Isso porque o algarismo 1 somente está equivalente na terceira casa dos dois números. Para mais detalhes veja http://en.wikipedia.org/wiki/Logical_conjunction .
+
+That's all folks!
+
+----
+
+Carlos Morais dos Santos

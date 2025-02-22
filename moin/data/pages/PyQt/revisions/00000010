@@ -1,0 +1,16 @@
+= PyQt =
+
+Esta página irá abrigar documentação e outros materiais sobre PyQt dentro do nosso portal.
+
+== Tutoriais PyQt3 ==
+
+   * TutorialPyQt - Pequeno tutorial para iniciantes em PyQt.
+   * ComoUsarPyQt - Pequena introdução a biblioteca PyQT.
+
+== Tutoriais PyQt4 ==
+
+   * [[http://zetcode.com/tutorials/pyqt4/|ThePyQt4Tutorial]] - Tutorial para iniciantes (em inglês).
+   * [[http://lateral.netmanagers.com.ar/categories/pyqt.html|PyQt4 via exemplos]] - By Roberto Alsina
+   * [[http://www.rkblog.rk.edu.pl/w/p/introduction-pyqt4/|PyQT4 Tutorial]] - Tutorial passo-a-passo de PyQt4
+   * [[http://tango.csc.smith.edu/dftwiki/index.php/PyQt4_Lab_1|PyQt4 Lab 1]] - Criando uma janela de editor simples com Qt4
+   

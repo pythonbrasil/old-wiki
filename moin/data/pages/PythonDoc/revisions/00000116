@@ -1,0 +1,138 @@
+#pragma section-numbers off
+= Python Doc =
+
+Projeto de tradução da documentação [http://www.python.org/doc/ oficial] do Python para o português.
+
+|| Coordenador || PedroWerneck ||
+|| Tradutores || AlexandreNalon, FelipeLessa, OsvaldoSantanaNeto, RafaelAlmeida, RenataPalazzo, RodrigoSenra ||
+|| Página do Projeto || http://www.codigolivre.org.br/projects/pythondoc/ ||
+
+[[TableOfContents]]
+
+== CVS ==
+
+Você pode obter os arquivos via CVS:
+
+ * Logar com o seu nome de usuário:
+
+{{{
+cvs -d:pserver:USERNAME@cvs.pythondoc.codigolivre.org.br:/home/cvsroot login
+}}}
+
+ * Baixar os arquivos:
+
+{{{
+cvs -d:pserver:USERNAME@cvs.pythondoc.codigolivre.org.br:/home/cvsroot co pythondoc
+}}}
+
+ * Sincronizar seus arquivos locais com o repositório
+
+{{{
+cvs -d:pserver:USERNAME@cvs.pythondoc.codigolivre.org.br:/home/cvsroot update
+}}}
+   É necessário estar dentro do diretório {{{pythondoc}}} para efetuar esta operação
+
+ * Enviar suas correções/alterações para o repositório
+
+{{{
+cvs -d:pserver:USERNAME@cvs.pythondoc.codigolivre.org.br:/home/cvsroot commit
+}}}
+   É necessário estar dentro do diretório {{{pythondoc}}} para efetuar esta operação
+
+ * Desconectar do repositório:
+
+{{{
+cvs -d:pserver:USERNAME@cvs.pythondoc.codigolivre.org.br:/home/cvsroot logout
+}}}
+
+Se você quer apenas os arquivos, mas não pretende enviar alterações pelo CVS, pode usar o usuário anonymous, com senha anonymous.
+
+== Lista de Discussão ==
+
+Os arquivos da lista de discussão do projeto encontram-se em: http://codigolivre.org.br/pipermail/pythondoc-brasil/
+
+
+== Dicionário == 
+
+O dicionário para tradução de termos ténicos encontra-se em ["Dicionário"]
+
+
+== Nomes dos Manuais Traduzidos ==
+
+||||||<tablewidth="100%" #C0C0C0>'''Nomes dos Manuais'''||
+||'''Diretório'''||'''Título Original'''||'''Título Traduzido'''||
+||api||Python/C API Reference Manual||Manual de Referência da API Python/C||
+||ext||Extending and Embedding the Python Interpreter||Estendendo e Embutindo o Interpretador Python||
+||lib||Python Library Reference||Referência da Biblioteca Python||
+||ref||Python Reference Manual||Manual de Referência Python||
+||tut||Python Tutorial||Tutorial Python||
+||||||* Falta a definição dos outros títulos||
+
+== Arquivos ==
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da tradução dos arquivos: referência'''||
+||<|2>'''Arquivo'''||||'''Tradução'''                        ||||'''Revisão'''||
+||                      '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável''' ||
+||ref/ref.tex         ||<#80FF80>100%||OsvaldoSantanaNeto      ||<#80FF80> 100% ||PedroWerneck      ||
+||ref/ref1.tex        ||<#80FF80>100%||OsvaldoSantanaNeto      ||<#80FF80> 100% ||PedroWerneck      ||
+||ref/ref2.tex        ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||ref/ref3.tex        ||<#FFFF80>14% ||OsvaldoSantanaNeto      ||<#FF8080> 0%   || -                ||
+||ref/ref4.tex        ||<#80FF80>100%||RafaelAlmeida           ||<#80FF80> 100% ||PedroWerneck      ||
+||ref/ref5.tex        ||<#FFFF80>36% ||RenataPalazzo           ||<#FF8080> 0%   || -                ||
+||ref/ref6.tex        ||<#FFFF80>0%  ||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||ref/ref7.tex        ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||ref/ref8.tex        ||<#80FF80>100%||PedroWerneck            ||<#FF8080> 0%   || -                ||
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da tradução dos arquivos: tutorial'''||
+||<|2>'''Arquivo'''||||'''Tradução'''                        ||||'''Revisão'''||
+||                      '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável''' ||
+||tut/glossary.tex    ||<#FFFF80>34% ||PedroWerneck            ||<#FF8080> 0%   || -                ||
+||tut/tut.tex         ||<#FFFF80>75% ||RodrigoSenra            ||<#FF8080> 0%   || -                ||
+
+
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da tradução dos arquivos: biblioteca'''||
+||<|2>'''Arquivo'''||||'''Tradução'''                        ||||'''Revisão'''||
+||                      '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável''' ||
+||lib/asttable.tex    ||<#80FF80>100%||AlexandreNalon          ||<#80FF80> 100% ||PedroWerneck      ||
+||lib/compiler.tex    ||<#80FF80>100%||AlexandreNalon          ||<#80FF80> 100% ||PedroWerneck      ||
+||lib/distutils.tex   ||<#80FF80>100%||AlexandreNalon          ||<#80FF80> 100% ||PedroWerneck      ||
+||lib/email.tex       ||<#80FF80>100%||AlexandreNalon          ||<#FF8080> 0%   || -                ||
+||lib/email-dir.py    ||<#80FF80>100%||AlexandreNalon          ||<#FF8080> 0%   || -                ||
+||lib/email-mime.py   ||<#80FF80>100%||AlexandreNalon          ||<#FF8080> 0%   || -                ||
+||lib/email-simple.py ||<#80FF80>100%||AlexandreNalon          ||<#FF8080> 0%   || -                ||
+||lib/email-unpack.py ||<#80FF80>100%||AlexandreNalon          ||<#FF8080> 0%   || -                ||
+||lib/lib.tex         ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||PedroWerneck      ||
+||lib/libaifc.tex     ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||PedroWerneck      ||
+||lib/libal.tex       ||<#80FF80>100%||FelipeLessa             ||<#FF8080> 0%   || -                ||
+||lib/liballos.tex    ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||PedroWerneck      ||
+||lib/libamoeba.tex   ||<#FFFF80>60% ||FelipeLessa (abandonado)||<#FF8080> 0%   || -                ||
+||lib/libanydbm.tex   ||<#80FF80>100%||FelipeLessa             ||<#FF8080> 0%   || -                ||
+||lib/libfuncs.tex    ||<#80FF80>100%||FelipeLessa             ||<#FF8080> 0%   || -                ||
+||lib/libintro.tex    ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||OsvaldoSantanaNeto||
+||lib/libobjs.tex     ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||OsvaldoSantanaNeto||
+||lib/libstdtypes.tex ||<#FFFF80>31% ||FelipeLessa             ||<#FF8080> 0%   || -                ||
+
+== Comentários e Observações dos Tradutores ==
+
+''Acho que existe um erro na ref4: "It is illegal to unbind a name that is referenced by an enclosing scope; the compiler will report a !SyntaxError.". Se alguém tiver mais informações, me avise. -- RafaelAlmeida''
+
+''Talvez alguma palavra-chave do LaTeX tenha sido traduzida por engano. -- FelipeLessa''
+
+''Felipe, eu conheço LaTeX sim. Quando eu disse pra usarem {{{\emph{}}}} é porque é a forma correta de se fazer isso. -- OsvaldoSantanaNeto''
+
+''Não tive resposta no #python-br, então pergunto aqui: aquelas BNFnotations que tem no ref5, elas devem ser traduzidas? Ou melhor, o que deve ser traduzido e o que não deve? -- RafaelAlmeida''
+
+''Eu acho que em trechos de código ou 'verbatim' a gente deve traduzir apenas os comentários e mais nada. Mantemos as mensagens e nomes de variáveis intactos. No caso das BNFs, seria interessante mantê-las como estão -- OsvaldoSantanaNeto''
+
+----
+
+AlexandreNalon[[BR]]
+FelipeLessa[[BR]]
+GuilhermeManika[[BR]]
+OsvaldoSantanaNeto[[BR]]
+PedroWerneck[[BR]]
+RafaelAlmeida[[BR]]
+RenataPalazzo[[BR]]
+RudaMoura[[BR]]
+e outros

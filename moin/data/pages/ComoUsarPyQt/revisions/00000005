@@ -1,0 +1,93 @@
+## page was renamed from pyQTEsboco
+#pragma section-numbers off
+
+= PyQT, bindings da biblioteca QT para python =
+Vamos à uma pequena introdução a biblioteca PyQT, que é uma  ponte entre python e a biblioteca QT, dísponivel para todas as plataformas suportadas pela QT da TrollTech, incluindo Windows, Linux, UNIX, MacOS/X e sistemas embarcados como Sharp Zaurus e Compaq iPAQ.
+PyQT é distribuido sob a licensa GPL para uso com a versão GPL do QT, para informações a respeito das demais licensas vá ate o site da TrollTech http://www.trolltech.com.
+
+=== 1-Instalação: ===
+Presumimos que todos já estamos com o python, QT e QT designer instalados, vamos instalar os demais programas.
+
+sip (4.1.1) : http://www.riverbankcomputing.co.uk/sip/index.php
+
+PyQt (3.13) : http://www.riverbankcomputing.co.uk/pyqt/index.php
+
+{{{
+~$ tar -zxvf sip-4.1.1.tar.gz
+~$ cd sip-4.1.1
+~$ python configure.py -l qt-mt
+~$ make
+~# make install
+}}}
+{{{
+~$ tar -zxvf PyQt-x11-gpl-3.13.tar.gz
+~$ cd PyQt-x11-gpl-3.13
+~$ python configure.py
+~$ Do you accept the terms of the license?
+'L' para ver a licença.
+'yes' para aceitar os termos da licença.
+'no' para não aceitar os termos da licença.
+~$ make
+~# make install
+}}}
+
+=== 2-Interface com QT designer: ===
+
+Abra o QT designer e na janela que aparece na inicialização escolha Widget ou em “File -> New” e ai escolha Widget.
+Insira um “TextLabel” e mude as seguintes opções na aba properties:
+font -> Point Size: De “12” para “20”.
+hAlign: De “AlignAuto” para “AlignHCenter”.
+text: De “textLabel1” para “Aperte Hello”.
+Insira também um “PushButton” e mude a seguinte opção na aba properties:
+text: De “pushButton1” para “Hello”.
+Em seguida diminua o tamanho da janela, de um click dentro dela com o botão direito do mouse escolha a opção “Lay Out in a Grid”, diminua um pouco mais se for preciso, para que fique o mais parecido com a figura(1), mude a opção “caption” de “Form1” para “Hello Word pyQT” e a opção “name” de “Form1” para “hello_word_pyqt” na aba properties. Agora salve com o nome de  “interface.ui”.
+
+{{attachment:figura01.png}}
+
+Figura(1)
+
+3-De Interface com QT designer para código python.
+
+	Existe uma ferramenta chamada “pyuic” que transforma arquivos ”.ui” criados com QT designer em código python veja como ela funciona:
+{{{
+~$ pyuic -o interface.py  interface.ui
+~$ pyuic -help #para maiores informações.
+}}}
+
+O arquivo “interface.py” que é uma clase python e quando instânciada mostra uma janela equivalente a “interface.ui” criada com o QT designer, agora veremos como ultilizar a “interface.py” em nosso programa principal.
+
+{{{
+#!python
+#HelloWordPyQT.py
+#!/usr/bin/env python
+import qt
+import sys
+
+from interface import *
+# Função chamada quando botão “Hello” for acionado
+# responsável pela alteração do “TextLabel”
+def botao_hello_clicked():
+        principal.textLabel1.setText('Hello Word Pytonistas')
+# Criamos a aplicação principal
+app = QApplication(sys.argv)
+
+# Conectamos o sinal lastWindowClosed() com a funcão quit()
+# quando fecharmos a janela da aplicação
+# ele chamara a função quit() que encerará o programa
+QObject.connect(app,SIGNAL('lastWindowClosed()'),app,SLOT('quit()'))
+
+# Instânciamos a clase “hello_word_pyqt”
+# do arquivo “interface.py”
+principal = hello_word_pyqt()
+
+# Mostramos a interface
+principal.show()
+# Conectamos o sinal clicked() do botão Hello
+# com a função botao_hello_clicked 
+principal.connect(principal.pushButton1,SIGNAL('clicked()'),botao_hello_clicked)
+app.exec_loop()
+}}}
+
+obs: Artigo em fase de criação, ajude a completa-lo.
+
+WiliamAlvesDeSouza -- (waa) -- wiliamsouza83(arroba)gmail(ponto)com

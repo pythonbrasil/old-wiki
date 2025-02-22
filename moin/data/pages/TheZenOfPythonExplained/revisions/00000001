@@ -1,0 +1,145 @@
+== TheZenOfPythonExplained aqui ==
+
+Essa á uma adaptação de um e-mail muito divertido que o Senra enviou para a lista pythonbrasil, respondendo à pergunta do Lucas, que queria saber o significado exato de cada frase do Zen. Com o tempo e o uso, o Zen vai se tornando mais claro. Segundo o Senra: "muita vezes o Zen é contraditório. Por isso Zen tem que ser vivenciado e experimentado, qualquer explicação será incompleta. Como dizem os  taoístas: o verdadeiro Tao é aquele que não pode se enunciado. "
+
+=== Beautiful is better than ugly. ===
+
+2 .__add__(1)
+
+ou
+
+2+1
+
+=== Explicit is better than implicit. ===
+
+def exponenciacao(expoente, base):
+    # ordem dos parametros invertida propositalmente
+    return base**expoente
+
+exponenciacao(2,3)
+
+  ou
+
+exponenciacao(base=2, expoente=3)
+
+=== Simple is better than complex. ===
+
+>>> x , i = [], 0
+>>> while 1:
+...     if i>10:
+...         break
+...     else:
+...         i = i + 1
+...         x.append(i)
+
+=== Complex is better than complicated. ===
+
+>>> x , i = [], 0
+>>> while 1:
+...     if i>10:
+...         break
+...     else:
+...         i = i + 1
+...         x.append(i)
+...
+
+ou
+
+>>> x , i = [], 0
+>>> while i>10:
+...         i += 1
+...         x.append(i)
+...
+
+Ou compare Zope e J2EE.
+
+=== Flat is better than nested. ===
+
+>>> x = {"nome": ('fulano','da vida'),
+         "contato":{"fones":('12345','67890'),
+"email":'belex@davida.com'}}
+
+ou
+
+>>> x = {"nome": 'fulano', "sobrenome":'da vida',
+         "fone":'12345', "cel":'67890', "email":'belex@davida.com'}
+
+Para facilitar a resposta (quem pensou que o primeiro era +
+organizadinho)...
+
+x["contato"][1] ou x["cel"]
+
+=== Sparse is better than dense. ===
+=== Readability counts. ===
+
+ >>> [i**2 for i in [j for j in range(10) if j%2==0]]
+
+ou
+
+ >>> sequencia = range(10)
+ >>> pares = [j for j in sequencia if j%2==0]
+ >>> [i**2 for i in pares]
+ >>> del sequencia, pares # vamos deixar a casa limpa!
+
+=== Special cases aren't special enough to break the rules. ===
+
+>>> x = [ 4, 8, 15, 16, 23, "42" ]
+>>> r = 0
+>>> for i in x:
+...     if isinstance(i, basestring):
+...         i = int(i)
+...     r += i
+
+ou
+
+>>> for i in x:
+...     try:
+...         r += i
+...     except TypeError:
+...         r += int(i)
+
+=== Although practicality beats purity. ===
+
+ >>> x = [ 4, 8, 15, 16, 23, "42" ]
+ >>> r = sum(int(i) for i in x)
+ >>> r
+108
+
+=== Errors should never pass silently. ===
+
+try:
+    # do something
+except:
+    pass
+
+=== Unless explicitly silenced. ===
+
+try:
+    # do something
+except SomeException:
+    pass
+
+=== In the face of ambiguity, refuse the temptation to guess. ===
+
+>>> 1 + '1'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+=== There should be one-- and preferably only one --obvious way to do it. ===
+
+=== Although that way may not be obvious at first unless you're Dutch. ===
+
+O Guido é holandês
+
+=== Now is better than never. ===
+
+=== Although never is often better than *right* now. ===
+
+=== If the implementation is hard to explain, it's a bad idea. === 
+
+Pense três vezes antes de usar metaclasses
+
+=== If the implementation is easy to explain, it may be a good idea. ===
+
+=== Namespaces are one honking great idea -- let's do more of those! ===

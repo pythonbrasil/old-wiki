@@ -1,0 +1,145 @@
+#pragma section-numbers off
+[[TableOfContents]]
+
+''Cookbook'' vem do inglês e significa Livro de Receitas. Esta seção destina-se exatamente a conter trechos úteis de código Python. Aquele mini-aplicativo, método, classe, função ou simplesmente uma dica de uso de Python deve ser colocada aqui.
+
+== Receitas ==
+=== Arquivos ===
+ * ArquivoDeConfiguracao - Leitura e escrita de um arquivo de configuração simples usando o mecanismo de import do Python.
+ * ArquivoDeConfiguracaoComConfigParser - Leitura e escrita de um arquivo de configuração simples usando o módulo !ConfigParser do Python.
+ * DividirArquivosEmVariosCdOuDvd - Script que organiza uma série de arquivos em vários DVDs/CDs.  Útil quando você não quer pensar muito ou pra otimizar o uso do DVD/CD.
+ * DirFileList - Cria uma lista com todos os arquivos de um determinado diretório recursivamente.
+=== Banco de Dados ===
+ * ConexaoOracle - Exemplo de conexão com o Banco de Dados Oracle.
+ * ["ConexaoMySQLdb"] - Exemplo de conexão com o Banco de Dados MySQL.
+ * ["ConexaoPostgreSQL"] - Exemplo de conexão com o Banco de Dados PostgreSQL.
+=== Criptografia, senhas e validadores ===
+ * CriptografiaDidatica - Um exemplo didático de implementação de um algoritmo de (de)criptografia (fraca) em Python.
+ * PyCryptoChavePublica - Exemplo de uso da biblioteca {{{PyCrypto}}} com algoritmo de criptografia de chave pública.
+ * GerandoPasswords - Script gráfico pra fazer senhas rapidamente.
+ * GeradorDeCpf - Gerador de CPFs aleatório. Três versões diferentes para todos os gostos.
+ * VerificadorDeCpf - Módulo contendo funções e classe para verificação de números de CPF.
+ * VerificadorDeCpfparaZope - Mesmo módulo, somente adaptado para rodar no Zope.
+ * VerificadorDeCnpj - Módulo contendo funções e classe para verificação de números de CNPJ.
+=== Formatos, datas, números e conversões ===
+ * ContaLetras - Conta o total de letras, as vogais e as consoantes de um texto.
+ * FloatFormat - Função para formatar um número do tipo {{{float}}}.
+ * FormatarDatas - Exemplo mostra como formatar datas e somas entre datas usando {{{mx.DateTime}}} e a datetime do proprio python.
+ * FormatarNumeros - Exemplo do uso locale para formatação de números e moedas no formato do pais.
+ * FormatarNumerosBrasil - Funções para formatar números no formato nacional.
+ * FrmtBytes - Formatador de "bytes".
+ * NumeroParaPalavrasEspanhol - Programa que, quando recebe numero, retorna sua forma "por extenso", em espanhol
+ * NumerosRomanos - Conversão de números inteiros para romanos e vice-versa.
+ * TiradorDeAcentos - Um tirador de acentos e "verificador de imprimibilidade" de strings UTF-8.
+ * StripHtml - Remove tags HTML de uma string.
+ * RenameFiles - Renomeia arquivos seguindo um padrão.
+ * CoresNoTerminal - Como utilizar cores no console do Linux e MS-DOS.
+ * DateTimeRange - Iterando no tempo.
+=== Imagens ===
+ * ConversaoDeImagens - Um exemplo de como converter uma imagem BMP para JPG usando a biblioteca PIL.
+ * ProcessandoJpeg - Transformar jpegs e bmps da pasta atual para jpegs compressados (muito útil pra poupar um espaço das fotos que tiramos com máquinas digitais)
+ * CodigoBarras - Integração com PIL para gerar imagens de código de barras.
+=== Interfaces Gráficas ===
+ * AdivinhacaoTkinter - Programa para adivinhar número que o usuário pensou, utilizando tkInter
+ * BarraProgresso - Barra de progresso para uso geral, como, adicionar registros no treeview e/ou adicionar cabeçalho no reportlab.
+ * BuscaTkinter - Busca na caixa de texto do Tkinter.
+ * GameOfLifeConway - Classe que aplica a regra básica (#R 23/3) do  Game Of Life em uma matriz de 0s e 1s.
+ * HelloWordPyQT
+ * ImagemTkinter - Como inserir uma imagem dentro da tela do Tkinter.
+ * MaskEntry - Classe para o Entry do pyGTK com mascára de entrada.
+ * MenusTkinter - Como criar diferentes tipos de menus em Tkinter.
+ * Calculadoras Python
+  * MiniCalculadora - Calculadora simples com parsing top-down.
+  * CalculadoraSimples - Calculadora simples.
+  * CalculadoraTkinter - Funções de bibliotecas padrões Python.
+  * CalculadoraSimplesTk - Construção detalhada dos frames.
+  * CalculadoraWxPython - Gerada pelo BOA Constructor.
+  * CalculadoraQt - Criada com o {{{QtDesigner}}}.
+  * CalculadoraComercial - Imita uma fita de impressão
+ * PyGtkMensagens - Como padronizar suas mensagens no seu aplicativo.
+ * PyGtkComboBoxEntry - Várias Rotinas Usando {{{ComboBoxEntry}}} no PyGtk
+ * PyGtkCellRenderCombo - Treeview com Combo
+ * PyGtkBarraFerramenta - Barra de ferramenta com teclas de atalho.
+ * PyGtkTreeView - Exemplo de uso do GTKTreeView, comom tabela. Com célula editável, evento "click" e célula com barra colorida e outras coisinhas mais.
+ * QtSignalEmPython - Uma implementação de QT Signals em Python.
+ * RenderizadorHtml - Um renderizador de HTML ultra-simples em Tkinter.
+ * RenderizadorHtmlPyGtk - Um renderizador de HTML ultra-simples em PyGTK.
+ * SorteadorDeElemento - Pequeno programa em Tkinter que cadastra elementos e posteriormente sorteia um deles.
+ * TelaCadastro - Exemplo de tela criada com o glade sendo executa pelo PyGTK.
+ * Tkinter3dCanvas - Desenha um cubo em 3D num Tkinter.Canvas, com três barras de rolagem para rotacioná-lo.
+ * TkinterShelve - Um pequeno software de cadastro que usa Tkinter pra interface e Shelve para persistência dos objetos.
+ * VariavelGlobalpyGtk - Este pequeno aplicativo mostra como transferir as variaveis entre janelas.
+ * CriacaoDinamicaGtk - Este pequeno estudo, utilizando glade, mostra como criar dinâmicamente campos em uma aplicação.
+ * BásicoBoaConstructor - evento de  clique em botão e uso fácil de um grid
+=== Indexação ===
+ * AchaMaiorLinhaEmArquivo - Abre um arquivo e retorna a(s) linha(s) de maior comprimento, em uma lista.
+ * BuscaPyBrasil - Código que faz busca por palavras no histórico da lista de discussão python-brasil no Yahoogrupos.
+ * ContarOcorrenciasEmLista - Conta as Ocorrências de um texto em uma lista. Coloca o resultado num dict.
+ * QuickSort - Algoritmo Quick Sort implementado em Python.
+ * RemoverRepetidosLista - Função para remover elementos repetidos de uma lista.
+=== Linguagem (Avançado) ===
+ * AutomatizarAtributosSlots - Metaclasses para automatizar a definição de atributos recebidos no método init e o atributo slots.
+ * CacheDeFuncoes - Exemplo de uma função que retorna uma função. A função cache_f() recebe uma função como paramêtro e retorna uma função igual a função original com um cache associado.
+ * DaemonizadorDeProgramas - Módulo para transformar um script em daemon.
+ * ObjectSpace - Armazenando em um cache as instâncias de uma classe automaticamente usando uma metaclasse
+ * SimulandoOperadorTernario - Como simular um operador ternário (o ? do C) em Python.
+ * ClassAttrTracking - Usando classes como estruturas de dados mantendo os atributos ordenados
+=== XML, HTML e Internet ===
+ * LendoXml - Exemplo simples de como ler um arquivo XML com xml.dom.minidom.
+ * LendoXml2 - Uma pequena mudança no LendoXml acima, para extrair os valores do nó.
+ * LendoXmlComLibxml2 - Exemplo simples de como ler arquivo XML com  Libxml2
+ * LimitGet - Como fazer download com a urllib limitando a banda usada.
+ * NewsReader - Acesso ao protocolo NNTP e leitura de notícias.
+ * PythonToHtml - Pequeno aplicativo que converte códigos fontes em Python para HTML aplicando syntax highlighting.
+ * RankingLinguagens - Exemplo simples porém útil de urllib e regular expressions.
+ * ThreadingXmlrpc - Uma classe que implementa multi-thread na classe SimpleXMLRPCServer.
+ * WebSqlObject - Exemplo de armazenamento de dados em Banco de Dados a partir de formulários Web.
+ * WebService - Exemplo de criação e utilização de um webservice.
+ * WsUpload - Exemplo de um webservice para transferência de arquivo para o servidor.
+ * WebSms - Módulo para envio de mensagens para telefone celular via interface web da operadora (Telemig Celular).
+ * TwistedWeb - Exemplo de uso do twisted.web, server tanto para depuração quanto para aprendizado.
+=== Sistema Operacional ===
+ * BatteryMonitor - Monitor da bateria de notebooks usando os recursos APM (Linux)
+ * ChamarFuncaoEmDlls - Como chamar funções de uma DLL no Windows.
+ * ChecarConexaoComInternet - Testa se existe uma conexão com a internet.
+ * DesligarLinuxViaSockets - Exemplo de script para desligar máquinas Linux usando Sockets.
+ * ImprimindoWindows - Como imprimir no Windows com as extensões win32 para Python
+ * MapeandoErrosParaExcecoes - Uma idéia para mapear códigos de erro do sistema operacional para exceções.
+ * MonitorandoSocketsComPyGtk - Exemplo de como usar as funções de monitorar IO embutidas em PyGTK para manipular sockets e arquivos de forma assíncrona.
+ * MonitorandoSocketsComTkinter - A mesma idéia do exemplo MonitorandoSocketsComPyGtk, porém usando Tkinter.
+ * PequenoUsoDeSockets - Um exemplo de joguinho utilizando sockets.
+ * MagicVelox - script que faz a autenticação do velox, para quem não aguenta mais o login do provedor, utilizando socket, re e urlopen.
+ * ParametrosNoShell - Entrada de valores no script pela linha de comando.
+ * ProcurarMp3eGerarPlaylist - Pequeno script que procura arquivos MP3 por palavra-chave, gera uma playlist e abre o xmms/winamp pra executá-la.
+ * PyWin32Com - Exemplo de um componente COM (servidor) em Python.
+ * OfficeToPdf - Rotina para automação do processo de geração de PDF (e outros formatos também) a partir de arquivos Microsoft Word e Excel através do PDFCreator (Uso extensivo de COM)
+ * SocketBasico - Pequena explicação e exemplos do uso de socket (TCP e UDP) com Python.
+ * TransferirArquivosViaSockets - Um pequeno exemplo de como transferir arquivos por sockets.
+ * UnixLinuxComandosWeb - Aplicação Web que permite executar alguns comandos de Unix e Linux.
+=== Outras Implementações e exemplos ===
+ * ["Bingo"] - Simula o funcionamento de um bingo um exemplo simples para quem está iniciando
+ * ConstantesEnumeradas - Definição de constantes de forma protegida
+ * ConversordeBases - Funções para conversão de números de qualquer base para qualquer base
+ * CategorizarNadador - Categoriza nadador pela idade. São apresentados duas soluções para o problema, uma usando if/elif/else e outra usando o módulo bisect.
+ * EnviarEmail - Rotina para enviar e-mail com anexos.
+ * EnviarEmailHtml - Função para enviar email em html com anexos e imagens
+ * ExecutandoEmIntervalos - Quatro formas de se executar periodicamente uma determinada função.
+ * InterpretadorHq9 - Interpretador da linguagem HQ9+
+ * IncludeModulo - Um "include()" para Python.
+ * InteligenciaArtificial - Um exemplo de como usar o módulo PyAIML.
+ * ["Logging"] - Usando o modulo logging do python
+ * ParticionarSequencia - Exemplo de como particionar uma seqüencia em uma lista com um número máximo de elementos.
+ * ProgramacaoFuncional - Um exemplo de como fazer algo útil fazendo uso da programação funcional.
+ * ["Py2ExeI18N"] - Como incluir automaticamente o diretorio locale (internationalization via gettext) no pacote gerado pelo Py2Exe
+ * Py2ExeSimples - Pequeno script para gerar arquivos executáveis para console a partir de scripts Python.
+ * Py2ExeCom - Script para gerar bibliotecas com componentes COM.
+ * ReceitaBarraDeProgresso - Função que implementa uma barra de progresso em tela texto (terminal).
+ * ResolvedorLabirinto - Resolvedor de labirintos escrito em Python
+ * ResolvedorLabirintoGrafico - versão do ResolvedorLabirinto que mostra o passo-a-passo graficamente (em PyGame).
+ * ThreadingBasico - Exemplos básicos das funcionalidades de threading do python
+ * TraduzindoSeuPrograma - Como traduzir seu programa usando o gettext.
+ * WeakList - Especialização da classe List para que não incremente o contador de referência dos objetos contidos nela, e Unit Test da classe.
+ * PrologPython - Funções básicas do Prolog implementadas em Python.
+ * WebCam - utilização do módulo VideoCapture
+----
+ . CategoryCategory

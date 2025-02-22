@@ -1,0 +1,17 @@
+#pragma section-numbers off
+= Receita: Verificador de CPF =
+
+Quase tudo é cópia do script de verificação de CPF do Pedro Werneck, mas voltado para Cnpj (usei um algoritmo que achei na internet, o algoritmo referia-se a CGC/CNPJ, se algo estiver errado, ou se tudo estiver errado podem falar :). Esse módulo contém algumas funções e classes úteis para aplicações que envolvam cadastros e necessitem validar números de CNPJ antes de incluir no banco de dados..
+
+== Código ==
+
+
+{{{
+
+}}}
+
+Volta para CookBook.
+
+----
+
+MichelThadeuSabchuk

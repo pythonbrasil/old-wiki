@@ -1,0 +1,210 @@
+#pragma section-numbers off
+= Python To HTML =
+
+Na verdade, isso não é exatamente uma receita. É uma pequena aplicação que imaginei que pudesse ser útil para alguns e não encontrei lugar melhor para colocar.
+
+É um software simples que gera a partir do seu código Python, o código HTML para exibi-lo com coloração de sintaxe. A parte do código para a colorização foi retirada do proprio Moin. A interface para selecionar as cores e arquivos usa Tkinter.
+
+
+== Código ==
+
+{{{
+#!python
+
+import Tkinter
+import tkColorChooser
+import tkFileDialog
+from Tkconstants import *
+
+import cgi
+import sys
+import cStringIO
+import keyword
+import token
+import tokenize
+
+
+_KEYWORD = token.NT_OFFSET + 1
+_TEXT    = token.NT_OFFSET + 2
+
+
+class Parser:
+    """ Send colored python source.
+    """
+
+    def __init__(self, raw, colors, out = sys.stdout):
+        """ Store the source text.
+        """
+        self.raw = raw.expandtabs().strip()
+        self.colors = colors
+        self.out = out
+
+    def format(self, formatter, form):
+        """ Parse and send the colored source.
+        """
+        # store line offsets in self.lines
+        self.lines = [0, 0]
+        pos = 0
+        while 1:
+            pos = self.raw.find('\n', pos) + 1
+            if not pos: break
+            self.lines.append(pos)
+        self.lines.append(len(self.raw))
+
+        # parse the source and write it
+        self.pos = 0
+        text = cStringIO.StringIO(self.raw)
+        self.out.write('<pre><font face="Lucida,Courier New">')
+        try:
+            tokenize.tokenize(text.readline, self)
+        except tokenize.TokenError, ex:
+            msg = ex[0]
+            line = ex[1][0]
+            self.out.write("<h3>ERROR: %s</h3>%s\n" % (
+                msg, self.raw[self.lines[line]:]))
+        self.out.write('</font></pre>')
+
+    def __call__(self, toktype, toktext, (srow,scol), (erow,ecol), line):
+        """ Token handler.
+        """
+        if 0:
+            print "type", toktype, token.tok_name[toktype], "text", toktext,
+            print "start", srow,scol, "end", erow,ecol, "<br>"
+
+        # calculate new positions
+        oldpos = self.pos
+        newpos = self.lines[srow] + scol
+        self.pos = newpos + len(toktext)
+
+        # handle newlines
+        if toktype in [token.NEWLINE, tokenize.NL]:
+            self.out.write('\n')
+            return
+
+        # send the original whitespace, if needed
+        if newpos > oldpos:
+            self.out.write(self.raw[oldpos:newpos])
+
+        # skip indenting tokens
+        if toktype in [token.INDENT, token.DEDENT]:
+            self.pos = newpos
+            return
+
+        # map token type to a color group
+        if token.LPAR <= toktype and toktype <= token.OP:
+            toktype = token.OP
+        elif toktype == token.NAME and keyword.iskeyword(toktext):
+            toktype = _KEYWORD
+        color = self.colors.get(toktype, self.colors[_TEXT])
+
+        style = ''
+        if toktype == token.ERRORTOKEN:
+            style = ' style="border: solid 1.5pt #FF0000;"'
+
+        # send text
+        self.out.write('<font color="%s"%s>' % (color, style))
+        self.out.write(cgi.escape(toktext))
+        self.out.write('</font>')
+
+
+
+class MainWindow(Tkinter.Tk):
+    def __init__(self):
+        Tkinter.Tk.__init__(self)
+        self.title("TkColorizer")
+        self.colors = {"Numbers":"#0080C0",
+                       "Operators":"#0000C0",
+                       "Strings":"#004080",
+                       "Comments":"#008000",
+                       "Names":"#000000",
+                       "Errors":"#FF8080",
+                       "Keywords":"#C00000",
+                       "Text":"#000000"}
+        self.build()
+
+    def build(self):
+        lbody = Tkinter.Frame(self)
+        for k, v in self.colors.items():
+            b = Tkinter.Label(lbody, text=k, padx=30, bg=v)
+            b.pack(expand=1, fill=BOTH)
+            b.bind("<Button-1>", self.changeColor)
+            self.setFg(b)
+        lbody.pack(expand=1, fill=BOTH, side=TOP)
+
+        rbody = Tkinter.Frame(self)
+        self.input = Tkinter.StringVar()
+        self.output = Tkinter.StringVar()
+        Tkinter.Label(rbody, text="Input:").grid(row=0, column=0)
+        Tkinter.Entry(rbody, textvariable=self.input).grid(row=0, column=1)
+        Tkinter.Button(rbody, text="...", command=self.askinput,
+                       bd=1).grid(row=0, column=2)
+        Tkinter.Label(rbody, text="Output:").grid(row=1, column=0)
+        Tkinter.Entry(rbody, textvariable=self.output).grid(row=1, column=1)
+        Tkinter.Button(rbody, text="...", command=self.askoutput,
+                       bd=1).grid(row=1, column=2)
+        Tkinter.Button(rbody, text="Generate HTML",
+                       command=self.done).grid(row=2, column=1)
+        rbody.pack(expand=1, fill=BOTH, side=BOTTOM)
+
+    def done(self, event=None):
+        raw = open(self.input.get()).read()
+        out = open(self.output.get(), "wt")
+        colors = {token.NUMBER:self.colors['Numbers'],
+                  token.OP:self.colors['Operators'],
+                  token.STRING:self.colors['Strings'],
+                  tokenize.COMMENT:self.colors['Comments'],
+                  token.NAME:self.colors['Names'],
+                  token.ERRORTOKEN:self.colors['Errors'],
+                   _KEYWORD:self.colors['Keywords'],
+                  _TEXT:self.colors['Text']
+                  }
+
+        Parser(raw, colors, out).format(None, None)
+        self.destroy()
+
+    def askinput(self, event=None):
+        ft = [("Python source file", "*.py"),
+              ("All files", "*.*")]
+        file = tkFileDialog.askopenfilename(parent=self, filetypes=ft)
+        if file:
+            self.input.set(file)
+        
+    def askoutput(self, event=None):
+        ft = [("HTML file", "*.html"),
+              ("HTML file", "*.htm"),
+              ("All files", "*.*")]
+        file = tkFileDialog.asksaveasfilename(parent=self, filetypes=ft)
+        if file:
+            self.output.set(file)
+        
+    def setFg(self, button):
+        bg = eval("0x" + button['bg'][1:])
+        set = [(bg >> 8*x) % 256 for x in (0, 1, 2)]
+        if sum(set)/3 < 85:
+            button['fg'] = "#FFFFFF"
+        else:
+            button['fg'] = "#000000"
+        
+    def changeColor(self, event=None):
+        w = event.widget
+        k = w['text']
+        c = w['bg']
+        a, b = tkColorChooser.askcolor(parent=self, initialcolor=c, title=k)
+        if b is not None:
+            w['bg'] = b
+            self.colors[k] = b
+            self.setFg(w)
+            
+        
+if __name__ == "__main__":
+    root = MainWindow()
+    root.mainloop()
+
+}}}
+
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

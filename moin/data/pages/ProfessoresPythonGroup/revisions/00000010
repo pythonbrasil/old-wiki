@@ -1,0 +1,4 @@
+#acl ProfessoresPythonGroup:read,write,revert,admin,delete All:read
+ * MarcoAndréLopesMendes
+ * RodrigoSenra
+ * EduardoDaSilva

@@ -1,0 +1,33 @@
+O ojetivo desta página é auxiliar os usuários do Windows (principalemente Windows XP) a configurarem um ambiente para o desenvolvimento de programas em Python em conjunto com as mais diversas bibliotecas, como PyGTK, wxPython, Eagle, etc. e IDES, como o SPE e o Eclipse.
+
+A maioria das distribuições Linux traz Python na instalação padrão. Além disto, distribuições que possuem um gerenciador de pacotes, quer seja baseado em arquivos RPM, DEB ou semelhantes, tornam muito simples a instalação de pacotes adicionais, gerenciando as dependências e instalando todos os pacotes nedessários ao funcionamento de uma determinada aplicação.
+
+Para os usuários de Windows, o processo de instalação exige que ele saiba quais pacotes são necessários, bem como as versões, e em que ordem eles devem ser instalados. Esta documentação tem o objetivo de auxiliar neste processo.
+
+Serão descritos os pacotes necessários para o funcionamento de cada apliacação, bem como  a ordem correta de instalação. A maioria dos links aponta para o site [http://www.superdownloads.com.br superdownloads.com.br]. Ele foi escolhido por ser um site em português, ser bastante conhecido pelos usuários de Windows, por manter atualizados os links para a última versão de cada aplicativo e por possuir uma explicação do que faz cada aplicação. No caso de aplicações que não estão disponíveis neste site, outros endereços serão fornecidos.
+
+= Python =
+
+Para a instalação básica do Python, contendo o interpretrador, as bibliotecas padrão e um ambiente simples de desenvolvimento, siga os passos abaixo:
+
+ 1. Instale o [http://superdownloads.uol.com.br/download/i3176.html interpretador Python].
+
+É isto! 
+
+
+= wxPython =
+
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o [http://superdownloads.uol.com.br/download/i29158.html wxpython]
+
+= SPE =
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o wxpython, conforme as instruções da seção específica.
+ 1. [http://superdownloads.uol.com.br/download/i38598.html SPE].
+
+
+
+
+
+----
+Autor: MarcoAndreLopesMendes

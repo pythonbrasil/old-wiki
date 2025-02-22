@@ -1,0 +1,30 @@
+<<TableOfContents>>
+
+=== Como criar um pool de conexões no sqlalchemy ? ===
+
+from sqlalchemy import create_engine,Table,Column,Integer,String,MetaData,PrimaryKeyConstraint,Sequence,Boolean
+from sqlalchemy.engine.url import URL
+from sqlalchemy.orm import sessionmaker
+
+#bdband -> alias criado no arquivo firebird.conf ( Firebird 2.1 )
+
+_url     = URL('firebird','SYSDBA','masterkey','192.168.1.11','3052','bdband')
+engine   = create_engine(_url)
+metadata = MetaData(bind=engine)
+
+#cria a tabela
+cli_usu    = Table('cli_usu',
+                   metadata,
+                   Column('cli_usu_id',Integer,Sequence('gn_cli_usu_id')),#criar um campo cli_usu_id, do tipo inteiro, utilizando sequence do banco
+                   Column('nome',String(20),nullable=False),#criar um campo nome, do tipo String com tamanho 20, não aceitando null
+                   Column('senha',String(10),nullable=False),#criar um campo senha, do tipo String com tamanho 10, não aceitando null
+                   Column('ativo',Boolean,nullable=False)#criar um campo ativo, do tipo Boolean (no caso do firebird o sqlalchemy irá criar o campo ativo do tipo smallint (0-false,1-true ), não aceitando null
+                   )
+cli_usu_pk = PrimaryKeyConstraint('cli_usu_id',name='CLI_USU_PK') #criar a pk da tabela cli_usu, atribuindo um nome a constraint
+cli_usu.append_constraint(cli_usu_pk) #incluindo a pk à tabela cli_usu
+
+#cria as tabelas no banco (caso nao existam)
+metadata.create_all()
+
+#cria o sessionmaker
+Session = sessionmaker(bind=engine,autoflush=True,transactional=True)

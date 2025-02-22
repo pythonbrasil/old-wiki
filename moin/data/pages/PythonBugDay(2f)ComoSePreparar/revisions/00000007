@@ -1,0 +1,138 @@
+== Dicas Gerais ==
+
+- Leia http://wiki.python.org/moin/PythonBugDay !
+
+  - Lá há vários links de outras coisas que precisam ser lidas, incluindo o excelente ''educating new contributors'': http://www.cs.ubc.ca/~drifty/pycon/sprint_tutorial.pdf
+
+- Crie uma conta no issue tracker: http://bugs.python.org
+
+ - Identifique bugs fáceis de antemão (procure pela [http://bugs.python.org/issue?%40search_text=&title=&%40columns=title&id=&%40columns=id&creation=&creator=&activity=&%40columns=activity&%40sort=activity&actor=&nosy=&type=&components=&versions=&dependencies=&assignee=&keywords=6&priority=&%40group=priority&status=1&%40columns=status&resolution=&%40pagesize=50&%40startwith=0&%40queryname=&%40old-queryname=&%40action=search keyword "easy"])
+  - Procure escolher pelo menos 3 tickets interessantes e adicioná-los aos seus bookmarks. Assim, quando chegar o "Dia D" você já vai saber por onde começar.
+
+- Instale um cliente IRC (por exemplo, xchat para Linux, mirc para Windows ou Colloquy para Mac) e, no dia do Bug Day, conecte-se na rede irc.freenode.net, canais #python, #python-br e #python-dev
+
+== Baixando os fontes ==
+
+Se você não tem o svn instalado, leia as instruções para o seu sistema operacional mais abaixo.
+
+Para baixar a versão '''2.6''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/projects/python/trunk python_trunk
+}}}
+ Isso irá criar o diretório '''python_trunk''' no diretório onde foi executado o comando.
+
+Para baixar a versão '''3.0''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/projects/python/branches/py3k
+}}}
+ Isso irá gerar o diretório '''py3k''' no diretório onde foi executado o comando.
+
+
+== Preparando o Linux e/ou o MacOS ==
+
+Normalmente tanto o Linux quanto o Mac já vêm com as ferramentas necessárias para trabalhar com códigos (svn, gcc, vim, etc...). Caso algum não esteja instalado, eles estão no CD ou DVD do SO, ou disponíveis nos repositórios de softwares.
+
+=== Verificando as ferramentas básicas ===
+
+Para verificar se os programas estão instalados, execute os comandos em um terminal:
+{{{
+svn --version
+gcc --version
+make --version
+}}}
+ 
+Se aparecer alguma mensagem como a abaixo, significa que você não tem o programa instalado e será necessário instalá-lo:
+{{{
+gcc: command not found
+}}}
+
+Em uma distribuição Linux derivada da Debian (como o Ubuntu, por exemplo), você pode instalar estes programas com:
+{{{
+sudo apt-get install subversion gcc make
+}}}
+
+Para instalar estas ferramentas no Mac é preciso instalar o XCode, que já vem no DVD de instalação do Mac OS X. Se você não possuir um DVD de instalação à mão, é possível baixar o XCode no próprio [http://developer.apple.com/tools/download/ site da Apple]. Lembre-se que, apesar de gratuito, o download é enorme (1.1 GB para a versão 3.0) e requer cadastro.
+
+
+=== Configurando e compilando ===
+
+Bom agora já está fácil! Baixe o código dos repositórios (conforme explicado acima). Em seguida, basta entrar no diretório '''trunk''' ou '''py3k''' e executar:
+{{{
+./configure && make
+}}}
+
+ Isso irá compilar o Python na respectiva versão.
+
+Para rodar o seu novo interpretador basta execeutar:
+{{{
+./python
+}}}
+
+ Ou, no Mac,
+{{{
+./python.exe
+}}}
+
+Para rodar os testes, execute
+{{{
+./python[.exe] Lib/test/regrtest.py
+}}}
+
+== Windows ==
+
+Diferente do Mac o Windows não traz quase nada de útil! :-) 
+
+=== Instalando as ferramentas básicas. ===
+
+Instalar [http://subversion.tigris.org/ Subversion], baixe o instalador em http://subversion.tigris.org/files/documents/15/41687/svn-1.4.6-setup.exe
+ 
+Basta seguir o instalador.
+ 
+Instalar o [http://www.microsoft.com/express/download/ Visual C++ Express Edition 2008].
+ 
+Basta seguir o instalador, não precisa instalar o SQL nem o MSDN, como sugerido no instalador. E aguarde sentado, pois isso consome 1.1 GB no disco que será devidamente baixado durante a intalação.
+ 
+
+Para verificar se o svn está instalado e funcionando, execute:
+{{{
+svn --version
+}}}
+ 
+ Se aparecer alguma mensagem como a abaixo, significa que você não tem o programa instalado e será necessário instalá-lo:
+{{{
+svn: command not found
+}}}
+
+=== Baixando os fontes ===
+
+Crie uma pasta sem pontos e nem espaços em todo o nome, por exemplo '''c:\pysrc''' 
+ 
+Pelo prompt do DOS, vá para esse diretório '''cd c:\pysrc''' 
+
+Para baixar a versão '''2.6''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/projects/python/trunk
+}}}
+ Isso irá criar o diretório '''trunk''' no diretório onde foi executado o comando.
+
+Para baixar a versão '''3k''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/projects/python/branches/py3k
+}}}
+ Isso irá gerar o diretório '''py3k''' no local onde foi executado o comando.
+
+=== Compilando ===
+
+Agora para compilar, abra o Microsoft Visual C++ 2008 Express Edition e vá em '''''File >> Open >>> Project/Solution'''.
+
+ * Abra o arquivo: '''C:\pysrc\trunk\PCbuild\python.vcproj''' ou '''C:\pysrc\py3k\PCbuild\python.vcproj''' 
+  
+
+ * Depois de abrir os projetos basta teclar '''[F7]'''.
+
+Isso irá compilar o Python na respectiva versão.
+
+Para rodar o seu novo interpretador basta executar o arquivo:
+{{{
+C:\pysrc\trunk\PCbuild\python_d.exe
+}}}

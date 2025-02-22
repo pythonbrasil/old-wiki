@@ -1,0 +1,97 @@
+'''Uma coleção de informações sobre a comunidade Python e o uso da linguagem no Brasil'''
+
+Se você puder complementar alguma das informações abaixo, por favor edite esta página, colocando seu nome ao lado da informação fornecida.
+
+Caso tenha informações divergentes, não remova a informação anterior mas acrescente a sua ao lado ou embaixo, sempre assinando com o seu nome. (LucianoRamalho)
+
+[[TableOfContents]]
+
+== Listas de discussão ==
+=== Python-Brasil ===
+ * Endereço: python-brasil@yahoogrupos.com.br
+ * Associados: 2276 (em 17/mar/2008)
+ * Criada em: 25/jun/2003
+ * Obs: sucessora da Python-Br, criada em 22/ago/2000
+(LucianoRamalho)
+
+=== Zope-PT ===
+ * Endereço: zope-pt@yahoogrupos.com.br
+ * Associados: 965 (em 17/mar/2008)
+ * Criada em: 27/mar/2000
+(LucianoRamalho)
+
+=== Django ===
+ * Endereço: django-brasil@googlegroups.com
+ * Associados: 408 (em 17/mar/2008)
+(WalterCruz)
+
+=== TurboGears ===
+ * Endereço: turbogears-pt@yahoogrupos.com.br
+ * Associados: 112 (em 17/mar/2008
+(Leandro Hamid)
+
+=== Outras ===
+ * quais?
+ * acaba de surgir uma de PyGTK; dados?
+== Eventos ==
+=== FISL ===
+ * ano 2000, n palestras sobre tecnologias Python
+ * ano 2001, n palestras sobre tecnologias Python
+ * ano 2002, n palestras sobre tecnologias Python
+  * convidados internacionais: Paul Everitt e Shane Hathaway da Zope Corp. (foi este o ano?)
+ * ano 2003, n palestras sobre tecnologias Python
+ * ano 2004, n palestras sobre tecnologias Python
+  * convidado internacional: Alan Runyan do Plone (foi este o ano?)
+ * ano 2005, n palestras sobre tecnologias Python
+ * ano 2006, n palestras sobre tecnologias Python
+ * ano 2007, n palestras sobre tecnologias Python
+ * ano 2007, primeiro ano com uma trilha Python exclusiva:
+  * n palestras e workshops dentro da trilha
+  * m palestras e workshops fora da trilha
+=== PyConBrasil ===
+ * 2005: Campinas, SP, XXX participantes
+ * 2006: Brasília, DF, XXX participantes
+ * 2007: Joinville, SC, XXX participantes
+=== PyScience ===
+ * 2008: Rio de Janeiro, RJ, XXX participantes
+== Sites ==
+=== PythonBrasil.com.br ===
+ * wiki com documentação
+ * quando foi criado?
+ * o que mais vale falar a respeito?
+=== Tchezope.org ===
+ * plone com documentação Zope/Plone
+ * quando foi criado?
+=== Associacao.PythonBrasil.com.br ===
+ * Plone da APyB
+ * Contém estatutos, atas, press-releases etc.
+ * quando foi criado?
+== Grupos de Usuários ==
+=== Associação Python Brasil ===
+ * entidade nacional sem fins lucrativos legalmente constituída
+ * coordena os eventos nacionais e opera os principais sites
+ * fundada em 22/jun/2007
+ * NN membros inscritos em xx/xx/2008
+(LucianoRamalho)
+
+=== GruPy-SP: grupo de usuários do Estado de São Paulo ===
+ * reuniões mensais desde nov/2007
+ * cerca de 40 pessoas na reunião de jan/2008
+ * mutirão para o Python Bug Day em 23/fev/2008
+(LucianoRamalho)
+
+== Casos de Uso ==
+=== IDG ===
+ * empresa de mídia, opera vários portais em Plone
+ * idgnow.com.br roda Zope desde 1999 e é um dos principais portais sobre TI no país
+=== Universidade de São Paulo ===
+ * Python está sendo usada em MAC-110: Introdução à Computação, no BCC do IME
+ * No LSI, Python é usada para criar programas para o OLPC
+=== FAPESP ===
+ * um dos mais importantes órgãos de fomento à pesquisa científica no Brasil
+ * financia a Incubadora Digital que hospeda mais de 400 portais em Plone para projetos de interesse científico, tecnológico ou social
+=== SERPRO ===
+ * Serviço Federal de Processamento de Dados
+ * Maior provedor de soluções ITC para o Governo Federal.
+ * Utiliza Python nas suas soluções de portais (atualmente mais de 200 portais em PZP) de internet e intranet. Alguns exemplos: Presidência da República, Brasil Gov, Governo Eletrônico, Polícia Federal e INPI.
+ * Python também vem sendo utilizado como linguagem integradora em  muitas soluções.

@@ -1,0 +1,118 @@
+O Grupy-SP é o Grupo de Usuários Python do Estado de São Paulo.
+
+O grupo começou em Novembro de 2007 e desde então mantemos a tradição de um encontro por mês, alternando fins de semana com dias de semana. Já fizemos reuniões na capital e em Santos, e existem planos para que ocorram reuniões em outras cidades do estado (como Campinas em maio).
+
+Você pode acompanhar as ações do Grupy-SP na [http://groups.google.com/group/grupy-sp lista de discussão].
+
+Desde fevereiro fazemos relatos dos nossos encontros no blog [http://python-groups.blogspot.com/ python-groups] junto com outros grupos de usuários Python.
+
+O GruPy-SP organiza anualmente o SaoPy - Encontro Paulista de Programadores Python
+
+== Próximos encontros ==
+=== Junho ===
+ * '''Python Bug Day'''
+ * '''Data:''' 21/06/2008
+ * '''Local:''' Google São Paulo (Av. Brig. Faria Lima, 3900 - 4o andar)
+ * '''Coordenação do Local:''' Rodolpho Eckhardt
+==== Inscrição ====
+Para pré-autorizarmos a entrada das pessoas no prédio durante o final-de-semana, precisamos que se cadastrem no evento:
+
+ 1. RodolphoEckhardt
+ 1. BrunoGola
+ 1. BrunoGomes
+ 1. LeandroLameiro
+ 1. Luiz Vitor Martinez Cardoso
+ 1. Roberto Hiroshi
+ 1. ChristianoAnderson
+ 1. RodrigoPimentel (rbp) - Não é certeza que eu possa ír...
+ 1. DavidKwast
+ 1. Diego Ucha
+ 1. PedroWerneck
+ 1. DanielCassiano - Não é certeza..
+ 1. LucianoPacheco
+ 1. Luis Gustavo Neves
+ 1. Luciano Condé
+ 1. AlbertoFabiano
+
+==== Como chegar ====
+Av. Brig. Faria Lima, 3900 - 4o andar
+
+O prédio fica bem no cruzamento da Faria Lima com a Juscelino Kubitschek - há uma agência do Bradesco no térreo.
+
+Caso necessitem da ajuda, entrem em contato ( rodolpho@google.com ou rodolpho@eckhardt.com.br , e (11) 83709223).
+
+==== Programação ====
+== Reuniões passadas ==
+=== Maio ===
+ * '''Data:''' 30/05/2008
+ * '''Local:''' Centro de Computação da Unicamp, em Campinas
+ * '''Coordenação:''' TatiAlChueyr e RodrigoSenra
+ * '''Apoio:''' JoaoBueno, GustavoScalet, MiguelFilho
+==== Inscrição ====
+Para participar pedimos que você se cadastre adicionando seu nome na página [:InscritosGrupySP052008:Lista de Inscrição]. Este cadastro é importante para autorizar sua entrada no Centro de Computação da Unicamp.
+
+==== Como chegar ====
+Este encontro ocorrerá no Centro de Computação da Unicamp (CCUEC), o mesmo local onde ocorreu a primeira PyConBrasil em 2005!  [http://pyconbrasil.com.br/saiba-mais/edicoes-anteriores/pyconbrasil-2005/localizacao Localização]
+
+==== Programação ====
+'''Período da manhã'''
+
+ * 9h00 - 11h30: Mini-curso Plugins do GIMP em Python, João Bueno (Vagas limitadas! InscrevaSe)
+ * 11h30 - 13h00: Almoço (Cantina da Educação / Pedagogia)
+'''Período da tarde - Palestras'''
+
+ * 13h00 - 13h30: '''Introdução a Python''', GustavoScalet (20 min) [attachment:Introdu%C3%A7%C3%A3o_a_Python_-_GrupySP_%2830_05_2008%29.pdf Slides] [attachment:Introdu%C3%A7%C3%A3o_a_Python_-_GrupySP_%2830_05_2008%29.tex Fonte LaTeX]
+ * 13h30 - 14h00: '''Python aplicado ao ensino de robótica''' Victor Matheus (20 min)
+ * 14h00 - 15h00: '''Geração automática de bindings para ctypes'''. NiltonVolpato (45 min)
+ * 15h00 - 15h30: '''Seu projeto para o mundo''': Como empacotar sua aplicação feita em Python nos formatos. RPM e DEB. MiguelFilho (20min)
+ * 15h30 - 16h00: '''Python: Binding the Libre Universe Together''': Python como linguagem de script comum para vários aplicativos gráficos livres e bibliotecas gráficas. JoaoBueno (20min)
+ * 16h00 - 16h30: '''InVesalius: '''desenvolvimento de aplicativo desktop de reconstrução 3D de imagens médicas com wxPython e VTK. TatiAlChueyr (20 min)
+ * 16h30 - 17h00: '''Como construir uma Biblioteca Digital (na mão) com Python?''' com cenas explícitas de código-fonte  RodrigoSenra (20 min)
+'''Período da noite'''
+
+ * 17h00 -     ...   : Lanche no Galleria Shopping
+=== Abril ===
+Não houve encontro em Abril, nos reunimos "informalmente" no [http://fisl.softwarelivre.org.br/9.0/www FISL 9.0] em Porto Alegre.
+
+=== Dia 24/03/2008 no Google em São Paulo (Av. Brig. Faria Lima, 3900 - 4o Andar) ===
+Coordenação do local e do programa: Rodolpho Henrique Orlovsky Eckhardt
+
+[http://python-groups.blogspot.com/2008/04/v-grupy-sp-meeting-in-so-paulo-march.html Relato no python-groups]
+
+==== Programa ====
+ * 17h00-17h30: Aquecimento
+ * 17h30-18h30: RodolphoEckhardt: Relatório de Viagem para o PyCon 2008
+ * 18h30-19h30: Cary Hull. Tema: "Divmod's Axiom"
+ * 19h30-20h30: [http://www.aleax.it/pyc08_cback.pdf Alex Martelli. Tema: "Callback design patterns"]
+ * 20h30-21h30: [http://www.python.org/doc/essays/ppt/pycon2008/Py3kAndYou.pdf Guido van Rossum. Tema: "Python 3000"]
+ * 21h30-22h30: Collin Winter. Tema: "2to3"
+ * 22h30: Apresentações relâmpago/Sessão aberta
+=== Dia 22 e 23/02/2008 em Santos ===
+ * Responsável pelo local: Sandro e Ricardo
+ * Responsável pela programação: Sandro e Ricardo
+[http://python-groups.blogspot.com/2008/04/iv-grupy-sp-meeting-in-santos-feb-22.html Relato no python-groups]
+
+==== Atividades ====
+ * 22/02/2008 (sexta-feira):
+Palestras sobre Python para professores e alunos do Senai com LucianoRamalho e PedroWerneck.
+
+ * 23/02/2008 (sábado):
+Participação no PythonBugDay.
+
+[http://picasaweb.google.com/guinody/GrupySPSantosFevereiroDe2008?authkey=JsQFzDTedYY Fotos do evento]
+
+=== Dia 22/01/2008 na Livraria Cultura do Conjunto Nacional (Rua Augusta x Av. Paulista) ===
+ * Responsável pelo local: LucianoRamalho
+ * Responsável pela programação: BrunoGola
+==== Vídeos das palestras realizadas ====
+ * [http://video.google.com/videoplay?docid=-9174018775255486687 Coding DOJO] - Hugo Corbucci (Pageview = 111, Download = 20 até 20/02/2008)
+ * [http://video.google.com/videoplay?docid=-4731696367176083343 Mapeamento objeto-relacional com Python] - Leandro Lameiro (Pageview = 78, Download = 3 até 20/02/2008)
+=== Dia 08/12/2007 no Campus Santo Amaro do Centro Universitário SENAC ===
+ * Responsável pelo local: BrunoGola
+ * Responsável pela programação: MauroBeraldi e Alberto Fabiano
+==== Vídeos das palestras realizadas ====
+ * [http://video.google.com/videoplay?docid=5303962278151147403 Uma arquitetura de componentes em Python] - LucianoRamalho (Pageview = 317, Download = 50 até 20/02/2008)
+ * [http://video.google.com/videoplay?docid=-9021161105352496888 InVesalius - Por dentro do software de imagens médicas - parte 1] - TatiAlChueyr (Pageview = 50, Download = 19 até 20/02/2008)
+ * [http://video.google.com/videoplay?docid=-4069975514578548584 InVesalius - por dentro do software de imagens médicas - parte 2] - TatiAlChueyr (Pageview = 88, Download = 19 até 20/02/2008)
+=== Dia 13/11/2007 na pizzaria Degas (Rua Teodoro Sampaio) ===
+ * Responsável pelo local: LucianoRamalho

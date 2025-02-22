@@ -1,0 +1,50 @@
+= PyCon Brasil =
+
+Esta página será um repositório (temporário) para coletar informações sobre a organização do primeiro evento de Python no Brasil, extensível a América do Sul.
+
+== Sugestão de Nomes para a Conferência ==
+
+   * "PyConBR" 
+   * "PyConPt-br"
+   * "PyConBrasil"
+   * "PyConSA"
+   * "LatinPy"
+   * "PloZoPy"
+   * "PloneZoPy"
+
+''Prefiro nomes que façam referência ao Plone, ao Zope e ao Python àqueles que falem apenas de Python, apesar de achar que vai ser um pouco difícil a gente achar um nome com uma sonoridade boa misturando tudo isso. :) Uma alternativa pode ser colocar o Zope e o Plone no "subtítulo" da conferência. -- OsvaldoSantanaNeto''
+
+''Acredito que o Nome PyConBrasil é muito sugestivo. Outro nome bom eu acho que PyConLatinAmerica. Temos que fazer o nome python estar em evidência. -- FabioRizzo''
+
+== Sugestão de Data/Local ==
+
+  * (Jean Ferri) - Sendo no período 22 a 29 julho 2005, não seria melhor uma conferência em paralelo com o sexto FISL?
+
+  * (Sidney da Silva) - O congresso da SBC 2005 sera na Unisinos. Seria tempo suficiente pra organizar algo. http://www.inf.unisinos.br/servicos/noticias/mostra.php?codigo=18&chamada=SBC+2005
+
+=== Patrocínio ===
+ 
+Nome de possíveis nomes para pesquisar:
+
+   * Serpro
+   * Conectiva
+   * Haxent
+   * Async
+   * Hiper e o pessoal da Simples
+
+A lista não é completa, adicionem mais nomes que forem lembrando.
+
+=== Voluntários para Comissão de Organização ===
+
+   * RodrigoSenra
+   * OsvaldoSantanaNeto
+   * Fábio Rizzo Matos
+   * <seu nome aqui>
+
+=== Outras tarefas ===
+
+   * Contactar os organizadores do 6o FISL (parceira, auxílio, conselho)
+   * Levar a discussão para um âmbito + amplo: zope-pt, python-brasil, cabal, etc (quando + consolidado)
+   * Pescar listas de discussão PloneZoPy no mercosul e fazer contato com a galera.
+
+''Acho que levar essa discussão à python-cabal pode ser feita agora mesmo. Lá estão os maiores interessados em organizar um evento desse tipo. Alguém tem algo contra? -- OsvaldoSantanaNeto''

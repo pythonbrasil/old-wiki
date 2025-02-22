@@ -1,0 +1,377 @@
+MarcoAndreLopesMendes
+
+{{{                                                                  
+>>> s1 = "BSI320"
+>>> s2 = "BSI320"
+>>> 
+>>> len(s1) == len(s2)
+True
+>>> s1 == s2
+True
+>>> len(s1) == len(s2) ; s1 == s2
+True
+True
+>>> s2 = "bsi320"
+>>> len(s1) == len(s2) ; s1 == s2
+True
+False
+>>> s1 = "bsi-320"
+>>> len(s1) == len(s2) ; s1 == s2
+False
+False
+>>> s1 ; s2
+'bsi-320'
+'bsi320'
+>>> if len(s1) == len(s2):
+	print "Mesmo tamanho"
+	if s1 == s2:
+		print " iguais"
+	else:
+		print "diferentes"
+
+		
+>>> if len(s1) == len(s2):
+	print "Mesmo tamanho"
+	if s1 == s2:
+		print " iguais"
+	else:
+		print "diferentes"
+else:
+	print "Tamanho diferente"
+
+	
+Tamanho diferente
+>>> if len(s1) == len(s2):
+	print "Mesmo tamanho"
+	if s1 == s2:
+		print " iguais"
+	else:
+		print "diferentes"
+else:
+	print "Tamanho diferente"
+
+	
+Tamanho diferente
+>>> s1
+'bsi-320'
+>>> s2
+'bsi320'
+>>> s1 = 'bsi320'
+>>> if len(s1) == len(s2):
+	print "Mesmo tamanho"
+	if s1 == s2:
+		print " iguais"
+	else:
+		print "diferentes"
+else:
+	print "Tamanho diferente"
+
+	
+Mesmo tamanho
+ iguais
+>>> s1 = 'bsi310'
+>>> if len(s1) == len(s2):
+	print "Mesmo tamanho"
+	if s1 == s2:
+		print " iguais"
+	else:
+		print "diferentes"
+else:
+	print "Tamanho diferente"
+
+	
+Mesmo tamanho
+diferentes
+>>> if len(s1) == len(s2):
+	print "Mesmo tamanho"
+	if s1 == s2:
+		print " iguais"
+	else:
+		print "diferentes"
+else:
+	print "Tamanho diferente"
+
+	
+Mesmo tamanho
+diferentes
+>>> s1 = "01"
+>>> s2 = "1"
+>>> if len(s1) == len(s2):
+	print "Mesmo tamanho"
+	if s1 == s2:
+		print " iguais"
+	else:
+		print "diferentes"
+else:
+	print "Tamanho diferente"
+
+	
+Tamanho diferente
+>>> s1 > s2
+False
+>>> s1 < s2
+True
+>>> int(s1)
+1
+>>> n = "Ronaldinho"
+>>> n
+'Ronaldinho'
+>>> for l in range(len(n)-1,-1,-1): print n[l],
+
+o h n i d l a n o R
+>>> for l in range(len(n)-1,-1,-1): print n[l].upper(),
+
+O H N I D L A N O R
+
+>>> n[::-1].upper()
+'OHNIDLANOR'
+>>> 
+>>> 
+>>> 
+>>> n = "ovo"
+>>> ni = n[::-1]
+>>> n == ni
+True
+>>> n = 'casa'
+>>> n == ni
+False
+>>> ni = n[::-1]
+>>> n
+'casa'
+>>> ni
+'asac'
+>>> n = 'casa'
+>>> ni = n[::-1]
+>>> n == ni
+False
+>>> n = 'natan'
+>>> ni = n[::-1]
+>>> n == ni
+True
+>>> n = "socorram me subi no onibus em marrocos"
+>>> ni = n.replace(" ","")
+>>> ni
+'socorrammesubinoonibusemmarrocos'
+>>> ni = ni[::-1]
+>>> n
+'socorram me subi no onibus em marrocos'
+>>> n = "socorram me subi no onibus em marrocos"
+>>> n = n.replace(" ","")
+>>> ni = n[::-1]
+>>> n == ni
+True
+>>> n = "Festa na sexta!"
+>>> n
+'Festa na sexta!'
+>>> for l in range(len(n)-1,-1,-1): print n[l]
+
+!
+a
+t
+x
+e
+s
+ 
+a
+n
+ 
+a
+t
+s
+e
+F
+>>> for l in range(len(n)): print n[l]
+
+F
+e
+s
+t
+a
+ 
+n
+a
+ 
+s
+e
+x
+t
+a
+!
+>>> for i in range(len(n)): print n[:i+1]
+
+F
+Fe
+Fes
+Fest
+Festa
+Festa 
+Festa n
+Festa na
+Festa na 
+Festa na s
+Festa na se
+Festa na sex
+Festa na sext
+Festa na sexta
+Festa na sexta!
+>>> for i in range(len(n)): print n[0:i+1]
+
+F
+Fe
+Fes
+Fest
+Festa
+Festa 
+Festa n
+Festa na
+Festa na 
+Festa na s
+Festa na se
+Festa na sex
+Festa na sext
+Festa na sexta
+Festa na sexta!
+>>> data = "29/10/1973"
+>>> data[0:2]
+'29'
+>>> data[3:5]
+'10'
+>>> data[6:]
+'1973'
+>>> for i in range(len(n)-1,-1,-1): print n[0:i+1]
+
+Festa na sexta!
+Festa na sexta
+Festa na sext
+Festa na sex
+Festa na se
+Festa na s
+Festa na 
+Festa na
+Festa n
+Festa 
+Festa
+Fest
+Fes
+Fe
+F
+>>> 
+>>> mesesExt = ['Jan','Fev','Mar']
+>>> data = "29/01/1973"
+>>> mes = int(data[3:5])
+>>> mes
+1
+>>> 
+>>> print mesesExt[mes-1]
+Jan
+>>> n
+'Festa na sexta!'
+>>> for i in range(len(n)): 
+>>> c = 0
+>>> for i in range(len(n)):
+	if i
+>>> for letra in n:
+	if letra = " ":
+>>> for letra in n:
+	if letra == " ":
+		c +=1
+
+		
+>>> c
+2
+>>> print mesesExt[mes-1]
+>>> n
+'Festa na sexta!'
+>>> for letra in n:
+	if letra == " ":
+		c +=1
+>>> c
+4
+>>> c = 0
+>>> 
+>>> 
+
+>>> 
+>>> 
+>>> v = 0
+>>> for letra in n:
+	if letra in == " ":		v +=1
+	
+>>> v = 0
+>>> for letra in n:
+	if letra in ['a','e','i','o','u']:
+		v +=1
+>>> v
+5
+>>> n
+'Festa na sexta!'
+>>> n.upper()
+'FESTA NA SEXTA!'
+>>> n = n.lower()
+>>> n
+'festa na sexta!'
+>>> n.title()
+'Festa Na Sexta!'
+>>> n.capitalize()
+'Festa na sexta!'
+>>> n.title()
+'Festa Na Sexta!'
+>>> 'Festa Na Sexta!'
+'Festa Na Sexta!'
+>>> n
+'festa na sexta!'
+>>> l = range(10)
+>>> l
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> l.reverse()
+>>> l
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+>>> l
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+>>> l.sort()
+>>> l
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> import random
+>>> random.shuffle(l)
+>>> l
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2]
+>>> data
+'29/01/1973'
+>>> data[3]
+'0'
+>>> data[2]
+'/'
+>>> a = "marco"
+>>> b = a
+>>> b
+'marco'
+>>> b = "andre"
+>>> a
+'marco'
+>>> a
+'marco'
+>>> b
+'andre'
+>>> l
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2]
+>>> l1 = l
+>>> l1
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2]
+>>> l1.append(34566)
+>>> l1
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2, 34566]
+>>> l
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2, 34566]
+>>> l1 = l[:]
+>>> l1
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2, 34566]
+>>> l
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2, 34566]
+>>> l.pop()
+34566
+>>> l
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2]
+>>> l1
+[6, 9, 4, 0, 1, 3, 7, 5, 8, 2, 34566]
+>>> 
+}}}

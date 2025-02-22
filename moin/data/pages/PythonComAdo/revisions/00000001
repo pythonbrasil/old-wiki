@@ -1,0 +1,175 @@
+#pragma section-numbers off
+= Python com ADO =
+
+No ambiente Windows o acesso a banco de dados torna-se bem simples com a utilização do ADO (''Active Data Objects''), sigla bem comum para os programadores VB e ASP. Aliás, programadores VB conseguirão traçar alguns paralelos em relação a utilização do ADO entre as linguagens (VB e Python) neste tutorial. O ADO pode ser utilizado por qualquer linguagem que dê suporte a tecnologia COM (''Common Object Model''), como C++, xHarbour, VB, Delphi, e é claro, Python! Sim, se você não sabia, Python tem suporte à COM através da utilização do módulo {{{win32com}}} disponível no pacote {{{win32all}}} (''Win32 Extensions'' do Mark Hammond). Portanto, um dos requisitos para seguir os exemplos deste tutorial é que você possua o pacote {{{win32all}}} instalado, tanto baixando o mesmo da página do criador [http://starship.python.net/crew/mhammond Mark Hammond] ou instalando uma distribuição do Python que já venha com o pacote (como o [http://www.activestate.com ActivePython]). Além disso, você também deve ter o ADO instalado (a última versão é a 2.7, atualmente, e pode ser baixado no site da Microsoft ou http://www.graymalkin.globalhosts.com.br/files/mdac_typ.zip) além do driver JET 4.0 (também no site da Microsoft ou http://www.graymalkin.globalhosts.com.br/files/jetsetup.zip). É bom lembrar que neste tutorial estarei usando um banco de dados Access como exemplo (aqui não ensino como criá-lo, você deverá usar um já existente), porém o ADO permite se conectar a outros bancos como MySQL, SQL Server, Firebird, etc., desde que seja utilizado o provedor correspondente. Bem, agora, com tudo instalado, mãos à obra. Última nota: estarei comentando não só a utilização do ADO no Python, bem como aspectos da própria linguagem, para que o leitor (que pode ser um programador iniciante, assim como eu) não fique "no espaço" do porquê que tal coisa foi escrita de tal modo.
+
+Em primeiro lugar você deve criar os objetos do ADO, fazendo o seguinte:
+
+{{{
+#!python
+import win32com.client #importa o módulo para criar os objetos
+
+cn = win32com.client.Dispatch("ADODB.Connection")
+rs = win32com.client.Dispatch("ADODB.Recordset")
+}}}
+
+O objeto 'cn' será usado para manipular a conexão com o banco de dados (no nosso caso, com o arquivo físico) e o 'rs' será usado para manipular uma tabela do banco de dados. Necessariamente, você só precisa criar um Connection e quantos Recordsets forem necessários. Vejamos agora como abrir a conexão:
+
+{{{
+#!python
+cn.Open("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\\diretorio\\arquivo.mdb")
+}}}
+
+Lembre-se que o Python é sensível ao caso, portanto você deve escrever "Open" e não "open". E o quê quer dizer a string passada? Essa string, chamada string de conexão, é que define qual provedor de acesso [Provider] será utilizado e qual o banco de dados [Data Source] (no nosso caso é um arquivo físico, mas em BDs do tipo cliente-servidor será só o nome do banco). E qual o motivo das "\\" ao invés de "\"? Isso se deve ao fato de que a "\" tem um significado especial no Python. A junção da "\" com determinadas letras forma caracteres especiais como o Enter (representado por "\n"). Então para que a "\" apareça realmente é necessário que ela seja dobrada. Faça o teste no interpretador do Python digitando {{{print '\n'}}} e {{{print '\\'}}}, e você verá o resultado.
+
+''A minha sugestão nesse caso seria usar uma raw string. Ao invés de "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\\diretorio\\arquivo.mdb" usar r"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\diretorio\arquivo.mdb", dessa forma erros com relação ao número de "\" seriam evitados (usar o modulo os nesse caso acho que não faz sentido mesmo).'' - RafaelAlmeida (aFlag)
+
+Abrindo a tabela agora:
+
+{{{
+#!python
+sql = "SELECT * FROM tabela"
+rs.Open(sql, cn, 2, 3)
+}}}
+
+Primeiro, definimos sql como uma string com um comando na linguagem SQL (no nosso caso, não precisa-se necessariamente utilizar uma sintaxe SQL, bastava colocar o nome da tabela, todavia é mais interessante utilizar SQL). Como segundo argumento passamos a conexão ativa que é 'cn'. Mas, e esse 2 e 3, o quê significam? O primeiro (2) significa como a tabela deve ser aberta (para escrita e leitura, somente para leitura, etc). Você pode também utilizar variáveis-objetos no lugar, definindo-os:
+
+{{{
+#!python
+adOpenDynamic = 2 #leitura e escrita (permite ver alterações ou exclusões feitas por outros usuários)
+adOpenForwardOnly = 0 #permite somente que você avance aos registros posteriores, perdendo-se os anteriores
+adOpenKeyset = 1 #leitura e escrita (não permite ver alterações ou exclusões feitas por outros usuários)
+adOpenStatic = 3 #permite somente leitura
+}}}
+
+O segundo valor (3) representa como a tabela ou o registro devem ser trancadas (locked). Ele pode assumir os seguintes valores:
+
+{{{
+#!python
+adLockBatchOptimistic = 4
+adLockOptimistic = 3
+adLockPessimistic = 2
+adLockReadOnly = 1
+}}}
+
+Descobrindo os campos existentes na tabela aberta:
+
+{{{
+#!python
+for f in rs.Fields:
+    print f.Name
+}}}
+
+Apesar de rs.Fields não ser exibido como uma lista (se você tentar {{{print rs.Fields}}} o resultado será {{{<COMObject <unknown>>}}}) ele pode ser usado em uma iteração com o for. Daí, a cada iteração escrevemos a propriedade Name de "f", que representa o nome do campo. Outra propriedade existente é a propriedade {{{Type}}} que representa o tipo de dados contido no campo.
+
+Exibindo registros da tabela aberta:
+
+{{{
+#!python
+print rs.Fields['campo1'].value
+print rs.Fields['campo2']
+print rs.Fields('campo3')
+}}}
+
+Para exibir o conteúdo dos campos as três formas acima são válidas. A primeira explicita que você quer a propriedade "value" do campo, a segunda utiliza a propriedade padrão (que é a "value") e a terceira utiliza Fields() como uma função cujo paramêtro é o nome do campo.
+
+Adicionando registros na tabela aberta:
+
+{{{
+#!python
+rs.AddNew() #inicia a inclusão do registro
+rs.Fields['campo1'].value = "valor1" #coloca um valor no campo 'campo1'
+rs.Fields['campo2'].value = 5 #coloca um valor no campo 'campo2'
+rs.Fields['campo3'].value = "valor3" # coloca um valor no campo 'campo3'
+rs.Update() #finaliza a inclusão do registro
+}}}
+
+Note que para leitura do valor de um campo você pode fazer {{{print rs.Fields("codigo")}}} (utilizando "()") ou {{{print rs.Fields["codigo"]}}}, no entando para gravação você deve utilizar "[]", como no exemplo acima. O motivo é óbvio, já que os "()" representam a utilização de uma função e você não pode atribuir um valor à chamada de uma função. O melhor mesmo é se acostumar a utilizar apenas "[]", para evitar confusão.
+
+Procurando um registro:
+
+{{{
+#!python
+criterio = "valor=5"
+rs.Find(criterio)
+if rs.Eof:
+    print "Registro não encontrado!"
+else
+    print "Registro encontrado!"
+}}}
+
+Outro exemplo:
+
+{{{
+#!python
+criterio = "nome='Junior'"
+rs.Find(criterio)
+if rs.Eof:
+    print "Registro não encontrado!"
+else
+    print "Registro encontrado!"
+}}}
+
+O primeiro exemplo procura um registro cujo campo "valor" seja igual a 5 e o segundo exemplo procura um registro cujo campo "nome" seja igual a string "Junior". Necessariamente, o método {{{Find()}}} só precisa do primeiro paramêtro que é uma string contendo a condição (critério) que deve ser atendido para que um registro seja encontrado. A seguir, verificamos se a propriedade Eof (End of file) do registro é verdadeira (1) ou falsa (0). Isso se deve ao fato de que se o registro não for encontrado, o ponteiro do banco de dados ficará posicionado no final do arquivo, e quando isso ocorre Eof se torna 1. A partir disso, conclui-se se o registro foi ou não encontrado.
+
+Apagando um registro:
+
+{{{
+#!python
+rs.Delete()
+}}}
+
+Sim, é simples assim, lembrando que você deve estar posicionado no registro que você quer apagar. Para o posicionamento (movimentação) você pode utilizar o método {{{Find()}}} para encontrar o registro, ficando automaticamente posicionado nele. Ou utilizar um dos seguintes métodos:
+
+{{{
+#!python
+rs.MoveFirst() #vai para o primeiro registro
+rs.MoveLast() #vai para último registro
+rs.MoveNext() #vai para o próximo registro
+rs.MovePrevious() #vai para o registro anterior
+}}}
+
+Um exemplo de movimentação:
+
+{{{
+#!python
+rs.MoveFirst() #vai para o primeiro registro
+while not rs.Eof: #enquanto não for o final do arquivo
+    print rs.Fields['campo1'].value #escreve o conteúdo de "campo1" do registro
+    rs.MoveNext() #vai para o próximo registro
+}}}
+
+Nesse exemplo, ele vai para o primeiro registro e em seguida vai mostrando o conteúdo do campo "campo1" até que chegue ao final da tabela (após o último registro, ou seja, EOF).
+
+Fechando uma tabela e a conexão:
+
+{{{
+#!python
+rs.Close()
+cn.Close()
+}}}
+
+Simplesmente fecha a tabela e a conexão, sendo bom fazê-lo a fim de garantir que os dados sejam gravados no disco.
+
+O ADO não se limita as propriedades e métodos citados neste tutorial, existindo vários outros de grande importância mas que não citei (como Bof, {{{CancelUpdate()}}}, {{{RecordCount}}}, {{{Filter}}}, {{{Requery()}}}, {{{State}}}, {{{CursorLocation}}}, etc.).
+
+Bem, finda aqui o nosso pequeno tutorial que visa demonstrar o básico para a utilização do ADO no Python, além de exaltar a versatilidade da linguagem Python. Mostra também como programadores VB (como eu!) podem facilmente aprender Python e usufruir de conhecimentos já adquiridos. Para aqueles que já usam ADO no VB, basta apenas adaptar a sintaxe. E para aqueles que queriam um método fácil de acessar bancos de dados no Windows fica aí a dica.
+Qualquer dúvida, correção, crítica ou sugestão são mui bem aceitos por parte do autor, que pode ser contactado através do email: washingtonj arroba openlink pontocom ponto br
+
+
+''Parabéns! Muito bom esse artigo. -- OsvaldoSantanaNeto''
+
+''Ao invés de declarar as constantes manualmente, é possível usar o makepy. A maneira mais fácil de fazer isso é rodando o Pythonwin e selecionando Tools/COM Makepy Utility e, na lista que vai aparecer, "Microsoft ActiveX Data Objects 2.7 Library". As constantes e todos os métodos exportados pelos objetos dessa biblioteca passarão a estar disponíveis em tempo de desenvolvimento. Daí basta usar algo como:''
+
+{{{
+#!python
+from win32com.client import constants as c
+...
+rs.Open(sql, cn, c.adOpenDynamic, c.adLockOptimistic)
+}}}
+
+''Como os métodos também estarão disponíveis, o próprio Python checará uma série de erros, e se você estiver usando um ambiente como o Pythonwin, recursos como a auto-compleção funcionarão para os objetos ADO. -- Guilherme Manika''
+
+----
+
+Washington Coutinho Corrêa Junior

@@ -1,0 +1,60 @@
+Este espaço foi criado com a intenção de armazenar conteúdo sobre o curso de Jogos em python, a ser realizado em 2008 ainda. O projeto está em discussão na lista python-gamedev-brasil, no google groups.
+
+= O curso =
+
+O curso deve ser oferecido em EaD (Educação a Distância), atingindo assim o maior número de pessoas possível. O objetivo do mesmo é motivar e ensinar a comunidade em geral com assuntos relevantes a python e desenvolvimento de jogos. 
+
+ * '''Duração do curso''': 1 mês - mais que isso pode ficar muito extenso.
+ * '''Ensinando''': A principal forma de ensino a distância é através da criação de tutoriais e trabalhos a fazer. Podemos incrementar com jogos em comum, dinâmica de grupos e até alguns vídeo-tutoriais.
+ * '''Vagas''': O número de vagas terá de ser definido de acordo com a staff. Depois precisamos chegar num comum acordo de acordo com a carga horária escolhida.
+ * '''Formato da avaliação''': Como todo bom curso (ainda mais se for para considerarmos extensão universitária) precisamos de uma forma de avaliação que não seja carrasca com os alunos mas que cobrem para que todos estudem os conteúdos fornecidos. Pensei em dar então trabalhos práticos na maior parte do curso, sendo alguns individuais e a maioria em grupos diferentes (não sempre o mesmo, sorteio?). A idéia é cada 'disciplina' ter seus trabalhos e talvez bolarmos um trabalho final bem legal. (ps - se desejarmos que seja extensão universitária pela USP, essa mesma exige que seja realizada uma prova presencial)
+ * '''Apoio''': Precisamos arrumar alguém para emitir certificados (ou criar um nome do curso e esse ser somente o que emite). Patrocínio também é bem vindo para prêmios (seria ótimo por exemplo camisetas).
+
+= Disciplinas do Curso =
+
+Uma ementa está em construção em ["CursoDeJogos/Ementa"].
+
+Uma idéia é dividir o curso em 'disciplinas', que na realidade são assuntos. Precisa-se de responsáveis por cada área, não necessariamente apenas uma pessoa, mas pelo menos uma em cada área. Eis uma lista que repensei [[RobertoFaga]]:
+
+ * '''Python''': começa ensinando o básico de python (calculadora, listas, estruturas for, etc), seguido de técnicas mais avançadas, como OO (será que vale a pena ensinar OO?). Boa parte daqui já temos em português (até pelo PythonNaPratica), essa parte vai ser mais sossegada. Seria interessante ter sockets também, para games online.
+
+ * '''Pygame básico''': Ensinar os módulos básicos de pygame. Essa seria a disciplina mais pesada, e visa cobrir os módulos principais para se produzir um jogo simples. Apesar dos tutoriais que temos, vai ser um pouco chato pois precisamos ter materiais maiores, algo que ainda não encontrei. Mas enfim, é uma das mais divertidas...
+
+ * '''Técnicas de jogos''': game loops, sistemas de tiles, sprites (não com pygame necessariamente), alguma AI, e tudo que for relevante a jogos mas não atrelado a pygame necessariamente. Eu tenho alguma dificuldade em termos de material de referência para preparar isso. 
+
+Para game loops tem o artigo que eu traduzi aqui no wiki (GameLoop) e para o sistema de tiles eu posso preparar algum material, já que eu andei implementando umas coisas com isso durante as últimas férias. Alguma matemática seria interessante de ensinar aqui, ao meno vetores e geometria analítica em 2D. Mas isso pode (e provavelmente deve) ficar implícito dentro dos exemplos. [[KaoFelix]]
+
+ * '''Python em 3D''': Acho que seria interessante usar a Soya ou Panda (Soya é mais popular, não?), o problema é que eu sei muito pouco dessas para preparar material, precisaria ser outra pessoa.
+
+O desenvolvimento da Soya anda meio parado. Apesar dela ser fácil de usar a API é meio bagunçada e falta documentação. Acho a Panda mais interessante porque ela está sendo usada em projetos reais e apesar da API ser feia ela é razoavelmente consistente e tem documentação. Me proponho a preparar materiais, até porque eu já trabalhei em um projeto usando ela.[[KaoFelix]]
+
+== Quem pode o que ==
+Python:
+[[RobertoFaga]]
+[[KaoFelix]]
+
+PyGame:
+[[RobertoFaga]]
+[[KaoFelix]]
+
+GD:
+
+
+Python 3d:
+[[KaoFelix]]
+
+= Cronograma =
+
+Vou propor um cronograma, comentem plz, ou pelo menos votem com o nome depois da proposta. Existem duas opções de curso: 
+ * oferecer em Julho - quando teoricamente os alunos tem mais tempo, mas também podem viajar/descansar e atrapalhar. Ainda, teríamos pouco tempo para elaborar o material, o que ao meu ver é o maior ponto negativo dessa opção, mas também é quando eu e muitos outros têm mais tempo para monitorar/instruir.
+ * em Agosto  - começo de semestre universitário, normalmente mais sussegado, e começo de semestre efetivo também, normalmente pessoal que trabalha está mais folgado nesse período, até mesmo porque alguns nem têm férias em Julho. A maior vantagem mesmo é o tempo maior para preparar material, durante todo o mês de Julho, conseguiríamos ter um material muito bom. Ainda, podemos começar no finalzinho de Julho (lá pelo dia 28). [RobertoFaga]
+
+Existe ainda a duração do curso e a carga horária, que estão diretamente ligadas (votem tb):
+ * '''3 semanas''', carga horária mais pesada, sendo uma 4ª semana extra apenas para o projeto final - o qual seria grande. Considerando as 6 disciplinas citadas, isso daria um total de carga horária de aproximadamente 20h semanais, sem contar o tempo gasto para realização das tarefas (calculo eu que 30h a 40h seja o suficiente/máximo). Cada disciplina teria de contar então com 3 a 6 aulas de 2h a 4h, dependendo da relevância do assunto.
+ * '''4 semanas''', carga horária mais light, mas o projeto final sendo menor. O projeto final poderia ser formado de partes feitas durante o curso, é mais fácil de avaliarmos os trabalhos e de incentivar o pessoal. O problema é que não vai ter um super projeto tão legal quanto o item anterior, mas esse me agrada mais pois o trabalho fica mais espalhado. [RobertoFaga]
+ * '''5 semanas''', carga horária bem mais tranquila, mas temo por levar muito tempo de curso. Não sei se teremos tanto conteúdo assim para tanto tempo (parece que não mas é bastante)
+
+= Referências para usarmos no curso =
+
+ * http://www.pythonbrasil.com.br/moin.cgi/DesenvolvimentoDeJogos
+ * Paulo Barbeiro está organizando um material sobre GameDesign

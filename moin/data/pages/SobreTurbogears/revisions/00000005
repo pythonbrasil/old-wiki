@@ -1,0 +1,20 @@
+= Sobre O Turbogears =
+
+== O que é? ==
+O [[http://www.turbogears.org/|Turbogears]] É um arcabouço (framework) para a Web (AJAX, XML, Javascript, Web 2.0 como dizem), nos moldes do [[http://www.rubyonrails.org/|Ruby on Rails]], desenvolvido por Kevin Dangoor para a linguagem Python. O Turbogears utiliza-se do modelo model-view-controller ([[http://pt.wikipedia.org/wiki/MVC|MVC]]), e é diferente das abordagens de apresentação e código (controle) obtido com linguagens diretamente embutidas em HTML. O Turbogears permite desenvolver tanto a parte de apresentação como de armazenamento de um aplicativo para a Web.
+
+== Componentes ==
+O Turbogears é feito a partir de componentes já existentes e procura não reinventar a roda, são eles os componentes:
+
+  * [[http://www.turbogears.org/about/mochikit.html|Mochikit]]: Biblioteca para DOM, !JavaScript com chamamdas assíncronas (AJAX).
+  * [[http://www.turbogears.org/about/kid.html|Kid]]: Responsável pela apresentação, utiliza templates em XHTML com marcas própria para código em Python.
+  * [[http://www.turbogears.org/about/cherrypy.html|CherryPy]]: Servidor de servlets, é o mecanismo dinâmico para conteúdo Web.
+  * [[http://www.turbogears.org/about/sqlobject.html|SQLObject]]: Mapeia objetos em Python diretamente em um banco SQL.
+
+No contexto MVC, o Kid representa o view, o !CherryPy é o controller e finalmente o SQLOject faz o papel do Model.
+
+== Desenvolvendo ==
+
+Para quem deseja saber como utilizar o Turbogears (comprou a idéia :) ) eu recomendo olhar o [[http://www.turbogears.org/docs/wiki20/index.html|Tutorial]] disponível no sítio do Turbogears.
+
+Um bom local para encontrar informações sobre o TurboGears é (ou será, já que estamos começando :) ) o site da comunidade TurboGears que fala português, [[http://oturbogears.org|OTurboGears.org]]. -   DirceuPereiraTiegs

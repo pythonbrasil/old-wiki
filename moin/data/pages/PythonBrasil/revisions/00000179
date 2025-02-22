@@ -1,0 +1,70 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+#pragma section-numbers off
+= Python Brasil =
+
+Este site foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma (Português). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente.
+
+= Notícia do WikiMaster =
+
+'''Atualização:''' Como vocês notaram a cara do site mudou. Eu tive que atualizar a versão do MoinMoin por questões de segurança (descobriram um bug de segurança na versão que estavamos usando) e de quebra ganhamos algumas funcionalidades novas no site. Eu ainda vou acertar algumas coisas por aqui e é provável que tenha alguma coisa que não esteja funcionando no site. Se você descobrir algo assim mande um e-mail reportando o problema para osantana (@) pythonbrasil.com.br.
+
+Como vocês devem ter notado estamos com algumas 'novidades' por aqui. A primeira delas é aquele banner publicitário lá em cima. O pessoal da [http://www.linuxmall.com.br?fil=pythonbrasil.com.br LinuxMall] propôs uma parceria para o nosso site que consiste em: todas as vendas deles que partirem deste site pagarão 7% de comissão para o site. Esse dinheiro será usado para a manutenção do site e, futuramente, algum outro projeto que desejarmos colocar em prática e que demande de recursos financeiros.
+
+A outra novidade é a página CamisetasPython. Nessa página vocês encontrarão uma pesquisa sobre as camisetas Python que tanto desejamos e que é tão difícil de encontrarmos (a pesquisa ficará no ar por uns 15 dias ou até que tenha 300 participantes). Se conseguirmos muitos interessados em adquirir as camisetas a [http://www.linuxmall.com.br?fil=pythonbrasil.com.br LinuxMall] viabilizará a confecção e a venda delas em seu site. Legal isso, né? :) E mais uma vez: o dinheiro da venda das camisetas será destinado à manutenção do site e o excedente será guardado para uso posterior.
+
+Caso exista um valor excedente que não seja uma quantia muito alta para bancar projetos mais 'ousados' eu penso em criar um mecanismo de premiação para os melhores artigos publicados aqui no site. Podemos discutir essa idéia na lista posteriormente.
+
+Espero que vocês entendam essas modificações no site e contribuam sempre que possível fazendo suas compras no site da [http://www.linuxmall.com.br?fil=pythonbrasil.com.br LinuxMall].
+
+= Destaques =
+
+'''Teste de performance''' - Para os programadores que se preocupam com a performance de funcionamento de suas linguagens de programação preferidas os [http://www.d00dz.org d00dzers] fizeram um BenchmarkAdHoc onde comparam Python, Psycho (Python JIT), C++, PHP e Java. Acreditem, não ficamos tão mal posicionados assim.
+
+'''Muitas Oportunidades de trabalho''' - Nos últimos 4 dias, 3 novas vagas para programadores Python. É isso aí, aos poucos estamos mostrando que a linguagem Python veio para ficar. Não esqueça de ver as vagas na página de OportunidadesDeEmprego
+
+'''Foi!''' - O [http://www.softwarelivre.org/forum2004/ 5º Fórum Internacional do Software Livre] terminou. Para a comunidade Python foi simplesmente um sucesso. A paletra que eu e o RudaMoura apresentamos está disponibilizada na minha página (OsvaldoSantanaNeto). Aos outros Pythonistas participantes do Fórum eu peço que disponibilizem aqui no site as suas apresentações e fotografias tiradas por lá :) Para isso criei a página QuintoFórumInternacionalSoftwareLivre.
+
+'''Treinamento Zope''' - Recebi um e-mail da [http://www.simplesconsultoria.com.br Simples Consultoria] informando sobre um treinamento oficial de Zope que eles estão organizando. O instrutor será nada menos que o LucianoRamalho aqui da comunidade. Conhecendo o trabalho do LucianoRamalho e da Hiperlógica como conheço esse curso vai ser muito bom. E eu já recebi um e-mail com o valor do treinamento e digo: tá barato para este tipo de curso.
+
+Se você quer ajudar no crescimento da comunidade Python no Brasil e sabe inglês (ou sabe bem português e quer trabalhar na revisão dos textos), participe do projeto PythonDoc. É um projeto bastante interessante, ousado e aparentemente é o único no mundo (alguém conhece algum projeto de tradução da documentação oficial do Python para outro idioma?).
+
+= Seções =
+
+Aqui estão algumas das seções desse site. Se você gostaria de sugerir outras é só entrar em contato com o WikiMaster mais próximo.
+
+   * PerguntasFrequentes - Perguntas e Respostas frequentes.
+   * NotíciasPython - Notícias sobre Python.
+   * ProjetosPythonBrasil - Projetos apoiados pelo site.
+   * DocumentaçãoPython - Documentação, Livros, Manuais, Tutoriais e afins.
+   * ArtigosTutoriais - Artigos e Tutoriais sobre Python.
+   * CookBook - Trechos de códigos úteis.
+   * ComoUsarWiki - Como usar esse site. Introdução Rápida.
+   * SoftwarePython - Módulos, Editores e Ferramentas para desenvolvimento Python, bem como projetos desenvolvidos por brasileiros.
+   * EmpresasPython - Empresas Brasileiras que já usam Python para aumentar seus lucros :)
+   * OutrosGruposUsuários - Outros sites de grupos de usuários Python.
+   * OportunidadesDeEmprego - Vamos fazer a nossa parte no 'espetáculo do crescimento'. Empregue-se e ofereça empregos. Alguns recadinhos profissionais também estão aqui.
+   * DiscussõesAleatórias - Se você não sabe em que página contribuir, use esta.
+   * CaixaDeSugestões - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * LivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+
+= Como Participar =
+
+Você pode participar da comunidade PythonBrasil diretamente aqui no site, através da lista de discussão ou via IRC.
+
+=== Lista de Discussão ===
+
+A lista oficial do site é: python-brasil@yahoogrupos.com.br ([http://br.groups.yahoo.com/group/python-brasil/ página principal]). Para se cadastrar na python-brasil, envie email (com qualquer conteúdo/assunto) para python-brasil-subscribe@yahoogrupos.com.br. Feito isso você receberá um e-mail de confirmação. É só responder a esse e-mail e pronto.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+Existe ainda uma lista chamada python-br que está sendo desativada. Se você tem conta nesta lista, por favor migre para a lista python-brasil.
+Pedimos a todos pythonistas e curiosos que não remetam e-mails para a lista python-br! A lista python-br não tem como ser moderada ou gerenciada
+devido a um problema de autenticação.
+
+=== Canal de IRC ===
+
+O canal oficial do '''Python''' no Brasil é o #python-br do irc.freenode.org.
+
+= Observações =
+
+Esse site é um Wiki e está aberto para a participação de todos. Sejam responsáveis e organizados que ele continuará sempre aberto...

@@ -1,0 +1,28 @@
+Algumas pessoas provavalmente vão querer me bater por estar fazendo isto. Há
+algum tempo atrás, antes de fazer este tutorial eu provavelmente estaria entre
+essas pessoas. Programadores que seguirem apenas este tutorial e não se
+dedicarem a realmente aprender uma linguagem nova, que geralmente incentiva
+formas de pensar diferente que as que o programador já sabia, provavelmente irão
+produzir programas feios e nada "pythonicos".
+
+Por que escrever um documento que pode originar programas ilegiveis, ou pelo
+menos "não-pythonicos"? Recentemente eu tive a experiência de trabalhar em um
+projeto feito em Python com vários programadores que não sabiam programar em
+Python. O tempo era curto e eles já sabiam C. Em uma tentativa desesperada de
+não ter que fazer o trabalho todo sozinho, fiz este tutorial, que de fato
+ajudou. E para minha surpresa o código não ficou muito ruim, houveram alguns
+módulos um pouco problemáticos, mas que puderam ser consertados depois que o
+software já estava pronto e funcionando. Além dessa experiência, que pode
+acontecer a outras pessoas, eu também acho que quem já sabe C pode achar este
+tutorial útil para começar a aprender Python, afinal, existem várias ideias que
+são comuns a essas linguagens e este guia pode poupar uma leitura massante para
+descobrir como definir uma função em Python, por exemplo.
+
+||'''Condicional em C'''         ||'''Condicional em Python'''||
+||if (y < x || z == w) {         ||  if y < x or z == w:      ||
+||    /* codigo */               ||      # codigo             ||
+||} else if (x == y && z > w) {  ||  elif x == y and z > w:   ||
+||    /* mais codigo */          ||      # mais codigo        ||
+||else {                         ||  else:                    ||
+||    /* mais mais codigo */     ||      # mais mais codigo   ||
+||}                              ||                           ||

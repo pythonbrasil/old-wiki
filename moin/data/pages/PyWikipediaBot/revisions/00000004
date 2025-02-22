@@ -1,0 +1,24 @@
+''Python Wikipedia Robot Framework'' é um framework para toda a [[http://www.wikipedia.org|Wikipédia]]. Feito em linguagem [[http://www.python.org|Python]] inicialmente pelo holandês [[http://starship.python.net/crew/hooft|Rob Hooft]].
+
+O ''bot'' ou ''robô'' trabalha em [[http://pt.wikipedia.org/wiki/Imagem:Interwiki.png|linhas de comandos]], é multiplataforma e de fácil utilização. Para mais detalhes veja [[http://pt.wikipedia.org/wiki/Ajuda:Como_usar_bots|Como usar bots na Wikipédia]].
+
+Com a biblioteca wikipedia.py, o bot pode ser utilizado por todos os sites com o software [[http://www.mediawiki.org|MediaWiki]].
+
+
+=== Atividades ===
+
+ * InterWiki
+ * Categorização de artigos
+ * Correção ortográfica
+ * Manipulação do arquivo SQL
+ * Manipulação de imagens
+ * Desambiguação de artigos
+ * Replace com regexp
+ * Tabelas HTML para formato Wiki
+ * etc.
+
+=== Referências ===
+
+ * [[http://cvs.sourceforge.net/viewcvs.py/pywikipediabot/pywikipedia|Repositório do projeto]]
+
+ * [[http://pywikipediabot.sf.net/doc/|Documentação gerada pelo EpyDoc ]]

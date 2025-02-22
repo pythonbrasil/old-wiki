@@ -1,0 +1,27 @@
+== Citação de Peter Norvig ==
+
+Fonte: [http://www.python.org/about/quotes/ Python Quotes]
+
+"Python has been an important part of Google since the beginning, and remains so as the system grows and evolves. Today dozens of Google engineers use Python, and we're looking for more people with skills in this language." said Peter Norvig, director of search quality at Google, Inc.
+
+== Desenvolvedores Python contratados pelo Google ==
+   * Alex Martelli
+   * Alexander Limi
+   * Greg Stein
+   * Guido van Rossum
+
+== Onde o Python é usado? ==
+
+Fonte: [http://panela.blog-city.com/python_at_google_greg_stein__sdforum.htm Python At Google]
+
+Internally Google has been using Python 2.2.  It has been hard for them to move forward to 2.3 or 2.4 becaue of the large number of machines that the have and they have to have compatibility amoung those machines (I'm assumming this is more of an IT issue, since Python is pretty good at backwards compatibility, but I guess if you deploy 2.4 and start using decorators any machine running 2.2 will choke).  Greg said that they will soon try to move to 2.4.
+
+Python programmers at Google must follow a strict style guideline (based on PEP8 with 2 spaced indenting).  When engineers are first granted commit access to their SCM system, they must pass a style test.  All code must pass through two sets of eyes before being checked in.  That combined with liberal doses of unittest, pychecker and code coverage eliminates most non-algorithmic issues that might appear in python code.
+Where is Python used?
+
+    * The Google build system is written in python.  All of Google's corporate code is checked into a repository and the dependency and building of this code is managed by python.  Greg mentioned that to create code.google.com took about 100 lines of python code.  But since it has so many dependencies, the build system generated a 3 megabyte makefile for it!
+    * Packaging.  Google has an internal packaging format like RPM.  These packages are created using python.
+    * Binary Data Pusher.  This is the area where Alex Martelli is working, on optimizing pushing bits between thousands of servers
+    * Production servers.  All monitoring, restarting and data collection functionality is done with python
+    * Reporting.  Logs are analyzed and reports are generated using Python.
+    * A few services including code.google.com and google groups.  Most other front ends are in C++ (google.com) and Java (gmail).  All web services are built on top of a highly optimizing http server wrapped with SWIG.

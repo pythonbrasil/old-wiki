@@ -1,0 +1,12 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== @Leonardo Tada@ ==
+
+Email: <<MailTo(leonardo_tada@hotmail.com)>>
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+
+...
+
+----
+CategoryHomepage

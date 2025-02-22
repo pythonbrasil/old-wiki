@@ -1,0 +1,232 @@
+FAQ sobre utilização de XP com Python
+
+
+== FAQ TDD ==
+
+
+~+
+'''Em 23/04/2007, Adriano Rivolli:''' <<FootNote( http://www.nabble.com/testes-unit%C3%A1rios-e-processo-de-desenvolvimento-t3635414.html)>>
+
+{{{
+> Salve lista..
+> Andei procurando no histórico da lista material sobre testes em python
+> Achei pouca coisa e gostaria de trocar mais informações a respeito.
+}}}
++~
+
+Legal. Apesar de ter feito coisas sem testes recentemente eu já
+trabalhei numa empresa que levava isso muito a sério.
+
+~+
+{{{
+> Estou montando uma equipe de desenvolvedores em python para
+> desenvolvimento de softwares comerciais e também softwares para
+> appliences (ipbx, captive portal, entre outras soluções que a minha
+> empresa está para oferecer)
+}}}
++~
+
+Legal! Quando as coisas estiverem engrenando manda o seu 'case' aqui
+pra lista. A gente adoraria divulgá-lo.
+
+~+
+{{{
+> Contudo simplesmente sair desenvolvendo feito louco sem nenhum processo
+> não é recomendado a ninguém isso nem precisa ser mencionado..
+> A questão é ... eu tenho bastante experiência em desenvolver feito louco
+> :D e nenhuma experiência relacionado a gerência de projetos, tenho somente frias
+> teorias...
+}}}
++~
+
+É, eu também tinha esse mesmo tipo de problema. Por mais que eu lhe
+ajude nesse e-mail a única maneira de se aprender a desenvolver usando
+testes é: fazendo.
+
+E quando a gente está começando a gente tem que ser ainda mais radical
+do que alguém que já tem prática e desenvolver testes para tudo *e*
+desenvolver esses testes *antes* de implementar algo.
+
+~+
+{{{
+> Mais vamos lá... comecei a estudar o processo de desenvolvimento XP
+> (eXtreme Programming), descobri a ferramenta Trac juntamente com
+> Subversion, enfim estou começando a ver o mundo com outros olhos...
+}}}
++~
+
+Legal. Ver o mundo do software como ele deveria ser: "soft". É bem
+melhor encarar software como algo que precisa mudar e evoluir o tempo
+todo do que pensá-lo como uma obra de engenharia e desenhar
+especificações e planos como se fossem plantas de uma obra de
+engenharia civil.
+
+~+
+{{{
+> só que comecei a estudar mais afundo o XP e uma de suas principais
+> práticas é o desenvolvimento focado em testes.
+}}}
++~
+
+XP é a abreviação de eXtreme Programming e nesse contexto "eXtreme"
+significa "radical". Em XP não cabe "meias soluções", ou seja, ou você
+utiliza as práticas da metodologia radicalmente ou você não estará
+fazendo XP. Pair Programming é outra prática importante.
+
+Se você não fizer testes ou não fizer Pair Progamming você não estará usando XP.
+
+Se você não pensa em usar XP tente dar uma olhadinha na metodologia
+chamada Scrum.
+
+Mas se você optar por uma metodologia que não lhe peça para fazer
+testes tente implantá-los da mesma forma.
+
+~+
+{{{
+> Pelo que vi o Python tem uma API interna o !PyUnit semenlhante ao junit
+> que por sua vez eh semelhante a uma do smalltalk isso eu acei no site da
+> pythonbrasil, juntamente com um tutorial só que achei ainda meio vago o
+> assunto...
+}}}
++~
+
+Sim, essa API para desenvolvimento de testes unitários foi criada pelo
+próprio Kent Beck, criador da metodologia XP, em Smalltalk e depois
+disso em Java.
+
+O [[http://wiki.python.org/moin/PyUnit|PyUnit]] já faz parte da biblioteca padrão do Python, ou seja, você
+não precisa instalar nada para usá-la.
+
+Além do !PyUnit a linguagem Python disponibiliza o doctest que permite
+que você faça documentação e teste da sua aplicação de uma única vez.
+
+Fora esses dois existem ferramentas auxiliares muito interessantes
+para testes que estão disponíveis livremente na Internet:
+
+ - [[http://somethingaboutorange.com/mrl/projects/nose/|nose]]
+  O princípio de funcionamento é semelhante ao do !PyUnit, a diferença é
+  que você não precisa configurar nada pra usar o nose. Basta criar
+  arquivos cujos nomes comecem com "test_" e métodos, funções e classes
+  que tenham o nome iniciado por "test_", "Test", etc. que o nose irá
+  encontrar automaticamente. O nose faz parte do framework !TurboGears.
+
+ - [[http://nedbatchelder.com/code/modules/coverage.html|coverage.py]]
+  Com o coverage você pode encontrar trechos de código que não foram
+  executados no seu código depois que você executa os testes. Se você
+  executou todos os seus testes e existem linhas que nunca foram
+  executadas no seu código pode-se presumir que: 1 - você não tem testes
+  suficientes ou 2 - aquela linha de código está sobrando.
+
+~+
+{{{
+> Deste modo:
+> -- O que o pessoal experiente e que trabalha em equipe acha sobre fazer
+> esses testes
+}}}
++~
+
+Fundamental :)
+
+~+
+{{{
+> -- Como tratar testes com inserção, exclusão e outras coisas de banco de
+> dados
+}}}
++~
+
+Na empresa onde eu trabalhei a gente tinha um sistema de ORM
+(mapeamento objeto relacional) integrado ao sistema de testes. Isso
+não é trivial de se fazer mas é superútil. Com esse sistema você podia
+executar o teste até o momento em que ele falhava e depois ia voltando
+o estado dos objetos até achar onde existia um problema.
+
+Isso é o céu. Mas já é possível fazer testes com bancos de dados de
+maneira mais simples.
+
+O !PyUnit (jUnit, etc.) executa o metodo .setUp() antes de executar
+cada teste e depois de executá-lo ele roda o .tearDown().
+
+Então você pode usar um banco de dados com suporte a transações (ou à
+transactions e sub-transactions) e colocar um "begin transaction"
+dentro do .setUp() e um "rollback" no .tearDown().
+
+Aí é só deixar o banco de dados limpo (vazio *mesmo*) e rodar os
+testes. Cada teste deverá criar os objetos necessários para a
+avaliação. Quando o teste passa (ou falha) o "rollback" vai entregar o
+banco de dados limpo para o seu próximo teste que irá repetir o
+processo.
+
+Com o tempo isso pode se tornar muito lento, então é bom já ir
+pensando num sistema mais bem elaborado como o que eu conheci.
+
+Esse sistema usa sub-transactions para implementar uma espécie de
+sistema de "versioning" para os objetos. Desta forma é possivel
+executar "rollback" até o ponto em que o próximo teste precisa que o
+banco de dados esteja.
+
+~+
+{{{
+> -- Existe algum framework que serve tanto pra desenvolvimento web e desktop
+> (um dos motivos de eu até agora ter evitado os mais conhecidos  [Zope,
+> Plone, turbogears, django, etc...]
+}}}
++~
+
+Veja, a forma de trabalhar uma aplicação Web e uma aplicação
+standalone é muito diferente e isso faz com que seja muito difícil
+fazer um bom framework que sirva *bem* para as duas situações.
+
+Nesses casos eu iria preferir usar partes desses frameworks. Por exemplo:
+
+ - [[http://www.sqlalchemy.org/|SQLAlchemy]]
+  Para mapeamento Objeto-Relacional (ORM) - o SQLAlchemy pode ser usado tranquilamente no !TurboGears para Web e em uma aplicação standalone.
+ 
+ - [[http://wiki.zope.org/zope3/FrontPage|Zope3]] ou [[http://twistedmatrix.com/trac/|Twisted Componentes]]
+  Para desenvolvimento baseado em componentes.
+
+Uma solução mais 'híbrida' também é possível. Você desenvolveria uma
+aplicação Web mas disponibilizaria uma interface à la Webservices para
+uma aplicação standalone.
+
+~+
+{{{
+> -- Qual a melhor arquitetura a se adotar para esse tipo de
+> desenvolvimento
+}}}
++~
+
+Eu, o Osvaldo, não gosto muito de aplicações não-web. Acho que as
+coisas deveriam estar todas na Internet.
+
+~+
+{{{
+> -- O que o pessoal tem a dizer sobre o XP
+}}}
++~
+
+Eu sou suspeito para falar. Gosto muito, mas sei que é difícil de usar
+porque são poucas pessoas que aceitam o seu radicalismo.
+
+Essas pessoas têm experimentado um pouco de Scrum.
+
+~+
+{{{
+> Bom eu sei que ficou algo muito abrangente é que minhas dúvidas são tantas
+> que qualquer colaboração e referências sobre melhoria de processos e
+> projetos é bem vinda.. principalmente nesta semana que preciso definir
+> uma maneira e metodologia de trabalho e seguir em frente.. agradeço a
+> todos e anciosamente aguardo as opniões e contribuições valeu...
+}}}
++~
+
+O legal dos e-mails abrangentes é que eles permitem respostas
+abrangentes que ficarão como referência para perguntas futuras. Sejam
+elas abrangentes ou específicas.
+
+Valeu,
+Osvaldo
+
+
+----
+
+LucianoPacheco

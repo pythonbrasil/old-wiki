@@ -1,0 +1,71 @@
+#acl OsvaldoSantanaNeto:read,write All:read
+#pragma section-numbers off
+
+/!\ O conteúdo dessa página será movido aos poucos para:
+
+http://www.pythonologia.org/
+
+== Palestras ==
+
+'''Matando o Java e Mostrando o Python''' ([attachment:fisl.sxi sxi]) ([attachment:fisl.pdf pdf]) - 5º Fórum Internacional de Software Livre. Eu utilizei o estudo [attachment:jccpprtTR.pdf An empirical comparison of C, C++, Java, Perl, Python, Rexx and Tcl for a searching/string-processing program] de Lutz Prechelt. Porto Alegre.
+
+'''Python 3''' ([attachment:py3k.odp odp]) ([attachment:py3k.pdf pdf]) - II PyconBrasil em Brasília. Como se preparar para as mudanças da linguagem desde já.
+
+== Curso ==
+
+'''Mini-treinamento Python''' - Um minitreinamento que ministrei no [http://www.indt.org.br INdT], onde trabalho, para meus colegas ([attachment:crash_course.sxi sxi]).
+
+== Provocação Gratuita ==
+
+Estava brincando com um programa novo para edição de vídeo em Linux que se chama [http://heroinewarrior.com/cinelerra.php3 Cinelerra] e resolvi fazer uma brincadeira (provocação :)) com a linguagem de programação Java.
+
+attachment:PythonRocks.zip
+
+/!\ Atenção! Esse vídeo é uma '''brincadeira''', não fique ofendido. Se quiser fazer uma sacanagem com Python e mandar pra cá eu publico também :)
+
+== Outros ==
+
+'''The Law of Demeter'''
+
+Demeter foi um pesquisador de OO que trabalhou entre as décadas de 80 e 90. Ele criou projetos de onde se originou a "Lei de Demeter", que sugere restrições de onde objetos podem enviar mensagens de forma a tornar a manutenção desses objetos mais fácil. A "Lei de Demeter" diz que um objeto pode enviar mensagens apenas para:
+
+   * Ele mesmo
+   * Sua Superclasse (direta ou indireta)
+   * Objetos retornados diretamente de seus próprios métodos
+   * Um objeto passado para ele como parâmetro de um método
+   * Sua classe
+
+('''Fonte:''' Building Object Applications That Work -- Scott W. Ambler, ISBN 0-521-64826-2)
+
+'''Tutorial da SAP sobre OO'''
+
+Pode não ser o melhor tutorial de OO mas achei ele bastante conciso e informativo. Além disso ele trabalha usando uma técnica de explicação que migra o usuário do modelo estrutural para o modelo OO.
+
+O arquivo em formato PDF pode ser baixado [attachment:sap-oo.pdf aqui].
+
+== Tarefas de Administração do Site ==
+
+Algumas das tarefas para a manutenção aqui do site:
+
+   * Verificar todas as alterações do dia em MudançasRecentes
+   * Acertar problemas de formatação das páginas
+   * Verificar as Páginas OrphanedPages, WantedPages e PáginasAbandonadas por links quebrados e/ou Páginas sem referência
+   * Verificar a página PageSize à procura de páginas ques estejam ocupando muito espaço
+   * Sempre que necessário adicionar administradores em AdminGroup
+   * Verificar estatísticas do site em http://www.pythonbrasil.com.br/stats/ e em EventStats
+   * Verificar páginas à procura de google-spammers e fechar a página com ACLs:
+      * ACL para administração: {{{#acl All:read AdminGroup:read,write,delete,revert,admin}}}
+   * Verificar ParceriaLinuxMall
+   * Usar a ferramenta para [attachment:WWW-Yahoo-Groups-1.91.tar.bz2 baixar histórico da lista].
+
+== Tradução (incompleta) do Moin ==
+
+O arquivo potfile com a tradução do moin para pt_BR (que está incompleta) pode ser baixada [attachment:pt.po aqui]. Caso você traduza mais mensagens agradeceria se você enviasse para meu e-mail pessoal.
+
+== Codegen Definition File Generator ==
+
+attachment:defgen.py
+
+== Trabalho de RDC ==
+
+* ClientSocketServer

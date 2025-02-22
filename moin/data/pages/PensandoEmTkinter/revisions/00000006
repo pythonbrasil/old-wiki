@@ -1,0 +1,23 @@
+= Pensando em Tkinter =
+
+Tradução de [[http://www.ferg.org/thinking_in_tkinter/index.html|"Thinking in Tkinter"]], de Steve Ferg.
+
+"Tenho tentado aprender sozinho Tkinter por vários livros, e tenho encontrado mais dificuldade do que poderia pensar.
+
+O problema é que os autores desses livros já começam dizendo tudo sobre os widgets disponíveis em Tkinter, mas nunca dão uma parada para explicar os conceitos básicos. Eles não explicam como "pensar em Tkinter". Então achei que deveria tentar escrever um livro do tipo que eu mesmo estou procurando. Ou ao menos rascunhar esse tipo de livro.
+
+Pensando em Tkinter consiste de pequenos programas que começam a explicar como pensar em Tkinter. Nestes, não me preocupo em catalogar todos os tipos de widgets, atributos e métodos disponíveis em Tkinter, somente em dar um empurrãozinho na direção dos conceitos básicos do assunto."
+
+Trecho introdutório de "Pensando em Tkinter", por Steve Ferg.
+
+[[www.fem.unicamp.br/~labaki/Python/PensandoTkinter.pdf|pensandoemtkinter.pdf]]
+
+Pacote zip com os exemplos [[http://www.ferg.org/thinking_in_tkinter/thinking_in_tkinter.zip|thinking_in_tkinter.zip]]
+
+----
+
+Labaki<<BR>>
+Grupo Python<<BR>>
+Departamento de Engenharia Mecânica<<BR>>
+UNESP - Ilha Solteira<<BR>>
+http://grupopython.cjb.net

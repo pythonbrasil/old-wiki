@@ -1,0 +1,77 @@
+Quer você tenha chamado o interpretador python diretamente ({{{python}}}) ou juntamente com a execução de um script ({{{python -i blah.py}}}), você entrará no modo interativo do interpretador python. Este modo lhe possibilita "conversar" diretamente com o interpretador, declarando variáveis, funções, classes, e fazendo tudo que poderia fazer em um programa qualquer. 
+
+O modo interativo é muito interessante também para aprender. Para isso, você poderá usar alguns comandos simples e uma característica muito interessante do python chamada instrospecção.
+
+= print =
+
+O comando print imprime na tela qualquer objeto, seja ele do tipo que for, de forma que podemos ver o conteúdo atual de uma variável.
+{{{
+>>> x = dir
+>>> print x
+<built-in function dir>
+}}}
+
+= dir =
+
+O comando dir lista os símbolos (atributos, métodos, etc) públicos de um módulo, geralmente contém uma listagem de classes, funções e variáveis para serem usadas pelo programador.
+
+{{{
+>>> import math
+>>> dir(math)
+['__doc__', '__file__', '__name__', 'acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'cosh', 'degrees', 'e', 'exp', 'fabs', 'floor', 'fmod', 'frexp', 'hypot', 'ldexp', 'log', 'log10', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh']
+}}}
+
+Tirando os símbolos do Python ({{{__doc__}}}, {{{__file__}}} e {{{__name__}}}), esta é a lista do que eu tenho disponível para mexer com o módulo ''math''.
+
+= objeto.__doc__ =
+
+O atributo {{{__doc__}}} de um símbolo qualquer serve para documentar o que ele representa, faz, sua forma de uso, etc. Por exemplo, para que mesmo serve o módulo math?
+{{{
+>>> print math.__doc__
+This module is always available.  It provides access to the
+mathematical functions defined by the C standard.
+}}}
+
+E o símbolo {{{pow}}}, o que faz mesmo nesse módulo?
+{{{
+>>> print math.pow
+<built-in function pow>
+}}}
+
+Hum, é uma função, mas o que ela faz mesmo?
+{{{
+>>> print math.pow.__doc__
+pow(x,y)
+
+Return x**y (x to the power of y).
+}}}
+
+Mais adiante veremos como você pode documentar suas funções, classes, etc por meio do atributo {{{__doc__}}}.
+
+= help =
+
+O intrepretador do python tem uma função chamada help() que pode ser chamada de duas formas: apenas {{{help()}}} ou {{{help('pesquisa')}}}. A primeira forma permite que você navegue pela ajuda disponível, de acordo com o que você esteja procurando.
+{{{
+>>> help()
+
+Welcome to Python 2.4!  This is the online help utility.
+
+If this is your first time using Python, you should definitely check out
+the tutorial on the Internet at http://www.python.org/doc/tut/.
+
+Enter the name of any module, keyword, or topic to get help on writing
+Python programs and using Python modules.  To quit this help utility and
+return to the interpreter, just type "quit".
+
+To get a list of available modules, keywords, or topics, type "modules",
+"keywords", or "topics".  Each module also comes with a one-line summary
+of what it does; to list the modules whose summaries contain a given word
+such as "spam", type "modules spam".
+}}}
+
+''A continuar...''
+
+''Já existe uma página com o propósito similar ao teu, veja AjudaInterpretador. -- ruda''
+''Sim, esta página aqui é mais um refactoring daquela destinado ao NossoLivro (de forma a ser mais introdutória), a idéia é também colocar coisas sobre o shell além de como obter ajuda (por exemplo, IPython, TabCompleta), mas por enquanto mantive a original, enquanto esta não está suficientemente completa. Outra idéia é usar esta página apenas como um índice para os diferentes conteúdos sobre o shell, e então manter (talvez este mesmo texto refatorado) em AjudaInterpretador e nas páginas específicas sobre cada característica do shell. -- LuizCarlosGeron''
+
+Criado por LuizCarlosGeron

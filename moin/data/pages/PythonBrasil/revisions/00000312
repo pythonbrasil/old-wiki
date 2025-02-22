@@ -1,0 +1,44 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+#language pt_BR
+
+A comunidade Python Brasil reune grupos de usuários em todo o Brasil interessados em difundir e divulgar a linguagem de programação [[http://python.org|Python]], abrigando em seu domínio todo o material editado sobre esta linguagem em nosso idioma (português do Brasil). Ele utiliza o software MoinMoin que é um [[http://c2.com/cgi/wiki|Wiki]] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva conteúdo rapidamente.
+
+Visite o site http://2012.pythonbrasil.org.br, quem é "cobra" em Python vai estar lá!
+ 
+[[http://2012.pythonbrasil.org.br|{{http://2012.pythonbrasil.org.br/static/images/badges/im_attending_aside.png}}]]
+
+<<RSSReader(Notícias da Conferência PythonBrasil[8],http://www.pythonbrasil.org.br/2011/ultimas-noticias/RSS,allow_html,5)>>
+
+<<RSSReader(Notícias da Associação Python Brasil,http://associacao.python.org.br/noticias/RSS,allow_html,5)>>
+
+<<RSSReader(Planeta PythonBrasil,http://pipes.yahoo.com/pipes/pipe.run?_id=moBLbZ_U3RGv2jskBR50VA&_render=rss,allow_html,5)>>
+
+= Seções interessantes =
+
+   * DocumentacaoPython - Dezenas de tutoriais e artigos sobre Python para os mais diversos níveis de aprendizado.
+   * CookBook - Exemplos e trechos de códigos úteis.
+   * PerguntasFrequentes - Respostas às perguntas mais freqüentes.
+   * ListaDeExercicios - uma lista com exercícios para iniciantes em programação.
+   * ComoUsarWiki - dicas para quem deseja usar o nosso Wiki.
+
+= Participe da comunidade =
+
+== Lista de Discussão ==
+
+Assine a lista de discussões e participe da comunidade. Preencha o formulário abaixo e responda ao e-mail de confirmação que você receberá.
+
+<<HTML(<table border=0 style="background-color: #fff; padding: 5px;" cellspacing=0><tr><td><img src="http://groups.google.com/intl/en/images/logos/groups_logo_sm.gif" height=30 width=140 alt="Google Groups"></td></tr><tr><td style="padding-left: 5px"><b>Assine a lista python-brasil</b></td></tr><form action="http://groups.google.com/group/python-brasil/boxsubscribe"><tr><td style="padding-left: 5px;">Email: <input type=text name=email><input type=submit name="sub" value="Subscribe"></td></tr></form><tr><td align=right><a href="http://groups.google.com/group/python-brasil">Visite esse grupo</a></td></tr></table>)>>
+
+/!\ '''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existem também outras ListasDeDiscussao  sobre projetos relacionados a Python e tecnologias derivadas.
+
+== Canal de IRC ==
+
+O canal oficial da PythonBrasil é o #python-br do irc.freenode.org, mas também existem outros canais da comunidade Django e Zope. Em [[CanaisIRC]] você encontra maiores informações e um cliente web para facilitar o acesso.
+
+= Outros =
+   * GrupoDeUsuarios - Coloque a cidade e o estado a que vc pertence e nos ajude a georeferenciar a comunidade.
+   * CaixaDeSugestoes - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PaginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuarios - Outros sites de grupos de usuários Python.

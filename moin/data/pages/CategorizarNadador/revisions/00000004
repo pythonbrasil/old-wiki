@@ -1,0 +1,118 @@
+#pragma section-numbers off
+= Receita: CategorizarNadador =
+
+Simples codigo para resolver a questão:
+
+
+'''
+12. Elabore um algoritmo que dada a idade de um nadador classifica-o em uma das seguintes categorias: 
+  
+
+infantil A = 5 - 7 anos 
+
+infantil B = 8-10 anos 
+
+
+juvenil A = 11-13 anos 
+
+
+juvenil B = 14-17 anos 
+
+
+adulto = maiores de 18 anos
+'''
+
+Muito simples porém faz bom uso do if, elif e else.
+
+Abraços.
+
+== Código ==
+
+{{{
+#!python
+# Exercicio 12 da lista
+# Definir categoria do nadador
+
+#pega a idade do nadador
+idade_nadador = input('Entre com a idade do nadador: ')
+
+# Ifs para verificar entre qual faixa de idade se encontra o nadador
+if idade_nadador <= 4:
+    print 'indefinido.'
+
+elif 5 <= idade_nadador <= 7:
+    print 'infantil A'
+    
+elif 8 <= idade_nadador <= 10:
+    print 'infantil B'
+    
+elif 11 <= idade_nadador <= 13:
+    print 'Juvenil A'
+    
+elif 14 <= idade_nadador <=17:
+    print 'juvenil B'
+    
+else:
+    print 'adulto'
+    
+
+}}}
+== Exemplo de uso ==
+
+{{{
+#!python
+# Exercicio 12 da lista
+# Definir categoria do nadador
+
+#pega a idade do nadador
+# comentei a linha abaixo pra exemplificar o uso
+#idade_nadador = input('Entre com a idade do nadador: ')
+idade_nadador = 7 # defini a variavel idade_nadador..
+ 
+# Ifs para verificar entre qual faixa de idade se encontra o nadador
+if idade_nadador <= 4:
+    print 'indefinido.'
+
+elif 5 <= idade_nadador <= 7:
+    print 'infantil A'
+    
+elif 8 <= idade_nadador <= 10:
+    print 'infantil B'
+    
+elif 11 <= idade_nadador <= 13:
+    print 'Juvenil A'
+    
+elif 14 <= idade_nadador <=17:
+    print 'juvenil B'
+    
+else:
+    print 'adulto'
+    
+}}}
+
+----
+
+== Usando o módulo bisect ==
+
+{{{
+#!python
+categs = [('indefinido' , 5),
+          ('infantil A', 8),
+          ('infantil B', 11),
+          ('juvenil A', 14),
+          ('juvenil B', 18),
+          ('adulto',200),
+          ]
+
+from bisect import bisect
+idade_nadador = input('Entre com a idade do nadador: ')
+valores = [i[1] for i in categs]
+posicao = bisect(valores, int(idade_nadador))
+print categs[posicao][0]
+}}}
+Mais sobre o módulo bisect em http://pydoc.org/2.3/bisect.html
+
+-- RicardoNiederberger
+----
+
+Volta para CookBook.

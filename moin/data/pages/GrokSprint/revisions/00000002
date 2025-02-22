@@ -1,0 +1,16 @@
+= Passos pra quem esta começando: =
+
+baixe o código do grok do svn:
+
+{{{svn co svn://svn.zope.org/repos/main/grok/trunk grok}}}
+e
+{{{svn co svn://svn.zope.org/repos/main/grokproject/trunk grokproject}}}
+
+siga o tutorial do grok, ele ensina como instalar o grok e te deixa onde o pessoal esta trabalhando:
+http://grok.zope.org/tutorial.html
+
+O grok não funciona no python 2.5 (na verdade o zope3 é o culpado).
+
+
+O Sprint é para completar o tutorial do grok, já existe um outline com os topicos que devem ser abordados;
+http://svn.zope.org/grok/trunk/doc/tutorial_outline.txt?view=markup

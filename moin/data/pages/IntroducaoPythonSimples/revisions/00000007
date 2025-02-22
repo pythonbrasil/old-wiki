@@ -1,0 +1,92 @@
+= Introdução a Python =
+
+== O que é Python? ==
+
+Python é uma linguagem de uso geral que suporta ''scripting'' e que também é compilada para ''byte-code'' e interpretada dinamicamente. Ela é bastante similar a Perl (quanto à aplicação, não no modo de programar), mas ainda não se tornou tão popular. Pra consertar isso é que eu fiz esse tutorial :) .
+Python é uma linguagem de alto nível que pode fazer coisas extremamente complexas, ainda tem suporte a programação orientada a objetos e é modular, porém é extremamente fácil de aprender. Ela tem também diversos ''add-ons'' (módulos) que te dão a possibilidade de trabalhar desde arquivos de áudio mp3 até criar GUI (interfaces visuais) para seus programas.
+
+Python roda em quase todas as plataformas. Para fazer o download do Python, acesse http://www.python.org .
+
+Eu, quem vos escreve, não sou "O PROGRAMADOR DE PYTHON" e, sim, um aprendiz de Python empolgado :) , neste texto eu sou sintético, tipo, eu não ensino a deduzir a fórmula da velocidade de um paraquedas, eu ensino a fórmula. 
+
+Então pegue um Café (''ops''... não confunda, você vai aprender Python e não Java), baixe o Python e relaxe :) .
+
+== O Interpretador ==
+
+Como já disse Python é '''interpretada''' originalmente. Para interpretar seus programas, após você fazer o download do Python no site http://www.python.org e ter configurado, você só precisa digitar no "console" ou "terminal", o comando: "python nomedoscript.py" (sem as aspas, né?).
+
+Obs: para usuários windows, adicione a pasta onde você instalou o Python à variável PATH do sistema.
+
+== Seu Primeiro Programa, Hello World ==
+
+
+Vamos lá, ta na hora de começar a programar:
+   1. Abra seu editor preferido..
+   2. Agora digite o código abaixo:
+
+{{{
+#!python
+### Comeco do codigo helloworld.py #############
+### Programa que escreve na tela "Hello World" #
+
+print "Hello World"
+
+### Fim do Programa ############################
+}}}
+
+   3. Após ter digitado o programa (não copie-e-cole, '''DIGITE!'''), salve-o como helloworld.py
+   4. Pronto, agora é só executar: {{{python helloworld.py}}}
+   5. Vai aparecer na sua tela algo impressionante: "Hello World" (sem as aspas!)
+   6. Vamos explicar o codigo:
+      * O caracter '#' define um comentário, tudo que vem depois dele na linha não é interpretado
+      * {{{print "Hello World"}}} (print é um comando padrão do Python que imprime na tela os argumentos passados.)
+
+Obs: O comando {{{print}}} também aceita numeros, variáveis, expressões, etc... Exemplos:
+
+{{{
+#!python
+# print expressao
+print 5+5
+}}}
+
+
+{{{
+#!python
+# print com múltiplos argumentos
+print "5+5=",5+5 # uma string em python é tudo entre "" (aspas duplas)
+                 # ou '' (aspas simples).
+}}}
+
+
+{{{
+#!python
+# print com variáveis
+minhavariavel = "Essa é a minha variável" # declaração de variável
+                                          #
+                                          # Falaremos sobre isso
+                                          # no próximo artigo...
+print minhavariavel
+}}}
+
+
+{{{
+#!python
+# concatenação no print
+print "Eu "+"Te "+" Amo" # Concatenamos strings através do operador '+'.
+print "Eu","Te","Amo"    # Mesma coisa que a linha anterior, porém aqui
+                         # elas só se agrupam na saída.
+                         #
+                         # obs.: o espaçamento é automático.
+}}}
+
+
+Obs.: o comando {{{print}}} aceita múltiplos argumentos, para isto, basta separá-los por vírgulas (','). Como vimos, os argumentos podem ser de vários tipos, inclusive quando se usa múltiplos argumentos.
+
+Por hoje é só, sei que você leitor(a) ficou com água na boca, mas eu estou cansando, e - vejam só - somente a introdução rendeu todo esse texto :), tenho que dormir, já passam das 3 da manhã e eu aqui. Abraços e até o próximo artigo, que, com fé em Deus, será em breve.
+
+Obs.: Mande sugestões: ralobao@click21.com.br
+
+----
+ralobal@click21.com.br RaLobao
+
+Revisão e formatação dos Textos: OsvaldoSantanaNeto, PedroDeMedeiros

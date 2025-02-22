@@ -1,0 +1,10 @@
+##master-page:HomepageTemplate
+#format wiki
+== Isaac Marinho ==
+||Estudante de Sistemas para Internet. ||
+||Email: <<MailTo(isaacmarinho@gmail.com)>> ||
+||Homepage: [[http://isaacmarinho.googlepages.com/home|MinhaHomepage]] ||
+----
+ .Conheci e estou aprendendo Python através do projeto [[http://www.comunicacaodigital.org/python/|Comunicação Digital]], desenvolvido e coordenado por alunos do CEFETPB. Tenho grande interesse em aprofundar meus conhecimentos sobre esse "mundo" chamado Python.
+----
+ . CategoryHomepage

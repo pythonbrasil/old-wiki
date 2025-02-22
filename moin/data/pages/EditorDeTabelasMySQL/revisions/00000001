@@ -1,0 +1,96 @@
+ == Editor Minimalista de Tabelas MySQL ==
+(JoaoSOBueno)
+
+
+Um exemplo de como criar um programa que monta uma interface de edição a partir introspecção na estrutura de um banco de dados.
+
+Esse trecho está estritamente minimalista, mas cria uma interface funcional em TKinter para edição de uma tabela MySQL arbitrária. 
+
+Havendo necessidade, seria um trabalho  interessante ampliar o conceito para um editor 'genérico' de DBs (por exemplo: suporte a mudança de tabelas e DB por menu, suporte a edição de registros complementares denotados por Foreign Keys, adiçãode  validadores automáticos, mais especificidades por tipo de dados (texto livre, upload de arquivos, datas), suporte a marcação de estilo para apresentação, edição de validadroes e estilos onnline, suporte a user roles & groups.
+
+{{{
+#!/usr/bin/env python
+# coding: utf-8
+
+import Tkinter
+import MySQLdb
+import sys
+from getpass import getpass
+
+def init():
+    try:
+        host, database, table, user = sys.argv[1:5]
+        if  len(sys.argv) < 7:
+            password = getpass("MySQL Password: ")
+        else:
+            password = sys.argv[6]
+    except ValueError:
+        sys.stderr.write("Usage: taleber <host> <database> <table> <user> [<password>]")
+        sys.exit(1)
+    connection = MySQLdb.connect(host, user, password)
+    cursor = connection.cursor()
+    return connection, cursor, database, table
+
+class Window(object):
+    def __init__(self, con, cursor, database, table):
+        self.con = con
+        self.cursor = cursor
+        self.database = database
+        self.table = table
+
+        self.window = Tkinter.Tk()
+        self.window.title("taleber")
+        fields = self.get_table_fields()
+        self.ui_fields = []
+        for field in fields:
+            self.add_field_ui(field)
+        frame = Tkinter.Frame(self.window)
+        frame.pack()
+        self.save_button = Tkinter.Button(text="Save", command = self.save)
+        self.save_button.pack(side="left")
+        self.clear_button = Tkinter.Button(text="Clear", command = self.clear)
+        self.clear_button.pack(side="left")
+        
+    def add_field_ui(self, field):
+        frame = Tkinter.Frame(self.window)
+        frame.pack()
+        label = Tkinter.Label(frame, text = field[0] + ":")
+        label.pack(side="left")
+        entry = Tkinter.Entry(frame)
+        entry.pack(side="left")
+        self.ui_fields.append((field[0], entry, field[1], field[2]))
+    def save(self):
+        values = []
+        for field in self.ui_fields:
+            values.append( field[1].get())
+            #TODO: call validator
+        query = """INSERT INTO %s """ % self.table +   """ VALUES (%s) """ % ", ".join(["%s"] * len (values))
+        print query
+        self.cursor.execute(query, values)
+
+    def clear(self):
+        for field in self.ui_fields:
+            field[1]["text"] = ""
+
+    def get_table_fields(self):
+        self.cursor.execute("""USE %s""" % self.database)
+        query = """EXPLAIN %s""" 
+        self.cursor.execute(query % self.table)
+        fields = []
+        for field in self.cursor.fetchall():
+            name = field[0]
+            type_ = field[1].split("(")[0]
+            if "(" in field[1]:
+                size = int(field[1].split("(")[1].split(")")[0])
+            else:
+                size = None
+            fields.append((name, type_, size))
+        return fields
+
+if __name__ == "__main__":
+    con, cursor, database, table  = init()
+    window = Window(con, cursor, database, table)
+    Tkinter.mainloop()
+}}}
+
+Voltar ao CookBook

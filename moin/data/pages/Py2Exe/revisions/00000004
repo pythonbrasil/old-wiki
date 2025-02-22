@@ -1,0 +1,18 @@
+= Py2Exe =
+
+Gere arquivos executáveis e/ou componentes COM (DLL) que podem ser utilizados sem a presença do interpretador. O processo consiste em apenas agrupar todos os arquivos (módulos, bibliotecas, etc.) necessários e gerar um "executável" que forja todo o ambiente para que sua aplicação Python rode tranquilamente e sem dependências. Disponível apenas para Win32, também permite a criação de componentes COM (Common Object Model) em Python (quando usado em conjunto com o módulo PyWin32) que podem ser utilizados por outras linguagens que possuam suporte a esta tecnologia.
+
+== Exemplos ==
+
+Py2ExeSimples
+
+Py2ExeCom
+
+== Ficha técnica ==
+
+URL: http://sf.net/projects/py2exe [[BR]]
+Licença: MIT
+
+----
+
+WashingtonCoutinhoCorrêaJr

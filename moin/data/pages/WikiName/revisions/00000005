@@ -1,0 +1,12 @@
+#pragma section-numbering off
+= Instruções WikiName =
+
+Um WikiName é formado por duas ou mais palavras juntas em com letras maiúsculas nas iniciais dessas palavras.
+Para criar uma página nova basta editar uma das já existentes, colocar um WikiName novo e salvar a mudança. Logo após salvar a mudança o novo WikiName aparecerá em vermelho, indicando que a página ainda não existe.
+
+Ao clicar no WikiName em vermelho o Wiki vai dizer que a página não existe e sugerir a criação da mesma em branco ou com um dos templates pré-definidos. Eu criei alguns templates para a página e seria interessante usá-los.
+
+[http://www.pythonbrasil.com.br/moin.cgi/PythonBrasil]
+
+---- 
+OsvaldoSantanaNeto

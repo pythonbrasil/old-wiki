@@ -1,0 +1,27 @@
+#pragma section-numbers off
+= Cookbook =
+
+Cookbook vem do inglês e siginifica Livro de Receitas. Esta seção é destinada exatamente para conter trechos úteis de código Python. Aquele mini-aplicativo, método, classe, função, ou simplesmente uma dica de uso de Python deve ser colocada aqui.
+
+== Receitas ==
+
+   * ConexaoOracle - Exemplo de conexão com o Banco de Dados Oracle
+   * ContarOcorrenciasEmLista - Conta as Ocorrências de um texto em uma lista. Coloca o resultado num dict.
+   * ConversãoDeImagens - Um exemplo de como converter uma imagem BMP para JPG usando a ["PIL: Python Imaging Library"].
+   * DesligarLinuxViaSockets - Exemplo de script para desligar máquinas Linux usando sockets
+   * ExecutandoEmIntervalos - Três formas de se executar periodicamente uma determinada função usando threads.
+   * GeradorDeCpf - Gerador de CPFs aleatório. Três versões diferentes para todos os gostos.
+   * MapeandoErrosParaExceções - Uma idéia para mapear códigos de erro do sistema operacional para exceções.
+   * MonitorandoSocketsComPygtk - Exemplo de como usar as funções de monitorar IO embutidas em PyGTK para manipular sockets e arquivos de forma assíncrona.
+   * MonitorandoSocketsComTkinter - A mesma idéia do exemplo anterior, porém usando Tkinter.
+   * PequenoUsoDeSockets - Um exemplo de joguinho utilizando sockets.
+   * RankingLinguagens - Exemplo simples porém útil de urllib e regular expressions.
+   * ReceitaBarraDeProgresso - Função que implementa uma barra de progresso em tela texto (terminal).
+   * TkinterShelve - Um pequeno software de cadastro que usa Tkinter pra interface e Shelve para persistência dos objetos.
+   * UnixLinuxComandosWeb - Execute comandos Unix/Linux via Web com esse CGI.
+   * VerificadorDeCpf - Módulo contendo funções e classe para verificação de números de CPF.
+   * GerandoPasswords - Script gráfico pra fazer senhas rapidamente.
+   * ProcurarMp3eGerarPlaylist - Esse pequeno script procura arquivos mp3 por palavra-chave, gera uma playlist e abre o xmms/winamp pra executá-la.
+----
+
+OsvaldoSantanaNeto

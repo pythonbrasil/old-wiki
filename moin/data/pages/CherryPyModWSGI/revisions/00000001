@@ -1,0 +1,21 @@
+= CherryPy com mod_WSGI =
+Esta "receita de bolo" ensina passo a passo como configurar o servidor web Apache para executar aplicações em CherryPy.
+
+== Código ==
+{{{#!python
+import sys
+
+if __name__ == '__main__':
+   print "Aqui entra o código"
+}}}
+== Exemplo de uso ==
+{{{#!python
+import sys
+
+if __name__ == '__main__':
+   print "Aqui entra o exemplo de uso. Essa seção é opcional."
+}}}
+Volta para CookBook.
+
+----
+Nome do autor da Receita

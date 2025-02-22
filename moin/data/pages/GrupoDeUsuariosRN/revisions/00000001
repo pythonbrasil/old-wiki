@@ -1,0 +1,46 @@
+Esta página foi criada para discussão do Grupo de Usuários Python no RN.
+
+== Eventos ==
+
+Seria bem interessante termos mensalmente ou quinzenalmente um dia com 
+palestras e/ou minicursos.
+
+Como sugestão, proponho os seguintes temas:
+
+  * Python - A linguagem
+  * Zope
+  * Plone
+  * SQLObject
+  * Frameworks Web
+    * TurboGears
+    * Django
+    * Subway
+    * outros?
+  * Aplicações Desktop
+    * PyGtk
+    * wxPython
+    * QT
+    * Tk
+    * outros?
+  * sugestões?
+
+
+Eu, JoaoPauloFarias, poderia assumir alguns destes temas. Eu gostaria de falar
+sobree o SQLObject, possivelmente como subtópico do framework web TurboGears.
+Outro tema que posso assumir é PyGtk, juntamente com o Glade-2. Sei que existe
+o Gazpacho, que é implementado em python mas, sinceramente, acho que o glade-2
+é bem melhor, mais maduro e mais completo.
+
+Acho que um bom local para estes eventos seria a CEFET, que possui um excelente
+auditório e salas com projetores e tal. No entanto, não sei como proceder para
+tentar reservá-los para estes eventos.
+
+Outra possibilidade é a UFRN, nos anfiteatros do CCET. O DIMAp não tem sequer
+uma sala que se preze pra esse tipo de coisa. O LCC, no entanto daria um bom
+laboratório para os minicursos. Seria uma união perfeita: os anfiteatros para
+as palestras e o LCC para os minicursos. Tem que ver se estes locais podem
+ser reservados para tais eventos. Acho que com o LCC não tem burocracia e 
+estaria disponível com uma certa "facilidade". Não tenho a menor idéia em
+relação aos anfiteatros.
+
+Bom, dei a partida... Alguém mais?

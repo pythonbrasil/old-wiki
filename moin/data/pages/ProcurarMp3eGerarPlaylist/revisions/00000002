@@ -1,0 +1,103 @@
+#pragma section-numbers off
+= Procurar arquivos MP3 e gerar playlist =
+
+Esse foi meu primeiro script Python. A idéia é poder digitar {{{toca white stripes}}} na linha de comando do Linux ou !MiniCli, e o XMMS abriria com uma playlist com todos arquivos mp3 que tivessem essas palavras-chave. Também é possível usar esse script no Windows, basta mudar as variáveis {{{root_folder}}} e {{{player}}} apropriadamente (algo como {{{c:\\my documents\\mp3}}} e {{{c:\\arquivos de programas\\winamp\\winamp.exe}}}, respectivamente).
+
+Boa sorte, e me contate caso tenha alguma dúvida. Também estou aberto a sugestões pra melhorar esse script. Ainda tem algumas coisas com cara de C e Java no código, mas aos poucos to me acostumando com o "estilo Python" :)
+
+== Código ==
+
+{{{
+#! /usr/bin/env python
+"""
+Usage: toca <options> <keywords> ....
+
+Searches all mp3 files with the _all_ specified keywords, generates a playlist
+and execute it.
+
+It accepts the same options as winamp or xmms, such as -e to enqueue, and
+-s for shuffle. Actually the options are simply passed forward to the player
+so all the xmms/winamp options are available
+"""
+
+import sys
+import string 
+import os
+
+# -------- configuration options ------------
+root_folder = "/windows/E/mp3" #change this to your mp3 root folder....
+player = "xmms" #at windows might be something like c:\\program files\\winamp\\winamp.exe
+playlist_filename = "playlist.m3u"
+
+def findFiles(directory,keylist):
+    """
+    Gets a list of files in the directory (and subdirectories)
+    with contains all the keywords in 'keylist' at the filename 
+    """
+    
+    filenames = []
+    for (path,dname,fnames) in os.walk(directory):
+        for filename in fnames:
+            filename = string.lower(filename)
+            #for each filename, check if it contains all the keywords
+            for keyword in keylist:
+                if not keyword in string.lower(filename):
+                    break 
+            else:
+                #all keywords were found: add to the result list
+                filenames.append(os.path.join(path, filename))
+    return filenames
+    
+def makePlaylist(fileList):
+    """
+    Generates a playlist file for the filenames at fileList
+    """
+    playlist = open(playlist_filename,"w")     #create the file
+    playlist.write("#EXTM3U\n")                #add the standard header
+    for file in fileList:   
+        playlist.write(file + "\n")            #add the items
+    playlist.close
+    
+def playIt(opt):
+    """
+    Execute the playlist.
+    """
+    opt = " ".join(opt)
+    command = player + " " + opt + " " + playlist_filename + " &" 
+    #print command
+    os.popen(command)
+    
+if __name__ == "__main__":
+    print "-" * 60
+    if len(sys.argv) == 1: #if no keyword was entered, give the user a nice tip...    
+        print "Dude, you should enter a keyword to search the mp3's."
+        print "Something like 'toca radiohead'"
+    else:
+        sys.argv = sys.argv[1:]
+        #get any options (starting with '-') the user might have entered
+        #these options will simply be passed forward to the player
+        #one common option is -e to enqueue the songs instead of creating
+        #a brand new playlist
+        opt = [x for x in sys.argv if x[0] == "-"]
+        
+        #get the keywords to search for the mp3s
+        keylist = [x for x in sys.argv if x not in opt]
+        
+        print "Looking for mp3 files with the keyword(s)..."
+        print keylist
+        files = findFiles(root_folder,keylist)
+        if files:
+            print "Finished! Found " + str(len(files)) + " file(s). So, let's play!"
+            makePlaylist(files)
+            playIt(opt)
+        else:
+            print "Didn't find anything :-( Did you mispell it?"
+    print "-" * 69
+}}}
+
+== Para usar ==
+
+Renomeie o arquivo para {{{toca}}}, dê um {{{chmod +x toca}}} e copie para um diretório no seu {{{PATH}}}, por exemplo {{{/opt/kde3}}}. Então basta digitar {{{$ toca ''<nome da musica ou banda>''}}}. Pode usar quantas palavras quiser, para tornar a busca mais precisa (por exemplo, {{{toca beatles let it be}}}. Quaisquer opcões iniciadas com um "-" são passadas pro player, por exemplo "-e" para colocar as músicas na fila da playlist atual (enqueue) e "-s" para shuffle.
+
+----
+RodrigoVieira

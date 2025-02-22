@@ -1,0 +1,36 @@
+= Tarefas para limpeza =
+
+ * Retirar acentos dos nomes das páginas (adicionar na seção "Páginas para Renomear")
+ * Remover imediatamente páginas duplicadas (adicionar na seção "Páginas para Remover")
+ * Editar as páginas e retirar as seguintes marcações (caso elas existam):
+  * {{{#pragma section-numbers off}}} - essa configuração agora é a default
+  * {{{= Título da página =}}} - O MoinMoin já renderiza o nome da página e adicioná-la faz com que o título se repita deixando a página com um aspecto ruim.
+  * {{{--- NomeDoAutorDaPagina}}} - Essa informação é desnecessária e acaba por causar confusão quando o conteúdo da página recebe atualização de outras pessoas. Também cria a figura do 'pai' da página que intimida as pessoas que desejariam colaborar para melhorar o conteúdo do site. Além disso é possível descobrir essa informação clicando em "Obter Informação" no menu lateral.
+ * Links internos ou externos que estejam quebrados devem ser consertados (ou removidos caso não seja possível o conserto).
+ * WikiNames que não possuem página associada não são coisas desejáveis. Tente criar a página quando possível ou preceda o WikiName com uma {{{!}}} desta maneira {{{!GtkCellRenderer}}} para que o MoinMoin veja que não se trata de uma página.
+
+= Páginas para Remover =
+
+ * ...
+
+= Páginas para Renomear =
+
+   * AndréFarina -> AndreFarina
+   * CacheDeFunções -> CacheDeFuncoes
+   * ChamarFunçãoEmDll -> ChamarFuncaoEmDll
+   * ComparaçãoDeGUIs -> ComparacaoDeGuis
+   * ComunicaçãoComPipes -> ComunicacaoComPipes
+   * ConexãoOracle -> ConexaoOracle (#)
+   * conisli2005 -> Conisli2005 (#)
+   * ConversãoDeImagens -> ConversaoDeImagens
+
+   (#) Em duplicidade.
+
+= Páginas para reverter para versão anterior =
+
+   * ReverterEssaPagina -> versão anterior
+   * ReverterEssaPagina -> 2 versões anteriores
+
+= Edição em páginas protegidas =
+
+   * PythonBrasil -> Remover a notícia da campanha depois que a mesma terminar!

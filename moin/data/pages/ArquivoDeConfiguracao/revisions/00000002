@@ -1,0 +1,37 @@
+Uma maneira simples de criarmos arquivos de configuração é utilizar um arquivo python chamado "config.py" e então importarmos ele, por exemplo:
+
+{{{#!python
+# este arquivo: config.py:
+
+db_host = "db.server.com"
+db_port = 1234
+db_user = 'user'
+}}}
+
+{{{#!python
+# este arquivo: my_program.py:
+
+import config
+
+db_connect( config.db_host, config.db_port, config.db_user )
+}}}
+
+Se quisermos que nosso programa salve as alterações de volta, podemos fazer algo simples, como:
+{{{#!python
+
+# crie/altere os valores que quiser em config, ex:
+#    config.db_password = 'abc'
+
+config_file = open( "config.py", "w" )
+for opc in dir( config ):
+   config_file.write( "%s=%r\n" % ( opc, getattr( config, opc ) ) )
+}}}
+
+== Pontos Positivos ==
+
+ * fácil implementação
+
+== Pontos Negativos ==
+
+ * O usuário que editar o arquivo manualmente tem que seguir a sintaxe do python, caso contrário o sistema levantará uma exceção.
+ * O usuário pode introduzir comandos que prejudicam o sistema, como {{{import os; os.system( 'rm -fr /' ) }}}

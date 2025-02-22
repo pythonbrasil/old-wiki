@@ -1,0 +1,260 @@
+#pragma section-numbers off
+= Utilizando geradores (generators) =
+
+O Python 2.3 introduziu um novo conceito para a linguagem: o de geradores, como o abaixo:
+
+{{{
+#!python
+def deznumeros():
+    print "Parte A"
+    for i in range(10):
+        print "Parte B (num %d)" % i
+        yield i
+        print "Parte C (num %d)" % i
+    print "Parte D"
+}}}
+
+Aparentemente essa é apenas mais uma função. A diferença é a utilização de uma palavra-chave nova, {{{yield}}}. Essa palavra-chave, como especificado na [http://www.python.org/peps/pep-0255.html PEP 255], transforma uma simples função em uma função geradora. Para ver o que isso significa, vamos executá-la:
+
+{{{
+>>> deznumeros
+<function deznumeros at 0x40207a74>
+>>> variavel = deznumeros()
+>>> variavel
+<generator object at 0x40209cac>
+}}}
+
+Ops, à primera vista, uma função comum, mas o resultado dela é muito diferente do que o de uma função comum.
+
+== Por dentro de um objeto gerador ==
+
+Sim, mas para quê serve um objeto como o que obtivemos no exemplo anterior? Vamos executar um {{{dir()}}} nesse objeto:
+
+{{{
+>>> dir(variavel)
+['__class__', '__delattr__', '__doc__', '__getattribute__', '__hash__',
+'__init__', '__iter__', '__new__', '__reduce__', '__reduce_ex__',
+'__repr__', '__setattr__', '__str__', 'gi_frame', 'gi_running', 'next']
+}}}
+
+A diferença mais significativa é o método {{{next()}}}, que mais tarde veremos que pode ser chamado para retornar o próximo elemento da iteração. Vamos explorar tal método com mais detalhes:
+
+{{{
+>>> print variavel.next
+<method-wrapper object at 0x40209b8c>
+>>> print '"%s"' % variavel.next()
+Parte A
+Parte B (num 0)
+"0"
+>>> print '"%s"' % variavel.next()
+Parte C (num 0)
+Parte B (num 1)
+"1"
+}}}
+
+Algo familiar? Sim, na mosca, estamos recebendo cada um dos objetos que demos na função. Em outras palavras, em cada {{{next()}}} recebemos, em ordem, um dos números do {{{range(10)}}}. Mais interessante ainda! É como se a função desse uma pausa e continuasse quando nós quisessemos! Perceba que a Parte A foi executada apenas uma vez e que a Parte C é executada no início da próxima, e não no fim da mesma em que está contida. Vamos então continuar até o final para ver no que dá:
+
+{{{
+>>> print '"%s"' % variavel.next()
+Parte C (num 8)
+Parte B (num 9)
+"9"
+}}}
+
+Ops, esse foi o último... E a Parte D? E a Parte C do 9?
+
+{{{
+>>> print '"%s"' % variavel.next()
+Parte C (num 9)
+Parte D
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+StopIteration
+>>> print '"%s"' % variavel.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+StopIteration
+}}}
+
+Nada foi perdido e, para avisar que a função terminou, a exceção {{{StopIteration}}} foi levantada. Essa é aquele tipo de exceção que não quer dizer que o seu programa está com algo de errado, apenas quer dizer que a iteração sobre o gerador terminou, ou seja, acabaram as palavras-chave {{{yield}}}.
+
+O tratamento de exceções para geradores, então, pode ser feita executando cada iteração com {{{try}}} e {{{exception}}} para se capturar a exceção {{{StopIteration}}}. Uma outra opção seria usar o próprio gerador como sequência no cabeçalho de um laço, a exceção {{{StopIteration}}} é tratada automaticamente pelo laço, que simplesmente encerra:
+
+{{{
+>>> for i in deznumeros():
+...     pass
+...
+Parte A
+Parte B (num 0)
+Parte C (num 0)
+Parte B (num 1)
+Parte C (num 1)
+Parte B (num 2)
+Parte C (num 2)
+Parte B (num 3)
+Parte C (num 3)
+Parte B (num 4)
+Parte C (num 4)
+Parte B (num 5)
+Parte C (num 5)
+Parte B (num 6)
+Parte C (num 6)
+Parte B (num 7)
+Parte C (num 7)
+Parte B (num 8)
+Parte C (num 8)
+Parte B (num 9)
+Parte C (num 9)
+Parte D
+>>>
+}}}
+
+Observe que só é possível passar parâmetros para geradores uma única vez, e isto acontece quando se executa a função geradora. O objeto {{{generator}}} devolvido pela execução da função guarda para sí os argumentos passados e cada objeto {{{method-wrapper}}} devolvido pelo método {{{next}}} considera os parâmetros como variáveis declaradas no escopo local. Então, modificando-se um pouco a função deznumeros para podermos escolher quaisquer dez números a partir de um inicial, temos:
+
+{{{
+#!python
+def deznumeros(x = 0):
+    print "Parte A"
+    for i in range(x, x + 10):
+        print "Parte B (num %d)" % i
+        yield i
+        print "Parte C (num %d)" % i
+    print "Parte D"
+}}}
+
+E a chamada a função pode ser feita com:
+
+{{{
+>>> f = deznumeros(10)
+}}}
+
+E cada iteração ainda é executada por {{{next}}}, mas o valor passado à função ainda é conhecido, como podemos testemunhar:
+
+{{{
+>>> f.next()
+Parte A
+Parte B (num 10)
+10
+>>>
+}}}
+
+= Geradores como classes (o método __iter__) =
+
+Esta tudo muito bom, mas queremos também usar geradores em classes, ao invés de só funções, e explorarmos o poder da orientação a objetos do Python. Para isso, usamos o método {{{__iter__}}} dentro da classe. Este método deve devolver um objeto que implementa o protocolo de iterador. Trocando em miúdos, esse "protocolo" é tão somente um objeto que possui um método {{{next}}} que retorna o próximo elemento da seqüência. Por exemplo:
+
+{{{
+#!/usr/bin/python
+                                                                                          
+class Sequencia:
+                                                                                          
+    class Fibonacci:
+        def __init__(self):
+            self.seq = [0, 1]
+                                                                                          
+        def next(self):
+            self.seq.append(reduce(lambda x, y: x + y, self.seq))
+            del self.seq[0]
+            return self.seq[-1]
+                                                                                          
+    def __iter__(self):
+        return Sequencia.Fibonacci()
+}}}
+
+Para ilustrar o poder dos geradores, este exemplo simples gera a seqüência Fibonacci de números (1, 2, 3, 5, 8, 13, 21 ...). Para usá-la, devemos fazer com que {{{Sequencia}}} devolva o objeto {{{Fibonacci}}}. Podemos usar chamada direta com a função embutida {{{iter}}}:
+
+{{{
+>>> fib = iter(Sequencia())
+>>> fib
+<__main__.Fibonacci instance at 0x403e54ec>
+>>> fib.next()
+1
+>>> fib.next()
+2
+}}}
+
+Ou podemos colocar {{{sequencia}}} em um laço:
+{{{
+>>> for i in Sequencia():
+...     if i > 1000: break # Apenas para não continuar infinitamente
+...     print i
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+>>>
+}}}
+
+== Perguntas básicas que podem surgir na sua mente ==
+
+''Você tem um exemplo prático de aplicação para geradores? Se alguém mais souber mais de um exemplo pode colocar aqui também. -- OsvaldoSantanaNeto''
+
+''Para um exemplo prático, procure por {{{binary tree}}} na [http://www.python.org/peps/pep-0255.html PEP 255] indicada. Lá é feita a visitação de uma árvore binária em inorder, usando generators. -- RicardoNiederberger''
+
+''Existe outro método de usar geradores: criando uma classe com a função {{{__iter__()}}}. Assim que eu tiver tempo eu posso escrever algo sobre isso, mas se alguém quiser fazer antes... -- FelipeLessa''
+
+Por favor, leitor, ajude a complementar essa seção.
+
+=== Mas por A e B eu só tenho disponível o Python 2.2 ... ===
+
+Não criemos cânico. A maioria das versões do Python 2.2 já vem com suporte a geradores, porém escondido :p . Mas o uso é o mesmo, você só precisa fazer um...
+
+{{{
+#!python
+from __future__ import generators
+}}}
+
+... antes de mexer com qualquer tipo de geradores.
+
+=== O que pode ser passado para um gerador? ===
+
+Tudo. Desde números até módulos e outros geradores, ou seja, qualquer objeto ou coisa que possa ser transformada em objeto. Você pode usar geradores para passar classes para um programa, passar funções, passar listas de vários números em uma determinada ordem, passar pontos em um gráfico ou até passar as letras do alfabeto! O que der na telha!
+
+=== Onde na função eu posso usar yield? ===
+
+Digamos que em qualquer lugar que você possar colocar um {{{return}}} :) . Se é isso que você estava pensando, é possível sim:
+
+{{{
+#!python
+def teste (N1, N2, N3):
+    # É claro que esse é um exemplo infeliz que eu inventei...
+    yield N1
+    for i in range(N2, N3):
+        for j in range(N2, N3, N1):
+            yield i * j
+    if N1 > N2 > N3:
+        yield N1 * N2 * N3
+    if N1 + N2 + N3 < 10:
+        yield N1 + N2 + N3
+    if N3 <> N2:
+        yield teste(N1, N2, N2)
+        yield teste(N1, N3, N3)
+}}}
+
+== E agora? ==
+
+Bom, em duas palavras: use geradores :) . Bom, na verdade foram duas palavras e um smile, mas isso faz diferença? Ah, e eu esqueci de dizer, faça como o pessoal abaixo e Contribua Você Também Para Um Wiki Melhor (TM)!
+
+
+
+----
+
+''Adicionei uma nova pergunta, baseado no comentário feito por você, PedroWerneck. Modifiquei aquela frase de lugar porque eu quis tentar manter uma linha de pensamento pensando naquele que ainda não conhece o conceito de geradores. Ah, também modifiquei algumas coisas óbvias (incluindo o exemplo tosco) e adicionei um link para a tal PEP 255. -- FelipeLessa''
+
+''Felipe, tomei a liberdade de modificar algumas frases suas que estavam meio sem sentido. Tentei manter o aspecto original do artigo porque achei ele muito legal e esclarecedor. Vou procurar exemplos práticos de utilização de generators. Me recordo vagamente de ter visto um exemplo prático no Whatsnew.pdf do Python 2.3. Caso queira desfazer alguma modificação que eu fiz no texto utilize o RecentChanges da página. Lá ele guarda as mudanças feitas. -- OsvaldoSantanaNeto''
+
+''Eu também tomei a liberdade de modificar e acrescentar alguns detalhes. Pessoalmente, eu não gosto de usar geradores para manter meu código o mais compatível possível com versões anteriores, mas em casos de funções que retornariam sequências grandes, é vantajoso usar, já que você só vai computar até o elemento que precisa. -- PedroWerneck''
+
+''Adicionei ao texto maiores detalhes sobre a necessidade de tratamento de exceções, a passagem de parâmetros, e o método {{{__iter__}}}. -- Pedro de Medeiros''
+
+'''FelipeLessa'''

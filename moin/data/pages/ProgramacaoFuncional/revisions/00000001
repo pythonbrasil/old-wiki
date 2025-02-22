@@ -1,0 +1,49 @@
+#pragma section-numbers off
+= Receita: Programação Funcional =
+
+Esta receita é fruto de uma dúvida de Idelmárcia, aqui na UFRN. Ela queria
+saber como fazer para criar uma lista que contivesse os elementos de uma lista
+de listas, pegando um elemento de cada sublista por vez. Por exemplo, para a lista
+[[1, 2], [3], [4, 5, 6]], o resultado seria: [1, 3, 4, 2, 5, 6].
+
+Nós chegamos a um código utilizando generators recursivo, mas fiquei pensando e disse
+que poderia ser feito com apenas uma linha, daí fui montando minha idéia. O primeiro
+passo foi fazer um mapeamento, casando os elementos das sublistas que estão na mesma
+posição, ou None no caso de não haver um elemento para aquela posição.
+
+{{{
+>>> lista = [[1, 2], [3], [4, 5, 6]]
+>>> map(None, *lista)
+[(1, 3, 4), (2, None, 5), (None, None, 6)]
+}}}
+
+A lista já está na ordem que eu quero, tenho agora que quebrar as sublistas para ficar
+apenas com uma lista:
+
+{{{
+>>> reduce(lambda x, y: x + y, map(None, *lista))
+(1, 3, 4, 2, None, 5, None, None, 6)
+}}}
+
+Agora ficou fácil, basta remover os 'None':
+
+{{{
+>>> filter(None, reduce(lambda x, y: x + y, map(None, *lista)))
+(1, 3, 4, 2, 5, 6)
+}}}
+
+Pronto, tenho o resultado que desejava. A única diferença é que eu queria uma lista e
+o resultado foi uma tupla. Isto é facilmente resolvido usando 'list()':
+
+{{{
+>>> list(filter(None, reduce(lambda x, y: x + y, map(None, *lista))))
+[1, 3, 4, 2, 5, 6]
+}}}
+
+Prontinho! Resolvido o problema.
+
+Volta para CookBook.
+
+----
+
+João Paulo F Farias

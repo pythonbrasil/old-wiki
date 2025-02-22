@@ -1,0 +1,12 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+= Índice de Páginas =
+
+Esta página contém a listagem de todas as páginas do PythonBrasil organizadas em ordem alfabética.
+
+Veja também:
+ * WordIndex - Índice de todas as ocorrências de palavras em Títulos
+ * SiteNavigation - Organização hierárquica das páginas do site
+
+== Índice ==
+
+<<TitleIndex>>

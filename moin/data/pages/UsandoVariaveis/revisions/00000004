@@ -1,0 +1,117 @@
+'''"Variaveis", expressões e declarações'''
+
+Hehe pronto segundo artigo ta ai esse é somente sobre variaveis e revisão do primeiro artigo.
+Então vamos programar chega de perder tempo.
+E lembrem-se python é facil sim porém como tudo tem horas que fica dificil mais não se pode desistir.
+
+Variaveis são palavras que quardam valores, parece explicação pra criança mas serve, esses valores podem ser de diversos tipos, tamanhos ,etc. Porém em Python não a tipagem ou seja você declara variaveis dinamicamente é só atribuir um valor a uma palavra através do operador = , que a variavel será criada.
+
+Sei sei muito teorico não ? vamos dar alguns exemplos:
+
+1)
+{{{
+### variaveis1.py ###
+a = "variavel a tem conteudo string" # obeserve foi atribuida uma string como valor para a variavel a
+print a # se não lembra volte  e releia o primeiro artigo
+}}}
+
+2)
+{{{
+### variaveis2.py ###
+b = 2 # obeserve que a variavel 2 tem um numero como valor
+
+# esse valor poderia ser decimal tambem:
+c = 3.5
+
+print b #lembra da ultima aula ?
+print c # lembra da ultima aula ?
+}}}
+
+3)
+{{{
+### variaveis3.py ###
+a,b,c = 1,2,"neto" 
+# hum não se assuste as variaveis podem ser declaradas em conjuntos
+# independente do valor
+}}}
+
+4)
+{{{
+### variaveis4.py ###
+a = 1 #declara a variavel a
+b = " neto " #declara a variavel b
+c = 5.9 #declara a variavel c
+
+print a,b,c # imprime as 3 na tela
+}}}
+
+5)
+{{{
+### variaveis5.py ###
+a = 1 # declara a variavel a
+b = 2 #declara a variavel b
+c = 3 #declara a variavel c
+
+a = b # a passa a ter o valor de b logo, agora a = 2
+
+print a,c,b #imprime na ordem: variavel a mais a variavel c mais a variavel b
+}}}
+
+Dentro desse assunto também se encontram as listas, que são os Arrays do Python, elas são faceis de se assimilar e só você prestar atenção no codigo abaixo.
+Observe os exemplos abaixo:
+
+1)
+{{{
+# usandolista.py
+a = [1,"neto",2,"ruivaldo"]
+print a[0] #escreve o numero 1 pois as listas comecam do zero e não do um.
+print a[1]
+print a[2]
+print a[3] # entendeu agora? as listas tem como seu primeiro indice o valor 0
+}}}
+
+2)
+{{{
+# stringtbelista.py
+a = "letras"
+print a
+print a[0] #observe: strings são listas de caracteres unitarios ? sacou ?
+print a[1] #observe: o segundo caractere seria o nome da variavel string com o indice 1
+print a[2] # sera que deu pra entender ?
+print a[3]
+print a[4]
+print a[5]
+}}}
+
+3)
+{{{
+# listareplace.py
+a = ["primeiro","segundo","terceiro"]
+print a[2]
+## vamos mudar o mesmo a[2]
+a[2] = "quarto"
+print a[2]
+## a lista agora é igual a: a = ["primeiro","segundo","quarto"]
+## você não pode utilizar esse comando em strings
+}}}
+
+
+
+OBS: Ficou faltando no artigo passado essa tabela aqui oh:
+{{{
+-> São caracteres especiais para você usar no comando print ex: print "oi\ntchau"
+\n - Nova Linha. 
+\t - Tab Horizontal 
+\b - Insere um "backslash", deleta o ultimo caractere escrito 
+\a - Beep
+\\ - Escreve um "\" 
+\r - Retorno de "carruagem", carriage,. Use \n a menos que você saiba o que está fazendo. 
+
+}}}
+
+Pronto pessoal por hoje é só espero que tenham entendi esse assuntos qualquer coisa:
+ralobao@click21.com.br ( Desculpa pelo ultimo artigo pode mandar duvidas )
+
+From a newbie to another ( De um novato para outro )
+
+Abraços e viva ao Open Source porque nós amamos a liberdade.

@@ -1,0 +1,60 @@
+#pragma section-numbers off
+= Receita: DateDiff =
+
+Função pra calcular a diferença entre duas datas....
+
+== Código ==
+
+{{{
+#!python
+
+"""Function to calculate the difference between two dates."""
+__revision__ = 0.1
+
+def date_diff(start_date, end_date):
+    """
+    Function to get the days diference between
+    two dates.
+    The date format should be in:
+        Year-Month-Day ,format
+    Ex:
+        "2004-11-05"
+        
+    Ex2:
+        
+        print date_diff("2004-11-05","2004-12-05")    
+    
+    * If the date is not in this format it wont work.
+    """
+
+    #===========================================================================
+    # Import
+    #===========================================================================
+    from datetime import date
+    
+    #===========================================================================
+    # Process the date.
+    #===========================================================================
+    # TODO: Let this code more pythonic
+    start_splited = start_date.split('-')
+    end_splited = end_date.split('-')
+    start = date(int(start_splited[0]),  int(start_splited[1]),  \
+    int(start_splited[2]))
+    end = date(int(end_splited[0]),  int(end_splited[1]),  int(end_splited[2]))
+    
+    #===========================================================================
+    # Calculates and returns the diference.
+    #===========================================================================
+    return (end-start).days
+
+}}}
+
+== Exemplo de uso ==
+
+* Exemplo de uso no comentário do código acima.
+
+
+Volta para CookBook.
+
+----
+ralobao (ralobaoAROBAgmail.com)

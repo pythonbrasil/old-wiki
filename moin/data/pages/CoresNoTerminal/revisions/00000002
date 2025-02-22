@@ -1,0 +1,78 @@
+= Receita de como utilizar cores no terminal =
+ 
+ Algumas vezes queremos utilizar cores no terminal e sempre temos que lembrar os códigos complicados das cores, esta página é visa auxiliar nesta tarefa. 
+ 
+ Esta página surgiu de um post do Marco Carvalho na lista python-brasil@yahoogrupos.com.br , ou seja, todos os créditos a ele. ;)
+
+== Como faço para alterar a cor de texto no shell (win/linux)? ==
+
+Usando seqüências de escape ANSI:
+
+{{{
+#!python
+>>> print '\033[31m'+'Isto eh vermelho'+'\033[0;0m'
+Isto eh vermelho
+>>> print '\033[32m'+'Isto eh verde'+'\033[0;0m'
+Isto eh verde
+>>> print '\033[42m'+'\033[1m'+'\033[33m'+'Isto eh amarelo negrito com fundo verde'+'\033[0;0m'
+Isto eh amarelo negrito com fundo verde
+>>>
+}}}
+
+Para facilitar, segue a tabela de seqüência de escape ANSI:
+{{{
+#!python
+
+vermelho = '\033[31m'
+verde = '\033[32m'
+azul = '\033[34m'
+
+ciano = '\033[36m'
+magenta = '\033[35m'
+amarelo = '\033[33m'
+preto = '\033[30m'
+
+branco = '\033[37m'
+
+restaura cor original = '\033[0;0m'
+negrito = '\033[1m'
+reverso = '\033[2m'
+
+fundo preto = '\033[40m'
+fundo vermelho = '\033[41m'
+fundo verde = '\033[42m'
+fundo amarelo = '\033[43m'
+fundo azul = '\033[44m'
+fundo magenta = '\033[45m'
+fundo ciano = '\033[46m'
+fundo branco = '\033[47m'
+}}}
+
+== No windows não funciona. Existe alguma maneira? ==
+
+ Hummm.....
+
+ Se bem me lembro (faz séculos que não mexo com esse ambiente), o DOS não suporta ANSI diretamente, precisa do diver ANSI.SYS no config.sys
+
+{{{
+ device=ANSI.SYS
+}}}
+
+ Aproveitando, só de brincadeira, fiz uma conversão (bem porca por sinal) de um [1] script do Aurélio Marinho Jargas (vulgo Verde) que imprime todas as cores ANSI no terminal.
+
+{{{
+#!python
+#**** cores.py ****
+
+import string
+for letra in ["0","1","2","3","4","5","6","7"]:
+    for bold in ['',';1']:
+        for fundo in ["0","1","2","3","4","5","6","7"]:
+            seq="4" + fundo + ";3" + letra
+            saida = "\033["+ seq + bold + "m" + string.center(seq+bold, 8) + "\033[m"
+            print "%s" % saida,
+        print
+
+}}}
+
+ [1] http://www.dicas-l.com.br/artigos/linux-modotexto/coluna11.html 

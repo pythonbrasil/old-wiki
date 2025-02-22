@@ -1,0 +1,27 @@
+#pragma section-numbers off
+
+== Como baixar o Boa-Constructor 0.4.0 do CVS ==
+
+ * '''No Windows:'''
+ ''Traduzido do:'' ''[[https://sourceforge.net/forum/message.php?msg_id=3027525|fórum do Boa]] por: vegaseat''
+
+ Eu usei o [[https://www.tortoisecvs.org|TortoiseCVS]], que tem uma integração legal com o Windows Explorer e segui as instruções abaixo:
+  * Vá para a pasta onde deseja que o Boa fique, click com o botão direito do mouse em um local vazio (fora de qualquer pasta ou arquivo).
+  * Selecione "CVS Obter Módulo..." ou "CVS Checkout".
+  * '''Protocolo''' = Password Server (pserver)
+  * '''Servidor''' = cvs.sourceforge.net
+  * '''Pasta do Repositório''' = /cvsroot/boa-constructor
+  * '''Nome do usuário''' = anonymous
+  * '''Módulo''' = boa
+  * Selecione a aba Revisão
+  * Selecione "Escolher Marcador ou Ramo"
+  * '''Nome do Ramo ou Marcador''' = Boa_0-4-0_pre
+
+
+ * '''No Linux/Unix:'''
+  Na linha de comando com um cliete de cvs instalado.
+  {{{ cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/boa-constructor checkout -r Boa_0-4-0_pre boa }}} 
+
+
+Em ambos procedimentos irá criar a pasta boa.
+Entre na pasta e execute o boa.py ou boa.pyw

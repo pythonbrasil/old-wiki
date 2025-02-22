@@ -1,0 +1,84 @@
+= Software Python =
+Nesta página você vai achar aquele software, aquele módulo, aqueles scripts que facilitarão a sua vida de desenvolvedor Python. Aqui também você poderá colocar aquele seu projeto desenvolvido em Python para que todos conheçam.
+
+<<TableOfContents>>
+
+== Ferramentas para programação ==
+=== Ambientes de desenvolvimento/Editores ===
+ * EditorSpe - Editor de textos.
+ * AmbienteEric3 - Ambiente de desenvolvimento.
+ * [[http://rpdb.digitalpeers.com/|rpdb]] - rpdb é um debugger de linha de comando para Python. Ele é baseado no debugger padrão pdb do Python.
+ * [[http://pydev.sourceforge.net/|PyDev]] - é um plug-in que permite a edição de programas Python no Eclipse.
+
+=== Distribuição ===
+ * CxFreeze - Gere arquivos executáveis de seus scripts com esse conjunto de ferramentas.
+ * Py2Exe - Gere arquivos executáveis ou componentes COM (DLL) com esse módulo.
+
+== Módulos ==
+=== Web ===
+ * [[http://wwwsearch.sourceforge.net/ClientForm/|ClientForm]] - Manipula forms html. Parseia html com form, permite prencher o form e submeter.
+ * [[http://wwwsearch.sourceforge.net/ClientCookie/|ClientCookie]] - Cliente http com suporte a cookies. Equivalente ao urllib2.urlopen()
+ * [[http://wwwsearch.sourceforge.net/DOMForm/|DOMForm]] - Screen scrapping html com suporte a Javascript. Usa o !ClientForm pra preencher forms.
+ * [[http://diveintomark.org/projects/pygoogle/|pygoogle]] - Faz buscas no google. Precisa se registrar no google (http://google.com/apis)
+ * [[http://www.graymalkin.globalhosts.com.br/pysendmail.asp|Py.SendMail]] - Módulo de fácil utilização para envio de e-mails (HTML ou texto puro), com autenticação e possibilidade de anexar arquivos e embutir imagens nas mensagens. Pode ser utilizado tanto em Python quanto em outras linguagens (dada sua versão COM também disponível).
+
+=== Gráficos etc ===
+ * [[http://www.reportlab.org|reportlab]] - Cria/monta documentos PDF.
+ * [[PIL:_Python_Imaging_Library]] - Manipule e processe imagens através deste módulo.
+ * BoaConstructor - Ferramenta para construir visualmente interfaces gráficas utilizando as extensões wxPython.
+ * [[http://www.advsofteng.com/cdpython.html|ChartDirector]] - Biblioteca comercial para geração de gráficos em várias linguagens (inclusive Python :) ). Tem um Trial totalmente funcional, cuja limitação é gerar os gráficos com uma pequena linha amarela no rodapé com informações sobre a biblioteca.
+
+=== GUI ===
+ * [[http://www.daa.com.au/~james/software/pygtk/|PyGTK]] - Acesso à biblioteca GTK 1.2 e 2.0 para Python.
+ * [[http://www.async.com.br/projects/kiwi|Kiwi]] - um framework OO para aplicações desktop baseado no PyGTK 1.2 (com um port para 2.0 no forno).
+ * [[http://www.wxpython.org/|wxPython]] - Wrapper para a biblioteca multiplataforma wxWindows.
+ * [[http://www.riverbankcomputing.co.uk/pyqt/index.php|PyQT]] - Wrapper para a biblioteca QT, usada pelo KDE e muitas outras aplicações.
+ * [[http://pyfltk.sourceforge.net/|FLTK]] - PyFLTK (Fast Light Tool Kit) é uma biblioteca multiplataforma leve e disponível livremente.
+
+=== Win32 ===
+ * PyWin32 - Módulo para se trabalhar e desenvolver componentes COM em Python.
+
+=== IA ===
+ * [[http://pyml.sourceforge.net|PyML (machine learning in python)]] - PyML é um framework OO para aprendizado de máquina escrito em Python.
+ * [[http://montepython.sourceforge.net|Monte]] - "Monte(Python) is a Python framework for building gradient based learning machines, like neural networks, conditional random fields, logistic regression, etc."
+ * [[http://nltk.org/index.php/Main_Page|NLTK]] - Natural Language Tool Kit é uma suite de módulos em Python de código aberto, dados e documentação para pesquisa e desenvolvimento em processamento de linguagem natural.
+
+== Scripts ==
+ * MagicVelox - Script que faz a autenticação do velox, para quem não aguenta mais o login do provedor, utilizando socket, re e urlopen.
+
+== Softwares desenvolvidos por Brasileiros em Python ==
+ * Txt2Tags - Conversor de documentos.
+ * [[http://sedsed.sf.net|sedsed]] - Depurador para scripts SED (Stream EDitor)
+ * http://pybot.org - Pybot - um bot IRC
+ * [[https://moin.conectiva.com.br/EditMoin|EditMoin]] Ferramenta para edição de páginas no MoinMoin (como essa :) )
+ * [[https://moin.conectiva.com.br/ReMv|ReMv]] Ferramenta para renomear arquivos com expressões regulares
+ * [[https://moin.conectiva.com.br/Patcher|Patcher]] Ferramenta para geração rápida de patches
+ * https://moin.conectiva.com.br/GustavoNiemeyer/Projects - Vários projetos úteis e interessantes
+ * [[http://imgseek.sourceforge.net/|imgSeek]] - Gerenciador de fotos em python, pyqt e c++ com busca por imagens baseada em conteúdo
+ * [[https://moin.conectiva.com.br/LunaticPython|LunaticPython]] - Gosta de Python? Gosta de Lua? Quer juntar as duas? O GustavoNiemeyer resolveu este problema.
+ * [[http://www.mmorph.com/pymorph/index.html|pyMorph]] - Coleção de ferramentas para processamento de imagens (segmentação, filtros não-lineares, reconhecimento de padrões e análise).
+ * [[http://www20.brinkster.com/rodviking/spacinvaders/|Spacin'Vaders]] - Pequeno programa (ca. 500 linhas) ao estilo "Space Invaders", desenvolvido com !PyGame.
+ * [[http://awkly.org/cgi-bin/trac.cgi/browser/school/checkers|Checkers]] - Implementacao do famigerado jogo de Damas usando tecnicas de Inteligencia Artificial, baseado nos [[http://aima.cs.berkeley.edu/python/games.py|exemplos]] do livro do [[http://aima.cs.berkeley.edu/|Norvig]].
+ * [[http://awkly.org/cgi-bin/trac.cgi/browser/school/lex|Lexico]] (baseado no tokenizer.py) e [[http://awkly.org/cgi-bin/trac.cgi/browser/school/grammy|Sintatico]] (inspirado em um modulo que eu achei no Google depois nunca mais...) para uma [[http://awkly.org/cgi-bin/trac.cgi/file/school/grammy/doc/grammar.bnf|GramaticaTosca]]
+ * [[http://awkly.org/cgi-bin/trac.cgi/browser/school/concurrency|Concurrency]] - Um simulador de controle de concorrencia baseado em timestamps. O legal eh o modulo [[http://awkly.org/cgi-bin/trac.cgi/file/school/concurrency/parser.py|parser.py]] pra quem quer um exemplo de como usar o libxml2 pra validar um arquivo XML contra um schema RelaxNG.
+ * [[http://awkly.org/cgi-bin/trac.cgi/browser/school/evolve|Evolve]] - Um engine para implementacao de algoritmos geneticos, e de brinde a implementacao do problema do [[http://awkly.org/cgi-bin/trac.cgi/file/school/evolve/examples/caixeiro.py|CaixeiroViajante]]. Tambem inclui um exemplo de como plotar um grafico usando o [[http://scipy.org|SciPy]]. Ha tambem uma [[http://awkly.org/files/algoritmo_genetico.pdf|DescricaoDetalhada]] disponivel.
+ * [[http://chalks.berlios.de/|Chalks]] - Editor de texto-puro multiplataforma com suporte a edição remota colaborativa em tempo real. Projeto congelado no momento
+ * [[http://simcpu.gins.eng.br/|Simulador de CPU Hipotética]] - Simula uma CPU hipotética e permite ver o que acontece com os registradores e memória em tempo real.
+ * [[http://lotonyckx.sourceforge.net/|LotoNyckX]] - Gerenciador de jogos da [[http://www1.caixa.gov.br/loterias/loterias/lotomania/lotomania_resultado.asp|Lotomania]] (loteria) da [[http://www.caixa.gov.br/|Caixa Econômica Federal do Brasil]].
+ * [[http://www.umitproject.org|Umit Project]] - Interface gráfica multi-plataforma para varredura e administração de redes de computadores. Projeto iniciado em 2005 pelo brasileiro [[AdrianoMonteiro|Adriano Monteiro Marques]] durante o Google Summer of Code.
+
+== Outros repositórios ==
+ * [[http://www.python.org/pypi|PyPI]] - Python Package Index. Permite a catalogação automática para pacotes usando distutils.
+ * [[http://aspn.activestate.com/ASPN/Cookbook/Python/|Python Cookbook]] - Receitas de bolo e comentários.
+ * [[http://py.vaults.ca/apyllo.py|Vaults of Parnassus]] - Catálogo categorizado
+
+== Softwares Inusitados ==
+Nessa seção você pode colocar os softwares mais inusitados feitos em Python que você encontrar por aí.
+
+ * [[http://hawthorn.csse.monash.edu.au/~njh/programming/cross-stitch/|Ponto Cruz]] - Minha esposa, na condição de grávida, resolveu fazer alguns trabalhos com ponto-cruz. Resolvi procurar algum software (grátis ou livre) que convertesse bitmap para ponto-cruz e quando encontrei um desses adivinhem em que linguagem ele foi feito? :)
+ * [[http://pyching.sourceforge.net/|I Ching]] - Mais um para a categoria de softwares 'diferentes' feitos em Python. Desta vez é um software de I Ching.
+
+/!\ Solicito à vocês que sempre que colocar alguma URL nessa página colocar também uma breve descrição sobre o software.
+
+----
+OsvaldoSantanaNeto

@@ -1,0 +1,48 @@
+#pragma section-numbers off
+= Nome do Software =
+
+Esse software realmente é muito completo. Pena ele não fazer parte da maioria das distribuições por aí. (''está no Debian testing e unstable''). Ele é desenvolvido usando QScintilla, Qt e PyQt. Foi um pouco complicado eu colocar ele pra funcionar, mas ele é bastante completo (''apt-get install eric, no debian'').
+
+   * '''Prós:''' 
+      * Muito completo.
+      * Integração com QtDesigner
+      * Integração com QtLinguist (para tradução)
+      * Debuger integrado com editor
+      * Syntax Highlighting (básico)
+      * Autocompleta texto
+      * Possui integração com ferramenta de refatoração BicycleRepairMan
+      * Possui integração com PyUnit (testes unitários)
+      * Integra com CVS e Subversion
+      * Outras ''coisinhas para'' desenvolvimento GUI.
+      * É perfeito para quem quer usar PyQt
+   * '''Contras:''' 
+      * Relativamente pesado (''??? aqui é leve'')
+      * Algumas funcionalidades como gerar UML ainda estão imaturas, porém são secundárias
+      * Como ele possui apenas intergração com o toolkit Qt, talvez não seja vantagem para os outros toolkits. Mas ainda vale a pena pelas outras integrações
+      * Complicado de se compilar: de fato é preciso seguir um roteiro um pouco longo, mas não é tão complicado assim 
+      * Usa bibliotecas do Qt, o que implica em alguns casos (Windows) terá que adiquir a licença (não que isso realmente seja um 'contra').
+
+
+
+== Ficha técnica ==
+
+URL: http://www.die-offenbachs.de/detlev/eric3.html <<BR>>
+Licença: GPL
+
+== Tela ==
+
+{{attachment:eric3.png}}
+
+== Eric3 no Windows ==
+
+Como algumas pessoas da lista não conseguiram baixar, estou disponibilizando aqui os arquivos binários do pyqt e do Eric3.
+
+[[attachment:pyqt.exe]]
+[[attachment:eric3.exe]]
+
+* Obs: Precisa do Python 2.4 instalado na máquina, caso não tenha basta baixar no www.python.org
+
+
+----
+
+Osvaldo Santana Neto

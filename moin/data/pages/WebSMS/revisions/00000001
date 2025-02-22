@@ -1,0 +1,111 @@
+#pragma section-numbers off
+= Receita: WebSMS =
+
+Minha namorada adora receber mensagens no celular durante o trabalho, mas as vezes é um pouco trabalhoso abrir o browser só pra entrar no site da operadora (no caso, Telemig Celular) e enviar a mensagem. Resolvi fazer esse módulo que valida e envia a mensagem. Não deve ser difícil aproveitar a idéia, (e usar a mesma interface), para os sites de outras operadoras.
+
+== Código ==
+
+{{{
+#!python
+
+
+import urllib
+
+
+class MessageError(Exception):
+    pass
+
+class Message(object):
+    def __init__(self):
+        self.valid = False
+        self.url = "http://200.152.210.59/cgi-bin/waura.exe"
+        self.frm = {'operadora':"1",
+                     'servico':"3",
+                     'totalChars':"0",
+                     'msg_total':"",
+                     'Tel_Orig':"",
+                     'Mensagem':"",
+                     'DDD':"",
+                     'Tel_Dest':"",
+                     'Nome_Orig':"",
+                     'Mensagem1':"",
+                     'totalCounter':"145",
+                     }
+        
+    def setAreaCode(self, code):
+        self.frm['DDD'] = str(code)
+        self.valid = False
+
+    def setDestination(self, dest):
+        self.frm['Tel_Dest'] = str(dest)
+        self.valid = False
+        
+    def setSender(self, sender):
+        self.frm['Nome_Orig'] = str(sender)
+        self.valid = False
+
+    def setMessage(self, message):
+        self.frm['Mensagem1'] = str(message)
+        self.valid = False
+        
+    def validate(self):
+        if self.valid:
+            return True, "message not changed"
+        if not self.frm['Mensagem1']:
+            return False, "no message to send"
+        if not self.frm['Tel_Dest']:
+            return False, "no destination"
+        if self.frm['DDD'] not in [str(x) for x in range(31, 39)]:
+            return False, "invalid area code"
+        if not self.frm['Tel_Dest'].isdigit():
+            return False, "invalid destination number"
+
+        text1 = self.frm['Mensagem1']
+        text2 = self.frm['Nome_Orig']
+        text3 = self.frm['Tel_Orig']
+        len1 = len(text1)
+        len2 = len(text2)
+        len3 = len(text3)
+        total = len1 + len2 + len3
+
+        self.frm['totalChars'] = str(total)
+        self.frm['totalCounters'] = str(145 - total)
+        self.frm['msg_total'] = text1
+        
+        if total > 145:
+            return False, "message length exceeded"
+
+
+        self.frm['target'] = "WebSMS"
+        self.frm['Mensagem'] = self.frm['Mensagem1']
+        self.frm['Mensagem1'] = ""
+
+        self.valid = True
+        
+        return True, "OK"
+    
+    def encode(self):
+        isvalid, msg = self.validate()
+
+        if not isvalid:
+            raise MessageError(msg)
+
+        params = urllib.urlencode(self.frm)
+        return params
+
+    def send(self):
+        data = self.encode()
+        url = self.url
+
+        results = urllib.urlopen(url, data)
+        return results
+
+
+
+}}}
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

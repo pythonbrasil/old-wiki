@@ -1,0 +1,15 @@
+Escrevi esse módulo para facilitar a vida dos usuários ao lidar com CPF, Cnpj, Placas de Carro. Ainda está bemmmm novinho, mas espero que com a ajuda da comunidade ele cresça e apareça =)
+
+O download pode ser feito por esse link:
+
+http://www.pythonbrasil.com.br/moin.cgi/Utilidades?action=AttachFile&do=get&target=Utilidades.tar.gz
+
+A documentação está dentro das próprias classes, métodos, além de elas serem auto-exemplifiadas, pois os testes são feitos usando o módulo doctest.
+
+É só destarrar o arquivo em alguma pasta. Para importar o módulo que você deseja é só fazer:
+
+import Utilidades.Cpf
+
+por exemplo.
+
+Boa sorte. Aos poucos irei melhorando-o, conto com a contribuição de vocês.

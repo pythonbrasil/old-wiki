@@ -1,0 +1,135 @@
+= Receita: csv2ldif =
+
+Ao mudar meu cliente de e-mail de Outlook Express para Firefox Mozilla, encontrei uma dificuldade para passar meu address book de um para outro. O Firefox estava lendo o arquivo CSV (exportado do OE) e as informações ficavam todas bagunçadas. A solução que encontrei foi fazer um pequeno script que faz a conversão do formato CSV para LDIF, que pelo que vi, é o padrão do Firefox.
+
+O que o script faz é simplesmente ler linha por linha o arquivo CSV e guardar estas informações em um arquivo LDIF.
+
+O script usa Tkinter (não seria necessário, mas fiz apenas para deixar uma interface gráfica com o usuário. Note que no formato CSV deve ser seguida determinada ordem, ou então será necessário mexer no script. Outro item importante é cuidar para que nos campos de endereço, por exemplo, não tenha <ENTER> pressionado, separando uma linha e outra (endereço e cidade ou bairro, por exemplo), pois isso pode "quebrar" uma linha no arquivo e certamente ocorrerá um erro no tratamento...
+
+Quem quiser melhorar, pode postar novos códigos ou alterações abaixo, certamente serão bem-vindos!
+;-)
+
+== Código ==
+
+{{{#!python
+#!/usr/bin/env python
+
+#-----------------------------------------------------------------------------
+# Name:        csv2ldif.py
+# Purpose:     gerar um arquivo com formato LDIF (address book do Thunderbird) a partir de um arquivo CSV (formato alternativo de exportação do Outlook Express)
+#
+# Author:      Fabiano Charlier Ahlert
+#
+# Created:     2006/06/12
+# RCS-ID:      $Id: module1.py $
+# Copyright:   (c) 2006
+# Licence:     GPL
+# New field:   Ver observações abaixo
+#-----------------------------------------------------------------------------
+# Desenvolvido por Fabiano Charlier Ahlert
+# Instruções
+# Copie este arquivo para a mesma pasta do arquivo CSV a ser convertido
+# e execute-o
+# Este programa realiza a conversão de arquivos CSV (gerados pelo Outlook
+# a partir do bloco de endereços) para arquiso LDIF (arquivo para importação
+# para o bloco de endereços do Mozilla
+# as colunas do arquivo CSV devem estar na seguinte ordem:
+# Nome;Sobrenome;Segundo nome;Nome;End. de email;Telefone residencial;Fax residencial;Telefone celular;Rua do endereço comercial;Cidade do endereço comercial;CEP do endereço comercial;Estado do endereço comercial;País/região do endereço comercial;Telefone comercial;Fax comercial;Empresa
+# se o seu arquivo tiver uma estrutura diferente, faça as devidas alterações.... ;-)
+
+from Tkinter import *
+import string
+
+def converte(self):
+    Label(frame1, text="Lendo a linha de número:").grid(row=2, column=1, columnspan=3, sticky=W)
+    a_csv=arq_csv.get()+".csv"
+    a_ldif=arq_ldif.get()+".ldif"
+    arquivo1=open(a_csv, 'r')
+    a=arquivo1.readline()
+    a=arquivo1.readline()
+    arquivo2=open(a_ldif, 'a')
+    n=1
+    while a != "":
+        cont=Label(frame1, text=n, anchor=W)
+        cont.grid(row=2, column=6)
+        b=string.split(a, ';')
+        try:
+            primeiro_nome=b[0]
+            segundo_nome=string.rstrip(b[2]+" "+b[1])
+            segundo_nome=""
+            nome_completo=b[3]
+            email=b[4]
+            fone_res=b[5]
+            fax_res=b[6]
+            fone_cel=b[7]
+            end=b[8]
+            cid=b[9]
+            cep=b[10]
+            est=b[11]
+            pais=b[12]
+            fone_com=b[13]
+            fax_com=b[14]
+            empresa=b[15]
+        except:
+            print "Linha: "+`n`
+            print a
+            print b
+            print "O numero de parametros deve ser 16. O numero de parametros encontrados foi:"
+            print len(b)
+            arquivo1.close()
+            arquivo2.close()
+            janela.destroy()
+        arquivo2.write('dn: cn='+nome_completo+',mail='+email+'\n')
+        arquivo2.write('objectclass: top\n')
+        arquivo2.write('objectclass: person\n')
+        arquivo2.write('objectclass: organizationalPerson\n')
+        arquivo2.write('objectclass: inetOrgPerson\n')
+        arquivo2.write('objectclass: mozillaAbPersonAlpha\n')
+        arquivo2.write('givenName: '+primeiro_nome+'\n')
+        arquivo2.write('sn: '+segundo_nome+'\n')
+        arquivo2.write('mail: '+email+'\n')
+        arquivo2.write('modifytimestamp: 0Z\n')
+        arquivo2.write('telephoneNumber: '+fone_com+'\n')
+        arquivo2.write('homePhone: '+fone_res+'\n')
+        arquivo2.write('fax: '+fax_com+'\n')
+        arquivo2.write('mobile: '+fone_cel+'\n')
+        arquivo2.write('street: '+end+'\n')
+        arquivo2.write('l: '+cid+'\n')
+        arquivo2.write('st: '+est+'\n')
+        arquivo2.write('postalCode: '+cep+'\n')
+        arquivo2.write('company: '+empresa+'\n')
+        a=arquivo1.readline()
+        n=n+1
+    arquivo1.close()
+    arquivo2.close()
+
+janela=Tk()
+janela.title(" Conversão de arquivo")
+frame1=Frame(janela)
+frame1.grid(columnspan=9)
+Label(frame1, text="").grid(row=0, column=0)
+Label(frame1, text="").grid(row=1, column=0)
+Label(frame1, text="").grid(row=0, column=9)
+Label(frame1, text="").grid(row=1, column=9)
+Label(frame1, text="").grid(row=2, column=0)
+Label(frame1, text="Nome do arquivo CSV a ser convertido (sem extensão):").grid(row=0, column=1, columnspan=3, sticky=W)
+Label(frame1, text="Nome do arquivo LDIF a ser gravado    (sem extensão):").grid(row=1, column=1, columnspan=3, sticky=W)
+arq_csv=Entry(frame1, width=15, takefocus="")
+arq_ldif=Entry(frame1, width=15, takefocus="")
+arq_csv.grid(row=0, column=4, columnspan=3, sticky=W)
+arq_ldif.grid(row=1, column=4, columnspan=3)
+
+
+inicia=Button(janela, text="INICIAR\nCONVERSÃO", fg="blue")
+inicia.bind("<Button-1>", converte)
+inicia.bind("<space>", converte)
+inicia.grid(row=3, columnspan=9)
+
+janela.mainloop()
+}}}
+
+Volta para CookBook.
+
+----
+
+FabianoAhlert

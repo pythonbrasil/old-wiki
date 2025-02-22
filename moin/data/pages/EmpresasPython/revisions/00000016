@@ -1,0 +1,22 @@
+#pragma section-numbers off
+= Empresas que usam Python =
+
+Aqui os empresários poderão colocar as informações sobre as suas empresas, como Python os ajudou a aumentar os lucros. Os usuários do site também poderão colocar aqui o nome de empresas que usam Python no Brasil. A intenção dessa página é mostrar para outros empresários que Python é uma excelente ferramenta de trabalho.
+
+== Empresas ==
+
+   * [http://www.serpro.gov.br Serpro] - Usa Python/Zope/Plone para a confecção rápida de portais Web. Principal ferramenta de sua Fábrica de Sítios.
+   * [http://www.haxent.com.br Haxent] - Usa Python no desenvolvimento de seus softwares para clientes.
+   * [http://www.async.com.br Async] - Implementa sistemas de gestão utilizando Python, baseados nos frameworks [http://www.async.com.br/projects/kiwi/ Kiwi] e [http://www.async.com.br/projects/indexedcatalog/ IndexedCatalog] (este último baseado no ZODB). Um dos seus produtos é um sistema de automação comercial escrito em Python, e disponível como software livre: [http://www.stoq.com.br/ Stoq]. (ChristianReisOuKiko) trabalha aqui.
+   * [http://www.conectiva.com.br Conectiva] - Usa Python para gerenciar os pacotes da distribuição Linux, checagem e geração de snapshots, e diversas ferramentas de uso interno.
+   * [http://www.objective.com.br Objective Solutions] - Empresa onde eu (OsvaldoSantanaNeto) trabalho. Lá eles não usam Python não. Usam Smalltalk e ick! Java :\  :) . É a empresa criadora do [http://www.prevayler.org Prevayler] e uma das pioneiras no uso de ExtremeProgramming no país. Por que eu coloquei aqui se eles não usam Python? Porque eu ainda vou convencê-los a usar muahaha >:>
+   * [http://www.gpr.com.br GPr Sistemas] - Desenvolve soluções em Python há mais de 4 anos, oferece treinamento em Python, e patrocinou a tradução do Tutorial do GvR para o Português. Eu (RodrigoSenra) trabalho aqui.
+   * [http://www.hiperlogica.com.br Hiperlógica] - Uma das pioneiras do Brasil em desenvolvimento de soluções com Zope.
+   * [http://www.embratel.com.br/embratelonline Embratel] - Todas as interfaces do backbone e clientes internet são monitorados através de um sistema desenvolvido em Python. A idéia dessa ferramenta foi totalmente inspirada no [http://cricket.sourceforge.net Cricket], porem este não atendia a escalabilidade da rede. Varios outras sistemas de menor porte foram desenvolvidos usando Python, e varios scripts para controle e supervisão dos servidores foram feitos em Python. Eu (MarcoCatunda) fui o responsavel pela adoção de Python na Empresa.
+
+
+/!\ Fiquem à vontade para linkar o nome da sua empresa para uma página em separado (dentro do PythonBrasil ou fora, tanto faz) onde vocês poderão fazer um pouco de propaganda para garantir o leitinho das crianças :) .
+
+----
+
+Osvaldo Santana Neto

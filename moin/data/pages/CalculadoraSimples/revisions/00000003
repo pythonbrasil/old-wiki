@@ -1,0 +1,100 @@
+{{{
+#!python
+
+#!/usr/bin/python
+"""
+Calculadora simples.
+
+Para números em ponto flutuante utilize "." e não "," p.e.: 2.14
+   
+"""
+__author__ = "Leonardo Gregianin"
+
+import sys
+
+class Valor:
+    c = 0.000
+    d = 0.000
+    e = 0.000
+    
+    def valor1(self):
+        try:
+            self.c = input('Primeiro Valor: ')
+            c = self.c
+            return c
+        except:
+            print 'Inválido, digite um número! Se for float digite . e não ,'
+        self.valor1()
+
+    def valor2(self):
+        try:
+            self.d = input('Segundo Valor: ')
+            d = self.d
+            return d
+        except:
+            print 'Inválido, digite um número! Se for float digite . e não ,'
+        self.valor2()
+
+class Operador:
+    
+    def somar(self, c, d):
+        self.e = c + d
+        e = self.e
+        return e
+
+    def subtrair(self, c, d):
+        self.e = c - d
+        e = self.e
+        return e
+    
+    def multiplicar(self, c, d):
+        self.e = c * d
+        e = self.e
+        return e
+    
+    def dividir(self, c, d):
+        self.e = c / d
+        e = self.e
+        return e
+
+class Resultado:
+    
+    def resultado(self, e, c, d):
+        print('Resultado: %f')%(d)
+   
+
+if __name__ == "__main__":
+
+    p1 = Valor()
+    v1 = p1.valor1()
+    v2 = p1.valor2()
+
+    p2 = Operador()
+
+    p3 = Resultado()
+    
+    operacao = raw_input('Operação: (+) (-) (*) (/) ou (s)air ]: ')
+    
+    while operacao:
+        
+        if operacao == 's':
+            sys.exit()
+
+        if operacao == '+':
+            n1 = p2.somar(v1, v2)
+            p3.resultado(None, None, n1)
+
+        if operacao == '-':
+            n1 = p2.subtrair(v1, v2)
+            p3.resultado(None, None, n1)
+
+        if operacao == '*':
+            n1 = p2.multiplicar(v1, v2)
+            p3.resultado(None, None, n1)
+
+        if operacao == '/':
+            n1 = p2.dividir(v1, v2)
+            p3.resultado(None, None, n1)
+
+        break
+}}}

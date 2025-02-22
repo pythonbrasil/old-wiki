@@ -1,0 +1,57 @@
+= Receita: DateTime range =
+
+Generator para iterar numa faixa de tempo. Usa um timedelta como "passo".
+Codigo escrito por um co-worker (obrigado!)
+
+== Código ==
+
+{{{
+#!python
+def datetime_range(start, stop, timedelta_args=None):
+    if timedelta_args is None:
+        td = timedelta(days=1)
+    else:
+        try:
+            td = timedelta(timedelta_args)
+        except TypeError:
+            try:
+                td = timedelta(*timedelta_args)
+            except TypeError:
+                try:
+                    td = timedelta(**timedelta_args)
+                except TypeError:
+                    pass
+
+    while start <= stop:
+        yield start
+        start = start + td
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+
+from datetime import date, datetime, timedelta
+
+birth = date(1984, 10, 02)
+
+today = datetime.now()
+
+step = timedelta(365)
+
+for birthday_party in datetime_range(birthday, today, step):
+    # verificar se o ano anterior é bissexto e somar um dia:
+    # deixado como exercicio para o leitor (é facil, gente!)
+    print birthday_party
+    good_party = raw_input('Was this a good birthday party? (y/n) ')
+    if good_party.lower() == 'n':
+        print 'Poor child!'
+
+}}}
+
+Volta para CookBook.
+
+----
+
+EduardoDeOliveiraPadoan

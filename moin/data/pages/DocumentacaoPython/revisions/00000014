@@ -1,0 +1,54 @@
+#pragma section-numbers off
+= Documentação Python =
+
+Nas seções abaixo você certamente encontrará a documentação que você procura sobre Python. E se não encontrar, sinta-se à vontade para cadastrá-la.
+
+== Documentação Oficial Python ==
+
+A documentação oficial da linguagem Python, disponível [http://www.python.org/doc/2.3.3/ na página oficial Python] e inclusa muitas vezes nas ditribuições Linux em pacotes como python-doc, está atualmente sendo traduzida para o português pelo [http://codigolivre.org.br/projects/pythondoc Projeto de Documentação Python-BR], cuja página está hospedada aqui no !MoinMoin sob o nome de PythonDoc. Em alguns meses já deve ser lançada uma prévia do trabalho do time de tradutores, então fique antenado nas novidades!
+
+== Livros Python ==
+
+Livros e referências impressas sobre Python. Aqui você encontra resenhas e comentários de quem já leu os livros.
+
+   * ProgrammingPython (ing) - MarkLutz
+   * PythonPocketReference (ing) - MarkLutz
+   * LearningPython (ing) - MarkLutz
+   * PythonGuiaDeReferência (por) - MarcoCatunda
+   * ExpressõesRegulares (por) - AurelioMarinhoJargas
+   * GameProgrammingWithPython (ing) - RuivaldoNeto
+
+/!\ '''Atenção:''' Todos os links para compra nas páginas de resenha utilizam o site da Livraria Tempo Real. Lá eu tenho um plano de parceria que me dá descontos na aquisição de livros para mim. Espero que vocês não se importem com isso. Caso vocês estejam escrevendo uma resenha para essa parte do site fiquem à vontade para colocar o link de compra apontando para o site de sua preferência.
+
+/!\ '''Atenção:''' Existe um template para a criação de Resenhas de Livros. Dê preferência para usá-la. Se ela não estiver satisfatória converse com o WikiMaster mais próximo.
+
+== Livros On-Line ==
+
+Livros e referências On-Line sobre Python.
+
+   * [http://www.python.org/doc/ Documentação Oficial] (ing)
+   * [http://www.diveintopython.org Dive Into Python] (ing)
+   * [http://www.gpr.com.br/cursos/python21.pdf Tradução do Tutorial Python 2.1] (por) - Tradução de RodrigoSenra
+   * [http://www.async.com.br/projects/python/pnp/ Python na Prática] (por) - ChristianReis
+   * [http://www.pythonware.com/library/tkinter/introduction/index.htm An Introduction to Tkinter] (ing)
+   * [http://guia-er.sourceforge.net/guia-er-52.html Expressões Regulares - Capítulo Python] (por) - AurelioMarinhoJargas
+   * [http://www.freenetpages.co.uk/hp/alan.gauld/port/ Aprenda a Programar com Python] - Alan Gauld e traduzido por WilsonEdgar
+   * [http://www.ibiblio.org/obp/thinkCSpy/ Thinking Like a Computer Scientist] - Allen B. Downey, Jeffrey Elkner e Chris Meyers (ing)
+   * [attachment:cursoPython.pdf Curso de Python] - Gustavo Noronha Filho (PDF gerado por Douglas Soares)
+   * [attachment:aprendaAProgramar.pdf Aprenda a Programar] - Luciano Ramalho (PDF gerado por Douglas Soares)
+   * filename:Mergulhando em Python.pdf - Tradução parcial de Guilherme Manika - (PDF gerado por Douglas Soares)
+
+== How-Tos ==
+
+Como-Fazer são documentos que explicam como implementar determinado tipo de solução de maneira objetiva.
+
+   * [http://www.amk.ca/python/howto/advocacy/ Python Advocacy] (ing) - A. M. Kuchling.
+   * [http://www.amk.ca/python/howto/curses/ Curses Programming] (ing) - A. M. Kuchling / Eric Raimmond.
+
+== Artigos e Tutoriais ==
+
+Devido à quantidade de artigos e tutoriais Python ser muito grande (e deve crescer), separei uma página só para esse assunto: ArtigosTutoriais.
+
+----
+
+OsvaldoSantanaNeto

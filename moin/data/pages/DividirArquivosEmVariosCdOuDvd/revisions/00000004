@@ -1,0 +1,295 @@
+#pragma section-numbers off
+= Receita: Dividir Arquivos Em Vários Cds Ou Dvds =
+
+''MarceloBarros''
+
+Este script permite que uma série de arquivos sejam organizados em vários DVDs/CDs de forma otimizada, isto é, tentando sempre utilizar ao máximo o espaço disponível na mídia. É útil quando você não quer pensar muito na melhor organização e eu venho usado para organizar os meus arquivos de backup. Ao final, ele lista uma opção de organização. Como o algoritmo é estatístico, você pode rodar novamente para ter um resultado diferente, apesar de construído com os mesmos critérios.
+
+Este programa usa uma rede neural do tipo Hopfield para a solução do problema. Basicamente é necessário especificar o diretório onde os arquivos estão, o tamanho da mídia e a folga máxima. Se nenhum parâmetro é especificado, é usado o diretório corrente, uma mídia de 4500MB (DVD) e uma folga de 50MB. A folga diz o quanto o algoritmo pode encarar margem de erro, já que em geral não é possível ter uma divisão sempre perfeita.
+
+Rode com {{{dvdsplit.py -h}}} para informações da linha de comando. É meu primeiro programa em Python, comentário são bem vindos.
+
+== Código ==
+
+{{{
+#!python
+"""
+DVD Split, by Marcelo Barros (barros(at)smar.com.br)
+Sept/13/2005
+$Id: dvdsplit.py,v 1.1 2005/09/13 14:54:36 barros Exp $
+"""
+import random
+import math
+import os
+import sys
+from optparse import OptionParser
+import psyco
+
+def currentSize(files, selected):
+    """
+    Calculate the size of the current selection.
+    
+    Parameters:
+    - files: list with file sizes
+    - selected: list with 1 or -1, indicating if the file was selected or not
+
+    Returns:
+    - the current selection size
+    """
+    sz = 0
+    for i in range(len(files)):
+        if(selected[i] > 0):
+            sz = sz + files[i]
+    return sz
+
+def energyFun(files,selected,dvdsz):
+    """
+    Energy function used. In this case is:
+    f(x) = |current_size - dvdsize |
+
+    Parameters:
+    - files: list with file sizes
+    - selected: list with 1 or -1, indicating if the file was selected or not
+    - dvdsz: dvd size
+
+    Returns:
+    - energy function value for the current selection
+    """
+    energ = 0
+    for i in range(len(files)):
+        if selected[i] > 0:
+            energ = energ + files[i]
+    energ = abs(energ - dvdsz)
+    return energ
+
+def dvdInitialGuess(files,selected,dvdsz):
+    """
+    Just provide an initial random guess to the algorithm
+
+    Parameters:
+    - files: list with file sizes
+    - selected: list with 1 or -1, indicating if the file was selected or not
+    - dvdsz: dvd size    
+    """
+    l = len(files)
+    idx = range(l)
+    idx = random.sample(idx,l)
+
+    t = 0
+    for i in range(l):
+        j = idx[i]
+        t = t + files[j]
+        selected[j] = 1
+        if t >= dvdsz:
+            break
+    
+def dvdSplit(files,dvdsz,slack=50,itermax=3000,beta=0.005):
+    """
+    Given a list with file sizes, the dvd size and the acceptable slack
+    this routine gives a subset that fits in one dvd.  
+
+    Parameters:
+    - files: list with file sizes
+    - dvdsz: dvd size (single side)
+    - slack: maximum acceptable error when calculating the selection
+    - itermax: maximum number of iteration (default=2000)
+    - beta: sigmoid parameter (default 0.005, empirically determined)
+
+    Returns:
+    - indexes of selected files: [ idx1, idx2, ..., idxn ]
+    - indexes of not selected files: [ idx1, idx2, ..., idxn ]
+    - current selection size
+    - iteration used to calculate
+    """
+    running = True
+    iter = 0
+    numfiles = len(files)
+    selected = [-1 for x in range(numfiles)]
+    dvdInitialGuess(files,selected,dvdsz)
+    
+    sz = currentSize(files,selected) # maximum size must be greather than dvdsize
+
+    if(sz > dvdsz):
+        while(running and iter < itermax):
+            # current energy 
+            e1 = energyFun(files,selected,dvdsz)
+            # change state for random node
+            n = random.randint(0,numfiles-1)
+            selected[n] = -selected[n]
+            # new energy
+            e2 = energyFun(files,selected,dvdsz)
+            # evaluate the change against sigmoid and accept it or not
+            # according to a uniform probability
+            sig = (1/( 1 + math.exp(beta*(e2-e1))))
+            if sig < random.uniform(0,1):
+                selected[n] = -selected[n] # state not accepted
+            sz = currentSize(files,selected)
+            # testing exit condition: (dvdsz - slack) < currentSize < dvdsz
+            if ( (sz >= (dvdsz - slack)) and (sz < dvdsz) ):
+                running = False
+            iter = iter + 1
+        
+    sel = []
+    notsel = []
+    for i in range(numfiles):
+        if selected[i] > 0:
+            sel.append(i)
+        else:
+            notsel.append(i)
+    #print "Solution found in %d iterations. Compilation size is %d (%d files)" % (iter,sz,len(sel))
+    return sel,notsel,sz,iter
+
+def dvdsSplit(files,dvdsz,slack=50,itermax=3000,beta=0.005):
+    """
+    Given a list with file sizes, the dvd size and the acceptable slack
+    this routine distributes the selection over several dvs.
+
+    Parameters:
+    - files: list with file sizes
+    - dvdsz: dvd size (single side)
+    - slack: maximum acceptable error when calculating the selection (default=50)
+    - itermax: maximum number of iteration (default=2000)
+    - beta: sigmoid parameter (default 0.005, empirically determined)
+
+    Returns:
+    - indexes of selected files per dvds:
+      [ [idx1, idx2, ..., idxn], [idx1, idx2, ..., idxm], ..., [idx1, idx2, ..., idxk] ]
+    - compilation sizes: [ size1, size2, ..., sizen ]      
+    """
+    # first create a dictionary with all file sizes indexed. Files choosen
+    # by dvdSplit will be removed from this dictionary until it becomes empty
+    filesdic = dict()
+    n = len(files)
+    for i in range(n):
+        filesdic[i] = files[i]
+    dvds = []
+    sz = []
+    running = True
+    r = 1
+    while(running):    
+        v = filesdic.values()
+        k = filesdic.keys()
+        print "Starting DVD %02d [%3.2f%% completed]" % (r,100-100*len(v)/n)
+        maxtries = 50
+        while(True):
+            sel,ns,dsz,iter = dvdSplit(v,dvdsz,slack,itermax,beta)
+            if dsz < dvdsz:
+                break;
+            maxtries = maxtries - 1
+            if(maxtries == 0):
+                print "Could not find a good solution for DVD %d in 50 attempts. Try again, please." % (r)
+                sys.exit(1)
+        # getting indexes
+        r = r + 1
+        d = []
+        for s in sel: 
+            d.append(k[s])
+            del filesdic[k[s]]
+        # saving dvd compilation
+        dvds.append(d)
+        sz.append(dsz)
+        if len(ns) == 0:
+            running = False
+
+    return dvds, sz
+
+def dvdConsistency(filenames,filesizes,dvdsz):
+    """
+    Consistency checks.
+
+    Parameters:
+    - filenames: file names dict
+    - filesizes: file sizes dict
+    - dvds: dvd size
+    """
+    # look for any file bigger than dvd side
+    for i in filesizes:
+        if filesizes[i] >= dvdsz:
+            print "Size %d is bigger than dvd size %d" % (filesizes[i],dvdsz)
+            sys.exit(1)
+
+def printDvdLayout(filesizes,filenames,dvdsz,dvds,s):
+    """
+    Print results
+    """
+    i = 0
+    n = len(dvds)    
+    tts = []
+    print "\nSummary:" 
+    for dvd in dvds:
+        tt = []
+        i = i + 1
+        for track in dvd:
+            tt.append(filesizes[track])
+        tts.append(sum(tt))
+        print "[DVD %d/%d, SIZE %dMBs, USAGE %2.2f%%]" % (i,n,tts[i-1],100.0*tts[i-1]/dvdsz)
+            
+    i = 0
+    print "\nFile seletion per DVD:" 
+    for dvd in dvds:
+        i = i + 1
+        print "[DVD %d/%d, SIZE %dMBs]" % (i,n,tts[i-1])
+        for track in dvd:
+            files = filenames[track].split(',')
+            files.sort()
+            for f in files:
+                print "\t%s" % (f)
+        
+def buildDvds(basedir,dvdsz,slack):
+    """
+    Get the files list and call optimization routines
+    """
+    filelist = os.listdir(basedir)
+    filenames = dict()
+    filesizes = dict()
+    i = 0
+    print "\nFiles at base directory %s (DVD size = %d, slack = %d)" % (basedir,dvdsz,slack)
+    for f in filelist:
+        filename = basedir+f
+        if os.path.isfile(filename):
+            filenames[i] = f
+            # in MB, rounded up
+            filesizes[i] = int(os.path.getsize(filename)/1024.0**2 + 1)
+            print '[%5.2fMB ] %s' % (filesizes[i],filenames[i])
+            i = i + 1
+
+    print "\nChecking consistency ..."
+    dvdConsistency(filenames,filesizes,dvdsz)
+    dvds, s = dvdsSplit(filesizes.values(),dvdsz,slack)
+    printDvdLayout(filesizes,filenames,dvdsz,dvds,s)
+
+def main():
+
+    usage = "Usage: %prog [options]"
+    cmdline = OptionParser(usage)
+    cmdline.add_option("-d", "--dir",  action="store", dest="basedir", type="string", default=".",    metavar="DIR",      help="Directory where files are stored")
+    cmdline.add_option("-s", "--size", action="store", dest="dvdsz",   type="int",    default="4500", metavar="SIZE",     help="DVD size")
+    cmdline.add_option("-l", "--slack",action="store", dest="slack",   type="int",    default="50",   metavar="SLACK",    help="Maximum acceptable error")
+    
+    (options, args) = cmdline.parse_args()
+
+    if(os.path.isdir(options.basedir) == False):
+        print "%s is not a valid directory" %(options.basedir)
+        sys.exit(1)
+
+    options.basedir.strip()
+    basedir = os.path.normpath(options.basedir)
+    if(os.path.isdir("c:\\")):
+        basedir = basedir + "\\"
+    else:
+        basedir = basedir + "//"
+
+    buildDvdsPrx = psyco.proxy(buildDvds)
+    buildDvdsPrx(basedir,int(options.dvdsz),int(options.slack))
+    
+if __name__ == "__main__":
+
+    main()
+
+}}}
+
+Volta para CookBook.
+
+----
+
+Marcelo Barros

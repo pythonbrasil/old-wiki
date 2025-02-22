@@ -1,0 +1,40 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+[[HTML(<div id="special_page">)]]
+
+== Livros ==
+
+=== Português ===
+
+attachment:mergulhando.png '''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=8576080931 Mergulhando no Python]'''
+
+Tradução do livro ''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=1590593561 Dive into Python]'' é muito útil para aqueles que já sabem programar e que gostam de livros que possuem uma abordagem mais prática.
+
+[[BR]]
+
+attachment:mergulhando.png '''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=8576081067 Python - Guia de bolso]'''
+
+Esse guia é muito útil naqueles momentos de dúvida sobre alguma característica da linguagem. Este livro é tradução do livro ''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=0596009402 Python - Pocket Reference]''.
+
+[[BR]]
+
+=== Inglês ===
+
+attachment:learning.png
+'''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=0596002815 Learning Python]'''
+
+Sem dúvida este é o melhor livro para quem está interessado em aprender Python. Completo, com uma linguagem simples e fácil além de uma ótima estrutura.
+
+[[BR]]
+
+== Tutoriais Online ==
+
+=== Português ===
+
+ * XXX
+
+=== Inglês ===
+
+ * YYY
+
+[[HTML(</div>)]]

@@ -1,0 +1,688 @@
+= Python e Programação Orientada a Objeto =
+
+<<TableOfContents>>
+
+== 1. Introdução ==
+
+Este pequeno manual traduzido de [[http://www.brpreiss.com/books/opus7/html/page585.html|Estrutura de Dados e Algoritmos com Padrões de Projetos Orientado a Objeto em Python de Bruno R. Preiss]] identifica e descreve as características da linguagem de programação Python.
+
+== 2. Objetos e Tipos de dados ==
+
+Um objeto em linguagem de programação abstrata representa a posição onde será armazenada. Os objetos em Python apresentam os seguintes atributos:
+
+* Tipo: O tipo de um objeto determina os valores que o objeto pode receber e as operações que podem ser executadas nesse objeto.
+
+* Valor: O valor de um objeto é o índice de memória ocupada por essa variável. Como os índices das posições da memória são interpretados, isto é determinado pelo tipo da variável.
+
+* Tempo de vida: A vida de um objeto é o intervalo de tempo de execução de um programa em Python, é durante este tempo que o objeto existe.
+
+Python define uma extensa hierarquia de tipos. Esta hierarquia inclui os tipos numéricos (tais como int, float e complex), seqüências (tais como a tupla e a lista), funções (tipo função), classes e métodos (tipos classobj e instancemethod), e as instâncias da classe (tipo instance).
+
+== 3. Nomes ==
+
+A fim de utilizar um objeto em um programa em Python, esse objeto deve ter um nome. O nome de um objeto é uma variável usada para identificar esse objeto em um programa. Em Python, um objeto não pode ter zero, um ou mais no nome.
+
+Veja:
+
+{{{
+#!python
+i = 57
+}}}
+
+Esta indicação cría um objeto com nome i e liga vários atributos com esse objeto. O tipo do objeto é int e seu valor é 57.
+
+Alguns atributos de um objeto, tal como seu tipo, são limitados quando o objeto é criado e não podem serer mudados. Isto é chamado ligação estática. 
+
+As ligações para outros atributos de um objeto, tais como seu valor, podem ser mudados durante a execução do programa onde o objeto está. Isto é chamado de ligação dinâmica.
+
+Veja:
+
+{{{
+#!python
+i = int(57)
+}}}
+
+Se nós seguirmos esta indicação com uma indicação de atribuição como:
+
+{{{
+#!python
+j = i
+}}}
+
+então os nomes i e j são o mesmo objeto!
+
+A comparação ficaria:
+
+{{{
+#!python
+if i == j:
+    print "valores iguais"
+}}}
+
+este é o teste se o valor do objeto i é o mesmo valor do objeto j (desde que sejam de mesmo valor). Entretanto, é possível para dois objetos distintos terem o mesmo valor. Para testar se os dois nomes são um mesmo objeto, é necessário utilizar o operador is:
+
+{{{
+#!python
+if i is j:
+    print "mesmo objeto"
+}}}
+
+Para saber se os tipos de dados de dois objetos são iguais é necessário:
+
+{{{
+#!python
+i = 57
+j = 47
+if type(i) == type(j):
+    print "mesmo tipo"
+}}}
+
+=== 3.1. Objeto None ===
+
+Em Python, um nome sempre será um objeto. Entretanto, às vezes é conveniente usar um nome chamado None ou nulo. Python fornece um tipo especial de objeto para esta finalidade chamada NoneType. Sempre há somente um objeto do tipo NoneType e o nome desse objeto é None. 
+
+Nós podemos explicitamente atribuir um nome ao None
+
+{{{
+#!python
+f = None
+}}}
+
+Também, nós podemos testar explicitamente se um nome é None como:
+
+{{{
+#!python
+if f is None:
+    print "é nulo"
+}}}
+
+=== 3.2. Espaço de um nome e Namespaces ===
+
+O espaço de um nome é a escala das indicações no texto de um programa em que esse nome pode ser usado referenciado a um objeto. Python define três espaços -- locais, globais, e built-in (internos do Python). Os espaços são chamados namespaces. Quando um nome é referenciado a um objeto em um programa os namespaces serão procurados na seguinte ordem para encontrar a ligação para esse nome: namespace local primeiramente, então namespace global, e depois namespace interno. Isto é chamado de regra de LGB. 
+
+Quando uma função é chamada, um novo namespace local está criado. Por padrão, as ligações conhecidas criadas dentro de uma função são criados no namespace local dessa função. As ligações conhecidas criadas no nível mais alto de um módulo (ou de um arquivo) são criados no namespace global. O namespace interno contem as ligações para os nomes predefinidos do Python.
+
+
+== 4. Passagem de Parâmetros ==
+
+A passagem de parâmetro é um método em que os parâmetros são transferidos entre métodos quando um método chama outro. Python fornece somente um método da passagem de parâmetro, passagem-por-referência.
+
+Considere o par de métodos definidos abaixo. Na linha 4, o método um chama o método dois. Em geral, cada chamada do método inclui a lista de argumentos, possivelmente vazio. Os argumentos especificados em uma chamada do método são chamados parâmetros reais. Neste caso, há somente um parâmetro real, o x.
+
+{{{
+#!python
+
+def um():
+    x = 1
+    print x
+    dois(x)
+    print x
+
+def dois(y):
+    print y
+    y = 2
+    print y
+}}}
+
+Na linha 7 o método dois é definido como um método que aceita um único argumento y. Os argumentos que aparecem na definição do método são chamados parâmetros formais.
+
+A semântica da passagem-por-referência é: O efeito da definição do parâmetro formal deve criar um nome no namespace local da função e ligá-lo então o nome ao objeto pelo parâmetro real. Por exemplo, no método dois o parâmetro formal é y. Quando o método é chamado, o nome y está atribuído ao objeto x.
+
+A saída do método um ficará:
+
+1
+1
+2
+1
+
+E a saída do método dois com o parâmetro 3 ficará:
+
+2
+3
+
+== 5. Classes ==
+
+Uma classe define uma estrutura de dados que contenha instância de atributos, instância de métodos e classes aninhadas. Em Python a classe de um objeto e o tipo de um objeto são sinônimos. Cada objeto do Python tem uma classe (tipo) que é derivada diretamente ou indiretamente da classe interna do objeto do Python. A classe (tipo) de um objeto determina o que é e como pode ser manipulado. Uma classe encapsula dados, operações e semântica. 
+
+A classe é o que faz com que Python seja uma linguagem de programação orientada a objetos. Classe é definida como um agrupamento de valores sua gama de operações. As classes facilitam a modularidade e abstração de complexidade. O usuário de uma classe manipula objetos instanciados dessa classe somente com os métodos fornecidos por essa classe.
+
+Frequentemente classes diferentes possuem características comuns. As classes diferentes podem compartilhar valores comuns e podem executar as mesmas operações. Em Python tais relacionamentos são expressados usando derivação e herança.
+
+=== 5.1 Instâncias, Instância de Atributos e Métodos ===
+
+Objetos são instanciados pelas classes. Cada instância (objeto) em uma programa Python tem seu próprio namespace. 
+
+Um classe criada é chamada de classe objeto (tipo classobj). Os nomes no namespace da classe objeto são chamados de atributos da classe. Funções definidas dentro de uma classe são chamadas de métodos. 
+
+Quando um objeto é criado, o namespace herda todos os nomes do namespace da classe onde o objeto está. O nome em um namespace de instância é chamado de atributo de instância.
+
+Um método é uma função criada na definição de uma classe. O primeiro argumento do método é sempre referenciado no início do processo. Por convenção, o primeiro argumento do método tem sempre o nome self. Portanto, os atributos de self são atributos de instância da classe.
+
+=== 5.2 Exemplo de números complexos ===
+
+Agora vamos definir uma classe para representar números complexos. A primeira definição é o nome da classe chamada Complex que utiliza dois atributos de instância, _real and _imag, para representar o real e a parte imaginária de um número complexo (respectivamente). A classe Complex definida é baixo:
+
+{{{
+#!python
+class Complex(object):
+     def __init__(self, real, imag):
+             self._real = real
+             self._imag = imag
+}}}
+
+Toda instância da classe Complex contém seus próprios atributos de instância. Veja:
+
+{{{
+#!python
+c = Complex(1,0)
+d = Complex(2,0)
+e = Complex(3,0)
+
+c._real
+d._real
+e._real
+}}}
+
+Veja:
+
+{{{
+123
+}}}
+
+Ambas c e d se referem a duas instâncias diferentes da classe Complex. Portanto, cada um dos dois _real e _imag tem suas próprias instâncias de atributos. O atributo de instância object é acessado utilizando o operador . (ponto). Por exemplo, c._real referencia _real, um atributo de instância de c e d._imag referencia _imag um atributo de isntância de d.
+
+=== 5.3 Método __init__ ===
+
+O método __init__ é um método especial para classes. O __init__ é um método construtor, ele inicializa o estado de um objeto. O método __init__ é invocado a cada nova instância de uma classe é criada. Na verdade não estamos apenas definindo o método __init__ mais sobrescrevendo o __init__ da classe base. O método __init__ na classe Complex é definido assim:
+
+{{{
+#!python
+i = Complex(0,1)
+}}}
+
+O efeito deste estado é equivalente a isto:
+
+{{{
+#!python
+c = object.__new__(Complex)
+Complex.__init__(c,0,1)
+}}}
+
+O método __new__ é um objeto classe built-in (interno do Python) é chamada para criar uma nova instância de object. O método __init__ dentro da classe Complex é chamada para inicializar o estado da nova instância.
+
+=== 5.4 Propriedades, Acessores e Modificadores ===
+
+Continuando com o exemplo da classe Complex. Incluímos quatro métodos: getReal, setReal, getImag e setImage, e dois property (propriedades): real e imag.
+
+{{{
+#!python
+class Complex(object):
+
+	def getReal(self):
+		return self._real
+
+	def setReal(self, valor):
+		self._real = valor
+
+	real  = property(
+		fget = getReal,
+		fset = setReal)
+
+	def getImag(self):
+		return self._imag
+
+	def setImag(self, valor):
+		self._imag = valor
+
+	imag = property(
+		fget = getImag,
+		fset = setImag)
+}}}
+
+
+Os métodos getReal e setImag promovem o acesso dos atributos _real e _imag, respectivamente. Um método que acessa uma instância mas não modifica a instância é chamado de accessor ou acessor. Portanto, getReal e getImag são accessors.
+
+Os métodos setReal e setImag promovem a modificação dos atributos _real e _imag, respectivamente. Um método que modifica uma instância é um mutator ou modificador. Portanto, setReal e setImag são modificadores.
+
+O operador . (ponto) é utilizado para especificar o objeto em que o método também é invocado. Por exemplo:
+
+{{{
+#!python
+c.setReal(2)
+print c.getReal()
+}}}
+
+isto é equivalente a:
+
+{{{
+#!python
+Complex.setReal(c, 2)
+print Complex.getReal(c)
+}}}
+
+Um property é um atributo de classe que promove o método de acesso e/ou método modificador. O argumento fget é uma propriedade específica do método accessor chamada de "getter" e o argumento fset é uma propriedade específica do método mutator chamada de "setter".
+
+Por exemplo, a propriedade getter real é o método accessor getReal e a propriedade setter real é um método mutator setReal. Similarmente, a propriedade getter imag é getImag e a propriedade setter imag é setReal.
+
+Você pode usar propriedades instanciando atributos e utilizando a notação de invocação dos métodos accessor e mutator. Novamente, o operador . (ponto) é utilizado para especificar o objeto, por exemplo:
+
+{{{
+#!python
+c.imag = 2
+print c.imag
+}}}
+
+é equivalente a: 
+
+{{{
+#!python
+Complex.setImag(c, 2)
+print Complex.getImag(c)
+}}}
+
+A classe abaixo define quatro métodos e mais duas propriedades da classe Complex. A propriedade r utilizada pelo accessor getR como getter e o mutator setR como setter. Similarmente, a propriedade theta utiliza o accessor getTheta como getter e o mutator setTheta como setter.
+
+{{{
+#!python
+class Complex(object):
+
+	def getR(self):
+		return math.sqrt(self._real * self._real +
+				 self._imag * self._imag)
+	def setR(self, valor):
+		theta = self.theta
+		self._real = valor * math.cos(theta)
+		self._imag = valor * math.sin(theta)
+
+	r = property(
+		fget = getR,
+		fset = setR)
+
+	def getTheta(self):
+		return math.atan2(self._imag, self._real)
+
+	def setTheta(self, valor):
+		r = self.r
+		self._real = r * math.cos(valor)
+		self._imag = r * math.sin(valor)
+
+	theta = property(
+		fget = getTheta,
+		fset = setTheta)
+}}}
+
+Definindo propriedades apropriadas, é possível esconder a execução da classe para o usuário. Veja:
+
+{{{
+#!python
+print c._real
+print c.real
+}}}
+
+A primeira indicação depende da execução da classe Complex. Se nós mudarmos a execução da classe dada (que usa coordenadas retangulares) a uma que usa coordenadas polares, a primeira indicação acima deve também ser mudada. Em outro modo, a segunda indicação não necessita ser modificada, fornecendo a re-execução da propriedade real quando nós alteramos às coordenadas polares.
+
+=== 5.5 Sobrecarga de Operadores ===
+
+Abaixo um exemplo de sobrecarga:
+
+{{{
+#!python
+    def __add__(self, c):
+        return Complex(self.real + c.real, self.imag + c.imag)
+
+    def __sub__(self, c):
+        return Complex(self.real - c.real, self.imag - c.imag)
+
+    def __mul__(self, c):
+        return Complex(self.real * c.real - self.imag * c.imag * c.imag,
+                       self.real * c.imag + self.imag * c.real)
+}}}
+
+Para sobrecaregar os operadores +, - e * dentro da classe Complex definimos os métodos chamados de __add__, __sub__ e __mul__, respectivamente. 
+
+Utilizamos agora as variáveis c, d, e, na expressão:
+
+{{{
+#!python
+c + d * e
+}}}
+
+é equivalente a:
+
+{{{
+#!python
+Complex.__add__(c, Complex.__mul__(d, e))
+}}}
+
+Veja [[http://www.eupodiatamatando.com/2007/04/09/sobrecarga-de-operadores-em-python/|esta entrada de um blog]] para um exemplo mais completo.
+
+=== 5.6 Métodos Estáticos ===
+
+Um método estático é uma atribuição a classe que não precisa do primeiro argumento para ser instanciado na classe. (Normalmente métodos precisam do primeiro argumento como self, para ser uma instância da classe).
+
+{{{
+#!python
+    @staticmethod
+    def main(*argv):
+        "Programa para o tesste do Complex"
+        c = Complex(0,0)
+        print c
+        c.real = 1
+        c.real = 2
+        print c
+        c.theta = math.pi/2
+        c.r = 50
+        print c
+        c = Complex(1,2)
+        d = Complex(3,4)
+        print c, d, c+d, c-d, c*d
+        return 0
+}}}
+
+O exemplo acima definiu o método main na classe Complex. Este método é um teste simples para a classe Complex. Por exemplo, este método estático poderia ser invocado assim:
+
+{{{
+#!python
+import sys
+if __name__ == "__main__":
+    sys.exit(Complex.main(*sys.argv))
+}}}
+
+== 6 Classes Aninhadas ==
+
+Em Python é possível definir uma classe dentro de outra, chamada de classes aninhadas.
+
+Veja:
+
+{{{
+#!python
+class A(object):
+
+    def __init__(self):
+	self.y = 0
+
+    class B(object):
+
+	def __init__(self):
+	    self.x = 0
+
+	def f(self):
+	    pass
+}}}
+
+Uma classe aninhada comporta-se como qualquer "classe externa" (não-aninhada). Pode conter métodos e atributos, e pode ser instanciada assim:
+
+{{{
+#!python
+obj = A.B()
+}}}
+
+Este estado cria uma nova instância da classe B. Instanciado, nós podemos invocar o método f utilizando: 
+
+{{{
+#!python
+obj.f()
+}}}
+
+Note, não é necessário instanciar a classe externa A, mesmo quando nós criamos uma instância da classe interna.
+
+Os métodos de uma classe aninhada podem acessar os atributos da classe interna mas não das classes externas, o método f pode acessar o atributo x do exemplo acima, mas não pode acessar o atributo y.
+ 
+== 7 Herança e Polimorfismo ==
+=== 7.1 Derivação e Herança ===
+
+Esta seção revê o conceito de classe derivada. As classes derivadas são uma característica extremamente útil em Python porque permitem que o programador defina classes novas estendendo classes existentes. Usando classes derivadas, o programador pode explorar as comunalidades que existem entre as classes de um programa. As classes diferentes podem compartilhar valores e operações.
+
+A derivação é a definição de uma classe nova estendendo uma classe existente. A classe nova é chamada de classe derivada e a classe existente de quem é derivada é chamada de classe base.
+
+Em Python, deve haver ao menos uma classe base, mas pode haver mais de uma classe base, formando assim herança múltipla.
+
+Python suporta classes clássicas (old-style classes) e classes de novo-estilo (new-style classes). Uma new-style class é uma classe que é derivada da classe interna do objeto. Uma old-style class é uma classe que não tem uma classe base ou uma que é derivada somente de outras classes old-style. 
+
+Considere a classe Pessoa e a classe Pais abaixo. Porque Pais também são Pessoas, a classe Pai é derivada da classe Pessoa. A derivação em Python é indicada incluindo o(s) nome(s) da class(es) base em parênteses na declaração da classe derivada.
+
+{{{
+#!python
+class Pessoa(object):
+    FEMALE = 0
+    MALE = 1
+
+    def __init__(self, nome, sexo):
+        super(Pessoa, self).__init__()
+        self._nome = nome
+        self._sexo = sexo
+
+    def __str__(self):
+        return str(self._nome)
+
+class Pais(Pessoa):
+
+    def __init__(self, nome, sexo, crianca):
+        super(Pais, self).__init__(nome, sexo)
+        self._crianca = crianca
+
+    def getCrianca(self, i):
+        return self._crianca[i]
+
+    def __str__(self):
+        pass
+}}}
+
+    
+Uma classe derivada herda todos os atributos de sua classe base. Isto é, a classe derivada contem todos os atributos da classe contidos na classe base e a classe derivada suporta todas as operações fornecidas pela classe base. Por exemplo, veja:
+
+{{{
+#!python
+p = Pessoa() 
+q = Pais()
+}}}
+
+Assim p é uma Pessoa, tem os atributos _nome e _sexo e o método __str__. Além disso, a classe Pais é derivado de Pessoa, então o objeto q também é uma instância de atributos _nome _sexo e do método __str__.
+
+Uma classe derivada pode estender a classe base de diversas maneiras: Os novos atributos podem ser usados, os novos métodos podem ser definidos e os métodos existentes podem ser sobrescritos. Por exemplo, a classe Pais adiciona uma atributo _crianca e um método getChild.
+
+Se um método for definido em uma classe derivada que tenha o mesmo nome que um método na classe base, o método na classe derivada sobrescreve ele na classe base. Por exemplo, o método __str__  na classe Pais sobrescreve o método __str__ na classe Pessoa. Conseqüentemente, str(p) invoca Pessoa.__str __, visto que o str(q) invoca Pais.__str __.
+
+Uma instância de uma classe derivada pode ser usada em qualquer lugar em um programa onde uma instância da classe base possa ser usado. Por exemplo, isto significa que a classe Pais pode ser passado como um parâmetro real a um método que espere receber uma Pessoa.
+
+
+=== 7.2 Polimorfismo ===
+
+Polimorfismo significa ter algo único em vários lugares. O polimorfismo é usado em classes distintas compartilhando funções em comum. Porque as classes derivadas são distintas, suas execuções podem diferir. Entretanto, as classes derivadas compartilham de uma relação comum, instâncias daquelas classes são usadas exatamente na mesma maneira.
+
+==== 7.2.1 Objetos Gráficos ====
+
+Considere um programa para criar desenhos simples. Suponha que o programa forneça vários objetos gráficos primitivos, tais como círculos, retângulos e quadrados. O programador seleciona os objetos desejados e invoca-os para extrair, apagar ou movê-los. Idealmente, todos os objetos gráficos suportam os mesmos tipos de operações. Não obstante, a maneira que as operações são executadas varia de um objeto a outro.
+
+Nós executamos assim: definimos uma classe que representa as operações comuns fornecidas por todos os objetos gráficos. O programa define a classe ObjetoGrafico. Esta classe fornece quatro métodos, __init __, desenho, apaga e movePara.
+
+{{{
+#!python
+class ObjetoGrafico(object):
+    def __init__(self, centro):
+        super(ObjetoGrafico, self).__init__()
+        self._centro = centro
+
+    @abstractmethod
+    def desenha(self):
+        pass
+
+    def apaga(self):
+        self.setPenColor(self.BACKGROUND_COLOR)
+        self.desenha()
+        self.setPenColor(self.FOREGROUND_COLOR)
+
+    def movePara(self, p):
+        self.apaga()
+        self._centro = p
+        self.desenho()
+}}}
+
+O método desenho é invocado a fim de extrair um objeto gráfico. O método apaga é invocado a fim de apagar um objeto gráfico. O método moverPara é usado para mover um objeto para uma posição especifica no desenho. O argumento do método moverPara é um ponto. O programa abaixo define a classe do ponto que representa uma posição em um desenho.
+
+A classe ObjetoGrafico tem um único atributo _centro, que é um ponto que representa a posição em um desenho no ponto central do objeto gráfico.
+
+O exemplo abaixo mostra uma execução possível para o método apaga: neste caso supomos que a imagem extraída está usando uma caneta imaginária. 
+
+Assumindo que nós sabemos extrair um objeto gráfico, nós podemos apagar o objeto mudando a cor da caneta de modo que combine a cor do fundo e então redesenhamos o objeto.
+
+Uma vez que nós podemos apagar um objeto, mais fácil ainda será movê-lo.
+
+Nós vimos que a classe ObjetoGrafico fornece execuções para os métodos apaga e movePara. Entretanto, a classe não fornece uma execução para o método desenha. Então o método é declarado para ser abstrato. Nós fazemos isto porque até que nós saibamos que tipo de objeto é, nós não podemos desenhá-lo!
+
+Considere a classe Circulo abaixo. A classe Circulo estende a classe ObjetoGrafico. Conseqüentemente, herda o atributo centro e os métodos apaga e movePara. A classe Circulo adiciona um atributo _raio que sobrescreve o método desenha. O corpo do método desenha não é mostrado no exemplo, entretanto, nós vamos assumir um desenho de um circulo com um raio e o ponto centro dados.
+
+{{{
+#!python
+class Circulo(ObjetoGrafico):
+    def __init__(self, centro, raio):
+        super(Circulo, self).__init__(centro)
+        self._raio = raio
+
+    def desenha(self):
+        pass
+}}}
+
+
+Observe a maneira que o método __init__ na classe Circulo é executado. Este método chama primeiramente o método __init__ da superclasse Circulo, que é um ObjetoGrafico. O método __init__ do ObjetoGrafico inicializa o atributo _centro. Então o método __init__ do Circulo inicializa o atributo _raio.
+
+Usando a calsse Circulo definida acima podemos escrever algo assim agora:
+
+{{{
+#!python
+c = Circulo(Ponto(0, 0), 5)
+c.desenha()
+c.movePara(Ponto(10, 10))
+c.apaga()
+}}}
+
+Esta seqüência do código declara um objeto Circulo com seu centro inicialmente na posição (0,0) e no raio 5. O círculo é desenhado, movido e para (10,10), e depois apagado.
+
+O exemplo abaixo define uma classe Retangulo. A classe Retangulo estende também a classe ObjetoGrafico. Conseqüentemente, herda o atributo centro e os métodos apaga e movePara. A classe Retangulo adiciona dois atributos adicionais, _altura e _largura, e sobrescreve o método desenha. O corpo do método desenha não é mostrado, entretanto, nós vamos supor que desenha um retângulo com as dimensões dadas.
+
+{{{
+#!python
+class Retangulo(ObjetoGrafico):
+    def __init__(self, centro, altura, largura):
+        super(Retangulo, self).__init__(centro)
+        self._altura = altura
+        self._largura = largura
+
+    def desenha(self):
+        pass        
+}}}
+
+
+A classe Quadrado estende a classe Retangulo abaixo. Nenhum atributo ou método novo são inicializados -- aqueles herdados de ObjetoGrafico ou de Retangulo são suficientes. O método do __init__ simplesmente certificar que a altura e largura de um quadrado são iguais!
+
+{{{
+#!python
+class Quadrado(Retangulo):
+    def __init__(self, centro, largura):
+        super(Quadrado, self).__init__(centro, largura, largura)
+}}}
+
+==== 7.2.2 Definição de Método ====
+
+Considere a seguência abaixo:
+
+{{{
+#!python
+g1 = Circulo(Ponto (0,0), 5)
+g2 = Quadrado(Ponto (0,0), 5)
+g1.desenha()
+g2.desenha()
+}}}
+
+A instrução g1.desenha() chama Circulo.desenha visto que a instrução g2.desenha() chama Retangulo.desenha.
+
+É como se cada objeto de uma classe "soubesse" o método real a ser invocado quando um método é convidado de objet. Por exemplo, um círculo "sabe" chamar Circulo.desenha, ObjetoGrafico.apaga e ObjetoGrafico.movePara, visto que um quadrado "sabe" chamar Retangulo.desenha, ObjetoGrafico.apaga e ObjetoGrafico.movePara.
+
+==== 7.2.3 Métodos Abstratos ====
+
+O método de desenha nunca deve ser chamado. Isto porque se espera que cada classe derivada da classe ObjetoGrafico sobrescreverá o método desenha. Conseqüentemente, nós definimos o método desenha na classe ObjetoGrafico para ser um método abstrato (abstractmethod).
+
+Ao contrário do staticmethod, a classe do abstractmethod não é uma classe interna do Python. A fim compreender o que a classe do abstractmethod faz, é necessário compreender como a máquina virtual do Python invoca métodos de instância. Considere a seguinte chamada do método:
+
+{{{
+#!python
+g.desenha()
+}}}
+
+O interpretador do Python executa uma seqüência de operações que seja equivalente ao seguinte:
+
+{{{
+#!python
+func = ObjetoGrafico.desenha.__get__(g, ObjetoGrafico)
+func.__call__()
+}}}
+
+A finalidade do método __get__ é retornar um objeto método que seja limitado a uma instância. O objeto método é chamado como uma função normal invocando o método __call__.
+
+O método __get__ na classe abstractmethod retorna uma instância da classe interna chamada de método. O método __call__ na classe interna levanta uma exceção de TypeError quando chamado.
+
+
+==== 7.2.4 Algoritmos Abstratos ====
+
+Uma classe abstrata é uma classe que contem um ou mais métodos abstratos. As classes abstratas podem ser usadas em muitas maneiras interessantes. Um dos paradigmas mais úteis é o uso de uma classe abstrata para algorítmo abstrato. Os métodos apaga e movePara definidos na classe ObjetoGrafico são exemplos disso.
+
+Os métodos apaga e movePara são executados na classe abstrata ObjetoGrafico. Os algoritmos executados são projetados para trabalhar em qualquer classe concreta derivada de ObjetoGrafico, podendo ser ele Circulo, Retangulo ou Quadrado. De fato, nós escrevemos os algoritmos que trabalham na classe real do objeto. Conseqüentemente, tais algoritmos são chamados algoritmos abstratos.
+
+Os algoritmos abstratos invocam tipicamente métodos abstratos. Por exemplo, o movePara e apaga invocam desenha para fazer a maioria do trabalho real. Neste caso, as classes derivadas esperam-se herdar o algoritmo abstrato movePara e apaga e sobrescrevem o método abstrato desenha. Assim, a classe derivada customiza o comportamento do algoritmo abstrato sobrescrevendo os métodos apropriados. O mecanismo da definição do método do Python assegura de que o método "correto" sempre seja chamado.
+
+=== 7.3 Herança Múltipla ===
+Em Python uma classe pode ser derivada de uma ou mais classes base. Por exemplo, veja:
+
+{{{
+#!python
+class A(object):
+    def f():
+        pass
+
+class B(object):
+    pass
+
+    def f(): pass
+
+class C(A, B):
+    pass
+}}}
+
+A classe C estende as classes A e B. Conseqüentemente, a classe C herda atributos da classe de ambas as classes base.
+
+Uma pergunta interessante é levantada quando mais de uma classe base define um atributo com o mesmo nome. Por exemplo, A e B, ambos definem um método nomeado f. Dado um exemplo c da classe C, que método a expressão c.f() chama?
+
+O método chamado é determinado por um conjunto de réguas chamadas de Ordem de Resolução de Métodos Python. Em caso geral, as réguas são completamente complexas e não serão explicadas neste artigo (para uma explanação completa, veja http://www.python.org/2.3/mro.html). Entretanto, os casos simples como o exemplo acima, as réguas são fáceis: para encontrar um nome, procure primeiramente no namespace da classe C, e então procure na ordem das classes base dadas. Isto é, procura A primeiramente e depois procure B. Conseqüentemente, neste caso a função invocada pela expressão c.f() é a função A.f.
+
+== 8. Exceções ==
+
+Há situações inesperadas durante a execução de um programa, isto ocorrerá com todos. Os programadores cuidadosos escrevem o código que detecta erros o que é apropriado. Entretanto, um algoritmo simples pode tornar-se ininteligível quando checamos muitos erros isto pode obscurecer a operação normal do algoritmo.
+
+As exceções fornecem uma maneira limpa de detectar e assegurar situações inesperadas. Quando um programa detecta um erro, levanta uma exceção. 
+
+Quando uma exceção é levantada, o controle está transferido a alimentar a exceção. Definindo um método que trave a exceção, o programador pode escrever o código para segurar o erro.
+
+Em Python, uma exceção é um objeto. Todas as exceções no Python são derivadas da classe base interna chamada Exception. Por exemplo, considere a classe A definida abaixo. Desde que a classe A estende a classe da exceção, A é uma exceção que pode ser levantada.
+
+{{{
+#!python
+class A(Exception):
+    pass
+
+def f():
+    raise A
+
+def g():
+    try:
+        f()
+    except A:
+        pass
+}}}
+        
+Um método levanta uma exceção usando o identificador raise: Um identificador raise é similar a um identificador return. Uma identificador return representa a terminação normal de um método e o objeto retornado combina o valor do retorno do método. Um identificador raise representa a terminação anormal de um método e o objeto levantado representa o tipo de erro encontrado. O método f levanta uma exceção de A.
+
+Os alimentadores da exceção são definidos usando um bloco try: O corpo do bloco try está executado qualquer um até que uma exceção esteja levantada ou até que termine normalmente. Um ou mais alimentadores de exceção seguem em um bloco try. Cada alimentador de exceção consiste na cláusula que especifica as exceções a serem travadas, e um bloco do código, que é executado quando a exceção ocorre. Quando o corpo do bloco try levanta uma exceção para que uma exceção está definida, o controle é transferido ao corpo do alimentador da exceção.
+
+No exemplo acima, a exceção levantada pelo método f é travada pelo método g. Em geral, quando uma exceção é levantada, a corrente dos métodos chamados é procurada ao contrário (da chamada até quem chamou o método) para encontrar a exceção mais próxima. Quando um programa levanta uma exceção que não esteja travada, o programa termina.
+
+Traduzido por LeonardoGregianin

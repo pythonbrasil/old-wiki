@@ -1,0 +1,762 @@
+MarcoAndreLopesMendes
+
+{{{   
+>>> quadradoMagico = ['Ronaldo', 'Kaka','Ronaldinho', 'Adriano']
+>>> quadraMagico
+
+>>> type(quadradoMagico)
+<type 'list'>
+>>> for jogador in quadradoMagico:
+	print jogador
+	
+Ronaldo
+Kaka
+Ronaldinho
+Adriano
+>>> len(quadradoMagico)
+4
+
+>>> for i in range(len(quadradoMagico)):
+	print quadradoMagico[i]
+	
+Ronaldo
+Kaka
+Ronaldinho
+Adriano
+>>> range(len(quadradoMagico))
+[0, 1, 2, 3]
+>>> range(4)
+[0, 1, 2, 3]
+
+>>> q = quadradoMagico
+>>> jogador
+'Adriano'
+>>> len(q)
+4
+>>> print q[0]
+Ronaldo
+>>> print q[1]
+Kaka
+>>> print q[2]
+Ronaldinho
+>>> print q[3]
+Adriano
+>>> q[4]
+
+Traceback (most recent call last):
+  File "<pyshell#25>", line 1, in -toplevel-
+    q[4]
+IndexError: list index out of range
+
+>>> for i in range(len(quadradoMagico)):
+	print i, quadradoMagico[i]
+
+	
+0 Ronaldo
+1 Kaka
+2 Ronaldinho
+3 Adriano
+>>> q
+['Ronaldo', 'Kaka', 'Ronaldinho', 'Adriano']
+>>> for i in range(len(quadradoMagico)):
+	if quadradoMagico[i][0] == 'R': print i, quadradoMagico[i]
+
+	
+0 Ronaldo
+2 Ronaldinho
+>>> for i in range(len(quadradoMagico)):
+	if quadradoMagico[i][0] == 'R': print i, quadradoMagico[i]
+KeyboardInterrupt
+>>> for jogador in q:
+	if jogador[0] == 'R':
+		print jogador
+
+		
+Ronaldo
+Ronaldinho
+>>> quadradoMagico.sort()
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano
+Kaka
+Ronaldinho
+Ronaldo
+>>> quadradoMagico.reverse()
+>>> for jogador in q:
+	print jogador
+
+	
+Ronaldo
+Ronaldinho
+Kaka
+Adriano
+
+>>> for i in range(len(quadradoMagico)):
+	print i, quadradoMagico[i]
+
+	
+0 Ronaldo
+1 Ronaldinho
+2 Kaka
+3 Adriano
+>>> jogador
+'Adriano'
+>>> jogador in quadradoMagico
+True
+>>> jogador = 'Bianca'
+>>> jogador in quadradoMagico
+False
+>>> 
+>>> 
+>>> for jogador in q:
+	if jogador[0:2] == 'Ro':
+		print jogador
+
+		
+Ronaldo
+Ronaldinho
+>>> q.append('Ricardinho')
+
+>>> len(q)
+5
+>>> q
+['Ronaldo', 'Ronaldinho', 'Kaka', 'Adriano', 'Ricardinho']
+>>> for jogador in q:
+	if jogador[0] == 'R':
+		print jogador
+
+		
+Ronaldo
+Ronaldinho
+Ricardinho
+>>> for jogador in q:
+	if jogador[0:2] == 'Ro':
+		print jogador
+
+		
+Ronaldo
+Ronaldinho
+>>> len(q)
+KeyboardInterrupt
+>>> for jogador in q:
+	print jogador
+
+	
+Ronaldo
+Ronaldinho
+Kaka
+Adriano
+Ricardinho
+>>> q.sort()
+
+>>> q
+['Adriano', 'Kaka', 'Ricardinho', 'Ronaldinho', 'Ronaldo']
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano
+Kaka
+Ricardinho
+Ronaldinho
+Ronaldo
+>>> q[0] = 'Adriano Imperador'
+>>> q
+['Adriano Imperador', 'Kaka', 'Ricardinho', 'Ronaldinho', 'Ronaldo']
+>>> q[1] = 'Principe' + ' ' + q[1]
+>>> q
+['Adriano Imperador', 'Principe Kaka', 'Ricardinho', 'Ronaldinho', 'Ronaldo']
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano Imperador
+Principe Kaka
+Ricardinho
+Ronaldinho
+Ronaldo
+>>> q[2] = 'Romário'
+>>> q
+['Adriano Imperador', 'Principe Kaka', 'Rom\xe1rio', 'Ronaldinho', 'Ronaldo']
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano Imperador
+Principe Kaka
+Romário
+Ronaldinho
+Ronaldo
+>>> q[2] += "Vovô"
+>>> q
+['Adriano Imperador', 'Principe Kaka', 'Rom\xe1rioVov\xf4', 'Ronaldinho', 'Ronaldo']
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano Imperador
+Principe Kaka
+RomárioVovô
+Ronaldinho
+Ronaldo
+>>> q[2] = "Vovo Romario"
+>>> q
+['Adriano Imperador', 'Principe Kaka', 'Vovo Romario', 'Ronaldinho', 'Ronaldo']
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano Imperador
+Principe Kaka
+Vovo Romario
+Ronaldinho
+Ronaldo
+>>> q[3] += ' Gaúcho'
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano Imperador
+Principe Kaka
+Vovo Romario
+Ronaldinho Gaúcho
+Ronaldo
+>>> q[4] += ' Bolao'
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano Imperador
+Principe Kaka
+Vovo Romario
+Ronaldinho Gaúcho
+Ronaldo Bolao
+>>> 
+>>> 
+>>> 
+>>> 
+
+>>> 
+>>> 
+>>> q.sort()
+>>> for jogador in q:
+	print jogador
+
+	
+Adriano Imperador
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+>>> len(q)
+5
+>>> jogador = q[0]
+>>> jogador
+'Adriano Imperador'
+>>> n = jogador.split()
+>>> n
+['Adriano', 'Imperador']
+>>> q[0] = n[1] + ' ' + n[0]
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario']
+>>> for jogador in q:
+	print jogador
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+>>> q[0].split()
+['Imperador', 'Adriano']
+>>> q[0].split()[0]
+'Imperador'
+>>> nome = q[0]
+>>> nome
+'Imperador Adriano'
+>>> nomeS = nome.split()
+>>> nomeS
+['Imperador', 'Adriano']
+>>> nomeS[0]
+'Imperador'
+>>> for jogador in quadradoMagico:
+	print jogador
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario']
+>>> quadradoMagico
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario']
+>>> copia = quadradoMagico[:]
+>>> copia
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario']
+>>> copia.pop()
+'Vovo Romario'
+>>> copia
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao']
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario']
+>>> quadradoMagico
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario']
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[0]
+
+	
+Imperador
+Principe
+Ronaldinho
+Ronaldo
+Vovo
+>>> copia.pop()
+KeyboardInterrupt
+>>> for jogador in quadradoMagico:
+	print jogador.upper()
+
+	
+IMPERADOR ADRIANO
+PRINCIPE KAKA
+RONALDINHO GAÚCHO
+RONALDO BOLAO
+VOVO ROMARIO
+>>> 
+KeyboardInterrupt
+>>> for i in range(len(quadradoMagico)):
+	print i, quadradoMagico[i]
+
+	
+0 Imperador Adriano
+1 Principe Kaka
+2 Ronaldinho Gaúcho
+3 Ronaldo Bolao
+4 Vovo Romario
+>>> for i in range(len(quadradoMagico)):
+	print i, quadrad
+KeyboardInterrupt
+>>> for jogador in quadradoMagico:
+	
+KeyboardInterrupt
+>>> for i in range(len(quadradoMagico)):
+	q[i] = q[i].lower()
+	print q[i]
+
+	
+imperador adriano
+principe kaka
+ronaldinho gaúcho
+ronaldo bolao
+vovo romario
+>>> for jogador in quadradoMagico: print jogador
+
+imperador adriano
+principe kaka
+ronaldinho gaúcho
+ronaldo bolao
+vovo romario
+>>> q
+['imperador adriano', 'principe kaka', 'ronaldinho ga\xfacho', 'ronaldo bolao', 'vovo romario']
+>>> for jogador in quadradoMagico: print jogador.title()
+
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+>>> for jogador in quadradoMagico: print jogador.capitalize()
+
+Imperador adriano
+Principe kaka
+Ronaldinho gaúcho
+Ronaldo bolao
+Vovo romario
+>>> for i in range(len(quadradoMagico)):
+	q[i] = q[i].title()
+	print q[i]
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+
+>>> len(q)
+5
+>>> 
+>>> 
+
+>>> 
+>>> for jogador in quadradoMagico: print jogador
+KeyboardInterrupt
+>>> for i in range(len(quadradoMagico)):
+	print q[i]
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+>>> for i in range(len(quadradoMagico)):
+	print i, q[i]
+
+	
+0 Imperador Adriano
+1 Principe Kaka
+2 Ronaldinho Gaúcho
+3 Ronaldo Bolao
+4 Vovo Romario
+>>> q.append('Edson Arantes do Nascimento')
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario', 'Edson Arantes do Nascimento']
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[0]
+
+	
+Imperador
+Principe
+Ronaldinho
+Ronaldo
+Vovo
+Edson
+>>> 
+>>> 
+
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[-1]
+
+	
+Adriano
+Kaka
+Gaúcho
+Bolao
+Romario
+Nascimento
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[1]
+
+	
+Adriano
+Kaka
+Gaúcho
+Bolao
+Romario
+Arantes
+
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario', 'Edson Arantes do Nascimento']
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[-1]
+
+	
+Adriano
+Kaka
+Gaúcho
+Bolao
+Romario
+Nascimento
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[0], nomeSeparado[-1]
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+Edson Nascimento
+>>> q.append('Marco Andre Lopes Mendes')
+>>> 
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[-1]
+
+	
+Adriano
+Kaka
+Gaúcho
+Bolao
+Romario
+Nascimento
+Mendes
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[0]
+
+	
+Imperador
+Principe
+Ronaldinho
+Ronaldo
+Vovo
+Edson
+Marco
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[0], nomeSeparado[-1]
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+Edson Nascimento
+Marco Mendes
+>>> for i in range(len(quadradoMagico)):
+	print i, q[i]
+
+	
+0 Imperador Adriano
+1 Principe Kaka
+2 Ronaldinho Gaúcho
+3 Ronaldo Bolao
+4 Vovo Romario
+5 Edson Arantes do Nascimento
+6 Marco Andre Lopes Mendes
+>>> i = 0
+>>> while 1 < len(q):
+	print q[i]
+	i += 1
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+Edson Arantes do Nascimento
+Marco Andre Lopes Mendes
+
+Traceback (most recent call last):
+  File "<pyshell#183>", line 2, in -toplevel-
+    print q[i]
+IndexError: list index out of range
+
+>>> while i < len(q):
+	print q[i]
+	i += 1
+
+	
+>>> i = 0
+>>> while i < len(q):
+	print q[i]
+	i += 1
+
+	
+Imperador Adriano
+Principe Kaka
+Ronaldinho Gaúcho
+Ronaldo Bolao
+Vovo Romario
+Edson Arantes do Nascimento
+Marco Andre Lopes Mendes
+>>> while i < len(q):
+	print q[i]
+	i += 1
+KeyboardInterrupt
+>>> i
+7
+>>> i = 0
+>>> while i < len(q):
+	print i, q[i]
+	i += 1
+
+	
+0 Imperador Adriano
+1 Principe Kaka
+2 Ronaldinho Gaúcho
+3 Ronaldo Bolao
+4 Vovo Romario
+5 Edson Arantes do Nascimento
+6 Marco Andre Lopes Mendes
+>>> range(7)
+[0, 1, 2, 3, 4, 5, 6]
+>>> 
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Ronaldo Bolao', 'Vovo Romario', 'Edson Arantes do Nascimento', 'Marco Andre Lopes Mendes']
+>>> del quadradoMagico[4]
+>>> for jogador in quadradoMagico:
+	nomeSeparado  = jogador.split()
+	print nomeSeparado[0], nomeSeparado[-1]
+KeyboardInterrupt
+>>> for i in range(len(quadradoMagico)):
+	print i, q[i]
+
+	
+0 Imperador Adriano
+1 Principe Kaka
+2 Ronaldinho Gaúcho
+3 Ronaldo Bolao
+4 Edson Arantes do Nascimento
+5 Marco Andre Lopes Mendes
+>>> jogador  = q.pop()
+>>> jogador
+'Marco Andre Lopes Mendes'
+>>> for i in range(len(quadradoMagico)):
+	print i, q[i]
+
+	
+0 Imperador Adriano
+1 Principe Kaka
+2 Ronaldinho Gaúcho
+3 Ronaldo Bolao
+4 Edson Arantes do Nascimento
+>>> jogador  = q.pop(3)
+>>> jogador
+'Ronaldo Bolao'
+>>> for i in range(len(quadradoMagico)):
+	print i, q[i]
+
+	
+0 Imperador Adriano
+1 Principe Kaka
+2 Ronaldinho Gaúcho
+3 Edson Arantes do Nascimento
+>>> q.append("Diogo")
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Edson Arantes do Nascimento', 'Diogo']
+>>> q.insert(0,"Heleno")
+>>> q
+['Heleno', 'Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Edson Arantes do Nascimento', 'Diogo']
+>>> fruta = ['banana','maca']
+>>> fruta
+['banana', 'maca']
+
+>>> frutas = ['banana','maca']
+>>> for i in range(len(frutas)):
+	frutas[i] += "s"
+
+	
+>>> frutas
+['bananas', 'macas']
+>>> for i in range(2):
+	frutas[i] += "s"
+
+	
+>>> for i in range(2):
+	print frutas[i]
+
+	
+bananass
+macass
+>>> frutas.append('kiwi')
+>>> for i in range(2):
+	print frutas[i]
+
+	
+bananass
+macass
+>>> for i in range(3):
+	print frutas[i]
+
+	
+bananass
+macass
+kiwi
+>>> fruta
+['banana', 'maca']
+>>> fruta = frutas[0]
+>>> fruta
+'bananass'
+>>> fruta[:-1]
+'bananas'
+>>> fruta[:-2]
+'banana'
+>>> fruta[:]
+'bananass'
+>>> fruta
+'bananass'
+>>> fruta[0:-2]
+'banana'
+>>> fruta[0:2]
+'ba'
+>>> fruta[0:3]
+'ban'
+>>> fruta[0:-2]
+'banana'
+>>> q
+['Heleno', 'Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Edson Arantes do Nascimento', 'Diogo']
+>>> q.pop()
+'Diogo'
+>>> q
+['Heleno', 'Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Edson Arantes do Nascimento']
+>>> len(q)
+5
+>>> q.remove("Heleno")
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Edson Arantes do Nascimento']
+>>> 
+>>> 
+>>> 
+>>> min(q)
+'Edson Arantes do Nascimento'
+
+>>> notas = [9.6, 9.5, 6.1, 7.3]
+>>> min(notas)
+6.0999999999999996
+>>> min(notas)
+6.0999999999999996
+>>> print min(notas)
+6.1
+>>> print max(notas)
+9.6
+
+>>> sum(notas)
+32.5
+>>> sum(notas)/len(notas)
+8.125
+>>> notas.append(9.5)
+>>> notas
+[9.5999999999999996, 9.5, 6.0999999999999996, 7.2999999999999998, 9.5]
+>>> notas.count(9.5)
+2
+>>> 
+>>> 
+>>> 
+>>> notas.count(9.6)
+1
+>>> notas.count(9.4)
+0
+>>> q
+['Imperador Adriano', 'Principe Kaka', 'Ronaldinho Ga\xfacho', 'Edson Arantes do Nascimento']
+>>> notas
+[9.5999999999999996, 9.5, 6.0999999999999996, 7.2999999999999998, 9.5]
+
+>>> notas.pop()
+9.5
+>>> for i in range(len(quadradoMagico)):
+	print i, q[i], notas[i]
+
+	
+0 Imperador Adriano 9.6
+1 Principe Kaka 9.5
+2 Ronaldinho Gaúcho 6.1
+3 Edson Arantes do Nascimento 7.3
+>>> notas.pop()
+7.2999999999999998
+>>> for i in range(len(quadradoMagico)):
+	print i, q[i], notas[i]
+
+	
+0 Imperador Adriano 9.6
+1 Principe Kaka 9.5
+2 Ronaldinho Gaúcho 6.1
+3 Edson Arantes do Nascimento
+
+>>> 
+}}}

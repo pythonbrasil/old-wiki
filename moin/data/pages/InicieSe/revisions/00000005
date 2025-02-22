@@ -1,0 +1,50 @@
+Começar a usar Python é super-simples. Basta baixar e instalar.
+
+== Baixe ==
+
+=== Linux & Mac ===
+
+A grande maioria das distribuições Linux existentes hoje já disponibilizam o interpretador Python pré-instalado ou pacotes binários que podem ser facilmente instalados.
+
+Os computadores da Apple com o Mac OSX também já acompanham um interpretador Python pré-instalado que pode ser atualizado com a última versão disponibilizada no [http://www.python.org/ftp/python/2.5/python-2.5-macosx.dmg site oficial] da linguagem Python.
+
+=== Windows ===
+
+Existem duas distribuições disponíveis para Windows atualmente. Uma delas está disponível no próprio [http://www.python.org/ftp/python/2.5/python-2.5.msi site oficial] da linguagem.
+
+A outra versão é disponibilizada pela [http://www.activestate.com/Products/ActivePython/?mp=1 ActiveState] e possui os mesmos componentes da versão citada acima mais a adição de módulos específicos para Win32 e a documentação oficial da linguagem.
+
+== Instale ==
+
+=== Windows ===
+
+ * TODO: colocar screenshots dos processos de instalação
+
+=== Linux & Mac ===
+
+O interpretador Python já vem pré-instalado nesses sistemas operacionais, portanto, não é necessário detalhar o processo de instalação aqui. Para maiores informações visite o site oficial da linguagem [http://www.python.org Python].
+
+== Use ==
+
+Existem muitas IDEs e ferramentas de apoio ao desenvolvimento em Python. Os usuários das distribuições Linux mais famosas certamente as terão facilmente disponíveis. Infelizmente nem todas as alternativas listadas abaixo estarão facilmente disponíveis para usuários das plataformas Windows e Mac mas ainda assim as que estão disponíveis são excelentes.
+
+=== IDEs Livres ===
+
+attachment:pydev.png - [http://pydev.sf.net PyDev] - Plugin para desenvolvimento Python para [http://www.eclipse.org Eclipse]. Pode ser encontrado no [http://www.easyeclipse.org EasyEclipse].
+ * IDEs e editores de texto em IdesPython
+
+attachment:eric4.png - [http://www.die-offenbachs.de/detlev/eric.html Eric] - Uma das IDEs livres mais completas disponíveis. Permite o desenvolvimento de aplicações Python usando a biblioteca Qt.
+
+attachment:pida.png - [http://pida.berlios.de Pida] - A mais nova da "turma" e uma das mais promissora entre elas.
+
+attachment:boa.png - [http://boa-constructor.sourceforge.net/ Boa-Constructor] - Essa IDE é pra quem gosta de ferramentas que seguem mais a linha do famoso Delphi.
+
+=== IDEs proprietárias ===
+
+attachment:komodo.png - [http://www.activestate.com/Products/Komodo/ Komodo] - Essa IDE não é específica para Python mas ainda assim é extremamente amigável à linguagem. Possui recursos poderosíssimos e pode ser usado por desenvolvedores que utilizam outras linguagens além de Python em seus projetos.
+
+attachment:wing.png - [http://www.wingware.com/ Wing IDE] - Uma IDE que é ideal para o desenvolvimento em Python que conta com plugins que também facilitam muito o trabalho com [http://www.zope.org Zope].
+
+=== Editores de texto ===
+
+Além das IDEs existem muitos editores de texto que facilitam o trabalho do desenvolvedor Python. Entre eles estão o [http://www.vim.org Vi], [http://www.gnu.org/software/emacs/emacs.html Emacs], [http://www.jext.org/ jExt], [http://www.jedit.org jEdit], [http://www.scintilla.org/SciTE.html SciTE], [http://www.gnome.org/projects/gedit/ gedit], [http://macromates.com/ Textmate], [http://http://wiki.python.org/moin/PythonEditors etc] (em inglês).

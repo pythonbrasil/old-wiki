@@ -1,0 +1,122 @@
+= "Variáveis", expressões e declarações =
+
+Este segundo artigo é sobre variáveis e revisão do primeiro artigo. Então vamos programar, chega de perder tempo.
+E lembrem-se Python é facil sim porém, como tudo, tem horas que fica difícil mas não se pode desistir.
+
+Variáveis são referências que apontam para objetos. Esses objetos podem ser de qualquer tipo ou valor, diferentemente de outras linguagems, em que você precisa declarar previamente o tipo dos dados. Em Python, basta atribuir um objeto, seja ele um valor numérico, uma string, etc, a uma palavra através do operador = que a variável será criada.
+
+Muito teorico não? Vamos dar alguns exemplos:
+
+{{{
+#!python
+### variaveis1.py ###
+a = "variável a aponta para string" # a variável "a" aponta para uma objeto do tipo string
+print a # se não lembra volte e releia o primeiro artigo
+}}}
+
+{{{
+#!python
+### variaveis2.py ###
+b = 2 # obeserve que a variavel "b" aponta para um valor numérico, ou seja, um objeto do tipo 'int'
+
+# no caso de um valor fracionado, temos um objeto do tipo 'float'
+c = 3.5
+
+print b # lembra da ultima aula ?
+print c # lembra da ultima aula ?
+}}}
+
+{{{
+#!python
+### variaveis3.py ###
+a, b, c = 1, 2, "neto" 
+# não se assuste as variaveis podem ser declaradas em conjuntos
+# independente do valor
+}}}
+
+{{{
+#!python
+### variaveis4.py ###
+a = 1 #declara a variavel a
+b = " neto " #declara a variavel b
+c = 5.9 #declara a variavel c
+
+print a, b, c # imprime as 3 na tela
+}}}
+
+{{{
+#!python
+### variaveis5.py ###
+a = 1 # declara a variavel a
+b = 2 # declara a variavel b
+c = 3 # declara a variavel c
+
+a = b # a passa a ter o valor de b logo, agora a = 2
+
+print a,c,b # imprime na ordem: variavel a mais a variavel c mais a variavel b
+}}}
+
+Outro tipo de objeto muito usado em Python são as listas e tuplas, que juntamente com strings são os objetos do tipo sequência existentes. São fáceis de assimilar, basta prestar atenção no código abaixo:
+
+{{{
+#!python
+# usandotuple.py
+a = (1, "neto" , 2, "ruivaldo")
+print a[0] # escreve o numero 1 pois as sequências começam do zero e não do um.
+print a[1]
+print a[2]
+print a[3] # entendeu agora? as sequências tem como seu primeiro indice o valor 0
+}}}
+
+{{{
+#!python
+# stringtbelista.py
+a = "letras"
+print a
+print a[0] # observe: strings são sequências de caracteres.
+print a[1] # observe: o segundo caractere seria o nome da variavel string com o indice 1
+print a[2]
+print a[3]
+print a[4]
+print a[5]
+}}}
+
+{{{
+#!python
+# listareplace.py
+a = ["primeiro","segundo","terceiro"]
+print a[2]
+## vamos mudar o mesmo a[2]
+a[2] = "quarto"
+print a[2]
+## a lista agora é igual a: a = ["primeiro","segundo","quarto"]
+## note que dentre os três tipos de sequências mostrados (listas, tuples 
+## e strings) apenas as listas são mutáveis. Tuples depois de criadas não podem 
+## ter o valor de algum item alterado, como mostrado nesse  exemplo.
+}}}
+
+OBS1: Quando se refere a variavel nesse texto se faz de modo a facilitar o entedimento porém é errado dizer que python usa variaveis pois ele usa na verdade referencias. O assunto foi abordado da forma mais didatica encontrada pelo autor, logo não houve preocupações quanto a fidelidade a linguagem, no seu aspecto formal.
+
+OBS2: Ficou faltando no artigo passado essa tabela:
+
+{{{
+-> São caracteres especiais para você usar com strings ex: "oi\ntchau"
+\n - Nova Linha. 
+\t - Tab Horizontal 
+\b - Insere um "backslash", deleta o ultimo caractere escrito 
+\a - Beep
+\\ - Escreve um "\" 
+\r - Retorno de "carro", carriage,. Use \n a menos que você saiba o que está fazendo. 
+}}}
+
+Pronto pessoal por hoje é só espero que tenham entendido esse assunto qualquer coisa:
+ralobao@click21.com.br (Desculpa pelo último artigo pode mandar duvidas)
+
+From a newbie to another (De um novato para outro).
+
+Abraços e viva ao Open Source porque nós amamos a liberdade.
+
+----
+ralobao@click21.com.br ralobao
+
+Revisão e formatação no Wiki: Osvaldo Santana Neto

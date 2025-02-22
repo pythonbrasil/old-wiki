@@ -1,0 +1,77 @@
+= Receita: Conversão de Números Romanos =
+
+Os exemplos abaixo se baseiam no capítulo 3.24: Roman Numerals do livro Python Cookbook e que foi rejeitada a proposta para ser uma biblioteca padrão do Python.
+
+O sistema de cifras romanas é escrito com determinadas letras, que representam os números.
+
+Algumas regras:
+ * As letras são sempre maiúsculas.
+ * Zero não é representado.
+
+Para transformar um número inteiro em romano:
+
+{{{#!python
+def int_to_roman(input):
+    if not isinstance(input, type(1)):
+        raise TypeError, "expected integer, got %s" % type(input)
+    if not 0 < input < 4000:
+        raise ValueError, "Argument must be between 1 and 3999"
+    ints = (1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    nums = ('M', 'CM', 'D', 'CD','C', 'XC','L','XL','X','IX','V','IV','I')
+    result = []
+
+    for i in range(len(ints)):
+        count = int(input / ints[i])
+        result.append(nums[i] * count)
+        input -= ints[i] * count
+    return ''.join(result)
+}}}
+
+{{{#!python
+>>> int_to_roman(112)
+'CXII'
+>>> 
+}}}
+
+Para transformar um número romano em inteiro:
+
+{{{#!python
+def roman_to_int(input):
+    if not isinstance(input, type("")):
+        raise TypeError, "expected string, got %s" % type(input)
+    input = input.upper( )
+    nums = {'M':1000,
+            'D':500,
+            'C':100,
+            'L':50,
+            'X':10,
+            'V':5,
+            'I':1}
+    sum = 0
+    for i in range(len(input)):
+        try:
+            value = nums[input[i]]
+            if i+1 < len(input) and nums[input[i+1]] > value:
+                sum -= value
+            else: sum += value
+        except KeyError:
+            raise ValueError, 'input is not a valid Roman numeral: %s' % input
+        
+    if int_to_roman(sum) == input: return sum
+    else:
+        raise ValueError, 'input is not a valid Roman numeral: %s' % input
+}}}
+
+{{{#!python
+>>> roman_to_int('LIII')
+53
+>>> 
+}}}
+
+Mais informações:
+ * [http://en.wikipedia.org/wiki/Roman_numerals Números romanos pela Wikipedia]
+ * [http://www.python.org/dev/peps/pep-0313 PEP-313: Adding Roman Numeral Literals to Python]
+ * [http://diveintopython.org/roman_divein.html Implementação com regex de números romanos no Dive Into Python]
+ * [http://zoony23.cafe24.com/mycgi/Roman2/Roman_Conv.html Conversão on-line em Python+CGI]
+
+LeonardoGregianin

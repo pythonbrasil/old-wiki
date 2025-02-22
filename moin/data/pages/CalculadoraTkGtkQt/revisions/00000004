@@ -1,0 +1,316 @@
+by JoaoBueno
+
+Nunca programei muita coisa em GUI. Hoje inventei de criar uma calculadora
+como exemplo para um amigo que está aprendendo python.
+
+É impressionante como os kits GUI - todos - são anti-pythonicos. Nas chamadas,
+acesso a atributos, etc... No quesito ser Pythonico, o Tkinter de fato ganha
+de longe.
+
+Agora GTK e Qt...nota -5 em documentação. Para conseguir fazer o exemplo,
+não achei sequer um tutorial dos bindings de python que tivesse coisas tão
+simples quando o que fazer para acessar o texto de um widget de entrada
+de texto de uma linha (no Qt até pra saber que esse Widget se chamava QLineEdit 
+sambei). O remédio para Qt e GTK é consultar a documentação na raiz mesmo -
+do [[http://www.gtk.org/documentation.html|GTK+ em C]] e do [[http://doc.trolltech.com/4.0/index.html|QT4 em C++]]. O Tkinter tem a [[http://infohost.nmt.edu/tcc/help/pubs/tkinter/tkinter.pdf|referência completa em python]] (pdf) e dá mais luz quando tentamos usar "help" no console interativo.
+
+Mas, esperoq eu minah calculadorinha 4 operações possa salvar uma ou outra alma por ai, com
+dicas de como conectar botões em ter que criar uma função para cada botão. (Nesse critério,
+o mais esotérico é o Tk :-)  )- o Qt tá mal documentado pra caramba, mas pelo menos 
+tem só "um jeito óbvi de fazer". Alias - teoricamente, a gambiarra que fiz no Tkinter
+deveria ter funcionado no Qt também - mas não funciona. Coisas de nossos amigos em C++.
+
+Por fim, desculpas aos puristas de algum desses toolkits - provavelmente passei longe
+de "fazer do jeito certo"  em qualquer das três implementações. O Tkinter sofreu muito
+por não estar redimensionável (tem como fazer).
+
+Mas por outro lado, o fato do Qt estar mais bonito é culpa, sim, do GTK e do Tk -
+nesses, para espaçar os botões, por exemplo, eu teria que ficar fazendo ajustes
+manuais do layout que não sãp do escopo dessa aplicação.
+
+Atualização: o código antes era "bonitnho" e rodava uma calculadora por vez. Alguém na lista PyGTK 
+me deu a idéia de mandar as três rpa tela ao mesmo tempo. (Mas os mainloops da gtk+ e da Tkinter 
+são auto-excludentes dentro do mesmo processo, tive que apelar para o fork)
+
+Coisas que deram mais trabalho:
+
+* descobrir como deixar os botões do GTK+ do mesmo tamanho (tem que se configurar uma fonte mono-espaçada para o label implicito dentro dos botões. Mudar a fonte em GTK, uma vez que tem que usar chamadas de Pango, também não é algo óbvio.)
+
+* conectar os botões do Qt4 sem precisar criar uma função para cada um (é necessario que descobrir qual botão disparou o sinal com uma chamada a self.sender. Parece fácil vendo aqui, mas vá procurar outro exemplo disso na web)
+
+* No TkInter eu já sabia da questão da função callback - então não me estressou hoje. E criar a factorizinha foi divertido.
+     
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Copyright João S. O. Bueno (2008)
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ * You should have received a copy of the GNU  General
+ * Public License along with this program; if not, see
+ * <http://www.gnu.org/licenses/>.
+"""
+import sys
+
+class Calculator(object):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.set_displayed(0.)
+        self.operator = None
+        self.operand_1 = 0.
+        self.clear_display = True
+
+    def keypress(self, arg):
+        if arg in ("+", "-", "X", "/"):
+            if not self.operator:
+                self.operand_1 = self.get_displayed()
+            else:
+                self.operand_2 = self.get_displayed()
+                self.operate()
+            self.operator = arg
+            self.clear_display = True
+        elif arg == "%":
+            if not self.operand_1:
+                return
+            operand_2 = self.get_displayed()
+            result = self.operand_1 / 100.0 * operand_2
+            self.set_displayed(result)
+        elif arg == "=":
+            if not self.operator:
+                return
+            self.operand_2 = self.get_displayed()
+            self.operate()
+            self.operator = None
+            self.clear_display = True
+        elif arg == "C":
+            self.reset()
+        else:
+            self.insert_number(arg)
+
+
+    def set_displayed(self, number):
+        self.set_displayed_str(("%f" % number).strip("0"))
+
+    def get_displayed(self):
+        try:
+            result = float(self.get_displayed_str())
+        except ValueError:
+            result = 0.0
+        return result
+
+    def insert_number(self, digit):
+        if not self.clear_display:
+            text = self.get_displayed_str()
+        else:
+            text = ""
+        text += digit
+        self.set_displayed_str(text)
+        self.clear_display = False
+
+    def operate (self):
+        if self.operator == "+":
+            result = self.operand_1 + self.operand_2
+        elif self.operator == "-":
+            result = self.operand_1 - self.operand_2
+        elif self.operator == "X":
+            result = self.operand_1 * self.operand_2
+        elif self.operator == "/":
+            if not self.operand_2:
+                self.set_displayed_str("Error")
+                self.operand_1 = 0
+                return
+            result = self.operand_1 / self.operand_2
+        self.operand_1 = result
+        self.set_displayed(result)
+
+try:
+    import gtk
+    import pango
+except ImportError:
+    sys.stderr.write("PyGTK not found\n")
+    #create a dummy gtk window class so the program parses
+    class gtk(object):
+        class Window(object):
+            pass
+
+class GtkCalculator(Calculator, gtk.Window):
+    def __init__(self):
+        gtk.Window.__init__(self)
+        self.connect("destroy", self.destroy)
+        mainbox = gtk.VBox()
+        self.add(mainbox)
+        self.display = gtk.Entry()
+        mainbox.add(self.display)
+        self.display.set_editable(False)
+        self.display.set_alignment(1.0)
+        count = 0
+        font = pango.FontDescription("monospace 16")
+        buttons = "789+456-123X0.%/C="
+        for button in buttons:
+            if count % 4 == 0:
+                row = gtk.HBox()
+                mainbox.pack_start(row)
+            b = gtk.Button(button)
+            #b is a GTK Button - it has no text
+            # it contains a single "gtk label"
+            # to set the button font we have to change the font
+            # in this contained label instead
+            b.get_child().modify_font(font)
+            b.connect("clicked", self.keypress, button)
+            row.pack_start(b)
+
+            count += 1
+        self.show_all()
+        Calculator.__init__(self)
+
+    def keypress(self, widget, arg):
+        Calculator.keypress(self, arg)
+
+    def set_displayed_str(self, number):
+        self.display.set_text(number)
+    def get_displayed_str(self):
+        return self.display.get_text()
+
+
+    def destroy(self, *args):
+        gtk.main_quit()
+
+try:
+    import Tkinter
+except ImportError:
+    sys.stderr.write("Tkinter not found\n")
+    #create a dummy Tkinter.Tk class so the program parses
+    class Tkinter(object):
+        class Tk(object):
+            pass
+
+class TkCalculator(Calculator, Tkinter.Tk):
+    def __init__(self):
+        Tkinter.Tk.__init__(self)
+        self.title("Calculadora")
+        self.displayed = Tkinter.StringVar()
+        self.display = Tkinter.Entry(self,
+                                     textvar = self.displayed,
+                                     state = "readonly",
+                                     justify = Tkinter.RIGHT,
+                                     background="#dddddd",
+                                     readonlybackground="#dddddd",
+                                     borderwidth=5)
+        self.display.grid(row=0, columnspan=4)
+        buttons = "789+456-123X0.%/C="
+        count = 0
+        row = 0
+        for button in buttons:
+            if count % 4 == 0:
+                row += 1
+            b = Tkinter.Button(self,
+                               text = button,
+                               command = self.command_factory(button),
+                               width=2 )
+            b.grid(column=count % 4, row=row)
+            count += 1
+        Calculator.__init__(self)
+
+    def command_factory(self, button):
+        class Command(object):
+            def __init__(self, calculator, button):
+                self.calculator = calculator
+                self.button = button
+            def command(self):
+                return self.calculator.keypress(self.button)
+        return Command(self, button).command
+
+
+    def set_displayed_str(self, string):
+        self.displayed.set(string)
+
+    def get_displayed_str(self):
+        return self.displayed.get()
+
+try:
+    from PyQt4 import QtGui
+    from PyQt4 import QtCore
+except ImportError:
+    sys.stderr.write("PyQt4 not found\n")
+    #create a dummy QtGui.QWidget class so the program parses
+    class QtGui(object):
+        class QWidget(object):
+            pass
+class QtCalculator(Calculator, QtGui.QWidget):
+    def __init__(self):
+        QtGui.QWidget.__init__(self)
+        self.setWindowTitle("Calculator")
+        grid = QtGui.QGridLayout()
+        #FIXME: find single line widget
+        self.display = QtGui.QLineEdit()
+        self.display.setReadOnly(True)
+        self.display.setAlignment(QtCore.Qt.AlignRight)
+        grid.addWidget(self.display,0,0,1, 5)
+        buttons = "789+456-123X0.%/C="
+        counter = 0
+        row = 0
+        self.clear_display = False
+        for button in buttons:
+            if counter % 4 == 0:
+                row += 1
+            b = QtGui.QPushButton()
+            b.setText(button)
+            self.connect(b, QtCore.SIGNAL("clicked()"), self.keypress)
+            grid.addWidget(b, row, counter % 4)
+            counter += 1
+        self.setLayout(grid)
+        self.show()
+        Calculator.__init__(self)
+
+    def keypress(self, *args):
+        button = self.sender()
+        if not isinstance(button, QtGui.QPushButton):
+            return
+        key = str(button.text().toUtf8())
+        Calculator.keypress(self,key)
+
+    def set_displayed_str(self, string):
+        self.display.setText(string)
+
+    def get_displayed_str(self):
+        return str(self.display.text().toUtf8())
+
+if __name__ == "__main__":
+    if len(sys.argv) >= 2 and sys.argv[1] in ("tk", "gtk", "qt", "all"):
+        if sys.argv[1] == "gtk":
+            GtkCalculator()
+            gtk.main()
+        elif sys.argv[1] == "tk":
+            TkCalculator()
+            Tkinter.mainloop()
+        elif sys.argv[1] == "qt":
+            app = QtGui.QApplication(sys.argv[1:])
+            c = QtCalculator()
+            sys.exit(app.exec_())
+        elif sys.argv[1] == "all":
+            import os
+            if os.fork()==0:
+                app = QtGui.QApplication(sys.argv[1:])
+                c = QtCalculator()
+                GtkCalculator()
+                gtk.main()
+            else:
+                TkCalculator()
+                Tkinter.mainloop()
+            #sys.exit(app.exec_())
+
+    else:
+        sys.stderr.write("Usage: calc_tk_gtk [tk|gtk|qt|all]\n")
+        sys.exit(1)
+}}}

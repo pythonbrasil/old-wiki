@@ -1,0 +1,57 @@
+<<TableOfContents>>
+
+=== Criando tabela no sqlalchemy ===
+
+ * tabela -> cli_usu
+ * servidor de banco de dados utilizado no exemplo -> FireBird 2.1
+{{{#!python
+#este arquivo: db.py:
+
+from sqlalchemy import create_engine,Table,Column,Integer,String,MetaData
+from sqlalchemy import PrimaryKeyConstraint,Sequence,Boolean
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.engine.url import URL
+
+#bdband -> alias criado no arquivo firebird.conf ( Firebird 2.1 )
+#bdband pode ser substituido por 'c:/dados/banco.fdb'
+
+_url     = URL('firebird','SYSDBA','masterkey','192.168.1.11','3052','bdband')
+engine   = create_engine(_url)
+metadata = MetaData(bind=engine)
+
+#cria a tabela
+cli_usu = Table('cli_usu',
+                 metadata,
+                 Column('cli_usu_id',Integer,Sequence('gn_cli_usu_id')),
+                 Column('nome',String(20),nullable=False),
+                 Column('senha',String(10),nullable=False),
+                 Column('ativo',Boolean,nullable=False)
+                 )
+#cria a pk
+cli_usu_pk = PrimaryKeyConstraint('cli_usu_id',name='CLI_USU_PK')
+
+#adiciona a pk a tabela
+cli_usu.append_constraint(cli_usu_pk)
+
+#cria as tabelas no banco (caso nao existam)
+metadata.create_all()
+
+#cria o sessionmaker
+Session = sessionmaker(bind=engine,autoflush=True)
+
+sessao = Session()
+ins = cli_usu.insert().values(id=1,nome='jack',senha='senha',ativo='1')
+sessao.execute(ins)
+sessao.commit()
+sessao.close()
+#Agora, a partir de qualquer lugar do seu projeto, voce pode instanciar uma sessao.
+
+#outro arquivo: login.py
+import db
+sessao  = db.Session()
+sel_cli = db.cli_usu.select(db.cli_usu.c.ativo==1)
+result  = sessao.execute(sel_cli)
+for row in result:
+    print row.nome,row.cli_usu_id,row.senha,row.ativo
+sessao.commit()
+sessao.close()

@@ -1,0 +1,65 @@
+A linguagem Python disponibiliza um mecanismo de gerência de memória automático que é responsável por alocar memória para seus objetos e
+desalocá-la quando esses objetos não possuem mais referência para eles.
+
+O mecanismo para a desalocação dessa memória fica implementado dentro do sistema de ''Garbage Collector''.
+
+De tempos em tempos o Garbage Collector do Python percorre a lista de objetos registrados verificando o número de referências para cada um deles. Quando esse número é zero (não existem mais referência para eles) o GC desaloca a memória usada por esse objeto. O mecanismo de contagem de referência funciona +/- assim:
+
+{{{
+#!python
+var1 = Objeto() # o objeto Objeto agora tem uma referência chamada var1
+
+var2 = var1 # o objeto Objeto agora tem duas referências para ele: var1 e var2
+
+var1 = OutroObjeto() # a referência de var1 agora pertence a 
+                     # OutroObjeto, logo, Objeto agora tem só uma referência
+
+var2 = var1 # OutroObjeto agora tem 2 referências e o nosso bom e
+            # velho Objeto não tem mais referência nenhuma para ele.
+            # Desta forma fica impossível acessá-lo. Ele se perdeu
+            # para sempre no 'limbo' da memória do computador.
+}}}
+
+Passado algum tempo (ou quando forçamos a execução do gc com um '{{{import gc; gc.collect()}}}') o GC do Python vai encontrar esse objeto lá na memória e procederá o seguinte diálogo:
+
+   * Objetinho, você está aí perdido? Onde estão as suas referências?
+   * Ah, eu as perdi nos últimos comandos e agora estou aqui, perdido neste limbo...
+   * Calma, não fique assim tão preocupado que eu vou te levar para um lugar muito melhor.
+   * Não, eu quero ficar aqui porque minhas referências me disseram que não era pra eu conversar com estranhos!
+   * Sinto muito, mas a minha função é recolher todo o li... digo... objetinho que perderam suas referências.
+   * Eu não quero ir!
+   * Neste caso terei que te matar!
+   * NÃO!
+   * Adeus objetinho... essa memória ficou pequena demais para nós dois.
+
+E assim se foi o nosso Objeto :)
+
+Além dessa maneira mais convencional de funcionamento o GC também trabalha de um outro método, mais lento, de coleta de lixo para
+eliminar objetos que perderam as suas referências externas mas possuem referência circular entre eles:
+
+{{{
+#!python
+class Obj(object):
+  def __init__(self, ref = None):
+     self.ref = ref
+
+a = Obj()
+b = Obj(a)
+c = Obj(b)
+a.ref = c
+}}}
+
+Desta forma os objetos referenciados por {{{a}}}, {{{b}}} e {{{c}}} além dessas referências também possuem a referência circular em seus respectivos '{{{self.ref}}}'. O '{{{self.ref}}}' de {{{a}}} aponta para {{{c}}}, o de {{{c}}} aponta para {{{b}}} e o de {{{b}}} aponta para {{{a}}}.
+
+Agora apagaremos as referências {{{a}}}, {{{b}}} e {{{c}}}:
+
+{{{
+#!python
+del a
+del b
+del c
+}}}
+
+Cada um dos objetos ainda possuem pelo menos uma referência entre eles em '{{{self.ref}}}', portanto os seus contadores de referência ainda não são zero mesmo que pra gente seja impossível acessá-los. Para resolver esse tipo de situação o GC tem um algorítmo mais esperto que percorre o círculo para identificar essa referência circular e desalocar esses objetos da memória.
+
+O GC funciona nesse modo mais 'esperto' menos vezes do que o outro modo mais convencional e esse modo também consome uma quantidade muito grande de processamento. Portanto, ao fazer aplicações evite as referências circulares de objetos.

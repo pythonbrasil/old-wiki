@@ -1,0 +1,60 @@
+Acesso ao protocolo NNTP e leitura de notícias.
+
+{{{
+#!python
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+python news.py [server] [newsgroup]
+
+[server]                        : Server NNTP
+[newsgroup]                     : Newsgroup of the server
+
+Run: python news.py news.gmane.org gmane.comp.python.announce
+"""
+
+from nntplib import *
+from rfc822 import *
+from string import *
+from StringIO import *
+from sys import *
+
+SERVER = argv[1]
+NEWSGROUP = argv[2]
+server = NNTP(SERVER)
+resp, count, first, last, name = server.group(NEWSGROUP)
+
+print 'Group', name, 'has', count, 'articles, range', first, 'to', last
+#ls = input('Quantos títulos deseja mostrar na tela: ')
+print 'Please wait...'
+resp, subs = server.xhdr('subject', first + '-' + last)
+
+# TODO:
+#li = ('-%s:' % ls)
+#for id, sub in subs[li]: 
+for id, sub in subs[-10:]:
+    print id, sub
+
+print 'Group', name, 'has', count, 'articles, range', first, 'to', last
+id = input('Message id: ')
+resp, id, message_id, text = server.article(str(id))
+text = join(text, "\n")
+file = StringIO(text)
+message = Message(file)
+
+headers = ['xref', 'from', 'date', 'subject']
+for k in headers:
+    print k, '=', message[k]
+
+# TODO: suporte a unicode
+print message.fp.read()
+}}}
+
+
+Volta para CookBook.
+
+----
+
+LeonardoGregianin

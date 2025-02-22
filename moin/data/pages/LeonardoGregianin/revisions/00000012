@@ -1,0 +1,41 @@
+feito:
+
+   * CookBook:
+        * ParametrosNoShell
+        * CalculadoraSimples
+        * CalculadoraSimplesTk
+        * CodigoBarras
+        * NewsReader
+        * NumerosRomanos
+        * EditBoxFind - Busca na caixa de texto do Tkinter.
+        * ImagemTkinter - Imagem dentro da tela do Tkinter.
+   * ProgramacaoOrientadaObjetoPython
+   * PyWikipediaBot
+   * CodificacaoDosWindows - Codificação no DOS do Windows
+
+----
+
+Mark Lutz em Learning Python:
+
+|| Features || Benefits ||
+|| No compile or link steps || Rapid development cycle turnaround ||
+|| No type declarations || Simpler, shorter, and more flexible programs ||
+|| Automatic memory management || Garbage collection avoids bookkeeping code ||
+|| High-level datatypes and operations || Fast development using built-in object types ||
+|| Object-oriented programming || Code reuse, C++, Java, and COM integration ||
+|| Embedding and extending in C || Optimization, customization, and "glue" ||
+|| Classes, modules, and exceptions || Modular "programming-in-the-large" support ||
+|| Simple, clear syntax and design || Readability, maintainability, ease of learning ||
+|| Dynamic loading of C modules || Simplified extensions, smaller binary files ||
+|| Dynamic reloading of Python modules || Programs can be modified without stopping ||
+|| Universal "first-class" object model || Fewer restrictions and special-case rules ||
+|| Runtime program construction || Handles unforeseen needs, end-user coding ||
+|| Interactive, dynamic nature || Incremental development and testing ||
+|| Access to interpreter information || Metaprogramming, introspective objects ||
+|| Wide interpreter portability || Cross-platform programming without ports ||
+|| Compilation to portable bytecode || Execution speeds, protecting source code ||
+|| Standard portable GUI framework || Tkinter scripts run on X, Windows, Macs ||
+|| Standard Internet protocol support || Easy access to email, FTP, HTTP, CGI ||
+|| Standard portable system calls || Platform-neutral system scripting ||
+|| Built-in and third-party libraries || Vast collection of precoded software components ||
+|| True open source software || May be freely embedded and shipped ||

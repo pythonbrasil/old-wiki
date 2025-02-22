@@ -1,0 +1,60 @@
+Nos exemplos abaixo são mostras duas opção de bibliotecas para a mesma operação a 1° é para{{{mx.DateTime}}} e a 2° é no modulo {{{datetime}}}
+
+1° Exemplo:
+{{{
+#!python
+#!/usr/bin/env python
+
+from mx.DateTime import *
+
+Diasemana = ('segunda feira','terceira feira','quarta feira',
+             'quinta feira','sexta feira','sabado','domingo')
+Meses=('janeiro','fevereiro','mar','abril','maio','junho',
+       'julho','agosto','setembro','outubro','novembro','dezembro')
+agora = now()
+aniversario =Date(1971,12,23)
+
+mes=(agora.month-1)
+diadoano=(agora.day_of_year)
+diadasemana = agora.day_of_week
+print 'Hoje e dia:', agora.strftime('%d/%m/%Y %H:%M:%S')
+print 'Hoje e:' ,Diasemana[diadasemana]
+print 'Mes:', Meses[mes]
+print 'Somando-se 2 dias:', (agora + DateTimeDelta(2)).strftime('%d/%m/%Y')
+print 'Somando-se 3 meses:', (agora + DateTimeDelta(90)).strftime('%d/%m/%Y')
+print 'Somando-se 1 ano:', (agora + DateTimeDelta(365)).strftime('%d/%m/%Y')
+idade=(agora - aniversario)
+print 'Idade:', (idade.day)/365 , 'To ficando veio...'
+}}}
+
+2° Exemplo:
+
+{{{
+#!python
+#!/usr/bin/env python
+
+import datetime
+
+Diasemana = ('segunda feira','terceira feira','quarta feira',
+             'quinta feira','sexta feira','sabado','domingo')
+Meses=('janeiro','fevereiro','mar','abril','maio','junho',
+       'julho','agosto','setembro','outubro','novembro','dezembro')
+agora = datetime.date.today()
+aniversario =datetime.date(1971,12,23)
+
+mes=(agora.month-1)
+#diadoano=(agora.day_of_year)
+diadasemana = datetime.date.weekday(agora)
+print 'Hoje e dia:', agora.strftime('%d/%m/%Y')
+print 'Aniversario:', aniversario.strftime('%d/%m/%Y')
+print 'Hoje e:' ,Diasemana[diadasemana]
+print 'Mes:', Meses[mes]
+print 'Somando-se 2 dias:', (agora + datetime.timedelta(days=2)).strftime('%d/%m/%Y')
+print 'Somando-se 2 semanas:', (agora + datetime.timedelta(weeks=2)).strftime('%d/%m/%Y')
+print 'Somando-se 3 meses:', (agora + datetime.timedelta(days=90)).strftime('%d/%m/%Y')
+print 'Somando-se 1 ano:', (agora + datetime.timedelta(days=365)).strftime('%d/%m/%Y')
+idade=(agora - aniversario)
+print 'Idade:', (idade.days)/365 , 'To ficando veio...'
+}}}
+
+SidneiBrianti

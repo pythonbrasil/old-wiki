@@ -1,0 +1,96 @@
+= Distribuindo Seu Programa com Distutils =
+
+distutils é uma alternativa ao complicado {{{make}}}, com ele você pode criar roteiros de compilação, criação de pacotes, tanto windows (.zip e .exe) quanto unix (.tar.bz2, .tar.gz, .rpm), tudo isso com sua linguagem preferida ;)
+
+http://www.python.org/doc/current/dist/
+
+Tudo o que você precisa é de um arquivo '''setup.py''' que importe os módulos do distutils, acerte os parâmetros e depois chame a função {{{setup()}}} com estes parâmetros.
+
+Um exemplo para um pacote que contenha dois arquivos python '''hello.py''' e '''world.py''':
+
+{{{
+#!python
+from distutils.core import setup
+setup( name="helloworld", version="1.0", py_modules=[ "hello", "world" ],
+       author="Gustavo Sverzut Barbieri", author_email="barbieri@gmail.com" )
+}}}
+
+Você poderá, então:
+ * Criar um pacote com código fonte: {{{python setup.py sdist}}}
+ * Criar um pacote binário RPM: {{{python setup.py bdist_rpm}}}
+ * Criar um pacote com instalador do Windows: {{{python setup.py bdist_wininst}}}
+ * Instalar um pacote: {{{python setup.py install}}}
+
+'''OBS:''' Para mais informações sobre comandos e opções dos comandos, vide {{{python setup.py --help}}} e {{{python setup.py --help-commands}}}.
+'''OBS:''' Existem mais parâmetros a serem passados, dentre eles o {{{data_files}}}, veja exemplo em TraduzindoSeuPrograma.
+
+
+== Utilizando um Pacote ==
+
+Se você possui um pacote, isto é, um diretório com um arquivo '''{{{__init__.py}}}''' e os vários módulos dentro, você pode utilizar-se destes ao especificar os parâmetros do {{{setup()}}}.
+
+Vamos considerar que seu pacote é {{{meupacote}}}.
+
+=== Caso 1: meupacote está dentro de lib ===
+
+Se você gosta de organizar seu código de forma que sua estrutura de diretórios contenha:
+ * '''./''': diretório base
+ * '''./lib''': diretório com código
+ * '''./lib/meupacote''': seu pacote
+
+Você deverá usar:
+
+{{{
+#!python
+from distutils.core import setup
+setup( name="helloworld", version="1.0", 
+       author="Gustavo Sverzut Barbieri", author_email="barbieri@gmail.com",
+       packages=[ "meupacote" ], package_dir={ "": "lib" }
+     )
+}}}
+
+
+=== Caso 2: meupacote é o lib ===
+
+Se você gosta de organizar seu código de forma que sua estrutura de diretórios contenha:
+ * '''./''': diretório base
+ * '''./lib''': seu pacote
+
+Você deverá usar:
+
+{{{
+#!python
+from distutils.core import setup
+setup( name="helloworld", version="1.0", 
+       author="Gustavo Sverzut Barbieri", author_email="barbieri@gmail.com",
+       packages=[ "meupacote" ], package_dir={ "meupacote": "lib" }
+     )
+}}}
+
+
+== Instalando Scripts ==
+
+Até agora vimos como instalar módulos e pacotes python, mas como instalar scripts que serão usados diretamente pelo usuário? Você usa o parâmetro {{{scripts}} e uma lista de scripts, os quais deverão ser código fonte em python e começar com a linha {{{#!/.../python}}}, o distutils irá alterar esta linha para o caminho correto do interpretador python da máquina.
+
+Um exemplo, para um script '''helloworld''' (note, sem o .py!):
+{{{
+#!python
+from distutils.core import setup
+setup( name="helloworld", version="1.0", py_modules=[ "hello", "world" ],
+       author="Gustavo Sverzut Barbieri", author_email="barbieri@gmail.com",
+       scripts=[ "helloworld" ] )
+}}}
+
+== sdist e MANIFEST.in ==
+
+Ao criar um pacote fonte o distutils procura por um arquivo '''MANIFEST''', o qual contém os arquivos a serem inclusos no pacote, caso este não exista um é criado a partir de um '''MANIFEST.in''' (caso este exista). Se nenhum destes existir, crie um com os arquivos básicos.
+
+Portanto, se você quiser incluir alguns arquivos com o pacote fonte, como os arquivos de template e fonte de tradução do gettext, arquivos auxiliares, caso de teste, etc, coloque-os em MANIFEST.
+
+
+== Outros recursos ==
+
+O distutils pode registrar o seu programa no PyPI (''Python Package Index''), para isso você deve usar o parâmetro {{{classifiers}}} com os dados necessários, vide http://www.python.org/doc/current/dist/setup-script.html
+
+
+

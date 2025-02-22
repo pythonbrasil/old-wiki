@@ -1,0 +1,15 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== Candido Vieira ==
+Cidade: Aracaju - Sergipe
+
+Email: <<MailTo(cvieira.br@gmail.com)>>
+
+Blog: [[http://www.coding4fun.com.br/blog|Coding 4 Fun]]
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+
+...
+
+----
+CategoryHomepage

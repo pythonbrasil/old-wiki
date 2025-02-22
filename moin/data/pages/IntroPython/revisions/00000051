@@ -1,0 +1,546 @@
+[[TableOfContents]]
+
+= Guia de Introdução à Linguagem Python =
+
+Este é o Guia do PythonBrasil, para uma rápida introdução à linguagem Python. O guia inicia contextualizando Python, para em seguida tratar da estrutura da linguagem propriamente dita.
+
+Este tutorial exige que se tenha algum conhecimento em programação, saber que um programa é a maneira que dizermos ao computador como efetuar (passo-a-passo) alguma tarefa já é um bom começo! O conhecimento básico de algoritmos e estruturas de dados.
+
+=== O que é Python ===
+
+O Python é uma linguagem de programação moderna, de sintaxe agradável e recursos poderosos. A linguagem tem alguns pontos que a tornam especial:
+
+    * É uma linguagem interpretada. Não é necessário perder tempo no processo de editar, compilar e executar. Basta editar e executar para ver o resultado.
+
+    * É uma linguagem de tipagem dinâmica. Não se declarara o tipo de variáveis, retornos de funções e parâmetros. Os tipos são identificados de acordo com o uso que fazemos deles.
+
+    * O controle de bloco de comandos é feito apenas por alinhamento, não há delimitadores do tipo {{{Begin}}} e {{{End}}} do Pascal ou { e } da linguagem C. Não elson se assuste, isso pode ser muito interessante!
+
+    * Oferece tipos de dados de alto nível como ''strings'' de verdade, dicionários (também conhecido por ''hashes'' ou arranjos associativos), listas, tuplas, classes, etc.
+
+    * É orientada a objetos. Aliás, tudo em Python é um objeto inclusive os tipos primitivos.
+
+    * Aceita outros paradigmas de programação bastantes úteis, como a programação modular, para evitar a "poluição" de nomes e a programação funcional, que descreve mais facilmente determinadas estruturas.
+
+Nas próximas seções estes aspectos serão discutidos com mais detalhes. 
+
+''Em parte retirado de: http://www.async.com.br/projects/python/pnp/node3.html''
+
+== O que eu posso fazer com Python? ==
+
+Praticamente tudo o que se faria com qualquer linguagem de programação, seja ela interpretada ou compilada. Pode-se fazer protótipos de sistemas, automatizar tarefas repetitivas como manipulação de texto, cópia de arquivos e outros (fazer ''scripts'' como é comumente conhecido).
+
+Pode-se também criar programas que funcionam no modo texto, tanto interativos como servidores (ou daemons). Pode-se fazer programas em modo gráfico usando a interface nativa do seu sistema, ou então utilizando Tk, GTk, Qt, wxWidgets e tantas outras. Programas que operam em rede e Internet, banco de dados, escrever aplicações comerciais e científicas. A lista é grande e só depende da criatividade do programador!
+
+== O que eu não posso fazer com Python? ==
+
+Em teoria, qualquer coisa, mas, na prática, devido à recursos de CPU, implementação e uso de memória, isso nem sempre é verdade. Criar um ''kernel'' de um sistema operacional a partir do zero poderia até ser feito, mas, com certeza, o desempenho seria pouco adequado para o uso no mundo de verdade, não passaria de um brinquedo.
+
+Em resumo, sistemas de muito baixo nível, como ''kernel'' de sistema operacional ou rotinas relacionadas e controladores de dispositivos, são pouco adequados de serem desenvolvidos em Python. Para isso, é melhor utilizar-se de uma linguagem compilada, como C ou C++.
+
+== Por que eu deveria usar Python e não Perl, Java ou outra linguagem? ==
+
+Python e Perl são linguagens com propósitos bastante parecidos. A vantagem do Python que chama mais atenção é a sua consistência e facilidade de leitura (e se você já programou em Perl, sabe que isso é importante! Alguém tem/quer exemplos?).
+
+Python e Java são linguagens bem diferentes, o que torna a comparação difícil ou sem signficado. Python sugere um desenvolvimento rápido, do tipo "editar-executar" (Python compila automaticamente quando executamos o programa). Java exige que o programador declare tipos, visibilidade de funções, separe cada classe (pública) em arquivos diferentes, e o desenvolvimento é do tipo "editar-compilar-executar" (ainda que o arquivo gerado tenha que ser interpretado...). Outra vantagem do Python são suas estruturas de dados tais como listas e dicionários que são nativas à linguagem. Java usa classes de sua biblioteca padrão para prover essas funcionalidades, mas geralmentes são necessários muito mais comandos (e ''casts'') para obter o mesmo resultado. Outras diferenças significativas são: a tipagem dinâmica do Python e sua natureza multiparadigma (enquanto o java força a orientação a objetos, o Python permite o uso de outros paradigmas como a programação funcional)
+
+== De onde eu adquiro o Python? ==
+
+O site oficial é: http://www.python.org/, para baixar os arquivos para poder instalar o interpretador e a biblioteca padrão basta ir no endereço http://www.python.org/download/.
+
+=== Linux ===
+
+Para instalar o Python em Linux você dispõe de 2 opções:
+   1. Baixar os códigos fontes, compilar e instalar
+   2. Instalar um pacote que geralmente já vem com sua distribuição Linux.
+
+Para instalar a partir dos fontes basta seguir os procedimentos abaixo:
+   * Baixe o arquivo com os fontes [http://www.python.org/download/ aqui].
+   * Descompacte os fontes:
+
+{{{
+$ tar zxvf Python-VERSAO.tgz
+}}}
+
+   * Certifique-se que as bibliotecas necessárias para compilar o Python e os arquivos de cabeçalhos dessas bibliotecas (geralmente esses arquivos ficam nos pacotes {{{-devel}}} das distribuições) estejam instalados:
+      * glibc (ou outra libc)
+
+   * Compile:
+{{{
+$ ./configure
+$ make
+# make install # esse comando deverá ser executado como root
+}}}
+
+   * Adicione o diretório do interpretador no {{{PATH}}} caso ele ainda não esteja e teste para ver se tudo está funcionando corretamente:
+{{{
+$ PATH=$PATH:/usr/local/bin; export PATH
+$ python
+}}}
+
+=== Windows ===
+
+No site oficial tem um instalador para Windows que é muito simples! Nem parece que está instalando uma linguagem de programação...
+
+=== Macintosh ===
+
+Você poder baixar um instalador binário Python no site:
+
+http://homepages.cwi.nl/~jack/macpython/download.html
+
+
+
+== Entendendo Python ==
+
+Se você NUNCA programou antes, é necessário entender alguns conceitos básicos.
+
+Por exemplo: você sabe o que é um "executável" certo? Experimente abrir um arquivo desses em algum editor de textos. A não ser que você tenha vivido anos na Matrix, não entenderá nada!
+
+Isso acontece porque o programa está escrito, ali, em linguagem de máquina, ou seja, apesar de você não entender nada, o computador entende muito bem.
+
+Mas não pense que alguém escreveu aquilo do jeito que está. Também não foi escrito ao estilo "morse" (10010010110)... inicialmente, o programador escreveu o que chamamos de "código-fonte" em alguma linguagem de programação, como C, C++, Pascal, e, depois de terminado, compilou o código, ou seja, traduziu de C, C++, Pascal para linguagem de máquina (também chamada de Assembly).
+
+Essas linguagens que eu citei acima são as linguagens compiladas, pois antes de serem executadas, seus códigos-fonte devem ser devidamente compilados.
+
+Python não é compilada, mas sim interpretada, assim como PHP, Perl e muitas outras, ou seja, não há o processo de compilação. O que acontece é que o código-fonte (ou script) é "traduzido" direto, através de um interpretador (imagine que ele é um intérprete mesmo, pois é assim que funciona!). Observação: Geralmente, quando uma linguagem é interpretada, existe um código intermediário (''bytecode''), com o qual o programador não precisa se preocupar. Seria muito lento interpretar diretamente o texto do código fonte. No caso do Python, o ''bytecode'' é salvo em arquivos '''.pyc''' e '''.pyo'''.
+
+Tal fato adiciona muita produtividade à linguagem, já que o processo de programar é somente escrever-rodar, ao contrário de escrever-compilar-rodar. Veja que o ciclo dum programa interpretado é bem mais eficiente, pois a fase de testes é MUITO simplificada:
+
+Python: escrever-testar-corrigir-escrever-testar-distribuir
+
+C: escrever-compilar-testar-corrigir-compilar-testar-distribuir
+
+Tecnicamente, qualquer linguagem pode ser compilada ou interpretada, mas as linguagens mais dinâmicas geralmente são interpretadas e as mais estáticas (estilo declare-antes-de-usar) são compiladas.
+
+Se você já tem um interpretador instalado em seu sistema, experimente escrever o seguinte script:
+ 
+{{{
+#!python
+print "Olá, mundo"
+}}}
+  Depois, num terminal, digite "python nome_do_script", e veja como é simples!
+
+== Tipos de dados, constantes, variáveis e expressões ==
+
+  Python é dinamicamente tipado, o que significa que se você usou uma variável para armazenar um inteiro, nada lhe impede de usá-la posteriormente para armazenar uma string (frase). Na verdade, variáveis em Python não são declaradas, o que lhe dá muita flexibilidade.
+
+  Quem determina o tipo de uma variável é o próprio interpretador. Se você escreve:
+
+{{{
+#!python
+x = 2
+FRASE = 'Isso é um exemplo simples e bobo'
+}}}
+
+  O interpetador já sabe que x é um inteiro e FRASE é uma ''string''. Mas isso não lhe impede de, posteriormente, escrever
+
+{{{
+#!python
+x = 'agora tudo mudou'
+FRASE = 3.2
+}}}
+
+ Como x já disse, tudo mudou, e isso é bem natural. Na verdade, raras são as vezes em que você precisa se preocupar com tipos. Geralmente você simplesmente atribui um valor a uma variável e pronto! Isso é bem simples. Mas não abuse desse recurso, senão seus programas vão virar uma confusão.
+
+ Então aqui vão alguns exemplos de tipos:
+
+{{{
+#!python
+x = 2         #inteiro
+
+p = 3.1415    #real, ou ponto flutuante
+
+estringue = 'alguma frase'   #string
+
+lista = [3, 4, 5]   #lista com elementos inteiros
+
+lista2 = [2,'tres',4.0,[5,6]]   #lista mista e aninhada
+
+tupla = (1,2,3,'quatro')    #isso se chama tupla. É como uma lista, mas não pode ser mudada
+
+# tuplas de 0 ou 1 elementos têm sintaxes especiais:
+tupla0 = ()
+tupla1 = ('primeiro e único item',) # repare na vírgula
+
+# Em alguns casos (atribuições, returns), os parênteses são opcionais,
+# mas na maioria das vezes (tuplas dentro de listas, tuplas dentro de chamadas de funções)
+# os parênteses são necessários porque a vírgula faz parte de outra sintaxe
+coord = 4.5, 9.1
+cor_branca = 255, 255, 255 # cor no formato RGB
+funcao((4.5, 9.1), 'string')
+
+dic = {'site':'Python Brasil','url':'www.pythonbrasil.com.br'} # isso é um dicionário
+}}}
+
+=== Tipos simples ===
+    * str (Strings, como 'blabla')
+    * unicode (São strs em que os caracteres podem representar qualquer língua, u'blabla')
+    * bool (True ou False)
+    * float (Números em ponto flutuante, como 4.5 ou 3.14e-10)
+    * int (Números inteiros, como 99)
+    * long (Números inteiros muito grandes, como 1234567890123456789123456789L)
+    * complex (Números complexos, como 3.1j ou 7+3.14e-10j)
+    * file (Arquivos)
+    * decimal ''(proposto, ainda não faz parte do Python)'' (Números fracionários representados de forma decimal em vez de binária)
+
+=== Tipos agrupados (listas, tuplas, dicionários) ===
+    * list
+    * tuple
+    * dict
+
+== Estuturas de controle ==
+    * if...elif...else
+
+Estruturas if elif else
+
+O if o elif e o else servem para examinar expressões. Em português eles avaliam se determinada expressão retorna Verdadeiro ou Falso.
+
+Em Python os valores mais vazios: None, [] (* Lista vazia), "", 0. São tidos como Falso. E os outros valores são verdadeiros.
+
+Explicado isso vamos aos exemplos:
+
+*IF*
+
+Obs: Os exemplos são digitados no Python Interativo.
+{{{
+#!python
+# Exemplo IF 01
+In [1]: meuNome = "Ruivaldo"
+
+In [2]: seuNome = "Adolfo"
+
+In [3]: if meuNome == seuNome:
+   ...:     print "Nos temos os nomes iguais!"
+   ...:
+}}}
+
+Você notou que o print não ocorreu já que as variáveis meuNome e  seuNome são diferentes.
+
+Agora observe esse exemplo:
+{{{
+#!python
+# Exemplo IF 02
+In [1]: meuNome = "Adolfo"
+
+In [2]: seuNome = "Adolfo"
+
+In [3]: if meuNome == se
+setattr  seuNome
+
+In [3]: if meuNome == se
+setattr  seuNome
+
+In [3]: if meuNome == seuNome:
+   ...:     print "Temos os nomes iguais!"
+   ...:
+Temos os nomes iguais!
+}}}
+
+Viu ? Agora imprimiu, já que as variáveis são iguais.
+
+*ELSE*
+
+Vamos dar uma olhada no ELSE agora. Vejamos esse exemplo:
+{{{
+#!python
+#Exemplo ELSE 01
+In [1]: meuNome = "Ruivaldo"
+
+In [2]: seuNome = "Adolfo"
+
+In [3]: if m
+map      max      meuNome  min
+
+In [3]: if meuNome == se
+setattr  seuNome
+
+In [3]: if meuNome == seuNome:
+   ...:     print "Temos nomes iguais!"
+   ...: else:
+   ...:     print "Nossos nomes sao diferentes... :("
+   ...:
+Nossos nomes sao diferentes... :(
+}}}
+
+O else não verifica nada. Ele é só uma delimitação de código a ser executado caso o if não ocorra.
+
+Mais um exemplo só para fixar:
+{{{
+#!python
+# Exemplo ELSE 02
+In [1]: x = 5
+
+In [2]: y = 10
+
+In [3]: if x > 5:
+   ...:     print "X maior que Y"
+   ...: else:
+   ...:     print "Y maior ou igual a X"
+   ...:
+Y maior ou igual a X
+}}}
+
+Nesse exemplo nós não sabemos se o Y é igual ao X. Teríamos que usar o ELIF, que eu vou explicar agora.
+
+*ELIF*
+
+O elif é uma mistura de if com else. Calma, não se assuste. Ele é um else, logo só é executado se o if não ocorrer, só que além de else ele também é um if, então pro bloco elif ser executado a sua expressão tem que ser verdadeira.
+
+Vamos a um exemplo similar ao anterior:
+{{{
+#!python
+#Exemplo ELIF 01
+In [1]: x = 5
+
+In [2]: y = 10
+
+In [3]: if x > y:
+   ...:     print "X maior que Y"
+   ...: elif x == y:
+   ...:     print "X igual a Y"
+   ...: else:
+   ...:     print "Y maior que X"
+   ...:
+Y maior que X
+}}}
+Note que agora se o x for igual ao y ele irá imprimir uma mensagem. Veja esse mais outro exemplo:
+{{{
+#!python
+# Exemplo ELIF 02
+In [1]: x = 5
+
+In [2]: y = 5
+
+In [3]: if x > y:
+   ...:     print "X > Y"
+   ...: elif x == y:
+   ...:     print "X == Y"
+   ...: else:
+   ...:     print "X < Y"
+   ...:
+X == Y
+}}}
+
+Pronto. Provado o que eu te falei.
+
+*Modificador not*
+
+O modificador not é uma palavrinha que serve pra negar a expressão do if ou elif. Ao invés de esperar o valor verdadeiro da expressão o if vai esperar pelo valor negativo. Veja mais esse exemplo:
+{{{
+#!python
+# Exemplo not
+In [1]: x = 5
+
+In [2]: y = 6
+
+In [3]: if not x == y:
+   ...:     print "X eh diferente de Y"
+   ...:
+X eh diferente de Y
+}}}
+
+*Tabela de expressões válidas*
+
+Você pode usar os seguintes símbolos em suas expressões if, elif:
+{{{
+>= (Maior Igual)
+> (Maior)
+<= (Menor Igual)
+< (Menor)
+== (Igual)
+!= (Diferente)
+<> (Diferente)
+}}}
+
+E para finalizar o in:
+
+
+* Modificador in *
+
+O in verifica se um elemento está dentro de outro.
+
+Veja esses exemplos:
+{{{
+#!python
+In [1]: if 1 in [1,2,3]: print "Esta!"
+   ...:
+Esta!
+
+In [2]: if 'a' in "aloha":
+   ...:     print "Esta tambem"
+   ...:
+Esta tambem
+
+In [3]: if [2,3] in [1,2,3]:
+   ...:     print "Esta"
+   ...:
+
+In [4]: if [2,3] in [[2,3],[2,4]]:
+   ...:     print "Esta denovo..."
+   ...:
+Esta denovo...
+
+}}}
+
+
+== Estruturas de iteração ou loop ==
+    * for
+    
+     Usando for:
+     Se você programa em C, vai perceber que o {{{for}}} em Python é diferente. Ele itera sobre listas. Por exemplo:
+
+{{{
+if not odeio_metallica:
+    metallica = ['James','Kirk','Lars','Trujillo']
+    for membro in metallica:
+        print membro
+}}}
+
+   Ou seja, para cada elemento da lista, itere. Você terá acesso ao item corrente ({{{print membro}}}). Se quiser fazer iterações sobre progressões aritméticas, use a função {{{range}}}, que cria uma lista de inteiro em seqüência. Exemplo:
+
+{{{
+#!python
+for i in range(50):
+   print i
+}}}
+
+   Isso vai imprimir na tela os números de 0 a 49.
+
+  * while
+
+    O while é muito simples. Ver o exemplo já vai ajudar muito:
+(((
+#!python
+opc = 1
+while opc != 0:
+   # código e mais código...
+   opc = raw_input("Digite 0 para sair \n > ")
+)))
+
+    Veja, o laço vai continuar iterando até que o usuário digite 0 na hora que o programa perguntar. Simples. O while é literalmente um "enquanto ISSO faça AQUILO".
+
+== Tratamento de erros e exceções ==
+
+    * try - except
+    * try - finally
+
+== Módulos ==
+
+Uma das características que me surpreendeu foi a facilidade de criar módulos simples. Por exemplo, se você quer criar um módulo chamado ''funcoesuteis'', é só criar um arquivo chamado ''funcoesuteis.py'' no mesmo diretório do seu programa principal. Nesse arquivo, coloque todos os '''def'''s e '''class'''es que quiser. No programa que for usar esse módulo, é só colocar {{{import funcoesuteis}}} e usar as funções como {{{funcoesuteis.funcao1()}}}, {{{funcoesuteis.funcao2()}}}, etc. Se quiser poupar digitação, use a forma {{{from funcoesuteis import funcao1, funcao2}}} e chame as funções diretamente: {{{funcao1()}}}, {{{funcao2()}}}.
+
+(Melhorar: exemplos mais completos, descrição menos concisa e mais fácil de seguir, talvez explicar packages).
+
+=== Pequeno complemento: ===
+
+Um módulo Python é como se fosse um pedaço de programa que você, como programador, decidiu que ficaria melhor separado do todo. Essa decisão geralmente é tomada sobre estruturas que são usadas em diversos programas. Isso facilita nossa vida, pois já não precisamos "copiar e colar" as coisas de um lado para outro.
+Claro, módulos podem ser mais complexos em certos pontos de vista. Eu mesmo não vejo nada de muita complexidade. Pura praticidade!
+
+== Classes ==
+
+Criar uma classe em Python é muito simples. Acompanhe o exemplo:
+{{{
+#!python
+class Pessoa:
+  def __init__(self):
+    self.nome = ""
+    self.x = 0
+    self.y = 0
+  def andar(self, x, y):
+    self.y = self.y + y
+    self.x = self.x + x
+
+eu = Pessoa()
+eu.nome = "Cléber"
+eu.andar(2, 0)
+}}}
+
+A classe criada chama-se {{{Pessoa}}}. É costume nomear classes {{{DesteJeito}}} em vez de {{{deste_jeito}}}. Assim, fica fácil de distinguir as classes dos objetos, das variáveis, das funções, etc. Essa convenção de nomenclatura é usada em Java, Ruby, Python e em outras linguagens (já que os programadores acabam levando esse costume de uma linguagem pra outra). Voltando à classe {{{Pessoa}}}. Nela definimos duas funções (funções dentro classes geralmente são chamadas de ''métodos''). A função andar, sob um ponto de vista muito abstrato, faz "a pessoa andar", ou seja, altera os valores x e y de sua posição (faça de conta que também existe uma função pra desenhar a pessoa :-) ).
+Perceba que eu não declarei nenhuma das variáveis. Classes servem mesmo é pra criar métodos (agrupar funções), e não tanto para criar estruturas de variáveis (apesar de classes em Python serem ótimos containers).
+A função {{{__init__()}}} é especial: ela é chamada toda a vez que é criada uma nova instância da classe (obs.: '''instância de classe''' é o mesmo que '''objeto'''), por isso o nome init: ela inicializa o objeto, e é opcional.
+O argumento self é obrigatório, e deve ser o primeiro da função. Perceba que foi usado self na definição das variáveis. Isso quer dizer que estamos mexendo nas variáveis do objeto (Repare no detalhe: fora da classe usamos o nome do objeto criado, no caso {{{eu}}}. Dentro da classe, o código serve pra qualquer objeto criado a partir dessa classe, e o primeiro argumento, o {{{self}}}, representa o objeto sendo usado.).
+Classes podem servir como os "struct" do C ou "record" do Pascal. {{{dict}}}s também podem servir como {{{struct}}}s. {{{dict}}}s são mais usados pra simplesmente agrupar dados acessados por nome. Classes são mais usadas quando a estrutura é complexa, necessita de métodos de acesso e serão usadas várias instâncias da mesma estrutura. Pra simular uma {{{struct}}}, basta definir uma classe vazia, por exemplo:
+
+{{{
+#!python
+
+class conteiner:
+   pass
+
+# E depois criar as variáveis dela "por fora",
+conteiner.var = "fácil, não?"
+conteiner.num = 1
+}}}
+
+Classes podem ser muito bem utilizadas, mas algumas vezes são péssimas opções. Assim como tudo em programação, saiba usá-las com parcimônia.
+
+Exemplos, pra terminar:
+
+{{{
+#!python
+class Carro:
+   def __init__(self, preco):
+      self.marca = "Ford"
+      self.modelo = "Maverick"
+      self.ano = 74
+      self.cor = [0,200,50]
+      self.pos = [0,0]
+   def andar(self, x, y):
+      self.pos[0] = self.pos[0]+x
+      self.pos[1] = self.pos[1]+y
+
+carango = Carro(5000)   #passa o valor 5000 para __init__()
+
+for i in range(300):
+   carango.andar(1,0)  #o carro anda 300m
+}}}
+ 
+== Herança ==
+
+Herança é um recurso poderoso da programação orientada a objetos que permite reutilizar o código de classes já definidas. O Python suporta herança múltipla, ou seja, é possível criar uma nova classe a partir de várias outras (esse recurso deve ser usado com cuidado, pois isso dificulta a manutenção)
+
+Exemplo:
+
+{{{
+#!python
+
+# definindo uma classe 'pai'
+class CD:
+  def __init__(self, titulo):
+    self.titulo = titulo
+
+  def mudarTitulo(self, novoTitulo):
+    self.titulo = novoTitulo
+
+# definindo uma classe 'filha'
+class CDAudio(CD):
+
+  def __init__(self, titulo, autor):
+    CD.__init__(self, titulo)
+    self.autor = autor
+    self.faixas = []
+
+  def adicionarFaixa(self, numero, nome):
+    self.faixas.append((numero, nome))
+
+  def removerFaixa(self, numero, titulo):
+    self.faixas.remove((numero, nome))
+
+novoCD = CDAudio('Physical Graphitte', 'Led Zeppelin');
+
+novoCD.adicionarFaixa(1,'Custard Pie')
+novoCD.adicionarFaixa(2,'The Rover')
+
+print dir(novoCD)
+print "CD: %s, %s" % (novoCD.titulo, novoCD.autor)
+print novoCD.faixas
+
+}}}
+
+
+== Um exemplo Completo ==
+
+''Pretendo deixar um aplicativo de exemplo para sintetizar tudo. Uma idéia que me ocorreu agora é fazer um programinha gráfico (usando tk) de perguntas e repostas (quiz). Não sei se é confundir muito botar tk no meio, mas creio que se a pessoa entendeu o tutorial vai ser capaz de entender um pouco do código, mesmo porque com o quiz eu posso usar dicionários, listas, abrir/fechar arquivos (aka usar módulos), talvez usar classes e mostrar um exemplo prático que teoricamente rodaria em todas as plataformas''.
+
+(Sugestão: Coloca o programa sim! Assim o tutorial "cresce" junto com o leitor, em vez de ficar só no conhecimento básico - tem é que mergulhar fundo! Ao infinito e além!!)
+
+(Muito bom! Este exemplo completo seria muito interessante. De repente não utilizar a biblioteca gráfica, para não complicar, tendo em vista que a sintaxe do Python é bem particular, não tendo muitas semelhanças com as linguagens de uso corriqueiro)

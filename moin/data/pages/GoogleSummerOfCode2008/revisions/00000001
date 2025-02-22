@@ -1,0 +1,119 @@
+= Participação de brasileiros no Google Summer of Code 2008 =
+
+=== Python Software Foundation ===
+
+'''Bruno Gola'''
+
+''Supporting Python 2.5 features in PyPy''
+
+http://code.google.com/soc/2008/psf/appinfo.html?csaid=3DED41878DC5E619B2
+
+'''Guilherme Henrique Polo Gonçalves'''
+
+''Bringing Ttk to Tkinter''
+
+http://code.google.com/soc/2008/psf/appinfo.html?csaid=3DD31B95EB4E10C908
+
+'''Rodrigo Bernardo Pimentel'''
+
+''Confidence ranking for 2to3 fixers''
+
+http://code.google.com/soc/2008/psf/appinfo.html?csaid=3D4F154C172A17A8F0
+
+
+=== Zope Foundation ===
+
+'''Sidnei da Silva (mentor)'''
+
+''Zope2 on Python2.5''
+
+http://code.google.com/soc/2008/zope/appinfo.html?csaid=3D3F42269E3CDF31BD
+
+'''Dirceu Pereira Tiegs'''
+
+''Improved replication for ZODB through ZEO Raid''
+
+http://code.google.com/soc/2008/zope/appinfo.html?csaid=3D480505ACAC256B7D
+
+'''Luciano Ramalho'''
+
+'''Leonardo Rochael Almeida (mentor)'''
+
+''Flint: a simple Grok-based CMS''
+
+http://code.google.com/soc/2008/zope/appinfo.html?csaid=3D3B4AE1B198100838
+
+
+=== Umit ===
+
+'''Rodolfo da Silva Carvalho'''
+
+''UmitWeb Improvements and Independent features''
+
+http://code.google.com/soc/2008/umit/appinfo.html?csaid=ED27F73C82201FB0
+
+'''Adriano Monteiro Marques (mentor)'''
+
+''UmitWeb Improvements and Independent features''
+
+http://code.google.com/soc/2008/umit/appinfo.html?csaid=ED27F73C82201FB0
+
+''Bluetooth Scanner & Vulnerabilities Database System''
+
+http://code.google.com/soc/2008/umit/appinfo.html?csaid=DA162251AE9E0982
+
+''Preferences Window and Interface Editor improvements''
+
+http://code.google.com/soc/2008/umit/appinfo.html?csaid=A76C25B908F6494A
+
+''Packet manipulation - backend''
+
+http://code.google.com/soc/2008/umit/appinfo.html?csaid=64F5DD4631DD7C55
+
+''Packet Manipulation User Interface for umit''
+
+http://code.google.com/soc/2008/umit/appinfo.html?csaid=953364D731CC9FB0
+
+
+=== TurboGears ===
+
+'''Ariane Paola Gomes'''
+
+''Improving TurboGears2 support on Jython''
+
+http://code.google.com/soc/2008/turbogears/appinfo.html?csaid=9D3A17CF760D00B9
+
+'''Bruno José de Moraes Melo'''
+
+''Documentation Production System''
+
+http://code.google.com/soc/2008/turbogears/appinfo.html?csaid=E12BB037DB80068
+
+
+===  Translate Toolkit & Pootle ===
+
+'''George Yoshikazu Kussumoto'''
+
+''Complete libgettextpo Python Interface''
+
+http://code.google.com/soc/2008/translate/appinfo.html?csaid=81036E0717B4B31
+
+
+'''Alexandre Inacio Rosenfeld'''
+
+''Full iPod support for Conduit''
+
+http://code.google.com/soc/2008/gnome/appinfo.html?csaid=90F643A2BBAEC3D7
+
+
+'''João Sebastião de Oliveira Bueno (mentor)'''
+
+''Enhance Python Scripting Interface Experience''
+
+http://code.google.com/soc/2008/gimp/appinfo.html?csaid=E7A725B2B5503E7D
+
+'''Alexis Sakurai Landgraf Carvalho (mentor)'''
+
+''Partial Cloning support for Mercurial''
+
+http://code.google.com/soc/2008/hg/appinfo.html?csaid=B091D9B819911D09

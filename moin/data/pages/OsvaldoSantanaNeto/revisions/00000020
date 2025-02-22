@@ -1,0 +1,70 @@
+#acl OsvaldoSantanaNeto:read,write All:read
+#pragma section-numbers off
+= Osvaldo Santana Neto =
+
+||Nome||Osvaldo Santana Neto||
+||Nickname||aC''''''iD''''''Ba''''''Se||
+||e-mail||osantana (arrouba) pythonbrasil (punto) com (dotz) br||
+||ICQ||11287184||
+||MSN||acidbasebr@hotmail.com||
+||Página||http://www.osantanabr.brturbo.com||
+||IRC||irc.freenode.org||
+
+Palavras chave:
+Python, Jogos, MSX, d00dz.org, Linux, 
+
+Sou um [http://d00dz.org d00dzer].
+
+== Uma História de Vida :) ==
+
+Meu nome é Osvaldo Santana Neto e sou o 'fundador' deste site (entre aspas mesmo, porque na verdade eu só juntei as idéias do pessoal da lista python-br@yahoogroups.com e coloquei em funcionamento). Como isso aqui é uma página web e páginas webs não aceitam conteúdos de texto muito grande eu vou fazer um resumo da minha história. Um 'resumo' de 16 páginas :) Se não quiserem ler é melhor :)
+
+Comecei a trabalhar com informática aos 14 anos mas já programava em Logo e Basic de Apple ][ e MSX desde os 9 anos de idade. O que eu mais gostava de fazer nessa época era programar joguinhos de computador. Com 14 anos fui trabalhar como programador de computadores para uma imobiliária de São José do Rio Preto - SP (cidade onde morei por mais tempo). Meu trabalho lá era o de criar um software que controlasse recebimentos de aluguéis. Desenvolvi para dBase II em cima de um CP/M :) até que o primeiro PC-XT chegou à empresa e continuei o trabalho em Clipper (se alguém me perguntar se programo em Clipper eu nego). Na verdade eu tinha começado esse software wm gw-basic, mas não deu muito certo essa idéia :)
+
+Dei aula de informática (DOS, Wordstar, Lotus 123, dBase III Plus e programação em Clipper e Pascal), fiz estágio na Telesp (foi onde tive meu primeiro contato com Unix. Era um SCO Unix rodando num 386sx com 4 de RAM. Lá rodava o Lotus 123 e o nOffice da Nutec brasileira), e me formei em tecnologia de processamento de dados em 2o. grau pela Fundação Paula Souza. Fiz mais alguns bicos na área até que resolvi virar Publicitário. Trabalhei em uma gráfica, e em uma agência de propaganda por 2 anos. Descobri que a vida de publicitário é pior do que a de programador e resolvi voltar para a informática. :)
+
+Voltando para a informática resolvi brincar de Linux enquanto trabalhava para o ZAZ (Terra) como webmaster :) Em uma dessas surpresas boas fui chamado para uma entrevista na Conectiva em Curitiba e fui contratado. Me mudei para cá no dia 1/1/2000 e comecei a trabalhar no dia 3/1/2000. No meu primeiro dia de Curitiba fui muito bem recebido: roubaram o som do meu carro. :)
+
+Fiquei na Conectiva por quase 2 anos e depois fui (como consultor terceirizado) para a GVT trabalhar com Unix (HP-UX e Solaris) onde fiquei por 6 meses. Fiquei trabalhando em Salvador por 2 meses para a mesma empresa de consultoria (nesse caso era AIX). Até resolver montar a minha própria empresa de consultoria em Software Livre junto com amigos (http://www.haxent.com.br). Estavamos indo bem mas optamos por dar uma 'parada' na empresa para trabalharmos com desenvolvimento de software para celular para uma outra empresa. Essa empresa entrou em falência por problemas de gerência. Retomamos então com a nossa empresa mas em uma situação bastante difícil. Foi quando desisti da sociedade e fui para São João da Boa Vista - SP assumir a coordenação técnica de uma rede de provedores de internet.
+
+Terminei(?) os trabalhos de desenvolvimento por lá e resolvi voltar para Curitiba. Mandei um CV para a Objective e estou é onde estou trabalhando no momento. Aqui a gente usa SmallTalk e Java (apesar de não gostar muito de Java eu ainda prefiro ela do que PHP :))). Aqui também rola uns esquemas de XP (Extreme Programming) e foi onde criaram o polêmico Prevayler (Camada de persistência de objetos Java).
+
+ufa! (história grande e chata... e eu tenho só 26 anos :))
+
+Bom, chega...
+
+== TODO ==
+
+   * Colocar mais palavras chave na minha ficha
+   * Colocar a explicação do Python para Web da lista no CookBook UnixLinuxComandosWeb
+
+== Provocação Gratuita ==
+
+Estava brincando com um programa novo para edição de vídeo em Linux que se chama [http://heroinewarrior.com/cinelerra.php3 Cinelerra] e resolvi fazer uma brincadeira (provocação :)) com a linguagem de programação Java.
+
+attachment:PythonRocks.zip
+
+/!\ Atenção! Esse vídeo é uma '''brincadeira''', não fique ofendido. Se quiser fazer uma sacanagem com Python e mandar pra cá eu publico também :)
+
+== Vendendo Livros ==
+
+Feirão do Livro Usado. Estou vendendo alguns livros meus para liberar espaço em meu escritório para a chegada do meu herdeiro. Para pessoas de Curitiba-PR que quiserem comprar algum livro é só me contactar pelo fone (41) 9103-8749 e reservar. Infelizmente não tenho serviço de entrega, mas você poderá buscar o livro em minha casa (Bairro Cajuru).
+
+||'''Livro'''||'''Autor'''||'''ISBN'''||'''Valor'''||'''Status'''||
+||Dominando Algoritmos com C||Kyle Loudon||8573930764||R$15,00||Vendido||
+||Entendendo o Conectiva Linux 7, Guia do Servidor Conectiva 7 e Manual do usuário Conectiva Guarani 3||Diversos||-||R$15,00 (os 3)||-||
+||Álgebra Linear||Steinbruch e Winterle||0074504126||R$15,00||-||
+||Programação em QT||Matthias Kalle Dalheimer||8573930535||R$10,00||-||
+||Ciência da Computação - Uma visão abrangente||J. Glenn Brookshear||8573075376||R$20,00||-||
+||Fundamentos de Física 1 - Mecânica (4a. ed)||Halliday, Resnick e Walker||8521610696||R$20,00||-||
+||XML - Guia de Consulta Rápida||Otávio C. Décio||8585184868||R$5,00||-||
+||PHP - Guia de Consulta Rápida||Herbert G. Fischer||8585184698||R$5,00||ruda||
+||Drácula (L&PM pocket)||Bram Stoker||8525408417||R$5,00||-||
+||IBM PC & PS/2||Peter Norton Richard Wilton||8570016239||R$5,00||-||
+||MS-DOS Avançado||Ray Duncan||0074606042||R$5,00||-||
+||Programas Residentes para IBM PC||Carlos Yallouz||8521607598||R$5,00||-||
+||HTML Avançado||Ramalho||8534607311||R$5,00||Vendido||
+||Programando com ferramentas GNU||Mike Loukides e Andy Oram||8587118110||R$15,00||-||
+||Linux Dicas e Truques||Rubens Queiroz de Almeida||8587118137||R$15,00||-||
+||C Completo e Total||Herbert Schildt||8534605955||R$10,00||Vendido||
+

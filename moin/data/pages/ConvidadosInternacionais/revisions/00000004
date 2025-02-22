@@ -1,0 +1,72 @@
+Desde 2008 a Associação Python Brasil passou a trazer palestrantes internacionais para nosso evento nacional anual, a Conferência Python Brasil (PyCon para os amigos).
+
+=== Convidados 2008 ===
+
+Estes foram os mais votados na pesquisa feita entre os membros da APyB.
+
+==== Alexander Limi ====
+
+ * Designer de interfaces, fundador do projeto [[http://plone.org|Plone]].
+ * Blog: http://limi.net/
+
+==== Bruce Eckel ====
+
+ * Instrutor, autor do livro [[http://www.mindview.net/Books/TIJ/|Thinking in Java]]
+ * palestrante ''keynote'' da [[http://us.pycon.org/dc2004/talks/keynote|PyCon US 2004]]
+ * Blog: http://www.artima.com/weblogs/index.jsp?blogger=beckel
+
+
+== Processo de Escolha ==
+
+Em 2009 os convidados serão escolhidos da seguinte maneira:
+
+ 1. '''Até 16/04''': Membros ''ativos'' da APyB ([[http://associacao.pythonbrasil.org/associados|lista]]) poderão colocar nesta página sugestões de convidados
+
+ 2. '''De 17/04 a 19/04''': Toda a comunidade (membros e não-membros da APyB) poderá votar online, em URL a ser divulgada nesta página e nas principais listas da comunidade
+
+ 3. '''Em 20/04''': A APyB vai divulgar os resultados da votação. O mais votado será convidado primeiro. O segundo nome a ser convidado será escolhido pelos Diretores e Conselheiros da APyB, entre os candidatos indicados aqui, independente da classificação na votação.
+
+ 4. '''A partir de 21/04''': A APyB vai formalizar o convite aos nomes escolhidos. Caso o nome mais votado não possa vir, convidaremos o próximo mais votado, até confirmarmos este primeiro nome. Se o convidado da Diretoria e Conselhos não puder vir, outro nome será escolhido, até confirmaros este segundo nome.
+
+== Candidatos 2009 ==
+
+Para indicar um candidato a ser convidado internacional da APyB, siga estas recomendações:
+
+ * escreva algumas palavras sobre o candidato na primeira linha
+
+ * forneça no mímimo um link para que a comunidade passa avaliar a pessoa e sua contribuição para a comunidade Python
+
+ * não coloque e-mails, mas esteja pronto para fornecer o e-mail do indicado caso ele seja escolhido
+
+ * identifique-se escrevendo seu nome exatamente como ele aparece na [[http://associacao.pythonbrasil.org/associados|Relação de Associados da APyB]], e complemente com link para sua página aqui no Wiki, se quiser.
+
+ * siga os exemplos já criados abaixo
+
+=== Brett Cannon ===
+
+ * core developer importante na [[http://python.org/|linguagem Python]]
+
+ * perfil no Ohloh: http://www.ohloh.net/accounts/bcannon
+
+ * blog: http://sayspy.blogspot.com/
+
+ * palestrante engraçado e cara divertido
+
+ * indicado por Luciano Gama de Sousa Ramalho (LucianoRamalho)
+
+=== Jacob Kaplan-Moss ===
+
+ * co-fundador e líder do projeto [[http://www.djangoproject.com/|Django]]
+
+ * demonstrou grande interesse em vir ao Brasil ao ser sondado na PyCon 2009 em Chicago
+
+ * blog: http://jacobian.org/
+
+ * indicado por Luciano Gama de Sousa Ramalho (LucianoRamalho)
+
+
+== FAQ ==
+
+=== Porquê não convidar simplesmente o primeiro e o segundo mais votados? ===
+
+Pode ser que a Diretoria e Conselhos acabe fazendo isso mesmo, mas queremos ter mais opções. A experiência tem mostrado que as votações na comunidade refletem de forma desproporcional os interesses dos membros mais antigos e atuantes, e estes tendem a preferir nomes envolvidos em projetos muito avançados mas às vezes não tão significativos para a comunidade como um todo. Assim, a Diretoria optou por reservar o direito de definir com os Conselheiros o segundo nome, para que seja um palestrante que complemente o primeiro e atenda melhor os interesses de pessoas que estão chegando agora na comunidade.

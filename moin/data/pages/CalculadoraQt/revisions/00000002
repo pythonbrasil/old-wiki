@@ -1,0 +1,949 @@
+#pragma section-numbers off
+= Receita: CalculadoraQt =
+
+Esta é uma calculadora simples, projetada para ter um comportamento similar às calculadoras de mão.
+
+Foi feita com PyQt e QtDesigner. O código demonstra o uso de um "cache de funções", uma estratégia usada para que possamos utilizar os métodos gerados dinamicamente. Em PyQt especificamente, isto é necessário pois precisamos manter uma referência para todos os métodos dinâmicos (como os gerados com lambda) que forem usados como slots, ou a coleta de lixo irá garantir que não funcionem (o que é normal e esperado, já que as referências para slots são fracas).
+
+O primeiro código é aquele gerado pelo QtDesigner (para quem quiser mexer). O segundo é o código Python gerado via pyuic. O terceiro é uma classe que extende o primeiro, adicionando a ação. O quarto, nosso ''main()''.
+
+'''Obs.:''' Antes que digam que o código ficou grande, notem que só precisamos mexer com os dois últimos, sendo o último simples e cotidiano. Conhecendo a ferramenta dá pra perceber que o código fica bem econômico e simples de manter.
+
+== Código ==
+
+calcform.ui
+{{{
+#!python
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>CalcForm</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>CalcForm</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>252</width>
+            <height>309</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Calculadora</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="resizeMode">
+            <enum>Fixed</enum>
+        </property>
+        <widget class="QLineEdit" row="0" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>resultEdit</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>0</width>
+                    <height>45</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>14</pointsize>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="alignment">
+                <set>AlignRight</set>
+            </property>
+            <property name="readOnly">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Resultados</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="1" column="2">
+            <property name="name">
+                <cstring>backspaceButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="paletteForegroundColor">
+                <color>
+                    <red>0</red>
+                    <green>170</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>B</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="5" column="1">
+            <property name="name">
+                <cstring>n0Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>0</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="4" column="2">
+            <property name="name">
+                <cstring>n3Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>3</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="4" column="0">
+            <property name="name">
+                <cstring>n1Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>1</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="0">
+            <property name="name">
+                <cstring>n7Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>7</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="1" column="3">
+            <property name="name">
+                <cstring>clearButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="paletteForegroundColor">
+                <color>
+                    <red>255</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>C</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="5" column="2">
+            <property name="name">
+                <cstring>calcButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="paletteForegroundColor">
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>255</blue>
+                </color>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>=</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="3" column="3">
+            <property name="name">
+                <cstring>subButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>-</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="3" column="2">
+            <property name="name">
+                <cstring>n6Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>6</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="5" column="3">
+            <property name="name">
+                <cstring>divButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>/</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="3" column="0">
+            <property name="name">
+                <cstring>n4Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>4</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="3">
+            <property name="name">
+                <cstring>sumButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>+</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="4" column="1">
+            <property name="name">
+                <cstring>n2Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>2</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="3" column="1">
+            <property name="name">
+                <cstring>n5Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>5</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="4" column="3">
+            <property name="name">
+                <cstring>mulButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>X</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="1">
+            <property name="name">
+                <cstring>n8Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>8</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="2">
+            <property name="name">
+                <cstring>n9Button</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>9</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="5" column="0">
+            <property name="name">
+                <cstring>floatPointButton</cstring>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>50</width>
+                    <height>40</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>.</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<tabstops>
+    <tabstop>resultEdit</tabstop>
+    <tabstop>backspaceButton</tabstop>
+    <tabstop>clearButton</tabstop>
+    <tabstop>n7Button</tabstop>
+    <tabstop>n8Button</tabstop>
+    <tabstop>n9Button</tabstop>
+    <tabstop>sumButton</tabstop>
+    <tabstop>n4Button</tabstop>
+    <tabstop>n5Button</tabstop>
+    <tabstop>n6Button</tabstop>
+    <tabstop>subButton</tabstop>
+    <tabstop>n1Button</tabstop>
+    <tabstop>n2Button</tabstop>
+    <tabstop>n3Button</tabstop>
+    <tabstop>mulButton</tabstop>
+    <tabstop>floatPointButton</tabstop>
+    <tabstop>n0Button</tabstop>
+    <tabstop>calcButton</tabstop>
+    <tabstop>divButton</tabstop>
+</tabstops>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>
+}}}
+
+calcform.py
+{{{
+#!python
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'calcform.ui'
+#
+# Created: Seg Set 5 21:17:18 2005
+#      by: The PyQt User Interface Compiler (pyuic) 3.13
+#
+# WARNING! All changes made in this file will be lost!
+
+
+from qt import *
+
+
+class CalcForm(QWidget):
+    def __init__(self,parent = None,name = None,fl = 0):
+        QWidget.__init__(self,parent,name,fl)
+
+        if not name:
+            self.setName("CalcForm")
+
+
+        CalcFormLayout = QGridLayout(self,1,1,11,6,"CalcFormLayout")
+        CalcFormLayout.setResizeMode(QLayout.Fixed)
+
+        self.resultEdit = QLineEdit(self,"resultEdit")
+        self.resultEdit.setMinimumSize(QSize(0,45))
+        resultEdit_font = QFont(self.resultEdit.font())
+        resultEdit_font.setPointSize(14)
+        resultEdit_font.setBold(1)
+        self.resultEdit.setFont(resultEdit_font)
+        self.resultEdit.setAlignment(QLineEdit.AlignRight)
+        self.resultEdit.setReadOnly(1)
+
+        CalcFormLayout.addMultiCellWidget(self.resultEdit,0,0,0,3)
+
+        self.backspaceButton = QPushButton(self,"backspaceButton")
+        self.backspaceButton.setMinimumSize(QSize(50,40))
+        self.backspaceButton.setPaletteForegroundColor(QColor(0,170,0))
+        backspaceButton_font = QFont(self.backspaceButton.font())
+        backspaceButton_font.setBold(1)
+        self.backspaceButton.setFont(backspaceButton_font)
+
+        CalcFormLayout.addWidget(self.backspaceButton,1,2)
+
+        self.n0Button = QPushButton(self,"n0Button")
+        self.n0Button.setMinimumSize(QSize(50,40))
+        n0Button_font = QFont(self.n0Button.font())
+        n0Button_font.setBold(1)
+        self.n0Button.setFont(n0Button_font)
+
+        CalcFormLayout.addWidget(self.n0Button,5,1)
+
+        self.n3Button = QPushButton(self,"n3Button")
+        self.n3Button.setMinimumSize(QSize(50,40))
+        n3Button_font = QFont(self.n3Button.font())
+        n3Button_font.setBold(1)
+        self.n3Button.setFont(n3Button_font)
+
+        CalcFormLayout.addWidget(self.n3Button,4,2)
+
+        self.n1Button = QPushButton(self,"n1Button")
+        self.n1Button.setMinimumSize(QSize(50,40))
+        n1Button_font = QFont(self.n1Button.font())
+        n1Button_font.setBold(1)
+        self.n1Button.setFont(n1Button_font)
+
+        CalcFormLayout.addWidget(self.n1Button,4,0)
+
+        self.n7Button = QPushButton(self,"n7Button")
+        self.n7Button.setMinimumSize(QSize(50,40))
+        n7Button_font = QFont(self.n7Button.font())
+        n7Button_font.setBold(1)
+        self.n7Button.setFont(n7Button_font)
+
+        CalcFormLayout.addWidget(self.n7Button,2,0)
+
+        self.clearButton = QPushButton(self,"clearButton")
+        self.clearButton.setMinimumSize(QSize(50,40))
+        self.clearButton.setPaletteForegroundColor(QColor(255,0,0))
+        clearButton_font = QFont(self.clearButton.font())
+        clearButton_font.setBold(1)
+        self.clearButton.setFont(clearButton_font)
+
+        CalcFormLayout.addWidget(self.clearButton,1,3)
+
+        self.calcButton = QPushButton(self,"calcButton")
+        self.calcButton.setMinimumSize(QSize(50,40))
+        self.calcButton.setPaletteForegroundColor(QColor(0,0,255))
+        calcButton_font = QFont(self.calcButton.font())
+        calcButton_font.setBold(1)
+        self.calcButton.setFont(calcButton_font)
+
+        CalcFormLayout.addWidget(self.calcButton,5,2)
+
+        self.subButton = QPushButton(self,"subButton")
+        self.subButton.setMinimumSize(QSize(50,40))
+        subButton_font = QFont(self.subButton.font())
+        subButton_font.setBold(1)
+        self.subButton.setFont(subButton_font)
+
+        CalcFormLayout.addWidget(self.subButton,3,3)
+
+        self.n6Button = QPushButton(self,"n6Button")
+        self.n6Button.setMinimumSize(QSize(50,40))
+        n6Button_font = QFont(self.n6Button.font())
+        n6Button_font.setBold(1)
+        self.n6Button.setFont(n6Button_font)
+
+        CalcFormLayout.addWidget(self.n6Button,3,2)
+
+        self.divButton = QPushButton(self,"divButton")
+        self.divButton.setMinimumSize(QSize(50,40))
+        divButton_font = QFont(self.divButton.font())
+        divButton_font.setBold(1)
+        self.divButton.setFont(divButton_font)
+
+        CalcFormLayout.addWidget(self.divButton,5,3)
+
+        self.n4Button = QPushButton(self,"n4Button")
+        self.n4Button.setMinimumSize(QSize(50,40))
+        n4Button_font = QFont(self.n4Button.font())
+        n4Button_font.setBold(1)
+        self.n4Button.setFont(n4Button_font)
+
+        CalcFormLayout.addWidget(self.n4Button,3,0)
+
+        self.sumButton = QPushButton(self,"sumButton")
+        self.sumButton.setMinimumSize(QSize(50,40))
+        sumButton_font = QFont(self.sumButton.font())
+        sumButton_font.setBold(1)
+        self.sumButton.setFont(sumButton_font)
+
+        CalcFormLayout.addWidget(self.sumButton,2,3)
+
+        self.n2Button = QPushButton(self,"n2Button")
+        self.n2Button.setMinimumSize(QSize(50,40))
+        n2Button_font = QFont(self.n2Button.font())
+        n2Button_font.setBold(1)
+        self.n2Button.setFont(n2Button_font)
+
+        CalcFormLayout.addWidget(self.n2Button,4,1)
+
+        self.n5Button = QPushButton(self,"n5Button")
+        self.n5Button.setMinimumSize(QSize(50,40))
+        n5Button_font = QFont(self.n5Button.font())
+        n5Button_font.setBold(1)
+        self.n5Button.setFont(n5Button_font)
+
+        CalcFormLayout.addWidget(self.n5Button,3,1)
+
+        self.mulButton = QPushButton(self,"mulButton")
+        self.mulButton.setMinimumSize(QSize(50,40))
+        mulButton_font = QFont(self.mulButton.font())
+        mulButton_font.setBold(1)
+        self.mulButton.setFont(mulButton_font)
+
+        CalcFormLayout.addWidget(self.mulButton,4,3)
+
+        self.n8Button = QPushButton(self,"n8Button")
+        self.n8Button.setMinimumSize(QSize(50,40))
+        n8Button_font = QFont(self.n8Button.font())
+        n8Button_font.setBold(1)
+        self.n8Button.setFont(n8Button_font)
+
+        CalcFormLayout.addWidget(self.n8Button,2,1)
+
+        self.n9Button = QPushButton(self,"n9Button")
+        self.n9Button.setMinimumSize(QSize(50,40))
+        n9Button_font = QFont(self.n9Button.font())
+        n9Button_font.setBold(1)
+        self.n9Button.setFont(n9Button_font)
+
+        CalcFormLayout.addWidget(self.n9Button,2,2)
+
+        self.floatPointButton = QPushButton(self,"floatPointButton")
+        self.floatPointButton.setMinimumSize(QSize(50,40))
+        floatPointButton_font = QFont(self.floatPointButton.font())
+        floatPointButton_font.setBold(1)
+        self.floatPointButton.setFont(floatPointButton_font)
+
+        CalcFormLayout.addWidget(self.floatPointButton,5,0)
+
+        self.languageChange()
+
+        self.resize(QSize(252,309).expandedTo(self.minimumSizeHint()))
+        self.clearWState(Qt.WState_Polished)
+
+        self.setTabOrder(self.resultEdit,self.backspaceButton)
+        self.setTabOrder(self.backspaceButton,self.clearButton)
+        self.setTabOrder(self.clearButton,self.n7Button)
+        self.setTabOrder(self.n7Button,self.n8Button)
+        self.setTabOrder(self.n8Button,self.n9Button)
+        self.setTabOrder(self.n9Button,self.sumButton)
+        self.setTabOrder(self.sumButton,self.n4Button)
+        self.setTabOrder(self.n4Button,self.n5Button)
+        self.setTabOrder(self.n5Button,self.n6Button)
+        self.setTabOrder(self.n6Button,self.subButton)
+        self.setTabOrder(self.subButton,self.n1Button)
+        self.setTabOrder(self.n1Button,self.n2Button)
+        self.setTabOrder(self.n2Button,self.n3Button)
+        self.setTabOrder(self.n3Button,self.mulButton)
+        self.setTabOrder(self.mulButton,self.floatPointButton)
+        self.setTabOrder(self.floatPointButton,self.n0Button)
+        self.setTabOrder(self.n0Button,self.calcButton)
+        self.setTabOrder(self.calcButton,self.divButton)
+
+
+    def languageChange(self):
+        self.setCaption(self.__tr("Calculadora"))
+        QToolTip.add(self.resultEdit,self.__tr("Resultados"))
+        self.backspaceButton.setText(self.__tr("B"))
+        self.n0Button.setText(self.__tr("0"))
+        self.n3Button.setText(self.__tr("3"))
+        self.n1Button.setText(self.__tr("1"))
+        self.n7Button.setText(self.__tr("7"))
+        self.clearButton.setText(self.__tr("C"))
+        self.calcButton.setText(self.__tr("="))
+        self.subButton.setText(self.__tr("-"))
+        self.n6Button.setText(self.__tr("6"))
+        self.divButton.setText(self.__tr("/"))
+        self.n4Button.setText(self.__tr("4"))
+        self.sumButton.setText(self.__tr("+"))
+        self.n2Button.setText(self.__tr("2"))
+        self.n5Button.setText(self.__tr("5"))
+        self.mulButton.setText(self.__tr("X"))
+        self.n8Button.setText(self.__tr("8"))
+        self.n9Button.setText(self.__tr("9"))
+        self.floatPointButton.setText(self.__tr("."))
+
+
+    def __tr(self,s,c = None):
+        return qApp.translate("CalcForm",s,c)
+}}}
+
+calcwidget.py
+{{{
+#!python
+# -*- coding: iso-8859-1 -*-
+
+from calcform import CalcForm
+import qt
+
+class CalcWidget(CalcForm):
+	"""Define a janela de calculadora.
+	"""
+	def __init__(self):
+		"""Prepara widget.
+		"""
+		super(CalcWidget, self).__init__()
+		self.setFocusPolicy(self.StrongFocus)
+		self.resultEdit.setFocusPolicy(self.NoFocus)
+		# Cache de ações.
+		self.action = {}
+		self.action[0] = self.__funcAppendToResult('0')
+		self.action[1] = self.__funcAppendToResult('1')
+		self.action[2] = self.__funcAppendToResult('2')
+		self.action[3] = self.__funcAppendToResult('3')
+		self.action[4] = self.__funcAppendToResult('4')
+		self.action[5] = self.__funcAppendToResult('5')
+		self.action[6] = self.__funcAppendToResult('6')
+		self.action[7] = self.__funcAppendToResult('7')
+		self.action[8] = self.__funcAppendToResult('8')
+		self.action[9] = self.__funcAppendToResult('9')
+		self.action['+'] = self.__funcDoOperation('+')
+		self.action['-'] = self.__funcDoOperation('-')
+		self.action['*'] = self.__funcDoOperation('*')
+		self.action['/'] = self.__funcDoOperation('/')
+		# Conecta ações dos botões numéricos.
+		self.connect(self.n0Button, qt.SIGNAL('clicked()'), \
+			self.action[0])
+		self.connect(self.n1Button, qt.SIGNAL('clicked()'), \
+			self.action[1])
+		self.connect(self.n2Button, qt.SIGNAL('clicked()'), \
+			self.action[2])
+		self.connect(self.n3Button, qt.SIGNAL('clicked()'), \
+			self.action[3])
+		self.connect(self.n4Button, qt.SIGNAL('clicked()'), \
+			self.action[4])
+		self.connect(self.n5Button, qt.SIGNAL('clicked()'), \
+			self.action[5])
+		self.connect(self.n6Button, qt.SIGNAL('clicked()'), \
+			self.action[6])
+		self.connect(self.n7Button, qt.SIGNAL('clicked()'), \
+			self.action[7])
+		self.connect(self.n8Button, qt.SIGNAL('clicked()'), \
+			self.action[8])
+		self.connect(self.n9Button, qt.SIGNAL('clicked()'), \
+			self.action[9])
+		# Botão ponto flutuante.
+		self.connect(self.floatPointButton, qt.SIGNAL('clicked()'), \
+			self.appendFloatPoint)
+		# Botão clear.
+		self.connect(self.clearButton, qt.SIGNAL('clicked()'), \
+			self.doClear)
+		# Botão back.
+		self.connect(self.backspaceButton, qt.SIGNAL('clicked()'), \
+			self.doBackspace)
+
+		# Inicializa dados para o cálculo.
+		self.doClear()
+
+	def text(self):
+		"""Retorna texto atual no campo de resultado.
+		"""
+		return str(self.resultEdit.text())
+
+	def setText(self, text):
+		"""Atribui um novo texto ao campo de resultado.
+		"""
+		self.resultEdit.setText(text)
+
+	def appendText(self, text):
+		"""Adiciona um texto ao final do campo de resultado.
+		"""
+		self.resultEdit.setText(str(self.resultEdit.text()) + text)
+
+	def doClear(self):
+		"""Reinicia cálculos.
+		"""
+		# Resultados iniciais.
+		self.res = 0
+		# Nenhum operador até então.
+		self.op = None
+		# Ainda sem ponto flutuante.
+		self.floatPoint = False
+		# Texto inicial.
+		self.resultEdit.setText('0')
+		# Controla se alguma tecla foi ou não pressionada.
+		self.calcKey = False
+
+	def doBackspace(self):
+		"""Remove o último caractere do campo de texto.
+		"""
+		# Marca ponto flutuante como não usado se excluído.
+		if self.text()[-1] == '.':
+			self.floatPoint = False
+		self.setText(self.text()[:-1])
+		# Coloca '0' se o campo estiver vazio.
+		if len(self.text()) == 0:
+			self.setText('0')
+
+	def doCalc(self):
+		"""Realiza qualquer cálculo aguardando execução e exibe o resultado.
+		"""
+		# Se a tecla já foi pressionada, ignora.
+		if self.calcKey:
+			return
+		# Captura valor atual.
+		current = self.text()
+		# Calcula (se houver operação).
+		if self.op == None:
+			self.res = float(current)
+		else:
+			try:
+				self.res = eval(str(self.res) + self.op + current)
+				# Exibe resultado.
+				self.setText(str(self.res))
+			except ZeroDivisionError:
+				self.doClear()
+				qt.QMessageBox.warning(self, 'Erro', \
+					'Divisão por zero', qt.QMessageBox.Ok)
+				return
+		# Marca cálculo como realizado.
+		self.op = None
+		# Marca tecla pressionada.
+		self.calcKey = True
+
+	def __funcAppendToResult(self, s):
+		"""Gera um método que adiciona a string especificada ao campo
+		de resultado.
+		"""
+		def appendToResult():
+			# Remove o '0' inicial.
+			# Verifica se está iniciando uma nova operação.
+			if self.text() != '0' and not self.calcKey:
+				self.appendText(s)
+			else:
+				self.setText(s)
+			# Marca tecla como pressionada.
+			self.calcKey = False
+		return appendToResult
+
+	def __funcDoOperation(self, op):
+		"""Gera um método que realiza a operação especificada.
+		"""
+		def doOperation():
+			self.doCalc()
+			self.op = op
+		return doOperation
+
+	def appendFloatPoint(self):
+		"""Adiciona um caractere de ponto flutuante ao campo de resultado.
+
+		Caso já exista um ponto, ignora.
+		"""
+		# Verifica se está iniciando uma nova operação.
+		if self.op:
+			self.setText('0.')
+			# Reinicia operador.
+			self.op = None
+		if not self.floatPoint:
+			self.appendText('.')
+		self.floatPoint = True
+
+	def keyPressEvent(self, evt):
+		"""Evento disparado ao receber eventos do teclado.
+		"""
+		# Números.
+		if evt.text() == '0':
+			self.action[0]()
+		elif evt.text() == '1':
+			self.action[1]()
+		elif evt.text() == '2':
+			self.action[2]()
+		elif evt.text() == '3':
+			self.action[3]()
+		elif evt.text() == '4':
+			self.action[4]()
+		elif evt.text() == '5':
+			self.action[5]()
+		elif evt.text() == '6':
+			self.action[6]()
+		elif evt.text() == '7':
+			self.action[7]()
+		elif evt.text() == '8':
+			self.action[8]()
+		elif evt.text() == '9':
+			self.action[9]()
+		# Ponto flutuante.
+		elif evt.text() == '.':
+			self.appendFloatPoint()
+		# Clear.
+		elif evt.key() == self.Key_Escape:
+			self.doClear()
+		# Backspace.
+		elif evt.key() == self.Key_Backspace:
+			self.doBackspace()
+		# Return e Enter (o 2° do teclado numérico)
+		elif evt.key() == self.Key_Return or evt.key() == self.Key_Enter:
+			self.doCalc()
+		# Operações matemáticas.
+		elif evt.text() == '+':
+			self.action['+']()
+		elif evt.text() == '-':
+			self.action['-']()
+		elif evt.text() == '*':
+			self.action['*']()
+		elif evt.text() == '/':
+			self.action['/']()
+		# Passa evento para que uma camada superior interprete.
+		else:
+			evt.ignore()
+}}}
+
+calc.py
+{{{
+#!python
+# -*- coding: iso-8859-1 -*-
+
+import sys, qt
+import calcwidget
+
+import calcform
+
+class Calc(qt.QApplication):
+	"""Define uma aplicação de calculadora.
+	"""
+	def __init__(self, argv):
+		"""Prepara e executa aplicação, a partir dos argumentos de linha de
+		comando passados.
+		"""
+		super(Calc, self).__init__(argv)
+		mainWidget = calcwidget.CalcWidget()
+		self.setMainWidget(mainWidget)
+		mainWidget.show()
+		self.exec_loop()
+
+
+def main():
+	Calc(sys.argv)
+
+if __name__ == '__main__':
+	main()
+}}}
+
+Volta para CookBook.
+
+----
+
+JoaoPauloSilva

@@ -1,0 +1,20 @@
+Esta é uma lista com sugestões de programas para iniciantes em programação. Os exercícios podem ser implementados em pseudo-código, Python, C, C++, Java, Pascal ou em qualquer outra linguagem.
+Os exercícios estão divididos em categorias e procuram obedecer uma ordem de dificuldade crescente. Cada exercício é independente do outro, sendo possível deixar exercícios para trás sem grandes prejuízos.
+
+Lista de exercícios:
+ 1. EstruturaSequencial
+ 1. EstruturaDeDecisao
+ 1. EstruturaDeRepeticao
+ 1. ExerciciosListas
+ 1. ExerciciosFuncoes
+ 1. ExerciciosComStrings
+ 1. ExerciciosArquivos
+ 1. ExerciciosClasses
+ 1. ListaDeExerciciosProjetos
+
+Envie sugestões sobre novos enunciados e melhorias nos textos já existentes. A criação de telas de exemplo com a saída dos programas também é algo importante de ser feito.
+
+Está com dúvidas? Acesse a DocumentacaoPython e o material [[http://www.pythonbrasil.com.br/moin.cgi/P3|P3 - Princípios de Programação com Python]].
+
+-----
+Criada por MarcoAndréLopesMendes

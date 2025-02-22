@@ -1,0 +1,4 @@
+#acl ProfessoresPythonGroup:read,write,revert All:read
+
+   * MarcoAndréLopesMendes
+   * RodrigoSenra

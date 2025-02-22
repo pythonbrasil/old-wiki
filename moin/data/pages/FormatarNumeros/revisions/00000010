@@ -1,0 +1,80 @@
+## page was renamed from FormatarNúmeros
+Neste exemplo usei o modulo {{{locale}}} para criar formatações de numeros e moedas no padrão do Brasil
+
+Segue abaixo o codigo:
+
+{{{
+#!python
+#!/usr/bin/env python
+import locale
+
+sal=2500.87
+aumento=0.25
+perc=10
+vendas=4800.9
+prejuizo=-3200
+print "locale", "=>", locale.setlocale(locale.LC_ALL, "")
+
+print '------Formato numero Float------'
+print locale.format("%1.0f",sal,0)
+print locale.format("%1.2f",sal,0)
+print locale.format("%1.3f",sal,0)
+print locale.format("%1.2f",(sal-10000),0)
+
+print '------Formato numero Porc-------'
+print locale.format("%2.2f%%",(aumento * 100),0)
+print locale.format("%2.3f%%",(aumento * 100),0)
+print locale.format("%1.2f%%",(perc * 100),1)
+print locale.format("%1.3f%%",(perc * 100),1)
+
+print '------Formato moeda ------------'
+info=locale.localeconv()
+print info['currency_symbol'],locale.format("%1.2f",vendas,1)
+print info['currency_symbol'],locale.format("%1.3f",vendas,1)
+print info['currency_symbol'],locale.format("%1.2f",prejuizo,1)
+print info['currency_symbol'],locale.format("%1.3f",prejuizo,1)
+
+print 'Simbolo internacional da moeda no pais => ',info["int_curr_symbol"]
+
+}}}
+
+SidneiBrianti
+
+
+=== Sem depender do locale ===
+
+É ótimo usar o locale quando podemos, mas em sistemas Web que são daemons (serviços) não é recomendável usar a função setlocale exceto na fase e inicialização do sistema, porque alterar o locale não é thread-safe (inseguro em sistemas multi-threaded) e pode gerar erros.
+
+Então se o locale não está previamente configurado da forma correta, é melhor não depender dele. Eis uma implementação (parcial) de uma função que coloca separadores nos milhares, sem depender do locale:
+
+{{{
+def split1000(s, sep=','):
+   return s if len(s) <= 3 else split1000(s[:-3], sep) + sep + s[-3:]
+}}}
+
+Agora, com alguns testes:
+
+{{{
+'''
+    >>> print split1000('1')
+    1
+    >>> print split1000('100')
+    100
+    >>> print split1000('1000')
+    1,000
+    >>> print split1000('10000')
+    10,000
+    >>> print split1000(str(10**7))
+    10,000,000
+    
+'''     
+
+def split1000(s, sep=','):
+   return s if len(s) <= 3 else split1000(s[:-3], sep) + sep + s[-3:]
+   
+if __name__=='__main__':
+    import doctest
+    doctest.testmod()
+}}}
+
+LucianoRamalho

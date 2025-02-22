@@ -1,0 +1,158 @@
+Implementação do [[http://en.wikipedia.org/wiki/Conway's_Game_of_Life|Conway's Game of Life]] em Python, que eu chamei de PyOrganism. Adaptado e melhorado da versão em C++ escrita por Mithun Aiyswaryan.
+
+{{{#!python
+#!/usr/bin/python
+import platform
+import random
+import math
+import time
+import sys
+import os
+
+clear = ('clear','cls')[platform.system() == 'Windows']
+
+class Life:
+    def __init__(self):
+        self._life = []
+        self._flag = 1
+        self._seed = 0
+        self._number_of_generations = 0
+        self._game_world = 0
+        self._screen_length = 40
+        self._delay_seconds = -1
+    
+    def initialize(self):
+        random.seed(self._seed)
+        self.init_world()
+        
+        for i in range(self._number_of_generations):
+            os.system(clear)
+            self.print_world()
+            self.evolve()
+            time.sleep(self._delay_seconds)
+    
+    
+    def exit(self):
+        self.draw_line('=')
+        raw_input("Press <enter> to exit...\n")
+        sys.exit(0)
+
+        
+    def header(self):
+        self.draw_line('=')
+        print "PyOrganysm - Python Implementation of Conway's Game of Life"
+        print "Writen by Danillo Souza <danillo012@gmail.com>"
+        self.draw_line('=')
+        print ">>> Rules Of The Game"
+        self.draw_line('~')
+        print "1. An organism is born in an Empty-Cell when it has exactly 3 neighbors"
+        print "2. An organism dies from starvation if it has fewer than 2 neighbors"
+        print "3. An organism dies of overcrowding if it has more than 3 neighbors"
+        print "4. Otherwise, the organism survives!"
+        self.draw_line('~')
+        
+    
+    def setup(self):
+        while self._seed == 0:
+            self._seed = int(raw_input("Enter a number to initiate the world: "))
+        
+        while self._number_of_generations == 0:
+            self._number_of_generations = int(raw_input("Enter the number of generations: "))
+        
+        while self._game_world == 0:
+            self._game_world = int(raw_input("Enter the size of the array: "))
+            self._game_world = (30, self._game_world)[self._game_world >= 4]
+        
+        while self._delay_seconds < 0:
+            self._delay_seconds = int(raw_input("Enter the delay time(in seconds): "))
+        
+        self._seed = int(math.fabs(self._seed))
+        self._number_of_generations = int(math.fabs(self._number_of_generations))
+        self._game_world = int(math.fabs(self._game_world))
+        self._delay_seconds = int(math.fabs(self._delay_seconds))
+        self._life = [['' for i in range(self._game_world)] for i in range(self._game_world)]    
+    
+    def draw_line(self, char):
+        for i in range(self._screen_length):
+            print char,
+        
+        print
+            
+            
+    def init_world(self):
+        for y in range(self._game_world):
+            for x in range(self._game_world):
+                z = random.randint(1, 10)
+                if z < 5:
+                    self._life[y][x] = ' '
+                else:
+                    self._life[y][x] = '#'
+                    
+                    
+    def evolve(self):
+        double_array = [['' for i in range(self._game_world)] for i in range(self._game_world)]
+        
+        for i in range(self._game_world):
+            for j in range(self._game_world):
+                x = self.count_neighbors(i, j)
+                
+                if self._life[i][j] == '#':
+                    if (x == 2) or (x == 3):
+                        double_array[i][j] = '#'
+                    else:
+                        double_array[i][j] = ' '
+                else:
+                    if x == 3:
+                        double_array[i][j] = '#'
+                    else:
+                        double_array[i][j] = ' '
+                        
+        self._life = double_array
+        
+    def print_world(self):
+        for x in range(self._game_world):
+            tmp = ''
+            for y in range(self._game_world):
+                tmp += self._life[x][y] + ' '
+            
+            print tmp
+            tmp = ''
+    
+    def count_neighbors(self, y, x):
+        sum = 0
+        
+        if (x - 1) >= 0:
+            for i in range(y-1, y+2):
+                if (i >= 0) and (i < self._game_world):
+                    if self._life[i][x-1] == '#':
+                        sum += 1
+                        
+        if (x + 1) < self._game_world:
+            for i in range(y-1, y+2):
+                if (i >= 0) and (i < self._game_world):
+                    if self._life[i][x+1] == '#':
+                        sum += 1
+                        
+        if (y - 1) >= 0:
+            if self._life[y-1][x] == '#':
+                sum += 1
+        
+        if (y + 1) < self._game_world:
+            if self._life[y+1][x] == '#':
+                sum += 1
+                
+        return sum
+
+            
+    def go(self):
+        self.header()
+        self.setup()
+        self.initialize()
+        self.exit()
+            
+            
+if __name__ == '__main__':
+    life = Life()
+    life.go()
+
+}}}

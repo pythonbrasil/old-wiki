@@ -1,0 +1,147 @@
+#pragma section-numbers off
+= Receita: TkinterNdCanvas =
+
+Outra brincadeira, upgrade do Tkinter3dCanvas... exibindo um cubo de N dimensões em Tkinter. Por padrão ele desenha um hipercubo (4 dimensões), mas aceita qualquer número como argumento.
+
+== Código ==
+
+{{{
+#!python
+#!/usr/bin/env python
+
+from __future__ import division
+
+import sys
+from Tkinter import *
+from math import *
+from numpy import matrix, eye, array
+import random
+
+
+class MainWindow(Tk):
+    def __init__(self, dim):
+        Tk.__init__(self)
+
+        self.dim = dim
+
+        self.width = width = 600
+        self.height = height = 600
+        
+        self.canvas = Canvas(self, width=width, height=height, bg='white')
+        self.canvas.grid(row=0, column=0)
+
+        self.CAM = CAM = 800
+        self.OFF = OFF = self.width/2
+
+        self.canvas.create_line(0, OFF, width, OFF, fill='black',
+                                stipple='gray50')
+        self.canvas.create_line(OFF, 0, OFF, height, fill='black',
+                                stipple='gray50')
+        
+        self.angles = []
+        for i in range(self.dim):
+            v = IntVar()
+            v.set(0)
+            self.angles.append(v)
+            Scale(self, variable=v, from_=-360, to=360, resolution=1,
+            orient=HORIZONTAL, command=self.rotate).grid(row=i+1,
+            column=0, sticky=E+W)
+            
+        self.draw()
+
+
+    def rotate(self, event=None):
+        for i, pol in enumerate(self.get_coords()):
+            c = []
+            for x in pol:
+                c.extend(x)
+            self.canvas.coords(self._canvas[i], *c)
+
+    def dist(self, x, y):
+        d = 0
+        for i in range(len(x)):
+            t = x[i]-y[i]
+            d += t*t
+        return sqrt(d)
+
+    def draw(self):
+        self.size = 300
+        self.nv = nv = 2 ** self.dim
+        
+        self.verts = v = array(tuple(self.vert()))
+
+        self.lines = []
+
+        for i in range(nv):
+            for j in range(i+1, nv):
+                if ((abs(self.dist(v[i], v[j]))/self.size) - 1) < 0.1:
+                    self.lines.append((v[i], v[j]))
+
+        self.lines = array(self.lines)
+                     
+        self._canvas = []
+        
+        for pol in self.get_coords():
+            print pol
+            self._canvas.append(self.canvas.create_polygon(pol, outline='black'))
+
+
+    def get_coords(self):
+        trans = self.get_trans(self.dim)
+
+        n, i, d = self.lines.shape
+        assert i == 2
+
+        lines = array(self.lines.reshape(n*2, d)* trans + self.OFF)
+        lines = lines.reshape(n, i, d)
+
+        for line in lines:
+            yield [(p[0], p[1]) for p in line]
+                
+
+    def get_trans(self, d=3):
+        angles = [radians(x.get()) for x in self.angles]
+
+        rot = matrix(eye(d))
+        
+        for i in range(d):
+            for j in range(i+1, d):
+                delta = matrix(eye(d))
+                a = angles[self.dim-i-j]
+                s = sin(a)
+                c = cos(a)
+
+                delta[i, i] = delta[j, j] = c
+                delta[j, i] = -s
+                delta[i, j] = s
+
+                rot *= delta
+
+        return rot
+        
+    def vert(self):
+        for i in range(self.nv):
+            b = []
+            for j in range(self.dim):
+                if (i>>j)&1 == 1:
+                    b.append(self.size/2)
+                else:
+                    b.append(-self.size/2)
+            yield array(b)
+
+
+if __name__ == "__main__":
+    try:
+        root = MainWindow(int(sys.argv[1]))
+    except IndexError:
+        root = MainWindow(4)
+    finally:
+        root.mainloop()
+
+}}}
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

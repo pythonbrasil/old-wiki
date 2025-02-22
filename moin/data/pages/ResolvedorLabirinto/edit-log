@@ -1,0 +1,7 @@
+1113286684000000	00000001	SAVENEW	Labirinto	200.218.227.61	200.218.227.61	1094843344.56.23447		Resolvedor de Labirintos
+1113314882000000	00000002	SAVENEW	ResolvedorLabirinto	200.160.73.7	200-160-73-7.user.ajato.com.br	1069111771.32.31279		
+1113331397000000	00000003	SAVE	ResolvedorLabirinto	200.19.175.3	proxy.gerencia.ufrn.br	1111083440.91.55840		Algoritmo A* para solucionar labirintos, busca de menor caminho, etc.
+1113593566000000	00000004	SAVE	ResolvedorLabirinto	143.106.24.52	tux08.ltc.ic.unicamp.br	1094843344.56.23447		Acrescentadas versões de Rodrigo Senra e Gustavo Niemeyer
+1114503486000000	00000005	SAVE	ResolvedorLabirinto	200.218.227.61	200.218.227.61	1094843344.56.23447		Adicionada versão gráfica
+1129590306000000	00000006	SAVE	ResolvedorLabirinto	143.106.24.52	tux08.ltc.ic.unicamp.br	1094843344.56.23447		Atualizado o meu url
+1222437960260503	00000007	SAVE	ResolvedorLabirinto	127.0.0.1	localhost			converted to 1.6 markup

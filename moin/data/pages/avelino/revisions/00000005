@@ -1,0 +1,12 @@
+##master-page:HomepageTemplate
+#format wiki
+== Thiago Avelino ==
+
+Email: <<MailTo(thiagoavelinoster@gmail.com)>> <<BR>>
+Jabber: <<MailTo(thiagoavelinoster@gmail.com)>> <<BR>>
+Site: http://avelino.us <<BR>>
+Blog: http://blog.avelino.us <<BR>>
+...
+
+----
+CategoryHomepage

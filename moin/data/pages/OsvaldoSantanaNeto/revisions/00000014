@@ -1,0 +1,40 @@
+#acl OsvaldoSantanaNeto:read,write All:read
+#pragma section-numbers off
+= Osvaldo Santana Neto =
+
+||Nome||Osvaldo Santana Neto||
+||Nickname||aC''''''iD''''''Ba''''''Se||
+||e-mail||osantana (arrouba) pythonbrasil (punto) com (dotz) br||
+||ICQ||11287184||
+||MSN||acidbasebr@hotmail.com||
+||Página||http://www.osantanabr.brturbo.com||
+||IRC||irc.freenode.org||
+
+Palavras chave:
+Python, Jogos, MSX, d00dz.org, Linux, 
+
+Sou um [http://d00dz.org d00dzer].
+
+== Uma História de Vida :) ==
+
+Meu nome é Osvaldo Santana Neto e sou o 'fundador' deste site (entre aspas mesmo, porque na verdade eu só juntei as idéias do pessoal da lista python-br@yahoogroups.com e coloquei em funcionamento). Como isso aqui é uma página web e páginas webs não aceitam conteúdos de texto muito grande eu vou fazer um resumo da minha história. Um 'resumo' de 16 páginas :) Se não quiserem ler é melhor :)
+
+Comecei a trabalhar com informática aos 14 anos mas já programava em Logo e Basic de Apple ][ e MSX desde os 9 anos de idade. O que eu mais gostava de fazer nessa época era programar joguinhos de computador. Com 14 anos fui trabalhar como programador de computadores para uma imobiliária de São José do Rio Preto - SP (cidade onde morei por mais tempo). Meu trabalho lá era o de criar um software que controlasse recebimentos de aluguéis. Desenvolvi para dBase II em cima de um CP/M :) até que o primeiro PC-XT chegou à empresa e continuei o trabalho em Clipper (se alguém me perguntar se programo em Clipper eu nego). Na verdade eu tinha começado esse software wm gw-basic, mas não deu muito certo essa idéia :)
+
+Dei aula de informática (DOS, Wordstar, Lotus 123, dBase III Plus e programação em Clipper e Pascal), fiz estágio na Telesp (foi onde tive meu primeiro contato com Unix. Era um SCO Unix rodando num 386sx com 4 de RAM. Lá rodava o Lotus 123 e o nOffice da Nutec brasileira), e me formei em tecnologia de processamento de dados em 2o. grau pela Fundação Paula Souza. Fiz mais alguns bicos na área até que resolvi virar Publicitário. Trabalhei em uma gráfica, e em uma agência de propaganda por 2 anos. Descobri que a vida de publicitário é pior do que a de programador e resolvi voltar para a informática. :)
+
+Voltando para a informática resolvi brincar de Linux enquanto trabalhava para o ZAZ (Terra) como webmaster :) Em uma dessas surpresas boas fui chamado para uma entrevista na Conectiva em Curitiba e fui contratado. Me mudei para cá no dia 1/1/2000 e comecei a trabalhar no dia 3/1/2000. No meu primeiro dia de Curitiba fui muito bem recebido: roubaram o som do meu carro. :)
+
+Fiquei na Conectiva por quase 2 anos e depois fui (como consultor terceirizado) para a GVT trabalhar com Unix (HP-UX e Solaris) onde fiquei por 6 meses. Fiquei trabalhando em Salvador por 2 meses para a mesma empresa de consultoria (nesse caso era AIX). Até resolver montar a minha própria empresa de consultoria em Software Livre junto com amigos (http://www.haxent.com.br). Estavamos indo bem mas optamos por dar uma 'parada' na empresa para trabalharmos com desenvolvimento de software para celular para uma outra empresa. Essa empresa entrou em falência por problemas de gerência. Retomamos então com a nossa empresa mas em uma situação bastante difícil. Foi quando desisti da sociedade e fui para São João da Boa Vista - SP assumir a coordenação técnica de uma rede de provedores de internet.
+
+Terminei(?) os trabalhos de desenvolvimento por lá e resolvi voltar para Curitiba. Mandei um CV para a Objective e estou é onde estou trabalhando no momento. Aqui a gente usa SmallTalk e Java (apesar de não gostar muito de Java eu ainda prefiro ela do que PHP :))). Aqui também rola uns esquemas de XP (Extreme Programming) e foi onde criaram o polêmico Prevayler (Camada de persistência de objetos Java).
+
+ufa! (história grande e chata... e eu tenho só 26 anos :))
+
+Bom, chega...
+
+== TODO ==
+
+   * Colocar mais palavras chave na minha ficha
+   * Colocar a explicação do Python para Web da lista no CookBook UnixLinuxComandosWeb
+

@@ -1,0 +1,59 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+[[HTML(<p style="text-align:center;"><a href="http://pyconbrasil.com.br/" title="PyConBrasil 2008 18, 19 e 20 de setembro no Rio de Janeiro"><img src="http://pyconbrasil.com.br/sobre-o-evento/divulgue-a-pyconbrasil/full_estatico.gif" /></a></p>)]]
+
+= PyConBrasil 2008 =
+
+Nos dias 18, 19 e 20 de setembro teremos o evento mais aguardado entre os programadores Python do Brasil: a '''[http://www.pyconbrasil.com.br PyConBrasil 2008]'''. A cidade escolhida para sediar o evento este ano foi o Rio de Janeiro e o evento irá acontecer nas instalações da Universidade Veiga de Almeira.
+
+Você poderá encontrar mais informações no [http://pyconbrasil.com.br/ site do evento].
+
+== Incrições abertas para a PyConBrasil 2008 ==
+
+As inscrições para o maior evento sobre Python da América Latina [http://pyconbrasil.com.br/sobre-o-evento/inscricao estão abertas]. 
+
+== Inscrições para os mini-cursos da PyConBrasil 2008 ==
+
+As inscrições para os mini-cursos oferecidos na PyConBrasil estão abertas [http://www.pythonbrasil.com.br/moin.cgi/AtividadesPyConBrasil2008].
+
+
+== Programação da PyConBrasil 2008 disponível ==
+
+A grade com a programação da [http://www.pyconbrasil.com.br PyConBrasil] 2008 já está [http://pyconbrasil.com.br/sobre-o-evento/programacao disponível] no site do evento. São cerca de 20 palestras, 10 palestras-relâmpago e mais alguns treinamentos.
+
+= Python Brasil =
+  
+O Python Brasil reune grupos de usuários em todo o Brasil interessados em difundir e divulgar a linguagem de programação [http://python.org Python], abrigando em seu domínio todo o material editado sobre esta linguagem em nosso idioma (português do Brasil). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva conteúdo rapidamente.
+
+[[RSSReader(http://www.pythonbrasil.com.br/planet/atom.xml,allow_html,10)]]
+
+= Seções interessantes =
+
+   * DocumentacaoPython - Dezenas de tutoriais e artigos sobre Python para os mais diversos níveis de aprendizado.
+   * CookBook - Exemplos e trechos de códigos úteis.
+   * PerguntasFrequentes - Respostas às perguntas mais freqüentes.
+   * ListaDeExercicios - uma lista com exercícios para iniciantes em programação.
+   * ComoUsarWiki - dicas para quem deseja usar o nosso Wiki.
+
+
+= Participe da comunidade =
+
+== Lista de Discussão ==
+
+Assine a lista de discussões e participe da comunidade. Preencha o formulário abaixo e responda ao e-mail de confirmação que você receberá.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+/!\ '''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existem também outras ListasDeDiscussao  sobre projetos relacionados a Python e tecnologias derivadas.
+
+== Canal de IRC ==
+
+O canal oficial da PythonBrasil é o #python-br do irc.freenode.org.
+
+= Outros =
+   * GrupoDeUsuarios - Coloque a cidade e o estado a que vc pertence e nos ajude a georeferenciar a comunidade.
+   * CaixaDeSugestoes - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PaginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuarios - Outros sites de grupos de usuários Python.

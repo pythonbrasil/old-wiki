@@ -1,0 +1,20 @@
+#pragma section-numbers off
+= Nome do Software =
+
+Conversor de documentos. À partir de um único fonte você pode converter para até 6 formatos. Desenvolvido pelo AurelioMarinhoJargas em Python.
+
+   * '''Prós:''' É muito simples de usar.
+   * '''Contras:''' O ainda está portando ele para um Python > 1.5 e ele não gosta muito de POO :)
+
+== Ficha técnica ==
+
+URL: http://txt2tags.sf.net/ [[BR]]
+Licença: GPL
+
+== Tela ==
+
+attachment:t2t.png
+
+----
+
+OsvaldoSantanaNeto

@@ -1,0 +1,44 @@
+#pragma section-numbers off
+= Cookbook =
+
+Cookbook vem do inglês e siginifica Livro de Receitas. Esta seção é destinada exatamente para conter trechos úteis de código Python. Aquele mini-aplicativo, método, classe, função, ou simplesmente uma dica de uso de Python deve ser colocada aqui.
+
+== Receitas ==
+   * TraduzindoSeuPrograma - Como traduzir seu programa usando o gettext.
+   * AchaMaiorLinhaEmArquivo - Abre um arquivo e retorna a(s) linha(s) de maior comprimento, em uma lista.
+   * CategorizarNadador - Categoriza nadador pela idade. São apresentados duas soluções para o problema, uma usando {{{if/elif/else}}} e outra usando o módulo {{{bisect}}}.
+   * ChamarFunçãoEmDll - Como chamar funções de uma DLL no Windows.
+   * ConexãoOracle - Exemplo de conexão com o Banco de Dados Oracle.
+   * ContarOcorrênciasEmLista - Conta as Ocorrências de um texto em uma lista. Coloca o resultado num {{{dict}}}.
+   * ConversãoDeImagens - Um exemplo de como converter uma imagem BMP para JPG usando a biblioteca PIL.
+   * DesligarLinuxViaSockets - Exemplo de script para desligar máquinas Linux usando ''Sockets''.
+   * ExecutandoEmIntervalos - Quatro formas de se executar periodicamente uma determinada função.
+   * FloatFormat - Função para formatar um número do tipo {{{float}}}.
+   * GameOfLifeConway - Classe que aplica a regra básica (#R 23/3) do [http://www.math.com/students/wonders/life/life.html Game Of Life] em uma matriz de 0s e 1s.
+   * GeradorDeCpf - Gerador de CPFs aleatório. Três versões diferentes para todos os gostos.
+   * GerandoPasswords - Script gráfico pra fazer senhas rapidamente.
+   * IncludeMódulo - Um "include()" para Python.
+   * InteligênciaArtificial - Um exemplo de como usar o módulo PyAIML.
+   * LendoXml - Exemplo simples de como ler um arquivo XML com {{{xml.dom.minidom}}}.
+   * MapeandoErrosParaExceções - Uma idéia para mapear códigos de erro do sistema operacional para exceções.
+   * MonitorandoSocketsComPyGtk - Exemplo de como usar as funções de monitorar IO embutidas em PyGTK para manipular sockets e arquivos de forma assíncrona.
+   * MonitorandoSocketsComTkinter - A mesma idéia do exemplo MonitorandoSocketsComPyGtk, porém usando Tkinter.
+   * PequenoUsoDeSockets - Um exemplo de joguinho utilizando sockets.
+   * ProcurarMp3eGerarPlaylist - Pequeno script que procura arquivos MP3 por palavra-chave, gera uma playlist e abre o xmms/winamp pra executá-la.
+   * PythonToHtml - Pequeno aplicativo que converte códigos fontes em Python para HTML aplicando ''sintax highlight''.
+   * RankingLinguagens - Exemplo simples porém útil de urllib e regular expressions.
+   * ReceitaBarraDeProgresso - Função que implementa uma barra de progresso em tela texto (terminal).
+   * RemoverRepetidosLista - Função para remover elementos repetidos de uma lista.
+   * SorteadorDeElemento - Pequeno programa em Tkinter que cadastra elementos e posteriormente sorteia um deles.
+   * StripHtml - Remove tags HTML de uma ''string''.
+   * TiradorDeAcentos - Um tirador de acentos e  "verificador de imprimibilidade" de strings UTF-8.
+   * TkinterShelve - Um pequeno software de cadastro que usa Tkinter pra interface e Shelve para persistência dos objetos.
+   * UnixLinuxComandosWeb - Execute comandos Unix/Linux via Web com esse CGI.
+   * VerificadorDeCpf - Módulo contendo funções e classe para verificação de números de CPF.
+   * WeakList - Especialização da classe List para que não incremente o contador de referência dos objetos contidos nela.
+   * WebService - Exemplo de criação e utilização de um webservice. 
+   * WebSms -  Módulo para envio de mensagens para telefone celular via interface web da operadora (Telemig Celular).
+
+----
+
+OsvaldoSantanaNeto

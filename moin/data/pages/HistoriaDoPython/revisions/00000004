@@ -1,0 +1,43 @@
+= História do Python =
+
+== Python Nasceu ==
+
+No Natal de 1989, um holandês chamado Guido van Rossum estava com muito tempo de sobra e resolveu criar uma linguagem de programação que fosse melhor do que tudo que ele tinha visto até então. Nessa época, GvR estava trabalhando no projeto de sistema operacional Amoeba. A equipe desenvolvia uma linguagem em paralelo ao S.O. Amoeba,  chamada ABC [1].
+Tentando suprir as deficiências de ABC, GvR propôs a adoção da recém-nascida Python em 1990. A aceitação de Python foi tão boa que em 1991 Guido lançou sua cria na Internet. O mundo agradece ;o)
+
+[1] http://homepages.cwi.nl/~steven/abc/ 
+
+== As Novas Idéias ==
+
+Algo sobre as idéias que influenciaram Python, como a linguagem ABC e a situação das linguagens da época que levaram à criação de Python.
+
+
+== Versões da Linguagem ==
+
+Fazer um retrocesso cronológico sobre o que foi evoluindo com o passar do tempo e das versões. Também podemos colocar sobre como tem sido o processo de desenvolvimento da linguagem (políticas de bugs, patches, dentre outras, licensas, etc.).
+
+Uma idéia seria colocar alguns tópicos dizendo, por exemplo, sobre o que representou para a linguagem as novas classes em Python 2.2 [1] com talvez um comparativo entre as metaclasses antigas [2], ou dizer como eram os métodos de strings em versões anteriores à 1.6 [3], dentre outras coisas do tipo.
+
+== Python Hoje ==
+
+Em que versão ela está hoje? Citar a respeito do processo de desenvolvimento hoje, a política de novas versões, que usa, etc.
+
+== O Futuro ==
+
+Isso fica bem aqui? Talvez citar brevemente e colocar alguns links, onde possa ser encontrada informação constantemente atualizada.
+
+== Referências ==
+
+http://docs.python.org/ref/node106.html
+
+http://www.artima.com/intv/python.html
+
+http://www.python.org/doc/essays/foreword.html
+
+http://www.python.org/doc/essays/foreword2.html
+
+[1] http://www.python.org/2.2.3/descrintro.html
+
+[2] http://www.python.org/doc/essays/metaclasses/
+
+[3] http://diveintopython.org/native_data_types/joining_lists.html#d0e7982

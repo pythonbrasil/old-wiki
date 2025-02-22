@@ -1,0 +1,113 @@
+#acl OsvaldoSantanaNeto:read,write All:read
+#pragma section-numbers off
+
+[[TableOfContents]]
+
+||Nome||Osvaldo Santana Neto||
+||Nickname||aC''''''iD''''''Ba''''''Se||
+||e-mail||osantana (arrouba) gmail (punto) com||
+||ICQ||11287184||
+||MSN||acidbasebr@hotmail.com (não mandem e-mail pra esse endereço, eu não vejo ele)||
+||Página|| offline ||
+||IRC||irc.freenode.org||
+||Palavras chave||Python, Jogos, MSX, d00dz.org, Linux, DJ, Música Eletrônica, Trance, Tecno, [http://d00dz.org d00dz]||
+
+'''Agora eu tenho um blog em: http://pythonologia.org/'''
+
+== Uma História de Vida :) ==
+
+Meu nome é Osvaldo Santana Neto e sou o 'fundador' deste site (entre aspas mesmo, porque na verdade eu só juntei as idéias do pessoal da lista python-br@yahoogroups.com e coloquei em funcionamento). Como isso aqui é uma página web e páginas webs não aceitam conteúdos de texto muito grande eu vou fazer um resumo da minha história. Um 'resumo' de 16 páginas :) Se não quiserem ler é melhor :)
+
+Comecei a trabalhar com informática aos 14 anos mas já programava em Logo e Basic de Apple ][ e MSX desde os 9 anos de idade. O que eu mais gostava de fazer nessa época era programar joguinhos de computador. Com 14 anos fui trabalhar como programador de computadores para uma imobiliária de São José do Rio Preto - SP (cidade onde morei por mais tempo). Meu trabalho lá era o de criar um software que controlasse recebimentos de aluguéis. Desenvolvi para dBase II em cima de um CP/M :) até que o primeiro PC-XT chegou à empresa e continuei o trabalho em Clipper (se alguém me perguntar se programo em Clipper eu nego). Na verdade eu tinha começado esse software wm gw-basic, mas não deu muito certo essa idéia :)
+
+Dei aula de informática (DOS, Wordstar, Lotus 123, dBase III Plus e programação em Clipper e Pascal), fiz estágio na Telesp (foi onde tive meu primeiro contato com Unix. Era um SCO Unix rodando num 386sx com 4 de RAM. Lá rodava o Lotus 123 e o nOffice da Nutec brasileira), e me formei em tecnologia de processamento de dados em 2o. grau pela Fundação Paula Souza. Fiz mais alguns bicos na área até que resolvi virar Publicitário. Trabalhei em uma gráfica, e em uma agência de propaganda por 2 anos. Descobri que a vida de publicitário é pior do que a de programador e resolvi voltar para a informática. :)
+
+Voltando para a informática resolvi brincar de Linux enquanto trabalhava para o ZAZ (Terra) como webmaster :) Em uma dessas surpresas boas fui chamado para uma entrevista na Conectiva em Curitiba e fui contratado. Me mudei para cá no dia 1/1/2000 e comecei a trabalhar no dia 3/1/2000. No meu primeiro dia de Curitiba fui muito bem recebido: roubaram o som do meu carro. :)
+
+Fiquei na Conectiva por quase 2 anos e depois fui (como consultor terceirizado) para a GVT trabalhar com Unix (HP-UX e Solaris) onde fiquei por 6 meses. Fiquei trabalhando em Salvador por 2 meses para a mesma empresa de consultoria (nesse caso era AIX). Até resolver montar a minha própria empresa de consultoria em Software Livre junto com amigos (http://www.haxent.com.br). Estavamos indo bem mas optamos por dar uma 'parada' na empresa para trabalharmos com desenvolvimento de software para celular para uma outra empresa. Essa empresa entrou em falência por problemas de gerência. Retomamos então com a nossa empresa mas em uma situação bastante difícil. Foi quando desisti da sociedade e fui para São João da Boa Vista - SP assumir a coordenação técnica de uma rede de provedores de internet.
+
+Terminei(?) os trabalhos de desenvolvimento por lá e resolvi voltar para Curitiba. Mandei um CV para a Objective e estou é onde estou trabalhando no momento. Aqui a gente usa SmallTalk e Java (apesar de não gostar muito de Java eu ainda prefiro ela do que PHP :))). Aqui também rola uns esquemas de XP (Extreme Programming) e foi onde criaram o polêmico Prevayler (Camada de persistência de objetos Java).
+
+ufa! (história grande e chata... e eu tenho só 26 anos :))
+
+Bom, chega...
+
+== Palestras ==
+
+'''Matando o Java e Mostrando o Python''' ([attachment:fisl.sxi sxi]) ([attachment:fisl.pdf pdf]) - 5º Fórum Internacional de Software Livre. Eu utilizei o estudo [attachment:jccpprtTR.pdf An empirical comparison of C, C++, Java, Perl, Python, Rexx and Tcl for a searching/string-processing program] de Lutz Prechelt. Porto Alegre.
+
+== Curso ==
+
+'''Mini-treinamento Python''' - Um minitreinamento que ministrei no [http://www.indt.org.br INdT], onde trabalho, para meus colegas ([attachment:crash_course.sxi sxi]).
+
+== Provocação Gratuita ==
+
+Estava brincando com um programa novo para edição de vídeo em Linux que se chama [http://heroinewarrior.com/cinelerra.php3 Cinelerra] e resolvi fazer uma brincadeira (provocação :)) com a linguagem de programação Java.
+
+attachment:PythonRocks.zip
+
+/!\ Atenção! Esse vídeo é uma '''brincadeira''', não fique ofendido. Se quiser fazer uma sacanagem com Python e mandar pra cá eu publico também :)
+
+== Outros ==
+
+'''The Law of Demeter'''
+
+Demeter foi um pesquisador de OO que trabalhou entre as décadas de 80 e 90. Ele criou projetos de onde se originou a "Lei de Demeter", que sugere restrições de onde objetos podem enviar mensagens de forma a tornar a manutenção desses objetos mais fácil. A "Lei de Demeter" diz que um objeto pode enviar mensagens apenas para:
+
+   * Ele mesmo
+   * Sua Superclasse (direta ou indireta)
+   * Objetos retornados diretamente de seus próprios métodos
+   * Um objeto passado para ele como parâmetro de um método
+   * Sua classe
+
+('''Fonte:''' Building Object Applications That Work -- Scott W. Ambler, ISBN 0-521-64826-2)
+
+'''Tutorial da SAP sobre OO'''
+
+Pode não ser o melhor tutorial de OO mas achei ele bastante conciso e informativo. Além disso ele trabalha usando uma técnica de explicação que migra o usuário do modelo estrutural para o modelo OO.
+
+O arquivo em formato PDF pode ser baixado [attachment:sap-oo.pdf aqui].
+
+== Tarefas de Administração do Site ==
+
+Algumas das tarefas para a manutenção aqui do site:
+
+   * Verificar todas as alterações do dia em MudançasRecentes
+   * Acertar problemas de formatação das páginas
+   * Verificar as Páginas OrphanedPages, WantedPages e PáginasAbandonadas por links quebrados e/ou Páginas sem referência
+   * Verificar a página PageSize à procura de páginas ques estejam ocupando muito espaço
+   * Sempre que necessário adicionar administradores em AdminGroup
+   * Verificar estatísticas do site em http://www.pythonbrasil.com.br/stats/ e em EventStats
+   * Verificar páginas à procura de google-spammers e fechar a página com ACLs:
+      * ACL para administração: {{{#acl All:read AdminGroup:read,write,delete,revert,admin}}}
+   * Verificar ParceriaLinuxMall
+   * Usar a ferramenta para [attachment:WWW-Yahoo-Groups-1.91.tar.bz2 baixar histórico da lista].
+
+== Tradução (incompleta) do Moin ==
+
+O arquivo potfile com a tradução do moin para pt_BR (que está incompleta) pode ser baixada [attachment:pt.po aqui]. Caso você traduza mais mensagens agradeceria se você enviasse para meu e-mail pessoal.
+
+== Codegen Definition File Generator ==
+
+attachment:defgen.py
+
+=== Contribuições para Intruções de instalação do Python para o Livro ===
+
+||Distribuição||Responsável||Status||
+||Debian||Osvaldo Santana Neto|| Finalizado ||
+||Ubuntu||Osvaldo Santana Neto|| Finalizado ||
+||Mandriva 2006||Adriano Melo|| Compromisso ||
+||Mandriva 2006||Henrique Paiva|| Entregue com instalação gráfica + linha de comando ||
+||Gentoo||João Paulo Silva|| Instruções entregues (sem instalação gráfica) ||
+||Gentoo||Bruno Gola||Compromisso em fazer screenshots||
+||Slackware||João Paulo Silva|| Instruções entregues (sem instalação gráfica) ||
+||Slackware||Bruno Gola||Compromisso em fazer screenshots||
+||FreeBSD||Jan Palach||Instruções completas (instalação gráfica não disponível)||
+||OS X Tiger||Adriano Monteiro||Compromisso||
+||Fedora Core||Henrique Paiva||Compromisso||
+
+Ainda faltam:
+
+   * Suse
+   * outros Unices (HP-UX, Solaris, AIX, ...)
+   * algum outro que alguém venha a sugerir futuramente...

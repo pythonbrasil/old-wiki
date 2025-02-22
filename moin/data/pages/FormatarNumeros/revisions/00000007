@@ -1,0 +1,40 @@
+Neste exemplo usei o modulo {{{locale}}} para criar formatações de numeros e moedas no padrão do Brasil
+
+Segue abaixo o codigo:
+
+{{{
+#!python
+#!/usr/bin/env python
+import locale
+
+sal=2500.87
+aumento=0.25
+perc=10
+vendas=4800.9
+prejuizo=-3200
+print "locale", "=>", locale.setlocale(locale.LC_ALL, "")
+
+print '------Formato numero Float------'
+print locale.format("%1.0f",sal,0)
+print locale.format("%1.2f",sal,0)
+print locale.format("%1.3f",sal,0)
+print locale.format("%1.2f",(sal-10000),0)
+
+print '------Formato numero Porc-------'
+print locale.format("%2.2f%%",(aumento * 100),0)
+print locale.format("%2.3f%%",(aumento * 100),0)
+print locale.format("%1.2f%%",(perc * 100),1)
+print locale.format("%1.3f%%",(perc * 100),1)
+
+print '------Formato moeda ------------'
+info=locale.localeconv()
+print info['currency_symbol'],locale.format("%1.2f",vendas,1)
+print info['currency_symbol'],locale.format("%1.3f",vendas,1)
+print info['currency_symbol'],locale.format("%1.2f",prejuizo,1)
+print info['currency_symbol'],locale.format("%1.3f",prejuizo,1)
+
+print 'Simbolo internacional da moeda no pais => ',info["int_curr_symbol"]
+
+}}}
+
+SidneiBrianti

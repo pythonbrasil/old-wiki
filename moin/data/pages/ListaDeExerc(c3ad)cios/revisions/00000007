@@ -1,0 +1,391 @@
+= Lista de Exercícios =
+
+Esta é uma lista com sugestões de programas para iniciantes em programação. Os exercícios podem ser implementados em pseudo-código, Python, C, C++, Java, Pascal ou em qualquer outra linguagem.
+Os exercícios estão divididos em categorias e procuram obedecer uma ordem de dificuldade crescente. Cada exercício é independente do outro, sendo possível deixar exercícios para trás sem grandes prejuízos.
+
+[[TableOfContents]]
+
+== Estrutura Seqüencial ==
+
+ 1. Faça um Programa que mostre a mensagem "Alo mundo" na tela.
+
+ 1. Faça um Programa que peça um número e então mostre a mensagem O número informado foi [número].
+
+ 1. Faça um Programa que peça dois números e imprima a soma.
+
+ 1. Faça um Programa que peça as 4 notas bimestrais e mostre a média, com uma casa decimal.
+
+ 1. Faça um Programa que converta metros para centímetros.
+
+ 1. Faça um Programa que peça um número com 5 casas decimais e arredonde para duas.
+
+ 1. Faça um Programa que peça o raio de um círculo, calcule e mostre sua área.
+
+ 1. Faça um Programa que calcule a área de um quadrado, em seguida mostre o dobro desta área para o usuário.
+
+ 1. Faça um Programa para leitura de 3 valores e exibi&#8722;los em ordem crescente.
+
+ 1. Faça um Programa que pergunte quanto você ganha por hora e o número de horas trabalhadas no mês. Calcule e mostre o total do seu salário no referido mês.
+
+ 1. Faça um Programa que peça a temperatura em graus Farenheit, transforme e mostre a temperatura em graus Celsius.
+    C = (5 * (F&#8722;32) / 9).
+
+ 1. Faça um Programa que peça a temperatura em graus Celsius, transforme e mostre em graus Farenheit.
+
+ 1. Faça um Programa que pergunte quanto você ganha por hora e o número de horas trabalhadas no mês. Calcule e mostre o total do seu salário no referido mês, sabendo&#8722;se que são descontados 11% para o Imposto de Renda. Sabendo o número de horas trabalhadas por um funcionário em um mês e sabendo&#8722;se que o funcionário ganha R$ 3,00 por hora de trabalho e que há um desconto de 8% para o INSS e de 5% para o sindicato, faça um programa que nos dê:
+  a. salário bruto.
+  a. quanto pagou ao INSS.
+  a. quanto pagou ao sindicato.
+  a. o salário líquido.
+  a. calcule os descontos e o salário líquido, conforme a tabela abaixo:
+  {{{
++ Salário Bruto :   R$
+- IR (11%) :        R$
+- INSS (8%) :       R$
+- Sindicato ( 5%) : R$
+= Salário Liquido : R$
+  }}}
+ Obs.: Salário Bruto &#8722; Descontos = Salário Líquido.
+
+ 1. Faça um Programa que peça 2 números inteiros e um número real. Calcule e mostre:
+  a. o produto do dobro do primeiro com metade do segundo .
+  a. a soma do triplo do primeiro com o terceiro.
+  a. o terceiro elevado ao cubo.
+
+ 1. Faça um Programa para leitura de três notas parciais de um aluno. O programa deve calcular a média alcançada por aluno e presentar:
+  a. A mensagem "Aprovado", se a média for maior ou igual a 7, com a respectiva média alcançada;
+  a. A mensagem "Reprovado", se a média for menor do que 7, com a respectiva média alcançada;
+  a. A mensagem "Aprovado com Distinção", se a média for igual a 10.
+
+ 1. Faça um Programa para uma loja de tintas. O programa deverá pedir o tamanho em metros quadrados da área a ser pintada. Considere que a cobertura da tinta é de 1 litro para cada 6 metros quadrados e que a tinta é vendida em latas de 18 litros, que custam R$ 80,00 ou em galões de 3,6 litros, que custam R$ 25,00.
+ Informe ao usuário as quantidades de tinta a serem compradas e os respectivos preços em 3 situações:
+  a. comprar apenas latas de 18 litros;
+  a. comprar apenas galões de 3,6 litros;
+  a. misturar latas e galões, de forma que o preço seja o menor. 
+ 
+ Acrescente 10% de folgae sempre arredonde os valores para cima, isto é, latas cheias.
+
+== Estrutura de Decisão Simples ==
+
+ 1. Faça um Programa que peça dois números e imprima o maior deles.
+
+ 1. Faça um Programa que peça um valor e mostre na tela se o valor é positivo ou negativo.
+
+ 1. Faça um Programa que peça um número inteiro e determine se ele é par ou impar.
+
+ 1. Faça um Programa que peça um número e informe se o número é inteiro ou decimal.
+
+ 1. Faça um Programa que leia 2 números e em seguida pergunte ao usuário qual operação ele deseja realizar. O resultado da operação deve ser acompanhado de uma frase que diga se o número é:
+  a. par ou ímpar;
+  a. positivo ou negativo;
+  a. inteiro ou decimal.
+
+ 1. Faça um Programa que verifique se uma letra digitada é vogal ou consoante.
+
+ 1. Faça um Programa que peça um número e se este número for par, transforme&#8722;o em impar e vice&#8722;versa
+
+ 1. Faça um Programa que peça para entrar com um ano com 4 dígitos e determine se o mesmo é ou não bissexto.
+
+ 1. Faça um Programa que verifique se uma letra digitada é "F" ou "M". Conforme a letra escrever: F &#8722; Feminino, M &#8722; Masculino, Sexo Inválido.
+
+ 1. Faça um Programa que leia 3 números e mostre o maior e o menor deles. Utilizar inteiros entre 0 e 65535 (unsignedint).
+
+ 1. Faça um Programa que pergunte em que turno você estuda. Peça para digitar M&#8722;matutino ou V&#8722;Vespertino ou N&#8722; Noturno. Imprima a mensagem Bom Dia!, Boa Tarde! ou Boa Noite! ou Valor Inválido!, conforme o caso.
+
+ 1. Faça um Programa que leia um número e exiba o dia correspondente da semana. (1&#8722;Domingo, 2&#8722; Segunda, etc.), se digitar outro valor deve aparecer valor inválido.
+
+ 1. Faça um Programa que tendo como dados de entrada o preço de custo de um produto e um código de origem, emita o preço junto de sua procedência. Caso o código não seja nenhum dos especificados, o produto deve ser classificado como importado. Código de origem: 1 &#8722; Sul, 2 &#8722; Norte 3 &#8722; Leste, 4 &#8722; Oeste, 5 ou 6 &#8722; nordeste 7 ou 8 Centro&#8722;oeste.
+
+ 1. Altere o programa que calcula a média do aluno (Exercício 4), e mostre a mensagem de acordo com a média. De 0 a 3 &#8722; Reprovado, de 3 a 6.9  Em Exame, de 7 a 10 &#8722; Aprovado
+
+ 1. Faça um Programa para efetuar o diagnóstico de um paciente. O programa deverá perguntar:
+  a. infecção nos pulmões (0 = ausente, 1 = presente)
+  a. temperatura (0 = normal, 1 = anormal)
+  a. corisa (0 = ausente, 1 = presente)
+  a. espirros (0 = ausente, 1 = presente)
+ Se o paciente tiver infecção nos pulmões e temperatura anormal, o diagnóstico é pneumonia.  
+ Se o paciente tiver apenas um sintoma, qualquer deles, o diagnóstico é gripe. Se o paciente tiver dois ou mais sintomas, que não seja simultaneamente, infecção nos pulmões.
+
+ 1. Faça um Programa que peça os 3 lados de um triângulo. O programa deverá informar se os valores podem ser um triângulo. Indique, caso os lados formem um triângulo, se o mesmo é: equilátero, isósceles ou escaleno.
+
+ 1. Faça um Programa que calcule uma equação do 2o. grau, na forma x2+bx+c. O programa deve fazer todas as consistências de dados e informar caso o usuário entre com dados errados. Deve ainda informar se o delta é positivo ou negativo, e os valores de X quando existirem.
+
+ 1. Faça um Programa que seja capaz de concluir qual dentre os animais seguintes foi escolhido, através de perguntas e respostas. Animais possíveis: leão, cavalo, homem, macaco, morcego, baleia, avestruz, pingüim, pato, águia, tartaruga, crocodilo e cobra.
+ Exemplo:
+  {{{
+Utilize (1-SIM / 0-NAO)
+É mamífero? 1
+É quadrúpede? 1
+É carnívoro? 0
+É herbívoro? 1
+Então o animal escolhido foi: cavalo
+  }}}
+ Utilize as seguintes classificações:
+
+ Mamíferos	>>	quadrúpede	>>	carnívoro	>>	leão
+
+ Herbívoro	>>	cavalo
+
+ Bípede		>>	onívoro		>>	homem
+
+ Frutífero	>>	macaco
+
+ Voadores	>> 	morcego
+
+ Aquáticos	>>	baleia
+
+ Aves		>>	não voadoras	>>	tropical		>>	avestruz
+
+ Polar		>>	pingüim
+
+ Nadadoras	>>	pato
+
+ De rapina	>>	águia
+
+ Répteis	>> 	com casco	>>	tartaruga
+
+ Carnívoros	>>	crocodilo
+
+ Sem patas	>>	cobra
+ 
+ 1. Faça um Programa que peça um número correspondente a um determinado ano e em seguida informe se este ano é ou não bissexto.
+
+ 1. Faça um Programa que peça uma data no formato dd/mm/aaaa e determine se a mesma é uma data válida.
+
+ 1. Faça um Programa que leia um número inteiro menor que 1000 e imprima a quantidade de centenas, dezenas e unidades do mesmo.  
+ Observando os termos no plural a colocação do "e", da vírgula entre outros.
+ 
+ Exemplo:
+  a. 326 = 3 centenas, 20 dezenas e 6 unidades
+  a. 12  = 1 dezena e 2 unidades
+
+ Testar com: 326, 300, 100, 320, 310,305, 301, 101, 311, 111, 25, 20, 10, 21, 11, 1, 7 e 16
+
+ 1. Faça um Programa para ler três idades de alunos e seguir as seguintes instruções:
+  a. Se a média de idade dos alunos é inferior de 25, apresentar a mensagem "Turma Jovem";
+  a. Se a média de idade dos alunos é entre 25 e 40, apresentar a mensagem "Turma Adulta";
+  a. Se a média de idade dos alunos é acima de 40 anos, apresentar a mensagem "Turma Idosa".
+
+ 1. Faça um Programa para controle de temperatura de um forno que derrete alumínio. O programa deverá perguntar qual temperatura que o alumínio deverá ser trabalhado e operar nas seguintes condições:
+  a. Se temperatura for inferior ou igual 500o C enviar uma mensagem para tela "Temperatura Inválida";
+  a. Se temperatura for menor do que 700o C enviar uma mensagem para tela "Aquecimento Ligado em 100%";
+  a. Se temperatura for menor do que 735o C enviar uma mensagem para tela "Aquecimento Ligado em 50%"; 
+  a. Se temperatura for maior ou igual 735o C enviar uma mensagem para tela "Aquecimento Desligado";
+  a. Se temperatura for maior do que 780o C enviar uma mensagem para tela "SUPERAQUECIMENTO";
+  a. Os valores digitados devem ser inteiros e inferiores de 1000.
+
+ 1. Faça um Programa para aplicar em um carro, responsável pela seleção automática de marchas (o usuários deve digitar a velocidade) nas seguintes condições:
+  a. Quando a velocidade estiver menor do que 30 km/h envie para o centro da tela o número 1.
+  a. Quando a velocidade estiver 30 km/h e 40 km/h (menor do que 40 km/h) envie para o centro da tela o número 2.
+  a. Quando a velocidade estiver entre 40 km/h e 60 km/h (menor do que 60 km/h) envie para o centro da tela o número 3.
+  a. Quando a velocidade estiver entre 60 km/h e 80 km/h (menor do que 80 km/h) envie para o centro da tela o número 4.
+  a. Quando a velocidade estiver acima de 80 km/h envie para o centro da tela o número 5.
+
+ 1. Uma determinada empresa vende uma máquina que possui seis motores. Um de 20 CV, dois de 1 CV, e três de 5 CV, que custam 1500, 300 e 600 reais respectivamente cada motor. Existe a necessidade de saber quantos motores deverão ser comprados de cada modelo e quanto custará esta compra. Para isto elabore um programa que:
+  a. Pergunte quantas máquinas serão vendidas;
+  a. Calcule e apresente na tela a quantidade de motores que deverão ser comprados de cada modelo;
+  a. Calcule e apresente na tela o custo total por máquina e o custo total de todos os motores.
+
+ 1. Faça um Programa para um caixa eletrônico. O programa deverá perguntar ao usuário a valor do saque e depois informar quantas notas de cada valor serão fornecidas. As notas disponíveis serão as de 1, 5, 10, 50 e 100 reais. O valor mínimo é de 10 reais e o máximo de 600 reais. O programa não deve se preocupar com a quantidade de notas existentes na máquina.
+  a. Exemplo 1: Para sacar a quantia de 256 reais, o programa fornece duas notas de 100, uma nota de 50, uma nota de 5 e uma nota de 1;
+  a. Exemplo 2: Para sacar a quantia de 399 reais, o programa fornece três notas de 100, uma nota de 50, quatro notas de 10, uma nota de 5 e quatro notas de 1.
+
+== Estrutura de Repetição ==
+
+ 1. Faça um programa que imprima na tela os números de 1 a 20, um abaixo do outro. Depois modifique o programa para que ele mostre os números um ao lado do outro. Dica: use {{{print}}} com uma vírgula no final.
+
+ 1. Faça um programa que imprima na tela apenas os números ímpares entre 1 e 50.
+
+ 1. Faça um programa que receba dois números inteiros e gere os números inteiros que estão no intervalo compreendido por eles. 
+
+ 1. O Sr. Manoel Joaquim possui uma grande loja de artigos de R$ 1,99, com cerca de 10 caixas. Para agilizar o cálculo de quanto cada cliente deve pagar ele desenvolveu um tabela que contém o número de itens que o cliente comprou e ao lado o valor da conta. Desta forma a atendente do caixa precisa apenas contar quantos itens o cliente está levando e olhar na tabela de preços. Você foi contratado para desenvolver o programa que monta esta tabela de preços, que conterá os preços de 1 até 50 produtos, conforme o exemplo abaixo:
+
+  {{{
+Lojas Quase Dois - Tabela de preços
+1 - R$ 1.99
+2 - R$ 3.98
+...
+50 - R$ 99.50
+  }}}
+
+ 1. O Sr. Manoel Joaquim acaba de adquirir uma panificadora e pretende implantar a metodologia da tabelnha, que já é um sucesso na sua loja de 1,99. Você foi contratado para desenvolver o programa que monta a tabela de preços de pães,  de 1 até 50 pães,  a partir do preço do pão informado pelo usuário, conforme o exemplo abaixo:
+
+  {{{
+Preço do pão: R$ 0.18
+Panificadora Pão de Ontem - Tabela de preços
+1 - R$ 0.18
+2 - R$ 0.36
+...
+50 - R$ 9.00
+  }}}
+
+ 1. Desenvolva um gerador de tabuada, capaz de gerar a tabuada de qualquer número inteiro entre 1 a 10. O usuário deve informar de qual numero ele deseja ver a tabuada. A saída deve ser conforme o exemplo abaixo:
+
+  {{{
+Tabuada de 5:
+5 x 1 = 5
+5 x 2 = 10
+...
+5 x 10 = 50
+  }}}
+
+ 1. A série de Fibonacci é formada pela seqüência 0,1,1,2,3,5,8,13,21,34,55,... Faça um programa que gere a série até que o valor seja maior que 500.
+
+ 1. O Sr. Manoel Joaquim expandiu seus negócios para além dos negócios de 1,99 e agora possui uma loja de conveniências. Faça um programa que implemente uma caixa registradora rudimentar. O programa deverá receber um número desconhecido de valores referentes aos preços das mercadorias. Um valor zero deve ser informado pelo operador para indicar o final da compra. O programa deve então mostrar o total da compra e perguntar o valor em dinheiro que o cliente forneceu, para então calcular e mostrar o valor do troco. Após esta operação, o programa deverá voltar ao ponto inicial, para registrar a próxima compra. A saída deve ser conforme o exemplo abaixo:
+
+  {{{
+Lojas Tabajara 
+Produto 1: R$ 2.20
+Produto 2: R$ 5.80
+Produto 3: R$ 0
+Total: R$ 9.00
+Dinheiro: R$ 20.00
+Troco: R$ 11.00
+...
+  }}}
+
+ 1. Faça um programa que calcule o fatorial de um número inteiro fornecido pelo usuário. Ex.: 5!=5.4.3.2.1=120. A saída deve ser conforme o exemplo abaixo:
+
+  {{{
+Fatorial de: 5
+5! =  5 . 4 . 3 . 2 . 1 = 120
+  }}}
+
+ 1. Faça um programa que leia 5 números e informe o maior número.
+
+ 1. Faça um programa que leia 5 números e informe a soma é a média dos números.
+
+ 1. O Departamento Estadual de Meteorologia lhe contratou para desenvolver um programa que leia as um conjunto indeterminado de temperaturas, e informe ao final a menor e a maior temperaturas informadas, bem como a média das temperaturas.
+
+ 1. Os números primos possuem várias aplicações dentro da Computação, por exemplo na Criptografia. Um número primo é aquele que é divisível apenas por um e por ele mesmo. Faça um programa que peça um número inteiro e determine se ele é ou não um número primo.
+
+ 1. Encontrar números primos é uma tarefa difícil. Faça um programa que gera uma lista dos números primos existentes entre 1 e um número inteiro informado pelo usuário. 
+
+ 1. Desenvolva um programa que faça a tabuada de um número qualquer inteiro que será digitado pelo usuário, mas a tabuada não deve necessariamente iniciar em 1 e terminar em 10, o valor inicial e final devem ser informados também pelo usuário, conforme exemplo abaixo:
+
+  {{{
+Montar a tabuada de: 5
+Começar por: 4
+Terminar em: 7
+
+Vou montar a tabuada de 5 começando em 4 e terminando em 7:
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+  }}}
+
+ Obs: Você deve verificar se o usuário não digitou o final menor que o inicial.
+
+
+ 1. Um funcionário de uma empresa recebe aumento salarial anualmente: Sabe-se que:
+  a. Esse funcionário foi contratado em 1995, com salário inicial de R$ 1.000,00;
+  a. Em 1996 recebeu aumento de 1,5% sobre seu salário inicial;
+  a. A partir de 1997 (inclusive), os aumentos salariais sempre correspondem ao dobro do percentual do ano anterior.
+  Faça um programa que determine o salário atual desse funcionário.
+
+  Após concluir isto, altere o programa permitindo que o usuário digite o salário inicial do funcionário.
+
+ 1. Faça um programa que leia dez conjuntos de dois valores, o primeiro representando o número do aluno e o segundo representando a sua altura em centímetros. Encontre o aluno mais alto e o mais baixo. Mostre o número do aluno mais alto e o número do aluno mais baixo, junto com suas alturas.
+
+
+ 1. Foi feita uma estatística em cinco cidades brasileiras para coletar dados sobre acidentes de trânsito. Foram obtidos os seguintes dados:
+  a. Código da cidade;
+  a. Número de veículos de passeio (em 1999);
+  a. Número de acidentes de trânsito com vítimas (em 1999).
+
+ Deseja-se saber:
+  a. Qual o maior e menor índice de acidentes de transito e a que cidade pertence;
+  a. Qual a média de veículos nas cinco cidades juntas;
+  a. Qual a média de acidentes de trânsito nas cidades com menos de 2.000 veículos de passeio.
+
+ 
+ 1. Faça um programa que receba o valor de uma dívida e mostre uma tabela com os seguintes dados: valor da dívida, valor dos juros, quantidade de parcelas e valor da parcela.
+ Os juros e a quantidade de parcelas seguem a tabela abaixo:
+
+  {{{
+Quantidade de Parcelas	% de Juros sobre o valor inicial da dívida
+1	0
+3	10
+6	15
+9	20
+12	25
+  }}}
+
+ Exemplo de saída do programa:
+
+  {{{
+Valor da Dívida	Valor dos Juros	Quantidade de Parcelas	Valor da Parcela
+R$ 1.000,00	0	        1	                R$  1.000,00
+R$ 1.100,00	100	        3	                R$    366,00
+R$ 1.150,00	150	        6	                R$    191,67
+  }}}
+
+ 1. Faça um programa que leia uma quantidade indeterminada de números positivos e conte quantos deles estão nos seguintes intervalos: [0-25], [26-50], [51-75] e [76-100]. A entrada de dados deverá terminar quando for lido um número negativo.
+
+ O cardápio de uma lanchonete é o seguinte:
+
+  {{{
+Especificação	Código	Preço
+Cachorro Quente	100	R$ 1,20
+Bauru Simples	101	R$ 1,30
+Bauru com ovo	102	R$ 1,50
+Hambúrguer	103	R$ 1,20
+Cheeseburguer	104	R$ 1,30
+Refrigerante	105	R$ 1,00
+  }}}
+
+ 1. Faça um programa que leia o código dos itens pedidos e as quantidades desejadas. Calcule e mostre o valor a ser pago por item (preço * quantidade) e o total geral do pedido. Considere que o cliente deve informar quando o pedido deve ser encerrado.
+
+ 1. Em uma eleição presidencial existem quatro candidatos. Os votos são informados por meio de código. Os códigos utilizados são:
+
+  {{{
+1 , 2, 3, 4  - Votos para os respectivos candidatos 
+(você deve montar a tabela ex: 1  Jose/ 2- João/etc)
+5  Voto Nulo
+6  Voto em Branco
+  }}}
+
+ Faça um programa que calcule e mostre:
+  a. O total de votos para cada candidato;
+  a. O total de votos nulos;
+  a. O total de votos em branco;
+  a. A percentagem de votos nulos sobre o total de votos;
+  a. A percentagem de votos em branco sobre o total de votos.
+
+ Para finalizar o conjunto de votos tem-se o valor zero.
+
+ 1. Desenvolver um programa para verificar a nota do aluno em uma prova com 10 questões, o programa deve perguntar ao aluno a resposta de cada questão e ao final comparar com o gabarito da prova e assim calcular o total de acertos e a nota (atribuir 1 ponto por resposta certa). Após cada aluno utilizar o sistema deve ser feita uma pergunta se outro aluno vai utilizar o sistema. Após todos os alunos terem respondido informar:
+  a. Maior  e Menor Acerto;
+  a. Total de Alunos que utilizaram o sistema;
+  a. A Média das Notas da Turma.
+ 
+  {{{
+Gabarito da Prova:
+
+01  A
+02  B
+03  C
+04  D
+05  E
+06  E
+07  D
+08  C
+09  B
+10  A
+  }}}
+
+ Após concluir isto você poderia incrementar o programa permitindo que o professor digite o gabarito da prova antes dos alunos usarem o programa.
+
+----
+
+Gostaria de receber sugestões sobre novos enunciados, assim de melhorias nos textos dos já existentes. A criação de telas de exemplo com a saída dos programas também é algo que me interessa fazer no futuro.
+
+----
+
+As respostas para os exercícios também podem ser colocadas na página RespostasListaDeExercícios (apenas membros do ProfessoresPythonGroup possuem acesso à essa página.
+
+----
+
+MarcoAndréLopesMendes[[BR]]
+RodrigoCurvêllo

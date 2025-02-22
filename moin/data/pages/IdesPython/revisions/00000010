@@ -1,0 +1,51 @@
+#pragma section-numbers off
+= IDEs para Python =
+
+Essa pagina é uma lista de IDEs para desenvolvimento em Python com uma pequena descrição das mesmas para que as pessoas possam decidir qual delas se adapta melhor aos seus requisitos.
+Essa listagem surgiu a partir de uma discussão ocorrida na lista [http://br.groups.yahoo.com/group/python-brasil python-brasil].
+O autor de opiniões pessoais é colocado entre parentesis.
+
+== Livres ==
+
+'''Idle''' - http://www.python.org - O IDLE vem com o Python. É feita com Tkinter e se você se acostumar ela pode ajudar bastante. É bem simples de ser usado também.
+
+'''SPE''' - http://spe.pycs.net/ - Desenvolvida com wxPython é livre e tem algumas funcionalidades interessantes. Tem wxGlade como plugin para desenho de telas gráficas.
+
+'''Boa-Constructor''' - http://boa-constructor.sf.net - Essa é a "única" IDE ao estilo RAD do Delphi/VB. Funciona com o wxPython na versão 2.4 e é acho que é a mais fácil de ser usada apesar de não promover boas práticas de desenvolvimento como a de separar lógica de negócios de apresentação (telas). As outras IDEs não possuem mecanismos para desenho de telas gráficas mas podem usar ferramentas como Glade e/ou wxGlade.
+
+'''Eclipse''' - http://www.eclipse.org - Diferente de todos os outros.
+Pesado, grande, monstruoso mas muito poderoso. É feito em Java e é
+'''ideal''' para desenvolvimento Java. Mas existem plugins para se desenvolver em Python com ele (e detalhe: atualmente é um brasileiro quem o mantém) que é o pydev: http://pydev.sourceforge.net/
+
+'''!DrPython''' - http://drpython.sourceforge.net/ - usa wxPython. Criado para ser utilizado em escolas.
+
+'''IPython''' - http://ipython.scipy.org/ - Um shell com muitos recursos, através das comandos "magicos". Bastante util, modo texto apenas. Você pode usa-lo como um shell "acoplado" aos seus programas também.
+
+== Proprietários ==
+
+'''Wing''' - http://www.wingware.com - Das IDEs proprietárias essa é uma das que mais gosto ( OsvaldoSantanaNeto ).
+
+'''Komodo''' - http://www.activestate.com - Essa é outra IDE bem poderosa também. Trabalha com outras linguagens além de Python.
+
+'''!BlackAdder''' - http://www.thekompany.com/products/blackadder/ - Feita pelo pessoal que desenvolve o KDE.
+
+== Livres 'pero-no-mucho' ==
+
+'''Eric3''' - http://www.die-offenbachs.de/detlev/eric3.html - Dos IDEs esse é o que mais gosto. Não é exatamente o que eu uso (OsvaldoSantanaNeto) mas acho que é o mais completo de todos. É feito com a biblioteca QT e se integra às ferramentas da QT.
+
+== Editores de texto ==
+
+'''vim''' - http://www.vim.org - Esse é o que eu uso ( OsvaldoSantanaNeto ). Tem em todo Linux e é altamente configurável.
+
+'''emacs''' - http://www.gnu.org/software/emacs/emacs.html - Esse editor é muito difícil de se usar (assim como o vim também), mas uma vez que se aprende a usá-lo ele pode se tornar uma IDE Python poderosíssima, principalmente em modo Python (http://sourceforge.net/projects/python-mode/). Mais "Emacs Goodies": http://www.python.org/emacs/
+
+'''jext''' - http://www.jext.org/ - Muito bom editor! Suporta muitas linguagens e possui plugins para Python (executar, por exemplo).
+
+=== Para serem incluídos ===
+
+ * Mais alternativas pra Windows
+ * Mais editores de textos e plugins para os mesmos
+
+----
+
+EduardoDeOliveiraPadoan

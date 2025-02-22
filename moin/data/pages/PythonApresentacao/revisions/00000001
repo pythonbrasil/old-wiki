@@ -1,0 +1,47 @@
+#pragma section-numbers off
+= Python Apresentação =
+
+Atualmente tenho observado um movimento muito grande das empresas de
+desenvolvimento em direcao do desenvolvimento de aplicacoes distribuidas. Tenho
+visto tambem uma quantidade muito grande de ferramentas para a execucao desses
+trabalhos: linguagens, protocolos, interfaces, entre outras. Em consequencia
+disso vejo que o momento esta propício para mostrar para o grande publico o
+potencial de uma ferramenta de desenvolvimento, mais especificamente uma
+linguagem de programação, que se chama: Python.
+
+O desenvolvimento da linguagem Python foi iniciado em 1989 por Guido van Rossum,
+um holandes que foi buscar o inspiracao para o nome da linguagem no titulo do
+filme Monty Python's flying circus do grupo humoristico britanico homonimo. O
+criador da linguagem Python queria criar uma linguagem de altissimo nivel que
+agregasse caracteristicas importantes de diversas linguagens e ainda mantivesse
+uma sintaxe clara e solida. Com essa ideia em maos ele iniciou o desenvolvimento
+da linguagem usando os moldes do desenvolvimento da maioria dos software livres
+disponiveis no mercado.
+
+Python atualmente possui caracteristicas muito semelhantes com linguagens
+orientadas a objetos como Java, entretanto ela e considerada uma linguagem de
+mais alto nivel e demonstra um desempenho equivalente, e em algumas situações,
+superior ao da linguagem Java. A portabilidade de Python tambem e importante ser
+destacada. Atualmente ela trabalha em qualquer ambiente baseado em Microsoft
+(inclusive .NET), UNIX, Linux e MacOS. Além disso, ainda existem projetos em
+desenvolvimento de interpretadores de bytecode Python para dispositivos
+embedded.
+
+Python é uma linguagem Orientada a objetos, Interpretada e compilada em tempo de
+execução, possui suporte a tratamento de Excessões e de erros, Tipagem dinâmicae
+ampla documentação. Isso tranforma Python numa linguagem apropriada para
+desenvolvimento rápido de aplicações e ao mesmo tempo permite que o código seja
+mantido facilmente.
+
+Outras vantagens inerentes à Python é a sua sintaxe clara, limpa e sólida que a
+transforma em uma linguagem de fácil aprendizado. Python além de uma linguagem
+de altíssimo nível ainda possui licença compatível com a licença GPL da Free
+Software Foundation, isso faz dela uma linguagem independente de fornecedores
+exclusivos (como a Sun).
+
+Fica claro com tudo isso que Python pode se tornar uma ferramenta de alto poder
+para o desenvolvimento rápido de aplicações sérias.
+
+----
+
+Osvaldo Santana Neto

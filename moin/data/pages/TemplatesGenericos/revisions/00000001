@@ -1,0 +1,20 @@
+== Introdução ==
+
+O projeto TemplatesGenéricos visa disponibilizar uma biblioteca geral para expressar estruturas de dados complexas em código Python. Trata-se ainda de uma abordagem experimental. O conceito básico é simples:
+
+{{{
+class Pessoa(GenericTemplate):
+    nome = 'José da Silva'
+    class endereco(GenericTemplate):
+        rua = 'Rua das Bobos, 0'
+        cidade = 'Patópolis'
+    class documentos(GenericTemplate):
+        cpf = '00.000.000-00'
+        rg  = '0.000.000'
+}}}
+
+A princípio, o template acima é bastante similar a qualquer outro escrito em XML, ou em um dicionário Python. Qual seriam as vantagens, então?
+
+  * '''Legibilidade''': o código em Python é bem estruturado e legível. Já o código em XML não é tão legível, e é mais difícil de editar manualmente. O dicionário também se torna confuso, porque muitas definições ficam dentro de strings, o que polui o código com aspas e chaves que não são nada 'pitônicas';
+  * '''Integração''': o código pode residir dentro de um arquivo convencional Python. Não há necessidade de ler a descrição de outro lugar.
+  * '''Orientação a objeto''': é muito fácil criar novas classes e construir estruturas dinâmicas e inteligentes, que processam os atributos de forma automatizada. Estas estruturas podem ser herdadas e reutilizadas dentro do ambiente normal de programação Python.

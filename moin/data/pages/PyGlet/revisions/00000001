@@ -1,0 +1,7 @@
+=Pyglet=
+
+pyglet providencia uma interface de programação orientada a objetos para desenvolvimento de jogos e para outros tipos de aplicações para Windows, Mac OS X e Linux. Algumas características do pyglet:
+
+    *  Não há dependias externas ou requerimentos para instalação. Pyglet necessita apenas do Python simplificando a instalação e a distribuição de aplicações feitas com ele.
+    * Trabalha com multiplas janelas e desktops multi-monitores.
+    * Carrega imagnes, sons, músicas e vídeos na maioria dos formatos existentes.pyglet pode opicionalmente usar o AVbin para tocar os seguintes formatos de áudio: MP3, OGG/Vorbis e WMA, e os seguintes formatos de vídeo: DivX, MPEG-2, H.264, WMV e Xvid.

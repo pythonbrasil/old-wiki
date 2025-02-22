@@ -1,0 +1,84 @@
+#pragma section-numbers off
+
+= PostgreSQL e Python =
+
+[[TableOfContents]]
+
+== PostgreSQL == 
+
+O PostgreSQL (atualmente na versão 8.1, com a versão 8.2 planejada para ser lançada em breve) é, nas palavras dos próprias desenvolvedores "o banco de dados livre mais avançado do mundo". Inclui recursos poderosos como stored procedures (em PL/PgSQL), triggers, domains e muito mais.
+
+Um dos campos nos quais o PostgreSQL se destaca é na programação de procedures. Embora a linguagem PL/PgSQL seja poderosa, devemos sempre ter em mente que a linguagem SQL é uma linguagem mais voltada à area da matemática, com o objetivo de descrever conjuntos e suas relações. Uma função em SQL, não é  exatamente a mais bonita das funções (e pode ser mais feia ainda, dependendo do dialeto específico do seu banco). O PostgreSQL contorna essa limitação ao permitir o uso de outras linguagens de programação. São atualmente suportadas: python, ruby, tcl, perl, Java, PHP e C. 
+
+= Porque Python no Postgres? =
+
+Porque python é uma linguagem poderosa, e com ela podemos estender as limitações do banco. Um exemplo: a maioria dos bancos proprietários possui alguma funcionalidade de enviar e-mail a partir do próprio banco de dados. O PostgreSQL, no geral, segue a filosofia Unix: faça uma coisa, e a faça bem. Ele não tem suporte a envio de e-mails integrado. Mas usando Python, podemos fazer isso.
+
+== Um exemplo ==
+
+{{{
+#!python
+-- Function: pysendmail(text, text, text, text, text)
+
+-- DROP FUNCTION pysendmail(text, text, text, text, text);
+
+CREATE OR REPLACE FUNCTION pysendmail(text, text, text, text, text)
+  RETURNS "varchar" AS
+$BODY$
+  # Author: Walter Rodrigo de Sá Cruz
+  # Date: 26/04/2006
+  from email.MIMEMultipart import MIMEMultipart
+  from email.MIMEText import MIMEText
+  from time import localtime, strftime
+  import smtplib
+  import re
+ 
+  smtpserver = 'servidor'
+  #AUTHREQUIRED = 0 # if you need to use SMTP AUTH set to 1
+  smtpuser = ''  # for SMTP AUTH, set SMTP username here
+  smtppass = ''  # for SMTP AUTH, set SMTP password here
+ 
+  sender = args[0]
+  recipients = args[1]
+  cc = args[2]
+  subject = args[3]
+  mesage = args[4]  
+
+  server = smtplib.SMTP(smtpserver)
+  
+  msg = MIMEMultipart('related')
+  msg['Subject'] = subject
+  msg['Date'] = strftime("%a, %d %b %Y %H:%M:%S -0300", localtime())
+  msg['Cc'] = cc
+  msg['From'] = sender
+  msg['To'] = recipients
+  msg.preamble = 'This is a multi-part message in MIME format.'
+  
+  msgAlternative = MIMEMultipart('alternative')
+  msg.attach(msgAlternative)
+  
+  # Expressão regular roubada de http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/440481
+  t = re.sub("< */? *\w+ */?\ *>", "", mesage) 
+  msgText = MIMEText(t)
+  msgAlternative.attach(msgText)
+  
+  msgText = MIMEText(mesage,'html')
+  msgAlternative.attach(msgText)
+  
+ 
+  #if AUTHREQUIRED:
+  #  server.login(smtpuser, smtppass)
+  smtpresult = server.sendmail(sender, recipients, msg.as_string())
+  server.quit()
+
+$BODY$
+  LANGUAGE 'plpythonu' VOLATILE;
+ALTER FUNCTION pysendmail(text, text, text, text, text) OWNER TO postgres;
+}}}
+
+
+Após criada, a função poderá ser executada assim:
+
+{{{
+SELECT pySendMail('usuario@servidor.com','usuario@servidor.com','','E-mail do Postgres','Teste de envio <b> de e-mail</b>');
+}}}

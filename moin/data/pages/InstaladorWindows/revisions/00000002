@@ -1,0 +1,34 @@
+#pragma section-numbers 1
+
+<<TableOfContents()>>
+
+= Criando um instalador para Ruindow$$ =
+
+== Motivos ==
+Um belo dia precisei criar um instalador de uma aplicação PyGTK para windows aqui no serviço.
+
+Procurei vários tutoriais, e a maioria deles apontava para o uso do py2exe.  Mas minha aplicação não era uma aplicação comum, ela utilizava matplotlib para gerar gráficos.  O grande problema disso é:
+ * py2exe me parece mais uma gambiarra para esconder o código do programa que não funciona direito.
+   * Não faça isso! Seja livre! Não caia na besteira de tentar ganhar dinheiro por domínio de conhecimento. Ganhe com seu serviço! Com seu esforço! Python existe graças a esses princípios! Vamos passar a diante esse bom exemplo!
+ * py2exe é muito complicado
+   * No meu caso, para utilizar GTK junto com py2exe ja existe uma configuração "especial" para funcionar descrito no site oficial, e para utilizar matplotlib existia outra configuração diferente, mas as 2 não casavam.  Perdi muitas horas tentando fazer funcionar meu instalador com py2exe.
+
+E a solução foi:
+ * Retirei o py2exe da jogada
+ * Instalei tudo que precisava numa máquina virtual e fiz funcionar normalmente
+ * Copiei toda a instalação do python dessa máquina virtual e a instalação do gtk para a pasta do instalador, do jeito que ficou após a instalação
+ * Utilizei os truques do [[http://www.portablepython.com/|portable python]] para transformar minha instalação do Python portável
+ * Customizei meu script de inicialização do programa para adicionar o GTK
+ * Criei o instalador NSIS
+
+Adiante vou mostrar em detalhes cada um desses passos!
+
+== Instalando o Python ==
+
+##= Titulo 1 =
+##teste<<FootNote(teste)>>
+##== Titulo 2 ==
+
+##=== Titulo 3 ===
+
+----

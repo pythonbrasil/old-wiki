@@ -1,0 +1,176 @@
+Desde 2008 a Associação Python Brasil passou a trazer palestrantes internacionais para nosso evento nacional anual, a Conferência Python Brasil (PyCon para os amigos).
+
+== Processo de Escolha ==
+
+Em 2009 os convidados serão escolhidos da seguinte maneira:
+
+ 1. '''Até 22/04''': Membros ''ativos'' da APyB ([[http://associacao.pythonbrasil.org/associados|lista]]) poderão colocar nesta página sugestões de convidados
+
+ 2. '''De 23/04 a 26/04''': Toda a comunidade (membros e não-membros da APyB) poderá votar online, em URL a ser divulgada nesta página e nas principais listas da comunidade
+
+ 3. '''Em 27/04''': A APyB vai divulgar os resultados da votação. O mais votado será convidado primeiro. O segundo nome a ser convidado será escolhido pelos Diretores e Conselheiros da APyB, entre os candidatos indicados aqui, independente da classificação na votação.
+
+ 4. '''A partir de 28/04''': A APyB vai formalizar o convite aos nomes escolhidos. Caso o nome mais votado não possa vir, convidaremos o próximo mais votado, até confirmarmos este primeiro nome. Se o convidado da Diretoria e Conselhos não puder vir, outro nome será escolhido, até confirmaros este segundo nome.
+
+== Candidatos 2009 ==
+
+Para indicar um candidato a ser convidado internacional da APyB, siga estas recomendações:
+
+ * escreva algumas palavras sobre o candidato na primeira linha
+
+ * forneça no mímimo um link para que a comunidade possa avaliar a pessoa e sua contribuição para a comunidade Python
+
+ * não coloque e-mails, mas esteja pronto para fornecer o e-mail do indicado caso ele seja escolhido
+
+ * identifique-se escrevendo seu nome exatamente como ele aparece na [[http://associacao.pythonbrasil.org/associados|Relação de Associados da APyB]], e complemente com link para sua página aqui no Wiki, se quiser.
+
+ * siga os exemplos já criados abaixo
+
+=== Brett Cannon ===
+
+ * core developer importante na [[http://python.org/|linguagem Python]]
+
+ * perfil no Ohloh: http://www.ohloh.net/accounts/bcannon
+
+ * blog: http://sayspy.blogspot.com/
+
+ * palestrante engraçado e cara divertido
+
+ * indicado por Luciano Gama de Sousa Ramalho (LucianoRamalho)
+
+=== Jacob Kaplan-Moss ===
+
+ * co-fundador e líder do projeto [[http://www.djangoproject.com/|Django]]
+
+ * demonstrou grande interesse em vir ao Brasil ao ser sondado na PyCon 2009 em Chicago
+
+ * blog: http://jacobian.org/
+
+ * indicado por Luciano Gama de Sousa Ramalho (LucianoRamalho)
+
+=== Alex Martelli ===
+
+ * core developer, autor do Python in a Nutshell e co-autor do Python Cookbook
+
+ * já comentou que tem muito interesse em vir ao Brasil
+
+ * suas palestras na PyCon sempre estão entre as mais aguardadas (esse ano, foi convidado especial pela organização)
+
+ * site: http://www.aleax.it/
+
+ * indicado por Rodolpho Eckhardt (RodolphoEckhardt)
+
+=== Mark Summerfield ===
+
+ * speaker bem "cotado" da PyCon UK
+
+ * expert em Python e PyQT
+
+ * autor de vários livros sobre Python: http://is.gd/rj6n
+
+ * site: [[http://www.qtrac.eu/marksummerfield.html|Mark Summerfield's Writing & Software]]
+
+
+ * indicado por Alberto Fabiano (AlbertoFabiano)
+
+=== David Beazley ===
+
+ * autor dos projetos SWIG, PLY (Python Lex-Yacc) entre outros softwares e do livro Python Essential Reference
+
+ * considerado um excelente instrutor e speaker, tendo utilizado Python na área científica nos Laboratórios de Los Alamos, tendo atuado como professor universitário de Sistemas Operacionais e Compiladores
+
+ * site: [[http://www.dabeaz.com/about.html|DaBeaz LLC is David Beazley]] 
+
+ * indicado por Alberto Fabiano (AlbertoFabiano)
+
+=== Colin Winter ===
+
+ * core developer, trabalhou no desenvolvimento do Python 3000 e entre outros no projeto Mondrian, Rietveld Code Review Tool: http://codereview.appspot.com
+
+ * É o principal responsável pelo projeto [[http://code.google.com/p/unladen-swallow/|Unladen Swallow]]
+
+ * mostrou-se bastante dinâmico na palestra (por video conferência) que ele deu ao GruPy-SP de 2to3 em março/2008
+
+ * indicado por Alberto Fabiano (AlbertoFabiano)
+
+=== Mark Shuttleworth ===
+
+ * Desenvolvedor sul-africano que se tornou milionário depois de vender sua empresa de segurança de Internet, a Thawte, para a Verisign. Em 2002 tornou-se o primeiro sul-africano a ir ao espaço, lançado na nave russa Soyuz TM-34, pagando 20 milhões de dólares pela aventura. Fundou a Canonical Ltd, responsável pelo desenvolvimento das distribuições Ubuntu, Kubuntu, Edubuntu e Xubuntu. É um grande incentivador da linguagem Python, largamente utilizada na Canonical.
+
+ * Mais informações em http://pt.wikipedia.org/wiki/Mark_Shuttleworth e http://www.markshuttleworth.com/
+
+ * indicado por Fabiano Weimar dos Santos
+
+=== Duncan McGreggor (oubiwann) ===
+
+ * Um dos mais novos membros da PSF
+
+ * Tem interesse especial por Ultra Large Scale Systems (ULS)
+
+ * Membro do time de desenvolvimento do projeto Landscape: http://www.canonical.com/projects/landscape
+
+ * Perfil no Ohloh: http://www.ohloh.net/accounts/oubiwann
+
+ * Blog: http://oubiwann.blogspot.com/
+
+ * Co-fundador do ULS-SIG: http://www.python.org/community/sigs/current/uls-sig/
+
+ * Core developer do Twisted: http://twistedmatrix.com/trac/wiki/TwistedMatrixLaboratories
+
+ * palestrante engraçado e cara divertido
+
+ * indicado por Sidnei da Silva (SidneidaSilva)
+
+=== Christopher Armstrong (radix) ===
+
+ * Um dos mais novos membros da PSF
+
+ * Membro do time de desenvolvimento do projeto Landscape: http://www.canonical.com/projects/landscape
+
+ * Interesse especial em Interactive Fiction Game Engines
+
+ * Perfil no Ohloh: http://www.ohloh.net/accounts/radeex
+
+ * Blog: http://radix.twistedmatrix.com/
+
+ * Core developer do Twisted: http://twistedmatrix.com/trac/wiki/TwistedMatrixLaboratories
+
+ * palestrante engraçado e cara divertidissimo!
+
+ * indicado por Sidnei da Silva (SidneidaSilva)
+
+
+=== Jack Dorsey [excluído na votação] ===
+
+ * fundador e ceo do Twitter
+
+ * site: http://twitter.com/jack
+
+ * indicado por Rodolpho Eckhardt (RodolphoEckhardt)
+
+ * '''Excluído da lista de candidatos.''' Motivo: embora seja um case muito importante, não tem relação com Python (LucianoRamalho)
+
+== FAQ ==
+
+=== Porquê não convidar simplesmente o primeiro e o segundo mais votados? ===
+
+Pode ser que a Diretoria e Conselhos acabe fazendo isso mesmo, mas queremos ter mais opções. A experiência tem mostrado que as votações na comunidade refletem de forma desproporcional os interesses dos membros mais antigos e atuantes, e estes tendem a preferir nomes envolvidos em projetos muito avançados mas às vezes não tão significativos para a comunidade como um todo. Assim, a Diretoria optou por reservar o direito de definir com os Conselheiros o segundo nome, para que seja um palestrante que complemente o primeiro e atenda melhor os interesses de pessoas que estão chegando agora na comunidade.
+
+=== O candidato tem que ter uma relação direta com Python? ===
+
+Sim. Embora a gente tenha inaugurado em 2008 a saudável prática de convidar pessoas para falar de outras linguagens, não vamos gastar a nossa limitada verba de viagens internacionais para este fim. Então é obrigatório que o candidato tenha uma relação forte e evidente com a comunidade Python internacional, ou com algum projeto importante onde Python tem um papel de destaque.
+
+=== Convidados 2008 ===
+
+Estes foram os mais votados na pesquisa feita entre os membros da APyB.
+
+==== Alexander Limi ====
+
+ * Designer de interfaces, fundador do projeto [[http://plone.org|Plone]].
+ * Blog: http://limi.net/
+
+==== Bruce Eckel ====
+
+ * Instrutor, autor do livro [[http://www.mindview.net/Books/TIJ/|Thinking in Java]]
+ * palestrante ''keynote'' da [[http://us.pycon.org/dc2004/talks/keynote|PyCon US 2004]]
+ * Blog: http://www.artima.com/weblogs/index.jsp?blogger=beckel

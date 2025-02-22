@@ -1,0 +1,39 @@
+= Receita: Py2ExeSimples =
+
+Exemplo simples de como gerar um executável para console através do módulo Py2Exe.
+
+== Código ==
+
+{{{
+#!python
+from distutils.core import setup
+import py2exe
+
+opcoes = {}
+opcoes['py2exe'] = {}
+opcoes['py2exe']['excludes'] = ["pywin", "pywin.debugger", "pywin.debugger.dbgcon", "pywin.dialogs", "pywin.dialogs.list"]
+opcoes['py2exe']['packages'] = ["encodings"]
+
+modulos = ['programa.py']
+descricao = 'Programa'
+versao = '1.0'
+
+setup(name=descricao, console=modulos, zipfile="lib/shared.zip", description=descricao, version=versao)
+
+}}}
+
+== Utilização ==
+
+Grave o código acima em um arquivo .py qualquer de sua preferência (setup.py, make.py, etc.), alterando a linha que define os módulos que fazem parte do seu programa. Depois, execute-o assim:
+
+{{{
+python setup.py py2exe
+}}}
+
+Onde "setup.py" deve ser substituído pelo nome que você deu ao arquivo.
+
+Volta para CookBook.
+
+----
+
+WashingtonCoutinhoCorrêaJr

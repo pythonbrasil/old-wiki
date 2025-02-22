@@ -1,0 +1,49 @@
+Este é o ponto de entrada do NossoLivro, um esforço colaborativo de escrita
+de um livro de Python à N-mãos inteiramente em Português e totalmente brazuca.
+
+= Basicão =
+== Histórico ==
+== Arquitetura ==
+== Os Modos de Execução ==
+== Passeando no Modo Interativo ==
+== Sintaxe da Linguagem ==
+
+== Estruturas de Dados Nativas ==
+=== Tuplas ===
+=== Listas ===
+=== Dicionários ===
+
+== Estruturas de Dados Adicionais ==
+=== Vetores ===
+=== Conjuntos ===
+
+
+= Para Quem já está Cobra =
+
+
+== List Comprehensions ==
+== Generator Expressions ==
+== Orientação a Objetos ==
+== Design Patterns e Python ==
+== Sobrescrevendo Operadores ==
+
+= Pajés, Gurus e Xamãs =
+
+== Iterators ==
+== Generators ==
+== Decorators ==
+== Metaclasses ==
+
+= Uma Aplicação de Cabo a Rabo =
+
+== Descrição da Aplicação ==
+== Selecionando um Framework (Django, TurboGears, outro framework?) ==
+== Modelo Relacional ==
+== Mapeamento Objeto Relacional ==
+== Camada de Controle ==
+== Camada de Visão ==
+== Adicionando Firulas ==
+=== Web Services ===
+=== Criando uma Interface para Desktop ===
+
+= Bibliografia, Referências e Links =

@@ -1,0 +1,79 @@
+#pragma section-numbers off
+= RAD com Linux =
+
+Sempre que falamos em RAD (Rapid Application Development) nos lembramos de
+ferramentas como o Delphi/Kylix, C++ Builder ou Visual Studio. Nessas horas
+precisamos nos lembrar que: IDE (Integrated Development Environment) é uma coisa
+e que RAD é outra. Ferramentas como as citadas acima seriam corretamente
+chamadas de IDEs RAD, mas simplesmente abreviamos (erroneamente).
+
+Entretanto se formos avaliar apenas o conceito de RAD, iremos notar que a
+linguagem Python (descrita no artigo anterior) é uma linguagem para RAD.
+Vejamos: A linguagem Python tem um poder fantástico, uma biblioteca básica
+completíssima, é interpretada e compilada em tempo de execução (veremos isso num
+artigo futuro) e possibilita o desenvolvimento rápido de aplicações. RAD!
+
+Mas como não vivemos só de bla bla bla, gostaria de provar as minhas opiniões no
+seguimento deste artigo. Crie um arquivo hello.py que usaremos ele para
+desenvolver rapidamente uma aplicação gráfica (sim, janelas) simples para Linux
+usando Python.
+
+{{{
+#!python
+#!/usr/bin/env python
+#
+# hello.py
+#
+
+from Tkinter import *                  # importa o módulo que contém as classes de GUI
+import sys                             # classes do sistema
+
+def principal():                       # função principal do programa
+   raiz = Tk()                         # cria o widget principal
+   botao = Button(root)                # cria um botão como filho do widget principal
+   botao['text'] = 'Olá mundo!'        # Texto do botão
+   botao['command'] = sai              # quando clicado sai (veja abaixo)
+   botao.pack()
+   raiz.mainloop()                     # loop principal que gerencia os eventos
+
+def sai():
+   sys.exit(0)                         # sai sem erro.
+
+principal()                            # executa principal
+}}}
+
+Agora é só executá-lo com {{{python hello.py}}} (ou dando permissão de execução para o
+arquivo e executando-o normalmente). Pronto. Temos uma aplicação gráfica
+desenvolvida rapidamente.
+
+É evidente que a vida não é feita só de 'Hello worlds!' mas esse é apenas um
+pequeno exemplo de como é fácil desenvolver uma aplicação com interface gráfica
+em Python. Particularmente considero os Widgets do pacote Tkinter horríveis, por
+isso prefiro usar o PyGTK (http://www.daa.com.au/~james/pygtk/) ou o PyKDE/PyQT
+(http://www.thekompany.com/projects/pykde/) que são pacotes com os widgets do
+Gnome e do KDE. Se você estiver usando o PyGTK eu recomendo que você experimente
+desenhar uma interface com o Glade (http://glade.gnome.org) e avaliar se existe
+diferenças tão substanciais entre ferramentas como o Delphi e o que estou
+mostrando.
+
+Mas pra você não achar que eu estou me esquecendo do suporte a outras
+funcionalidades do Delphi/Kylix/C++ Builder eu vou lhes mais algumas coisas que
+Python suporta com sua biblioteca padrão:
+
+   * Acesso a BD (SQL) - Você acessa qualquer BD de forma transparente, pois existe uma API padronizada para esse acesso que é muito bem padronizada.
+   * XML - possui dois excelentes módulos para trabalhar com XML.
+   * TCP/IP - possui módulos para trabalhar com todos os protocolos definidos pelo IETF
+   * Multimídia - módulos para trabalhos com multimídia
+   * Unicode - Trabalha com o conjunto de caracteres Unicode
+   * Internacionalização - módulos para internacionalização de programas
+   * Threads - suporte a desenvolvimento multi-thread (ainda não está 100%)
+
+Entre outras funcionalidades cujas implementações dependem do sistema
+operacional em que a aplicação está rodando.
+
+No próximo artigo eu espero acessar um Banco de dados SQL com Python para
+começarmos a encará-la como uma linguagem séria e poderosa que ela é.
+
+----
+
+Osvaldo Santana Neto

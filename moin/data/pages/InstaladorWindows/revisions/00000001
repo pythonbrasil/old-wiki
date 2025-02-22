@@ -1,0 +1,13 @@
+#pragma section-numbers 1
+
+<<TableOfContents()>>
+
+= Criando um instalador para Ruindow$$ =
+
+= Titulo 1 =
+teste<<FootNote(teste)>>
+== Titulo 2 ==
+
+=== Titulo 3 ===
+
+----

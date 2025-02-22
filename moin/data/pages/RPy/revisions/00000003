@@ -1,0 +1,37 @@
+= Receita: Usando o RPy =
+Um exemplo simples de uso do módulo RPy para realizar testes estatísticos utilizando-se do pacote estatístico R. O conjunto de dados utilizado no exemplo  é um arquivo tipo CSV comum, onde a primeira linha contém o nome dos dados.
+
+== Código ==
+{{{
+from rpy import *
+###############Carrega os dados###################
+#carrega o dataframe com seus dados
+r('ed<-read.table("dados.csv", row.names=1,head=T,dec=".")')
+#"disponibiliza" as colunas do dataframe para acesso direto
+r('attach(ed)')
+#################Testa normalidade################
+#direciona a saida para o arquivo "qqnorm_rpy.png"
+r('png("qqnorm_rpy.png")')
+#testa a normalidade pelo qqnorm
+r('qqnorm(altura)')
+r('qqline(altura)')
+#retorna a saida para o console
+r('dev.off()')
+################Gera um boxplot###################
+#direciona a saida para o arquivo "boxplot_rpy.png"
+r('png("boxplot_rpy.png")')
+#gera o boxplot da altura para os diferentes sexos
+r('boxplot(altura[sexo==0], altura[sexo==1], names=c("Feminino", "Masculino"))')
+#retorna a saida para o console
+r('dev.off()')
+################Realiza um test T-student###########
+#realiza o teste T-student para o modelo altura~sexo
+print "\n\nTest T student \n\n"
+test_t =r("t.test(altura~sexo)")
+## Outra maneira de realizar um test T: r.test_t()
+#imprime na tela os resultados do test T
+for titulo, dados in test_t.iteritems():
+    print titulo, dados
+}}}
+----
+ . Frederico G. Colombo Arnoldi

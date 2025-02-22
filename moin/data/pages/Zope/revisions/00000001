@@ -1,0 +1,10 @@
+= Zope =
+
+Zope é um framework de desenvolvimento completo, do servidor web até a base de dados integrada (ZODB), é muito usado em conjunto com o [Plone], possui diversos produtos úteis já desenvolvidos.
+
+A versão atual é a 2 e a 3, porém, da versão 2 para a 3 muita coisa mudou, tornando produtos incompatíveis, mas o desenvolvimento do Zope 2 continua ativo, o que significa que produtos feitos para o Zope 2 continuam na atividade.
+
+== Ficha técnica ==
+
+URL: http://zope.org/ [[BR]]
+Licença: http://www.zope.org/Resources/ZPL

@@ -1,0 +1,60 @@
+#pragma section-numbers off
+= Receita: LendoXML =
+
+Exemplo simples de como ler um arquivo XML usando xml.dom.minidom. O arquivo XML usado no exemplo segue logo abaixo do código.
+
+== Código ==
+
+{{{
+#!python
+
+import xml.dom.minidom
+
+if __name__=="__main__":
+    x = xml.dom.minidom.parse('teste.xml')
+    nos = x.documentElement
+    print "|-> %s" % nos.nodeName
+    filhos1 = [no for no in nos.childNodes if no.nodeType==x.ELEMENT_NODE]
+    for pai in filhos1:
+        print "|--> %s" % pai.nodeName
+        filhos2 = [no for no in pai.childNodes if no.nodeType==x.ELEMENT_NODE]
+        for filho in filhos2:
+            print "|---> %s" % filho.nodeName
+            print "|-----> %s" % filho.getAttribute('atributo1')
+            print "|-----> %s" % filho.getAttribute('atributo2')
+
+}}}
+
+== Arquivo XML usado no exemplo acima ==
+
+{{{
+<nos>
+  <nos1>
+    <no
+      atributo1="teste1"
+      atributo2="teste2"
+    />
+    <no
+      atributo1="teste3"
+      atributo2="teste4"
+    />
+  </nos1>
+
+  <nos2>
+    <no
+      atributo1="teste5"
+      atributo2="teste6"
+    />
+    <no
+      atributo1="teste7"
+      atributo2="teste8"
+    />
+  </nos2>
+</nos>
+}}}
+
+Volta para CookBook.
+
+----
+
+WashingtonCoutinhoCorrêaJr

@@ -1,0 +1,56 @@
+Autor: MarcoAndreLopesMendes
+
+O ojetivo deste artigo é auxiliar os usuários do Windows (principalmente do [[http://pt.wikipedia.org/wiki/Windows_XP|Windows XP]]) a configurarem um ambiente para o desenvolvimento de programas em [[http://pt.wikipedia.org/wiki/Python|Python]] em conjunto com as mais diversas bibliotecas, como [[http://pt.wikipedia.org/wiki/PyGTK|PyGTK]], [[http://pt.wikipedia.org/wiki/WxPython|wWPython]], [[http://www.gustavobarbieri.com.br/eagle/|Eagle]], etc. e [[http://pt.wikipedia.org/wiki/Ambiente_de_Desenvolvimento_Integrado|IDEs]], como o [[http://www.stani.be/python/spe|SPE]] e o [[http://pt.wikipedia.org/wiki/Eclipse_%28IDE%29|Eclipse]]. Para uma análise das alternativas para o densevolvimento de aplicações com interface gráfica, leia o artigo [[http://www.pythonbrasil.com.br/moin.cgi/ComparacaoDeGUIs|Comparação de GUIs]]. Se você pretende escolher um [[http://pt.wikipedia.org/wiki/Ambiente_de_Desenvolvimento_Integrado|IDE]] para desenvolver em Python, acesse o artigo [[http://www.pythonbrasil.com.br/moin.cgi/IdesPython|IDEs Python]].
+
+A maioria das distribuições Linux traz Python na instalação padrão. Além disto, distribuições que possuem um gerenciador de pacotes, quer seja baseado em arquivos RPM, DEB ou semelhantes, tornam muito simples a instalação de pacotes adicionais, gerenciando as dependências e instalando todos os pacotes nedessários ao funcionamento de uma determinada aplicação.
+
+Para os usuários de Windows, o processo de instalação exige que ele saiba quais pacotes são necessários, bem como as versões, e em que ordem eles devem ser instalados. Esta documentação tem o objetivo de auxiliar neste processo.
+
+Serão descritos os pacotes necessários para o funcionamento de cada apliacação, bem como  a ordem correta de instalação. 
+
+<<TableOfContents>>
+
+= Python =
+
+Para a instalação básica do Python, contendo o interpretrador, as bibliotecas padrão e um ambiente simples de desenvolvimento, siga os passos abaixo:
+
+ 1. Instale o interpretador Python disponível em [[http://python.org/|http://python.org/]], na opção '''Windows Installer'''. Por exemplo, no momento em que este documento está sendo escrito o arquivo é [[http://python.org/ftp/python/2.4.3/python-2.4.3.msi|python-2.4.3.msi]].
+
+Este arquivo instala tudo o que é necessário para iniciar o estudo de Python, incluindo o interpretador com shell interativo, um editor chamado IDLE, as bibliotecas padrão da linguagem e uma farta documentação em inglês. 
+
+
+= wxPython =
+
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o [[http://prdownloads.sourceforge.net/wxpython/wxPython2.6-win32-ansi-2.6.3.3-py24.exe|wxPython]].
+
+= SPE =
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o wxpython, conforme as instruções da seção específica.
+ 1. Instale o [[http://prdownloads.sourceforge.net/spe/SPE-0.8.2.a-wx2.6.1.0-py24.exe?download|SPE]].
+
+= PyGTK =
+
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o [[http://superdownloads.uol.com.br/download/i37838.html|GTK]].
+ 1. Instale o [[http://www.mapr.ucl.ac.be/~gustin/win32_ports/binaries/pygtk-2.8.6-1.win32-py2.4.exe|Pygtk]] e o [[http://www.mapr.ucl.ac.be/~gustin/win32_ports/binaries/pycairo-1.0.2-1.win32-py2.4.exe|PyCairo]].
+
+ '''Observações: '''
+  a.  Você também pode utilizar este instalador [[http://aruiz.typepad.com/siliconisland/2006/12/allinone_win32_.html|"Tudo-em-Um" (Python+PyGTK+GTk)]]. 
+  a. Encontrei também [[http://osl.ulpgc.es/~arc/gnome/pygtk-setup.exe|esse outro instalador]] que instala GTK+, PyGTK e PyCairo. Funciona no Python 2.5.
+
+= Eagle =
+
+Eagle é uma camada facilitadora para criar interfaces gráficas.
+
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o PyGTK, conforme as instruções da seção específica.
+ 1. Instale o [[http://www.gustavobarbieri.com.br/eagle/packages/|Eagle]], procurando a última versão disponível em: [[http://www.gustavobarbieri.com.br/eagle/packages/|http://www.gustavobarbieri.com.br/eagle/packages/]].
+
+O uso é simples, sem precisar instalar. Escolha uma das formas:
+
+ 1. Copie o arquivo gtk/eagle.py para o diretório com o programa que quer executar. Desta forma, você terá que copiar o arquivo para a pasta de cada programa que quiser executar.
+ 1. Copie o arquivo gtk/eagle.py para a pasta de bibliotecas do Python. 
+  a. '''Windows:''' em ''C:\Python25\Lib\site-packages''.
+  a. '''Ubuntu Linux 8.04 Hardy:''' coloque o arquivo ''eagle.py'' em ''/usr/lib/python2.5/site-packages''. 
+  Desta forma o eagle será encontrado não importa a pasta em que o programa esteja.

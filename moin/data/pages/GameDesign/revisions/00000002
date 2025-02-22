@@ -1,0 +1,92 @@
+= Conteúdo de Game Design =
+
+Aqui está um texto, ainda imcompleto, sobre game design. Tomei como referências principais, o livro "The computer Game Design Course" de Jim Thompson, que é bem introdutório, e material de minhas aulas da pós-graduação.
+O texto que fiz é bem resumido, e ainda está inacabado, mas como prometi até Domingo(hoje), aqui está! E já é alguma coisa para iniciar discussões sobre o tema.
+
+
+== TEORIA DOS JOGOS ==
+
+=== Um pouco de História ===
+
+Jogos são elementos culturais que estão entre nós há milhares de anos. Desde os primeiros relatos históricos e achados arqueológicos, lá estava o ser humano se divertindo com jogos. Achados arqueológicos do antigo Egito falam de um jogo chamado Senet a 3500AC, o Go tem pelo menos 4000 anos e o Xadrez 1000 anos de existência.
+Essa proximidade do ser humano com a diversão através de jogos, é fonte de muitas pesquisas e teorias. Um famoso pesquisador chamado Johan Huizinga, escreveu um dos primeiros trabalhos sobre o assunto chamado ''Homo Ludens'' em 1938. Neste texto ele define a atividade do jogo da seguinte forma:
+“Jogar é uma atividade ou ocupação voluntária executada em um determinado período de tempo e espaço, de acordo com regras livremente aceitas mas absolutamente fechadas, com o objetivo em si mesma e acompanhada por uma sensação de tensão, alegria, e consciência da diferença para a vida comum.”
+Essa definição baliza a criação de jogos digitais e não-digitais até hoje.
+Analisando a estrutura dos jogos, percebe-se que neles existem duas grandes características, os objetivos e a recompensa, e geralmente quando se atinge o objetivo o jogador vence. Os objetivos podem ser a eliminação de oponentes, vencer uma corrida, atingir alvos ou coletar objetos. E a recompensa pode ser simplesmente demonstrar sua superioridade ante os oponentes, conquistar mais sociabilidade e se divertir. Aliás, muitos jogos são projetados para que a diversão seja a maior recompensa dos jogadores, e onde mesmo perdendo o jogo, a exeriência seja praseirosa.
+
+=== Princípios ===
+
+Depois de Johan Huizinga muitos outros pesquisadores escreveram suas impressões sobre jogos e sua relação a sociedade. Um pesquisador comtemporâneo chamado Jesper Jull, escreveu o seguinte, para dar uma definição, e os elementos fundamentais, para que uma atividade seja considerada um jogo:
+“Um Game é um sistema formal baseado em regras com um resultado variável e quantificável onde diferentes resultados são associados a diferentes valores. Os jogadores depreendem esforços para influenciar o resultado sentindo-se ligados a estes resultados e as consequências desta atividade são opcionais e negociáveis” (The Game, The Player, The World: looking for a heart of gameness)
+
+Então vamos sumarizar os elementos:
+
+'''1) Regras fixas:''' as regras devem ser bem definidas, para que não sejam contestadas em cada partida.
+
+'''2) Resultado variável e quantificável:''' As regras devem prever os resultados para cada ação, e o resultado das ações deve ser quantificável de forma clara.
+
+'''3) Valorização do resultado:''' As regras devem prever que resultados de ações mais complexas, sejam mais valiosos, que resultados de ações simples.
+
+'''4) Esforço do jogador:''' O esforço do jogador deve ser recompensado há altura.
+
+'''5) Ligação do jogador ao resultado:''' É uma característica psicológica do jogo. Onde o jogador deve ficar feliz ao ganhar pontos, ou triste ao perder. É algo complexo de ser adicionado ao jogo, uma vez que depende diretamente do momento em que ocorre durante a partida.
+
+'''6) Consequências negociáveis:''' Os resultados do jogo ficam, no jogo. Ou seja, se o jogador for morto pelos montros, basta reiniciar a partida para continuar vivo.
+
+=== Elementos ===
+Jogos possuem basicamente três elementos. São eles:
+
+'''1) Regras'''
+
+'''2) Peças'''
+
+'''3) Arena'''
+
+As regras são fundamentais para que o jogo possa ser jogado por mais de uma pessoa, por mais de uma vez, e em diferentes momentos. Elas fornecem uma estrutura ao jogo, uma forma para o inicio, o desenvolvimento e o fim da diversão, determinando possibilidades e limitações ao jogador onde ele poderá testar suas habilidades.
+
+As peças são os personagens e objetos importantes para o desenvolvimento do jogo, que são manipuladas ou interagem com o jogador. Em jogos não-digitais, são geralmente cartas, pinos, bonecos, fichas, moedas etc. A peça do jogador (ou no popular, o avatar), é o coponente primário que deve representar o jogador dentro do jogo. É verdade que nem todo jogo possui uma peça que representa o jogador, mas sempre há componentes ligados a ação do jogador.
+
+A arena é o limitador físico do jogo, o tabuleiro ou o cenário. Nem todos os jogos se utilizam de uma arena, como alguns jogos de cartas e dados.
+
+=== Motivação e Objetivos ===
+É na motivação e no objetivo, que está a razão pela qual o jogador se envolve ou não em um jogo.
+
+Porque Jogar? Três tipos de motivação são recorrentes em jogos digitais, a motivação pessoal do personagem; ou uma motivação global; ou ainda uma motivação que une as duas anteriores, chamada Die Hard.
+Imagine três diferentes situações.
+
+1) Você foi drogado e caiu em um sono profundo. Quando acordou viu no jornal que um gorila alienígena de 15 metros sequestrou sua namorada. E só você pode salvá-la.
+
+2) Você foi drogado e caiu em um sono profundo. Quando acordou viu no jornal que um gorila alienígena de 15 metros ameaça destruir o planeta caso não sejam pagos $100 bilhões. E só você pode impedí-lo.
+
+3) Você foi drogado e caiu em um sono profundo. Quando acordou viu no jornal que um gorila alienígena de 15 metros ameaça exterminar a humanidade, e sequestrou sua namorada para repovoar a Terra após a eliminação da humanidade. E só você pode salvar o mundo.
+
+Agora seja honesto e diga, por qual razão vale mais apena jogar? As motivações que unem motivações pessoais e globais, são sempre mais cativantes para os jogadores.
+
+Para vencer um jogo, os jogadores devem cumprir certos sub-objetivos, até que ele esteja apto a enfrentar o gorila alienígena. Esses objetivos, e mini-objetivos devem ser apresentados para preparar o jogador. Os bons objetivos são construtivos, ensinam o jogador a aprimorar suas habilidades, enquanto os objetivos ruins são apenas obstrutivos, e não dizem nada ao que tange a vivência do jogo.
+
+=== Papel do Jogador ===
+''Ainda por fazer...''
+
+== GAME DESIGN ==
+
+=== O que é Design ===
+
+Bem, já vimos o que é um game, mas o que é design? Será que pode-se dizer que é só traduzir do inglês e temos “projeto”, e já é o suficiente? Design é arte? A resposta é não. E é exatamente por não ser o suficiente que a termo não foi traduzido para o português. O termo poder ter pequenas variações de definição, de acordo com a área de especialização do design, como Design Gráfico, Design de Produtos, Design Automobilístico etc... podemos entender melhor o termo design como uma atividade mercadológica que tem por objetivo a criação de produtos. 
+Portanto design não é simplesmente projeto, tampouco arte. O termo projeto remete a algo exato, onde há um objetivo a ser cumprido e um método para ser seguido, mas como design lida com consumo, que nem de longe podemos dizer que é uma atividade lógica nos seres humanos, e o design se encarrega de trabalhar com essa subjetividade do desejo consumista das pessoas. A arte tem a liberdade para ser ofenciva, questionadora e independente, o design não. O designer não tem toda essa liberdade, seu trabalho é criar produtos que satisfaçam os desejos, ou necessidades de consumo das pessoas, logo toda a criação do designer deve estar condicionada a cumprir certos objetivos mercadológicos. 
+Agora para especificar o design no contexto dos jogos. “Design é o processo pelo qual o designer cria um contexto para ser encontrado pelo participante de onde emerge um significado.” (''Salen – Rules of Play, pg 41''). Dessa forma o designer é quem cria o jogo; O contexto de um game é o seu espaço, objetos, narrativas e comportamentos dos elementos; o participante é o jogador, o habitante do jogo que explora e manipula o contexto durante a partida; o significado é aquilo que o participante apreende da partida, o que ele fantasia ser no mundo do jogo.
+
+=== O que faz um game designer ===
+
+Já falamos sobre o que é game, e o que é design, agora qual é o trabalho do game designer
+
+=== Significado ===
+''Ainda por fazer...''
+
+=== Conceito ===
+''Ainda por fazer...''
+
+=== Inspiração e Transpiração (Idéia, e pesquisa) ===
+''Ainda por fazer...''
+
+=== Aplicação dos conceitos ===
+''Ainda por fazer...''

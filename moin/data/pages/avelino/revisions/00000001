@@ -1,0 +1,12 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== @``ME@ ==
+
+Email: <<MailTo(thiagoavelinoster@gmail.com)>>
+Jabber: <<MailTo(avelino@jabber.org)>>
+
+...
+
+----
+CategoryHomepage

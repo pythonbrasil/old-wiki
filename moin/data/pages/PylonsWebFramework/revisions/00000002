@@ -1,0 +1,3 @@
+||<rowstyle="background-color: #FFFFE0;">'''Artigo incompleto.'''||
+
+[http://pylonshq.com/ Pylons] é um framework para desenvolvimento de aplicações web focado em rapidez e flexibilidade. Sua principal característica é o suporte ao padrão [http://www.python.org/dev/peps/pep-0333/ WSGI (Web Server Gateway Interface)], possibilitando escrever aplicações portáveis entre diversos servidores web. O suporte a WSGI é provido pela integração entre o Pylons e o [http://pythonpaste.org/ Paste].

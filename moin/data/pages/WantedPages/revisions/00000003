@@ -1,0 +1,6 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+= Páginas Inexistentes =
+
+Listagem com nomes de páginas que não existem e possuem alguma referência apontando para elas:
+
+<<WantedPages>>

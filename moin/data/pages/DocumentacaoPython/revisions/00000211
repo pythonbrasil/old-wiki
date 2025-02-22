@@ -1,0 +1,156 @@
+Nas seções abaixo você certamente encontrará a documentação que você procura sobre Python. E se não encontrar, sinta-se à vontade para cadastrá-la.
+
+<<TableOfContents>>
+
+== Por onde começar ==
+Se você não tem noção de programação o livro [[http://www.altabooks.com.br/use-a-cabeca-programacao.html|Use a Cabeça! Programação]]  "começa do começo"e utiliza Python para ensinar os princípios básicos da programação.
+
+Outra excelente dica para quem está começando a programar agora é o [[attachment:Aprenda_a_Programar-Luciano_Ramalho.pdf|Aprenda a Programar]] do Luciano Ramalho e se seu inglês te permite compreender textos, o [[http://learnpythonthehardway.org|Learn Python The Hard Way]] também é ótimo.
+
+Quando (ou se) já tiver uma boa base, o criador da linguagem Python criou um excelente tutorial que deve ser o seu próximo passo: TutorialPython.
+
+
+== Documentação Oficial Python ==
+A documentação oficial da linguagem Python, disponível [[http://www.python.org/doc|na página oficial Python]] está sendo traduzida para o português pelo [[http://codigolivre.org.br/projects/pythondoc|Projeto de Documentação Python-BR]]. A situação atual da tradução pode ser vista em PythonDoc.
+
+== Livros Python ==
+Resenhas:
+
+ * [[http://www.lulu.com/content/616789|Computação Científica com Python]] (Português) - Flávio Codeço Coelho
+ * IntroducaoaProgramacaocomPython (Português) - NiloMenezes
+ * AprendendoPython (Português) - Mark Lutz
+ * MergulhandoNoPython (Português) - Mark Pilgrim
+ * [[http://ark4n.wordpress.com/python/|Python para desenvolvedores]] (Português) - Luiz Eduardo Borges
+ * LearningPython (Inglês) - David Ascher e Mark Lutz
+ * DiveIntoPython (Inglês) - Mark Pilgrim
+ * PythonCookbook (Inglês) - Alex Martelli, Anna Ravenscroft e David Ascher
+ * BeginningPython (Inglês) - Peter C. Norton et al
+ * PythonCursoCompleto (Português) - Pedro Morais e José Nuno Pires
+ * ProgrammingPython (Inglês) - Mark Lutz
+ * PythonPocketReference (Inglês) - Mark Lutz
+ * PythonEssencialReference (Inglês) - David Beazley
+ * GameProgrammingWithPython (Inglês) - Sean Riley
+ * ExpressoesRegulares (Português) - Aurelio Marinho Jargas
+
+Os livros abaixo estão fora de circulação ou o seu conteúdo está muito defasado:
+
+ * PythonGuiaDeReferencia (Português) - Marco Catunda
+ * ZopeKitDeConstrucaoDeAplicacoesWeb (Português) - K. Kirchner, Martina Brockmann
+ * PythonHowToProgram (Inglês) - Deitel & Deitel
+ * TheCompletePythonTrainingCourse (Inglês) - Deitel & Deitel
+ * ZopeWebApplicattionDevelopmentAndContentManagement (Inglês) - Jerry Spicklemire, Kim Brand, Kevin Friedly,  Steve Spicklemire
+
+== Formato Web ==
+ * [[http://www.gustavobarbieri.com.br/python/aulas_python/|Python para quem já é Programador]] (Português) - GustavoBarbieri
+ * [[http://getslim.de/kohlenhydrate-tabelle/|Was sind Kohlenhydrate]]
+ * [[http://www.freenetpages.co.uk/hp/alan.gauld/port/|Aprenda a Programar com Python]]
+ * [[http://www.async.com.br/projects/python/pnp/|Python na Prática]] (Português)
+ * [[http://pensarpython.incubadora.fapesp.br/portal|(site off 09/05/2011)Como Pensar como um Cientista de Computação em Python]] (Português) Tradução parcial (colabore!)
+ * [[attachment:Como_Pensar_Python]] Como Pensar como um Cientista de Computação em Python (em PDF)
+ * [[http://www.diveintopython.org|Dive Into Python]] (Inglês)
+ * [[http://www.pythonware.com/library/tkinter/introduction/index.htm|An Introduction to Tkinter]] (Inglês)
+ * [[http://www.ibiblio.org/obp/thinkCSpy/|How to Think Like a Computer Scientist - Learning with Python]] ([[attachment:thinkcspy.pdf|PDF]]) (Inglês)
+ * [[attachment:byte.pdf|A Byte of Python]] (Inglês)
+ * [[http://www.moeraki.com/pygtktutorial/|PyGTK]] (Inglês) - Tutorial sobre utilização de PyGTK.
+ * [[http://sjbrown.ezide.com/writing-games.html|PyGame e Twisted]] (Inglês) - Tutorial sobre a programação de jogos em Python, e uso da framework [[http://www.twistedmatrix.com|Twisted]] para comunicação.
+ * [[http://www.pycs.net/lateral/stories/16.html|PyQt e Eric3]] (Inglês) - Tutorial rápido, sobre !PyQt e Eric3.
+ * [[http://www.pycs.net/lateral/stories/27.html|Custom widgets usando PyQt]] (Inglês) - Esse tutorial ensina a criar uma widget personalizada usando PyQT
+ * [[http://effbot.org/zone/librarybook-index.htm|The Standard Python Library]] (Inglês) - Faz a apresentação objetiva de todos os principais módulos que temos em Python
+ * [[http://pt.wikibooks.org/wiki/Python|Livro de Python pela Wikibooks]] (Português) - Livro sobre Python, incompleto.
+ * [[http://nltk.org/index.php/Book|Natural Language Processing in Python]] (Inglês) - Explica de maneira simples e didática o NLTK(Natural Language Tool Kit), escrito em Python, bem como a linguagem Python e o processamento de linguagem natural(PLN). O material é indicado inclusive para quem ainda não conhece a linguagem.(em PDF e HTML)
+
+== Formatos para impressão ==
+ * [[attachment:Aprenda_a_Programar-Luciano_Ramalho.pdf|Aprenda a Programar]] (Português) - Luciano Ramalho
+ * [[attachment:python24.pdf|Tutorial Python 2.4]] (escrito por GuidoVanRossum e traduzido pela equipe PythonBrasil)
+ * [[attachment:material2.pdf|Módulo A - Bem-vindo a Python!]] (Português) - Labaki
+ * [[http://www.jlabaki.com|Módulo A - Bem-vindo a Python!: Versão otimizada para impressão]] (Português) - Labaki
+ * [[attachment:modulo_b.pdf|Módulo B - Python Orientado a Objetos]] (Português) - Labaki
+ * [[attachment:modulo_c.pdf|Módulo C - Tkinter!]] (Português) - Labaki
+ * [[attachment:intro-python.zip|Introdução ao Python]] (Português)
+ * [[attachment:aula-01.pdf|Python para quem já é Programador - Aula-1]] (Português) - GustavoBarbieri
+ * [[attachment:resumo.pdf|Python para quem já é Programador - Resumão]] (Português) - GustavoBarbieri
+ * [[attachment:cursokov.pdf|Curso de Python]] (Português) - Gustavo Noronha Silva
+ * [[attachment:mergulhando.pdf|Mergulhando em Python]] (Português) - Guilherme Manika - Tradução parcial
+ * [[attachment:minicursoPython.pdf|Mini Curso Python]] (Português)
+ * [[attachment:minicursoPython4horas.pdf|Slides do Mini Curso de Python (duração de 4horas)]] (Português)
+ * [[attachment:mysqlcompython.pdf|MySQL e Python]] (Tradução de DouglasAndrade)
+ * [[attachment:pqr.pdf|Python 2.4 Quick Reference]] (Inglês)
+ * [[attachment:ref.pdf|PyGTK Reference]] (Inglês)
+ * [[attachment:refpython24.pdf|Manual de Referência Python 2.4]] (escrito por GuidoVanRossum e traduzido pela equipe PythonBrasil)
+
+
+== Artigos e Tutoriais ==
+ * AlgoritmoBully - Artigo sobre a implementação de um algoritmo de eleição usado em sistemas distribuídos.
+ * AprendaProgramar - Cópia local do tutorial em PDF mencionado acima
+ * AspectosFormaisDaLinguagemPython - Artigo que fala sobre a análise léxica da linguagem Python.
+ * BancosDeDadosSql - Descreve os aspectos basicos de acesso aos bancos de dados SQL: SQLite, PostgreSQL, Firebird e MySQL.
+ * BateriasNaoInclusas - Como chamar código em C/C++ a partir do Python.
+ * BeautifulSoup - Alguns exemplos de como usar este poderoso parser XML/XHTML
+ * BenchmarkAdHoc - Artigo com comparação de performance entre diversas linguagens (inclusive Python).
+ * [[ComparacaoDeGUIs]] - Breve análise, vantagens, desvantagens e outros detalhes das principais bibliotecas para desenvolvimento de interfaces gráficas disponíveis para Python.
+ * ComoUsarPyQt - Um breve tutorial de como utilizar PyQt (ainda incompleto, contribua!)
+ * ComunicacaoComPipes - Artigo apresentando o uso de pipes em Python com o uso do módulo Popen2
+ * DeterminandoPrimos: artigo demonstrando os passos para se chegar a um programa que determine se um número é primo no menor número de comparações possível. Apresenta links para a definição dos primos e códigos fonte em Python. Por MarcoAndréLopesMendes.
+ * DistUtils - Distribuindo Seu Programa com Distutils, como criar pacotes do seu programa. (por GustavoBarbieri)
+ * DocTest - Mantendo documentação e código em sincronia.
+ * FuncionamentoGarbageCollector - Explicação simplificada sobre o funcionamento do mecanismo de ''garbage collecting''.
+ * GuiaDeEstilo - Tradução da PEP-8 - ''Python Style Guidelines'' para o português. Dicas e convenções usadas na edição e formatação de código em Python.
+ * InteragindoUsuarios - Artigo que fala sobre como usar as funções de stdin (entrada de dados).
+ * InterpretadorCompiladorPython - Artigo sobre a arquitetura do interpretador Python.
+ * IntroducaoJython - Uma introdução ao Jython: panorama, conceituações e prática. Artigo, apresentação e uma aplicação cliente/servidor (chat).
+ * IntroducaoJythonDidatica - Uma introdução bastante didática dessa ferramenta que permite usar o poderio de Python e de Java juntos.
+ * IntroducaoOop - Introdução a Orientação a Objetos utilizando Python
+ * IntroducaoPython - Mini-artigo que apresenta a linguagem Python.
+ * IntroducaoPythonSimples - Uma Simples introdução à programação Python.
+ * MysqlEmWindows64 - Como compilar um modulo MySQL para Python em Windows 64bit.
+ * PensandoEmTkinter - Tradução de "Thinking in Tkinter", de Steven Ferg. Ótimo tutorial para começar a entender como Tkinter funciona.
+ * PrincipiosFuncionais - Como programar em Python usando alguns principios de programação funcional, e outras dicas sobre funções.
+ * ProgramadoresCaprendendoPython - Um pequeno tutorial para quem já sabe C.
+ * ProgramasCompativeisV15 - Como fazer programas compatíveis com o Python versão 1.5, que ainda é bastante usado.
+ * ProgramacaoOrientadaObjetoPython - Tutorial didático sobre Programação Orientada a Objeto.
+ * PyGtk - Página sobre "PyGTK" no portal
+ * PythonApresentacao - Mini-artigo usado para demonstrar Python para pessoas que ainda não a conhecem.
+ * PythonComAdo - Veja como utilizar o ADO no Python.
+ * PythonFuncional - Descreve os aspectos funcionais (lambda, map, filter e zip) de Python.
+ * PythonInstantaneo - Tutorial ultra-rápido para aprender Python.
+ * PythonLdap - Exemplos práticos para manusear uma base LDAP com Python.
+ * PythonParaWeb - Um pequeno ponto de vista sobre programação web utilizando Python.
+ * PythonUno - Descreve um exemplo de automatização de tarefas do OpenOffice usando o Python.
+ * PythonComEmacs - Ensinando o Emacs a trabalhar com Python.
+ * RadComLinux - Mini-artigo sobre o desenvolvimento rápido de aplicações usando Python.
+ * ReferenciasCruzadas - Como evitar problemas com referências circulares usando os módulos weakref e gc.
+ * SignificadoDoSelf - Explicação sobre o self usando funções / métodos.
+ * SobreTurbogears - Aborda as idéias principais e referências introdutórias para o Turbogears, um arcabouço (framework) para a Web feito em Python.
+ * TabCompleta - Ensina como utilizar a tecla {{{<TAB>}}} para completar nomes de funções e métodos, no modo interativo do Python.
+ * TestDrivenDevelopment - Artigo sobre um dos aspectos de Extreme Programming e exemplos de como adotar {{{unittests}}} em seu código.
+ * TudoSobrePythoneUnicode - Tradução do artigo "All About Python and Unicode".
+ * TutorialPyQt - Tradução do ótimo tutorial de Jonathan Gardner.
+ * TutorialRedesNeurais - Tutorial de introdução às redes neurais artificiais com exemplo de código em python.
+ * TutorialStorm - Tradução do Tutorial de Storm, Mapeador Objeto-relacional para banco de dados SQL.
+ * TutorialVirtualenv - Como usar o virtualenv em 5 minutos.
+ * [[http://dicaswordpress.net/|Dicas Wordpress]] - Desenvolvimento WordPress
+ * UnificandoTiposClasses- Tradução de artigo de GuidoVanRossum sobre as alterações radicais feitas na linguagem na versão 2.2.
+ * UsandoGenerators - Aprenda a utilizar geradores (''generators'') no Python.
+ * UsandoVariaveisParte1 - Mini-artigo sobre o funcionamento de variáveis e expressões em Python.
+ * UsandoVariaveisParte2 - Artigo ensinando a usar as "variáveis" no Python, e expressões.
+ * WxGrid - Tutorial sobre como alimentar uma wxGrid através de uma subclasse de {{{PyGridTableBase}}}.
+
+== Artigos fora do PythonBrasil ==
+ * [[http://yguarata.com/blog/wp-content/uploads/2007/05/parametrizacao-python.pdf|Parametrização em Python]] (Por Yguaratã C. Cavalcanti. Artigo que ensina em detalhes a manipulação de parâmetros em Python)
+ * [[http://www.fabiorizzo.com/artigos/python/pdbintro/|Debugando o Python]] (Por Fabio Rizzo. Artigo que ensina a debugar no python usando o módulo pdb)
+ * [[http://www.gustavobarbieri.com.br/jogos/jogo/doc/|Introdução à Programação de Jogos]] (por GustavoBarbieri. Texto que usa Python e PyGame para elaboração passo a passo de um Jogo 2D, porém os conceitos podem ser utilizados para qualquer linguagem e até mesmo jogos 3D.
+ * [[http://www.livejournal.com/users/rstm/3014.html|Como fazer um binding em C para Python]] - Artigo que explica a estrutura básica necessária para fazer um binding de uma biblioteca em C para o Python
+ * [[http://www.fabiorizzo.com/artigos/plone/ploneintro|Introdução ao Plone]] - Curso On-line de introdução ao Plone.
+ * [[http://fabiorizzo.objectis.net/artigos/introdaojython|Introdução ao Jython+Swing]] Artigo que ensina você utilizar as bibliotecas do Swing no Python.
+ * [[http://fabiorizzo.objectis.net/artigos/utilizandojavajython|Utilizando as Bibliotecas Java no Jython]] Neste tutorial, iremos aprender como implementar um !HttpServlets utilizando o Jython (Python), dentro de um container do Tomcat. Também aprenderemos como utilizar as bibliotecas nativas do Java dentro do Jython, trabalhando seus atributos, utilizando exemplos explicativos.
+ * [[http://lameiro.redirectme.net/mediawiki/index.php/O_guia_do_Newbie_do_Pygame|O guia do Newbie do Pygame]] - Artigo com dicas gerais sobre o uso do PyGame.
+ * [[http://www.awaretek.com/tutorials.html|Tutoriais Python]] - Coletânea de tutoriais e exemplos categorizados. Em inglês.
+
+== Documentos diversos (sem classificação atualmente) ==
+ * PapoAdvancedPython - Um bate-papo (IRC) bem interessante que fala sobre algumas técnicas de programação funcional e list-comprehension em Python.
+ * [[http://www.rodrigo.senra.nom.br|Palestras sobre Python (Speeches)]] (por RodrigoSenra)
+ * [[http://www.livejournal.com/users/rstm/1281.html|Python, Máquina Virtual, Bytecode & Otimização]] - Detalhes sobre a representação interna da linguagem Python.
+ * PalestraEagora - Palestra "E Agora Para Algo Completamente Diferente: Python" (por CarlosMoraisDosSantos e EduardoDeOliveiraPadoan)
+
+== Projetos de Tradução ==
+ * TraduçãoPygtk - Aqui encontra-se um status da tradução do material,sendo em Inglês e em Espanhol, bem como o responsável pela tradução de cada módulo e previsão de entrega.

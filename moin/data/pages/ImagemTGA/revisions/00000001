@@ -1,0 +1,93 @@
+= Gravação de Arquivo de Imagens
+
+Por: ''JoaoBueno''
+
+Algumas vezes temos que manipular arquivos de dados binários. Em Python, estruturas de dados que requeiram o posicionamento de valores nos bytes corretos é feito com o módulo Struct. Já, o trabalho com grandes massas de dados, byte a byte, é feito com o módulo Array se for desejado usar só a biblioteca padrão (se forem necessárias muitas operações na massa de dados, pode ser vantagem usar o NumPy)
+
+Este é um exemplo bem direto da criação em memória de uma imagem, e sua gravação em disco como um arquivo do tipo .tga. Arquivos TGA são notoriamente simples de serem lidos e escritos por não empregarem nenhuma compressão de dados.
+
+Para trabalhos "de verdade" com imagens é melhor usar a PythonImagingLibrary - PIL, a biblioteca PyGame, ou outro dentre vários módulos disponíveis. O que está aqu foi só um exercício (pra mim) e estou colandoa qui or que pode ser um exemplo legal de uso do struct e do array.
+
+{{{
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Simple Binary data creation recipe:
+# creation of a plain TGA image file
+# with hardcoded size and contents;
+
+# Author: João S. O. Bueno
+# License: Creative Commons, Attribution Required.
+
+import struct, array
+
+SIZE = 400
+## begin tga header fields:
+## structure seen at 
+## http://gpwiki.org/index.php/TGA, 2009-09-20
+Offset = 0
+ColorType = 0
+ImageType = 2
+PaletteStart = 0
+PaletteLen = 0
+PalBits = 8
+XOrigin = 0
+YOrigin = 0
+Width = SIZE
+Height = SIZE
+BPP = 24
+Orientation = 0
+
+# Struct format string documentation at:
+# http://docs.python.org/library/struct.html
+# (c 'short' stays for 16 bit data)
+StructFmt = "<BBBHHBHHHHBB"
+
+header = struct.pack(StructFmt, Offset, ColorType, ImageType,
+                                PaletteStart, PaletteLen, PalBits,
+                                XOrigin, YOrigin, Width, Height,
+                                BPP, Orientation)
+
+color = (0,0,0)
+
+# Array mdule and format documentation at:
+# http://docs.python.org/library/array.html
+data = array.array("B", (255 for i in xrange(SIZE ** 2 * 3)))
+
+def put(x, y, c):
+    for i in xrange(3):
+        try:
+            data[(y * SIZE + x) * 3 + i] = c[i]
+        except IndexError:
+            print x, y, i, c
+
+def hline(y, x1, x2):
+    for x in xrange(x1, x2 + 1):
+        put(x, y, color)
+
+def vline(x, y1, y2):
+    for y in xrange(y1, y2 + 1):
+        put(x, y, color)
+
+def rect (x1, y1, x2, y2):
+    vline(x1, y1, y2)
+    vline(x2, y1, y2)
+    hline(y1, x1, x2)
+    hline(y2, x1, x2)
+
+def zebra():
+    for i in xrange(0, SIZE / 2, 2):
+        rect(i, i, SIZE - i - 1 , SIZE - i - 1)
+
+def save(filename):
+    datafile = open(filename, "wt")
+    datafile.write(header)
+    data.write(datafile)
+    datafile.close()
+
+if __name__ == "__main__":
+    zebra()
+    save("blaquad.tga")
+}}}
+----
+Voltar ao CookBook

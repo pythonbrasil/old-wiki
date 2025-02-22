@@ -1,0 +1,23 @@
+Esta página serve para organizar as propostas de palestras da comunidade Python Brasil no FISL 13. Pedimos a todos que cadastrem suas palestras abaixo.
+
+Este ano para o http://softwarelivre.org/fisl13 teremos 5 palestras que a APyB irá pré-aprovar (e nenhum slot de palestras relâmpago já que vai ter um espaço só pra isso esse ano!!!). Esse ano as palestras escolhidas vão ser anunciadas e os palestrantes terão que confirmar se vão estar presentes no FISL.
+
+== Palestras ==
+||'''Título''' ||'''Palestrante(s)''' ||'''Descrição''' ||
+||'''Título de exemplo'''||'''palestrante (com link para pagina pessoal que tenha email e CELULAR ou os dados aqui direto)'''||'''Descrição longa da palestra'''||
+||Testando aplicações Django||FranciscoSouza (fss@acm.org)||Uma abordagem '''prática''' sobre testes em Django, baseada em exemplos reais de projetos Django de larga escala, desenvolvidos na Globo.com||
+||Iteráveis, geradores e co-rotinas||LucianoRamalho (luciano!ramalho.org)||Partimos do padrão de projeto '''Iterator''' e mostramos suas várias manifestações e usos práticos em Python. O que já era excelente ficou melhor ainda, com funções e expressões geradoras, que permitem lidar com massas de dados muito grandes de modo eficiente e com baixo consumo de memória. Ao final, mostramos o uso de uma função geradora como co-rotina simplificando a programação assíncrona no framework Tornado. Mais detalhes: http://turing.com.br/wiki/index.php?title=Python:_iteráveis,_geradores_e_co-rotinas||
+||Python para programadores PHP||Evaldo Junior (junior!casoft.info http://infog.casoft.info) ||Python é uma poderosa linguagem de programação que vem ganhando espaço em equipes de desenvolvimento de pequenas e grandes empresas. A linguagem nasceu no início dos anos 90 e sempre teve foco em legibilidade do código e fazer mais com menos. Esta é uma palestra destinadas a desenvolvedores PHP, nela serão abordados os principais tópicos e frameworks para desenvolvimento Python para WEB, características da linguagem, diferenças para o PHP, sistema de módulos e pacotes, comunicação com banco, comunidade, ambiente para desenvolvimento, além de tópicos sobre desenvolvimento desktop e games.||
+||O Estado do Plone||EricoAndrei (ericof!gmail.com)||O Plone é um sistema de gestão de conteúdo conhecido por sua facilidade de uso, segurança e aderência a padrões web e com utilização intensiva em sites governamentais -- ex: brasil.gov.br, serpro.gov.br, fbi.gov --, universidades -- metodista.br, psu.edu -- e intranets de empresas de diversos portes. Processos claros e conhecidos de colaboração, práticas de codificação e uso extensivo de testes automatizados e serviços de integração, o Plone preza pela qualidade de seu código e, graças as ações da Plone Foundation, também possui proteção da propriedade intelectual e licenciamento.A adoção do Deco, grid visual para criação de layouts, do Diazo, nova tecnologia para modificação de design, e o do Dexterty, para criação de novos tipos de conteúdo, dão ao Plone momentum adicional para o seu futuro. Nesta palestra apresentaremos o estado atual e futuro (roadmap) do Plone, suas novas tecnologias, os processos adotados em nossa comunidade e os ganhos obtidos graças a existência e atuação da Plone Foundation. ||
+||Processamento de Linguagem Natural para Leigos em Python||AdrianoPetrich (petrich!gmail.com)|| Existem ferramentas ótimas para Processamento de Linguagem Natural(NLP) aprenda a usar essas ferramentas numa palestra pratica introdutória||
+||Python como Primeira Linguagem de Programação || JoaoSOBueno || Python é uma linguagem de alto nível, de tipagem dinâmica, multi-plataforma e com um mínimo de passos entre o início de um projeto e ter um programa funcional. Um de seus preceitos é não ser uma barreira entre as idéias do desenvolvedor e sua implementação. Entre outras, é adotada como primeira linguagem de programação pelo MIT em seus cursos Ciências da Computação. ||
+||
+|| Desenvolvimento Multimídia com Kivy e Python || JoaoSOBueno || Possibilidade de desenvolver um único projeto que funcione no Desktop e em dispositivos Android. Kivy permite o desenvolvimento de aplicativos tradicionais ou jogos, de forma concisa, fazendo uso de capacidades multitouch de dispositivos móveis, e aproveitando todas as facilidades da linguagem de programação Python. Demonstração de um jogo simples construído com o framework.||
+
+
+
+
+
+== Votação ==
+
+A votação é aberta para membros da APyB.

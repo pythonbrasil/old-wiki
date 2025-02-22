@@ -1,0 +1,48 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+== Inscrições para o V Encontro da Comunidade Python, Zope e Plone Brasileira no VIII FISL ==
+
+Se você deseja apresentar algum tema no V Encontro da Comunidade Python, Zope e Plone Brasileira, que irá ocorrer durante o VIII Fórum Internacional de Software Livre, pode editar esta página e registrar o tema de sua apresentação.
+
+Esse registro nos ajudará a organizar o evento, dando oportunidade a todas as pessoas de participar do encontro.
+
+Os temas poderão envolver qualquer assunto envolvendo Python, como por exemplo Zope, Plone, TurboGears, Django, etc...
+
+Informações sobre o evento:
+
+ http://fisl.softwarelivre.org/8.0/papers/pub/programacao/543
+
+Inscreva-se aqui:
+
+----
+
+ * RodrigoSenra (rsenra _advinha_ acm.org)
+   * Título: Twisted
+   * Tempo solicitado: 10 min
+
+ * JeanRodrigoFerri (jeanrodrigoferri EM yahoo.com.br)
+   * Título: Interlegis - a experiência do Portal Modelo nos municípios brasileiros
+   * Tempo solicitado: 20 min
+
+ * RamiroLuz (ramiroluz EM gmail.com)
+   * Título: Assistente de Migração HTML para Postgresql. Caso de sucesso do Python na Câmara Municipal de Curitiba, sistema com multithread e processamento paralelo MPI.
+   * Tempo solicitado: 20-30 min
+
+ * SidneidaSilva (sidnei.da.silva aquele-simbolo-chatinho gmail.com)
+   * Título: Python e Windows - Desenvolvendo e Avancando o Open Source num ambiente "Nem Tanto"
+   * Tempo solicitado: 10 min
+
+ * EricoAndrei (erico NA simplesconsultoria.com.br)
+   * Título: Python como playground das gigantes de tecnologia
+   * Tempo solicitado: 10 min
+
+ * RobertoAllende (rallende NA menttes.com)
+   * Título: Communes Plone, a governmental free software community
+   * Tempo solicitado: 20-30 min
+
+ * Fabiano Weimar dos Santos (xiru AT xiru DOT org)
+   * Título: frozer - A solução para seu site dinamico que não funciona rápido o suficiente mesmo com o CacheFu.
+   * Tempo solicitado: 10 a 20 min
+
+ * RudaPorto (rudazz NA gmail DOT com)
+   * Título: Removendo o overhead da autenticação no PlonePAS com ADAuthPlugin e SQLAuthPlugin.
+   * Tempo solicitado: 15 min

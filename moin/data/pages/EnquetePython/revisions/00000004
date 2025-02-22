@@ -1,0 +1,31 @@
+Esta página tem a função de coletar informações sobre o ambiente Python que os usuários dessa linguagem costuma usar para facilitar as escolhas de um novato.
+
+Essa pesquisa começou na lista mas para não congestionar a lista com esse tipo de enquete esta página foi criada.
+
+/!\ '''Se alguma opção ficou de fora não adicione ela no formulário pois isso irá zerar a pesquisa. Avise ao WikiMaster ou adicione um comentário na página que ele providencia a inclusão da opção.'''
+
+== Toolkit gráfico ==
+
+[[Vote(EnquetePython, Qual toolkit gráfico você usa?, pyGTK, PyQT, wxPython, Tkinter, PyFLTK, PXPy, Anygui, Outro)]]
+
+Opções retiradas da página ["ComparaçãoDeGUIs"].
+
+== IDE ==
+
+[[Vote(EnquetePython, Qual IDE você usa?, IDLE, Spe, Boa-Constructor, Eclipse+pydev, DrPython, WingIDE, Komodo, BlackAdder, Eric3, Editor de textos, Outro)]]
+
+Opções retiradas da página IdesPython. (Editores de textos incluem vim, emacs, jEdit, jext, etc.)
+
+== Banco de Dados ==
+
+[[Vote(EnquetePython, Qual banco de dados você usa?, MySQL - MySQLdb, PostgreSQL - pypgsql, PostgreSQL - outros, Firebird - kinterbasdb, SQLite - pysqlite, Outro)]]
+
+Opções retiradas da página BancodeDadosSQL.
+
+== Framework Web ==
+
+[[Vote(EnquetePython, Qual framework/módulo Web você usa?, Webware, Cherrypy, Quixote, Twisted Maven, Divmod Nevow, Spyce, mod_python, Python Servlet Engine, Zope, Skunkweb, Crusader, Albatross, Webmodules, Uma combinação de opções, Outro)]]
+
+Opções retiradas da página PythonParaWeb.
+
+''Usei o [http://pythonweb.org Webmodules] mas ainda não coloquei informações sobre ele na página PythonParaWeb -- OsvaldoSantanaNeto''

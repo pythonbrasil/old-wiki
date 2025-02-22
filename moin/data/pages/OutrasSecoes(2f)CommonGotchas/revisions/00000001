@@ -1,0 +1,39 @@
+Aqui é uma página que irá prover uma discussão sobre os problemas mais comuns encontrado em Python que parecem deixar o usuário novato encucado (tá, o experiente também), juntamente da solução deles. São comumente chamados de 'gotchas', uma forma abreviada de 'got you'. Alguns lhe pegam de surpresa quando você está começando, outros são comportamentos esotéricos (jeito bonito de dizer 'bizarro') do Python.
+
+== Atribuição cria referências e não cópias ==
+
+Isso pode ser um ''gotcha'' se você não entender como Python referencia variáveis.
+
+{{{
+#!python
+>>>L = [1,2,3]
+>>>M = ['X', L, 'Y'] # Coloca uma referência a L
+>>>M
+['X', [1, 2, 3], 'Y']
+>>>L[1] = 0 # Muda M também
+>>>M
+['X', [1, 0 ,3], 'Y']
+}}}
+
+'''Solução'''
+
+Este efeito pode se tornar importante em programas grandes, e algumas vezes referências compartilhadas é exatamente o que você quer. Se não são, você pode evitar isso copiando-os explicitamente; para listas, você pode fazer um cópia top-level usando slice sem limites definido.
+
+{{{
+#!python
+>>>L = [1,2,3]
+>>>M = ['X', L[:], 'Y'] # Coloca uma cópia de L
+>>>M
+['X', [1, 2, 3], 'Y']
+>>>L[1] = 0 # Só muda L, não M
+>>>M
+['X', [1, 2 ,3], 'Y']
+>>>L
+[1, 0, 3]
+}}}
+
+Lembre-se, cópias top-level não copiam listas dentro de listas, por exemplo. Se quiser copiar uma estrutura destas, use o módulo copy padrão.
+
+== Repetição adiciona um nível de profundidade ==
+
+Continua...

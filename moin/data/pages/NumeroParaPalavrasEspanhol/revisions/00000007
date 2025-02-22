@@ -1,0 +1,151 @@
+#pragma section-numbers off
+= Receita: Número para Palavras em Espanhol =
+
+Programa que, quando recebe um número (ex: 123), retorna sua forma "por extenso", em espanhol (ex: 'ciento veinti tres')
+Esse codigo é adaptado de um que eu achei no [[http://aspn.activestate.com/ASPN/Python/Cookbook/|Python Cookbook]]. Mudei apenas alguns trechos como funções que, dado um numero retornava um nome, trocando por listas, ou outro em que 16 linhas viraram uma com um metodo rjust.
+O algoritmo que faz a parte 'suja', da conversão em si, eu não mudei nada. Se alguém estiver interessado... Falta também o mais óbvio, traduzir para o português. Acho que assim ele serve pra ensinar a contar em espanhol, pelo menos!
+
+== Código ==
+
+{{{
+#!python
+
+unidades = ["cero", "un", "dos", "tres", "cuatro",
+            "cinco", "seis", "siete", "ocho", "nueve"]
+
+teens = ["diez", "once", "doce", "trece", "catorce", "quince"]
+
+tens = ["diez", "veinte", "treinta", "cuarenta", "cincuenta",
+        "sesenta", "setenta", "ochenta", "noventa"]
+
+def tercia(num):
+    numero=str(num)
+    numero.rjust(3, '0')
+    a=int(numero[0])
+    b=int(numero[1])
+    c=int(numero[2])
+    if a == 0:
+        if b == 0:
+            resultado=unidades[c]
+            return resultado
+        elif b == 1:
+            if c >= 0 and c <= 5:
+                resultado = teens[c]
+                return resultado
+            elif c >= 6 and c <= 9:
+                resultado = tens[b-1]+' y '+unidades[c]
+                return resultado
+        elif b == 2:
+            if c == 0:
+                resultado = 'veinte'
+                return resultado
+            elif c > 0 and c <= 9:
+                resultado ='veinti '+unidades[c]
+                return resultado
+        elif b >=3 and b <= 9:
+            if c == 0:
+                resultado = tens[b-1]
+                return resultado
+            if c >= 1 and c <= 9:
+                resultado = tens[b-1]+' y '+unidades[c]
+                return resultado
+    if a == 1:
+        if b == 0:
+            if c == 0:
+                resultado = 'cien'
+                return resultado
+            elif c > 0 and c <= 9:
+                resultado ='ciento '+unidades[c]
+                return resultado
+        elif  b == 1:
+            if c >= 0 and c <= 5:
+                resultado = 'ciento '+teens[c]
+                return resultado
+            elif c >= 6 and c <= 9:
+                resultado = 'ciento '+tens[b-1]+' y '+unidades[c]
+                return resultado
+        elif b == 2:
+            if c == 0:
+                resultado = 'ciento veinte'
+                return resultado
+            elif c > 0 and c <= 9:
+                resultado ='ciento veinti '+unidades[c]
+                return resultado
+        elif b >= 3 and b <= 9:
+            if c == 0:
+                resultado = 'ciento '+tens[b-1]
+                return resultado
+            elif c > 0 and c <= 9:
+                resultado = 'ciento '+tens[b-1]+ ' y '+unidades[c]
+                return resultado
+
+    elif a >= 2 and a <= 9:
+        if a == 5:
+            prefix='quinientos '
+        elif a == 7:
+            prefix='setecientos '
+        elif a == 9:
+            prefix='novecientos '
+        else:
+            prefix=unidades[a]+' cientos '
+        if b == 0:
+            if c == 0:
+                resultado = prefix
+                return resultado
+            elif c > 0 and c <= 9:
+                resultado = prefix+unidades[c]
+                return resultado
+        elif b == 1:
+            if c >= 0 and c <= 5:
+                resultado = prefix+teens[c]
+                return resultado
+            elif c >= 6 and c <= 9:
+                resultado = prefix+tens[b-1]+' y '+unidades[c]
+                return resultado
+        elif b == 2:
+            if c == 0:
+                resultado = prefix+' veinte'
+                return resultado
+            elif c > 0 and c <= 9:
+                resultado = prefix+' veinti '+unidades[c]
+                return resultado
+        elif b >= 3 and b <= 9:
+            if c == 0:
+                resultado = prefix+tens[b-1]
+                return resultado
+            elif c > 0 and c <= 9:
+                resultado = prefix+tens[b-1]+' y '+unidades[c]
+                return resultado
+def main(num):
+    result=''
+    numero=str(num)
+    numero=numero.rjust(9,'0')+numero
+    posicion=1
+    for i in [0,3,6]:
+        var=numero[i]+numero[i+1]+numero[i+2]
+        if int(var) != 0:
+            res=tercia(var)
+            if i == 0:
+                result=res+" millones "
+            elif i == 3:
+                result=result+res+" mil "
+            elif i == 6:
+                result=result+res
+    return result
+}}}
+
+== Exemplo de uso ==
+Dos comentários do programa original:
+{{{
+
+>>>main('45635')
+
+'Cuarenta y cinco mil seis cientos treinta y cinco'
+
+}}}
+
+Volta para CookBook.
+
+----
+
+EduardoDeOliveiraPadoan

@@ -1,0 +1,47 @@
+Dicas de outros livros interessantes para um programador, esta discussão começou na lista com um post do LeonardoSantagada. Depois surgiu a idéia de colocar a lista de livros em algum lugar, então aqui estão os livros. A lista esta incompleta, ajude colocando mais livros ou adicionando detalhes sobre os livros (autores, links, porque ele é interessante).
+
+Obs: Tirei a seção "outros", talvez outras pessoas queiram incluí-la novamente, mas eu acho que a tendência é que a lista fique grande demais e meio sem foco. Acho melhor focar nos livros mais técnicos, mas é só minha opinião pessoal... (CarlosRibeiro) - eu acho que tem que coloca-la de volta (LeonardoSantagada)
+
+== Computação & Matemática ==
+ The Art of Computer Programming — Donald Knuth:: [[http://www.amazon.com/Computer-Programming-Volumes-1-4A-Boxed/dp/0321751043|{{http://ecx.images-amazon.com/images/I/41gCSRxxVeL._SL500_SS75_.jpg}}]] Livro clássico e muito preciso, mas muito complexo e o autor não economiza matemática para explicar os conceitos. Não deve ser o primeiro livro de algoritmos a ser lido.
+ The C Programming Language — Brian Kernighan & Dennis Ritchie:: [[http://www.amazon.com/Programming-Language-2nd-Brian-Kernighan/dp/0131103628|{{http://ecx.images-amazon.com/images/I/41G0l2eBPNL._SL500_SS75_.jpg}}]]Um livro que explica toda a linguagem C e é bem curto e direto. Tente pegar a versão que já fala sobre ansi C.
+ JavaScript: The Good Parts — Douglas Crockford:: [[http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742|{{http://ecx.images-amazon.com/images/I/41EMBPmjJLL._SL500_PIsitb-sticker-arrow-big,TopRight,35,-73_OU01_SS75_.jpg}}]] Livro importante sobre JavaScript. [[http://video.yahoo.com/watch/630959/2974197| Uma palestra do autor sobre o livro]]
+ * Structure and Interpretation of Computer Programs
+ * Design Patterns: Elements of Reusable Object-Oriented Software
+ * Advanced Programming in the UNIX environment
+ * UNIX Internals: The new frontier
+ * Beautiful Code
+ * Mastering Regular Expressions
+ * Concrete Mathematics
+ * Programming Pearls
+ * Code Complete
+ * Estrutura de Dados Usando C — Andrew's Tanenbaum, Yedidyah Langsam, Moshe J. Augenstein
+ * Introdução à Organização de Computadores — Mário A. Monteiro
+ * Computer Networks — Andrew's Tanenbaum
+ * Engenharia de Software — Roger S. Pressman
+ * Engenharia de Software — Ian Sommerville
+ * Head First: Design Patterns
+ * Aprendendo Python — Mark Lutz & David Ascher
+ * Beautiful Code
+ * Programming Pearls
+ * Beautiful Data (sobre como organizar melhor os dados de maneira a
+  interpretar melhor as informações, tem um ou dois capítulos especiais em
+  python)
+ * Programming Challenges do Skiena (pra desafios de maratona de
+  programação)
+ * Programming Collective Intelligence (os códigos do livro impresso são
+  bem bugados, mas no site tem as erratas)
+ * Handbook of Algorithms and Data Structures in Pascal and C (como eu sou
+  um pascaleiro, esse livro me ajudou bastante já. ele tem umas 140 páginas só
+  de referências bibliográficas)
+
+== Design ==
+ * Thinking with type
+ * Presentation Zen
+ * The Design of Everyday Things — Donald Norman
+ * Emotional Design: Why We Love (or Hate) Everyday Things — Donald Norman
+
+== Lógica & Filosofia ==
+ * Logicomix
+ * Gödel, Escher, Bach
+ * Introdução a Lógica para Ciências da Computação — Jair Minoro Abe, Alexandre Scalzitti &  João Inácio da Silva Filho

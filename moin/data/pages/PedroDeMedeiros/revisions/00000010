@@ -1,0 +1,28 @@
+#pragma section-numbers off
+= Pedro Vaz de Mello de Medeiros =
+
+Não pretendo colocar muitas informações aqui. Tenho meu próprio [http://www.nonseq.net site] onde mantenho um [http://www.nonseq.net/?q=blog/1 blog] e a maior parte das coisas que me interessa, então, cabe a este espaço aqui apenas listá-las e fazer uma breve introdução a meu respeito.
+
+Por onde começar? Ah, sim. Tudo começou quando eu primeiro me toquei sobre a existência do software livre e seu mais famoso exemplar, GNU/Linux, isso por volta de 1995. A distro era [http://slackware.com Slackware] e o nome do lugar, [http://unb.br UnB] (Universidade de Brasília). Comecei fazendo administração e programação, desde scripts pequenos para conversão de dados e código de "cola" em Bash (e, depois, Perl) até programas de tamanho médio em C e C++. Foi em 2002 que finalmente descobrir as maravilhas da linguagem Python e me tornar um programador muito mais preguiçoso que antes de então. ;-)
+
+O resto até então foi uma expansão natural dos eventos causados pela difusão da Internet, minha flutuação de interesses causada por meus projetos de programação e um grande respeito na capacidade e poder do software livre.
+
+= Contribuições no PythonBrasil =
+
+Relato das minhas contribuições ao sítio PythonBrasil, na tentativa de me incentivar a contribuir mais ou me lembrar o que eu posso ainda melhorar nos artigos que eu escrevi ou contribuí.
+
+ * Artigo ComunicaçãoComPipes;
+ * Tradução da parte "Estendendo e Embutindo o Interpretador Python" da Documentação Oficial em DocumentacaoPython;
+ * Contribuição com algumas respostas às PerguntasFrequentes;
+ * Contribuição com seção sobre {{{__iter__}}} no artigo UsandoGenerators;
+ * Contribuição com definições no ["Dicionário"].
+
+Fora isso, fiz diversas correções de português em diversos artigos e páginas e estou checando novidades constantemente.
+
+= Contato =
+
+Emails: pedro (at) yawl.com.br
+
+ICQ: 2878740
+
+Meu site (non sequitur) e de amigos: http://www.nonseq.net

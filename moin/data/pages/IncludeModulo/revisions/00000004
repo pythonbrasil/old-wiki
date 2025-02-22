@@ -1,0 +1,35 @@
+## page was renamed from IncludeMódulo
+#pragma section-numbers off
+= Include =
+
+Às vezes pode-se achar necessária a inclusão de outro arquivo em seu programa, sem ter que recorrer ao "import" (quando, por exemplo, precisar carregar um módulo dinamicamente, e possuir o nome dele apenas em uma variável). O código abaixo faz exatamente isso.
+
+Não ligo para a licença de distribuição desse snippet, portanto façam o que quiser com ele :)
+
+== Código ==
+
+{{{
+#!python
+def include(filename):
+    try:
+        fd = open(filename, "r")
+    except:  
+        return
+
+    eval(compile(fd.read(), filename, "exec"))
+    fd.close() 
+}}}
+
+----
+
+LeandroPereira
+
+----
+
+Ou então, se você quer ser um cara legal e usar o interpretador, existe ua função embutida {{{__import__}}}
+que recebe como argumento uma string com o nome do módulo (não do arquivo) e retorna um objeto module.
+Depois disso, é tranquilo.
+
+----
+
+Alexandre Passos

@@ -1,0 +1,15 @@
+##master-page:HomepageTemplate
+#format wiki
+#language pt-br
+== Gustavo de Carvalho Sales ==
+----
+Email: <<MailTo(gt.salles@gmail.com)>>
+
+Site: [[http://gtsalles.com.br]]
+
+Github: [[http://github.com/gtsalles]]
+
+----
+Gustavo de Carvalho Sales é um estudante de Ciência da Computação da [[http://ufpi.br|UFPI]]. Entusiasta de sistemas open source, apreciador de bons problemas e principalmente de resolvê-los, leve o tempo que levar. Perdidamente apaixonado por Python, torcedor do Flamengo, amante de boa música, apreciador de uma cerveja bem gelada e membro ativo do [[https://www.facebook.com/groups/pugpi/|PUG-PI]].
+
+Atualmente brincando com Python e Django na [[http://agencia128bits.com|Agência 128 Bits]].

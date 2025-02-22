@@ -1,0 +1,67 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+Este site foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma (Português). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente. Veja o ComoUsarWiki para aprender a usar esta ferramenta.
+
+= Destaques =
+
+'''Atualização do Moin do site''' - Atualizei a versão do Moin para a mais recente (1.3.4) e isso pode gerar alguns probleminhas. Caso você encontre algum envie o ''traceback'' gerado e uma descrição dos passos usados para reproduzir o problema para o e-mail osantana (at) gmail.com.
+
+'''Apostila de Introdução ao Zope''' - Disponível apostila de Introdução ao Zope, com explicações detalhadas de como iniciar no Zope.
+[http://www.fabiorizzo.com/artigos/zope/zopeintro Acesse a apostila aqui!]
+
+'''Apostila de Introdução ao Plone''' -  Está disponível apostila de Introdução ao Plone, explicando passo-a-passo como iniciar a utilização dessa fantástica ferramenta chamada Plone. [http://www.fabiorizzo.com/artigos/plone/ploneintro Acesse a apostila aqui!]
+
+'''1a Conferência Brasileira de Python''' - Foi realizada a primeira conferência brasileira exclusiva sobre Python,  nos dias 28 e 29 de abril de 2005 no Centro de Computação da UNICAMP. Maiores informações na página PyConDayBrasil 
+
+'''Enquete Plataforma Python''' - Para facilitar a escolha dos novatos sobre quais componentes ele pode usar para desenvolver em Python criamos a EnquetePython onde você, que já programa em Python pode dizer quais elementos compõem seu ambiente de trabalho.
+
+= Iniciantes =
+
+Leitura recomendada para aqueles que têm interesse ou são iniciantes na linguagem Python ou em ["Jython"]:
+
+   * IntroPython - O Guia da comunidade Python Brasil para iniciantes da linguagem Python.
+   * IntroduçãoPythonSimples - Uma Simples introdução a programação Python (escrito por RaLobao)
+   * IntroduçãoPython e PythonApresentação - Artigos de OsvaldoSantanaNeto.
+   * PythonInstantaneo - Artigo Magnus Lie Hetland traduzido por WanderleiAntonioCavassin.
+   * IntroduçãoJythonDidática - Uma introdução bastante didática e relativamente completa dessa ferramenta que permite usar o poderio de Python e de Java juntos.
+
+= Seções =
+
+Aqui estão algumas das seções desse site. Se você gostaria de sugerir outras é só entrar em contato com o WikiMaster mais próximo.
+
+   * PerguntasFrequentes - Perguntas e Respostas frequentes.
+   * NotíciasPython - Notícias sobre Python.
+   * ProjetosPythonBrasil - Projetos apoiados pelo site.
+   * DocumentacaoPython - Documentação, Livros, Manuais, Tutoriais e afins.
+   * PythonNaEducação - Página mantida por professores e coordenadores de cursos de Python {NEW}
+   * CookBook - Trechos de códigos úteis.
+   * SoftwarePython - Módulos, Editores e Ferramentas para desenvolvimento Python, bem como projetos desenvolvidos por brasileiros.
+   * EmpresasPython - Empresas Brasileiras que já usam Python para aumentar seus lucros :)
+   * OportunidadesDeEmprego - Vamos fazer a nossa parte no 'espetáculo do crescimento'. Empregue-se e ofereça empregos. Alguns recadinhos profissionais também estão aqui.
+   * DiscussõesAleatórias - Se você não sabe em que página contribuir, use esta.
+
+= Como Participar =
+
+Você pode participar da comunidade PythonBrasil diretamente aqui no site, através da lista de discussão ou via IRC.
+
+=== Lista de Discussão ===
+
+A lista oficial do site é: python-brasil@yahoogrupos.com.br ([http://br.groups.yahoo.com/group/python-brasil/ página principal]). Para se cadastrar na python-brasil, envie email (com qualquer conteúdo/assunto) para python-brasil-subscribe@yahoogrupos.com.br. Feito isso você receberá um e-mail de confirmação. É só responder a esse e-mail e pronto.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+'''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existe ainda uma lista chamada python-br que está sendo desativada. Se você tem conta nesta lista, por favor migre para a lista python-brasil.
+Pedimos a todos pythonistas e curiosos que não remetam e-mails para a lista python-br! A lista python-br não tem como ser moderada ou gerenciada
+devido a um problema de autenticação.
+
+=== Canal de IRC ===
+
+O canal oficial do '''Python''' no Brasil é o #python-br do irc.freenode.org.
+
+=== Outros ===
+
+   * CaixaDeSugestões - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PáginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuários - Outros sites de grupos de usuários Python.

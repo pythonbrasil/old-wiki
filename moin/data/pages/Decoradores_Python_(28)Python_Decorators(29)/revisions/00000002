@@ -1,0 +1,261 @@
+Está é uma simples introdução preparada para o encontro de usuários Python do Grupo "''[http://wiki.gnhlug.org/twiki2/bin/view/Www/WebHome Greater New Hampshire Linux Users Group]''".
+
+== Funções de primeira classe (First-class functions) ==
+
+Métodos/Funções em Python são objetos de primeiro nível. Peculiarmente, funções podem ser passadas como valores para outras funções e serem retornadas como valores de outras funções. Por exemplo, aqui está uma função que recebe uma função como argumento e imprime o nome dela na saída padrão:
+
+{{{
+
+>>> def show_func(f):
+...   print f.__name__
+}}}
+
+E aqui um simples exemplo de uso:
+
+{{{
+>>> def foo():
+...   print 'foo here'
+
+>>> show_func(foo)
+foo
+}}}
+
+E aqui está uma função que gera uma nova função e a retorna como resultado. Nesse caso, {{{make_adder()}}} cria uma nova função que soma o parâmetro {{{y}}} à constante {{{x}}}, passada na sua criação.
+
+{{{
+>>> def make_adder(x):
+...   def adder(y):
+...     return x+y
+...   return adder
+
+>>> a = make_adder(5)
+>>> a(10)
+15
+}}}
+
+== Decorando uma função (Wrapping a function) ==
+
+Combinando essas duas idéias, nós podemos fazer uma função que recebe uma função como parâmetro e retorna uma nova função que é baseada na função passada. Por exemplo, podemos decorar a função passada em uma nova função que loga todas suas chamadas.
+
+{{{
+>>> def show_call(f):
+...   def shown(*args, **kwds):
+...     print 'Calling', f.__name__
+...     return f(*args, **kwds)
+...   return shown
+
+>>> bar = show_call(foo)
+>>> bar()
+Calling foo
+foo here
+}}}
+
+Se nós reatribuirmos o resultado de {{{show_foo()}}} para o mesmo nome, nós estamos de fatos substituindo a função original pela versão decorada.
+
+{{{
+>>> foo = show_call(foo)
+>>> foo()
+Calling foo
+foo here
+}}}
+
+== Decoradores são açucar sintático (Decorators are syntactic sugar) ==
+
+Se você seguiu essa discussão até aqui, então você entende as bases em que se apóiam os decoradores, pois um decorador é apenas um açúcar sintático para o que acabamos de fazer. Especificamente, o código.
+
+{{{
+#!python
+@show_call
+def foo():
+  pass
+}}}
+
+É equivalente a:
+
+{{{
+#!python
+def foo():
+  pass
+foo = show_call(foo)
+}}}
+
+Qualquer função que recebe uma outra função como parâmetro como seu único argumento e retorna uma outra função ou qualquer outro tipo  "''callable''" (qualquer tipo que responda ao método {{{__call__()}}}, como um "''descriptor''", mas não falaremos deles aqui) pode ser usado como um decorador.
+
+== Então, qual é a grande sacada? (So what's the big deal?) ==
+
+Por um lado não há bem uma "grande sacada"; decoradores não adicionam nada de novo à linguagem. Eles são apenas uma nova sintaxe para uma Idéia antiga. Mas decoradores também mostram como a sintaxe pode fazer diferença – eles são bem populares  e muito usados em códigos Python contemporâneos.
+
+Decoradores são usados vastamente para extrair um código comum que deve ser aplicado para diversas funções. Colocando o decorador com uma sintaxe própria, torna a intenção e a função do código muito mais claras.
+
+== Decoradores bem comportados (Well-behaved decorators) ==
+
+Com um simples decorador, como mostrado abaixo, existem notáveis diferenças entre a função original e a função decorada:
+
+{{{
+>>> def bar():
+...   ''' Function bar() '''
+...   pass
+
+>>> bar.__name__, bar.__doc__, bar.__module__
+('bar', ' Function bar() ', '__main__')
+
+>>> import inspect
+>>> inspect.getargspec(bar)
+([], None, None, None)
+
+>>> bar2 = show_call(bar)
+>>> bar2.__name__, bar2.__doc__, bar2.__module__
+('shown', None, '__main__')
+
+>>> inspect.getargspec(bar2)
+([], 'args', 'kwds', None)
+}}}
+
+Os atributos da função não são copiados para a função decorada, e a assinatura do método decorado é diferente da original.
+
+Há como preservar os atributos da função original copiando-os da função original para a função decorada. Aqui está uma implementação melhor para "{{{show_call()}}}":
+
+{{{
+#!python
+def show_call(f):
+  def shown(*args, **kwds):
+    print 'Calling', f.__name__
+    return f(*args, **kwds)
+
+  shown.__name__ = f.__name__
+  shown.__doc__ = f.__doc__
+  shown.__module__ = f.__module__
+  shown.__dict__.update(f.__dict__)
+
+  return shown
+}}}
+
+Nesta versão, os atributos estão corretos, porém a assinatura está completamente diferente:
+
+{{{
+>>> bar2 = show_call(bar)
+>>> bar2.__name__, bar2.__doc__, bar2.__module__
+('bar', ' Function bar() ', '__main__')
+}}}
+
+O módulo {{{functools}}} (novo no Python 2.5) provê um decorador para decoradores, chamado wraps(), que simplesmente copia os atributos do método original para o novo método. O exemplo acima poderia ser escrito da seguinte maneira:
+
+{{{
+>>> from functools import wraps
+
+>>> def show_call(f):
+...   @wraps(f)
+...   def shown(*args, **kwds):
+...     print 'Calling', f.__name__
+...     return f(*args, **kwds)
+...   return shown
+
+>>> bar2 = show_call(bar)
+>>> bar2.__name__, bar2.__doc__, bar2.__module__
+('bar', ' Function bar() ', '__main__')
+}}}
+
+O módulo {{{decorator}}} de Michele Simionato faz uso do método {{{eval()}}} para criar decoradores com a mesma assinatura do método original.
+
+== Decoradores com argumentos (Decorators with arguments) ==
+
+Você deve ter notado algo novo no exemplo acima: o próprio decorador {{{wraps()}}} recebe um argumento. Como será que isso funciona?
+
+Vamos supor que temos este código:
+
+{{{
+#!python
+@wraps(f)
+def do_nothing(*args, **kwds):
+  return f(*args, **kwds)
+}}}
+
+Pela definição da sintaxe de decoradores, isto é equivalente à:
+
+{{{
+#!python
+def do_nothing(*args, **kwds):
+  return f(*args, **kwds)
+
+do_nothing = wraps(f)(do_nothing)
+}}}
+
+Para isto fazer sentido, {{{wraps()}}} deve ser uma fábrica de decoradores – uma função onde o valor de retorno é também um decorador. Em outras palavras, {{{wraps()}}} é uma função cujo retorno é uma função que recebe uma função como argumento e retorna uma função!
+
+Uau!
+
+Que tal um exemplo simples? Podemos fazer um decorador que repetidamente chama a função a qual está decorando? Para um número constante de chamadas, isto é balela:
+
+{{{
+>>> def repeat3(f):
+...   def inner(*args, **kwds):
+...     f(*args, **kwds)
+...     f(*args, **kwds)
+...     return f(*args, **kwds)
+...   return inner
+
+>>> f3 = repeat3(foo)
+>>> f3()
+foo here
+foo here
+foo here
+}}}
+
+Mas caso queiramos prover o número de repetições como um argumento? Então precisamos de uma função que tenha como retorno um decorador. O decorador retornado será similar ao {{{repeat3()}}}, acima. Isso requere um novo nível de hierarquia de funções:
+
+{{{
+>>> def repeat(n):
+...   def repeatn(f):
+...     def inner(*args, **kwds):
+...       for i in range(n):
+...         ret = f(*args, **kwds)
+...       return ret
+...     return inner
+...   return repeatn
+}}}
+
+Aqui {{{repeat()}}} é uma fábrica de decoradores, {{{repeatn()}}} é de fato o decorador, e {{{inner()}}} é o método decorado que será chamado no lugar do original.
+
+N. d. t: A fábrica de decoradores só se faz necessária quando passamos argumentos para o decorador.
+
+Aqui ele sendo usado com a sintaxe de decoradores:
+
+{{{
+>>> @repeat(4)
+... def bar():
+...   print 'bar here'
+
+>>> bar()
+bar here
+bar here
+bar here
+bar here       
+}}}
+
+== Exemplos Reais (Real-world examples) ==
+
+Bons exemplos para iniciantes de decoradores do mundo real são difíceis de encontrar. Decoradores tendem a ser bem simples, estes não adicionam muito aos exemplos acima, ou significativamente mais complexos e difíceis de entender.
+
+E decoradores do mundo real são normalmente compostos de outros decoradores e não são únicos, trabalham juntos.
+
+A biblioteca de decoradores ''[http://wiki.python.org/moin/PythonDecoratorLibrary Python Decorator Library]'' é uma boa fonte de exemplos simples.
+
+O decorador [http://wiki.python.org/moin/PythonDecoratorLibrary#head-b3d8da6dba23d97be6f8b70d25f90ef70ebdb791 Synchronize] é um dos mais simples. O [http://wiki.python.org/moin/PythonDecoratorLibrary#head-d4ce77c6d6e75aad25baf982f6fec0ff4b3653f4 Easy Dump of Function Arguments] é uma versão mais completas do {{{show_call()}}}, usado acima.
+
+O [http://www.turbogears.org/ TurboGears] usa extensivamente o seu decorador {{{@expose}}} para configurar a saída de métodos que são expostos para a web. O código está [http://svn.turbogears.org/trunk/tg/controllers.py aqui].
+
+== Próximas leituras (Further reading) ==
+
+[http://www.python.org/doc/2.4.4/whatsnew/node6.html What's new in Python 2.4] – Dá uma explanação breve sobre o que são os decoradores.
+
+[http://www.python.org/dev/peps/pep-0318/ PEP-318] é a formalização da sintaxe dos decoradores.
+
+A biblioteca de decoradores [http://wiki.python.org/moin/PythonDecoratorLibrary Python Decorator Library] tem vários exemplos interessantes.
+
+A [http://www.phyast.pitt.edu/~micheles/python/documentation.html documentação] para o módulo {{{decorator}}} de Michele Simionato tem uma descrição do problema de criar decoradores bem comportados e vários exemplos de decoradores. O próprio módulo provê uma maneira de criar decoradores que preservam a assinatura dos métodos decorados.
+
+David Mertz escreveu um coluna para o Charming Python chamado "[http://www-128.ibm.com/developerworks/linux/library/l-cpdecor.html?ca=dgr-lnxw09PythonDecorators Decorators make magic easy]".
+
+----
+
+Artigo traduzido com a devida autorização do autor, Kent Johnson, do site: http://personalpages.tds.net/~kent37/kk/00001.html por Ruivaldo Neto. Revisão e formatação por OsvaldoSantanaNeto

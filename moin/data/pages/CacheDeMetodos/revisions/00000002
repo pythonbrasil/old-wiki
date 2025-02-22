@@ -1,0 +1,28 @@
+Classe de exemplo demonstrando um método simples de se fazer cache dos resultados dos métodos em uma classe.
+
+{{{#!python
+class Cache:
+    def __init__(self):
+        # cache do metodo fatorial()
+        self.c_fatorial = {}
+        
+    def fatorial(self,  x):
+        result = 0
+        # verificando cache
+        if x in self.c_fatorial.keys():
+            return self.c_fatorial[x]
+        # processamento normal
+        if x <= 1:
+            result = 1
+        else:
+            result = x * self.fatorial(x - 1)
+        
+        self.c_fatorial[x] = result
+        return result
+        
+# Evento principal
+if __name__ == '__main__':
+    c = Cache()
+    print c.fatorial(5) # aqui o fatorial é processado.
+    print c.fatorial(5) # e aqui ele é obtido do cache.
+}}}

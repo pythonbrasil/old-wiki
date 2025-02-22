@@ -1,0 +1,578 @@
+#pragma section-numbers off
+= Introdução ao Jython =
+
+[[TableOfContents]]
+
+== O que é Jython? ==
+
+Jython é a união entre o Java e o Python, devemos aqui fazer uma separação entre a linguagem de programação Java e a plataforma Java.
+
+Primeiro temos a linguagem (um C++ que não deu certo) que possui certas características. Podemos citar por exemplo a orientação a objetos e o fato de Java não ser compilada de forma a gerar um binário nativo (características em comum com o Python). É ai que entra a plataforma Java, todos que conhecem o Java sabem que a propaganda do Java é "Write Once, Run Anywhere", algo como compile uma vez rode em qualquer lugar. Java funciona assim porque ele não roda diretamente em contato com a plataforma nativa e sim em cima de uma máquina virtual que cria uma camada com API's padronizadas. Bom se é assim eu preciso usar "aquela linguagem " para programar para Java?
+
+    Na verdade hoje já existem varias linguagens para a plataforma Java (Ruby, Perl um tclsh ainda incompleto, Smalltalk e, acreditem se quiser, tem um compilador Cobol pra Java) e de todas estas linguagens a que consegui ir mais fundo na integração com a plataforma Java foi com Python (Python tem acesso a todos os recursos da plataforma Java e a todas as bibliotecas, além de possuir a capacidade de "compilar" o bytecode resultante. O resultado final não é totalmente indepedente do Jython porque ele estende um pouco as classes nativas do Java, mas é possível incluir todas as dependecias em um jar com cerca de 83KB, dependendo do que é usado).
+
+== As vantagens do Jython ==
+
+   1 - Velocidade de desenvolvimento: Python é uma linguagem de desenvolvimento rápido (cerca de 8 vezes mais rápido que em linguagem Java).
+   2 - Praticidade: Você não precisa compilar o código Jython pra testá-lo. Isto torna a depuração muito mais rápida. Depois de terminado o processo você utiliza o compilador Jythonc para compilar o programa, para incluir as biliotecas do Jython existe a opção do freeze.
+   3 - Tempo de aprendizado: É muito mais rápido que no caso da linguagem Java (até por esta ser derivada do C++ que tradicionalmente não é uma linguagem fácil).
+
+== Pondo a mão na massa ==
+
+=== Instalação ===
+
+Aqui nós cobriremos apenas a instalação do pacote binário, mas como o Jython é distribuido seguindo uma licença bem liberal
+você pode compilar ele do fonte. Não é necessário, já que a plataforma Java é unificada.
+
+==== Download ====
+
+Em http://www.jython.org/download.html você encontrará as versões mais recentes do Jython.
+
+Baixe uma versão atualizada da VM do Java (dhuu!!). Jython funciona a partir da versão 1.1. Nos meus testes ele não rodou em nada mais velho que a versão 1.2. Estou utilizando o 1.4 no meu Linux mas os programas rodam igualmente bem em um 1.3 (instalado em OS/2).
+
+A instalação é simples. Simplesmente execute o .class:
+
+{{{
+java jython-????
+}}}
+
+e siga as instruções da interface gráfica de instalação.
+
+'''Obs:''''' não inclua a extensão do arquivo no comando acima, se por exemplo o arquivo baixado é jython-21.class, o comando será ''{{{java jython-21}}}'' -- RodrigoVieira''
+
+==== O primeiro programa em Python no Java ====
+
+Vamos fazer um {{{Hello world!}}} rapidinho:
+
+Execute o Jython (normalmente existe um script pra isso no diretório onde você instala o Jython).
+
+{{{
+Jython 2.1 on java1.4.1 (JIT: null)
+Type "copyright", "credits" or "license" for more information.
+
+>>>from javax.swing import *
+>>>
+>>> janela = JFrame('Teste')
+>>> label = JLabel('Ola mundo!')
+>>> janela.getContentPane().add(label)
+>>> janela.setBounds(20,20,200,200)
+>>> janela.setVisible(1)
+}}}
+
+E temos o nosso {{{Hello world!}}}.
+
+== Trabalhando com classes "Java Puro-Sangue" ==
+
+Primeiro vamos criar uma classe em Java. Vamos utilizar um painel com um rótulo:
+
+{{{
+#!java
+/**
+ * Painel com uma caixa de texto e um label.
+ * 
+ * Um objeto muito usado
+ * @version 0.0.1
+ */
+
+import java.awt.*;
+import javax.swing.*;
+
+public class lentry extends JComponent {
+    private JLabel label;
+    private JTextField texto;
+
+    public lentry(String rotulo) {
+        label = new JLabel(rotulo);
+        texto = new JTextField();
+        setLayout(new GridLayout(2,2));
+        add(label);
+        add(texto);
+    }
+
+    public String getText() {
+        return this.texto.getText();
+    }
+
+    public void setText(String te) {
+        this.texto.setText(te);
+    }
+}
+}}}
+
+Bom o próximo passo é compilar o arquivo:
+
+{{{
+javac lentry.java
+}}}
+
+Com o .class em mãos vamos utilizá-lo no Jython. Aqui vai um exemplo simples:
+
+{{{
+#!python
+from javax.swing import *
+from java import awt
+
+# importando a nossa classe Java
+import lentry
+
+class teste(JFrame):
+   def __init__(self, rotulo='Teste'):
+      JFrame.__init__(self, rotulo)
+      teste = lentry('Rotulo')
+      self.setLayout(awt.BorderLayout())
+      self.getContentPane().add(teste)
+      self.setBounds(20,20,200,300) # define o tamanho da janela
+      self.setVisible(1)
+
+if __name__=="__main__":
+   janela = teste()
+}}}
+
+Aqui vemos algumas diferenças básicas entre o Python e o Java. Basicamente não importa como foi feito o objeto o efeito final para uso dele é o mesmo (aquilo que os pythonistas já estão acostumados mas no quesito importação nós vamos ver a diferença: Java trata cada arquivo como uma classe, já para Python um arquivo pode conter várias classes. Também não é necessário que a classe tenha o mesmo nome do arquivo). Por isso quando vamos importar algo escrito em Java (the lang) a importação é feita do modo simples:
+
+{{{
+import nome_do_objeto
+}}}
+
+Para todos os outros efeitos nem mesmo o programador será capaz de dizer se está usando um módulo "Puro-Sangue" ou um módulo feito em Python.
+
+'''Observação:''' A maneira como o Python trata os arquivos em relação aos objetos é o principal motivo pelo qual os seus programas feitos no Jython não são totalmente independentes do Jython uma vez compilados as classes criadas neles são primariamente objetos do Python, embora possam ser usados no Java.
+
+== Utilizando o Jython no Java ==
+ 
+Este exemplo veio do site do Jython, me foi enviado por alguem da lista, não me lembro quem e infelizmente eu perdi o e-mail.
+Primeiro vamos criar a seguinte classe em Python:
+
+{{{
+#!python 
+#------------------------------------
+# WelcomeFrame.py
+#-----------------------------------
+
+import javax.swing as swing
+import java.awt as awt
+import java.lang as lang
+
+def exit(event):
+   lang.System.exit(0)
+
+class WelcomeFrame(swing.JFrame):
+   names = ["Groucho", "Chico", "Harpo"]
+   quotes = {"Groucho": "Say the secret word", "Chico": "Viaduct?", "Harpo": "HONK!"}
+
+   def __init__(self, title="Welcome to Jython", size=(200, 200)):
+      "@sig public WelcomeFrame(String title, java.awt.Dimension size)"
+      self.title = title
+      self.windowClosing = exit
+      self.contentPane.layout = awt.FlowLayout()
+      self.field = swing.JTextField(preferredSize=(200,20))
+      self.contentPane.add(self.field)
+      buttons = [self.createButton(each) for each in self.names]
+      for eachButton in buttons:
+         self.contentPane.add(eachButton)
+      self.pack()
+
+   def buttonPressed(self, event):
+      self.field.text = self.quotes[event.source.text]
+
+   def createButton(self, name):
+      "@sig public javax.swing.JButton createButton(String name)"
+      return swing.JButton(name, preferredSize=(100,20),actionPerformed=self.buttonPressed)
+
+   def addQuote(self, marxBrother, quote):
+      "@sig public void addQuote(String marxBrother, String quote)"
+      self.quotes[marxBrother] = quote
+
+if __name__ == '__main__':
+   WelcomeFrame().show()
+}}}
+
+Feito isso passamos ao passo 2: Compilar o código acima.
+
+Para isso utilizamos o {{{jythonc}}}, que faz parte do pacote do Jython:
+
+{{{
+# jythonc WelcomeFrame.py
+}}}
+
+As outras opções do compilador do Jython serão discutidas em um capítulo mais a frente, você também pode ler mais sobre ele na documentação do Jython. Por enquanto isso deve bastar, o Jythonc cria um subdiretório na pasta corrente chamado {{{jpywork}}}, dentro dele encontraremos as classes que usaremos, são duas, uma é a classe {{{NomedaClasse.class}}} e a outra {{{NomedaClasse$_PyInner.class}}}.
+
+A primeira contém um proxy Java para o objeto Python, e a segunda contém o objeto Python propriamente dito. É bom lembrar que como o Python trata os objetos de maneira distinta do Java, não é possível o acesso direto do Java aos objetos criados em Python, embora o acesso do Python aos objetos do Java seja direto.
+
+Obviamente você não precisa obrigatoriamente do {{{$_PyInner.class}}}, pode-se usar no lugar dele o código Python puro ou a versão ''bytecompiled'' dele. Depois de copiar as duas classes pro diretório onde vamos trabalhar criaremos um objeto em Java que extende o objeto que criamos no Python:
+ 
+{{{
+#!java
+// ------------------------------------
+// FrameUser.java
+// ------------------------------------
+
+import javax.swing.JButton;
+
+
+public class FrameUser {
+   public static void main(String[] argv) {
+      WelcomeFrame f = new WelcomeFrame("From Java");
+      JButton newButton = f.createButton("Zeppo");
+      f.addQuote("Zeppo", "Hello");
+      f.getContentPane().add(newButton);
+      f.pack();
+      f.show();
+   }
+}
+
+Em seguida vamos compilar o código acima. Mas antes disso temos que configurar o {{{CLASSPATH}}}
+
+Eu uso o Java 1.4.1 que normalmente não usa {{{CLASSPATH}}} para acessar suas própias bibliotecas somente para acessar bibliotecas que não estejam no diretorio {{{$JAVA_HOME/jre/lib/ext}}}. Eu não utilizo as bibliotecas do Jython neste diretório, se você utiliza pode pular este passo.
+
+{{{
+$ export CLASSPATH=LugarOndeEstaOJython/jython.jar:.  # configura no Linux (Shell Bash)
+}}}
+
+O passo seguinte é compilar o fonte:
+
+{{{
+$ javac FrameUser.java
+}}}
+
+Uma vez compilado é só rodar o programa, com o {{{CLASSPATH}}} acima configurado ele roda sem problemas.
+
+== Acessando banco de dados com o Jython ==
+
+O Jython é bastante democrático em relação ao acesso à bancos de dados. Pode-se utilizar o acesso do Java, para quem está mais acostumado ao Java. E quem está passando do PythonC ao Jython? Utiliza-se o zxJDBC, ele cria um objeto com interface semelhante à do Python para acesso a banco de dados.
+
+Eu fiz testes com o PostgreSQL e o MySQL, em ambos os casos o acesso foi perfeito. Aqui vai um pequeno exemplo de como fazer o acesso com o zxJDBC. Para para maiores informações leia a documentação que vem junto com o Jython (ela é bastante completa e não é nosso interesse aprofundar aqui}.
+
+{{{
+#!python
+from com.ziclix.python.sql import zxJDBC
+
+#-----------------------------------------------
+# d->URI to database
+# u->user
+# p->password
+# v->java class driver
+
+d, u, p, v = "jdbc:mysql://localhost/mysql", "rodrigo", None, "com.mysql.jdbc.Driver"
+
+# do python connect
+db = zxJDBC.connect(d,u,p,v)
+
+cursor = db.cursor()
+cursor.execute("show tables")
+ret = cursor.fetchone()
+print(ret[0])
+db.close()
+}}}
+
+== Extensões do Python ao Java ==
+ 
+O Python cria uma série de extensões ao Java. Primeiro as do próprio PythonC, já que a grande maioria delas funciona bem no Jython. Quem não conhece bem estas extensões eu recomendo primeiro uma visita ao [http://www.python.org PythonC].
+
+Nós trataremos aqui de dois exemplos:
+   1 - Usar o PAWT para configurar o layout dos nossos objetos.
+   2 - Usar o PAWT para trabalhar com eventos.
+
+O segundo item é importante já que o método de eventos de Java é bastante deficiente (ele trabalha com um ''listener'' centralizado onde o programador deve checar os eventos e objetos e depois executar a chamada apropriada).
+
+'''Obs.:''' PAWT significa {{{Python AWT}}} e é a versão Python para a biblioteca AWT do Java. Essa biblioteca contêm os pacotes de Layout e eventos do Python além de "atalhos" para outras coisas de maior uso no dia a dia. Para usar Swing você deve importá-la como {{{pawt.swing}}}).
+ 
+=== Configurando layout no Jython usando o Pawt.GridBag ===
+
+Uma das maneiras mais usadas para se configurar layout no Java manualmente é o !GridBag. Ele permite que se estipulem tamanhos diversos para widgets baseando-se na proporção da tela, o que permite conservar a aparência da janela não importando o tamanho da mesma. O único problema do !GridBag é que ele é um pouco complicado e não muito intuitivo de se usar. Um exemplo do uso de !GridBag pode ser visto no seguinte código retirado do manual do Java:
+
+{{{
+#!java
+import java.awt.*;
+import java.util.*;
+import java.applet.Applet;
+
+public class GridBagEx1 extends Applet {
+
+   protected void makebutton(String name,
+                             GridBagLayout gridbag,
+                             GridBagConstraints c) {
+      Button button = new Button(name);
+      gridbag.setConstraints(button, c);
+      add(button);
+   }
+
+   public void init() {
+      GridBagLayout gridbag = new GridBagLayout();
+      GridBagConstraints c = new GridBagConstraints();
+
+      setFont(new Font("Helvetica", Font.PLAIN, 14));
+      setLayout(gridbag);
+
+      c.fill = GridBagConstraints.BOTH;
+      c.weightx = 1.0;
+      makebutton("Button1", gridbag, c);
+      makebutton("Button2", gridbag, c);
+      makebutton("Button3", gridbag, c);
+
+      c.gridwidth = GridBagConstraints.REMAINDER; //end row
+      makebutton("Button4", gridbag, c);
+
+      c.weightx = 0.0;                  //reset to the default
+      makebutton("Button5", gridbag, c); //another row
+
+      c.gridwidth = GridBagConstraints.RELATIVE; //next-to-last in row
+      makebutton("Button6", gridbag, c);
+
+      c.gridwidth = GridBagConstraints.REMAINDER; //end row
+      makebutton("Button7", gridbag, c);
+
+      c.gridwidth = 1;                //reset to the default
+      c.gridheight = 2;
+      c.weighty = 1.0;
+      makebutton("Button8", gridbag, c);
+
+      c.weighty = 0.0;                  //reset to the default
+      c.gridwidth = GridBagConstraints.REMAINDER; //end row
+      c.gridheight = 1;               //reset to the default
+      makebutton("Button9", gridbag, c);
+      makebutton("Button10", gridbag, c);
+
+      setSize(300, 100);
+   }
+
+   public static void main(String args[]) {
+      Frame f = new Frame("GridBag Layout Example");
+      GridBagEx1 ex1 = new GridBagEx1();
+
+      ex1.init();
+
+      f.add("Center", ex1);
+      f.pack();
+      f.setSize(f.getPreferredSize());
+      f.show();
+   }
+}
+}}}
+ 
+O mesmo código em Python ficaria assim:
+ 
+{{{
+#!python
+from java.awt import *
+from pawt import GridBag
+from java.awt import GridBagConstraints as GB #layouts mais simples nem precisam disto
+from java.lang.System import exit
+
+class janela(Frame):
+   def __init__(self):
+      self.bag = GridBag(self)
+
+         # Criacao dos botoes
+         botao1 = Button('Button1', actionPerformed=self.sair)
+         botao2 = Button('Button2', actionPerformed=self.sair)
+         botao3 = Button('Button3', actionPerformed=self.sair)
+         botao4 = Button('Button4', actionPerformed=self.sair)
+         botao5 = Button('Button5', actionPerformed=self.sair)
+         botao6 = Button('Button6', actionPerformed=self.sair)
+         botao7 = Button('Button7', actionPerformed=self.sair)
+         botao8 = Button('Button8', actionPerformed=self.sair)
+         botao9 = Button('Button9', actionPerformed=self.sair)
+         botao10 = Button('Button10', actionPerformed=self.sair)
+
+         # Definicao do layout
+         self.bag.add(botao1, weightx=0.0, weighty=0.0)
+         self.bag.add(botao2, weightx=0.0, weighty=0.0)
+         self.bag.add(botao3, weightx=0.0, weighty=0.0)
+         self.bag.addRow(botao4, weightx=0.0, weighty=0.0)
+         self.bag.addRow(botao5, fill='HORIZONTAL')
+         self.bag.add(botao6, gridwidth=GB.RELATIVE, fill='HORIZONTAL')
+         self.bag.addRow(botao7)
+         self.bag.add(botao8, fill='BOTH', gridheight=2)
+         self.bag.addRow(botao9, fill='HORIZONTAL')
+         self.bag.addRow(botao10, fill='HORIZONTAL')
+         #
+         self.setBounds(200,200,280,170)
+
+      def sair(self,evt):
+         exit(0)
+
+if __name__=="__main__":
+   janela().show()
+}}}
+ 
+Não é simplesmente uma questão de simplicidade do código. O metódo também é bem mais intuitivo que o do Java. Para a maioria dos programas você não precisará nem dos !GridBagConstraints que eu importei aqui.
+
+Os métodos padrão são:
+
+   1 - {{{add()}}} - adiciona no espaço vago seguinte (normalmente na mesma linha, a menos que o ''weigthy'' tenha sido setado com valor maior que 0 suas opções são: {{{weightx}}} - Peso na horizontal, {{{weighty}}} - Peso na vertical, {{{gridwidth}}} - Largura horizontal da celula, {{{gridheight}}} - Largura vertical da célula e {{{fill}}} - completa o espaço. Tem três padrões: {{{HORIZONTAL}}}, {{{VERTICAL}}} e {{{BOTH}}}.
+
+   2 - {{{addRow()}}} - o mesmo que o anterior só que ocupa sempre o espaço restante na linha, o próximo objeto ocupará sempre a próxima linha.
+
+
+=== Trabalhando com eventos ===
+
+Em Java você trabalha com eventos da seguinte forma (o código esta em Python):
+
+{{{
+#!python
+class action(awt.event.ActionListener):
+   def actionPerformed(self,event):
+      java.lang.System.exit(0)
+
+button = awt.Button("Close Me!")
+button.addActionListener(action())
+}}}
+
+ 
+Quem programa em Java sabe o quanto essa implementação pode tornar-se infinitamente complexa. A meu ver a maneira de tratar os eventos constitui a maior falha do Java. Bom, e o Python?
+
+Em Python nós escreveriamos assim:
+ 
+{{{
+#!python
+def exit(event):
+    java.lang.System.exit(0)
+
+button = awt.Button("Close Me!", actionPerformed=exit)
+}}}
+
+Existem alguns eventos controlados pelo Python. O mais utilizado é o nosso já conhecido {{{actionPerformed}}}. Outra forma de configurar eventos é:
+
+{{{
+#!python
+obj.keyPressed = funcao
+ 
+def funcao(event):
+    pass
+}}}
+
+Uma lista completa dos eventos mapeáveis desta forma pode ser conseguida num manual Java :),  já que praticamente todos os eventos do Java podem ser mapeados desta forma. O código a seguir mostra como mapear as teclas pressionadas em uma caixa de texto:
+
+{{{
+#!python
+from javax.swing import *
+from java import awt
+
+def alert(panel,message):
+   result = JOptionPane.showMessageDialog(panel,message);
+
+class KeyChek(JFrame):
+   def __init__(self):
+      self.setBounds(200,200,200,70)
+      self.getContentPane().setLayout(awt.GridLayout(2,1))
+      self.label = JLabel('Digite algo:')
+      self.texto = JTextField()
+      self.panel = self.getContentPane()
+      self.panel.add(self.label)
+      self.panel.add(self.texto)
+      self.texto.keyPressed = self.textoKeyPressed
+
+   def textoKeyPressed(self, evt):
+      tecla = evt.getKeyChar()
+      alert(self.panel, 'Voce pressionou %c' % (tecla))
+
+if __name__=="__main__":
+   KeyChek().show()
+}}}
+
+== Compilando Fontes para Classes Java reais ==
+
+Este texto foi extraído e traduzido na íntegra do Manual do Jython.
+
+Na sessão sobre uso do Jython em Java nós vimos como criar {{{.class}}} com o {{{jythonc}}}. Lá nós conseguimos utilizar as classes geradas no Java, mas ela ainda conservava as dependências do próprio Jython e do seu codigo fonte original em Python.
+
+Isto é necessário para escrever Servlets, Beans e Applets. Existem duas ferramentas importantes para isto e elas vem junto com o Jython. A primeira que nós já conhecemos é o {{{jythonc}}}. O {{{jythonc}}} gera código real Java e depois compila este código para criar classes Java "reais".
+
+Abaixo temos uma tabela com as opções do {{{jythonc}}}:
+
+||{{{--package package | -p package | -package package}}}||Grava o código resultante no pacote definido.||
+||{{{--jar jarfile | -j jarfile | -jar jarfile}}}||Grava todo o resultado do "congelamento" dentro de um {{{jar}}}. Implica na opção {{{--deep}}}.||
+||{{{--deep | -d | -deep}}}||Compila todas as dependências (ou pelo menos tenta) do seu programa junto com ele.||
+||{{{--core | -c | -core}}}||Inclue o Jython (+- 130K) dentro do seu programa. Você precisa disto para escrever applets. Implica na opção --deep.||
+||{{{--all | -a | -all}}}||Inclue todo o Jython dentro do seu programa.||
+||{{{--bean jarfile | -b jarfile | -bean jarfile}}}||Gera um arquivo {{{jar}}} com um {{{manifest}}} para Bean.||
+||{{{--addpackages pkgs | -A pkgs | -addpackages pkgs}}}||Obtém a lista de dependências do Java destes pacotes. O ''default'' é {{{org.python.modules}}} e {{{org.apache.oro.text.regex}}}.||
+||{{{--workdir directory | -w directory | -workdir directory}}}||Especifica o diretório de trabalho, o padrão é {{{./jpywork}}}.||
+||{{{--skip modules | -s modules | -skip modules}}}||Não inclui nenhum destes módulos no pacote final.||
+||{{{--compiler path | -C path | -compiler path}}}||Usa um compilador Java alternativo, se setado para {{{None}}} não gera código Java.  Pode-se também setar {{{python.jythonc.compiler}}} no registry.||
+||{{{--compileropts options | -J options}}}||Seta as opções para serem passadas para o compilador. Você também pode setar em {{{python.jythonc.compileropts}}} no registry.||
+||{{{--falsenames names | -f names | -falsenames names}}}||Uma lista (separada por virgulas) de nomes que serão sempre falsos.||
+||{{{--help | -h}}}||Imprime uma mensagem de ajuda.||
+||{{{[module]*}}}||Uma lista de módulos para o "congelamento". Podem ser tanto os módulos que estejam no {{{python.path}}} ou arquivos {{{.py}}}.||
+
+Para poder criar classes Java reais o módulo Python deve conter uma classe com o mesmo nome do módulo e esta classe deve estender uma classe ou interface Java. A classe gerada será uma subclasse daquilo que você estendeu.
+
+=== Compilado métodos Python para métodos Java ===
+
+Normalmente métodos Python compilados não são acessíveis do Java. Simplesmente não existe informação suficiente a respeito dos métodos Python para escrever um método Java compatível. Existem duas maneiras de fazer isto:
+
+   * Overriding / Implementando um método Java.
+
+      Assim a assinatura do método será usada para criar uma classe Java real. Isto inclui tipo de retorno, privacidade, argumentos, tipos de argumentos e throws.
+
+   * Adicionando uma assinatura java ao docstrings do método.
+
+      Existe uma convenção especial no método {{{docstring}}} que permite a criação de um método Java. A assinatura deve começar com  {{{"@sig"}}}  e todas as classes em Java devem ser escritas com o nome completo (com excessão daquelas que fican no {{{java.lang}}}). Exemplo:
+
+{{{
+#!python
+def setExpression(self, e):
+   "@sig public void setExpression(java.lang.String e)"
+}}}
+
+=== Exemplos ===
+
+Para compilar os applets que vem de demonstração no Jython em uma máquina com Windows:
+
+{{{
+c:\jython\Demo\applet> jythonc --core --deep --jar appletdemo.jar *.py
+}}}
+
+Para criar um esqueleto que permita uma classe Python ser usada como um {{{java.awt.Component}}} no Java:
+
+{{{
+/usr/local/jython-2.1/demo$ jythonc Graph.py
+}}}
+
+Para gerar um bean:
+
+{{{
+/usr/local/jython-2.1/Demo/bean$ jythonc --deep --bean f2c.jar conversion.FahrenheitToCelsius
+}}}
+
+=== Freezing modules ===
+
+Aqui temos a segunda ferramenta. Na verdade ela é executada pelo próprio {{{jythonc}}}, e consiste no "congelamento do módulo". A aplicação congelada pode ser tratada como qualquer aplicação feita em Java.
+
+Existem algumas diferenças entre uma aplicação Jython e uma "congelada":
+   * Propriedades diferentes
+   * sys.argv[0]
+   * Não se pode carregar módulos Jython não congelados.
+
+
+== Uma comparação entre o Python/Java/PythonC ==
+
+Aqui vamos fazer uma comparação entre estas linguagens. A linguagem C será colocada como parâmetro, afinal é a origem de todas as outras e para a maioria dos analistas (eu inclusive) o padrão maxí. Os dados de desempenho foram obtidos a partir de testes feitos. Os programas de testes continham a seguinte estrutura:
+
+   * Uma interface gráfica com 22 elementos simples (caixas de texto e botões)
+   * PythonC -foram feitos dois programas um com o {{{Tk}}} e o outro com o {{{wx}}} o desempenho do {{{Tk}}} é ligeiramente superior, mas como o {{{wx}}} contém mais objetos, mantive apenas o teste com este na análise.
+   * Java - foram feitos dois. Um com Swing outro com o AWT. A diferença de desempenho é desprezível. ''Tem certeza disso? Eu tenho a sensação de que Swing é *muito* mais lenta que AWT - OsvaldoSantanaNeto''
+   * Jython - idem para o Java.
+   * C/C++ - Foi usado o {{{wx}}} apenas, mas a performance do C++ é superior demais e resolvi dispensar os testes com outros toolkits.
+
+||Linguagem||Portabilidade*||Bibliotecas**||Possibilidade de expanção***||Desempenho||Curva de aprendizado||Velocidade de desenvolvimento||
+||C/C++||++++++++++||++++++++++||++++++++++||++++++++++||+++||+++++||
+||Java||++++++||+++++++||++++++||+++++||+++||++++||
+||Jython||+++++||++++++++||+++++||++++||++++++++||+++++++++||
+||PythonC||+++++++||++++++||+++++++++||+++++++||++++++++++||++++++++++||
+
+'''Dados''':
+
+Segundo os dados do Jython newspaper o Java é 1,7 vezes mais lento que o PythonC e o Jython é 0,8 vezes mais lento que o Java. Meus testes confirmam os dados do Jython mas neles o Java foi cerca de 2,5 vezes mais lento.
+
+{{{*}}} Embora a portabilidade do C/C++ passe por recompilção do código e o programador tenha que se importar em manter o código portável não existe plataforma que não possua um compilador C/C++ e na verdade mesmo as funções que dependem do sistema operacional são relativamente parecidas e podem ser portadas usando o famoso {{{#ifdef QQOS}}}. Já o Java hoje roda em um número menor de plataformas que o Python embora seu objetivo principal seja a portabilidade. ''Tem certeza disso? Seria melhor exibir os fatos aqui. -- OsvaldoSantanaNeto''
+
+{{{**}}} O Java tem, hoje, um número ligeiramente maior de bibliotecas que o Python mas como não se integra ao C/C++ (''Embora exista o JINI para esta integração ele não tem sido estimulado ou sequer visto com bons olhos ,embora esta seja minha opinião eu só conheço dois trabalhos com ele o Tk para Jython e o sqlite para Java'')  limita. Já o Jython tem quase todas as extensões do Python mais as do Java ou seja só perde para a linguagem C.
+
+''Ok. Não ter seu uso estimulado é diferente de não ter. Você poderia dizer que integrar Java e C/C++ não é tão simples como integrar Python com C/C++. Além disso, SWT também usa Java e C/C++. -- OsvaldoSantanaNeto.''
+
+{{{***}}} Como o Python se integra a bibliotecas feitas em C/C++ o seu limite se expansão é praticamente infinito o que o coloca em posição de vantagem. 
+
+''Seria bom que você reavaliasse toda essa seção do seu texto. Me parece que existem incoerências nos resultados e, em se tratando de comparar linguagens, é bom tomar bastante cuidado. Caso contrário você pode levantar a ira dos Lemmings da Sun e nesta situação apenas dados reais e bem palpáveis, sem marketing é que poderá 'derrotá-los'. -- OsvaldoSantanaNeto''
+

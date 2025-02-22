@@ -1,0 +1,37 @@
+#pragma section-numbers off
+= Receita: Conta Ocorrencias em Lista =
+
+Conta as ocorrências de um texto em uma lista. Coloca o resultado em um dicionário.
+
+== Código ==
+
+{{{
+#!python
+def conta(lista):
+   resultado = {}
+
+   for i in lista:
+      resultado[i] = resultado.get(i, 0) + 1
+
+   return resultado
+
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+l = [ 'globo', 'sbt', 'cultura', 'sbt', 'globo', 'globo', 'record', 'sbt' ]
+
+dicionario = conta(l)
+
+for k,v in dicionario.items():
+   print "%-20s: %s" % (k,v)
+
+}}}
+
+Volta para CookBook.
+
+----
+
+Nome do autor da Receita

@@ -1,0 +1,160 @@
+= Quicksort =
+
+Script de ordenação rádida, inventado por C.A.R. Hoare. O algoritmo gasta o tempo proporcional a n log(n) em média e a n² no pior caso. 
+
+O código abaixo foi extraído de http://www.hetland.org/python/quicksort.html e foi escrito por Magnus Lie Hetland  e os comentários foram removidos.
+
+Logo abaixo, outros exemplos.
+
+{{{
+#!python
+# Written by Magnus Lie Hetland 
+
+ def partition(list, start, end):
+    pivot = list[end]
+    bottom = start-1
+    top = end
+
+    done = 0          
+    while not done:
+
+        while not done:
+            bottom = bottom + 1
+
+            if bottom == top:
+                done = 1
+                break
+
+            if list[bottom] > pivot:
+                list[top] = list[bottom]
+                break
+
+        while not done:
+            top = top-1
+
+            if top == bottom:
+                done = 1
+                break
+
+            if list[top] < pivot:
+                list[bottom] = list[top]
+                break
+
+    list[top] = pivot
+    return top
+
+ def quicksort(list, start, end):
+   if start < end:
+        split = partition(list, start, end)
+        quicksort(list, start, split-1)
+        quicksort(list, split+1, end)
+   else:
+        return
+
+ if __name__=="__main__":
+    import sys
+    list = map(int,sys.argv[1:])
+    start = 0
+    end = len(list)-1
+    quicksort(list,start,end)
+    import string
+    print string.join(map(str,list))
+}}}
+
+Exemplo retirado da http://en.wikipedia.org/wiki/Quicksort:
+
+{{{
+#!python
+def partition(array, begin, end, cmp):
+    while begin < end:
+         while begin < end:
+            if cmp(array[begin], array[end]):
+                (array[begin], array[end]) = (array[end], array[begin])
+                break
+            end -= 1
+         while begin < end:
+            if cmp(array[begin], array[end]):
+                (array[begin], array[end]) = (array[end], array[begin])
+                break
+            begin += 1
+    return begin
+
+def sort(array, cmp=lambda x, y: x > y, begin=None, end=None):
+    if begin is None: begin = 0
+    if end   is None: end   = len(array)
+    if begin < end:
+        i = partition(array, begin, end-1, cmp)
+        sort(array, cmp, begin, i)
+        sort(array, cmp, i+1, end)
+}}}
+
+
+Exemplo aproveitando códigos da lista python-brasil, idéia de José Alexandre Nalon, adaptada
+por JoaoPauloFarias:
+
+{{{
+#!python
+
+>>> def quicksort(l):
+	if l:
+		left = [x for x in l if x < l[0]]
+		right = [x for x in l if x > l[0]]
+		if len(left) > 1:
+			left = quicksort(left)
+		if len(right) > 1:
+			right = quicksort(right)
+		return left + [l[0]] * l.count(l[0]) + right
+	return []
+
+>>> quicksort(lista)
+[0, 1, 2, 3, 3, 4, 5, 7, 8, 8, 9, 9, 12, 13, 85, 99]
+>>> lista
+[1, 5, 3, 9, 2, 4, 8, 7, 3, 9, 8, 12, 13, 0, 99, 85]
+}}}
+
+
+Exemplos encontrados em uma pesquisa na web, são algoritimos curtos que usam recursos bacanas da linguagem, um deles usa as novas funcionalidades da versão 2.5.   
+
+Esse só funciona com PYTHON 2.5, último acesso em 27 de março de 2008, endereço: http://news.e-scribe.com/314
+
+
+{{{
+>>> q=lambda s:s if len(s)<2 else q([x for x in s[1:]if x<s[0]])+[s[0]]+q([x for x in s[1:]if x>=s[0]])
+>>> print q([9,7,5,3,1,8,6,4,2])
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+}}}
+
+
+O seguinte vem do site ASPN, Python CookBook, último acesso em 27 de março de 2008, endereço: http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66473
+
+
+{{{
+>>> def qsort(L):
+        if len(L) <= 1: return L
+        return qsort( [ lt for lt in L[1:] if lt < L[0] ] )  +  \ 
+                  [ L[0] ]  +  qsort( [ ge for ge in L[1:] if ge >= L[0] ] )
+}}}
+
+
+E por fim um utilizando lambda, é necessário paginar o texto algumas vezes, último acesso em 27 de março de 2008, endereço: http://www.ntecs.de/old-hp/uu9r/lang/html/python.en.html
+
+
+{{{
+
+#
+# QuickSort in Python
+# von Michael Neumann
+# 
+
+def quicksort(arr):
+   if len(arr) <= 1: return arr
+   m = arr[0]
+   return quicksort(filter(lambda i,j=m: i<j, arr)) + \
+          filter(lambda i,j=m: i==j, arr) + \
+          quicksort(filter(lambda i,j=m: i>j, arr))
+
+
+
+# Aufruf
+print quicksort([5,99,2,45,12,234,29,0])
+}}}

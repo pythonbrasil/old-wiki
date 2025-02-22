@@ -1,0 +1,12 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== Baguera13 ==
+
+Email: <<MailTo(baguera@naquelarua.com)>>
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+
+Contact: +55 11 82445813
+
+----
+CategoryHomepage

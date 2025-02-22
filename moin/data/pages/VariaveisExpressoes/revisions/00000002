@@ -1,0 +1,74 @@
+## page was renamed from VariáveisExpressoes
+#pragma section-numbers off
+= Variáveis e expressões aritméticas =
+
+O programa abaixo mostra como se dá o uso de variáveis e expressões executando um simples cálculo de juros acumulado:
+
+{{{
+#!python
+# Cálculo simples de juros acumulado
+
+principal = 1000        # Initial amount 
+rate = 0.05             # Interest rate 
+numyears = 5            # Number of years 
+year = 1
+while year <= numyears: 
+        principal = principal*(1+rate) 
+        print year, principal 
+        year += 1 
+}}}
+
+O resultado desse programa é o seguinte:
+
+{{{
+1050.0 
+1102.5 
+1157.625 
+1215.50625 
+1276.2815625 
+}}}
+
+Python é uma linguagem dinamicamente tipada na qual nomes podem representar valores de diferentes tipos durante a execução do programa. De fato, os nomes utilizados num programa são na verdade somente "rótulos" para objetos. O operador '=' (operador de atribuição) cria uma ligação entre o nome (rótulo) e o objeto. Sendo assim diferente de C, por exemplo, na qual um nome representa um tamanho fixado e a localização na memória nos quais os valores foram armazenados. O comportamento dinâmico de Python pode ser visto melhor no exemplo acima com a variável {{{principal}}}.
+
+Inicialmente, ela á ligada ao valor de um inteiro. No entanto, mais tarde no programa ela obtém um novo valor:
+
+{{{
+#!python
+principal = principal * (1 + rate) 
+}}}
+
+Essa instrução avalia a expressão que se encontra do lado direito do '=', retorna o resultado (um objeto) e o associa à variável {{{principal}}}. Quando isto ocorre, o valor original da variável {{{principal}}} (1000) é perdido. Além disto, o resultado da associação pode mudar o tipo da variável. Nesse caso, o tipo da variável {{{principal}}} muda de inteiro para ponto-flutuante, pois a variável {{{rate}}} é do tipo ponto-flutuante.
+
+Uma "newline" indica o fim de uma instrução. Você também pode utiliza ponto-e-vírgula para por mais de uma instrução por linha, como é mostrado abaixo:
+
+{{{
+#!python
+principal = 1000; rate = 0.05; numyears = 5; 
+}}}
+
+A instrução {{{while}}} testa a expressão que o segue imediatamente. Se a expressão é verdadeira, o bloco do {{{while}}} é executado. A expressão é novamente testada se for verdadeiro o bloco será novamente executado, caso ela tenha se tornada falsa o bloco não mais será executado. Assim o interpretador executará a instrução logo após o bloco do {{{while}}}. Como o corpo do loop é moldado a partir de identação, as três instruções após o {{{while}}} no exemplo acima são executadas a cada iteração. Python não determina uma quantidade exata de identação, desde que essa identação forme um bloco e seja consistente.
+
+Um problema com o exemplo acima é que o resultado não é visualmente muito agradável. Para melhorá-lo, você pode alinha a direita às colunas e limitando a precisão de 'principal' para dois dígitos usando a formatação de string da instrução {{{print}}}, como a seguir:
+
+{{{
+#!python
+print "%3d %0.2f" % (year, principal) 
+}}}
+
+Agora ira aparecer o seguinte como resultado:
+
+{{{
+1050.00 
+1102.50 
+1157.63 
+1215.51 
+1276.28 
+}}}
+
+'Formata Strings' contêm texto comum e caracteres especiais de formatação como: "%d", "%s", ou "%f". Esses 'caracteres' especificam um tipo de formatação especifico para diversos tipos como inteiros, strings, ou números de ponto-flutuante, respectivamente. Os caracteres especiais de formatação também podem especificar uma largura e uma precisão. Por exemplo, "%3d" formata um inteiro alinhado a direita em uma coluna com largura de três dígitos, e "%0.2f" formata um numero de ponto-flutuante para que somente dois dígitos apareçam após o '.' (ponto). O comportamento das strings é similar ao da função sprintf() da linguagem C, este comportamento será melhor discutido no capitulo quatro.
+
+''Espero ajudar aos novatos com essa tradução, que pra mim foi extremamente proveitosa para o melhor aprendizado desta característica de Python.'' - RaLobao
+
+----
+
+RaLobao

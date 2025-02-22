@@ -1,0 +1,74 @@
+Script que recebe pela linha de comando um arquivo contendo código fonte na linguagem [[http://pt.wikipedia.org/wiki/Brainfuck|BrainFuck]] e o interpreta. Pode ser facilmente extendido, sinta-se a vontade para criar sua própria implementação de [[http://pt.wikipedia.org/wiki/Brainfuck|BrainFuck]] ;-)
+
+{{{#!python
+import sys
+import re
+
+# Variables
+arq = None
+top = 30000
+ptr = 0
+cou = 0
+src = ''
+
+segment = [0 for i in range(top)]
+loops = []
+
+# Opening the file
+if len(sys.argv) < 2:
+	print "Usage: mybf.py myscript.bf"
+	sys.exit(1)
+else:
+	try:
+		arq = open(sys.argv[1], 'r')
+		src = ''.join(arq.readlines())
+		arq.close()
+		del arq
+	except Exception, e:
+		print "Can't read the specifyed script."
+		sys.exit(1)
+		
+# Eliminating non-bf characters
+src = re.sub('[^\+\-\.\[\],<>]', '', src);
+
+# Verifyig the brackets equivalency
+(lbrackets, rbrackets) = (src.count('['), src.count(']'))
+if lbrackets != rbrackets:
+	print "Missing brackets -> ([: %d | ]: %d)" % (lbrackets, rbrackets)
+	sys.exit(1)
+	
+# Execution loop
+while cou < len(src):
+	ch = src[cou]
+	cou += 1
+	
+	if ch == '+':
+		segment[ptr] += 1
+	
+	if ch == '-':
+		segment[ptr] -= 1
+	
+	if ch == '>':
+		ptr += 1
+		if ptr > 256: ptr = 0
+	
+	if ch == '<':
+		ptr -= 1
+		if ptr < 0: ptr = 256
+	
+	if ch == ',':
+		tmp = raw_input()
+		if tmp:	segment[ptr] = ord(tmp[0])
+	
+	if ch == '.':
+		print chr(segment[ptr]),
+	
+	if ch == '[':
+		loops.append(cou)
+	
+	if ch == ']':
+		if segment[ptr] != 0:
+			cou = loops[len(loops) - 1]
+		else:
+			loops.pop()
+}}}

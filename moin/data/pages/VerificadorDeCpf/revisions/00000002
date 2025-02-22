@@ -1,0 +1,160 @@
+#pragma section-numbers off
+= Receita: Verificador de CPF =
+
+Esse módulo contém algumas funções e classes úteis para aplicações que envolvam cadastros e necessitem validar números de CPF antes de incluir no banco de dados. Além de útil, também é um bom exemplo de como otimizar código que lida com manipulação de números e strings, usando as funções reduce(), map() e ''list compreensions''.
+
+== Código ==
+
+{{{
+#!python
+#/usr/bin/env python
+# -*- coding:UTF-8 -*-
+
+def _gen(cpf):
+    """Gera o próximo dígito do número de CPF
+
+    """
+    res = []
+    for i in range(len(cpf)):
+        a = cpf[i]
+        b = (len(cpf) + 1 - i)
+        res.append(b * a)
+
+    res = reduce(int.__add__, res) % 11
+
+    if res > 1:
+        return (11 - res)
+    else:
+        return 0
+
+
+def _translate(cpf):
+    """Traduz o número como string na forma:
+
+    123.456.789-10
+
+    para a forma:
+
+    12345678910
+
+    """
+    
+    i = xrange(256)
+    t = [' '] * 256
+    e = ''.join([chr(x) for x in i if not chr(x).isdigit()])
+    
+    for x in i:
+        if chr(x).isdigit():
+            t[x] = chr(x)
+            
+    return cpf.translate(''.join(t), e)
+
+
+
+class CPF(object):
+
+    def __init__(self, cpf):
+        """O argumento cpf pode ser uma string nas formas:
+
+        12345678910
+        123.456.789-10
+
+        ou uma lista ou tuple
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0]
+        (1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0)
+
+        """
+        
+        if isinstance(cpf, basestring):
+            if not cpf.isdigit():
+               cpf = _translate(cpf)
+            
+        self.cpf = [int(x) for x in cpf]
+
+    def __getitem__(self, index):
+        """Retorna o dígito em index como string
+
+        """
+        
+        return self.cpf[index]
+
+    def __repr__(self):
+        """Retorna uma representação 'real', ou seja:
+
+        eval(repr(cpf)) == cpf
+        
+        """
+        
+        return "CPF('%s')" % ''.join([str(x) for x in self.cpf])
+
+    def __eq__(self, other):
+        """Provê teste de igualdade para números de CPF
+
+        """
+
+        if isinstance(other, CPF):
+            return self.cpf == other.cpf
+        return False
+    
+    def __str__(self):
+        """Retorna uma representação do CPF na forma:
+
+        123.456.789-10
+
+        """
+
+        d = iter("..-")
+        s = map(str, self.cpf)
+        for i in xrange(3, 12, 4):
+            s.insert(i, d.next())
+        r = ''.join(s)
+        return r
+
+    def verificar(self):
+        """Valida o número de cpf
+
+        """
+        
+        s = self.cpf[:9]
+        s.append(_gen(s))
+        s.append(_gen(s))
+        return bool(s == self.cpf[:])
+
+
+
+
+}}}
+
+
+
+== Exemplo de uso ==
+
+{{{
+#!python
+#/usr/bin/env python
+# -*- coding:UTF-8 -*-
+
+
+from cpf import CPF
+
+# Estes números foram gerados aleatoriamente :)
+
+VALIDO = "113.451.253-80"
+INVALIDO = "31354110274"
+
+# qualquer um dos dois formatos (com pontos ou não) pode ser usado
+
+valido = CPF(VALIDO)
+invalido = CPF(INVALIDO)
+
+assert valido.verificar()
+assert not invalido.verificar()
+
+
+}}}
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

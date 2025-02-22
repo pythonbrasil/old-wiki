@@ -1,0 +1,2 @@
+1259935490000000	00000001	SAVENEW	RecarregarModulos	189.112.183.66	fw-cpqd.cpqd.com.br	1234183581.54.11983		
+1261140033000000	00000002	SAVE	RecarregarModulos	189.112.183.66	fw-cpqd.cpqd.com.br	1234183581.54.11983		arruma bug em código: não encontrava dependencias para a sintaxe "from X import Y, Z" 

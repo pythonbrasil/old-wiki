@@ -1,0 +1,76 @@
+##master-page:HomepageTemplate
+#format wiki
+#language pt
+== Felippe Bastos Netto ==
+
+Email: <<MailTo(felipperj86 AT SPAMFREE gmail DOT com)>>/<<MailTo(felipperj86 AT SPAMFREE hotmail DOT com)>>
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+
+Tels.: 2771.6101 / 9629.0652
+
+----
+'''''SÍNTESE DE QUALIFICAÇÕES'''''
+
+'''Franquia TOTVS Financial Services (Tools Serviços)''' – Atuando como Analista de Sistema, principais atividades:
+Levantamento de novos requisitos junto ao cliente; 
+Especificação de Projetos;
+Treinamento técnico a novos integrantes da equipe;
+Desenvolvimento de customizações no sistema nas tecnologias Java e Power Builder;
+Programação Para Web utilizando linguagem Java, Framework Struts e Arquitetura MVC;
+Alterações em banco de dados (DDL e DML);
+Suporte à implantação de novas versões junto ao cliente.
+Período: Maio/2008 à atual.
+
+'''Sony Music Edições Musicais LTDA.''' - Atuando como Analista de Royalty Junior, principais atividades:
+Análise, Elaboração, Tratamento e confecção e de relatórios nacionais e internacionais para matriz (New York).
+Período: Novembro/2005 à Dezembro/2007.
+----
+'''''FORMAÇÃO ACADÊMICA'''''
+
+Graduação em Sistemas de Informação
+Universidade Estácio de Sá
+Cursando o 8º período turno da noite.
+Previsão de conclusão: Julho/2009
+----
+'''''CURSOS COMPLEMENTARES'''''
+
+'''Curso Carlos Ribeiro''' - [[target|www.carlosribeiro.com]] 
+Curso de Java para Web - Período: 31/05/2008 a 06/09/2008
+Curso EJB 3.0 / JPA - Hibernate 3.2 / JSF - Período: 10/11/2008 a 21/01/2009
+'''Estácio de Sá'''
+Conceitos de Design de Web - Utilizando ferramentas do pacote Macromedia.
+'''Cultura Inglesa'''
+Nível Intermediário - Período: 01/2006 a 12/2007
+----
+'''''CAPACITAÇÃO PROFISSIONAL:'''''
+
+Desenvolvimento Web utilizando:
+Programação em Java;
+As APIs JDBC e Servlet, páginas JSP;
+Arquitetura MVC;
+Componentes JavaBeans, JSTL e DisplayTag;
+Servidores Tomcat e JBoss;
+iReport, JasperReports para Gerar Relatórios em HTML e em PDF;
+Frameworks Struts, JSF, Hibernate/JPA;
+Ajax (Ajax4jsf ou DWR);
+Log4J;
+
+Padrões de Projetos (Design Patterns - DAO, Command e etc.).
+Conhecimento e Utilização da Metodologia de Gestão Ágil de Projetos Scrum.
+----
+'''''EXPERIÊNCIA PROFISSIONAL'''''
+
+Trabalho há 1 ano como Desenvolvedor Web na empresa Tools Serviços:
+
+Desenvolvimento e customizações no Portal utilizado pelos clientes da empresa (Java).
+IDE de desenvolvimento Eclipse, e Netbeans(uso pessoal).
+Servidor de Aplicações JBoss e GlassFish(uso pessoal).
+Últimos projetos:
+
+1.Desenvolvimento de um processo para geração de arquivos eletrônicos a ser enviado e lido pela custodiante de cheques.
+2.Desenvolvimento de uma Mesa de Credito com possível alteração, atualização e históricos dos dados cadastrados e alterados.
+3.Desenvolvimento de uma integração do Portal com o sistema particular utilizado pelo cliente.
+
+
+----
+CategoryHomepage

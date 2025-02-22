@@ -1,0 +1,193 @@
+## page was renamed from Mais
+Durante o PyConBrasil 2008 serão oferecidos as seguintes atividades paralelas:
+
+Mini-cursos
+ * Criando Plug-ins em python para o GIMP
+ * Introdução ao Python
+ * Introdução ao Django
+
+Tutorial
+ * Coding Dojo Python
+
+Caso você tenha interesse em participar de algum dos mini-cursos ou do tutorial, edite esta página e coloque o seu nome em um dos espaços marcados como '''(livre)''' abaixo. São 25 vagas disponíveis para cada mini-curso e 40 vagas para o tutorial, onde o critério de seleção é a ordem de inscrição.
+
+DICA: para poder editar esta página e colocar o seu nome na lista, você precisa criar uma conta neste Wiki. Qualquer um pode criar uma conta e imediatamente editar. Clique no link '''Login''' no topo desta página para inciar a criação da sua conta.  
+
+No início dos treinamentos a lista de inscrição será conferida e caso tenhamos ausências, as vagas serão redistribuídas aos presentes no local.
+
+A participação nas atividades é '''gratuita''', mas limitada pela ordem das pré-inscrições nesta página.
+
+
+== Mini-curso de Introdução ao Python ==
+'''Sábado, dia 20/09, das 09:00 às 12:00''', por LucianoRamalho
+
+Aprenda Python de forma rápida. A idéia é passar pelo tutorial do Python, e quem sabe algumas partes do Diving Into Python dependendo do tempo alocado.
+
+Só pra lembrar o tutorial do Python é voltado pra quem já programa em alguma linguagem ou tem pelo menos os conceitos de programação estruturada e lógica, mas tirando isso não precisa ter conhecimento nenhum da linguagem. A parte a ser adicionada no treinamento são mais exercícios para fixação dos conteúdos. 
+
+|| '''Num''' || '''25 Vagas para participantes do PyConBrasil''' ||
+|| 1 || MauroCavalcanti ||
+|| 2 || Maurício Neves ||
+|| 3 || Eliezer Dutra Gonçalves ||
+|| 4 || Rodrigo Fonseca de Souza ||
+|| 5 || Alexander Barros da Silva ||
+|| 6 || Vitor Rodrigues Cavalcanti ||
+|| 7 || NiltonMoura ||
+|| 8 || Mara Dota ||
+|| 9 || Gabriela Couto Reis Cabral ||
+|| 10 || Felipe da Silva Ferreira ||
+|| 11 || Chaiana Layza do Nascimento Lima ||
+|| 12 || Claudio Delfino Machado ||
+|| 13 || Mauricio Nunes ||
+|| 14 || Marcelo Pontes Rodrigues ||
+|| 15 || Gabriel Gottgtroy Zigolis ||
+|| 16 || André Ricardo Prazeres Rodrigues ||
+|| 17 || Rafael Lopes do Carmo Oliveira ||
+|| 18 || Evalnir teles da costa ||
+|| 19 || Elton Aristoteles Okada ||
+|| 20 || Maria Elidaiana da Silva Pereira ||
+|| 21 || Vanessa Menezes Theodoro ||
+|| 22 || Daniel Rodrigues Pessoa ||
+|| 23 || Diogo da Silva Dias ||
+|| 24 || Diego Matos de São Joaquim ||
+|| 25 || Alexandre da Silva Pedroto ||
+Pelo menos como ouvinte (categoria não oficial):
+|| 26 || Graziele Miranda Cabral Moreira ||
+|| 27 || Pablo Jetro de Freitas ||
+|| 28 || Silvano Buback ||
+|| 29 || Yuri Maximiano de Pina Ferreira ||
+|| 30 || Janio Iuri Antunes ||
+|| 31 || Alvaro de Jesus Netto ||
+
+----
+
+== Mini-Curso de Criando Plug-ins em Python para o GIMP ==
+'''Sexta, dia 19/09, das 9:00 às 12:00''', por João Sebastião de Oliveira Bueno
+
+A possibilidade de criar plug-ins em Python para o GIMP existe há vários anos. Esse treinamento visa capacitar os alunos a entenderem como os scripts são organizados, do que são capazes e qual a API do GIMP disponível para plug-ins em Python.
+
+Ao final do mesmo, os alunos devem ser capazes de criarem seus próprios plug-ins para automatizar tarefas de edição de imagens, processar imagens em lote, ou criar padrões e efeitos programáticamente usando o GIMP. Além das aplicações práticas, é uma boa oportunidade para ver como Python pode ser usado em aplicações reais com o uso de poucas linhas de código.
+
+|| '''Num''' || '''25 Vagas para participantes do PyConBrasil''' ||
+|| 1 || Alan Franco Rosa ||
+|| 2 || José Mário Neiva Brandão ||
+|| 3 || Mara Dota ||
+|| 4 || Gabriela Couto Reis Cabral ||
+|| 5 || Felipe da Silva Ferreira ||
+|| 6 || Chaiana Layza do Nascimento Lima ||
+|| 7 || Evalnir Teles Da Costa ||
+|| 8 || Paulo César Machado de Abreu Farias ||
+|| 9 || Fábio Duncan de Souza ||
+|| 10 || Marcelo Pontes Rodrigues ||
+|| 11 || Pablo Jetro de Freitas ||
+|| 12 || Yuri Maximiano de Pina Ferreira ||
+|| 13 || Alvaro  de Jesus Netto ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+
+----
+
+== Coding Dojo Python ==
+'''Sábado, dia 20/09, das 14:00 às 17:00''', por HugoCorbucci e a equipe [http://www.async.com.br/ Async Open Source]
+
+Um [http://www.codingdojo.org coding dojo] é uma sessão aberta onde o público participa em pares, ao vivo, codificando um software de escopo reduzido. Os pares trabalham por alguns minutos conectados a um projetor e discutem projeto e implementação à medida que avançam.  Ao fim do tempo trocam-se os pares e o desafio continua! 
+
+Nesta sessão faremos um coding dojo épico cobrindo 2 problemas: um em Python puro, e um usando infraestrutura gráfica. Tanto ninjas em Python quanto iniciantes se divertirão, e são igualmente bem-vindos.
+
+|| '''Num''' || '''40 Vagas para participantes do PyConBrasil''' ||
+|| 1 || BrunoGola ||
+|| 2 || FelipeFerreriTonello ||
+|| 3 || RafaelZanella ||
+|| 4 || Ramiro Batista da Luz ||
+|| 5 || DouglasAndrade ||
+|| 6 || FlavioAmieiro ||
+|| 7 || Alexander Barros da Silva ||
+|| 8 || NiltonMoura ||
+|| 9 || Vanderson Mota dos Santos ||
+|| 10 || DiegoPinheiro ||
+|| 11 || Pablo Jetro de Freitas ||
+|| 12 || Yuri Maximiano de Pina Ferreira ||
+|| 13 || Tiago Pac-Man(globo.com) ||
+|| 14 || Chrystiano Barbosa de Souza Araújo ||
+|| 15 || Leandro Moraes Valle Cruz ||
+|| 16 || Alvaro de Jesus Netto ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+|| 26 || (livre) ||
+|| 27 || (livre) ||
+|| 28 || (livre) ||
+|| 29 || (livre) ||
+|| 30 || (livre) ||
+|| 31 || (livre) ||
+|| 32 || (livre) ||
+|| 33 || (livre) ||
+|| 34 || (livre) ||
+|| 35 || (livre) ||
+|| 36 || (livre) ||
+|| 37 || (livre) ||
+|| 38 || (livre) ||
+|| 39 || (livre) ||
+|| 40 || (livre) ||
+
+== Mini-curso de Introdução ao Django ==
+'''Sábado, dia 20/09, das 13:30 às 17:30''', por LucianoRamalho
+
+
+|| '''Num''' || '''40 Vagas para participantes do PyConBrasil''' ||
+|| 1 || MarcoAndreLopesMendes ||
+|| 2 || EricoAndrei ||
+|| 3 || MauroCavalcanti ||
+|| 4 || Yuri Maximiano de Pina Ferreira ||
+|| 5 || Alan Alcântara Porto ||
+|| 6 || Chrystiano Barbosa de Souza Araújo ||
+|| 7 || Leandro Moraes Valle Cruz ||
+|| 8 || Janio Iuri Antunes ||
+|| 9 || Alvaro de Jesus Netto  ||
+|| 10 || Marcos Massao Iuato ||
+|| 11 || PauloAlem ||
+|| 12 || Mauricio Nunes ||
+|| 13 || DaviVercillo ||
+|| 14 || Tânia Andrea ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+|| 26 || (livre) ||
+|| 27 || (livre) ||
+|| 28 || (livre) ||
+|| 29 || (livre) ||
+|| 30 || (livre) ||
+|| 31 || (livre) ||
+|| 32 || (livre) ||
+|| 33 || (livre) ||
+|| 34 || (livre) ||
+|| 35 || (livre) ||
+|| 36 || (livre) ||
+|| 37 || (livre) ||
+|| 38 || (livre) ||
+|| 39 || (livre) ||
+|| 40 || (livre) ||

@@ -1,0 +1,65 @@
+#pragma section-numbers off
+= Python Doc =
+
+Projeto de tradução da documentação [http://www.python.org/doc/ oficial] do Python para o português.
+
+|| Coordenador || PedroWerneck ||
+|| Colaboradores || OsvaldoSantanaNeto RodrigoSenra ||
+|| Página do Projeto || http://www.codigolivre.org.br/projects/pythondoc/ ||
+
+== Dicionário ==
+
+Termos utilizados nas traduções. Adicione/Comente os termos. Se for adicionar, fique atento para que fique em ordem alfabética.
+
+   * '''array''' - array.
+   * '''callable''' - executável (que feio)
+   * '''call (substantivo)''' - chamada.
+   * '''to call (verbo)''' - chamar, executar.
+   * '''to catch (verbo)''' - capturar (contexto: ...catching a exception...)
+   * '''dictionary''' - dicionário.
+   * '''escape sequences'' ' - sequências de escape
+   * '''garbage collect''' - coleta de lixo.
+   * '''to garbage collect''' - coletar o lixo. ''Ai que falta que faz um 'garbage-coletar' no português :) -- OsvaldoSantanaNeto''
+   * '''indent''' - indentação
+   * '''immutable''' - imutável.
+   * '''key''' - chave (dicionário).
+   * '''list comprehension''' - compreensão de lista(?) ''Eu sugiro interpretação de lista -- OsvaldoSantanaNeto'' ''Eu acho que o comprehension é usado no sentido de compreensão, termo vindo da lógica: "Extensão é o conjunto de objetos designados por um termo ou uma categoria. Compreensão é o conjunto de propriedades que esse mesmo termo ou essa categoria designa.'' -- GuilhermeManika Que tal Construção ou Contenção ? -- PedroWerneck
+
+   * '''list''' - lista
+   * '''operadores lógicos''' - ficam com nome em inglês.
+   * '''parser''' - fica parser mesmo (?) "Analisador gramatical é uma alternativa, mas o termo parser é tão comum que não vale a pena mexer - mesmo caso que 'string'" -- GuilhermeManika
+   * '''race condition''' - (?) o osvaldo citou a tradução dos livros do tanenbaum, não lembro ''Condição de corrida -- OsvaldoSantanaNeto''
+   * '''raise''' - levantar (contexto: to raise an exception).
+   * '''shell''' - interpretador, interpretador interativo
+   * '''statement''' - instrução, comando (?)
+   * '''string''' - string (adicionar nota de rodapé caso o documento seja para newbies)
+   * '''subclass (substantivo)''' - Subclasse, classe derivada, classe filha.
+   * '''to subclass (verbo)''' - herdar (esse é um uso estrito), derivar.
+   * '''token''' - símbolo (?)
+   * '''trace (tracing)''' - acompanhamento (contexto: ...the implementation's tracing or debugging facilities...) ''Acho que trace tem que ficar trace mesmo. Acompanhamento é pedante e não é facilmente identificável -- Guilherme Manika''
+   * '''debug (debugging)''' - depurar
+   * '''tuple''' - tupla
+   * '''value''' - valor (dicionário) - conteúdo(?)
+
+== Arquivos ==
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da tradução dos arquivos'''||
+||<|2>'''Arquivo'''||||'''Tradução'''||||'''Revisão'''||
+||'''Status'''||'''Responsável'''||'''Status'''||'''Responsável'''||
+||ref/ref.tex||<#80FF80>100%||OsvaldoSantanaNeto||<#80FF80> 100% ||PedroWerneck||
+||ref/ref1.tex||<#80FF80>100%||OsvaldoSantanaNeto||<#80FF80> 100% ||PedroWerneck||
+||ref/ref2.tex||<#FFFF80>20%||PedroWerneck||<#FF8080> 0% || - ||
+||ref/ref3.tex||<#FFFF80>3%||OsvaldoSantanaNeto||<#FF8080> 0% || - ||
+||ref/ref4.tex||<#FF8080>0%|| - ||<#FF8080> 0% || - ||
+||tut/tut.tex||<#FFFF80>??%||RodrigoSenra||<#FF8080> 0% || - ||
+||tut/glossary.tex||<#FFFF80>34%||PedroWerneck||<#FF8080> 0% || - ||
+
+''Ficou 'bunitinha' essa tabela, né? :) -- OsvaldoSantanaNeto''
+
+''Muito bom :) Show ! Quando (se ?) habilitarem o host http://pythondoc.codigolivre.org para a página do projeto, eu vou botar um redirect pra cá. O wiki é bem mais fácil de manter. -- PedroWerneck''
+
+''Alguém acha que seria interessante fazer um scriptizinho pra criar uma gigantesca tabela com todos os tex's disponíveis? Ou é perda de tempo e espaço? -- FelipeLessa''
+
+----
+
+OsvaldoSantanaNeto

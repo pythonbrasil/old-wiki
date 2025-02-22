@@ -1,0 +1,52 @@
+#pragma section-numbers off
+= Hospedagem Python =
+
+Compilação de empresas de hospedagem web que suportam Python.
+
+''Existe a necessidade das colunas: Indicado por; Última verificação; Contato ?''
+
+== Brasileiras ==
+
+||'''Link'''||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+||[http://www.rantac.com.br/ rantac]|| 2.2 em modo CGI || || ||
+||[http://www.hostnet.com.br hostnet]|| || || Somente nos planos PERL e PHP+PERL ||
+||[http://www.matrix.com.br/ matrix]||  || || ||
+||[http://www.nt10.com.br/hospedagem/index.html nt10]||  || || ||
+||[http://www.locaweb.com.br LocaWeb] || 1.5, 2.2 em modo CGI || || Tem acesso SSH, mas, não tem acesso ao Shell do Python ||
+||[http://hospedagem.hostmidia.com.br/members.php?page=planos HostMídia] || 1.5.2 || || ||
+||[http://www.insite.com.br/planos/ Insite] || || || Possui Zope e Plone ||
+
+== Estrangeiras ==
+
+|| '''Link''' ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [http://www.python-hosting.com/ python-hosting] || 2.1.3, 2.2.2, 2.3.2 ||PIL, MySQLdb, PyGreSQL, PsycoPG, 4Suite, PyXML, mxBase, Cheetah, Twisted, Gnosis Utilities, python-svn, !Mk4Py, !PyBsdDb, PySQLite, KInterbasDB and more ...|| ||
+
+== Gratuitas ==
+
+|| '''Link''' ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [http://www.objectis.org/ Objectis] ||  ||Zope, Plone, Plone2 e uma grande variedade de produtos Zope || Exclusivo para sites não comerciais ||
+|| [http://www.freezope.org/ Freezope] ||  || Zope e alguns produtos || Exclusivo para sites não comerciais ||
+
+== Script de Teste ==
+
+Quem tiver acesso a estes provedores tente verificar a exata versão do python, e se possui modulos extras. Segue código de exemplo (convencionei chama-lo de {{{PythonInfo.py}}}) para verificar a versão e talvez as bibliotecas:
+
+{{{
+#!python
+#!/usr/bin/env python
+# Não esqueçam de colocar no diretório para cgi e dar
+# direito de execução
+
+import sys
+
+print 'Content-type: text/plain\n'
+print sys.version
+print '\nPath das bibliotecas:'
+print '\n'.join(sys.path)
+}}}
+
+----
+
+JuracyFilho
+
+RicardoNiederberger

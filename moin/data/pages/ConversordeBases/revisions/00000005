@@ -1,0 +1,116 @@
+São 3 funções simples para conversão de números inteiros de qualquer base para qualquer base.
+
+1- any2dec(num_original,base_original) - Esta função converte qualquer número da base 2 a 36 para qualquer base. Onde '''num_original''' é o número a ser convertido, e '''base_original''' é o valor de sua base (de 2 a 36 só considerando inteiros).
+
+2- dec2any(dec,base_final) = Esta função converte qualquer número decimal para qualquer base de 2 a 36. Onde '''dec''' é o número decimal a ser convertido, e '''base_final''' é a base para qual se deseja converter o número (base_final: de 2 a 36 só considerando inteiros.)
+
+3- any2any(num_original,base_original,base_final) = aglutina as duas funções acima para  conversão direta de um número '''num_original''' de base '''base_original''' para uma determinada '''base_final'''.
+
+OBS: tanto '''num_original''' quanto '''dec''' podem ser passados a função como string, ou inteiros, porém '''base''' deve ser sempre um inteiro.
+
+OBS2:: Ambas as funções retornam sempre strings.
+
+OBS3: As bases '''base_original''' e '''base_final''' são convertidas para inteiro
+
+Abaixo temos o código desta biblioteca que chamo de '''base_convert.py'''.
+
+= Código =
+{{{
+#!python
+
+# -*- coding: cp1252 -*-
+# Conversão des:
+#
+# Por Alexandre Martins Klostermann
+#     alexandre.klostermann@gmail.com
+#
+#   any2dec: Converte o numero "any" na base "base"
+#           para decimal, retornando "dec"
+#
+#   dec2any: Converte um numero decimal "dec" para a
+#           base "base" retornando o valor convertido
+#           em "any"
+
+import string
+
+def any2dec(num_original,base_original):
+    num_original = str(num_original)
+    base_original = int(base_original)
+    dic = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    x = 0
+    dec = 0
+    dec_temp = list(num_original)
+    dec_temp.reverse()
+    for i in dec_temp:
+        dec = dec + ( (dic.index(i)) * (base_original**(x)))
+        x = x+1
+    return str(dec)
+
+
+def dec2any(dec,base_final):
+    base_final = int(base_final)
+    dec = int(dec)
+    dic = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numero_final_temp = []
+    numero_final = ''
+    while True:
+        temp_numero_final = dec%base_final
+        numero_final_temp.append(temp_numero_final)
+        if  ((int(dec/base_final)) == 0):
+            break
+        dec = int(dec/base_final)
+    numero_final_temp.reverse()
+    for i in numero_final_temp:
+        numero_final = numero_final + (dic[i])      
+    return numero_final
+
+def any2any(num_original,base_original,base_final):
+    num_dec = any2dec(num_original,base_original)
+    num_final = dec2any(num_dec,base_final)
+    return num_final
+
+}}}
+
+== Aplicado em Modo Gráfico == 
+
+Usando o Eagle temos o mesmo programa em modo gráfico.
+
+OBS: necessita pyGTK, pyCairo, Eagle e outros.
+
+{{{
+#!python
+# -*- coding: cp1252 -*-
+#Conversor de Bases Grafico.
+from eagle import *
+import base_convert
+
+def executar(app, wid):
+    num_original= app["valor_inicial"]
+    base_original= app["base_inicial"]
+    base_final= app["base_final"]
+    app["valor_final"] = base_convert.any2any(num_original,base_original,base_final)
+
+    
+def limpar(app, wid):
+    app["valor_inicial"] = ""
+    app["valor_final"] = ""
+
+App(
+    title="Conversor de Bases",
+    window_size = (250,250),
+    center=(
+        Entry(id="valor_inicial", label="Numero Original:", editable=True, persistent=True),
+        UIntSpin(id="base_inicial", label="Base Original:", value=2, min=2, max=36, step=1),
+        UIntSpin(id="base_final", label="Base Desejada:", value=2, min=2, max=36, step=1),
+        Entry(id="valor_final", label="Valor Final: ", editable=False, persistent=True),
+        ),
+    bottom=(
+        Button(id="bCalcular", label="Calcular", callback=executar),
+        Button(id="bLimpar", label="Limpar", callback=limpar),
+        ),
+)
+
+run()
+}}} 
+
+por AlexandreKlostermann

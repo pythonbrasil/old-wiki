@@ -1,0 +1,71 @@
+#pragma section-numbers off
+= Software Python =
+
+Nesta página você vai achar aquele software, aquele módulo, aqueles scripts que facilitarão a sua vida de desenvolvedor Python. Aqui também você poderá colocar aquele seu projeto desenvolvido em Python para que todos conheçam.
+
+[[TableOfContents]]
+
+== Ferramentas para programação ==
+=== Ambientes de desenvolvimento/Editores ===
+   * EditorSpe - Editor de textos.
+   * AmbienteEric3 - Ambiente de desenvolvimento.
+   * [http://rpdb.digitalpeers.com/ rpdb] - rpdb é um debugger de linha de comando para Python. Ele é baseado no debugger padrão pdb do Python.
+
+=== Distribuição ===
+   * CxFreeze - Gere arquivos executáveis de seus scripts com esse conjunto de ferramentas.
+
+== Módulos ==
+
+=== Web ===
+   * [http://wwwsearch.sourceforge.net/ClientForm/ ClientForm] - Manipula forms html. Parseia html com form, permite prencher o form e submeter.
+   * [http://wwwsearch.sourceforge.net/ClientCookie/ ClientCookie] - Cliente http com suporte a cookies. Equivalente ao urllib2.urlopen()
+   * [http://wwwsearch.sourceforge.net/DOMForm/ DOMForm] - Screen scrapping html com suporte a Javascript. Usa o !ClientForm pra preencher forms.
+   * [http://diveintomark.org/projects/pygoogle/ pygoogle] - Faz buscas no google. Precisa se registrar no google (http://google.com/apis)
+
+=== Gráficos etc ===
+   * [http://www.reportlab.org reportlab] - Cria/monta documentos PDF.
+   * ["PIL: Python Imaging Library"] - Manipule e processe imagens através deste módulo.
+   * BoaConstructor - Ferramenta para construir visualmente interfaces gráficas utilizando as extensões wxPython.
+
+=== GUI ===
+
+   * [http://www.daa.com.au/~james/software/pygtk/ PyGTK] - Acesso à biblioteca GTK 1.2 e 2.0 para Python.
+   * [http://www.async.com.br/projects/kiwi Kiwi] - um framework OO para aplicações desktop baseado no PyGTK 1.2 (com um port para 2.0 no forno).
+   * [http://www.wxpython.org/ wxPython] - Wrapper para a biblioteca multiplataforma wxWindows. 
+   * [http://www.riverbankcomputing.co.uk/pyqt/index.php PyQT] - Wrapper para a biblioteca QT, usada pelo KDE e muitas outras aplicações.
+   * [http://pyfltk.sourceforge.net/ FLTK] - PyFLTK (Fast Light Tool Kit) é uma biblioteca multiplataforma leve e disponível livremente.
+
+== Scripts ==
+
+   * Compile2Exe - Script para facilitar o uso do módulo py2exe
+
+== Softwares desenvolvidos por Brasileiros em Python ==
+
+   * Txt2Tags - Conversor de documentos.
+   * [http://sedsed.sf.net sedsed] - Depurador para scripts SED (Stream EDitor)
+   * [http://pybot.org] - Pybot - um bot IRC
+   * [https://moin.conectiva.com.br/EditMoin EditMoin] Ferramenta para edição de páginas no MoinMoin (como essa :) )
+   * [https://moin.conectiva.com.br/ReMv ReMv] Ferramenta para renomear arquivos com expressões regulares
+   * [https://moin.conectiva.com.br/Patcher Patcher] Ferramenta para geração rápida de patches
+   * [https://moin.conectiva.com.br/GustavoNiemeyer/Projects] - Vários projetos úteis e interessantes
+   * [http://imgseek.sourceforge.net/ imgSeek] - Gerenciador de fotos em python, pyqt e c++ com busca por imagens baseada em conteúdo
+   * [https://moin.conectiva.com.br/LunaticPython LunaticPython] - Gosta de Python? Gosta de Lua? Quer juntar as duas? O GustavoNiemeyer resolveu este problema.
+   * [http://www.mmorph.com/pymorph/index.html pyMorph] - Coleção de ferramentas para processamento de imagens (segmentação, filtros não-lineares, reconhecimento de padrões e análise).
+
+== Outros repositórios ==
+
+   * [http://www.python.org/pypi PyPI] - Python Package Index. Permite a catalogação automática para pacotes usando distutils.
+   * [http://aspn.activestate.com/ASPN/Cookbook/Python/ Python Cookbook] - Receitas de bolo e comentários.
+   * [http://py.vaults.ca/apyllo.py Vaults of Parnassus] - Catálogo categorizado
+
+== Softwares Inusitados ==
+
+Nessa seção você pode colocar os softwares mais inusitados feitos em Python que você encontrar por aí.
+
+   * [http://hawthorn.csse.monash.edu.au/~njh/programming/cross-stitch/ Ponto Cruz] - Minha esposa, na condição de grávida, resolveu fazer alguns trabalhos com ponto-cruz. Resolvi procurar algum software (grátis ou livre) que convertesse bitmap para ponto-cruz e quando encontrei um desses adivinhem em que linguagem ele foi feito? :)
+
+/!\ Solicito à vocês que sempre que colocar alguma URL nessa página colocar também uma breve descrição sobre o software.
+
+----
+
+OsvaldoSantanaNeto

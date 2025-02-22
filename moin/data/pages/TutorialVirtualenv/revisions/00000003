@@ -1,0 +1,31 @@
+= Tutorial: Virtualenv em 5 minutos =
+
+Baseado em [http://article.gmane.org/gmane.comp.python.brasil/33228 email de Luciano Ramalho] para a python-brasil@yahoogrupos.com.br 
+
+== Instalação ==
+{{{
+$ easy_install virtualenv }}}
+
+== Criando um ambiente ==
+{{{
+$ virtualenv meu_lab }}}
+
+== Criando um ambiente sem nenhum pacote do sistema ==
+{{{
+$ virtualenv --no-site-packages meu_lab }}}
+
+== Ativando o ambiente ==
+{{{
+$ source meu_lab/bin/activate }}}
+
+Depois de ativado o ambiente, o prompt vai mudar para algo assim:
+{{{
+(meu_lab)$ }}}
+
+Uma vez ativado o seu ambiente, você tem no diretório bin do ambiente um novo interpretador python zerado (~/meu_lab/bin/python). O comando easy_install que você usar será a cópia dentro bin do ambiente, e ele só vai instalar pacotes dentro do seu ambiente, sem mexer no python do sistema.
+
+O legal é que a criação e ativação do ambiente podem ser feitos por qualquer usuário, sem privilégios de root. Em máquinas compartilhadas, isso é muito útil. Basta pedir ao administrador para executar o passo 1, e todos os usuários ficam livres para configurar seus interpretadores python como quiserem.
+
+----
+ . Volta para DocumentacaoPython.
+----

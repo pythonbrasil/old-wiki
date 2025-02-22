@@ -1,0 +1,202 @@
+#pragma section-numbers off
+= PyGtkMensagens =
+
+Em nossos aplicativos precisamos de mensagens para alertar o usuário, seja ela crítica ou não.
+Essa receita ensina como criar mensagem padrão para seu aplicativo.
+
+== Código ==
+
+{{{
+#!python
+#-*- encoding: utf8 -*-
+
+##
+# Esse programa é livre, você pode distribuir e/ou modifica-lo sob os
+# termos da licença geral publica GNU publicada pela fundação de software
+# livre (Free Software Foundation),  contida na segunda versão da licença
+# ou (em sua opinião) outra versão mais recente.
+# Esse programa é distribuído na esperança de ser útil e satisfatório,
+# mas DESTITUÍDO DE QUALQUER GARANTIA, destituído igualmente da
+# COMPATIBILIDADE DE MÁQUINA ou CONVENIÊNCIA PARA PROPÓSITOS
+# PARTICULARES. Veja a licença geral publica GNU para opter mais detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+##
+
+###############################################################################
+## Nome do Arquivo: utilitario
+## Autor: Guedes, Maurilio<billguedes>
+## Data da Criação: 26/11/2004
+## Data da Modificação: 03/07/2005
+## Finalidade: Funções úteis do dia-a-dia
+##
+##
+##
+###############################################################################
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+
+def mensagem(texto, janela= None):
+	'''
+	Uso: Mensagem(texto, janela)
+	texto	->	texto a ser exibido nos padrões pango
+	janela ->	janela ativa
+	
+	Apresenta uma caixa de dialogo com o botão 'OK'
+	com o texto	definido pelo desenvolvedor e o ícone de informação
+
+	Endereço das referências do pango:
+	http://www.pygtk.org/pygtk2reference/pango-markup-language.html
+	'''
+	
+	dialogo= gtk.MessageDialog(janela, gtk.DIALOG_MODAL,	gtk.MESSAGE_INFO, \
+	gtk.BUTTONS_OK, texto)
+	dialogo.set_markup(texto) # texto formatado nos padrões pango
+	dialogo.run()
+	dialogo.destroy()
+	
+def mensagem_erro(texto, janela= None):
+	'''
+	Uso: Mensagem(texto, janela)
+	texto	->	texto a ser exibido nos padrões pango
+	janela ->	janela ativa
+	
+	Apresenta uma caixa de dialogo com o botão 'OK'
+	com o texto	definido pelo desenvolvedor e com o ícone de erro
+
+	Endereço das referências do pango:
+	http://www.pygtk.org/pygtk2reference/pango-markup-language.html
+	'''
+	
+	dialogo= gtk.MessageDialog(janela, gtk.DIALOG_MODAL,	gtk.MESSAGE_ERROR, \
+	gtk.BUTTONS_OK, texto)
+	dialogo.set_markup(texto) # texto formatado nos padrões pango
+	dialogo.run()
+	dialogo.destroy()
+
+def confirmar(texto, janela= None):
+	'''
+	Uso: Confirmar(texto, janela)
+	texto	->	texto a ser exibido nos padrões pango
+	janela ->	janela ativa
+
+	Apresenta uma caixa de dialogo com os botões 'Sim' e 'Não'
+	com o texto definido pelo desenvolvedor
+	
+	Endereço das referências do pango:
+	http://www.pygtk.org/pygtk2reference/pango-markup-language.html
+	'''
+	
+	dialogo= gtk.MessageDialog (janela, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION, \
+	gtk.BUTTONS_YES_NO, texto)
+	dialogo.set_markup(texto) # texto formatado nos padrões pango
+	response = dialogo.run ()
+	dialogo.destroy ()
+	if response == gtk.RESPONSE_YES:
+		return True
+	else:
+		return False
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+#-*- encoding: utf8 -*-
+
+##
+# Esse programa é livre, você pode distribuir e/ou modifica-lo sob os
+# termos da licença geral publica GNU publicada pela fundação de software
+# livre (Free Software Foundation),  contida na segunda versão da licença
+# ou (em sua opinião) outra versão mais recente.
+# Esse programa é distribuído na esperança de ser útil e satisfatório,
+# mas DESTITUÍDO DE QUALQUER GARANTIA, destituído igualmente da
+# COMPATIBILIDADE DE MÁQUINA ou CONVENIÊNCIA PARA PROPÓSITOS
+# PARTICULARES. Veja a licença geral publica GNU para opter mais detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+##
+
+###############################################################################
+## Nome do Arquivo: teste.py
+## Autor: Guedes, Maurilio<billguedes>
+## Data da Criação: 13/08/2005
+## Data da Modificação: 13/08/2005
+## Finalidade: Testar o uso do arquivo utilitario.py
+##
+##
+##
+###############################################################################
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+import utilitario
+
+class Principal:
+	'''Classe principal'''
+	
+	def __init__(self):
+		'''Incialização padrão'''
+		
+		# Cria uma janela
+		self.janela = gtk.Window(gtk.WINDOW_TOPLEVEL)
+		self.janela.set_title("Usando a Rotina Utilitário") # Coloca um título
+		self.janela.set_border_width(5) # Especifica uma porda de 5 pixels
+		self.janela.set_position(gtk.WIN_POS_CENTER) # Centraliza a janela
+		
+		 # Fecha o aplicativo ao destruir a janela
+		self.janela.connect("destroy", gtk.main_quit)
+		
+		# Cria um botão
+		botao= gtk.Button("Executar")
+		botao.connect("clicked", self.executar) # Execute o método "executar" ao clicar		
+		self.janela.add(botao) # Adiciona o botão na janela
+		
+		# Mostra todas os widgets adicionados na janela
+		self.janela.show_all()
+
+	def executar(self, widget= None):
+		'''Executa o código abaixo'''
+
+		# Mostra uma mensagem de informação, o "<span>", "<b>" é padrão pango
+		# Exemplo sem conexão ao "Pai", nesse exemplo você pode selecionar
+		# outra janela
+		utilitario.mensagem("<b><span color='red'>Atenção</span></b>, Você está "\
+		"Preste a <b>Apagar</b> um Arquivo <b>Importante</b>!")
+
+		# Mostra uma mensagem de informação, o "<span>", "<b>" é padrão pango
+		# Exemplo com conexão ao "Pai", nesse exemplo você NÃO pode selecionar
+		# outra janela
+		utilitario.mensagem("<b><span color='red'>Atenção</span></b>, Você está "\
+		"Preste a <b>Apagar</b> um Arquivo <b>Importante</b>!", self.janela)
+
+		# Mostra uma mesagem de confirmação
+		if utilitario.confirmar('<b>Realmente</b> Deseja <b>Apagar</b> este Arquivo?',
+		self.janela):
+			
+			# Mostra uma mensagem de erro
+			utilitario.mensagem_erro('Ocorreu um <b>Erro</b> ao Apagar o Arquivo!',
+			self.janela)
+		else:
+			
+			# Mostra uma mensagem de informação
+			utilitario.mensagem('Operação <b>Abortada</b>!', self.janela)
+
+
+if __name__ == '__main__':
+	'''Se o aplicativo é principal, execute esse método'''
+	
+	# Chama a classe 'Principal'			
+	p= Principal()
+
+	# Inicia o aplicativo
+	gtk.main()
+
+}}}
+
+Volta para CookBook.
+
+----
+
+Guedes, Maurilio <billguedes.python at terra.com.br>

@@ -1,0 +1,9 @@
+
+<?xml
+<script> 
+alert('teste')
+</script>
+</xsl:template>
+
+
+teste

@@ -1,0 +1,45 @@
+== Documentação Python 3.1.1 ==
+
+Esforço pessoal de tradução da documentação python 3.1.1.
+
+Bem vindo! Esta é a documentação de Python 3.1.1, última atualização Jan 22, 2010. 
+
+'''Partes da documentação:'''
+=== O que há de Novo em 3.1? ===
+ ou [[py3k/whatsnew-all|todos os documentos "O que há de Novo"]] desde 2.0
+Tutorial
+ comece aqui
+Usando Python
+ como usar Python em diferentes plataformas
+Referência da Biblioteca
+ mantenha isso bem perto
+Referência da Linguagem
+ descreve a sintaxe e os elementos da linguagem
+Python HOWTOs
+ documentos aprofundados em tópicos específicos
+  Extendendo e Embutindo
+ tutorial para programadores C/C++
+Python/C API
+ referência para programadores C/C++
+Instalando Módulos Python
+ informação para instaladores & sys-admins
+Distribuindo Módulos Python
+ compartilhando módulos com outros
+Documentando Python
+ guia para autores de documentação
+  Índices e tabelas:
+Índice Global de Módulos
+ acesso rápido a todos os módulos
+Índice Geral
+ todas as funções, classes e termos
+Glossário
+ os termos mais importantes explicados
+  Página de busca
+ busque nesta documentação
+Tabela Completa do Conteúdo
+ lista todas as seções e subseções
+  Meta informação:
+Reportando bugs
+Sobre esta Documentação
+  História e Licença de Python
+Copyright

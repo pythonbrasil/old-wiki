@@ -1,0 +1,199 @@
+= Uma arquitetura de componentes em Python =
+
+'''Autor:''' Lennart Regebro - 19/nov/2007
+
+Ao construir grandes frameworks você muitas vezes deseja que tudo seja facilmente plugável e extensível. Os objetos precisam ser capazes de interagir uns com os outros mesmo quando esta interação não está prevista inicialmente. Criar este tipo de flexibilidade não é muito difícil, especialmente em uma linguagem dinâmica como Python, mas se você tem que criar um framework para plug-ins toda vez que precisa de um, você acaba não fazendo isso a menos que seja realmente muito necessário.
+
+Assim, é bom ter uma forma padrão para a interação entre objetos e para que eles possam se inspecionar, e uma forma que você possa usar toda vez que precisar. Resumindo, o você precisa de uma arquitetura de componentes. Felizmente, já existe uma para Python, que foi bem implementada, bem testada e vem sendo usada há anos. Seu nome é Zope Component Architecture.
+
+Ah, sim, já posso ouvir você: "Eca! Zope não... Isso só específico para Zope, não é pythonico, só serve para a Web, é cheio de XML. Argh!". Mas você estaria errado. A única coisa não pythonica e "webby" da Zope Component Architecture é que seus módulos se chamam zope.algo. Mas os módulos têm esse nome porque foram escritos pela Zope Corp. Sim, é verdade que o Zope usa XML em sua linguagem de configuração orientada a aspectos. Veja bem, na orientação a aspectos é desejável ter uma linguagem específica para conectar os componentes, e a do Zope é ZCML. Mas a arquitetura de componentes não exige ZCML de nenhuma maneira. É totalmente baseada em Python (exceto por algumas partes escritas em C para maior performance, mas elas também possuem implementações alternativas em Python). 
+
+Vamos ver um exemplo realmente estúpido de como usar a arquitetura de componentes. Vamos criar um componente que seja capaz de fazer aritmética com inteiros. Sim, é bem estúpido, porque sempre existiram jeitos de fazer isso em Python, mas foi a melhor idéia que eu tive. Primeiro, a gente define como a aparência externa do componente de aritmética, sua interface:
+
+{{{
+#!python
+from zope import interface, component
+
+class IOperacoesInteiros(interface.Interface):
+
+    def somar(a, b):
+        """soma dois inteiros"""
+
+    def subtrair(a, b):
+        """subtrai dois inteiros"""
+
+    def multiplicar(a, b):
+        """multiplica dois inteiros"""
+
+    def dividir(a, b):
+        """divide dois inteiros"""
+}}}
+
+É uma convenção chamar as interfaces de IAlgumaCoisa, por isso temos IOperacoesInteiros. Não é um erro de digitação. ;-)
+Uma vez que temos uma interface, criamos um componente que a implementa a interface, e podemos instanciá-lo:
+
+{{{
+#!python
+class Calculadora:
+
+    interface.implements(IOperacoesInteiros)
+
+    def somar(self, a, b):
+        return a + b
+
+    def subtrair(self, a, b):
+        return a - b
+
+    def multiplicar(self, a, b):
+        return a * b
+
+    def dividir(self, a, b):
+        return a//b
+
+calc = Calculadora() # sem usar a AC
+}}}
+
+Agora podemos efetuar uma divisão com a calculadora diretamente digitando apenas calc.dividir(23,5), mas este não é o estilo de programação de componentes. Para usar a arquitetura de componentes, precisamos registrar o componente:
+
+{{{
+#!python
+component.provideUtility(Calculator())
+}}}
+
+Agora, quem precisar fazer operações com inteiros pode encontrar o componente que presta este serviço:
+
+{{{
+#!python
+calc = component.getUtility(IOperacoesInteiros)
+print "Divisão:", calc.dividir(23, 5)
+}}}
+
+Note que você não precisa conhecer o componente, mas apenas a interface. Isto significa que qualquer um pode implementar o componente para você usar. É claro que quando se trata de algo tão banal quanto somar e dividir isto é inútil, mas você pode por exemplo criar uma interface para componentes que conversam com bancos de dados SQL, e então plugar uma utility para cada modelo de banco de dados diferente. Você pode ter quantos componentes quiser, todos implementando a mesma interface, e se eles forem registrados com nomes diferentes você pode escolher na configuração da sua aplicação qual deles deseja usar. Você tem componentes plugáveis, de um jeito muito fácil.
+
+Also, the ZCA has provisions for extending other components. Lets say that we also want to be able to do modulo of the integers. We define up how a component that would calculate the modulo should look. We could let it extend the previous IIntegerMaths interface, by just subclassing IIntegerMaths, but that would mean that to get Modulo functionality, we need to sublass every implementation of IIntegerMaths. But since since modulo can be calculated by using division, we can implement it as an adapter. First the new interface for modulo maths:
+
+Além disso, a ZCA permite que você extenda outros componentes. Digamos que você precisa calcular o resto da divisão inteira, ou módulo. Primeiro definimos a aparência do componente que fará isso. Poderíamos extender a interface IOperacoesInteiros, mas isso significa que para obter a funcionalidade de módulo, teríamos que criar sub-classes de todas as implementações de IOperacoesInteiros. Porém, como o módulo pode ser calculado usando a divisão, podemos implementar isso usando um adaptador, ou ''adapter'' no jargão da ZCA. Primeiro, a nova interface:
+
+{{{
+#!python
+class IModulador(interface.Interface):
+
+    def modulo(a, b):
+        "devolve o resto da divisão entre dois inteiros"
+}}}
+
+Agora, criamos e registramos o ''adapter'':
+
+{{{
+#!python
+class AdaptadorDivisorModulador:
+
+    interface.implements(IModulador)
+    component.adapts(IOperacoesInteiros)
+
+    def __init__(self, context):
+        self.context = context
+
+    def modulo(self, a , b):
+        return a - (b*self.context.dividir(a, b))
+
+component.provideAdapter(AdaptadorDivisorModulador)
+}}}
+
+Note que desta vez não instanciamos a classe. Os adaptadores são instanciados quando você adapta alguma coisa.
+
+Agora podemos obter um componente que implementa IOperacoesInteiros:
+
+{{{
+#!python
+calc = component.getUtility(IOperacoesInteiros)
+}}}
+
+e agora podemos adaptá-lo à interface IModulador e usar a funcionalidade extendida:
+
+{{{
+#!python
+mod_calc = IModulador(calc)
+print "Módulo:", mod_calc.modulo(23, 5)
+}}}
+
+Note que isto vai funcionar para qualquer componente IOperacoesInteiros. Basta que ele saiba dividir. Desta forma eu extendi '''todos''' os componentes IOperacoesInteiros ao mesmo tempo. Não precisei extender cada uma das implementações de IOperacoesInteiros, mas usando adaptação eu forneco a qualquer implementação existente a funcionalidade modulo. 
+
+Será que é assim tão fácil? Se não acredita, faça easy_install zope.component, copie todo o código abaixo em um arquivo, e execute. Funciona mesmo. Tudo o que você precisa para ter a arquitetura de componentes mais bacana do planeta é fazer from zope import interfaces, component, criar interfaces para seus plugins, e passar a acessá-los através de getUtility.
+
+Agora, é clar que há muito mais coisas e funcionalidades e operações interessantes que podem ser feitas com a arquitetura de componentes. Existe um novo projeto de documentação da ZCA que foi iniciado pelo Baiju Muthukadan. O livro "" que ele está escrevendo vai te dar mais detalhes.
+
+''Traduzido por LucianoRamalho'' com autorização do autor, Lennart Regebro. 
+
+'''Documento original:''' http://regebro.wordpress.com/2007/11/16/a-python-component-architecture/
+
+{{{
+#!python
+#!/usr/bin/env python2.4
+# coding: utf-8
+
+from zope import interface, component
+
+class IOperacoesInteiros(interface.Interface):
+
+    def somar(a, b):
+        """soma dois inteiros"""
+
+    def subtrair(a, b):
+        """subtrai dois inteiros"""
+
+    def multiplicar(a, b):
+        """multiplica dois inteiros"""
+
+    def dividir(a, b):
+        """divide dois inteiros"""
+        
+class Calculadora:
+
+    interface.implements(IOperacoesInteiros)
+
+    def somar(self, a, b):
+        return a + b
+
+    def subtrair(self, a, b):
+        return a - b
+
+    def multiplicar(self, a, b):
+        return a * b
+
+    def dividir(self, a, b):
+        return a//b
+
+calc = Calculadora() # sem usar a AC
+
+# para usar a AC, registrar o componente
+component.provideUtility(Calculadora())
+
+calc = component.getUtility(IOperacoesInteiros)
+print "Divisão:", calc.dividir(23, 5)
+
+# uso de um adaptador para extender um componente
+
+class IModulador(interface.Interface):
+
+    def modulo(a, b):
+        "devolve o resto da divisão entre dois inteiros"
+
+class AdaptadorDivisorModulador:
+
+    interface.implements(IModulador)
+    component.adapts(IOperacoesInteiros)
+
+    def __init__(self, context):
+        self.context = context
+
+    def modulo(self, a , b):
+        return a - (b*self.context.dividir(a, b))
+
+component.provideAdapter(AdaptadorDivisorModulador)
+
+calc = component.getUtility(IOperacoesInteiros)
+
+mod_calc = IModulador(calc)
+print "Módulo:", mod_calc.modulo(23, 5)
+}}}

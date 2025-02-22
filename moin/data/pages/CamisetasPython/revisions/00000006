@@ -1,0 +1,35 @@
+#acl All:read
+#pragma section-numbers off
+= Camisetas Python =
+
+Nesta página faremos uma pesquisa de opinião sobre camisetas Python. A partir dos resultados desta pesquisa podemos (ou não) fechar uma parceria com o site [http://www.linuxmall.com.br?fil=pythonbrasil.com.br LinuxMall] para que ele confeccione e venda as camisetas de Python.
+
+As opções marcadas como "oficial" são referentes à camiseta que já foi confeccionada e vendida durante o QuintoFórumInternacionalSoftwareLivre.
+
+== Pesquisa ==
+
+As opções marcadas (*) são as opções utilizadas na camiseta confeccionada para o Fórum. Na parte frontal ela tem a logomarca "PYTHON powered" nas cores Branco/Preto e na parte de trás ela apresenta o "The Zen of Python" (para ler esse texto digite {{{import this}}} no interpretador Python) com a a URL {{{www.pythonbrasil.com.br}}}.
+
+/!\ '''Atenção:''' É necessário votar em uma das pesquisas de cada vez e clicar no botão "Vote" correspondente. Além disso é necessário estar logado para poder votar.
+
+=== Cores ===
+
+[[Vote(CamisetasPython, Qual a sua cor favorita?, Azul Royal*, Preta, Branca, Amarela)]]
+
+=== Tamanho ===
+
+[[Vote(CamisetasPython, Que tamanho você usa?, P, M, G, GG, SGG)]]
+
+=== Modelo ===
+
+[[Vote(CamisetasPython, Qual o modelo de sua preferência?, Manga Curta*, Manga Longa, Polo, Baby Look / Feminino)]]
+
+
+== Camiseta já confeccionada ==
+
+A camiseta já confeccionada é esta:
+
+attachment:camisetapython.jpg
+
+Eu tentei ajustar a cor para que ela representasse o tom de azul da camiseta. A malha usada para esta camiseta é algodão 100% com a malha 'penteada'.
+

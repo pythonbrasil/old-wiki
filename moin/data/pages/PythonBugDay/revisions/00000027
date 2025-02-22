@@ -1,0 +1,72 @@
+= Python Bug Day =
+'''Python Bug Day''' (http://wiki.python.org/moin/PythonBugDay) é um mutirão de solução de bugs no interpretador CPython e na biblioteca padrão. É coordenado via IRC e os core developers estão à disposição para ajudar e orientar. Além de solucionar bugs, o intuito é incentivar programadores a participarem ativamente do desenvolvimento da linguagem em si!
+
+Está chegando o próximo Bug Day? Prepare-se! PythonBugDay/ComoSePreparar
+
+= Global Python Sprint Weekend: 10 e 11 e Maio de 2008 =
+A próxima edição do Bug Day dá ênfase para participação presencial de grupos de usuários. Coordene a participação com seu grupo de usuários local, ou participe online!
+
+A programação é:
+
+ * Sábado: sprint presencial. Os grupos de usuários se encontram "ao vivo" para solucionar bugs, revisar patches, comentar issues etc.
+ * Domingo: revisão/fechamento via IRC. Fechamento, detalhes, preparar e fazer revisão de patches fornecidos no sábado etc.
+PythonBugDay/SugestoesDeIssues
+
+PythonBugDay/IssuesTrabalhados
+
+== Participantes ==
+=== Individuais ===
+- Coloque aqui seu nome, se você pretende participar!
+
+=== Grupy-SP ===
+Local: IME/USP (Ainda não confirmado)
+
+ 1. RodrigoPimentel
+ 1. PedroWerneck
+ 1. BrunoGola
+ 1. LucianoPacheco
+ 1. ViníciusBaggioFuentes
+ 1. FelipeFerreriTonello
+ 1. AlexandreHideki
+ 1. SergioCampos
+ 1. DanielCassiano
+
+=== Grupy-MT ===
+Local: Andrews House
+
+ 1. AndrewsMedina
+ 1. JonathasMachado
+
+=== Natal/RN ===
+Local: Diginet
+
+ 1. HumbertoDiogenes
+ 1. JonatasOliveira
+ 1. TulioPaiva
+ 1. ItaloRossi
+ 1. RodrigoWanderley
+
+=== Coloque aqui seu grupo de usuários! ===
+----
+
+= Bug Days anteriores: =
+= PythonBugDay em Santos =
+== Notebooks preparados para formar duplas ==
+- PedroWerneck - Linux Slackware
+
+- BrunoGola - Linux Ubuntu
+
+- RBP - Linux Ubuntu
+
+== Outros participantes ==
+- DaviKwast - OSX
+
+- LucianoRamalho - OSX
+
+- FelipeFaria
+
+- PauloAmorim - Windows
+
+- RafaelAntonio
+
+- SanroFernandes - Windows

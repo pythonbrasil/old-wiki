@@ -1,0 +1,125 @@
+Este espaço foi criado com a intenção de armazenar conteúdo sobre o curso de Jogos em python, a ser realizado em 2008 ainda. O projeto está em discussão na lista python-gamedev-brasil, no google groups.
+
+= O curso =
+
+O curso deve ser oferecido em EaD (Educação a Distância), atingindo assim o maior número de pessoas possível. O objetivo do mesmo é motivar e ensinar a comunidade em geral com assuntos relevantes a python e desenvolvimento de jogos. 
+
+ * '''Duração do curso''': 1 mês - mais que isso pode ficar muito extenso.
+ * '''Ensinando''': A principal forma de ensino a distância é através da criação de tutoriais e trabalhos a fazer. Podemos incrementar com jogos em comum, dinâmica de grupos e até alguns vídeo-tutoriais.
+ * '''Vagas''': O número de vagas terá de ser definido de acordo com a staff. Depois precisamos chegar num comum acordo de acordo com a carga horária escolhida.
+ * '''Formato da avaliação''': Como todo bom curso (ainda mais se for para considerarmos extensão universitária) precisamos de uma forma de avaliação que não seja carrasca com os alunos mas que cobrem para que todos estudem os conteúdos fornecidos. Pensei em dar então trabalhos práticos na maior parte do curso, sendo alguns individuais e a maioria em grupos diferentes (não sempre o mesmo, sorteio?). A idéia é cada 'disciplina' ter seus trabalhos e talvez bolarmos um trabalho final bem legal. (ps - se desejarmos que seja extensão universitária pela USP, essa mesma exige que seja realizada uma prova presencial)
+ * '''Apoio''': Precisamos arrumar alguém para emitir certificados (ou criar um nome do curso e esse ser somente o que emite). Patrocínio também é bem vindo para prêmios (seria ótimo por exemplo camisetas).
+
+= Disciplinas do Curso =
+
+Uma idéia é dividir o curso em 'disciplinas', que na realidade são assuntos. Eis uma lista que pensei [[RobertoFaga]]:
+ * '''Python''': começa ensinando o básico de python (calculadora, listas, estruturas for, etc), seguido de técnicas mais avançadas, como OO (será que vale a pena ensinar OO?). Boa parte daqui já temos em português (até pelo PythonNaPratica), essa parte vai ser mais sossegada.
+ * '''Pygame básico''': Ensinar os módulos básicos de pygame. Essa seria a disciplina mais pesada, e visa cobrir os módulos principais para se produzir um jogo simples. Apesar dos tutoriais que temos, vai ser um pouco chato pois precisamos ter materiais maiores, algo que ainda não encontrei.
+ * '''Técnicas de jogos''': game loops, sistemas de tiles, sprites (não com pygame necessariamente), alguma AI, e tudo que for relevante a jogos mas não atrelado a pygame necessariamente. Eu tenho alguma dificuldade em termos de material de referência para preparar isso. 
+
+Para game loops tem o artigo que eu traduzi aqui no wiki (GameLoop) e para o sistema de tiles eu posso preparar algum material, já que eu andei implementando umas coisas com isso durante as últimas férias. Alguma matemática seria interessante de ensinar aqui, ao meno vetores e geometria analítica em 2D. Mas isso pode (e provavelmente deve) ficar implícito dentro dos exemplos. [[KaoFelix]]
+
+ * '''Sockets''': É bem fácil quem já sabe sockets programar isso em Python, mas teríamos de passar algum conteúdo introdutório sobre sockets mesmo. Acho interessante para jogos online, podendo usar algumas coisas mais avançadas, como servidor xml e tals.
+ * '''Python em 3D''': Acho que seria interessante usar a Soya ou Panda (Soya é mais popular, não?), o problema é que eu sei muito pouco dessas para preparar material, precisaria ser outra pessoa.
+
+O desenvolvimento da Soya anda meio parado. Apesar dela ser fácil de usar a API é meio bagunçada e falta documentação. Acho a Panda mais interessante porque ela está sendo usada em projetos reais e apesar da API ser feia ela é razoavelmente consistente e tem documentação. Me proponho a preparar materiais, até porque eu já trabalhei em um projeto usando ela.[[KaoFelix]]
+
+ * '''Pygame avançado''': Ensinar algumas técnicas como otimizações, uso dos módulos adicionais (fonte, som, etc) e o que mais não for básico em pygame. Seria interessante nesse ponto mixar com a biblioteca 3D também.
+
+
+Ainda, essas áreas podem ser resumidas em 4: Python (inclusive coisas avançadas como sockets e etc), Técnicas de jogos, PyGame e Python 3D (mostrando soya e panda, mas destacando uma). Ou seja, cada área precisa de pelo menos um instrutor responsável (por enquanto temos 3, alguém sobraria com mais uma), e os outros obviamente ajudam também - a idéia é deixar alguém responsável principalmente nas correções, para dar conta do curso. E o(s) responsável(is) corre(m) atrás do conteúdo que já está pronto, organiza e td mais (a estrutura todos definimos juntos).
+
+= Cronograma =
+
+Vou propor um cronograma, comentem plz, ou pelo menos votem com o nome depois da proposta. Existem duas opções de curso: 
+ * oferecer em Julho - quando teoricamente os alunos tem mais tempo, mas também podem viajar/descansar e atrapalhar. Ainda, teríamos pouco tempo para elaborar o material, o que ao meu ver é o maior ponto negativo dessa opção, mas também é quando eu e muitos outros têm mais tempo para monitorar/instruir.
+ * em Agosto  - começo de semestre universitário, normalmente mais sussegado, e começo de semestre efetivo também, normalmente pessoal que trabalha está mais folgado nesse período, até mesmo porque alguns nem têm férias em Julho. A maior vantagem mesmo é o tempo maior para preparar material, durante todo o mês de Julho, conseguiríamos ter um material muito bom. Ainda, podemos começar no finalzinho de Julho (lá pelo dia 28). [RobertoFaga]
+
+Existe ainda a duração do curso e a carga horária, que estão diretamente ligadas (votem tb):
+ * '''3 semanas''', carga horária mais pesada, sendo uma 4ª semana extra apenas para o projeto final - o qual seria grande. Considerando as 6 disciplinas citadas, isso daria um total de carga horária de aproximadamente 20h semanais, sem contar o tempo gasto para realização das tarefas (calculo eu que 30h a 40h seja o suficiente/máximo). Cada disciplina teria de contar então com 3 a 6 aulas de 2h a 4h, dependendo da relevância do assunto.
+ * '''4 semanas''', carga horária mais light, mas o projeto final sendo menor. O projeto final poderia ser formado de partes feitas durante o curso, é mais fácil de avaliarmos os trabalhos e de incentivar o pessoal. O problema é que não vai ter um super projeto tão legal quanto o item anterior, mas esse me agrada mais pois o trabalho fica mais espalhado. [RobertoFaga]
+ * '''5 semanas''', carga horária bem mais tranquila, mas temo por levar muito tempo de curso. Não sei se teremos tanto conteúdo assim para tanto tempo (parece que não mas é bastante)
+
+= Referências para usarmos no curso =
+
+ * http://www.pythonbrasil.com.br/moin.cgi/DesenvolvimentoDeJogos
+
+= Conteúdo de Game Design =
+
+Aqui está um texto, ainda imcompleto, sobre game design. Tomei como referências principais, o livro "The computer Game Design Course" de Jim Thompson, que é bem introdutório, e material de minhas aulas da pós-graduação.
+O texto que fiz é bem resumido, e ainda está inacabado, mas como prometi até Domingo(hoje), aqui está! E já é alguma coisa para iniciar discussões sobre o tema.
+
+
+== TEORIA DOS JOGOS ==
+
+=== Um pouco de História ===
+
+Jogos são elementos culturais que estão entre nós há milhares de anos. Desde os primeiros relatos históricos e achados arqueológicos, lá estava o ser humano se divertindo com jogos. Achados arqueológicos do antigo Egito falam de um jogo chamado Senet a 3500AC, o Go tem pelo menos 4000 anos e o Xadrez 1000 anos de existência.
+Essa proximidade do ser humano com a diversão através de jogos, é fonte de muitas pesquisas e teorias. Um famoso pesquisador chamado Johan Huizinga, escreveu um dos primeiros trabalhos sobre o assunto chamado ''Homo Ludens'' em 1938. Neste texto ele define a atividade do jogo da seguinte forma:
+“Jogar é uma atividade ou ocupação voluntária executada em um determinado período de tempo e espaço, de acordo com regras livremente aceitas mas absolutamente fechadas, com o objetivo em si mesma e acompanhada por uma sensação de tensão, alegria, e consciência da diferença para a vida comum.”
+Essa definição baliza a criação de jogos digitais e não-digitais até hoje.
+Analisando a estrutura dos jogos, percebe-se que neles existem duas grandes características, os objetivos e a recompensa, e geralmente quando se atinge o objetivo o jogador vence. Os objetivos podem ser a eliminação de oponentes, vencer uma corrida, atingir alvos ou coletar objetos. E a recompensa pode ser simplesmente demonstrar sua superioridade ante os oponentes, conquistar mais sociabilidade e se divertir. Aliás, muitos jogos são projetados para que a diversão seja a maior recompensa dos jogadores, e onde mesmo perdendo o jogo, a exeriência seja praseirosa.
+
+=== Princípios ===
+
+Depois de Johan Huizinga muitos outros pesquisadores escreveram suas impressões sobre jogos e sua relação a sociedade. Um pesquisador comtemporâneo chamado Jesper Jull, escreveu o seguinte, para dar uma definição, e os elementos fundamentais, para que uma atividade seja considerada um jogo:
+“Um Game é um sistema formal baseado em regras com um resultado variável e quantificável onde diferentes resultados são associados a diferentes valores. Os jogadores depreendem esforços para influenciar o resultado sentindo-se ligados a estes resultados e as consequências desta atividade são opcionais e negociáveis” (The Game, The Player, The World: looking for a heart of gameness)
+
+Então vamos sumarizar os elementos:
+	'''1) Regras fixas:''' as regras devem ser bem definidas, para que não sejam contestadas em cada partida.
+	'''2) Resultado variável e quantificável:''' As regras devem prever os resultados para cada ação, e o resultado das ações deve ser quantificável de forma clara.
+	'''3) Valorização do resultado:''' As regras devem prever que resultados de ações mais complexas, sejam mais valiosos, que resultados de ações simples.
+	'''4) Esforço do jogador:''' O esforço do jogador deve ser recompensado há altura.
+	'''5) Ligação do jogador ao resultado:''' É uma característica psicológica do jogo. Onde o jogador deve ficar feliz ao ganhar pontos, ou triste ao perder. É algo complexo de ser adicionado ao jogo, uma vez que depende diretamente do momento em que ocorre durante a partida.
+	'''6) Consequências negociáveis:''' Os resultados do jogo ficam, no jogo. Ou seja, se o jogador for morto pelos montros, basta reiniciar a partida para continuar vivo.
+
+=== Elementos ===
+Jogos possuem basicamente três elementos. São eles:
+'''1) Regras'''
+'''2) Peças'''
+'''3) Arena'''
+
+As regras são fundamentais para que o jogo possa ser jogado por mais de uma pessoa, por mais de uma vez, e em diferentes momentos. Elas fornecem uma estrutura ao jogo, uma forma para o inicio, o desenvolvimento e o fim da diversão, determinando possibilidades e limitações ao jogador onde ele poderá testar suas habilidades.
+
+As peças são os personagens e objetos importantes para o desenvolvimento do jogo, que são manipuladas ou interagem com o jogador. Em jogos não-digitais, são geralmente cartas, pinos, bonecos, fichas, moedas etc. A peça do jogador (ou no popular, o avatar), é o coponente primário que deve representar o jogador dentro do jogo. É verdade que nem todo jogo possui uma peça que representa o jogador, mas sempre há componentes ligados a ação do jogador.
+
+A arena é o limitador físico do jogo, o tabuleiro ou o cenário. Nem todos os jogos se utilizão de uma arena, como alguns jogos de cartas e dados.
+
+=== Motivação e Objetivos ===
+É na motivação e no objetivo, que está a razão pela qual o jogador se envolve ou não em um jogo.
+
+Porque Jogar? Três tipos de motivação são recorrentes em jogos digitais, a motivação pessoal do personagem; ou uma motivação global; ou ainda uma motivação que une as duas anteriores, chamada Die Hard.
+Imagine três diferentes situações. 
+   1) Você foi drogado e caiu em um sono profundo. Quando acordou viu no jornal que um gorila alienígena de 15 metros sequestrou sua namorada. E só você pode salvá-la.
+   2) Você foi drogado e caiu em um sono profundo. Quando acordou viu no jornal que um gorila alienígena de 15 metros ameaça destruir o planeta caso não sejam pagos $100 bilhões. E só você pode impedí-lo.
+   3)Você foi drogado e caiu em um sono profundo. Quando acordou viu no jornal que um gorila alienígena de 15 metros ameaça exterminar a humanidade, e sequestrou sua namorada para repovoar a Terra após a eliminação da humanidade. E só você pode salvar o mundo.
+Agora seja honesto e diga, por qual razão vale mais apena jogar? As motivações que unem motivações pessoais e globais, são sempre mais cativantes para os jogadores.
+
+Para vencer um jogo, os jogadores devem cumprir certos sub-objetivos, até que ele esteja apto a enfrentar o gorila alienígena. Esses objetivos, e mini-objetivos devem ser apresentados para preparar o jogador. Os bons objetivos são construtivos, ensinam o jogador a aprimorar suas habilidades, enquanto os objetivos ruins são apenas obstrutivos, e não dizem nada ao que tange a vivência do jogo.
+
+=== Papel do Jogador ===
+''Ainda por fazer...''
+
+== GAME DESIGN ==
+
+=== O que é Design ===
+
+Bem, já vimos o que é um game, mas o que é design? Será que pode-se dizer que é só traduzir do inglês e temos “projeto”, e já é o suficiente? Design é arte? A resposta é não. E é exatamente por não ser o suficiente que a termo não foi traduzido para o português. O termo poder ter pequenas variações de definição, de acordo com a área de especialização do design, como Design Gráfico, Design de Produtos, Design Automobilístico etc... podemos entender melhor o termo design como uma atividade mercadológica que tem por objetivo a criação de produtos. 
+Portanto design não é simplesmente projeto, tampouco arte. O termo projeto remete a algo exato, onde há um objetivo a ser cumprido e um método para ser seguido, mas como design lida com consumo, que nem de longe podemos dizer que é uma atividade lógica nos seres humanos, e o design se encarrega de trabalhar com essa subjetividade do desejo consumista das pessoas. A arte tem a liberdade para ser ofenciva, questionadora e independente, o design não. O designer não tem toda essa liberdade, seu trabalho é criar produtos que satisfaçam os desejos, ou necessidades de consumo das pessoas, logo toda a criação do designer deve estar condicionada a cumprir certos objetivos mercadológicos. 
+Agora para especificar o design no contexto dos jogos. “Design é o processo pelo qual o designer cria um contexto para ser encontrado pelo participante de onde emerge um significado.” (''Salen – Rules of Play, pg 41''). Dessa forma o designer é quem cria o jogo; O contexto de um game é o seu espaço, objetos, narrativas e comportamentos dos elementos; o participante é o jogador, o habitante do jogo que explora e manipula o contexto durante a partida; o significado é aquilo que o participante apreende da partida, o que ele fantasia ser no mundo do jogo.
+
+=== O que faz um game designer ===
+
+Já falamos sobre o que é game, e o que é design, agora qual é o trabalho do game designer
+
+=== Significado ===
+''Ainda por fazer...''
+
+=== Conceito ===
+''Ainda por fazer...''
+
+=== Inspiração e Transpiração (Idéia, e pesquisa) ===
+''Ainda por fazer...''
+
+=== Aplicação dos conceitos ===
+''Ainda por fazer...''

@@ -1,0 +1,6 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+= Páginas Orfãs =
+
+Uma lista de páginas para as quais nenhuma outra página aponta:
+
+<<OrphanedPages>>

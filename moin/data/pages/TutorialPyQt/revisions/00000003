@@ -1,0 +1,338 @@
+= Tutorial de PyQt =
+
+Este é um pequeno tutorial para iniciantes em PyQt. Assume-se que o leitor possua algum conhecimento prévio de bash, Python e Qt.
+
+
+== Sumário ==
+
+Este tutorial cobrirá os seguintes pontos:
+  * Como utilizar o Qt Designer para gerar arquivos .ui para Qt.
+  * Como usar a ferramenta pyuic para gerar programas python.
+  * Como usar sinais e slots do Qt no Python.
+  * Finalmente, criaremos uma aplicação simples para comunicar com o comando 'at'.
+
+== Requisitos ==
+
+Você precisará:
+  * Red Hat 8.0 com a seguinte configuração:
+     * qt-devel RPM instalado
+     * !PyQt-devel RPM instalado
+
+----
+
+  Não precisa ser RPM, desde que você instale qt-devel e !PyQt-devel. Essas bibliotecas já vêm na maioria das distribuições, como Mandrake, Suse, Fedora, etc.
+  RodrigoVieira
+
+----
+
+PyQt funciona em outros sistemas também. Este tutorial pode ou não funcionar em outras configurações, porém eu não irei prover todos os detalhes sobre como fazê-los funcionar em outros sistemas. Você é responsável por resolver essa questão.
+
+Para seguir esse tutorial, você deverá já saber:
+  * Como usar um editor de textos, e como fazer esse editor trabalhar apropriadamente com código Python.
+  * Como programar em Python.
+  * Alguns comandos bash básicos.
+  * O básico de programação em Qt.
+
+Se você não possui todos os conhecimentos acima, poderá experimentar alguns problemas em fazer este tutorial funcionar.
+
+== Utilizando o Qt Designer ==
+
+Primeiramente, vamos começar onde eu começo. Abra uma janela de comando bash. Inicie o Qt Designer digitando o seguinte comando:
+
+  {{{
+$ designer
+}}}
+
+Eu não vou assumir que você seja totalmente iniciante na utilização do Qt Designer. Caso seja, você pode facilmente consultar a documentação.
+
+Crie uma widget nova. Nomeie-a 'at_auto'. Adicione algumas coisas nela:
+
+  * Adicione uma Q``Line``Edit. Nomeie-o "command" na janela de propriedades.
+  * Adicione um Q``Push``Button. Nomeie-o "schedule" na janela de propriedades. Mude o seu texto para "Schedule".
+  * Adicione um Q``Date``Time``Edit. Nomeie-o "time" na janela de propriedades.
+
+Agora, acerte o layout usando as ferramentas de layout do Qt, do jeito que você preferir. Você deve querer utilizar alguns espaçadores também.
+
+Salve o arquivo em um diretório para esse tutorial. Se você ainda não o criou, crie um chamado "pyqt_tutorial" ou algo assim. Salve o arquivo como "at.ui".
+
+== Utilizando o pyuic ==
+
+Volte ao prompt do bash, ou abra uma nova janela de comando. Vá ao diretório que você acabou de criar, e execute o seguinte comando.
+
+  {{{
+$ pyuic at.ui
+}}}
+
+Esse comando irá imprimir em stdout o arquivo python gerado a partir do arquivo .ui do Qt. Nós queremos salvar essa saída, então nós rodaremos o seguinte comando.
+
+  {{{
+$ pyuic at.ui > at_auto.py
+}}}
+
+----
+  'Petr Vanek (subzero AT py DOT cz)':
+    '''CUIDADO:''' usando pyuic dessa forma ''pode'' ser errado. Pyuic escreve algumas informações na saída-padrão que não é código python '''de verdade'''!
+
+    Use-o dessa forma:
+    {{{
+$ pyuic at.ui -o at_auto.py
+}}}
+
+----
+
+  Este problema não afeta o pyuic que vem com !PyQt 3.5 (que é o que !RedHat 8 e 9 usam).
+
+  Eu postei um patch na lista PyKDE para consertar isso. Phil a aceitou. Deve aparecer na próxima versão (3.7?)
+
+  -- Jonathan Gardner
+
+----
+
+Nós depositamos a saída do comando em at_auto.py. Toda vez que alterarmos o arquivo at.ui, precisaremos regenerar o arquivo at_auto.py. Vamos adicionar esse comando a um makefile.
+
+/!\ Tabs são importantes!
+
+  {{{
+$ cat > Makefile
+at_auto.py : at.ui
+	pyuic at.ui > at_auto.py
+^D
+}}}
+
+----
+  '''Obs:''' Se você está usando !PyQt 3.6, você terá que usar o método '-o' descrito por Petr acima. Você pode querer usar de qualquer forma, por outros motivos vários.
+
+  {{{
+$ cat > Makefile
+at_auto.py : at.ui
+	pyuic at.ui -o at_auto.py
+^D
+}}}
+----
+
+Agora execute o makefile.
+
+    {{{
+$ make
+}}}
+
+Note que ele diz algo sobre todos os arquivos estarem atualizados. Vamos executar um touch em at.ui para que ele conste como mais recente que at_auto.py, e então executar make de novo.
+
+  {{{
+$ touch at.ui
+$ make
+}}}
+
+Agora ele ecoou os comandos executados. Veja que ele regenerou at_auto.py com sucesso.
+
+=== Teoria ===
+
+A idéia aqui é que você quer que o desenvolvedor GUI seja capaz de fazer alterações na interface (como mudar a posição de objetos) sem afetar a lógica por trás da GUI. Então com a configuração que temos agora, tudo o que o desenvolvedor GUI tem que fazer é usar Qt Designer para mudar o arquivo .ui, e então rodar o comando make para ver suas alterações serem efetuadas.
+
+Seu arquivo make ficará mais complicado à medida que você adiciona mais arquivos. Mas não esqueça de ler mais sobre make para que você possa saber de antemão como utilizá-lo apropriadamente.
+
+== Rodando sua aplicação ==
+
+Então nós temos aquele arquivo .ui, e também o arquivo at_auto.py. Como nós rodamos o programa afinal?
+
+Nós temos que criar at.py. Aqui está como ele parecerá.
+
+  {{{
+#!/usr/bin/env python
+from qt import *
+from at_auto import at_auto
+
+class at(at_auto):
+    def __init__(self, parent=None, name=None, fl=0):
+        at_auto.__init__(self,parent,name,fl)
+
+if __name__ == "__main__":
+    import sys
+    a = QApplication(sys.argv)
+    QObject.connect(a,SIGNAL("lastWindowClosed()"),a,SLOT("quit()"))
+    w = at()
+    a.setMainWidget(w)
+    w.show()
+    a.exec_loop()
+}}}
+
+Now, run it.
+
+  {{{
+$ python at.py
+}}}
+
+Pronto! Você tem o seu programa.
+
+NOTA:
+Se você está usando Qt Designer com a versão 3.3.0 do Qt, seu arquivo .ui contém
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+no cabeçalho, e pyuic (3.8.1 pelo menos) reclamará que essa versão é muito recente e não produzirá nenhuma saída.
+
+Para resolver isso da forma fácil, você pode criar um pequeno script que irá corrigir esse erro automaticamente, 
+execute make e rode seu novo programa:
+
+#!/bin/bash
+
+sed -i s/3.3/3.3.0/g at.ui
+
+make
+
+exec python at.py
+
+chmod 700 myscript e resolvido !
+
+== Colocando Data / Hora Default ==
+
+Vamos colocar um valor default para a widget QDate``Time``Edit. Essa widget espera um valor QDate``Time como parâmetro no método set``Date``Time, então vamos criar um. Mas como a gente define a hora do QDate``Time? Examinando a documentação, vemos que o método setTime_t nos permite definir a data com a hora em segundos a partir do epoch Unix. Nós podemos pegar isso da função time() no módulo interno time.
+
+Aqui está o código que faz isso. Nós colocaremos isso no método `__init__` para que ele seja populado corretamente já no início. Lembre de importar time!
+
+  {{{
+        # Set the date to now
+        now = QDateTime()
+        now.setTime_t(time.time()) # Time in seconds since Unix Epoch
+        self.time.setDateTime(now)
+}}}
+
+Esse trecho de código mostra como Python e !PyQt trabalham facimente um com o outro. Também demonstra a linha de pensamento que você deverá seguir para manipular widgets do Qt.
+
+== Sinais e Slots ==
+
+Tudo que você tem que fazer agora é conectar sinais (Signals) a Slots. É bem fácil, e por isso que eu gosto do !PyQt.
+
+Python não é C++. Então ele lida com sinais e slots de forma diferente.
+
+Primeiro, em Python, tudo que pode ser chamado é um slot. Pode ser um método, uma função, ou mesmo uma expressão lambda. Segundo, em Python, um sinal é só um texto sem significado em particular.
+
+Deixe-me esclarecer a distinção entre um Signal/Slot C++ de um Signal/Slot Python. Não tem a ver com onde o objeto foi criado. Tem tudo a ver com onde o sinal foi originado, e onde o slot está localizado. Por exemplo, um QPush``Button tem um sinal C++, "clicked()". Se você criar sua própria subclasse no Python, chamado "Py``Push``Button", ele ainda terá um sinal C++, "clicked()". Se você criou um novo sinal em Python, chamado "Gobbledy``Gook()", então esse é um sinal Python, porque nada em C++ sequer sabe de sua existência.
+
+Quando você liga um sinal a um slot, você pode fazer uma das seguintes operações:
+
+  * Ligar um sinal C++ a um slot Python
+
+    Você vai fazer isso o tempo todo. Isso é feito através de uma chamada assim:
+
+    {{{
+QObject.connect(some_object, SIGNAL('toggled(bool)'), some_python_callable)
+}}}
+
+  * Ligar um sinal C++ a um sinal C++
+
+    Você não fará isso muito freqüentemente, mas pode ser útil às vezes.
+
+    {{{
+QObject.connect(some_object, SIGNAL('toggled(bool)'), some_object, SLOT('the_slot(bool)'))
+}}}
+
+  * Ligar um sinal Python a um slot C++ ou Python
+
+    Você provavelmente não usará muitos sinais Python, mas aqui está como fazê-lo. Basicamente, você imagina um novo nome pra um sinal. Então você muda a palavra "SIGNAL" acima para "PYSIGNAL".
+
+    Se você está usando muitos sinais Python, poderá fazer sentido ignorar a biblioteca Qt de sinais e usar a sua própria. Se você tem planos de portar para C++ um dia, isso não fará sentido algum. Eu fiz isso porque achei a sintaxe meio difícil, e debugar complicado.
+
+   Nossa aplicação vai responder a apenas um sinal: o botão "Schedule" sendo pressionado. O que ele fará é rodar o comando "at" com argumentos apropriados.
+
+Aqui está o código para iniciar a conexão:
+  {{{
+#!/usr/bin/env python
+self.connect(
+    self.schedule, SIGNAL('clicked()'),
+    self.schedule_clicked
+)
+}}}
+
+Repare que estamos conectando um sinal C++ a um slot Python. Entretanto, esse slot não existe ainda. Vamos adicioná-lo à classe 'at'.
+
+  {{{
+#!/usr/bin/env python
+    def schedule_clicked(self):
+        if not str(self.command.text()):
+            QMessageBox.critical(self,
+                "Invalid event", "You must specify an event",
+                QMessageBox.Ok)
+            return
+
+        t = str(self.time.dateTime().toString('hh:mm MM/dd/yyyy'))
+        p = os.popen('at -m "%s"'%t, 'w')
+        p.write(str(self.command.text()))
+        self.close()
+}}}
+
+O processo aqui se divide em duas partes. Primeiro, nós checamos se algo é especificado no widget Q``Line``Edit "command". Caso não haja nada, nós mostramos uma Q``Message``Box com um erro crítico.
+
+Se houver algo no command box, nós abriremos um pipe para o comando 'at'. 'at' espera que o comando venha do stdin. Então nós escreveremos no seu stdin o comando que queremos executar. Note que nós não efetuamos nenhum tipo de checagem de erro aqui.
+
+Prossiga e rode o aplicativo agora, e use o comando 'atq' para ver se o comando 'at' foi enfileirado.
+
+Tudo certo? OK.
+
+Aqui está o código final para o arquivo 'at.py'.
+
+  {{{
+#!/usr/bin/env python
+from qt import *
+from at_auto import at_auto
+import time
+import sys
+import os
+
+class at(at_auto):
+
+    def __init__(self, parent=None, name=None, fl=0):
+        at_auto.__init__(self,parent,name,fl)
+
+        # Set the date to now
+        now = QDateTime()
+        now.setTime_t(time.time()) # Time in seconds since Unix Epoch
+        self.time.setDateTime(now)
+
+        self.connect(
+            self.schedule, SIGNAL('clicked()'),
+            self.schedule_clicked
+        )
+
+    def schedule_clicked(self):
+        if not str(self.command.text()):
+            QMessageBox.critical(self,
+                "Invalid event", "You must specify an event",
+                QMessageBox.Ok)
+            return
+
+        t = str(self.time.dateTime().toString('hh:mm MM/dd/yyyy'))
+        p = os.popen('at -m "%s"'%t, 'w')
+        p.write(str(self.command.text()))
+        self.close()
+
+if __name__ == "__main__":
+    a = QApplication(sys.argv)
+    QObject.connect(a,SIGNAL("lastWindowClosed()"),a,SLOT("quit()"))
+    w = at()
+    a.setMainWidget(w)
+    w.show()
+    a.exec_loop()
+}}}
+
+== Dever de Casa ==
+
+Com o tempo restante, você poderá querer adicionar algumas extensões.
+
+  * Usando o Qt Designer, adicione QLabels para descrever o quê cada um dos inputs fazem. Note que você não tem que mudar nada no código, só editar o arquivo 'at.ui' e rodar 'make'.
+
+  * Depois que você terminar o job 'at', você pode querer que a aplicação feche. Ache um slot apropriado para fechar o widget 'at' ou toda a aplicação. Pergunta: Porquê fechando o widget 'at' a aplicação toda fecha também?
+
+  * Cheque erros quando você chama o comando 'at'. Se houver alguma mensagem, mostre-a ao usuário com uma QMessage``Box.
+
+  * Escreva uma aplicação para listar a queue 'at'.
+
+  * Adicione funcionalidade para editar ou remover jobs 'at' enfileirados. Tente reutilizar o máximo de código possível. (Dica: a widget que irá requisitar um novo job 'at' já está pronta. Tente colocá-la em um QDialog.)
+
+== Direções Futuras  ==
+
+Essa aplicação poderia ser parte de um conjunto de interfaces para comando Unix. Que outros comandos você gostaria de implementar? Eu sugeriria tentar comandos como "crontab" e "ps". Interpretar a saída desses comandos não é muito difícil, e as interfaces são bem fáceis.
+
+Você também pode tentar combinar seus novos aplicativos com o seu programa 'at'. Se quiser, pode vendê-los como uma interface gráfica para Unix, mas você terá que comprar a licença comercial para ambos !PyQt e Qt a não ser que você siga algo como a GPL.
+
+== Sobre esse tutorial  ==
+
+O original em inglês, gentilmente cedido por Jonathan Gardner, está disponível em http://www.python.org/cgi-bin/moinmoin/JonathanGardnerPyQtTutorial . Traduzido por RodrigoVieira.

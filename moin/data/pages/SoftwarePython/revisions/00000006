@@ -1,0 +1,23 @@
+#pragma section-numbers off
+= Software Python =
+
+Nesta página você vai achar aquele software, aquele módulo, aqueles scripts que facilitarão a sua vida de desenvolvedor Python. Aqui também você poderá colocar aquele seu projeto desenvolvido em Python para que todos conheçam.
+
+[[TableOfContents]]
+
+== Ferramentas Programação ==
+
+   * EditorSpe - Editor de textos.
+   * AmbienteEric3 - Ambiente de desenvolvimento.
+
+== Scripts ==
+
+   * Compile2Exe - Script para facilitar o uso do módulo py2exe
+
+== Softwares desenvolvidos em Python ==
+
+   * Txt2Tags - Conversor de documentos.
+
+----
+
+Osvaldo Santana Neto

@@ -1,0 +1,13 @@
+#pragma section-numbers off
+= cxFreeze =
+
+Gere executáveis stand-alone de seus scripts Python, que podem ser do tipo Console (todas as plataformas), ConsoleSetLibPath (somente Unix), Win32 GUI, Win32 Service ou Win32 COM.
+
+== Ficha técnica ==
+
+URL: http://starship.python.net/crew/atuining/cx_Freeze/ [[BR]]
+Licença: Python License
+
+----
+
+Washington Coutinho Corrêa Jr

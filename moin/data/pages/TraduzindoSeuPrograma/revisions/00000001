@@ -1,0 +1,213 @@
+= Traduzindo Seu Programa usando gettext =
+
+Gettext é um conjunto de bibliotecas e ferramentas muito utilizado no meio software livre para implementar a tradução de programas. Esta ferramenta é multiplataforma e multilinguagem, isto é, roda em vários sistemas operacionais e também em várias linguagens, como C, Ruby, Python, Java, ... 
+
+http://www.gnu.org/software/gettext/gettext.html
+
+== Introdução ao Gettext ==
+
+Seu uso é fácil: você "instala" um catálogo de traduções para seu programa e utiliza a chamada {{{gettext()}}}, muito comumente renomeada para {{{_()}}} para as mensagens a serem traduzidas. Esta função tem o seguinte comportamento: Quando o texto passado estiver no catálogo de tradução requerido, esta tradução será utilizada, caso contrário o texto original será retornado.
+
+Depois você deverá rodar o utilitário {{{xgettext}}} em todos os arquivos python que contém mensagem a ser traduzida, isto gerará um arquivo '''.pot''' (''Portable Object Template''), o qual é um arquivo texto puro (''plain/text'') o qual deverá ser copiado para a língua que se quer a tradução, e então traduzí-lo. Para auxiliar na tradução existem utilitários como o kbabel o qual oferece uma interface amigável e várias facilidades, como a conferência em um Vocabulário Padrão (http://br.tldp.org/ferramentas/vp/vp-kbabel-info.html). 
+
+Após traduzido, este arquivo deverá ser compilado em um arquivo '''.mo''' (''Machine Object'') o qual será usado por nosso programa. Para isso utilizamos o utilitário {{{msgfmt}}}.
+
+Toda vez que modificamos alguma mensagem de texto em nosso programa, precisaremos gerar o '''.pot''' novamente e também modificar o arquivo '''.po''' com a tradução, para isso utilizamos a ferramente {{{msgmerge}}}. Lembre-se de compilar o arquivo traduzido novamente!
+
+Para que o arquivo '''.mo''' seja encontrado por nosso programa, ele precisará estar em algum lugar específico como o {{{/usr/share/locale/$LANG/LC_MESSAGES/$PROGRAM.mo}}}, no caso dos Unix. Você pode especificar um caminho alternativo no seu programa ao instalar o catálogo. Note que por {{{$LANG}}} entendemos o código da linguagem, como '''pt_BR''' para o Português do Brasil e por {{{$PROGRAM}}} o nome do programa e consequentemente o nome do catálogo.
+
+Para facilitar o processo de muda-gera-mistura-compila eu utilizo o seguinte ''bash script'':
+{{{
+#!/bin/sh
+
+PROGRAM="pytvgrab"                 # my program name
+SRC_DIR="./lib"                    # where the .py files are
+DST_DIR="./share/locale"           # where to store translation files
+DST_FILE="$DST_DIR/${PROGRAM}.pot" # template file
+
+function regen_pot()
+{
+    echo -e "Regenerate template file: \c"
+    find "$SRC_DIR" -name "*.*py" | xargs xgettext -L Python -o "$DST_FILE"
+    echo -e "done."
+    echo
+}
+
+function compile()
+{
+    echo -e "Compile message catalog to new format:"
+    for file in `find "$DST_DIR" -name "${PROGRAM}.po"`; do
+        out=`echo "$file" | sed 's/\.po$/.mo/'`
+        outn=${out/$DST_DIR\//}
+        echo -e "   Generating: $outn"
+        msgfmt -o "$out" "$file" 2> /dev/null
+    done
+    echo
+}
+
+function merge()
+{
+    echo -e "Merge new strings into translations:"
+    for file in `find "$DST_DIR" -name "${PROGRAM}.po"`; do
+        filen=${file/$DST_DIR\//}
+        echo -e "   Merging: $filen\c"
+        msgmerge --update --backup=off -i -F "$file" "$DST_FILE"
+    done
+    echo
+}
+
+function check()
+{
+    echo -e "Checking translations:"
+    for file in `find "$DST_DIR" -name "${PROGRAM}.po"`; do
+        filen=${file/$DST_DIR\//}
+        filen=${filen/\/${PROGRAM}.po/}
+        echo -e "   Check: $filen: \c"
+        msgfmt -o /dev/null --statistics -v -c "$file"
+    done
+    echo
+}
+
+case $1 in
+    check | -C | --check )
+        shift
+        check $@
+        ;;
+
+    compile | -c | --compile )
+        shift
+        compile $@
+        ;;
+
+    merge | -m | --merge )
+        shift
+        merge $@
+        ;;
+
+    regen_pot | -r | --regen_pot | --regen-pot | regen | --regen )
+        shift
+        regen_pot $@
+        ;;
+
+    all | -a | --all | -A | --ALL | --All )
+        shift
+        regen_pot $@
+        merge $@
+        compile $@
+        check $@
+        ;;
+
+    *)
+        cat <<EOF
+Usage:
+   $0 [OPTION]
+
+OPTION is one of:
+   -r, --regen    regenerates the po template (.pot)
+   -m, --merge    merge new strings from .pot into existing .po files
+   -c, --compile  compile .po files in .mo
+   -C, --check    check translation files
+   -a, --all      do in order: regen, merge, compile and check.
+EOF
+        ;;
+esac
+
+}}}
+
+
+== Adaptando seu Programa ==
+
+Para que seu programa faça uso do gettext você terá que fazer algumas modificações:
+ 1. Importar o módulo gettext e instalar o catálogo
+ 1. Envolver as mensagens a serem traduzidas com _()
+
+Eu costumo fazer a primeira parte em um arquivo em separado chamado "i18n.py" o qual replico abaixo:
+{{{
+#!/usr/bin/python
+
+PROGRAM="pytvgrab" # my program name
+
+import locale
+LC_ALL = locale.setlocale(locale.LC_ALL, '') # lê variáveis de ambiente LC_ALL, LANG, ...
+
+try:
+    import gettext
+    from gettext import gettext as _
+    # Install internationalization stuff and define _()
+    gettext.install( PROGRAM, unicode=True )
+except ImportError:
+    import sys
+    print >> sys.stderr, ( "You don't have gettext module, no " \
+                           "internationalization will be used." )
+    # define _() so program will not fail
+    import __builtin__
+    __builtin__.__dict__[ "_" ] = lambda x: x
+}}}
+
+importe este arquivo no seu código e você terá acesso à função _() e um catálogo instalado.
+
+Um exemplo de programa que use isso é:
+{{{
+#!/usr/bin/python
+
+from i18n import *
+
+print _( "Hello World!" )
+
+}}}
+
+
+== Como Distribuir? ==
+Podemos utilizar o ["distutils"] para distribuir nosso programa, para isso teremos que acrescentar alguns parâmetros à chamada {{{setup()}}}  do '''setup.py''' e algumas linhas no '''MANIFEST.in''':
+
+=== MANIFEST.in ===
+Inclua os arquivos .pot, .po e .mo nos pacotes:
+
+{{{
+recursive-include share/locale *.pot
+recursive-include share/locale *.po
+recursive-include share/locale *.mo
+}}}
+
+=== setup.py ===
+{{{
+#!/usr/bin/python
+
+# ... code ...
+
+
+# Find locale files:
+setup_args[ "data_files" ] = []
+def mo_find( result, dirname, fnames ):
+  files = []
+  for f in fnames:
+    p = os.path.join( dirname, f )
+    if os.path.isfile( p ) and f.endswith( ".mo" ):
+      files.append( p )
+
+  if files:
+    result.append( ( dirname, files ) )
+# po_find()
+os.path.walk( os.path.join( "share", "locale" ), mo_find, setup_args[ "data_files" ] )
+
+
+setup( **setup_args )
+}}}
+
+Isto é, passe como parâmetro para {{{setup()}}} data_files e uma lista de tuplas com as tuplas tendo o primeiro argumento o diretório destino e o segundo uma lista de arquivos a serem colocados neste diretório. Por exemplo:
+
+ * Arquivos a serem incluídos: '''share/locale/pt_BR/LC_MESSAGES/pytvgrab.mo''' e '''share/locale/pt_BR/LC_MESSAGES/pytvgrab2.mo''' em '''share/locale/pt_BR/LC_MESSAGES'''
+ * Mais arquivos a serem incluídos: '''share/locale/es_ES/LC_MESSAGES/pytvgrab.mo''' e '''share/locale/es_ES/LC_MESSAGES/pytvgrab2.mo''' em '''share/locale/es_ES/LC_MESSAGES'''
+ * {{{ 
+#!/usr/bin/python
+
+data_files=[ 
+   ( 'share/locale/pt_BR/LC_MESSAGES', 
+      [ 'share/locale/pt_BR/LC_MESSAGES/pytvgrab.mo', 
+        'share/locale/pt_BR/LC_MESSAGES/pytvgrab2.mo' ],
+
+     'share/locale/es_ES/LC_MESSAGES', 
+      [ 'share/locale/es_ES/LC_MESSAGES/pytvgrab.mo', 
+        'share/locale/es_ES/LC_MESSAGES/pytvgrab2.mo' ],
+    )
+}}}

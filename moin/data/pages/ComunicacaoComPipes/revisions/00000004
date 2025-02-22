@@ -1,0 +1,120 @@
+## page was renamed from ComunicaçãoComPipes
+#pragma section-numbers off
+= Comunicação com Pipes =
+
+Este artigo destina-se a fazer uma introdução sobre o que são ''pipes'' e como programá-los em Python, explorando esse recurso poderoso em programação de ferramentas interligáveis.
+
+[[TableOfContents]]
+
+= Introdução =
+
+''Pipe'' (traduzido literalmente para o português como "cano") é o famoso redirecionamento de entrada/saída de um programa para o outro. O exemplo mais comum conhecido, tanto em ambientes Unix como Windows, é controlar a saída de um programa que fornece várias páginas de texto usando o {{{more}}} para pausar ao final de cada página:
+
+{{{
+> ls | more
+}}}
+
+O que acontece é que o programa ls lista o conteúdo do diretório e, através do ''pipe'' (|), direciona sua saída como entrada para o próximo programa, more. O programa more detecta a última linha do console e para temporariamente a entrada de dados. Ao digitar uma tecla, ''more'' continua a leitura da entrada.
+
+Cada processo em execução possui basicamente dois canais de comunicação iniciais: a entrada padrão e a saída padrão. Quando um programa é iniciado via console, o sistema operacional se encarrega em conectar os dispositivos teclado e vídeo respectivamente a esses dois canais para que o usuário possa interagir com ele. Mas a capacidade de usar outros programas como entradas e saídas possibilita grande flexibilidade de automação de procedimentos.
+
+Para se ter uma idéia sobre a utilidade deste recurso, usar o ''shell'' (console) sem ele seria muito mais limitante.
+
+= O Módulo popen2 =
+
+O módulo popen2 fornece opções de acordo com o estilo de programação desejado, se você escolher um estilo de programação mais procedural, as funções ''popen2'', ''popen3'' e ''popen4'' podem ser usadas de acordo com as suas necessidades. Para trabalhar com objetos, usa-se as classes ''Popen3'' e ''Popen4'' (observe os nomes começando em maiúsculas). Infelizmente estas classes só estão disponíveis em ambiente Unix.
+
+== As Funções popen2, popen3 e popen4 ==
+
+As funções ''popen2'', ''popen3'' e ''popen4'' executam um programa paralelamente (isto é, sem esperar ele acabar para continuar) e tornam possível que se comunique com o processo filho criado através daqueles ''pipes'' apresentados anteriormente. Esses ''pipes'' são recebidos como retorno das funções popen. As várias funções popen oferecem possibilidades de combinação:
+
+'''popen2'''(''cmd'''''[''',''bufsize'''''[''',''mode''''']'''''']''')
+
+ * Executa ''cmd'' e retorna a tupla (''child_stdout'', ''child_stdin'')
+
+'''popen3'''(''cmd'''''[''',''bufsize'''''[''',''mode''''']'''''']''')
+
+ * Executa ''cmd'' e retorna a tupla (''child_stdout'', ''child_stdin'', ''child_stderr'')
+
+'''popen4'''(''cmd'''''[''',''bufsize'''''[''',''mode''''']'''''']''')
+
+ * Executa ''cmd'' e retorna a tupla (''child_stdout_and_stderr'', ''child_stdin'')
+
+O argumento opcional ''bufsize'' indica o tamanho interno do ''buffer'' (área de transferência, onde dados são guardados temporariamente), já o modo indica se os canais de comunicação devem ser lidos como texto ('t') ou binário ('b') e só fazem sentido em ambiente Windows.
+
+As tuplas que essas funções retornam contém objetos do tipo ''file'' (arquivo) e são os canais de comunicação para enviar e receber dados. Por exemplo: a função popen2 retorna (''child_stdin'', ''child_stdout''), o que quer dizer que a função retorna uma tupla, do qual o primeiro objeto é o canal de saída do programa executado (stdout - ''standard output'') e o segundo objeto, o canal de entrada (stdin - ''standard input'').
+
+O objeto ''child_stderr'' representa a saída de erro de um programa (e este é geralmente o vídeo também), mas sua importância é maior para depuração de programas, caso eles dêem erros. O objeto ''child_stdout_and_stderr'' envia tanto a saída quanto o erro pelo mesmo canal e também tem maior importância na depuração de um programa.
+
+== Um Exemplo ==
+
+Vamos simular o uso da linha abaixo, quando digitada no ''shell'' do sistema operacional GNU/Linux:
+
+{{{
+~$ ls | sort | head
+}}}
+
+O que significa pegar a lista de arquivos do diretório ('''ls'''), colocamos
+em ordem alfabética ('''sort''') e pegamos as 10 primeiras entradas
+('''head''') já em ordem. Estamos usando redirecionamento: a entrada de
+cada processo é a saída do outro. O equivalente em Python seria
+abrir o processo com ''popen'' e ler de cada um e escrever para o
+próximo:
+
+{{{
+#!/usr/local/bin/python
+
+import popen2
+
+# Abrimos todos os programas ls, sort e head em paralelo.
+output_ls, input_ls = popen2.popen2('/bin/ls')
+output_sort, input_sort = popen2.popen2('/bin/sort')
+output_head, input_head = popen2.popen2('/bin/head')
+
+# Não precisamos da entrada do programa ls, só da saída
+input_ls.close()
+
+# Lemos a saída do programa ls e colocamos na varíavel text
+text = output_ls.readlines()
+
+# Fechamos todos os canais de ls, terminando o processo.
+output_ls.close()
+
+# Enviamos text para o programa sort.
+input_sort.writelines(text)
+
+# E enfim fechamos a entrada de sort.
+input_sort.close()
+
+# Depois de processado, pegamos a saída de sort.
+text = output_sort.readlines()
+
+# Encerramos o processo sort.
+output_sort.close()
+
+# Enviamos text para o programa head.
+input_head.writelines(text)
+
+# Fechamos a entrada do programa head.
+input_head.close()
+
+# Imprimimos na tela a saída do programa head.
+print str().join(output_head.readlines())
+
+# Encerramos o último processo.
+output_head.close()
+
+}}}
+
+== As Classes de popen2 ==
+
+As classes Popen3 e Popen4 só funcionam em ambiente Unix, como foi dito antes, e elas fornecem algumas vantagens, como a possibilidade de usar as funções do sistema ''wait'' e ''poll'' para trabalhar com os estados finais dos processs filhos retornados. Estas funções estão fora do escopo deste documento e não serão tratados aqui. No demais, os objetos ''file'' do processo criado são representados pelos atributos ''fromchild'' (saída do processo), ''tochild'' (entrada do processo) e ''childerr'' (saída de erro do processo).
+
+
+= Últimas Palavras =
+
+Bom, este foi um artigo um tanto longo e trabalhoso, mas espero que ele ajude as pessoas novas em Python e também em programação em ambientes Unix a entender essa poderosa ferramenta que eles tem em suas mãos. =)
+
+----
+
+PedroDeMedeiros

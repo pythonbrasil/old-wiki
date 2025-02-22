@@ -1,0 +1,58 @@
+Uma mistura do código do amigo Pedro Werneck em http://www.pythonbrasil.com.br/moin.cgi/VerificadorDeCpf e  do amigo Michel Thadeu Sabchuk em http://www.pythonbrasil.com.br/moin.cgi/VerificadorDeCnpj.
+
+Este código roda no Zope.
+
+{{{
+#!python
+## Script (Python) "valida_CNPJ"
+##bind container=container
+##bind context=context
+##bind namespace=
+##bind script=script
+##bind subpath=traverse_subpath
+##parameters=cnpj
+##title=
+##
+
+#Baseado nos códigos de Pedro Werneck e Michel Thadeu Sabchuk
+#http://www.pythonbrasil.com.br/moin.cgi/VerificadorDeCpf
+#http://www.pythonbrasil.com.br/moin.cgi/VerificadorDeCnpj
+#Adaptado para o Zope por Cleber J Santos
+
+cnpj = context.REQUEST.get('cnpj',None)
+cnpj_invalidos = [15*str(i) for i in range(10)]
+
+
+if not cnpj.isdigit():
+    """ Verifica se o CPF contem pontos, hifens e Barras """
+    cnpj = cnpj.replace(".", "")
+    cnpj = cnpj.replace("-", "")
+    cnpj = cnpj.replace("/", "")
+
+if (not cnpj) or (len(cnpj) < 14):
+   return False
+
+elif cnpj in cnpj_invalidos:
+   return False
+
+else:
+   """ Pega apenas os 12 primeiros dígitos do CNPJ e gera os 2 dígitos que faltam """
+   inteiros = map(int, cnpj)
+   novoCnpj = inteiros[:12]
+
+   prod = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+   while len(novoCnpj) < 14:
+      r = sum([x*y for (x, y) in zip(novoCnpj, prod)]) % 11
+      if r > 1:
+         f = 11 - r
+      else:
+         f = 0
+      novoCnpj.append(f)
+      prod.insert(0, 6)
+
+
+   """ Se o número gerado coincidir com o número original, é válido """
+   if novoCnpj == inteiros:
+      return bool(novoCnpj == inteiros)
+   return False
+}}}

@@ -1,0 +1,172 @@
+Dúvida do Luan Fonseca:
+
+  Bom dia a todos, sempre enfrentei esse temido problema, mas nunca realmente compreendi o que o causa e quais as medidas posso tomar para evitar esse erro de UnicodeDecode, então queria por gentileza que algum de vocês me desse uma luz sobre o que é e como normalmente se resolve esse problema.
+
+Olá, Iuan, você não descreveu exatamente qual o problema, mas mesmo assim eu vou tentar ajudar. Só que é preciso paciência porque a explicação é um pouco longa. Vamos lá... 
+
+Em Python 2.x existe dois tipos de string: 
+
+ * str, cujos literais são escritos 'assim', "assim", '''assim''' ou """assim""" 
+ * unicode, cujos literais são escritos u'assim', u"assim", u'''assim''' ou u"""assim""" 
+
+O primeiro tipo, str, é na verdade um grande equívoco, pois assume que 1 byte == 1 caractere. Antes da Internet se tornar importante, a maioria dos países do mundo podia se virar usando uma simples tabela que mapeava caracteres para bytes. A mais famosa destas tabelas chama-se ASCII, mas tem também a ISO-8815-1 e a Windows-1252, para citar duas que são muito usadas nas Américas e na Europa Ocidental. Em Python, se você não especifica qual é a tabela a usar, o interpretador e quase todas as funcṍes assumem que é ASCII, e essa é uma das causas de muitos erros. Veremos como solucionar isso daqui a pouco.
+
+Mas voltando à teoria, porque sem ela isso tudo vira um monte de superstições... 
+
+Atualmente a idéia de que 1 caractere == 1 byte é idiota por 2 motivos:
+
+ 1. alguns dos maiores consumidores e produtores de produtos e serviços informática no mundo, como o Japão, a China e a Coréia do Sul, usam milhares de ideogramas em sua escrita, e em um byte só é possível armazenar 256 valores distintos;
+ 1. mesmo nos países que usam alfabetos menores, como o latino, cirílico, hebraico etc., o uso de uma simples tabela torna impossível escrever um texto em dois ou mais idiomas, e complica o intercâmbio com outros países, o que é inaceitável nesses tempos de Internet.
+
+Então para resolver este problema inventou-se o Unicode, definido no  site Unicode.org. Na verdade, Unicode é uma série de padrões, mas os mais importante é uma tabela imensa, que tenta associar um código hexadecimal a cada caractere de todas as línguas atuais e mesmo línguas mortas, como hieroglifos egípcios. Essa tabela é publicada na forma de arquivos para serem lidos por programas, mas também em lindos PDFs que realmente vale a pena dar uma olhada: 
+
+ * http://www.unicode.org/charts/
+
+Por exemplo, caracteres antigos como hieroglifos egipcios e runas: 
+
+ * http://www.unicode.org/charts/PDF/U13000.pdf 
+ * http://www.unicode.org/charts/PDF/U16A0.pdf 
+
+Repare que cada caractere está associado a um código hexadecimal de 4 ou mais dígitos hexadecimais. Cada um destes códigos chama-se "codepoint". Guarde essa idéia. 
+
+Em Python, um objeto unicode é uma sequência de caracteres, e não de bytes. Mas um str é de fato uma sequência de bytes. O len de um unicode é de fato o número de caracteres, mas o len de um str é o número de bytes, mas nem sempre 1 byte == 1 caractere. Veja só: 
+
+{{{
+>>> s = 'avião' 
+>>> len(s) 
+6 
+>>> for c in s: print '%x %s' % (ord(c), c) 
+... 
+61 a 
+76 v 
+69 i 
+c3 
+a3 � 
+6f o 
+>>> u =u 'avião' 
+>>> for c in u: print '%x %s' % (ord(c), c) 
+... 
+61 a 
+76 v 
+69 i 
+e3 ã 
+6f o 
+}}}
+
+Note que no caso da str, vemos dois fenômenos curiosos: o len('avião') == 6 e ao exibir cada byte, a letra ã desaparece, sendo substituída por dois gremlins com códigos c3 e a3 (gremlin é o apelido que se dá para caracteres inválidos, quebrados, trocados etc.). A explicação destes fenômenos curiosos está no padrão UTF-8 que, é o default no terminal do Linux e do OSX, os sistemas que eu uso. No Windows eu não sei qual é o default do terminal no Windows 7, quem souber conta pra nós! 
+
+MAS AFINAL, COM QUANTOS BYTES SE FAZ UM CARACTERE? 
+
+Hoje o padrão Unicode está na versão 6.1. Antes da versão 3.0, os gringos que mandavam no Unicode acreditavam que seria viável codificar todos os caracteres do mundo em 65536 codepoints. Esse número mágico é 2**16, então se de fato tivéssemos até 65536 codepoints seria possível representar todos os caracteres do mundo em 2 bytes (256*256 = 2**16 = 65536). 
+
+Porém quando os chineses, japoneses e coreanos de fato se engajaram no projeto Unicode ficou claro que a idéia de 1 caractere == 2 bytes também é idiota. 
+
+Segundo a Wikipedia [1], já existe um dicionário chinês com mais de 106.000 caracteres, e esse número tende a crescer por dois motivos: a língua chinesa continua viva, então novos ideogramas continuam sendo inventados e (2) ainda não se esgotaram todos os sítios arquelógicos onde se podem encontrar ideogramas antigos ainda não catalogados. E além do chinês, japonês e coreano também usam ideogramas, e o vocabulário do Unicode vai bem além de letras e ideogramas, incluindo símbolos matemáticos, icones etc. e nada disso vai parar por aqui.
+
+[1] http://en.wikipedia.org/wiki/Chinese_characters 
+
+Então o conceito dos codepoints é muito bom, mas como implementar isso em programas de computador. A primeira idéia, considerando a arquitetura de 32 bits moderna, é usar 4 bytes por codepoint, que é bem mais que o suficiente. Isso funciona, e é uma das representações usadas por algumas versões de Python e de Java (no caso do Python, depende da plataforma e de chaves de compilação. Na memória, esses 4 bytes podem ser arranjados de algumas formas diferentes, por causa da questão de endianness (não vou entrar nisso; basta dizer que um int de 32 bits sem sinal, como o número decimal 4660 (hexadecimal: 0x1234), pode aparecer na memória como os bytes 0x12,0x34 ou 0x34, 0x12, conforme a arquitetura do computador). Mas para salvar no disco existe um padrão chamado UTF-32 que define a ordem exata destes bytes, permitindo que qualquer computador possa ler os codepoints sem problema, independente de seu "endianness" 
+
+Porém usar 4 bytes para um caractere é certo desperdício de espaço, porque hoje 96% dos codepoints Unicode ficam abaixo do 65536, e boa parte do tráfego da Internet ainda é ASCII ou variantes de ISO-8859 onde basta 1 byte por caractere. 
+
+Então quase nenhum editor de texto ou programa que se comunica na rede usa UTF-32. A grande maioria hoje usa UTF-8, e este é o padrão recomendado pelo W3C, e o default nos templates do Django, por exemplo. É também o default no código-fonte em Python 3, mas infelizmente não em Python 2, onde se escolheu o ASCII como default. É por isso que você deve colocar o comentário # coding: utf-8 no topo dos seus arquivos .py sempre que usar qualquer caractere não-ASCII (ex: letras acentuadas). A rigor vc pode escolher outro encoding, como # coding: windows-1252, se for muito fã do Bill Gates, mas usar qualquer coisa que não seja utf-8 é meio falta de educação, hoje em dia. 
+
+O UTF-8 é um formato onde cada codepoint pode ser representado como 1, 2, 3 ou 4 bytes. Os caractes ASCII são 1 byte, e as letras acentuadas do português, junto com todos os demais caracteres da tabela Latin-1 da norma ISO-8859-1, são 2 bytes. Caracteres chineses podem ser 2, 3 ou 4 bytes. 
+
+E como se representa bytes em Python 2? Tradicionalmente usa-se str para isso. É por isso que len('avião') resulta 6: a letra ã (a com 
+til) é representada por dois bytes: 0xc3 e 0xa3. É por isso também que, num terminal UTF-8 como o do meu Linux, cada um dos dois bytes da letra ã aparece como um gremlim: o byte 0xc3 é um gremlim invisível e o 0xa3 é o sinal � (interrogação dentro de um losango preto) que representa um caractere inexistente no Unicode. De fato, em UTF-8 o byte 0xc3 não representa nenhum caractere por si só. Apenas quando seguido do 0xa3, esta combinação é o ã. 
+
+Vale notar que, na tabela ISO-8859-1 o byte 0xc3 corresponde à a letra Ã (A maiúsculo com til) e o 0xa3 é o símbolo da moeda libra (£), então se você não sabe qual é o encoding de um arquivo, e encontra os bytes 0xc3, 0xa3, não tem como saber se eles representam a sequência Ã£ ou a letra ã, se bem que a letra ã é muito mais provável que a sequência Ã£. Isso explica porque aparecem muitos Ã em páginas Web quando o encoding não está especificado ou está errado. 
+
+E OS MALDITOS UNICODE ERRORS? 
+
+Existem duas variedades principais é importante entender o problema para saber dar a solução correta: existe o UnicodeEncodeError e o UnicodeDecodeError. Ambas exceções são sub-classes de UnicodeError. A diferença está na palavra chave encode x decode. Resumindo:
+
+ * encode é passar de str para unicode 
+ * decode é passar de unicode para str 
+
+Detalhes a seguir... 
+
+ENCODE 
+
+O verbo "encode" significa codificar, e em se tratando de Unicode, codificar é transformar de codepoints para sequências de bytes, ou seja, do tipo unicode para o tipo str. Nos exemplos a seguir, a palavra avião em unicode é codificada para UTF-8 e para ISO-8859-1. Note os resultados diferentes: 
+
+{{{
+>>> u 
+u'avi\xe3o' 
+>>> u.encode('utf8') 
+'avi\xc3\xa3o' 
+>>> u.encode('iso8859-1') 
+'avi\xe3o' 
+>>> 
+}}}
+
+O erro UnicodeEncode error acontece quando não existe na codificação de destino uma forma de representar um determinado codepoint. Por exemplo, não existe o símbolo da moeda Euro na codificação ISO-8859-1: 
+
+{{{
+>>> eur = u'\N{EURO SIGN}' 
+>>> print eur 
+€ 
+>>> eur 
+u'\u20ac' 
+>>> eur.encode('iso8859-1') 
+Traceback (most recent call last): 
+  File "<stdin>", line 1, in <module> 
+UnicodeEncodeError: 'latin-1' codec can't encode character u'\u20ac' 
+in position 0: ordinal not in range(256) 
+}}}
+
+Mas este caractere existe nas codificações ISO-8859-15 e Windows-1252, além do UTF-8, claro (todos os codepoints Unicode podem ser representados por UTF-8). 
+
+{{{
+>>> eur.encode('iso8859-15') 
+'\xa4' 
+>>> eur.encode('windows-1252') 
+'\x80' 
+>>> eur.encode('utf8') 
+'\xe2\x82\xac' 
+}}}
+
+DECODE 
+
+O verbo "decode" significa decodificar, e em se tratando de Unicode, decodificar é transformar uma sequência de bytes em codepoints, ou seja, do tipo str para unicode. Este erro acontece quando um ou mais bytes da str não representam nenhum caractere válido no encoding da str. Por exemplo, o byte 0x80 representa o caractere Euro no encoding windows-1252, mas não representa nada em UTF-8:
+
+{{{
+>>> hex80 = '\x80' 
+>>> print hex80.decode('windows-1252') 
+€ 
+>>> print hex80.decode('utf-8') 
+Traceback (most recent call last): 
+  File "<stdin>", line 1, in <module> 
+  File "/usr/lib/python2.7/encodings/utf_8.py", line 16, in decode 
+    return codecs.utf_8_decode(input, errors, True) 
+UnicodeDecodeError: 'utf8' codec can't decode byte 0x80 in position 0: 
+invalid start byte 
+>>> 
+}}}
+
+ENTÃO, COMO RESOLVER OS MALDITOS UNICODE ERRORS? 
+
+A melhor prática, ao ler um arquivo ou receber dados da rede é transformar estes bytes imediatamente em caracteres Unicode, usando o método str.decode. Note que o Django já faz isso para você automaticamente. Tudo o que o Django te entrega, vindo do banco de dados, é unicode. E ao gerar saída em HTML ou salvar no banco, use sempre unicode que o Django se vira para fazer o encoding correto automaticamente. 
+
+Também ajuda muito se todas as strings literais dentro do seu programa forem unicode. Tem dois jeitos de fazer isso: usar SEMPRE o prefixo u'', ou escrever SEMPRE no topo dos arquivos: 
+
+{{{#!python
+from __future__ import unicode_literals 
+}}}
+
+Neste caso os literais 'assim' serão entendidos como unicode. 
+
+Se você não usa literais Unicode, pode gerar erros porque, ao operar com strings str e unicode misturadas, por exemplo ao concatenar ou interpolar) o Python precisa converter a str para unicode, e ao fazer isso ele vai assumir ASCII em certos casos. 
+
+E COMO não RESOLVER OS MALDITOS UNICODE ERRORS? 
+
+Finalmente vale notar que UnicodeEncodeError e UnicodeDecodeError não tem a ver com o uso ou falta do comentário # coding: utf-8. Muitas vezes as pessoas recomendam essa solução aqui na lista, mas é superstição. O erro que acontece quando não se especifica o encoding no arquivo é: 
+
+{{{
+SyntaxError: Non-ASCII character '\xff' in file bla.py on line 1, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details
+{{{
+
+Você pode fazer programas perfeitamente válidos e robustos manipulando todo tipo de encoding sem nunca usar este comentário. Basta que o seu código seja 100% ASCII puro, ou seja, sem acentos nas strings, comentários ou em qualquer lugar. Como em pt-br a gente usa acentos, e nos models e forms às vezes temos strings que vão aparecer para os usuários em pt-br, então vale a pena se acostumar a usar o  # coding: utf-8 no topo do arquivo. Mas não é obrigatório, e nem resolve problemas de UnicodeEncodeError ou UnicodeDecodeError.
+
+Ufa, por enquanto é só! 

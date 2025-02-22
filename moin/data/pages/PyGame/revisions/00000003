@@ -1,0 +1,17 @@
+= PyGame =
+
+PyGame (http://www.pygame.org) é um módulo Python que fornece a API da biblioteca [http://www.libsdl.org SDL] (feita em C) e mais algumas funcionalidades para a programação gráfica, em especial jogos.
+
+Provê facilidades tais como Sprites, Render Groups, deteção de colisão básica (retângulos) e muito mais.
+
+'''É multi plataforma! Funciona em Linux, Windows, Sun, MacOS, BeOS, ...'''
+
+== Tutoriais Oficiais Traduzidos para o português ==
+
+ * PyGameIntro Introdução ao PyGame.
+
+
+== Códigos de Exemplo ==
+ * http://www.ic.unicamp.br/~ra008849/downloads/jogo.tar.bz2 Introdução à Programação de Jogos, passo a passo de uma versão básica até uma versão "jogável". Acompanha documentação.
+ * http://www.ic.unicamp.br/~ra008849/downloads/pingpong.tar.bz2 Jogo de Ping Pong bem simples, aprox. 450 linhas com comentários + linhas em branco.
+ * http://www.ic.unicamp.br/~ra008849/downloads/pingpong-net.tar.bz2 Versão do Ping Pong usando XMLRPC, aprox 900 linhas, com comentários + linhas em branco.

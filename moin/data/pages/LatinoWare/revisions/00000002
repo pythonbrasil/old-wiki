@@ -1,0 +1,37 @@
+Página de organização da grade de eventos da Latinoware.
+
+== Ano de 2008 ==
+=== Lista de pendencias ===
+ * Definição do nome do evento:
+  1. Encontro Latino-Americano de programadores Python
+  1. Fórum de desenvolvedores Python da América Latina
+  1. I Fórum Latino-Americano de Usuários Python
+  1. Sua sugestão aqui...
+ * Lista de palestrantes para convidar:
+  1. "Alejandro J. Cura" < alecu@vortech.com.ar > - Argentina, Palenstrante de outro país da América Latina.
+  1. "Luciano Ramalho" < ramalho@gmail.com >
+  1. "Rodrigo Dias Arruda Senra" < rsenra@acm.org >
+  1. "Dorneles Treméa" < dorneles@x3ng.com.br >
+  1. "Osvaldo Santana Neto" < osantana@gmail.com >
+  1. "Marco André Lopes Mendes" < marcoandre@gmail.com >
+  1. "Roberto Allende" < rallende@menttes.com > - Argentina, Palenstrante de outro país da América Latina.
+  1. "Gustavo Niemeyer" < gustavo@niemeyer.net >,
+  1. "Andrews Medina" < andrewsmedina@gmail.com >
+ * Lista de palestrantes voluntários:
+||<tablewidth="531px" tableheight="152px">Nome: ||DIGITE_SEU_NOME ||
+||Email: ||DIGITE_SEU_EMAIL ||
+||Minicurriculo: ||DIGITE_SEU_MINICURRICULO ||
+||Pagina Web: ||DIGITE_SEU_SITE_WEB ||
+||Descrição da Palestra: ||DIGITE_A_DESCRICAO_DA_PALESTRA ||
+||Precisa de patrocinio?(Sim/Não): ||DIGITE_SIM_OU_NAO ||
+----
+
+||<tablewidth="531px" tableheight="152px">Nome: ||DIGITE_SEU_NOME ||
+||Email: ||DIGITE_SEU_EMAIL ||
+||Minicurriculo: ||DIGITE_SEU_MINICURRICULO ||
+||Pagina Web: ||DIGITE_SEU_SITE_WEB ||
+||Descrição da Palestra: ||DIGITE_A_DESCRICAO_DA_PALESTRA ||
+||Precisa de patrocinio?(Sim/Não): ||DIGITE_SIM_OU_NAO ||
+
+
+----

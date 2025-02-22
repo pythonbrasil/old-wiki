@@ -1,0 +1,14 @@
+ * exemplo de uso simples
+  * {{{#!python
+import logging
+log = logging.getLogger('sqlalchemy')
+log.addHandler(logging.StreamHandler())
+log.handlers[0].setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+log.setLevel(logging.DEBUG)
+
+log.debug("debug message")
+log.info("info message")
+log.warn("warn message")
+log.error("error message")
+log.critical("critical message")
+}}}

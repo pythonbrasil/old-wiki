@@ -1,0 +1,63 @@
+Como programador Php que está aprendendo Python, decidi reunir neste artigo algumas de minhas impressões sobre o apredizado de Python que penso serem úteis a outros iniciantes como eu. :P
+
+Table Of Contents
+
+== Básico da linguagem ==
+
+Existem diversos recursos para quem deseja começar a estudar Python (existe uma relação no link DocumentacaoPython). 
+
+=== Variáveis e Tipos de dados ===
+
+Uma primeira diferença é que em Python as variáveis não começam com sinal de ''cifrão'' :P.
+No mais, tanto como em Php, para definir uma variável em Python basta atribuir um valor a um identificador. Identificadores também seguem a mesma regra: qualquer combinação de letras e números e o caracter ''underline'' que não iniciam por números.
+
+Tal como Php, Python também não usa predefinição de tipos de variáveis. A tipagem é definida pelo contexto. Por exemplo, um número com ponto decimal será um tipo ''float'' e um dado entre aspas será uma ''string''. Em Python, a função ''type'' retorna o tipo de uma variável (semelhante à função gettype do Php).
+
+Aliás, nas duas linguagens, ''strings'' podem ser delimitadas tanto por aspas duplas ou simples.
+
+Necessário dizer também que expressões aritméticas em Python implementam o fechamento. Isto é, via de regra, operar dois números de um tipo dá um resultado do mesmo tipo. Por exemplo:
+
+{{{
+>>> a= 15
+>>> b= 3
+>>> a/b
+
+>>> type(a+b)
+<type 'int'>
+>>>
+>>> a= 
+}}}
+
+Uma expressão entre aspas será uma string
+
+== Integração entre as linguagens ==
+
+Pra finalizar, pesquisando na Internet, pude encontrar o projeto '''PiP, Python in Php'''  [http://www.csh.rit.edu/~jon/projects/pip/], uma interessante extensão que permite que código Python possa ser interpretado de dentro de scripts Php, inclusive manipulação de objetos e tudo. Um exemplo do site:
+{{{
+<?php
+$a = "test";
+$b = true;
+$c = 50;
+$d = 60.4;
+
+$code = <<<EOD
+import php
+
+a = php.var('a')
+b = php.var('b')
+c = php.var('c')
+d = php.var('d')
+
+print a, b, c, d
+print a, d / c + b, a
+EOD;
+
+py_eval($code);
+
+// ### Resulta em: 
+// test 1 50 60.4
+// test 2.208 test
+?>
+}}}
+
+Parágrafo adicionado posteriormente. [[FootNote(MarceloAndrade)]]

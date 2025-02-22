@@ -1,0 +1,152 @@
+== Receita: Ranking de Linguagens do SourceForge ==
+Script útil para mostrar aos incrédulos que Python é uma linguagem bastante usada no desenvolvimento de software livre. 
+O site SourceForge.net publica uma relação com linguagens de programação e número de projetos hospedados com cada linguagem. Na página do SF, a listagem é alfabética por linguagem. Este script busca a relação e gera uma listagem ordenada por número de projetos, em ordem decrescente. 
+=== Código ===
+{{{
+# -*- coding: iso-8859-1 -*- 
+
+'''
+A função buscar() acessa a página do SourceForge.net que relaciona
+o número de projetos por linguagem de programação, e retorna uma 
+lista de tuplas (numero_de_projetos, linguagem), ordenada por 
+numero_de_projetos decrescente.
+
+Quando acionado como programa principal, este módulo emite a 
+listagem em stdout, com campos delimitados por tab.
+'''
+
+import re
+from urllib import urlopen
+
+URL_FONTE = 'http://sourceforge.net/softwaremap/trove_list.php?form_cat=160'
+
+TABELA = r'''<b>Programming Language</b><br>(.*?)</td>'''
+
+#               &nbsp; Ada</a> <i>(72 projects)</i>
+LINGUAGEM = r'''&nbsp; ([^<]+)</a>\s*<i>\((\d+) projects\)</i>'''
+                
+re_tabela = re.compile(TABELA, re.IGNORECASE|re.DOTALL)
+re_linguagem = re.compile(LINGUAGEM, re.IGNORECASE|re.DOTALL)
+
+def buscar():
+    # teste local: html = open('trove_list.php.html').read()
+    html = urlopen(URL_FONTE).read()
+    miolo = re.search(re_tabela,html).group(1)
+    achados = re.findall(re_linguagem, miolo)
+    lista = [(int(projs), ling) for (ling, projs) in achados]
+    lista.sort(reverse=True)
+    return lista
+    
+def main():    
+    lista = ['%5d\t%s' % item for item in buscar()]
+    print '\n'.join(lista)
+    
+if __name__=='__main__':
+    main()
+}}}
+
+O arquivo resultante fica assim: 
+{{{
+12279   C
+12112   C++
+10519   Java
+ 7963   PHP
+ 5108   Perl
+ 2820   Python
+ 1661   Visual Basic
+ 1502   JavaScript
+ 1324   Delphi/Kylix
+ 1287   Unix Shell
+[...]
+}}}
+
+Volta para CookBook. 
+----------
+LucianoRamalho 
+-----------
+== Receita: Ranking de Linguagens do Google/Yahoo ==
+De forma correlata, ontem me bateu vontade de ver quantos hits tínhamos pra diferentes linguagens nos search engines, mas combinando o nome da linguagem com um domínio da computação - por exemplo "scientific computing", "mail server", "web application" e assim por diante. 
+Comecei fazendo um buscadorzinho usando o html do google (eles tem uma API REST que seria mais apropriada.) Lá pelo meio do caminho, o Google resolveu que eu era um bot saqueando seus rankings e começou a colocar captchas pro meu script. Eu mudei pro Yahoo mas o código está bruto aqui - rápido e sujo - as funções para o google estão inclusas, é só mudar as atribuições dentro do código. Como eu tenho uma dimensão a mais pra busca, preferi dar a saída num arquivo CSV, que eu importo num software de planilha e fico vendo gráficos bonitos. 
+Só não consegui dados significativos ainda -- rodem uma vez e vocês vão perceber. Tem que se ajustar os domínios, talvez refinar um pouco mais as buscas com um outro parâmetro - para se ter algo mais interessante. 
+Bom fica aí pra quem quiser brincar 
+
+{{{
+# !/usr/bin/env python
+# coding: utf-8
+
+import urllib
+import csv
+import cookielib, urllib2
+
+cj = cookielib.CookieJar()
+opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+urllib2.install_opener(opener)
+#r = opener.open("http://example.com/")
+
+GOOGLE_SEARCH_URL = """http://www.google.com/search?hl=en&safe=off&num=10&q=%s&btnG=Search"""
+YAHOO_SEARCH_URL = """http://search.yahoo.com/search?p=%s&y=Search"""
+csvfile = "language_domains.csv"
+
+SEARCH_URL = YAHOO_SEARCH_URL
+
+def get_result(language, domain):
+    language = language.replace("+", "%2B")
+    language = language.replace("#", "%23")
+    if " " in language:
+        language = "%%22%s%%22" % language
+    if " " in domain:
+        domain = "%%22%s%%22" % domain
+    query_string = "%s++%s" % (domain.replace(" ", "+"), language.replace(" ", "+"),)
+    url = SEARCH_URL % query_string
+    print url
+    html = urllib2.urlopen(url).read()
+    return html
+
+def count_matches_google(html):
+    index = html.find("swrnum=")
+    if index == -1:
+        return 0
+    part = html[index + len("swrnum="):]
+    part = part.split('"')[0]
+    if part.isdigit():
+        return int(part)
+    return 0
+def count_matches_yahoo(html):
+    index = html.find('''id="infotext"''')
+    if index == -1:
+        return 0
+    part = html[index: index + 80]
+    part = part.split("of")[1].split("for")[0].strip()
+    part = part.replace(",", "")
+    if part.isdigit():
+        return int(part)
+    return 0
+count_matches = count_matches_yahoo
+
+languages = ("java", "c++", "python","javascript", "ruby", "php", "perl", "shell", "fortran", "cobol", "ansi c", "visual basic", "c#", "lua", "jython")
+
+domains = ("scientific computing", "web development", "server software", "gui application", "database", "financial",
+           "mail server", "security software", "system administration", "enterprise software")
+           
+def main():
+    file = open(csvfile, "wt")
+    writer = csv.writer(file)
+    writer.writerow(("",) + languages +("NORMALIZED",) + languages)
+    for domain in domains:
+        results = []
+        for language in languages:
+            count = count_matches(get_result(language, domain))
+            print ("%s-  %s: %s" % (domain, language, count))
+            results.append(count)
+        m = float(max(results))
+        normalized_results = [result / m for result in results]
+        writer.writerow([domain] + results + [""] + normalized_results)
+    file.close()
+main()
+
+}}}
+
+Volta para CookBook 
+---------
+JoaoBueno

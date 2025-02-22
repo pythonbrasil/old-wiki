@@ -1,0 +1,21 @@
+Alguns documentos, artigos e tutoriais que seria legal traduzir para o português (aka Campanha para deixar todo mundo :D ):
+
+ * :( Essential Python Reading List - http://wordaligned.org/articles/essential-python-reading-list
+ * :( Python Coding Style & Standards - http://www.voidspace.org.uk/python/articles/python_style_guide.shtml
+ * :( Python Speed and Performance Tips - http://wiki.python.org/moin/PythonSpeed/PerformanceTips
+ * :D All About Python and Unicode - http://boodebr.org/main/python/all-about-python-and-unicode - TudoSobrePythoneUnicode - Tradução: NiloMenezes
+ * :( Intermediate and Advanced Software Carpentry in Python - http://ivory.idyll.org/articles/advanced-swc/ CarpintariaPython - AdamVictorNazarethBrandizzi - Status: incompleto
+ * :( Python Testing Tools Taxonomy - http://pycheesecake.org/wiki/PythonTestingToolsTaxonomy - FerramentasDeTeste - OsvaldoSantanaNeto - Status: iniciado/órfão
+ * :( Code Like a Pythonista: Idiomatic Python - http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html
+ * :( Java is not Python, either... - http://dirtsimple.org/2004/12/java-is-not-python-either.html
+ * :( Python Interfaces are not Java Interfaces - http://dirtsimple.org/2004/12/python-interfaces-are-not-java.html
+ * :( When Python Attack - http://www.onlamp.com/lpt/a/4586
+ * :( Python Performance Tips - http://www.webfast.com/~skip/python/fastpython.html
+
+Dê preferência para manter a tradução deste documento aqui no site. Se você não souber usar o Wiki corretamente mande um pedido de ajuda para a nossa lista de discussões que teremos o maior prazer em ajudá-lo.
+
+Se você quiser apenas traduzir o documento mas não tiver interesse em formatá-lo adequadamente aqui, avise-nos também que podemos ajudar.
+
+O importante, no final das contas, é termos esses documentos em nosso idioma.
+
+/!\ '''Aviso:''' Antes de iniciar a tradução de algum desses documentos, coloque o seu nome na frente do nome do documento e um link para a página onde a tradução vai ficar. Lembre-se também que é importante solicitar a autorização do autor para traduções (mesmo praqueles artigos com licenças livres é de bom tom contactar o autor).

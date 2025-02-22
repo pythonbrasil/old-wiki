@@ -1,0 +1,17 @@
+#pragma section-numbers off
+= PyWin32 =
+
+Módulo que permite a criação de componentes COM (Common Object Model) em Python. Pode-se tanto criar componentes para serem utilizados por outras linguagens/aplicações (servidores) quanto criar objetos previamente existentes (clientes) criados em outras linguagens.
+
+[http://www.win32com.de/index.php?option=com_content&task=section&id=7&Itemid=130&lang=en Pywin32 Examples]
+
+== Ficha técnica ==
+
+URL: http://starship.python.net/crew/mhammond/win32/Downloads.html [[BR]]
+Licença: PSF
+
+----
+
+gate2-r
+
+WashingtonCoutinhoCorrêaJr

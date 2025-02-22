@@ -1,0 +1,99 @@
+= Receita: Conta Letras Unicode =
+
+ *  - conta o número de ocorrências de cada letra de A a Z em um arquivo no formato UTF-8. Demonstra o uso de dados Unicode para a redução de caracteres acentuados para os seus equivalentes não acentuados.
+
+== Código ==
+
+{{{
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+Este programa conta as ocorrências das letras de A a Z em um arquivo
+texto em formato UTF-8, e exibe uma lista com as letras em ordem 
+decrescente de quantidade. 
+
+As letras acentuadas e letras minúsculas são convertidas para seus
+equivalentes maiúsculos e sem acentos. O cedilha é contado como C.
+
+Para usar, passe o nome do arquivo texto como argumento na linha de
+comando.
+"""
+
+import sys
+from unicodedata import decomposition
+from string import ascii_uppercase
+
+ocorrencias = {}
+
+for linha in file(sys.argv[1]):
+    for car_uni in linha.decode('utf-8'): # converter linha para unicode
+        if not car_uni.strip():
+            continue # ignorar brancos
+        try: # primeiro tentamos converter para ASCII
+            car = car_uni.encode('ascii')
+        except UnicodeEncodeError: # se não dá certo, apelamos
+            partes = decomposition(car_uni)
+            if partes: # se o caractere pode ser decomposto...
+                ascii = partes.split()[0] # a primeira parte é o código ASCII...
+                car = chr(int(ascii, 16)) # converter o ASCII hexadecimal
+            else: # se o caractere não pode ser decomposto...
+                continue # então não tem correspondente na tabela ASCII
+
+        car = car.upper() # converter para maiúsculas
+        if car in ascii_uppercase:
+            # finalmente, podemos computar a ocorrência
+            if car in ocorrencias:
+                ocorrencias[car] += 1
+            else:
+                ocorrencias[car] = 1
+                  
+indice = [(qtd, car) for (car, qtd) in ocorrencias.items()]
+indice = sorted(indice)
+
+print 'letra ocorrencias'
+print '----- -----------'
+for qtd, car in reversed(indice):
+    print '%5s %11d' % (car, qtd)
+
+}}}
+
+== Exemplo de uso ==
+
+{{{
+$ ./ocorrencias.py memorias-postumas.txt 
+letra ocorrencias
+----- -----------
+    A       39559
+    E       35245
+    O       28534
+    S       20374
+    I       18633
+    R       17055
+    M       13891
+    U       13608
+    N       13150
+    D       12859
+    T       11707
+    C       10409
+    L        8158
+    P        6699
+    V        4810
+    H        3537
+    Q        3377
+    G        3313
+    F        2767
+    B        2739
+    Z        1183
+    X         925
+    J         823
+    Y           8
+    K           8
+    W           3
+
+}}}
+
+Volta para CookBook.
+
+----
+LucianoRamalho

@@ -1,0 +1,23 @@
+##master-page:HomepageTemplate
+#format wiki
+== Daniel Alves Barbosa de Oliveira Vaz ==
+=== Pessoal ===
+Bem, eu nome é Daniel e mais esses outros 4 sobrenomes que você vê aí em cima. Atualmente estou cursando o sexto período de Engenharia Elétrica [http://www.eletrica.ufu.br] na Universidade Federal de Uberlândia [http://www.ufu.br], minha futura área de atuação será Engenharia de Eletrônica e de Telecomunicações. Já brinco com python há algum tempo, cerca de quase 1 ano.
+=== Porque Python? ===
+Me apaixonei pela facilidade e pela inexistência da famosa curva de aprendizado, como citado em SobrePython
+=== Interesses Atuais ===
+Atualmente venho brincando com PyGTK e Django. PyGTK para um curso que estamos ministrando pela segunda vez em nossa faculdade e Django para modelar o site da Conferência de Estudos em Engenharia Elétrica que acontecerá em meados de Setembro.
+
+=== Para Fazer ===
+Fiz dois videozinhos legais para aqueles que pretendem iniciar seus estudos em Python + PyGTK. Como ajustar algumas variáveis de ambiente e como corrigir alguns problemas de conflitos entre DLLs da GTK e DLLs que já se encontram no Windows. Os vídeos são para iniciantes, não é nada de espetacular, é mais uma tentativa para que os iniciantes não se desanimem. Agora resta postar os vídeos em algum lugar.
+
+=== Contatos ===
+
+Email: [[MailTo(daniel AT gmail DOT com)]]
+Msn: [[MailTo(danielalvesvaz AT hotmail DOT com)]]
+IRC: irc.brasnet.org - #C - #Python -> sniper_cool
+
+...
+
+----
+CategoryHomepage

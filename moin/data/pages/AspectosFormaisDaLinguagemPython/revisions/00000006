@@ -1,0 +1,443 @@
+#pragma section-numbers off
+= Aspectos Formais da Linguagem Python =
+
+== Análise Léxica e Modelo de Dados ==
+
+Texto apresentado em palestra do Grupo de Interesse em Linguagens de Programação da Fundação Universidade Federal do Rio Grande (GRULING), 1998.
+
+[[TableOfContents]]
+
+== Resumo ==
+
+Este artigo tem por objetivo fazer uma descrição da linguagem Python do ponto de vista teórico. Este texto não tem a pretensão de ser um tutorial, mas sim de esclarecer uma pessoa já usuária da linguagem ou que tenha noções em linguagens de programação de como é a estrutura interna desta linguagem. O artigo faz inicialmente uma análize léxica da linguagem, passando, em seguida, pelos modelos de dados e de execução, expressões, senteças e componentes ''Toplevel''.
+
+O presente texto procura resumir os temas abordados em [[FootNote(Van Rossum, G., Python Reference Manual, Corporation for National Research Initiatives (CNRI), Reston, VA, USA, 1997.)]] incorporando exemplos mais práticos e fazendo refrências as demais referências bibliográficas.
+
+== Introdução ==
+
+A linguagem Python é uma linguagem de alto nível, interpretada, orientada a objetos com uma semântica dinâmica. Suas estruturas de alto nível, combinadas com sua tipagem de amarração dinâmica a faz muito atrativa para desenvolvimento de largos aplicativos assim como para uso como linguagem de script ou de colagem.
+
+A sintaxe simples do Python encoraja a reutilização de código simplificando a manutenção e a normalização de dados em módulos e pacotes distintos.
+
+Esta linguagem, bem como seu código fonte, se encontram gratuitamente disponível na Internet podendo ser vasculhados por qualquer interessado sem ônus algum. Apesar disto, a linguagem Python é marca registrada do Stichting Mathematisch Centrum de Amsterdam. Todos os direitos reservados.
+
+A linguagem Python foi desenvolvida pelo holandês Guido Van Rossun, no final de 1990. Segundo Van Rossum, a linguagem surgiu enquanto este passava o tempo entre o Natal de 1990 e o ano novo de 1991, mexendo na linguagem ABC, a qual ele havia participado do grupo que a desenvolvera. Já no começo de 1991, Van Rossum já havia feito uma especificação bastante próxima a esta feita neste texto.
+
+Hoje a linguagem Python vem sendo utilizada por milhares de pessoas ao redor do mundo, sendo sustentada por uma fundação, a CNRI, e por um sem número de voluntários ao redor do mundo, unidos via Internet, formando a ''Python Software Activity'' (PSA). Neste momento, está sendo proposta a criação de um movimento chamado ''Python Consortium'' que tem por objetivo passar o fomento da linguagem para um ''pool'' de empresas e instituições de ensino e pesquisa. Esta proposta está sendo apresentada na Sétima conferência Internacional da Linguagem Python que aconteceu agora em novembro, em Houston, Texas.
+
+De volta ao artigo, vamos, a seguir, iniciar o trabalho de análise léxica da linguagem. Você observará que o texto não será baseado em metodologias formais de especificação de linguagens, como a BNF, dando portanto, margens para ambigüidades. Mas, como o texto é de caráter ilustrativo, o autor escolheu a linguagem natural como o melhor formato para apresentá-lo.
+ 
+== Análise Léxica ==
+
+O interpretador Python interpreta senteças recebidas de algum dispositivo de entrada (console ou arquivo), Esta entrada é lida pelo analizador léxico, que divide o código recebido em tokens, repassando-o para o parser que interpreta o programa.
+
+O Python é totalmente definido utilizando a tabela ASCII de 7 bits. [[FootNote(Nota do 'editor': à partir da versão 2.3 a linguagem Python aceita caracteres Unicode)]]
+ 
+=== Linhas ===
+
+Um programa em Python é dividido em linhas lógicas. Estas linhas lógicas são separadas pelo token NEWLINE e podem ser constituídas de uma ou mais linhas físicas. Estas linhas físicas são trechos de programas divididos pelo caractere ENTER.
+
+Uma linha lógica não pode ultrapassar uma linha física, com exceção de dois casos especiais. O primeiro caso é o ajuntamento explícito de linhas quando um caractere de barra invertida é posto no final da linha.
+
+{{{
+#!python
+soma = a + b + c + d + e + f + g \
+       h + i + j + k + l + m
+}}}
+
+O segundo é o ajuntamento implícito de linhas que ocorre dentro de expressões delimitadas por colchetes, parênteses ou chaves, como no exemplo abaixo.
+
+{{{
+#!python
+dias_da_semana = ['dom','seg','ter',
+                  'qua','qui','sex','sab']
+}}}
+
+Os comentários são identificados pelo símbolo hash (#). todo o conteúdo de uma linha que estiver a direita deste símbolo é desconsiderado. O comentário só vale na linha que contém o hash. As linhas totalmente em branco são disconsideradas pelo interpretador.
+
+=== Endentação ===
+
+Uma peculiaridade do Python é a de não possuir terminadores de blocos explícitos, como ''begin'' e ''end'' no Pascal, ou { e } no C. Ao invés disto, o Python utiliza a própria endentação do programa como referência para que o analizador léxico determine o escopo dos blocos. Neste conceito, cada linha lógica possui um valor chamado de nível de endentação que é o número da primeira coluna não branca da linha. Os delimitadores de blocos são chamados de INDENT e DEDENT, e são encontrados através de uma pilha, como descrito abaixo.
+
+Antes que a primeira linha do arquivo seja lida, um zero é posto numa pilha, este zero não mais sairá da pilha. Os números postos na pilha irão sempre crescer do fundo até o topo da pilha, ou seja, cada novo valor na pilha é sempre maior que o valor anterior. No começo de cada linha lógica, o nível de endentação é comparado como o número do topo da pilha. Se este número for igual, a pilha permanece inalterada, Se o número for maior, a pilha recebe o valor do nível de endentação da linha e um delimitador INDENT é adicionado. Se o nível de endentação for menor que o valor da pilha, a pilha é sucessivamente desempilhada, até que se encontre na pilha o valor do nível da linha. Se este valor não for encontrado o interpretador acusa um erro de sintaxe. Para cada valor que sai da pilha, é adicionado um identificador DEDENT.
+
+A seguir, um programa onde são mostrados os delimitadores de linhas e blocos.
+
+{{{
+#!python
+        def perm(1):                        NEWLINE
+        # Compute the list for all permutations of 1
+INDENT      if len(l)<=1:                   NEWLINE
+INDENT         return[1]                    NEWLINE
+DEDENT      r=[]                            NEWLINE
+            for i in range(len(l)):         NEWLINE
+INDENT          s=l[:i]+ \
+                l[i+1:]                     NEWLINE
+                p=perm(s)                   NEWLINE
+                for x in p:                 NEWLINE
+INDENT             r.append (l[i:i+1]+x)    NEWLINE
+DEDENT
+DEDENT      return r
+DEDENT
+}}}
+
+Vemos agora a um exemplo com vário erros de endentação:
+
+{{{
+#!python
+   def perm(l):         # primeira linha endentada
+for i in range (len(l)):  # não endentada
+   s=l[:i]+l[i+1:]
+       p = perm (s)     # identação inesperada
+  for x in p:
+       r.append(l[i:i+1]+x)
+     return r             # ''dedentação'' inconsistente
+}}}
+
+=== Outros tokens ===
+
+'''Identificadores:''' uma letra seguido quantas letras ou números, ou barrasbaixas se desejar.
+'''Palavras-chave:''' as palavras-chave são as seguntes
+
+{{{
+and    assert  break class continue
+def    del     elif  else  except
+exec   finally for   from  global
+if     import  in    is    lambda
+not    or      pass  print raise
+return try     while yeld
+}}}
+
+'''Classes Reservadas de Identificadores:''' alguns identificadores com significados especiais. eles são reconhecíveis pelas seguintes máscaras: {{{_*}}} (não importável), {{{__*__}}} (nome definido pelo sistema), {{{__*}}} (nome privado de uma classe).
+'''Strings:''' uma string é uma cadeia de caracteres delimitada por aspas simples ou aspas duplas. Também são válidos os caracteres de escape ao estilo da linguagem C. As strings precedidas por um "r" maiúsculo ou minúsculo consideram os caracteres de escape como caracteres comuns.
+'''Números inteiros:''' uma sequência de dígitos decimais, sucedidos de "X" se hexadecimal, ou precedido de "0" (zero) se octal. Ou seja, 123 é um número inteiro decimal, já 0123 é um número inteiro octal.
+'''Inteiros longos:''' são números inteiros sucedidos da letra "L', maiúscula ou minúscula.
+'''Números de ponto flutuante:''' é um número inteiro seguido por um separador decimal "." e uma parte fracionária. Pode-se usar a notação de base dez com a letra "E".
+'''Numeros imaginários:''' é um número de ponto flutuante seguido da letra "J".
+'''Operadores:'''
+{{{
++  -  *  ** /  %
+<< >> &  |  ^  ~
+<  >  <= >= == != <>
+}}}
+
+'''Delimitadores:'''
+{{{
+( ) [ ] { }
+, : . ' = ;
+}}}
+
+'''Caracteres com significados dependentes do contexto:'''
+{{{
+' `` # \
+}}}
+
+'''Caracteres totalmente inválidos:''' fora de strings, estes caracteres geram erro sintático imediato.
+{{{
+@ $ ?
+}}}
+
+== Modelo de Dados ==
+
+Objetos são a abstração do Python para todas as estruturas de dados. Todo programa em Python é composto por objetos ou por relação entre objetos.
+
+Todo objeto tem uma identidade, que lhe é atribuída na sua criação e não pode ser mudada. O tipo do objeto também é imutável. Este tipo define as operações que podem ser efetuadas neste objeto. Os objetos também possuem um valor que pode ser de tipo mutável (listas, tuplas, etc.) ou imutável (números e strings).
+
+Os objetos de Python, uma vez criados, não podem ser destruídos. O que ocorre normalmente é que o interpretador possui um serviço de limpeza automática de memória que finaliza todo o objeto que não é mais alcançável. Por exemplo: suponha um objeto que representa uma grande estrutura de dados. Se a este objeto for atribuído um objeto de tamanho pequeno, como por exemplo um inteiro, toda aquela estrutura de dados a ele associada anteriormente é finalizada e o espaço de memória é liberado. Esta função é extensível a tipos mais complexos, como arquivos, apesar de que sua utilização não é aconselhada pelos próprios criadores da linguagem, devido ao baixo nível de abstração que oferece.
+
+Veremos a seguir os tipos padrão da linguagem Python. Devido a característica aberta da linguagem, estes tipos podem ser estendidos com a linguagem em C.
+
+'''None:''' é o tipo nulo. pode ser invocado pelo identificador None e indica ausência de sentença. Seu valor lógico é falso.
+
+'''Ellipsis:''' representa um objeto único identificado apenas por este nome. Serve para indicar a presença de elipse ("...") em uma seqüencia. Seu valor lógico é verdadeiro.
+
+=== Números ===
+
+São criados por literais numéricos ou são retornados por funções ou operações aritméticas. Objetos numéricos são imutáveis.
+
+'''Números inteiros:''' são objetos que representam o conjunto matemático dos números inteiros.
+'''Inteiros simples:''' são inteiros de 32 bits de precisão finita. Englobam a faixa de -2147483648 até 2147483647, mas podem ser maiores, dependendo do processador e do sistema operacional. Um resultado fora desta faixa retorna um erro de ''Overflow''. Não ocorre a perda do bit mais significativo fazendo com que o valor caia sempre dentro desta faixa. A representação binária do inteiro simples é em forma de complemento de 2.
+{{{
+...-1000,-1001,...,-3,-2,-1,0,1,2,3,...,1000,1001,...
+0100 # octal
+0x12 # hexadecimal
+}}}
+'''Interios longos:''' é uma outra classe de inteiros de abrangência ilimitada, ou limitada apenas pela memória da máquina. Uma operação bit-a-bit válida para os inteiros simples também é válida para os inteiros longos.
+{{{
+767468641767451361273676485352135L
+fatorial (10000L) # acredite, eh BEM maior do que todo este texto.
+}}}
+'''Números de ponto flutuante:''' representam valores reais de precisão dupla (64 bits). os numeros de precisão simples não são utilizados porque, devido à estrutura de dados internamente complexa do Python, o projetista da linguagem concluiu que a economia de alguns bits é completamente sem propósito.
+{{{
+3.1415
+1. # o ponto no numero inteiro serve para identificar um objeto como ponto flutuante
+0.00000000231
+}}}
+'''Números complexos:''' são representados por um par de números de ponto flutuante, os quais podem ser extraídos independentemente pelos métodos real e imag.
+{{{
+complex (1,2)
+(1+2j)
+3 + 1j*3
+(3+3j)
+}}}
+
+=== Sequências ===
+
+São objetos que representam seqüências ordenadas e finita de outros objetos. A função ''len'' retorna o número de elementos de uma determinada seqüência. As seqüências são indexadas e podem ser recuperadas por um esquema de índices por exemplo:
+
+{{{
+#!python
+a = [i:j]
+}}}
+
+retorna todos os elementos cujos índices estão compreendidos no intervalo i <= k < j.
+
+   * '''Sequências imutáveis:''' são sequências que não podem ser extendidas. São elas as strings e as tuplas:
+      * '''Strings:''' são cadeias de caracteres. São validos quaisquer caracteres da tabela ASCII.
+         'Isto eh uma string'[[BR]]
+         "Isto tambem eh uma string"[[BR]]
+         "That's cool!"[[BR]]
+         """Isto eh uma string de tamanho ilimitado"""[[BR]]
+         'Isto eh uma string com um caracter <ENTER>\n'[[BR]]
+         r'Isto eh uma string com uma barra invertida e um n \n'[[BR]]
+      * '''Tuplas:''' é um conjunto de objetos de tipos arbitrários, separados por vírgula.
+         (1, 2.3, [3,4,5], 'abacaxi')
+         * Observe que existem tuplas de um elemento apenas, usando-se uma vírgula isolada, por exemplo:
+            (1,)
+
+   * '''Sequências Mutáveis:''' são sequências compostas de objetos que podem ser alteradas mesmo após serem criadas. Os tipos mutáveis disponíveis são:
+      * '''Listas:''' os elementos de uma lista são objetos arbitrários em Python. Uma lista é definida por sendo uma sucessão de objetos separados por vírgula e delimitados por colchetes. Não existem casos especias para tratamento de listas vazias ou listas unitárias.
+         [1,2,3][[BR]]
+         ['a', 0, 124111122L][[BR]]
+         [[1,2],[3,4],[5,6]][[BR]]
+      * '''Mapeamentos (mappings):''' são estruturas de dados que podem ser indexadas por um chave de qualquer tipo. No caso da lista, os únicos índices válido são números inteiros que significam a posição do elemento indexado dentro da própria lista, já no caso dos objetos mappings este índice pode ser de qualquer tipo.
+         * '''Dicionários:''' o único objeto do tipo mapeamento presente em Python é o dicionário. Estes são elementos que podem adotar como índice qualquer objeto imutável. Isto ocorre porque a indexação destes objetos ocorre por comparação de valor e não de referência, o que certamente iria de encontro a abstração proposta pelo tipo. Os dicionários são sequências de "n" objetos separados por vírgula e delimitados por chaves, tal que "n" é um número inteiro. Os elementos de índice impar desta sequência são as chaves e os elementos de índice par são são os objetos indexados pelas chaves propostas.
+            {'nome': 'Jose' , 'idade': 54 , 23: [1,2,3,4,5] , 3.14: None}[[BR]]
+
+==== Uma explanação sobre as sequências mutáveis ====
+
+Pode haver confusão em declarar que uma string é uma estrutura imutável posto que são válidas operações do tipo
+
+a = "Rolling "
+a = a + "Stones"
+
+Quando fazemos uma atribuição a uma string estamos redefinindo o seu valor, ou seja, na primeira linha, o objeto ''a'' recebe a string " Rolling ", que por sua vez é uma constante (ou um objeto imutável na terminologia adotada pelo Python). Na segunda expressão, o objeto recebe o valor de "a", ou seja, a constante "Rolling ", concatenada a constante "Stones", que é, na verdade, um novo objeto. Desta forma o objeto string não é mutável!
+
+Na sentença a seguir, ocorre uma opreração completamente diferente.
+
+{{{
+#!python
+a = [1,2]
+a = a + [3,4]
+}}}
+
+Neste caso o objeto ''a'' recebe na primeira expressão, a lista [1,2] que não é uma constante e, sim, uma construção composta de dois objetos imutáveis, ou em termos de implementação, um conjunto de dois ponteiros. Na segunda expressão, o objeto ''a'' recebe ele mesmo, ou seja, a construção que ele está referenciando, mais uma nova construção composta de dois objetos imutáveis.
+
+Uma outra forma de definir objetos mutáveis e não mutáveis é observando que nas operações feitas sobre os objetos mutáveis, estes objetos são passados por referência e, nos não mutáveis, são passados por valor.
+
+=== Funções ===
+
+Existem dois tipos de funções:
+
+'''Funções definidas pelo usuário:''' é um objeto criado por uma definição de função. Observe o código a seguir: A primeira função retorna o fatorial do número dado, a segunda retorna a potência de base x e expoente n, observe os exemplos de utilização das funções.
+
+{{{
+#!python
+def fatorial (n):
+    'retorna o fatorial de n'
+    if n == 0:
+        return 1
+    return n*fat (n-1)
+
+def pot (x, n=2)
+    'retorna a potencia com base x e expoente n \
+    se n for ocultado eh assumido n = 2'
+    return x**n
+
+print fat (10)
+print fat (5000L) # inteiro longo
+print pot (3,5)
+print pot (8)    # equivale a 8**2
+}}}
+
+'''Funções pré-definidas (Built-in):''' são funções que não são obtidas de uma operação ''import'' ou declaração, ou seja, já estavam presentes quando da inicialização do interpretador. O usuário pode escrever uma função ''built-in'', escrevendo-a na linguagem C e incorporando-a ao próprio interpretador. A linguagem Python oferece vários recursos de expansão neste sentido.
+
+=== Classes ===
+
+Um objeto classe é definido por uma definição de classe. Quando uma classe é atribuída a outro objeto, este objeto passa a ser uma instância desta classe. Uma classe é composta por atributos que representam o seu estado interno ou funções que fazem operações sobre estes estado (métodos). Vejamos o exemplo abaixo:
+
+{{{
+#!python
+from Tkinter import *
+
+class App:
+    def __init__ (self):
+        self.i = 0
+        self.root = Tk()
+
+        self.button = Button (self.root, text = 'Hello', command = self.say_hi)
+        self.button.pack (side=LEFT)
+
+        self.root.mainloop()
+
+    def say_hi (self):
+        print 'Ola todos!'
+        self.i = self.i + 1
+
+a = App()
+}}}
+
+O exemplo acima mostra a classe App. Esta classe cria uma janela com um botão escrito 'Hello', que, quando pressionado, imprime a frase 'Ola todos!'. Esta classe é composta dos métodos {{{__init__}}} e {{{say_hi}}}, e dos objetos ''root'' (a janela), ''button'' (o botão) e ''i'' (literal que conta o número de vezes que o botão foi pressionado). Os métodos definidos pelo usuário dentro do objeto são as implementações das operações válidas nos objetos desta classe. Estes objetos, por sua vez, representam o estado atual da classe.
+
+Na última linha, observamos a atribuição de ''App()'' a ''a''. Neste ponto a tornou-se uma instância de ''App''. Uma instância de uma Classe é obtida pela chamada desta classe como uma função. Quando isto ocorre, automaticamente é chamado o método {{{__init__}}}. Isto é um padrão da linguagem.
+
+==== Diferença entre classe e instância ====
+
+Uma classe é um objeto, porém é um objeto dito não amarrado (''unbound''), ou seja, não foi mapeado em memória um endereço para os métodos e os demais objetos internos a esta classe. Por outro lado, uma instância de uma classe é uma amarração (''binding'') de uma classe, ou seja, quando se instancia uma classe, atribuindo-a a um objeto, está se alocando um espaço da memória para os elementos desta classe. No exemplo acima, são válidos as seguintes expressões no nível da instância a.
+
+{{{
+#!python
+a.say_hi ()
+
+print a.i #imprime o número de vezes que o botao foi pressionado
+
+a.root.title ('Exemplo 1') # muda o título da janela
+}}}
+
+Isto não significa que os métodos de uma classe não sejam objetos executáveis, por exemplo, a expressão a.say_hi() é o mesmo do que App.say_hi(a). Aliás, a primeira expressão geralmente é conhecida como ''açucar sintático'' da segunda, o que quer dizer que é uma forma resumida e mais simples de fazê-la.
+
+==== Características internas das classes ====
+
+Em Python, as classes são construídas através de uma estrutura de dicionário no qual uma strings com os identificadores dos objetos são as chaves e os objetos em sí (métodos e atributos em geral) são os valores indexados por estas chaves.
+
+O exemplo acima é representado pelo seguinte dicionário (os números são aleatórios e seria substituídos pelo endereço de memória dos objetos referidos pelos campos chave):
+
+{{{
+#!python
+App = {'__init__':63233, 'say_hi':67542, 'root':63462, 'button':68382, 'i':68112}
+}}}
+
+==== Nomes Especiais de Métodos ====
+
+Aqui é descrito como expressões definidas pelo usuário podem customizar o comportamento de um determinado objeto. Vamos estudar alguns nomes padrões de métodos.
+
+{{{__init__}}} este método é invocado quando uma instância da classe é criada. Os argumetos da função são aqueles passados ao construtor de classe. Quando uma classe é derivada de outra, esta nova classe deve chamar explicitamente a função {{{__init__}}} da classe herdada. Veja o exemplo:
+
+{{{
+#!python
+class MyClass (OldClass):
+    def __init__ (self, data1, data2):
+        self.data1 = data1
+        self.data2 = data2
+        OldClass.__init__ (self, 0, 0)
+
+    def Op1 (self):
+        pass
+
+    def Op2 (self):
+        pass
+
+X = MyClass (x, y)
+}}}
+
+{{{__del__}}} este método é invocado quando a instância está para ser destruída, por exemplo:
+
+{{{
+#!python
+class arquivo:
+    def __init__ (self, nomearq):
+        self.arq = open (nomearq, 'rw')
+
+        ..........
+
+    def __del__ (self):
+        self.arq.close()
+}}}
+
+{{{__repr__}}} retorna a representação em Python do objeto, ou seja, retorna o código-fonte do objeto. Serve para recriar objetos com o mesmo valor.
+
+{{{__call__}}} é invocada quando a instância é "invocada" como uma função. Quando este argumento existe, x(arg1, arg2,..) é uma forma compacta para {{{x.__call__(arg1, arg2, ...)}}}. Como, em Python, a abstração genérica de dados é o objeto, ou seja, a classe instanciada, todas as funções defindas são também objetos que contém este método que é invocado quando a própria função é invocada. Observe o exemplo:
+
+{{{
+#!python
+def riemann (expr, a, b):
+    x = a
+    somat = 0
+    norma = 0.0001
+    while x <= b:
+        somat = somat + eval (expr)* norma
+        x = x + norma
+    return somat
+}}}
+
+É estritamente a mesma coisa do que:
+
+{{{
+#!python
+class riemann:
+    def __call__ (self, expr, a, b):
+        x = a
+        somat = 0
+        norma = 0.0001
+        while x <= b:
+            somat = somat + eval (expr)* norma
+            x = x + norma
+        return somat
+}}}
+
+=== Outros objetos ===
+
+'''Módulos:''' são arquivos fonte de programa em Python que são importados por uma chamada de ''import''. Também são tratadas como as classes e representadas por um dicionário.
+'''Arquivos:''' um objeto arquivo representa um arquivo aberto e é criado pelas funções ''open'', ''popen'', ''fdopen'', ou pelo método ''makefile'' do objeto ''socket''.
+'''Código objeto:''' um dos objetos mais impressionantes do Python é o seu código objeto. Como já foi dito o Python é uma linguagem interpretada mas sua execução não é feita linha-a-linha. Na realidade o interpretador gera um ''bytecode'' para as senteças recebidas. Este bytecode é a chave da portabilidade e do polimorfismo pois neste são válidas operações do tipo recuperar os nomes dos objetos que o compoem ou mesmo o código fonte e que o gerou. Isto é chamado introspecção, a capacidade de um objeto de descrever-se.
+'''Frame:''' é um dicionário que conta todos os tipos daquele nível de execução. Neste dicionário estão descritos todos os objetos acessíveis naquele ponto do programa. Veja o exemplo:
+
+{{{
+#!python
+x = 1
+y = 2
+nome = 'Mariazinha'
+
+def troca (x, y):
+   'funcao que nao serve pra nada'
+   aux = x
+   x = y
+   y = aux
+
+# frame global
+#{'x'=1,'y'=2, 'nome'='Mariazinha, 'troca' = funcao}
+
+# frame na funcao troca
+#{'x'=??, 'y'=??, aux=??, 'nome'='Mariazinha'}
+}}}
+
+'''Traceback:''' um objeto traceback é uma pilha que é criada quando ocorreu uma exceção. Quando acontece uma exceção, o interpretador procura por um bloco de tratamento de exceções para isto ele começa a desempilhara ''stack'', ou a pilha de execução. Á cada nível que é desempilhado o ''traceback'' recebe um elemento. Desta forma, pode-se saber em quantos níveis abaixo do tratador é que houve a exceção.
+
+== Sobre este texto ==
+
+Este texto foi escrito no LyX, um editor WYSIWYG para o formato !LaTeX, rodando no sistema operacional Linux. Foi Também utilizado o programa Ghostview, para visualizar os arquivos Postscript gerados pelo !LaTeX.
+
+LyX é marca registrada de Matthias Ettrich, LaTeX é marca registrada de Leslie Lamport, Linux é marca registrada de Linus Torvalds e Ghostview é marca registrada de Alladin Software. Todos estes programas são distribuídos livremente nos termos da GNU Public License.
+
+A linguagem Python é marca registrada do ''Stichting Matematisch Centrum'' e também é distribuída livremente.
+
+== Referências ==
+
+   1. Van Rossum, G., Python Tutorial, Corporation for National Research Initiatives (CNRI), Reston, VA, USA, 1997.
+   2. Van Rossum, G., Python Library Reference, Corporation for National Research Initiatives (CNRI), Reston, VA, USA, 1997.
+   3. Lutz, M., Programming Python, O'Reily & Associates, Inc., New York, NY, 1996.
+   4. Laird, C., Soraiz, K., Getting Started with Python, !SunWorld On-Line, outubro/1997, http://www.sun.com/sunworldonline.
+   5. Van Rossum, G., Glue it all together with Python, OMG-DARPA-MMC Workshop on Compositional Software Architecture, Monterrey, CA, 1998.
+   6. Lundhl, F., An introduction to Tkinter - take two, Pythonware, http://www.pythonware.com, 1998.
+   7. Waters, A., Van Rossum, G., et. al., Internet Programming with Python, M&T Books, MIS:Press, Inc., New York, NY, 1996.
+
+----
+
+''Corrigi alguns de erros de português :-) -- PedroDeMedeiros''
+
+''Obs: a descrição de mapeamentos carece de correção. Listas não podem ser considerados mapeamentos da forma como foi escrita a definição, pois listas não usam chaves arbitrárias e são ordenados (mapeamentos não são ordenados e usam chaves arbitrárias). Aconselho tirar a comparação de listas com mapeamentos do texto -- PedroDeMedeiros''
+
+''A função de riemann e a classe de riemann não são estritamente iguais. Enquanto que o método {{{__call__}}} é atribuido ao objeto instanciado (transformando este em objeto executável), a função de riemann já é executável sem precisar de qualquer instanciação. Então, o objeto precisa antes ser instanciado -- PedroDeMedeiros''
+----
+
+MarceloPereiraNunes

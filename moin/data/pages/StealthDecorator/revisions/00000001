@@ -1,0 +1,66 @@
+Decorador para colocar uma função em algum outro lugar, sem sobre-escrever usos que já possam existir no name-space atual.
+
+Basicamente, o decorator vÊ o que já usa esse nome no frame de onde ele é chamado - e retorna esse mesmo objeto. 
+A função decorada, ele adiciona a uma outra classe.
+
+Palestra do Matthieu era sobre o uso de Python para estudar e fazer compiladores, na faculdade dele:
+http://pycon.blip.tv/file/3359636/
+
+{{{
+# -*- coding: utf-8 -*-
+# Idea by João S. O. Bueno (c) 2010 
+# Associação Python Brasil
+
+# License: you are free to re-use this code or the ideas herein at will
+
+
+
+"""
+At PyCon 2010:Teaching compilers with python (#87)
+Matthieu Amiguet told about an add to class decorator
+they use on their project, which has a side
+effect of polluting the namespace.
+
+This implementation use frame introspection to add a function
+to a previous existing class, keeping the current
+name space more or less untouched.
+
+(if the name did not exist before, it will be assigned to None, though)
+
+"""
+
+from inspect import currentframe
+
+
+def stealthAddToClass(cls):
+    def _addToClass(func):
+        name = func.__name__
+        parsing_frame = currentframe(1)
+        previous_binding = parsing_frame.f_locals.get(name,
+                                parsing_frame.f_globals.get(name, 
+                                   getattr(parsing_frame.f_globals["__builtins__"], name, None)))
+        setattr(cls, func.__name__, func)
+        return previous_binding
+    return _addToClass
+
+"""
+
+#testing
+class A(object):
+    "test blank class"
+    pass
+
+@stealthAddToClass(A)
+def help(self):
+    print self.__doc__
+
+
+a = A()
+a.help()
+
+help
+"""
+
+
+
+}}}

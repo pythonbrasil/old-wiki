@@ -1,0 +1,15 @@
+== Modos de Execução ==
+
+Existem diversas formas de se disparar o interpretador Python:
+
+python <modo interativo/>
+
+python bla.py <executa script/>
+
+python -c "print 2**64" <executa comando/>
+
+python -i bla.py <híbrido: executa script local e depois entra no modo interativo/>
+
+python -mNome_do_módulo <executa script em PYTHONPATH/>
+
+Criado por RodrigoSenra

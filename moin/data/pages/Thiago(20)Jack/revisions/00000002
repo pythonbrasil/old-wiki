@@ -1,0 +1,13 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== Thiago Jack ==
+Email: <<MailTo(thiagooliveirajack@gmail.com)>>
+
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+Twitter: [[www.twitter.com/thiagoojack|@ThiagoJack]]
+
+Espero ser bem util aqui no python.org.br.
+Estejam a vontande para entrar em contato.
+----
+Meu blog {o} [[www.thiagoojack.blogspot.com|ThiagooJack]]

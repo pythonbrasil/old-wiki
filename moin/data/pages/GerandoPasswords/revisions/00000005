@@ -1,0 +1,158 @@
+#pragma section-numbers off
+
+= Gerando Password =
+
+== Codigo ==
+
+{{{
+#!python
+#!/usr/bin/env python
+# Pass Generator
+# Rodrigo Calanca Nishino
+# 
+# Programa simples que gera passwords
+# Atenção: Ele usa o anyguy
+#
+# ChangeLog:
+#  - Modificado por FelipeLessa para (2004/01/17):
+#     o Otimizar conjuntos de letras.
+#     o Utilizar "".join ao invés de laço for em password() . 
+#     o Retirar tag coding visto que quando o código for copiado & colado do Wiki ele pode ser alterado.
+#     o Texto que aparece por padrão deve corresponder ao especificado no início do arquivo.
+#     o Adicionada a possibilidade de importar arquivo sem abrir a janela.
+#     o Modificações menores.
+
+
+# Import's
+from random import choice
+from anygui import *
+
+# Tamanho padrão do password
+pass_tamanho = 5
+
+# Conjuntos de letras
+maius = "ABCDEFGHIJKLMNOPQRSTUVXWYZ"
+minus = "abcdefghijklmnopqrstuvwxyz" # maius.lower()
+numeros = "0123456789"
+todas = maius + minus + numeros
+
+# Função por onde todo o programa se desenrola
+def password(vezes, conjunto=todas):
+    """Gera uma senha aleatória de vezes dígitos baseado numa lista de caracteres passados
+através da variável conjunto."""
+    lista = []                  # Lista vazia para guardar caracteres temporariamente.
+
+    for n in range(vezes):      # Laço repetido o número de vezes especificado
+        char = choice(conjunto) # Escolhe um caracterer da variável "a".
+        lista.append(char)      # Coloca o mesmo no fim da lista. 
+
+    result = "".join(lista)     # Pega a senha recém-criada e põe em uma string vazia.
+    return result               # Retorna a string.
+
+# Iniciar criação da GUI
+app = Application()
+
+janela = Window()
+janela.title = "Password Generator"
+
+texto = TextField()
+texto.hstretch = 1
+
+### Botões de escolha
+# Todos os tipos de caracteres
+ball = Button()
+ball.position = 5, 65
+ball.text = "ToDa5"
+
+# Caracteres em letras minúsculas
+bmin = Button()
+bmin.text = "a-z"
+
+# ... em letras maiúsculas
+bmaius = Button()
+bmaius.text = "A-Z"
+
+# ... apenas números
+bnum = Button()
+bnum.text = "0-9"
+
+
+tamanho = TextField()            # Espaço onde aparece o tamanho dos passwords.
+tamanho.text = str(pass_tamanho) # Texto que aparece por padrão quando o programa começa.
+
+bot_mais = Button()
+bot_mais.text = "+"
+
+bot_menos = Button()
+bot_menos.text = "-"
+
+titulo = Label(text="Cria novos passwords")
+
+
+
+janela.add(titulo, hstretch = 1)
+
+janela.add(texto, position=(0,30), right=5, hstretch=1)
+
+janela.add(ball, top=(texto, 5), hmove=0)
+janela.add(bmin, top=(ball,5), left = 5, hmove=0)
+janela.add(bmaius, top=(bmin,5), left = 5, hmove=0)
+janela.add(bnum, top=(bmaius,5), left = 5, hmove=0)
+
+janela.add(tamanho, top=(bnum, 15), left=5, width = 35, hmove=0)
+
+# Botoes de controle do tamanho do password
+janela.add(bot_menos, top=(tamanho, 15), left=5, width = 35, hmove=0)
+janela.add(bot_mais, top=(tamanho, 15), left=(bot_menos, 5), width = 35, hmove=0)
+
+janela.size = 180, 280
+
+#########
+###### Funções que os botões acessam quando clicados
+#########
+
+def handler_ball(event, source, time):
+    texto.text = password(pass_tamanho, todas)
+
+def handler_bmin(event, source, time):
+    texto.text = password(pass_tamanho, minus)
+
+def handler_bmaius(event, source, time):
+    texto.text = password(pass_tamanho, maius)
+
+def handler_bnum(event, source, time):
+    texto.text = password(pass_tamanho, numeros)
+
+def handler_size(event, source, time):
+    pass_tamanho = int(tamanho.text)
+
+def mais_tamanho(event, source, time):
+    global pass_tamanho 
+    pass_tamanho = pass_tamanho + 1
+    tamanho.text = pass_tamanho
+
+def menos_tamanho(event, source, time):
+    global pass_tamanho
+    pass_tamanho = pass_tamanho - 1
+    tamanho.text = pass_tamanho
+          
+###
+# Associando os botões às suas respectivas funções
+###
+
+link(ball, handler_ball)
+link(bmin, handler_bmin)
+link(bmaius, handler_bmaius)
+link(bnum, handler_bnum)
+link(bot_mais, mais_tamanho)
+link(bot_menos, menos_tamanho)
+
+app.add(janela) # Coloca a janela dentro do programa
+
+if __name__=="__main__":
+    app.run()   # Roda o programa
+}}}
+
+----
+
+FelipeLessa

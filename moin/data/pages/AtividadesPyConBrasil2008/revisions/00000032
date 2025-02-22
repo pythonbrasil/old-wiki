@@ -1,0 +1,137 @@
+## page was renamed from Mais
+Durante o PyConBrasil 2008 serão oferecidos as seguintes atividades paralelas:
+
+Mini-cursos
+ * Criando Plug-ins em python para o GIMP
+ * Introdução ao Python
+
+Tutorial
+ * Coding Dojo Python
+
+Caso você tenha interesse em participar de algum dos mini-cursos ou do tutorial, edite esta página e coloque o seu nome em um dos espaços marcados como '''(livre)''' abaixo. São 25 vagas disponíveis para cada mini-curso e 40 vagas para o tutorial, onde o critério de seleção é a ordem de inscrição.
+
+No início dos treinamentos a lista de inscrição será conferida e caso tenhamos ausências, as vagas serão redistribuídas aos presentes no local.
+
+A participação nas atividades é '''gratuita''', mas limitada pela ordem das pré-inscrições nesta página.
+
+
+== Mini-curso de Introdução ao Python ==
+'''Sábado, dia 20/09, das 09:00 às 12:00''', por LucianoRamalho
+
+Aprenda Python de forma rápida. A idéia é passar pelo tutorial do Python, e quem sabe algumas partes do Diving Into Python dependendo do tempo alocado.
+
+Só pra lembrar o tutorial do Python é voltado pra quem já programa em alguma linguagem ou tem pelo menos os conceitos de programação estruturada e lógica, mas tirando isso não precisa ter conhecimento nenhum da linguagem. A parte a ser adicionada no treinamento são mais exercícios para fixação dos conteúdos. 
+
+|| '''Num''' || '''25 Vagas para participantes do PyConBrasil''' ||
+|| 1 || MauroCavalcanti ||
+|| 2 || Maurício Neves ||
+|| 3 || Eliezer Dutra Gonçalves ||
+|| 4 || Rodrigo Fonseca de Souza ||
+|| 5 || Alexander Barros da Silva ||
+|| 6 || (livre) ||
+|| 7 || (livre) ||
+|| 8 || (livre) ||
+|| 9 || (livre) ||
+|| 10 || (livre) ||
+|| 11 || (livre) ||
+|| 12 || (livre) ||
+|| 13 || (livre) ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+
+----
+
+== Mini-Curso de Criando Plug-ins em Python para o GIMP ==
+'''Sexta, dia 19/09, das 9:00 às 12:00''', por João Sebastião de Oliveira Bueno
+
+A possibilidade de criar plug-ins em Python para o GIMP existe há vários anos. Esse treinamento visa capacitar os alunos a entenderem como os scripts são organizados, do que são capazes e qual a API do GIMP disponível para plug-ins em Python.
+
+Ao final do mesmo, os alunos devem ser capazes de criarem seus próprios plug-ins para automatizar tarefas de edição de imagens, processar imagens em lote, ou criar padrões e efeitos programáticamente usando o GIMP. Além das aplicações práticas, é uma boa oportunidade para ver como Python pode ser usado em aplicações reais com o uso de poucas linhas de código.
+
+|| '''Num''' || '''25 Vagas para participantes do PyConBrasil''' ||
+|| 1 || Alan Franco Rosa ||
+|| 2 || José Mário Neiva Brandão ||
+|| 3 || (livre) ||
+|| 4 || (livre) ||
+|| 5 || (livre) ||
+|| 6 || (livre) ||
+|| 7 || (livre) ||
+|| 8 || (livre) ||
+|| 9 || (livre) ||
+|| 10 || (livre) ||
+|| 11 || (livre) ||
+|| 12 || (livre) ||
+|| 13 || (livre) ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+
+----
+
+== Coding Dojo Python ==
+'''Sábado, dia 20/09, das 14:00 às 17:00''', por HugoCorbucci e a equipe [http://www.async.com.br/ Async Open Source]
+
+Um [http://www.codingdojo.org coding dojo] é uma sessão aberta onde o público participa em pares, ao vivo, codificando um software de escopo reduzido. Os pares trabalham por alguns minutos conectados a um projetor e discutem projeto e implementação à medida que avançam.  Ao fim do tempo trocam-se os pares e o desafio continua! 
+
+Nesta sessão faremos um coding dojo épico cobrindo 2 problemas: um em Python puro, e um usando infraestrutura gráfica. Tanto ninjas em Python quanto iniciantes se divertirão, e são igualmente bem-vindos.
+
+|| '''Num''' || '''40 Vagas para participantes do PyConBrasil''' ||
+|| 1 || BrunoGola ||
+|| 2 || FelipeFerreriTonello ||
+|| 3 || RafaelZanella ||
+|| 4 || Ramiro Batista da Luz ||
+|| 5 || DouglasAndrade ||
+|| 6 || FlavioAmieiro ||
+|| 7 || Alexander Barros da Silva ||
+|| 8 || (livre) ||
+|| 9 || (livre) ||
+|| 10 || (livre) ||
+|| 11 || (livre) ||
+|| 12 || (livre) ||
+|| 13 || (livre) ||
+|| 14 || (livre) ||
+|| 15 || (livre) ||
+|| 16 || (livre) ||
+|| 17 || (livre) ||
+|| 18 || (livre) ||
+|| 19 || (livre) ||
+|| 20 || (livre) ||
+|| 21 || (livre) ||
+|| 22 || (livre) ||
+|| 23 || (livre) ||
+|| 24 || (livre) ||
+|| 25 || (livre) ||
+|| 26 || (livre) ||
+|| 27 || (livre) ||
+|| 28 || (livre) ||
+|| 29 || (livre) ||
+|| 30 || (livre) ||
+|| 31 || (livre) ||
+|| 32 || (livre) ||
+|| 33 || (livre) ||
+|| 34 || (livre) ||
+|| 35 || (livre) ||
+|| 36 || (livre) ||
+|| 37 || (livre) ||
+|| 38 || (livre) ||
+|| 39 || (livre) ||
+|| 40 || (livre) ||

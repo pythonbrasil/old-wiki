@@ -1,0 +1,42 @@
+= Tutorial de instalação de PyGtk e Glade no Windows =
+
+Este é o meu primeiro tutorial para o PythonBrasil, então espero que ele seja útil pra você. Estarei falando sobre como instalar o trio Gtk, Glade e PyGtk no Windows. Vou mostrar passo-a-passo como fazer e espero que funcione para você ;)
+
+Fiz um teste com um fonte feito no Linux e o resultado foi muito bom, e não tive de mexer em nada pra funcionar. Então, vamos lá!
+
+== Baixando os programas ==
+
+=== Gtk e Glade ===
+
+Site: http://gladewin32.sourceforge.net/
+
+Agora vamos instalar o Gtk na sua máquina para que programas feitos com essa biblioteca possam rodar nela. No site tem dois arquivos, um é o '''pacotão da alegria''', que tem tudo - Glade, Runtime Gtk, libglade, e algumas coisas a mais. O outro é o '''pacotinho da contentação''' - que tem apenas o Runtime - Eu instalei o pacotão da alegria, que já vem com tudo, mas como disse antes, a escolha é sua.
+
+   * '''Pacotão da alegria''' é o {{{gtk-win32-devel}}}
+   * '''Pacotinho da contentação''' é o {{{gtk-win32}}}
+
+Com o Gtk instalado já podemos rodar programas como o Gimp e outros.
+
+=== PyGtk ===
+
+Site: http://www.pcpm.ucl.ac.be/~gustin/win32_ports/pygtk.html
+
+/!\ Baixe o pacote em desenvolvimento.
+
+Agora é hora de fazer a ponte entre o Gtk e o Python. Basta baixar o pacote e instalar, o que é bem simples.
+
+=== Testando ===
+
+Para testar, execute o Idle ou o próprio interpretador Python e de o comando:
+
+{{{
+>>> import gtk
+}}}
+
+Se o interpretador não chiar, você conseguiu :), senão tente seguir novamente os passos e caso alguma coisa continue a dar errado, mande uma email pra lista, que ajudamos a resolver.
+
+Se quiser rodar algum programa, baixe o programa abaixo execute este [http://www.pygtk.org/pygtk2tutorial/ch-GettingStarted.html#sec-HelloWorld exemplo].
+
+=== Conclusão ===
+
+É isso aí... Espero ter ajudado e até a próxima.

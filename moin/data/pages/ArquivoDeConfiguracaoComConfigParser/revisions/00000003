@@ -1,0 +1,38 @@
+Esta é uma maneira alternativa de ler um arquivo de configuração. Estes arquivos são semelhantes ao arquivos ".INI" do Windows. Vou utilizar o mesmo exemplo do artigo ArquivoDeConfiguracao.
+
+O arquivo de configuração {{{db.conf}}} é definido dessa forma:
+{{{
+; Arquivo db.conf
+[DB]
+host = db.server.com
+port= 1234
+user = user
+}}}
+
+Para ler este arquivo com o módulo ConfigParser é muito simples:
+
+{{{#!python
+import ConfigParser
+
+config = ConfigParser.ConfigParser()
+config.read("db.conf")
+
+db_connect( config.get("DB", "host"),
+            config.get("DB", "port"),
+            config.get("DB", "user") )
+}}}
+
+Se quisermos que nosso programa salve as alterações de volta, podemos fazer dessa forma:
+
+{{{#!python
+import ConfigParser
+
+config = ConfigParser.ConfigParser()
+config.add_section("DB")
+config.set("DB", "host", host)
+config.set("DB", "port", port)
+config.set("DB", "user", user)
+file = open("db.conf", "w")
+config.write(file)
+file.close()
+}}}

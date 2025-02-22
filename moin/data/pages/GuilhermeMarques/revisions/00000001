@@ -1,0 +1,6 @@
+#Questão 1
+
+n = input('Digite a quantidade de termos da PA: ')
+a1 = 5 
+r = 3 
+print((n *(a1 + r)) + (((n - 1 + 1)*(n-1))/2)*(r*2))

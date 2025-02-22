@@ -1,0 +1,41 @@
+= Recomendações de aplicativos plugáveis para django =
+
+Quando se está iniciando em python e django logo é possível perceber a grande quantidade de aplicativos plugáveis para diversas situações. O objetivo desta página é estabelecer uma classificação de aplicativos plugáveis conforme sua utilidade e listar algumas recomendações e indicações.
+
+Se você desejar contribuir, modifique esta página e adicione novas categorias ou recomendações de aplicativos plugáveis na lista abaixo.
+
+== A lista ==
+
+=== Blog ===
+ * [[http://code.google.com/p/django-diario/|django-diario]] (ver também os aplicativos relacionados)
+
+=== Fórum ===
+
+=== Notícias ===
+
+=== Tags ===
+
+=== Comentários ===
+
+=== Galeria de imagens ===
+De preferência, com upload e edição de imagens(cortar, redimensionar).
+
+ * [[http://code.google.com/p/django-photologue/|django-photologue]]
+
+=== Administração de usuários ===
+De preferência, com edição de permissões e ações.
+
+=== Gerenciador de arquivos ===
+
+=== Gerenciador de conteúdo ===
+
+=== Agregador [/gerador] de feeds rss/rdf ===
+De preferência, que gere feeds rss para aplicativos específicos (ex: gerar rss para blog, fórum e notícias)
+
+=== Integrador/mashup ===
+De preferência, que integre ou facilite a integração com APIs de serviços web comuns como flickr, youtube, del.icio.us etc.
+
+=== Wiki ===
+ * [[http://code.google.com/p/django-wikiapp/|django-wikiapp]]
+
+~~~~

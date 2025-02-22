@@ -1,0 +1,7 @@
+#pragma section-numbers off
+= Jython =
+[http://www.jython.org Jython] é uma implementação "100% Java" da linguagem Python.
+
+Você pode criar classes em Jython que estendem classes Java e vice-versa. O interpretador Jython pode ser embutido em uma aplicação Java, fornecendo scripting de alto nível para customização de regras de negócios. 
+
+Seu código Jython pode ser executado interativamente para realizar testes e experimentos, ou pode ser compilado para um arquivo .class.

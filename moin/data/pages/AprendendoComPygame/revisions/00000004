@@ -1,0 +1,3301 @@
+== Índice ==
+
+=== Capítulo 0 ===
+==== Introdução ====
+
+    * Por quê?
+    * O que
+    * Ferramentas
+    * Lugar
+
+
+
+=== Capítulo 1 ===
+==== Interaja ====
+
+    * Interpretador
+    * Nomes
+    * Compare
+    * Controle
+    * Loops
+    * Funções
+    * Listas
+    * Ajuda
+    * Exercícios
+
+
+
+=== Capítulo 2 ===
+==== Módulos ====
+
+    * Import
+    * Random
+    * Namespaces
+    * Funções
+    * Classes
+    * Exercícios
+
+
+
+=== Capítulo 3 ===
+==== Demo ====
+
+    * Bola
+    * Demo
+    * Exercícios
+
+
+
+=== Capítulo 4 ===
+==== Pong ====
+
+    * Paddle
+    * Ball
+    * Game
+    * Tweak
+    * Exercises
+
+
+
+=== Capítulo 5 ===
+==== Frog ====
+
+    * Hop Hop
+    * Sploosh
+    * Vroom
+    * Rolling
+    * Variation
+    * Exercises
+
+
+
+=== Licença  ===
+
+    * GNU Free Documentation License
+
+
+----
+
+== Prefácio ==
+
+O objetivo deste livro é introduzir a programação de computadores a qualquer pessoa que esteja realmente iniciando.
+
+Dito isso, faz bastante tempo desde que eu próprio aprendi muitas destas idéias. Se algo não lhe parecer claro, ou se você achar que estou explicando o que é óbvio, por favor deixe-me saber para que eu possa corrigir o problema para os próximos leitores.
+
+Outra coisa, ao ler este livro, tenha isso em mente:
+
+  Você não pode aprender a programar lendo um livro. Você precisa escrever código, um monte de código.
+
+Então, conforme for lendo, teste os exemplos, mas se o livro lhe inspirar uma idéia, não hesite e pratique-a. Modifique os exemplos e veja no que dá.
+
+Brinque, se divirta, veja o que você pode fazer, então volte e leia um pouco mais. Esta é a melhor maneira de aprender.
+
+----
+
+== Capítulo 0 ==
+=== Introdução ===
+
+
+==== Por quê? ====
+
+O computador é uma ferramenta muito versátil e poderosa. 
+
+A coisa realmente mais interessante sobre computadores é que eles são programáveis. Isso significa que o computador pode fazer muitas coisas diferentes por carregar e seguir diferentes conjuntos de instruções, chamados programas. 
+  *abiword  
+  *gimp 
+  *gnumeric 
+  *sh 
+  *bzflag
+
+Existem muitos programas disponíveis prontos para usar, o que não requer nenhuma programação de sua parte para instalá-los no seu computador ou usá-los, mas às vezes os programas disponíveis não são extamente o que você quer.
+
+O ato de criar novos programas ou modificar os que já existem para que atendam melhoras suas necessidades é chamado programação.
+
+
+==== O que é? ====
+
+===== Instruções =====
+
+Se um computador fosse um jogo de tabuleiro, um programa seria as instruções para o jogo. O programa diz ao computador como começar, o que fazer e certas situações particulares e quando parar.
+
+Esta não é uma analogia perfeita, é claro, mas vai nos ajudar bem a começar.
+
+Um maneira em que um programa é como um jogo de tabuleiro é que cada jogador precisa esperar a sua vez.
+
+Às vezes, quando um complexo programa de computador está rodando, pode parecer que há todo um mundo ao redor dele, tudo se movendo simultaneamente, mas isso é apenas uma ilusão.
+
+O computador pode processar apenas uma instrução por vez.
+
+No entanto, ele pode processar as instruções tão rapidamente que para nós ele parece simultâneo e quase vivo.
+
+
+''' Ferramentas '''
+
+
+Antes de poder começar a programar, você precisa instalar certas ferramentas.
+
+'''Computador'''
+    O seu computador não precisa ser o último nem o mais rápido, mas eu recomendo que você use um sistema operacional amigável para programar, como linux ou BSD. Todos os exemplos neste livro vão rodar perfeitamente no Windows, MacOS, Linux, ou BSD.
+
+
+'''Compilador ou interpretador'''
+    Existem centenas de diferentes linguagens de programação disponíveis atualmente. Neste livro nós vamos iniciar com python. Esta linguagem é livre (pode ser usada livremente sem custos) e está disponível para uma ampla variedade de sistemas operacionais. (Download).
+
+
+'''Editor'''
+    Um editor de textos é diferente de um processador de textos. Não tente editar os seus programas com o Word. Isso é possível, mas é difícil. O python já vem com um editor chamado IDLE, mas você pode querer testar outros editores também. Em sistemas parecidos com unix, como o Linux, eu recomendo o NEdit ou o Kate. No Windows você querer simplesmente usar o notepad por enquanto, mas você realente quiser programar você pode querer algo bem melhor. Algumas pessoas recomendam o SciTE para windows. No MacOS, o BBEdit serve bem.
+
+As próximas duas coisas não são essenciais para a programação em geral, mas nós vamos usá-las para começar:
+
+'''Pygame'''
+    Para fazer o aprendizado de programação mais divertido, nós vamos usar gráficos. Programas gráficos geralmente são considerados um tópico mais avançado, mas com as ferramentas apropriadas isso não é muito difícil, e vai nos ajudar a fazer as coisas ficarem mais claras. Pygame (http://pygame.org) é um conjunto de bibliotecas python que precisa ser instalado em seu sistema para ajudar com a parte gráfica.
+
+
+'''pygsear'''
+
+    Como um suplemento para o Pygame, pegue os arquivos que eu fiz para ajudar as pessoas a começar a programar. Eu os chamo pygsear (http://www.nongnu.org/pygsear/). Pegue o arquivo com o maior número de versão da página, seja em .zip ou em .tar.gz, o que for mais fácil para você descompactar. O arquivo que você precisa é algo como pygsear-0.52.tar.gz ou pygsear-0.52.zip.
+
+
+'''Lugar'''
+
+    Isso pode significar um abiente de trabalho quieto, onde ninguém vá interrompê-lo constantemente enquanto você está tentando pensar. Isso é importante, visto que programar requer pensar um tanto. No entanto, mais importante ainda é um lugar de trabalho no computador -- algum lugar seguro para colocar seus arquivos onde ninguém vá acidentalmente apagá-los -- algum lugar onde você possa organizar as coisas de uma forma que faça sentido para você. Crie uma pasta para trabalhar nela. dentro desta pasta, descompacte a biblioteca pygsear que você baixou. Isso deve criar uma nova pasta chamada como pygsear-0.47.
+
+
+'''Teste o ambiente:'''
+
+    Para ver se tudo está funcionando bem, tente rodar o programa de teste. Isso deve ser fácil como clicar no arquivo test.py dentro da pasta pygsear. Se isso não funcionar, você deve abrir um console (janela de terminal modo texto), mudar para o diretório onde foi descompactado o pygsear e digitar:
+
+{{{ python test.py }}}
+
+    Próximo passo, tenha certeza de que você possa usar seu editor com os arquivos neste diretório, e também salvá-los ali. Se tudo está funcionando, nós estamos prontos para começar a programar!
+
+''Não está funcionando!''
+
+    Se algo não está funcionando corretamente -- seja o programa de teste que não está iniciando, ou você não consegue entender como usar o editor de textos -- você pode precisar pedir a ajuda de alguém para deixar tudo funcionando nesta primeira vez. Quando você pedir ajuda à alguém, veja o que ele faz e pergunte se você não entender!
+
+----
+
+
+== Capítulo 1 ==
+=== Interaja ===
+
+
+==== Interpretador ====
+
+    Eventualmente, seu program vai parecer como outros programas. Ele vai ter um ícone onde as pessoas cliquem, o que fará rodar. Mas por enquanto, nós vamos trabalhar na linha de comando -- o modo interativo.
+
+Nota: Se você está trabalhando em um sistema com um terminal de texto decente (BSD, Linux, etc) você pode querer usá-lo em vez do arquivo interact.py para estas sessões interativas. Simplesmente abra um terminal no diretório de exemplo, digite 
+{{{python}}} 
+e então digite 
+{{{from penguin import *}}}. Depois disso, tudo deve ser a mesma coisa que usar o arquivo interact.py, com a diferença de que você vai ter mais recursos de edição de texto. O interpretador interativo é uma maneira para digitar programas em python e obter os resultados imediatamente. Olhe no diretório de exemplos do pygsear e rode o programa chamado interact.py. Você deve ver uma nova janela com um pequeno pinguim no meio da tela. O {{{>>>}}} no canto inferior esquerdo é chamado de prompt. Ele é o interpretador Python esperando que você o diga o que fazer.
+
+    
+We are going to start with something called "turtle" graphics. Oddly enough, our turtle will look like a penguin.
+
+                                         
+
+The penguin is called pete.
+
+Let's start out by having pete draw a line. Type in this line and press [ENTER]:
+
+pete.forward(100)
+
+This statement is a function call or method call. It tells pete to move forward 100 pixels.
+
+You can put any number you want inside the parentheses (even negative numbers), but keep in mind that the window that pete is drawing in is probably only about 600 pixels wide and 500 pixels high.
+
+We can also make pete turn:
+
+pete.right(30)
+
+pete understands turning in degrees, so when we tell pete right(30), he turns 30 degrees to his right.
+
+Notice that the amount is relative to where pete is looking when you ask him to turn. That means that if you say pete.right(30) again, pete will turn a bit more to the right, and if you do pete.right(30) one more time he will have turned a total of 90 degrees and be looking over at the right side of the screen.
+
+Reset the penguin graphics now by typing:
+
+reset()
+
+See if you can make pete go around in a square. How can you do that?
+
+How about like this:
+
+First, go forward again. Notice that by using the up and down arrows on your keyboard you can retrieve lines you typed previously and save yourself some typing. So, hit the up arrow until the line looks like pete.forward(100) again and hit [ENTER]
+
+Of course a square is just four equal sides, and four right angles, so make pete turn right 90 degrees:
+
+pete.right(90)
+
+Now the simplest way to continue is just to keep hitting up-arrow twice and [ENTER] until pete is back to where he started.
+
+Remember, if you make a mistake, or things get confused, don't worry. Just type:
+
+reset()
+
+pete will go back to where he started and clear the screen in the process.
+
+You can also use home() to bring pete back to where he started without changing anything drawn on the screen, or cls() to erase everything but without making pete move at all.
+
+
+
+Names
+
+While programming, you will need to come up with names for many different things that you create. These names are sometimes called variables or identifiers.
+
+For instance, you might want to give a name to the number 50:
+
+length = 50
+
+	This box represents an integer object which has been given the name length.
+
+This might seem like a silly idea, but imagine the number is used many times throughout your code, and suddenly you realize you need to change the 50 to 75.
+
+You might do this:
+{{{
+forward(50)
+right(90)
+forward(50)
+right(90)
+forward(50)
+right(90)
+forward(50)
+right(90)
+}}}
+You could then use the find/replace function in your editor to change all of the 50s to 75s, but there is a good chance that you might miss one. Even worse, if this code were part of a much larger section, you might accidentally change a 50 that has nothing to do with this change.
+
+This is much better:
+{{{
+length = 50
+
+forward(length)
+right(90)
+forward(length)
+right(90)
+forward(length)
+right(90)
+forward(length)
+right(90)
+}}}
+So, if you needed to change the size of your squares from 50 to 75, instead of having to go through and change all of the 50s to 75s, you can just change length = 50 to length = 75 and instantly make all of the needed changes.
+
+	This picture shows the name length being taken from the 50 object and placed on the 75 object.
+
+What Was That Again?
+
+Once you have created variables, you will want to be able to see and to use the values they are holding on to. In the interactive session, you can just mention the name again, and the interpreter will tell you what it is.
+
+Like this:
+>>> car = 'Ford Fairlane'
+>>> weight = 1700
+>>> length = 23.4
+>>> has_trunk = True
+>>> car
+'Ford Fairlane'
+>>> weight
+1700
+>>> length
+23.399999999999999
+>>> has_trunk
+True
+
+Notice here that there are a few different types of values that your variable names can be attached to.
+
+'Ford Fairlane' is a string -- a series of characters enclosed in quotes. 1700 is an integer with nothing after the decimal point. 23.4 is called a floating point number -- it can have a fractional value, and notice that the value stored may not be exactly what you specified. True and False are available as boolean values.
+
+Nicknames
+
+When we used the calls pete.forward() and pete.right() to make a square, the words forward and right are names for different methods that pete the Penguin object understands.
+
+Sometimes it is helpful to have more than one name for things. For instance, if you get tired of typing out pete.forward all the time, you could do:
+
+forward = pete.forward
+
+and then even:
+
+fd = forward
+
+(Note that there are no parenthesis at the end of any of the names.)
+
+Now, instead of using pete.forward(20), you could just say fd(20)
+
+Of course, forward(20) and pete.forward(20) still work too. An object can have as many names or aliases as you would like to give it.
+
+	Here the method object pete.forward has been given many different names: forward, fd and foo.
+
+Good Names
+
+Making short names -- like using fd for pete.forward -- can save you a lot of time and typing when working in the interactive interpreter.
+
+However, when you start creating longer programs, you need to balance two things: You do not want to not type too much, but also you need to be able to remember what a particular name refers to.
+
+Generally, unless a name will only be mentioned in one small area, you should not use names like:
+
+a
+i
+q
+
+since it is just too difficult to understand what they mean.
+
+Instead, think about what the names refer to, and use names like:
+
+number_of_apples
+appleindex
+quitAppleGame
+
+Notice that there are a few different styles used to name things.
+
+You should read through some other people's code and choose a style that you like, then try to use the same style consistently in all of your code.
+
+A Little Math
+
+Sometimes you do not know exactly what you want to store in a variable, but you could calculate it from other values that you do know. Just use mathematical symbols, and Python will do the calculations for you.
+
+Like this:
+>>> price = 125
+>>> tax_rate = 0.08
+>>> tax = price * tax_rate
+>>> total = price + tax
+>>> total
+135.0
+>>> shares = 4
+>>> total_per_share = total / shares
+>>> total_per_share
+33.75
+
+So, to multiply two numbers, use the *
+
+Division uses the /
+
+
+Compare
+
+You know how to give objects names, but you will also need to know how to tell if one thing is the same as another, or if it is equal, greater or less than another.
+
+To do this, we use comparison operators.
+
+The most common comparison is equality:
+
+this == 5
+
+Note the difference between these two lines:
+
+this = 4
+this == 5
+
+The first line is an assignment. It uses 1 equals sign (=) and it says "Set the variable this equal to 4." This is naming, like we talked about on the last page.
+
+The second line is a comparison. It uses 2 equals signs (==) and it asks a question: "Is the variable this equal to 5?"
+
+Try these lines in the Python interpreter:
+
+this = 5		assignment
+that = 10		assignment
+this == that		True
+or
+False?
+this = that		assignment
+this == that		True
+or
+False?
+
+If this is equal to that then Python will return True (1) and if not, then Python returns False (0).
+
+Some other common comparisons:
+
+3 < 5		is
+less
+than		True
+9 > 8		is
+greater
+than		True
+1 != 0		is
+not
+equal
+to		True
+5 is not None		is
+not		True
+
+The last example introduces two new ideas:
+
+First, None is a special object you can use to mean "no value" or "unknown" or "not set" or "null". It took me a long time to really understand when to use None and the best way is just to read other people's code and see how they use it.
+
+Second, the comparison is a bit different, as it does not compare the values of the two objects, but their actual identities.
+
+In Python, every object has a unique id number which you can get by using the builtin id() function.
+
+So, what the last line actually means is:
+{{{
+id(5) != id(None)
+}}}
+We use is or is not because it is quicker and easier to read.
+
+This comparison of identity also implies that two objects can be equal even if they are not identical.
+
+For instance:
+
+x1 = 3.2		3.2 is not an integer,
+it is a floating point number.
+x2 = 1.8		1.8 is also a float.
+x_total = x1 + x2		Adding floats always
+returns a float.
+x_total == 5		equals		True
+x_total is 5		is		False
+
+
+
+Control
+
+Now that you can make comparisons, you can control the flow of your programs.
+
+Start up the interact.py program again, and try this:
+{{{
+choice = 'blast'
+if choice == 'blast':
+    pete.blast()
+}}}
+
+The drawing on the right is a flow chart and it represents the code on the left. You can follow the flow by starting at the top, following the lines, and acting on the instructions in the boxes.
+
+In the code, notice how the line after the if statement is indented.
+
+Indentation is how Python knows those statements are all run only if the condition is True. Like this:
+{{{
+if choice == 'blast':
+    pete.blast()
+    pete.blast()
+    pete.blast()
+
+pete.write(choice) 	
+}}}
+So the three blast()s will only happen if the choice is 'blast', but the write will happen no matter what.
+
+Sometimes, you will want to make a choice between two things:
+
+It can help to make this more clear by reading the word else as "otherwise".
+{{{
+choice = 'blast'
+if choice == 'blast':
+    pete.blast()
+else:
+    pete.reset()
+}}}	
+
+There are only two possibilities here, and your program can only flow down one of these two branches.
+
+Other times, you will want to have multiple branches in your flow.
+
+Here, the word elif can be read as "else if" or "otherwise if"
+{{{
+choice = 'tree'
+if choice == 'blast':
+    pete.blast()
+elif choice == 'tree':
+    pete.tree()
+else:
+    pete.reset()
+}}}
+
+You can have as many elif sections as you need. Once any one of the if or elif conditions is True, that section will run and all other elif or else sections will be skipped.
+
+else is not required, and will only run if none of the preceeding if or elif conditions were True.
+
+
+Loops
+
+We made a square by performing the same two steps repeatedly -- once for each side of the square:
+{{{
+forward(100)
+right(90)
+}}}
+It made it a bit easier that we could use the up-arrow to get back things we typed previously and so save ourselves some typing, but it was still easy to make a mistake and turn our square in to something not exactly what we planned.
+
+There must be a simpler way, and there is.
+
+Computers are great at repeating things over and over again without ever making any mistakes. We just need to know how to tell the computer what to do.
+
+for
+
+One way to tell a computer to repeat a set of steps is called a loop.
+
+Here is how we tell pete to make a square using a loop:
+{{{
+for side in 1, 2, 3, 4:
+    forward(100)
+    right(90)
+}}}
+
+Go ahead and type in the first line for side in 1, 2, 3, 4: and hit [ENTER]
+
+Notice that the interpreter does not come back with the >>> prompt this time. Instead it shows ...
+
+This means it is waiting for more input before it can get started. You are saying "I want you to do something 4 times", and the computer comes back with "Ok. What should I do 4 times?"
+
+In Python, the way we tell the computer which steps are part of the loop is by indenting.
+
+It is sort of like an outline.
+
+Use 4 spaces for each level of indentation. Go ahead now and hit 4 spaces, then type in the second line of the loop forward(100) and hit [ENTER]
+
+The computer comes back with ... again.
+
+It does not know if you are finished telling it what to do 4 times, or if there are more steps inside of the loop.
+
+Turns out there is another step in the loop. Hit 4 more spaces, then type in the last line right(90) and hit [ENTER]
+
+Again, the computer comes back with ... but this time we are finished with the steps in the loop.
+
+To finish the loop, hit [ENTER] again.
+
+pete should, very quickly, draw a square for you.
+
+This loop is so simple that we can "unroll" the loop and take a look at exactly what is happening...
+{{{
+for side in 1, 2, 3, 4:
+    forward(100)
+    right(90)
+	side = 1
+forward(100)
+right(90)
+
+side = 2
+forward(100)
+right(90)
+
+side = 3
+forward(100)
+right(90)
+
+side = 4
+forward(100)
+right(90)
+}}}
+These two pieces of code are equivalent. The result will be exactly the same.
+
+Two things to notice here.
+
+First, the variable side is never used inside of the loop. You might have named it differently, and it would not make much difference. Other reasonable names might have been count or even i or x. You do have to be a bit careful though, as naming the variable forward would cause problems.
+
+Second, although horizontal space is used to indicate which statements are part of the loop, vertical space is not meaningful. Use blank lines in your code to make it easier to read.
+
+while
+
+The for loop is best when you have a list of objects and you want to do something with each one of them.
+
+Other times, you will want to continue looping until a particular condition is met. Like this:
+{{{
+angle = 0
+per = 6
+
+while angle < 360:
+    forward(10)
+    right(per)
+    angle += per 	
+}}}
+
+
+Functions
+
+Loops are useful for performing a set of steps repeatedly, but what if you want to repeat the entire loop over and over again -- maybe with different parameters.
+
+For instance, maybe you want to draw a lot of squares all on different parts of the screen.
+
+Many randomly placed squares
+
+Using functions we can save a piece of code so that we can use it again later.
+
+A function is sort of like a mini program inside of your program.
+
+When we use the function, we say that we call it, almost like you might call the time service on your phone.
+
+Functions can either return some value or object to your main program (like the current time), or they can perform some action (like setting the time) without returning a value. A function which does not return a value is sometimes called a procedure.
+
+Let's make a function which, when called, will draw a square, starting wherever pete happens to be at the time:
+{{{
+def square():
+    for side in 1, 2, 3, 4:
+        forward(100)
+        right(90)
+}}}	
+	square is a function object.
+
+Notice that the body of the function, just like the body of the loop before, is indented, and since there is a loop inside of our function, the body of the loop is indented again. The first indent should be 4 spaces, the second indent is 4 more for a total of 8 spaces.
+
+To call our new function, use this:
+
+square()
+
+To see why we might want to make functions, try a combination of a loop which calls our function:
+{{{
+for side in 1, 2, 3, 4:
+    forward(125)
+    square()
+    left(90) 		
+}}}
+Loop in progress...
+
+If you had done that by hand, or tried to figure out how to put all those loops together, it would have taken a long time, and it would have been very easy to make a mistake. With functions, you can think in terms of larger pieces. This loop says: "Set side equal to 1, go forward, make a square, turn left, set side equal to 2, go forward, etc..."
+
+Remember that "Set side equal to 1" has nothing to do with the length of the side. It is just counting.
+
+Parameters
+
+square() is fine as it is. It makes a square on the screen just as you asked it to, but what if all your squares are not the same size?
+
+Let's make a function which is a bit more general purpose:
+{{{
+def generalSquare(length):
+    for side in 1, 2, 3, 4:
+        forward(length)
+        right(90)
+}}}	
+	generalSquare takes one parameter -- the length
+
+This time, our function takes a parameter (also called an argument) the length of a side of the square, and when moving forward, instead of using the value 100, it uses the value of the length.
+
+Now, to make a square with a side of length 20, we will call:
+
+generalSquare(20)
+
+When this function gets called, the variable length is given the value we put in the parentheses. Then any time python sees length in the body of the function, it substitutes that value.
+
+This generalized square method is so useful, that it is built-in to all Penguin objects. In interact.py you can use it like this:
+
+pete.square(20)
+
+In fact, there is also another type of square built-in which is centered on the penguin's present location:
+
+pete.cSquare(50)
+
+will draw a 50-pixel square with pete right in the middle.
+
+How might we use the squares? Let's try this:
+{{{
+width = 5
+
+while width < 200:
+    set_color('random')
+    pete.square(width)
+    width += 2
+    left(65)
+}}}
+That's pretty neat. Let's make that in to a function too...
+{{{
+def flow(angle, grow=2):
+    width = 5
+
+    while width < 200:
+        set_color('random')
+        pete.square(width)
+        width += grow
+        left(angle)
+}}}
+ 		square, turn, square, turn, square, etc...
+
+As you can see, functions can also take more than one parameter. flow takes two parameters: the angle to turn between squares, and the amount to grow between squares. Also, grow uses a default value of 2.
+
+So, we can call flow with 2 parameters:
+
+flow(4, 1)
+
+or, if the default value is ok, then we can call it with just the one parameter:
+
+flow(14)
+
+and it will be the same as if we had called flow(14, 2)
+
+More General
+
+All of these squares might make you wonder if you can draw some other shape. Maybe you want to make an even more general function. Try this:
+{{{
+def lineTurn(length, angle):
+    for side in 1, 2, 3, 4:
+        forward(length)
+        right(angle)
+}}}
+		Two parameters, no default values.
+
+and call it like this:
+{{{
+lineTurn(150, 90)
+lineTurn(200, 120)
+lineTurn(50, 72)
+}}}
+Notice that I did not give it a name that mentions square at all, since what lineTurn() makes will not always be a square.
+
+Give those three function calls a try and see what you get.
+
+The first call is fine. It is just as if we called generalSquare(150). The second call succeeds in making a triangle, but it is a bit wasteful as it draws over one of the sides twice.
+
+What happens on the last call though? It gets most of the way through a pentagon and stops.
+
+It is close to being a complete pentagon... You could finish it up by just typing forward(50) but it would be nice if the function could do that on its own.
+
+In the next section, we will do just that.
+
+
+Lists
+
+In the loops in previous examples, we used code like this:
+{{{
+for x in 1, 2, 3, 4:
+}}}
+The series of numbers 1, 2, 3, 4 is a called a sequence, and loops can iterate over the members of any sequence.
+
+What this code means is: "set x = 1 and do the following things, then set x = 2, and do these things again", etc, until the end of the sequence.
+
+A sequence like this will often be written either in square brackets [1, 2, 3, 4] (called a list) or in parentheses (1, 2, 3, 4) (a tuple).
+
+The difference between these is a bit subtle.
+
+A list can be changed after it is constructed (we say that it is mutable), whereas a tuple cannot be changed (immutable).
+
+The differences will become more clear later, but I will use the word "list" for now to keep things simpler.
+
+Create
+
+It is very common to give the list a name instead of typing the list itself in to a loop statement. When creating a list like this, brackets are required.
+
+You can make an empty list:
+
+empty_list = []
+
+or if you know exactly what needs to be in the list, just go ahead and fill it up:
+{{{
+sides = ['side one', 'side two', 'side three', 'side four']
+}}}
+Sometimes, especially if the elements in the list are long, it looks better to break it up in to multiple lines. As long as you are inside the brackets, that is fine:
+{{{
+verbose_sides = [
+  'The side known as "side one"',
+  'This one is side two',
+  'Another side, called "side three"',
+  'The final side, or side four'
+]
+}}}
+Mutate
+
+Lists are mutable, but what exactly does that mean?
+
+Lists are objects with special methods built in to make it easy to add, remove, sort, and find things that are in the list.
+
+For instance, if you did not know beforehand what words you wanted to print around the square, you could add them to the list as you found out:
+{{{
+from pygsear.Widget import Dialog_LineInput
+sides = []
+for side in 'first', 'second', 'third', 'fourth':
+    message = 'Enter the name of the %s side' % side
+    namegetter = Dialog_LineInput(message=message)
+    name = namegetter.modal()
+    sides.append(name)
+}}}
+Iterate
+
+In this case, the members in the list sides are not numbers, but text (called strings), so we could not use them in math formulas, but we could use them like this:
+{{{
+for word in sides:
+    write(word)
+    forward(180)
+    right(90)
+}}}
+Or, more generally:
+{{{
+def messageSquare(messages=['one', 'two', 'three', 'four']):
+    for word in messages:
+        write(word)
+        forward(180)
+        right(90)
+}}}
+The function messageSquare() takes one parameter, and if called without a value it will use the default argument ['one', 'two', 'three', 'four'].
+
+In other words, a call to:
+
+messageSquare()
+
+is the same as if you called it:
+
+messageSquare(['one', 'two', 'three', 'four'])
+
+You can also call it with a totally different list:
+
+messageSquare(['penguins', 'like', 'to eat', 'herring'])
+
+or with a list created before:
+
+messageSquare(sides)
+
+Range
+
+The function messageSquare() has a problem similar to the problem with the function at the end of the last page. If you pass in a sequence which is longer or shorter than 4 elements, it is probably not going to do what you want.
+
+Try it now. If the sequence is less than 4 elements, it will not make a complete square. If the sequence is more than 4 elements, it will write over the words on previous sides.
+{{{
+reset()
+messageSquare(['one', 'side', 'short'])
+reset()
+messageSquare(['one', 'side', 'too', 'many', 'here'])
+}}}
+To get around this problem, we need to figure out what angle to turn from the number of sides we want the shape to have.
+
+Using the built-in function range() we can make a very general function to draw polygons:
+{{{
+def poly(sides, length):
+    angle = 360.0 / sides
+    for side in range(sides):
+        forward(length)
+        right(angle)
+}}}
+The function range() takes a number, and returns a list with that many elements.
+
+That means: if sides=5 then range(sides) is the same as range(5) and it returns [0, 1, 2, 3, 4]
+
+So the function call poly(5, 10) will draw a five-sided figure with sides of length 10.
+
+Now we can make almost any sort of regular polygon by giving poly() the number of sides and the length of each side:
+{{{
+poly(5, 20)
+poly(6, 30)
+poly(100, 3)
+}}}
+The last one will probably be indistinguishable from a circle. In fact, if pete did not have a built in circle() method, that would be a good way to simulate a circle.
+
+
+Help
+
+We will come back to functions and sequences in the next chapter, but first I want to bring up one more thing about the interactive interpreter:
+
+Notice that by typing:
+
+help
+
+python will tell you how to get help.
+
+Basically, it tells you to type help() with which you can enter the python help browser and get a lot of generally helpful information. Alternatively, you can put something inside the parentheses which you want to get help on. Try this:
+>>> help(range)
+Help on built-in function range:
+
+range(...)
+range([start,] stop[, step]) -> list of integers
+
+Return a list containing an arithmetic progression of integers.
+range(i, j) returns [i, i+1, i+2, ..., j-1]; start (!) defaults to 0.
+When step is given, it specifies the increment (or decrement).
+For example, range(4) returns [0, 1, 2, 3]. The end point is omitted!
+These are exactly the valid indices for a list of 4 elements.
+
+You type in the first line, after the >>>
+
+help(range)
+
+and Python will tell you about the range function.
+
+That is interesting. Let's try out the example they give:
+
+range(4)
+returns: [0, 1, 2, 3]
+
+Just like they said it would be. How about if we give range 2 numbers:
+
+range(4, 10)
+returns: [4, 5, 6, 7, 8, 9]
+
+Notice how the list returned does include the first number you give, but it does not include the last number you give.
+
+Now try range with 3 arguments:
+
+range(0, 100, 10)
+returns: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+Very nice. I wonder if we can use this to make pete perform some even more amazing tricks?
+
+Also notice that you can get help on pete himself!
+
+Unfortunately, help(pete) only tells us that pete is an instance of the Penguin class. We can get help on pete and all of his kind with:
+
+help(Penguin)
+
+
+Exercises:
+
+1. Play the practice.py game to get used to moving the penguin around. Read the comments at the start of the file to see how to play. (Hint)
+
+2. You made pete move in a square. Now make him go in a rectangle that is twice as wide as it is high. (Hint)
+
+3. Now see if you can make pete go in a triangle. (Hint)
+
+4. Use a variable distance to make pete walk in a square or triangular spiral. (Hint)
+
+5. Make two different loops -- one to draw a pentagon and one to draw a five-pointed star. (Hint)
+
+6. Turn exercise 4 in to both a for loop and a while loop. (Hint)
+
+7. Create functions for triangle and pentagon like we made for square. Make the functions take a parameter for the length of a side. (Hint)
+
+8. Create a function which takes a sequence of strings and writes them around the edges of a polygon with one side for each string. (Hint)
+
+9. Create a function which takes a sequence of strings and writes each one on a separate line, one above the next. (Hint)
+
+
+
+
+
+Chapter 2
+Modules
+
+
+Import
+
+At the top of most Python programs, you will see import statements like this:
+{{{
+import random
+import os.path
+from math import sqrt
+from penguin import *
+}}}
+The import statement lets you quickly and easily load in python modules.
+
+Modules are useful code that is already written -- either code which someone else wrote or your own code. Before starting any programming project, it is a good idea to look around and see if there is already a module which will do what you need.
+
+Why would you want to import a module?
+
+If you need to make your game behave randomly, you might want to choose from different attack strategies:
+
+import random
+strategies = ['aggressive', 'cautious', 'defensive']
+strategy = random.choice(strategies)
+
+Or, if your game needs to know the size of a file:
+{{{
+import os.path
+os.path.getsize('.')
+}}}
+Or, if you need to know the distance between two objects:
+{{{
+from math import sqrt
+x0, y0 = (150, 75)
+x1, y1 = (275, 300)
+distance = sqrt((x0 - x1)**2 + (y0 - y1)**2)
+}}}
+This distance formula (the Pythagorean Theorem) is so useful that it is included in the math module:
+
+import math
+distance2 = math.hypot((x0 - x1), (y0 - y1))
+
+You can see the values, and check if they are the same:
+
+print distance, distance2, distance == distance2
+
+Or, if you just want to use the penguin graphics module:
+{{{
+from penguin import *
+pete.star()
+}}}
+
+Random
+
+The random module is one which is used frequently in game code. The most common uses are random.randrange(), random.uniform(), random.choice() and random.shuffle().
+
+I will summarize the use of these common functions here, but remember that you can also use the help() function to read more:
+{{{
+import random
+from random import choice, shuffle
+help(random.randrange)
+help(random.uniform)
+help(choice)
+help(shuffle)
+}}}
+randrange
+
+randrange() works somewhat like the range() function. It is used to return random integers.
+
+To generate 5 random integers from 1 to 10, try this:
+{{{
+for loop in range(5):
+    print loop, random.randrange(1, 11)
+}}}
+Remember that range(5) is [0, 1, 2, 3, 4]. There are five elements in the list, but starting with 0. randrange() is the same way. It could return the first number, but never the last one. So, randrange(1, 11) will return one of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+shuffle
+
+shuffle() will put the elements of a list in random order.
+{{{
+bears = ['polar', 'grizzly', 'black', 'koala', 'panda']
+print bears
+random.shuffle(bears)
+print bears
+random.shuffle(bears)
+print bears
+random.shuffle(bears)
+print bears
+}}}
+choice
+
+choice() will return a randomly selected element of any list. So random.randrange(1, 11) would be equivalent to random.choice(range(1, 11))
+
+Also, choice() can work on lists of anything, like lists of strings:
+{{{
+for choice_number in range(5):
+    bear = random.choice(bears)
+    print 'number', choice_number, 'is a', bear, 'bear'
+}}}
+Or it can even work on lists of penguins:
+{{{
+from penguin import Penguin
+
+# First, make an empty list
+# and fill it with 10 penguins
+penguins = []
+for count in range(1, 11):
+    print 'creating penguin number', count
+    p = Penguin()
+    p.moveTo('random')
+    penguins.append(p)
+
+# Then make them explode randomly
+for explosion in range(50):
+    penguin = random.choice(penguins)
+    penguin.blast()
+}}}
+uniform
+
+uniform() is for random numbers that are not integers:
+{{{
+for loop in range(5):
+    print random.uniform(0, 10)
+    print random.uniform(-10, 0)
+}}}
+Similar to randrange() the result returned could be the first number, but it will never be the second number.
+
+
+Namespaces
+
+Notice that when you use
+
+import random
+
+You must access the functions in random by the full name:
+
+random.randrange(1, 11)
+
+The modules are said to have their own namespaces. This allows you to call on a particular piece of the module with no chance for any confusion. It is kind of like in a classroom where a teacher may need to call on "Joe Smith" or on "Joe Brown" in order to specify which Joe is being called.
+
+from
+
+If you only need one particular function from a module, you can import that function directly:
+
+from random import randrange
+randrange(1, 11)
+
+It is sort of like the kid in the class named "Ferdinand" who almost certainly will not have a classmate named Ferdinand, or just calling on "Joe" when Joe Smith is out sick for the day.
+
+You probably noticed that we do something like this all the time to start up the penguin graphics mode:
+
+from penguin import *
+
+The * says to import everything from the penguin module.
+
+To see exactly what is being imported, try this:
+
+Restart Python, to get a fresh start, then:
+{{{
+dir()
+from penguin import *
+dir()
+}}}
+Normally, it is considered bad style to import everything from a module. As you can see it may introduce a huge number of names in to the local namespace, but in this case the module is meant to be used on its own, and there is a definite advantage to being able to type "forward(50)" instead of "pete.forward(50)"
+
+locals, globals, builtins
+
+Python has 3 namespaces. The local namespace is inside of a function and is the first place checked to find a particular name. The global namespace is inside of a module, and is next in line for name resolution. Finally, the builtin namespace holds things which should be available everywhere, and is the last place searched for names.
+
+
+Functions
+
+The interactive python interpreter is very useful if you are testing and typing just a few lines, but anything more than that and you are going to want to save your code in a file.
+
+Saving your code in a file that ends in .py makes it a Python module. Once you have a module, your code can be used from the interpreter, or by code in other files and programs.
+
+The Python code that you save to a file will look much like the code you typed directly in to the interpreter. Try it now.
+
+Create a new, blank file in your text editor. In that file, type these lines:
+{{{
+from pygsear.Drawable import String
+
+def send(new_msg):
+    m = String(message=new_msg, fontSize=80)
+    m.center()
+    m.udraw()
+}}}
+Save the file in the examples/ directory and call it message.py
+
+import
+
+When you try to import a module, Python will look first in the current directory. It looks for a file with the name of the module plus a .py ending.
+
+Start Python in the examples/ directory, and import your new module:
+
+import message
+
+To use your new module, call the send() function with a text message:
+
+message.send('Penguin Patrol!')
+
+But there is a problem with this. What happens if you call the function again?
+{{{
+message.send('Python & Pygame. Oh yea!')
+message.send('Take me to your leader')
+}}}
+global
+
+One way to fix the problem of the new message writing over the previous one is to keep a handle on the old String object. That way when the function is called again, we can erase the old message and make a new one.
+
+Add the highlighted lines to your message.py so it matches this:
+{{{
+from pygsear.Drawable import String
+
+msg = None
+
+def send(new_msg):
+    global msg
+    if msg is not None:
+        msg.uclear()
+    m = String(message=new_msg, fontSize=80)
+    m.center()
+    m.udraw()
+    msg = m
+}}}
+The variable msg is a module level or global variable. The first time through the function, msg will be None and we will skip the call to uclear()
+
+On any other call, we first clear out the old message, then draw the new one and save it as msg
+
+Using global variables, sort of like from foo import *, is usually considered bad form.
+
+A much better solution is to use a class which we will work on next.
+
+
+Classes
+
+classes can also be loaded from modules.
+
+A class defines a type of object.
+
+Penguin, for example, is a class in the penguin module which we have already used extensively. To make a new instance of a Penguin, we first import the class, and then call it:
+
+from penguin import Penguin
+pete = Penguin()
+
+A class is sort of like a function which acts as a factory for creating objects. Each time you call the class, it returns an object of that class.
+
+class Ball
+
+Classes define data and methods which describe the different objects you want to use in your programs.
+
+Let's start out with a very basic object, a ball.
+{{{
+class Ball:
+    def set_color(self, color):
+        self.color = color
+
+    def bounce(self):
+        print 'boing!'
+}}}
+Put that code in to a file. Call it Ball.py
+
+To create a ball, simply call your new class:
+
+import Ball
+rb = Ball.Ball()
+
+Keep in mind that this is all very abstract at this point, and this code is not going to show you a picture of a ball. This is just the idea of a ball. It is more beautiful, really, if you think about it.
+
+If you really need to see a ball right now, here is a red one I made with the GIMP:
+
+reload
+
+Notice that we did not import your new class directly. It is import Ball and not from Ball import Ball. This makes it easier to change your module and see the changes.
+
+If you want to make a change to your class -- like if you made a typing error -- you can just do this:
+
+reload(Ball)
+rb = Ball.Ball()
+
+color
+
+The Ball class defines two methods: set_color() and bounce()
+
+Methods are like functions, but they are bound to particular objects.
+
+Once you create a ball, you can change its color:
+
+rb.set_color('bright red')
+
+Notice that with methods, unlike with functions, you do not pass in the first parameter (usually called self). The object itself is passed in automatically as the first parameter when the method is called from a class instance.
+
+Also notice the difference between color and self.color in the set_color() method.
+
+When you call rb.set_color('red') the variable self is bound to the same Ball instance that rb is bound to.
+
+At the same time, the variable color is bound to the string 'red'.
+
+Then with the code self.color = color the data attribute self.color is bound to that same string.
+
+The set_color() method will create the attribute self.color if it does not exist, or if self.color already exists, it will just set it to the new value.
+
+You can see what color the ball is by examining the attribute:
+
+rb.color
+
+get and set
+
+It is a good idea to access data attributes through "getter" and "setter" methods, so we should create a get_color() method which just returns self.color
+
+Using methods to access your object attributes allows you to keep the interfaces to the attributes the same, even if later the underlying implementation changes.
+{{{
+class Ball:
+    def set_color(self, color):
+        self.color = color
+
+    def get_color(self):
+        return self.color
+
+    def bounce(self):
+        print 'boing!'
+}}}
+In other words, set_color() might have side effects other than just setting self.color -- it might check first to make sure that you do not try to set the color to orange, or you might decide later that the color would actually be better stored in a different way.
+
+bounce
+
+The other method in this class so far is bounce(). You can make the ball bounce by calling that method:
+{{{
+rb.bounce()
+rb.bounce()
+rb.bounce()
+}}}
+All bounce() does is print a message to the console.
+
+Using print statements like this can be a simple way to debug your class methods. You can print out various values at different times and see if they match up to what you think they should be.
+
+Often you will get an error message or a weird value from the print, and you can start your investigation there.
+
+__init__
+
+One problem with the Ball class the way we have the code now is that if you try to check the color before you set it, you will get an error:
+
+gb = Ball.Ball()
+gb.get_color()
+
+To make sure that the Ball always has a color, we should include the special method __init__() to initialize the objects to a known state when they are created.
+
+Adding __init__(), the class will now look like this:
+{{{
+class Ball:
+    def __init__(self, color='white'):
+        self.set_color(color)
+
+    def set_color(self, color):
+        self.color = color
+
+    def get_color(self):
+        return self.color
+
+    def bounce(self):
+        print 'boing!'
+}}}
+The __init__() method is called automatically when you instantiate your class, and it can take parameters like any other function.
+
+Remember that any time you make changes to your module you will need to either re-start the interpreter or else reload() the module.
+
+reload(Ball)
+wb = Ball.Ball()
+
+will create a ball with its color set to the default 'white', and
+
+yb = Ball.Ball('yellow')
+
+will make a 'yellow' ball.
+
+Inheritance
+
+The real power of classes emerges when you understand inheritance.
+
+Inheritance means that a class can define a new object which is a type of another object.
+
+For example, we might create a new object SuperBall which is a type of Ball:
+{{{
+class SuperBall(Ball):
+    def __init__(self):
+        Ball.__init__(self, 'swirled')
+        print 'SuperBall created!'
+
+    def bounce(self):
+        print 'boing, boing, boing'
+        self.superbounce()
+
+    def superbounce(self):
+        print 'BOING!'
+}}}
+Add, Override, Extend
+
+If SuperBall defined no methods at all, it would be just like Ball. What we want, though, is something that is like a Ball, but with some changes.
+
+One thing we can do is add completely new methods.
+
+The superbounce() method adds a capability which a normal Ball just does not have.
+
+If your class defines a method which is also in its parent class, the new method will be called instead of the parent class method -- the new method overrides the parent method. In this case, The bounce() method is one which both Ball and SuperBall have.
+
+Calling bounce() on a SuperBall overrides the normal Ball.bounce(). In this case, it prints out a message, and then calls the superbounce() method too.
+
+Sometimes what you want is the parent class's behavior, plus something more.
+
+The SuperBall.__init__() method starts out by calling Ball.__init__() to get the normal Ball initialization.
+
+This is a common idiom in subclasses, and you should probably do it just like this until you have a better understanding of how classes and inheritance work.
+
+Notice that since Ball.__init__() is called against the class Ball and not against an instance of class Ball you need to explicitly pass in the Ball instance (self) as the first parameter.
+
+After that, SuperBall.__init__() also prints out an informative message. At this point, it could also set up any additional attributes which a SuperBall has, but which a Ball does not.
+
+
+Exercises:
+
+1. Make a function to have pete draw a line from one random point to another 100 times. (Hint)
+
+2. Now, instead of drawing a line each time he moves, give the function a parameter for how many lines to skip between lines that he draws. (Hint)
+
+3. Create a function that makes a list of the points on a polygon, then have pete draw lines among them randomly for a while. (Hint)
+
+4. Put all of the functions you wrote in chapter 1 in to a file called firstFunctions.py so that you can easily load them and access them. (Hint)
+
+
+
+
+
+Chapter 3
+Demo
+
+
+Ball
+
+All of this abstract knowledge about classes is fine, but what we need is to see something real.
+
+The pygsear modules provide classes which you can use as-is, or which you can subclass to make your own game objects.
+
+Let's go back to the ball, but this time subclass pygsear.Drawable.Circle
+{{{
+class WhoaBall
+
+from pygsear.Drawable import Circle
+
+class WhoaBall(Circle):
+    def bounce(self):
+        print 'boing!'
+}}}
+You can put WhoaBall in to Ball.py or start a new file. It is up to you. Just so long as you can find and import your new class:
+{{{
+import Ball
+b = Ball.WhoaBall()
+}}}
+I kept the old bounce() method in there, just so you can see that this is still your ball, but you can also see that by inheriting from Circle we gain a lot of new functions.
+
+For one thing, when you instantiated your WhoaBall another window should have opened up. If it did (and you did not get an error) you should now (finally) be able to see your ball:
+{{{
+b.udraw()
+}}}
+Remember that if you want to see the methods available for an object, you can use:
+{{{
+dir(b)
+}}}
+a better bounce
+
+Now that we can actually see the ball, having bounce() just print out to the console is not so interesting. Let's see if we can make it more useful.
+
+How about if we have the ball change direction if it tries to move off of the bottom of the screen? Let's do that:
+{{{
+from pygsear.Drawable import Circle
+
+class WhoaBall(Circle):
+    def bounce(self):
+        if not self.onscreen(bottom=0, jail=1):
+            self.path.vy = -self.path.vy
+            print 'boing!'
+
+    def move(self):
+        self.bounce()
+        Circle.move(self)
+}}}
+Circle already has a lot of built-in logic for how to move around on screen, which we want to leverage. So, when we want the ball to move, we need to call Circle.move() after we extend the method by calling bounce() first.
+
+This onscreen() call is also inherited from Circle and it tells you if the ball has moved off of the bottom of the screen. The jail parameter tells it to move the ball back onscreen if it has moved off.
+
+Ok, let's see:
+{{{
+reload(Ball)
+b = Ball.WhoaBall()
+b.path.set_gravity(gy=400)
+b.runPath()
+}}}
+boing! boing! boing!
+
+(Press ctrl-c to stop the bouncing.)
+
+initialize
+
+Now move those steps that set up the WhoaBall in to an __init__ method:
+{{{
+from pygsear.Drawable import Circle
+
+class WhoaBall(Circle):
+    def __init__(self):
+        Circle.__init__(self)
+        self.path.set_gravity(gy=400)
+
+    def bounce(self):
+        if not self.onscreen(bottom=0, jail=1):
+            self.path.vy = -self.path.vy
+            print 'boing!'
+
+    def move(self):
+        self.bounce()
+        Circle.move(self)
+}}}
+That makes it very easy to test your ball:
+{{{
+reload(Ball)
+b = Ball.WhoaBall()
+b.runPath()
+}}}
+Now let's test for going off the sides of the screen so we can give the ball some sideways motion:
+{{{
+from pygsear.Drawable import Circle
+
+class WhoaBall(Circle):
+    def __init__(self):
+        Circle.__init__(self)
+        self.path.set_velocity(vx=150)
+        self.path.set_gravity(gy=400)
+
+    def walls(self):
+        if not self.onscreen(left=0, right=0, jail=1):
+            self.path.vx = -self.path.vx
+
+    def bounce(self):
+        if not self.onscreen(bottom=0, jail=1):
+            self.path.vy = -self.path.vy
+            print 'boing!'
+
+    def move(self):
+        self.bounce()
+        self.walls()
+        Circle.move(self)
+
+Here is a shorcut method to see your updated ball:
+
+reload(Ball)
+Ball.WhoaBall().runPath()
+}}}
+
+Demo
+
+We got WhoaBall working pretty well, but it is still a hassle having to go in to the interpreter, import your module, make a ball, and run its path.
+
+Let's use the pygsear.Game module to make this a bit easier:
+{{{
+from pygsear.Game import Game
+
+from Ball import WhoaBall
+
+class BallGame(Game):
+    def initialize(self):
+        ball = WhoaBall()
+        self.sprites.add(ball)
+
+if __name__ == '__main__':
+    g = BallGame()
+    g.mainloop()
+}}}
+Here we inherit from pygsear.Game.Game to get more functionality. Save this as BallGame.py and run the program:
+
+python BallGame.py
+
+Your code to set the game up goes in the initialize method.
+
+The odd looking section at the bottom is an idiom which says "if this program is being run (and not just imported) do this:" It creates an instance of your game and starts the main loop.
+
+Now let's make a few changes to WhoaBall so that we can improve BallGame too.
+{{{
+class WhoaBall(Circle):
+    def __init__(self, v=150):
+        Circle.__init__(self, color='random')
+        self.path.set_velocity(vx=v)
+        self.path.set_gravity(gy=400)
+}}}
+I only show the method which needs to be changed.
+
+This makes each WhoaBall a random color, and makes WhoaBall take a parameter to set the initial horizontal velocity.
+
+Now your game can make a few balls each with different velocities:
+{{{
+import random
+
+from pygsear.Game import Game
+
+from Ball import WhoaBall
+
+class BallGame(Game):
+    def initialize(self):
+        for b in range(5):
+            vx = random.uniform(100, 200)
+            ball = WhoaBall(vx)
+            self.sprites.add(ball)
+
+if __name__ == '__main__':
+    g = BallGame()
+    g.mainloop()
+}}}
+One last change to WhoaBall and this will make a nice demo:
+{{{
+class WhoaBall(Circle):
+    def bounce(self):
+        if not self.onscreen(bottom=0, jail=1):
+            self.path.vy = -self.path.vy * 0.85
+            if abs(self.path.vy) <= 20:
+                self.path.set_velocity(vy=-800)
+                print 'FLING!'
+}}}
+Again, I only show the method which needs to be changed.
+
+This does two things:
+
+First, on each bounce the velocity is cut to 85% of the previous bounce, to make the bounces decay more quickly.
+
+Second, when the bounce goes below a certain height, the ball is re-energized and flinged back in to the air.
+
+Here are the final versions of the two files. You can download the files by clicking on the link:
+{{{
+# Ball.py
+from pygsear.Drawable import Circle
+
+class WhoaBall(Circle):
+    def __init__(self, v=150):
+        Circle.__init__(self, color='random')
+        self.path.set_velocity(vx=v)
+        self.path.set_gravity(gy=400)
+
+    def walls(self):
+        if not self.onscreen(left=0, right=0, jail=1):
+            self.path.vx = -self.path.vx
+
+    def bounce(self):
+        if not self.onscreen(bottom=0, jail=1):
+            self.path.vy = -self.path.vy * 0.85
+            print 'boing!'
+            if abs(self.path.vy) <= 20:
+                self.set_color('random')
+                self.path.set_velocity(vy=-800)
+                print 'FLING!'
+
+    def move(self):
+        self.bounce()
+        self.walls()
+        Circle.move(self) 
+
+# BallGame.py
+import random
+
+from pygsear.Game import Game
+
+from Ball import WhoaBall
+
+class BallGame(Game):
+    def initialize(self):
+        for b in range(5):
+            vx = random.uniform(100, 200)
+            ball = WhoaBall(vx)
+            self.sprites.add(ball)
+            
+if __name__ == '__main__':
+        g = BallGame()
+        g.mainloop()
+}}}
+
+
+Exercises:
+
+1. Change the Ball class such that some balls are more bouncy than others. (Hint)
+
+2. Remove the 'boing!' and 'FLING!' messages, and instead print a message when any 2 balls collide. (Hint)
+
+
+
+
+
+Chapter 4
+Pong
+
+
+Paddle
+
+We got a nice demo from WhoaBall and BallGame, but that is not really a game. Let's keep going and see if we can make this in to a real game.
+
+Pong was the first real video game. Let's do that.
+
+First, a paddle.
+{{{
+from pygsear.Drawable import Rectangle
+
+class Paddle(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self, width=15, height=50)
+        self.center(x=10)
+}}}
+You can put this and all of the pong code in to one file Pong.py
+
+Your Paddle will need some control from the player.
+
+To convert input from the keyboard in to motion of the paddle, we will use events. Events let you create functions which will be called whenever something external happens. We will use the up and down arrow keys to control to movement of the paddle.
+
+In the Paddle we will set up the functions that need to be called, and a couple of flags which will remember the state of the controls.
+{{{
+from pygsear.Drawable import Rectangle
+
+class Paddle(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self, width=15, height=50)
+        self.center(x=10)
+
+        self.up_pressed = 0
+        self.down_pressed = 0
+
+    def up(self):
+        self.up_pressed = 1
+
+    def noup(self):
+        self.up_pressed = 0
+
+    def down(self):
+        self.down_pressed = 1
+
+    def nodown(self):
+        self.down_pressed = 0
+}}}
+We are going through a bit of a roundabout here because we want to do the right thing when the player pushes or holds down both the up and down controls at the same time. Instead of actually setting the velocity of the paddle each time a control is pressed, we change the state of a flag which tells which controls are being pressed.
+
+We will change the velocity in the move() method.
+{{{
+class Paddle(Rectangle):
+    def set_vel(self):
+        if self.up_pressed and not self.down_pressed:
+            self.path.set_velocity(vy=-100)
+        elif self.down_pressed and not self.up_pressed:
+            self.path.set_velocity(vy=100)
+        else:
+            self.path.set_velocity(vy=0)
+
+    def move(self):
+        self.set_vel()
+        Rectangle.move(self)
+
+Also, we want the Paddle to be always onscreen:
+
+class Paddle(Rectangle):
+    def move(self):
+        self.set_vel()
+        Rectangle.move(self)
+        self.onscreen(top=-5, bottom=-5, jail=1)
+}}}
+This change restricts the motion of the paddle between 5 pixels from the top edge of the screen and 5 pixels from the bottom edge of the screen.
+
+Now let's put the Paddle in to a Game and see what happens. Put this right in the same file:
+{{{
+from pygame.locals import K_UP, K_DOWN
+
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event, KEYUP_Event
+
+class Pong(Game):
+    def initialize(self):
+        paddle = Paddle()
+        self.sprites.add(paddle)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=paddle.up))
+        self.events.add(KEYUP_Event(key=K_UP, callback=paddle.noup))
+
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=paddle.down))
+        self.events.add(KEYUP_Event(key=K_DOWN, callback=paddle.nodown))
+
+if __name__ == '__main__':
+    game = Pong()
+    game.mainloop()
+}}}
+So, here is what we have so far. You can download the code by clicking on the link, and run it with python Pong-0.1.py
+{{{
+# Pong-0.1.py
+from pygsear.Drawable import Rectangle
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event, KEYUP_Event
+
+from pygame.locals import K_UP, K_q, K_DOWN, K_a
+
+class Paddle(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self, width=15, height=50)
+        self.center(x=10)
+
+        self.up_pressed = 0
+        self.down_pressed = 0
+
+    def up(self, ev):
+        self.up_pressed = 1
+
+    def noup(self, ev):
+        self.up_pressed = 0
+
+    def down(self, ev):
+        self.down_pressed = 1
+
+    def nodown(self, ev):
+        self.down_pressed = 0 
+
+    def set_vel(self):
+        if self.up_pressed and not self.down_pressed:
+            self.path.set_velocity(vy=-100)
+        elif self.down_pressed and not self.up_pressed:
+            self.path.set_velocity(vy=100)
+        else:
+            self.path.set_velocity(vy=0)
+
+    def move(self):
+        self.set_vel()
+        Rectangle.move(self) 
+        self.onscreen(top=-5, bottom=-5, jail=1)
+
+
+class Pong(Game):
+    def initialize(self):
+        paddle = Paddle()
+        self.sprites.add(paddle)
+
+        self.events.add(KEYDOWN_Event(key=(K_UP, K_q), callback=paddle.up))
+        self.events.add(KEYUP_Event(key=(K_UP, K_q), callback=paddle.noup))
+
+        self.events.add(KEYDOWN_Event(key=(K_DOWN, K_a), callback=paddle.down))
+        self.events.add(KEYUP_Event(key=(K_DOWN, K_a), callback=paddle.nodown))
+
+if __name__ == '__main__':
+    game = Pong()
+    game.mainloop()
+}}}
+Notice that in this version, you can also control the paddle with the 'Q' and 'A' keys, in addition to the up and down arrows.
+
+
+Ball
+
+We have experience with a ball from the WhoaBall class.
+
+We can draw on that experience, but I am not going to inherit from WhoaBall for the Pong ball. It is just too different.
+{{{
+from pygsear.Drawable import Square
+
+class Ball(Square):
+    def __init__(self):
+        Square.__init__(self, size=15)
+        self.center()
+        self.path.set_velocity(vx=150, vy=100)
+
+    def walls(self):
+        vx, vy = self.path.get_velocity()
+        if not self.onscreen(top=-5, bottom=-5, jail=1)
+            self.path.set_velocity(vy=-vy)
+        if not self.onscreen(right=-5, jail=1)
+            self.path.set_velocity(vx=-vx)
+
+    def move(self):
+        self.walls()
+        Square.move(self)
+}}}
+Now we can add the new Ball in to our Pong game and see what happens.
+{{{
+class Pong(Game):
+    def initialize(self):
+        paddle = Paddle()
+        self.sprites.add(paddle)
+        ball = Ball()
+        self.sprites.add(ball)
+}}}
+Here is our progress so far. We have the paddle and the ball:
+{{{
+# Pong-0.2.py
+from pygsear.Drawable import Rectangle, Square
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event, KEYUP_Event
+
+from pygame.locals import K_UP, K_DOWN
+
+
+class Paddle(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self, width=15, height=50)
+        self.center(x=10)
+
+        self.up_pressed = 0
+        self.down_pressed = 0
+
+    def up(self, ev):
+        self.up_pressed = 1
+
+    def noup(self, ev):
+        self.up_pressed = 0
+
+    def down(self, ev):
+        self.down_pressed = 1
+
+    def nodown(self, ev):
+        self.down_pressed = 0 
+
+    def setVel(self):
+        if self.up_pressed and not self.down_pressed:
+            self.path.set_velocity(vy=-100)
+        elif self.down_pressed and not self.up_pressed:
+            self.path.set_velocity(vy=100)
+        else:
+            self.path.set_velocity(vy=0)
+
+    def move(self):
+        self.setVel()
+        Rectangle.move(self) 
+        self.onscreen(top=-5, bottom=-5, jail=1)
+
+
+class Ball(Square):
+    def __init__(self):
+        Square.__init__(self, side=15)
+        self.center()
+        self.path.set_velocity(vx=150, vy=100)
+
+    def walls(self):
+        vx, vy = self.path.get_velocity()
+        if not self.onscreen(top=-5, bottom=-5, jail=1):
+            self.path.set_velocity(vy=-vy)
+        if not self.onscreen(right=-5, jail=1):
+            self.path.set_velocity(vx=-vx)
+
+    def move(self):
+        self.walls()
+        Square.move(self) 
+
+
+class Pong(Game):
+    def initialize(self):
+        paddle = Paddle()
+        self.sprites.add(paddle)
+        ball = Ball()
+        self.sprites.add(ball)    
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=paddle.up))
+        self.events.add(KEYUP_Event(key=K_UP, callback=paddle.noup))
+
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=paddle.down))
+        self.events.add(KEYUP_Event(key=K_DOWN, callback=paddle.nodown))
+
+
+if __name__ == '__main__':
+    game = Pong()
+    game.mainloop()
+}}}
+You can run the new game with:
+
+python Pong-0.2.py
+
+The only problem is that the ball passes right through the paddle!
+
+To fix this we need to introduce collisions.
+
+
+Game
+
+In the simplest case, every Drawable object is a rectangle.
+
+Even when the image that you see is not just a rectangle, the sprite is considered to be the rectangle which would cover the entire image. pygsear defines two different colors you can use for transparency, or it can use the transparency created by an image program like GIMP.
+
+A collision is when two of these rectangles overlap.
+
+Notice here that even though the images themselves do not touch, these two sprites are colliding. In most cases this will not be a problem, since sprites tend to be small and move relatively fast.
+
+In Pong the only collision we are worried about is between the Paddle and the Ball.
+{{{
+class Ball(Square):
+    def hit(self):
+        vx, vy = self.path.get_velocity()
+        vx = abs(vx)
+        self.path.set_velocity(vx=vx)
+
+class Pong(Game):
+    def initialize(self):
+        paddle = Paddle()
+        self.sprites.add(paddle)
+        ball = Ball()
+        self.sprites.add(ball)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=paddle.up))
+        self.events.add(KEYUP_Event(key=K_UP, callback=paddle.noup))
+
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=paddle.down))
+        self.events.add(KEYUP_Event(key=K_DOWN, callback=paddle.nodown))
+
+        self.paddle = paddle
+        self.ball = ball
+
+    def checkCollisions(self):
+        if self.ball.collide(self.paddle):
+            self.ball.hit()
+}}}
+Each time through the mainloop() loop, the Game will call checkCollisions()
+
+Our checkCollisions() will check to see if the Ball has hit the Paddle and if so, it will call the hit() for the Ball.
+
+Important: Notice how we need to modify the initialize() method to keep a handle on the Ball and the Paddle. If the Game did not hold on to those, it would have no way of checking the collisions.
+
+Once we know there has been a collision, we know the Ball should end up moving to the right, and so that is all hit() does. It makes sure vx is positive, using the absolute value function.
+
+The only thing left is to check for the Ball exiting the screen to the left, and to show the score.
+{{{
+from pygsear.Drawable import Score
+
+class Pong(Game):
+    def initialize(self):
+        self.window.border(left=0, top=5, right=5, bottom=5)
+        self.window.setTitle('Pong!')
+
+        paddle = Paddle()
+        self.sprites.add(paddle)
+        ball = Ball()
+        self.sprites.add(ball)
+
+        self.score = Score()
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=paddle.up))
+        self.events.add(KEYUP_Event(key=K_UP, callback=paddle.noup))
+
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=paddle.down))
+        self.events.add(KEYUP_Event(key=K_DOWN, callback=paddle.nodown))
+
+        self.paddle = paddle
+        self.ball = ball
+
+    def checkCollisions(self):
+        if self.ball.collide(self.paddle):
+            self.ball.hit()
+            self.score.addPoints(1)
+            self.score.updateScore()
+
+        if not self.ball.onscreen(left=10):
+            self.ball.center()
+            self.ball.path.set_velocity(vx=150, vy=100)
+}}}
+Actually, while I was in there, I also set a title for the window and added a border around the screen.
+
+That border might make it a bit more clear why all of the onscreen() calls were checking for the ball to be 5 pixels from the edge.
+
+Here is the full source for the game. You can click on the link to download the file:
+{{{
+# Pong-1.0.py
+from pygsear.Drawable import Rectangle, Square
+from pygsear.Widget import Score
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event, KEYUP_Event
+
+from pygame.locals import K_UP, K_DOWN
+
+class Paddle(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self, width=15, height=50)
+        self.center(x=10)
+
+        self.up_pressed = 0
+        self.down_pressed = 0
+
+    def up(self, ev):
+         self.up_pressed = 1
+  
+    def noup(self, ev):
+         self.up_pressed = 0
+
+    def down(self, ev):
+         self.down_pressed = 1
+
+    def nodown(self, ev):
+         self.down_pressed = 0
+
+    def setVel(self):
+        if self.up_pressed and not self.down_pressed:
+            self.path.set_velocity(vy=-100)
+        elif self.down_pressed and not self.up_pressed:
+            self.path.set_velocity(vy=100)
+        else:
+            self.path.set_velocity(vy=0)
+
+    def move(self):
+        self.setVel()
+        Rectangle.move(self)
+        self.onscreen(top=-5, bottom=-5, jail=1)
+
+
+class Ball(Square):
+    def __init__(self):
+        Square.__init__(self, side=15)
+        self.center()
+        self.path.set_velocity(vx=150, vy=100)
+
+    def walls(self):
+        vx, vy = self.path.get_velocity()
+        if not self.onscreen(top=-5, bottom=-5, jail=1):
+            self.path.set_velocity(vy=-vy)
+        if not self.onscreen(right=-5, jail=1):
+            self.path.set_velocity(vx=-vx)
+
+    def hit(self):
+        vx, vy = self.path.get_velocity()
+        vx = abs(vx)
+        self.path.set_velocity(vx=vx)
+
+    def move(self):
+        self.walls()
+        Square.move(self) 
+
+
+class Pong(Game):
+    def initialize(self):
+        self.window.border(left=0, top=5, right=5, bottom=5)
+        self.window.set_title('Pong!')
+
+        paddle = Paddle()
+        self.sprites.add(paddle)
+        ball = Ball()
+        self.sprites.add(ball)
+
+        self.score = Score()
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=paddle.up))
+        self.events.add(KEYUP_Event(key=K_UP, callback=paddle.noup))
+ 
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=paddle.down))
+        self.events.add(KEYUP_Event(key=K_DOWN, callback=paddle.nodown))
+ 
+        self.paddle = paddle
+        self.ball = ball
+
+    def checkCollisions(self):
+        if self.ball.collide(self.paddle):
+            self.ball.hit()
+            self.score.addPoints(1)
+            self.score.updateScore()
+
+        if not self.ball.onscreen(left=10):
+            self.ball.center()
+            self.ball.path.set_velocity(vx=150, vy=100) 
+
+
+if __name__ == '__main__':
+    game = Pong()
+    game.mainloop()
+}}}
+
+
+Tweak
+
+Ok, that is a pretty good start. We have a ball and a paddle and everything basically works.
+
+The game is not much fun though. What we need is to shake things up a little bit. Let's see how we can make the game better.
+
+How about each time you hit the ball, it speeds up and goes in a random direction?
+{{{
+import random
+
+class Ball(Square):
+    def hit(self):
+        vx, vy = self.path.get_velocity()
+        vx = abs(vx) + 20
+        vy = random.uniform(-100, 100)
+        self.path.set_velocity(vx, vy)
+}}}
+That should make things a bit more exciting. Especially after you have hit the ball a few times.
+
+In fact, if you try it out, it soon becomes impossible to hit the ball. We need to speed the paddle up as the ball goes faster.
+{{{
+class Paddle(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self, width=15, height=50)
+        self.center(x=10)
+
+        self.speed = 100
+
+        self.up_pressed = 0
+        self.down_pressed = 0
+
+    def hit(self):
+        self.speed += 4
+
+    def setVel(self):
+        if self.up_pressed and not self.down_pressed:
+            self.path.set_velocity(vy=-self.speed)
+        elif self.down_pressed and not self.up_pressed:
+            self.path.set_velocity(vy=self.speed)
+        else:
+            self.path.set_velocity(vy=0)
+
+class Pong(Game):
+    def checkCollisions(self):
+        if self.ball.collide(self.paddle):
+            self.ball.hit()
+            self.paddle.hit()
+            self.score.addPoints(1)
+            self.score.updateScore()
+
+        if not self.ball.onscreen(left=10):
+            self.ball.center()
+            self.ball.path.set_velocity(vx=150, vy=100)
+}}}
+Finally, to make the game ever so slightly addictive, I want to keep track of the high score so far.
+{{{
+class Pong(Game):
+    def initialize(self):
+        self.window.border(left=0, top=5, right=5, bottom=5)
+        self.window.setTitle('Pong!')
+
+        paddle = Paddle()
+        self.sprites.add(paddle)
+        ball = Ball()
+        self.sprites.add(ball)
+
+        self.score = Score()
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=paddle.up))
+        self.events.add(KEYUP_Event(key=K_UP, callback=paddle.noup))
+
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=paddle.down))
+        self.events.add(KEYUP_Event(key=K_DOWN, callback=paddle.nodown))
+
+        self.paddle = paddle
+        self.ball = ball
+
+        self.hscore = Score(text='High:', position=(100,70))
+        self.sprites.add(self.hscore)
+
+    def checkCollisions(self):
+        if self.ball.collide(self.paddle):
+            self.ball.hit()
+            self.paddle.hit()
+            self.score.addPoints(1)
+            self.score.updateScore()
+
+        if not self.ball.onscreen(left=10):
+            self.ball.center()
+            self.ball.path.set_velocity(vx=150, vy=100)
+
+            high = max(self.score.points, self.hscore.points)
+            self.hscore.setPoints(high)
+            self.maxscore.updateScore()
+            self.score.setPoints(0)
+            self.score.updateScore()
+}}}
+So, here is the code for our tweaked pong game:
+{{{
+# Pong-1.1.py
+import random
+
+from pygsear.Drawable import Rectangle, Square
+from pygsear.Widget import Score
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event, KEYUP_Event
+
+from pygame.locals import K_UP, K_DOWN
+
+class Paddle(Rectangle):
+    def __init__(self):
+        Rectangle.__init__(self, width=15, height=50)
+        self.center(x=10)
+
+        self.up_pressed = 0
+        self.down_pressed = 0
+
+        self.speed = 100
+
+    def up(self, ev):
+         self.up_pressed = 1
+  
+    def noup(self, ev):
+         self.up_pressed = 0
+
+    def down(self, ev):
+         self.down_pressed = 1
+
+    def nodown(self, ev):
+         self.down_pressed = 0
+
+    def hit(self):
+        self.speed += 4
+
+    def setVel(self):
+        if self.up_pressed and not self.down_pressed:
+            self.path.set_velocity(vy=-self.speed)
+        elif self.down_pressed and not self.up_pressed:
+            self.path.set_velocity(vy=self.speed)
+        else:
+            self.path.set_velocity(vy=0)
+
+    def move(self):
+        self.setVel()
+        Rectangle.move(self)
+        self.onscreen(top=-5, bottom=-5, jail=1)
+
+
+class Ball(Square):
+    def __init__(self):
+        Square.__init__(self, side=15)
+        self.center()
+        self.path.set_velocity(vx=150, vy=100)
+
+    def walls(self):
+        vx, vy = self.path.get_velocity()
+        if not self.onscreen(top=-5, bottom=-5, jail=1):
+            self.path.set_velocity(vy=-vy)
+        if not self.onscreen(right=-5, jail=1):
+            self.path.set_velocity(vx=-vx)
+
+    def hit(self):
+        vx, vy = self.path.get_velocity()
+        vx = abs(vx) + 20
+        vy = random.uniform(-100, 100)
+        self.path.set_velocity(vx=vx, vy=vy)
+
+    def move(self):
+        self.walls()
+        Square.move(self) 
+
+
+class Pong(Game):
+    def initialize(self):
+        self.window.border(left=0, top=5, right=5, bottom=5)
+        self.window.set_title('Pong!')
+
+        paddle = Paddle()
+        self.sprites.add(paddle)
+        ball = Ball()
+        self.sprites.add(ball)
+
+        self.paddle = paddle
+        self.ball = ball
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=paddle.up))
+        self.events.add(KEYUP_Event(key=K_UP, callback=paddle.noup))
+
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=paddle.down))
+        self.events.add(KEYUP_Event(key=K_DOWN, callback=paddle.nodown))
+
+        self.score = Score(text='Score:')
+        self.sprites.add(self.score)
+
+        self.hscore = Score(text='Max:', position=(100, 70))
+        self.sprites.add(self.hscore)
+
+    def checkCollisions(self):
+        if self.ball.collide(self.paddle):
+            self.ball.hit()
+            self.paddle.hit()
+            self.score.addPoints(1)
+            self.score.updateScore()
+
+        if not self.ball.onscreen(left=10):
+            self.ball.center()
+            self.ball.path.set_velocity(vx=150, vy=100)
+
+            high = max(self.score.points, self.hscore.points)
+            self.hscore.set_points(high)
+            self.hscore.updateScore()
+            self.score.set_points(0)
+            self.score.updateScore()
+
+
+if __name__ == '__main__':
+    game = Pong()
+    game.mainloop()
+}}}
+There is actually at least one more bug that I know of in this version. See if you can find it. The pong.py in the pygsear examples/ directory has the bug fixed.
+
+
+Exercises:
+
+1. Allow the paddle to move left and right, also. (Hint)
+
+2. Add a second paddle on the right side of the screen. (Hint)
+
+3. Extend the two paddle program from exercise 2 to make a two player pong game. (Hint)
+
+4. Extend the 2 player pong game by devising some way for players to affect the direction of the ball. (Hint)
+
+
+
+
+
+Chapter 5
+Frog
+
+
+Hop Hop
+
+I want to play a game like "frogger". Remember that one? I looked around at the games that are ported to FreeBSD, but nothing to be found... so, I guess I will just make one myself.
+
+I figure while I am at it, I may as well let you follow along.
+
+My first step is to make a frog.
+
+Later on I will clean it up and make it look much better. For now I just want to get the basic game working. I can work on beautification afterwards.
+{{{
+from pygsear.Drawable import Image
+from pygsear.Game import Game
+
+
+class Frog(Image):
+    def __init__(self):
+        Image.__init__(self, filename='frog.png')
+        self.center(y=-5)
+
+
+class FrogGame(Game):
+    def initialize(self):
+        frog = Frog()
+        self.sprites.add(self.frog)
+
+
+if __name__ == '__main__':
+    g =FrogGame()
+    g.mainloop()
+}}}
+Now, add some controls and a background image, and things start to shape up quickly.
+{{{
+from pygsear.Drawable import Image
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event
+
+from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT
+
+
+class Frog(Image):
+    def __init__(self):
+        Image.__init__(self, filename='frog.png')
+        self.JUMP = 60
+        self.WALK = 30
+
+        self.center(y=-5)
+
+    def up(self, ev=None):
+        self.nudge(dy=-self.JUMP)
+    def down(self, ev=None):
+        self.nudge(dy=self.JUMP)
+    def left(self, ev=None):
+        self.nudge(dx=-self.WALK)
+    def right(self, ev=None):
+        self.nudge(dx=self.WALK)
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        frog = Frog()
+        self.sprites.add(frog)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+
+if __name__ == '__main__':
+    g =FrogGame()
+    g.mainloop()
+}}}
+
+
+Sploosh
+
+Ok, right now the frog can walk on the water. Plus there is also no way to win. Let's see if we can solve both of those problems.
+
+First, we will add a way to win.
+{{{
+from pygsear.Drawable import Image
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event
+from pygsear.Widget import Score
+
+from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT
+
+
+class Frog(Image):
+    def __init__(self):
+        Image.__init__(self, filename='frog.png')
+        self.JUMP = 60
+        self.WALK = 30
+        self.restart()
+
+    def restart(self):
+        self.center(y=-5)
+        self.lane = 0
+
+    def up(self, ev=None):
+        self.nudge(dy=-self.JUMP)
+        self.lane += 1
+    def down(self, ev=None):
+        self.nudge(dy=self.JUMP)
+        self.lane -= 1
+    def left(self, ev=None):
+        self.nudge(dx=-self.WALK)
+    def right(self, ev=None):
+        self.nudge(dx=self.WALK)
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        frog = Frog()
+        self.sprites.add(frog)
+        self.frog = frog
+
+        self.score = Score(text='', position=(610, 550))
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+    def checkCollisions(self):
+        if self.frog.lane == 9:
+            self.score.addPoints(1)
+            self.score.updateScore()
+            self.frog.restart()
+
+if __name__ == '__main__':
+    g =FrogGame()
+    g.mainloop()
+}}}
+I drew the lilly pads directly on the background, but now I think it may actually be easier to make them in to separate sprites. Maybe in advanced levels they might move around or change color or disappear. Yep. This should also make it easier to find if the frog has landed on the pad correctly.
+{{{
+class Pad(Image):
+    def __init__(self):
+        Image.__init__(self, filename='pad.png')
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        self.pads = self.addGroup()
+        for p in range(5):
+            pad = Pad()
+            pad.set_position(50 + 155*p, 5)
+            self.sprites.add(pad)
+            self.pads.add(pad)
+
+        frog = Frog()
+        self.sprites.add(frog)
+        self.frog = frog
+
+        self.score = Score(text='', position=(610, 550))
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+}}}
+Ok. Looks good. Now let's make those lilly pads safe.
+{{{
+from pygsear.Drawable import Image, MultiImage
+
+class Pad(MultiImage):
+    def __init__(self):
+        MultiImage.__init__(self, filenames=('pad.png', 'padfull.png'))
+        self.flip('pad.png')
+
+
+class FrogGame(Game):
+    def checkCollisions(self):
+        if self.frog.lane == 9:
+            pads = self.pads.sprites()
+            pad = self.frog.collidelist(pads)
+            if pad:
+                pad.flip('padfull.png')
+                self.score.addPoints(1)
+                self.score.updateScore()
+                self.frog.restart()
+}}}
+Note that I am only including the methods that need changing, so don't erase the rest of the methods when you work on it.
+
+I put this part in first, because otherwise the frog would not be able to cross the water and test out the pads. Now, fix the problem of multiple frogs on one pad, and make the water more dangerous.
+{{{
+class Frog(Image):
+    def __init__(self):
+        Image.__init__(self, filename='frog.png')
+        self.JUMP = 60
+        self.WALK = 30
+        self.floating = 0 # set if standing on something that floats
+        self.lives = 3
+        self.restart()
+
+    def croak(self):
+        print 'croak' # fill this in later ...
+        self.lives -= 1
+
+    def sploosh(self):
+        print 'sploosh' # fill this in later ...
+        self.croak()
+
+
+class Pad(MultiImage):
+    def __init__(self):
+        MultiImage.__init__(self, filenames=('pad.png', 'padfull.png'))
+        self.flip('pad.png')
+        self.occupied = 0
+
+    def occupy(self):
+        self.occupied = 1
+        self.flip('padfull.png')
+
+
+class FrogGame(Game):
+    def checkCollisions(self):
+        if self.frog.lane == 9:
+            pads = self.pads.sprites()
+            pad = self.frog.collidelist(pads)
+            if pad and not pad.occupied:
+                pad.occupy()
+                self.score.addPoints(1)
+                self.score.updateScore()
+                self.frog.restart()
+        if 6 <= self.frog.lane <= 9:
+            if not self.frog.floating:
+                self.frog.sploosh()
+                self.frog.restart()
+        if not self.frog.onscreen():
+            self.frog.croak()
+            self.frog.restart()
+        if self.frog.lives <= 0:
+            self.stop = 1
+}}}
+Remember that if you want to test out the pads, you can still comment out the lines that go sploosh() like this:
+{{{
+class FrogGame(Game):
+    def checkCollisions(self):
+        if self.frog.lane == 9:
+            pads = self.pads.sprites()
+            pad = self.frog.collidelist(pads)
+            if pad and not pad.occupied:
+                pad.occupy()
+                self.score.addPoints(1)
+                self.score.updateScore()
+                self.frog.restart()
+        #if 6 <= self.frog.lane <= 9:
+        #    if not self.frog.floating:
+        #        self.frog.sploosh()
+        #        self.frog.restart()
+        if not self.frog.onscreen():
+            self.frog.croak()
+            self.frog.restart()
+        if self.frog.lives <= 0:
+            self.stop = 1
+}}}
+Now to add a little traffic.
+
+
+Vroom
+
+First up, a few cars.
+
+Now add them in to the game.
+{{{
+from pygsear.Drawable import Image, MultiImage, RotatedImage
+from pygsear.locals import PI
+from pygsear import conf
+
+import random
+
+class Car(RotatedImage):
+    def __init__(self, lane, vx):
+        color = random.choice(['01', '02', '03', '04'])
+        fn = 'car%s.png' % color
+        RotatedImage.__init__(self, filename=fn, steps=2)
+        if vx > 0:
+            x = -100
+        else:
+            x = conf.WINWIDTH + 148
+            self.set_rotation(PI)
+
+        y = conf.WINHEIGHT - 25 - (60 * lane)
+
+        self.set_position(x, y)
+        self.path.set_velocity(vx=vx)
+        self.set_closest()
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        self.pads = self.addGroup()
+        for p in range(5):
+            pad = Pad()
+            pad.set_position(50 + 155*p, 5)
+            self.sprites.add(pad)
+            self.pads.add(pad)
+
+        frog = Frog()
+        self.sprites.add(frog)
+        self.frog = frog
+
+        self.score = Score(text='', position=(610, 550))
+        self.sprites.add(self.score)v 
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+        self.cars = self.addGroup()
+        for lane, vx in [(1, 120), (2, 150), (3, -100), (4, -120)]:
+            car = Car(lane, vx)
+            self.sprites.add(car)
+            self.cars.add(car)
+
+    def checkCollisions(self):
+        if self.frog.lane == 9:
+            pads = self.pads.sprites()
+            pad = self.frog.collidelist(pads)
+            if pad and not pad.occupied:
+                pad.occupy()
+                self.score.addPoints(1)
+                self.score.updateScore()
+                self.frog.restart()
+        if 6 <= self.frog.lane <= 9:
+            if not self.frog.floating:
+                self.frog.sploosh()
+                self.frog.restart()
+        if 1 <= self.frog.lane <=4:
+            cars = self.cars.sprites()
+            car = self.frog.collidelist(cars)
+            if car:
+                self.frog.croak()
+                self.frog.restart()
+        if not self.frog.onscreen():
+            self.frog.croak()
+            self.frog.restart()
+        if self.frog.lives <= 0:
+            self.stop = 1
+}}}
+That works. Sort of. I thought I might just reset the car when it goes off the other edge of the screen, but really what we need is more control over the cars. I think I will add a Lane object which handles all of that.
+{{{
+from pygsear.Event import KEYDOWN_Event, TIMEOUT_Event
+
+
+class Lane:
+    def __init__(self, lane_number, freq, speed):
+        self.number = lane_number
+        self.freq = freq
+
+        speed = abs(speed)
+        if lane_number > 2:
+            self.vx = -speed
+        else:
+            self.vx = speed
+
+        wavelength = speed / freq
+
+        self.cars = conf.game.addGroup()
+
+        x = random.randrange(int(wavelength))
+        while x < conf.WINWIDTH:
+            car = Car(lane_number, self.vx)
+            self.cars.add(car)
+            car_x, car_y = car.get_position()
+            car.set_position(x, car_y)
+            x += wavelength
+
+        self.spawn()
+
+    def spawn(self, ev=None):
+        car = Car(self.number, self.vx)
+        self.cars.add(car)
+        conf.game.sprites.add(car)
+        conf.game.cars.add(car)
+        conf.game.events.add(TIMEOUT_Event(delay=(1000/self.freq), callback=self.spawn))
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        self.pads = self.addGroup()
+        for p in range(5):
+            pad = Pad()
+            pad.set_position(50 + 155*p, 5)
+            self.sprites.add(pad)
+            self.pads.add(pad)
+
+        frog = Frog()
+        self.sprites.add(frog)
+        self.frog = frog
+
+        self.score = Score(text='', position=(610, 550))
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+        self.cars = self.addGroup()
+        for n in [1, 2, 3, 4]:
+            lane = Lane(n, 0.5, 120)
+            self.sprites.add(lane.cars)
+            self.cars.add(lane.cars)
+}}}
+It can still use some tweaking, plus it is going to need some work when we want to be able to add different levels, but it works for now.
+
+Once we make some way to get across the water, the game will at least be playable.
+
+
+Rolling
+
+A log.
+
+Some log code.
+{{{
+class Log(Image):
+    def __init__(self, lane, vx):
+        Image.__init__(self, filename='log.png')
+        if vx > 0:
+            x = -200
+        else:
+            x = conf.WINWIDTH + 50
+
+        y = conf.WINHEIGHT - 50 - (60 * lane)
+
+        self.set_position(x, y)
+        self.path.set_velocity(vx=vx)
+
+
+class LogLane:
+    def __init__(self, lane_number, freq, speed):
+        self.number = lane_number
+        self.freq = freq
+        speed = abs(speed)
+
+        assert 6 <= lane_number <= 8, 'logs only allowed in the water'
+
+        direction = random.choice((1, -1))
+        self.vx = direction * speed
+
+        self.logs = conf.game.addGroup()
+
+        self.spawn()
+
+    def spawn(self, ev=None):
+        log = Log(self.number, self.vx)
+        self.logs.add(log)
+        conf.game.sprites.add(log)
+        conf.game.logs.add(log)
+        conf.game.events.add(TIMEOUT_Event(delay=(1000/self.freq), callback=self.spawn))
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        self.pads = self.addGroup()
+        for p in range(5):
+            pad = Pad()
+            pad.set_position(50 + 155*p, 5)
+            self.sprites.add(pad)
+            self.pads.add(pad)
+
+        frog = Frog()
+        self.sprites.add(frog)
+        self.frog = frog
+
+        self.score = Score(text='', position=(610, 550))
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+        self.cars = self.addGroup()
+        for n in [1, 2, 3, 4]:
+            lane = Lane(n, 0.5, 120)
+            self.sprites.add(lane.cars)
+            self.cars.add(lane.cars)
+
+        self.logs = self.addGroup()
+        for n in [6, 7, 8]:
+            lane = LogLane(n, 0.3, 120)
+            self.sprites.add(lane.logs)
+            self.logs.add(lane.logs)
+
+    def checkCollisions(self):
+        if self.frog.lane == 9:
+            pads = self.pads.sprites()
+            pad = self.frog.collidelist(pads)
+            if pad and not pad.occupied:
+                pad.occupy()
+                self.score.addPoints(1)
+                self.score.updateScore()
+                self.frog.restart()
+
+        if self.frog.lane == 5:
+            self.frog.floating = 0
+            self.frog.path.set_velocity(vx=0)
+
+        if 6 <= self.frog.lane <= 9:
+            logs = self.logs.sprites()
+            log = self.frog.collidelist(logs)
+            if log:
+                self.frog.floating = 1
+                vx, vy = log.path.get_velocity()
+                self.frog.path.set_velocity(vx=vx)
+            else:
+                self.frog.floating = 0
+                self.frog.path.set_velocity(vx=0)
+
+            if not self.frog.floating:
+                self.frog.sploosh()
+                self.frog.restart()
+
+        if 1 <= self.frog.lane <=4:
+            cars = self.cars.sprites()
+            car = self.frog.collidelist(cars)
+            if car:
+                self.frog.croak()
+                self.frog.restart()
+
+        if not self.frog.onscreen():
+            self.frog.croak()
+            self.frog.restart()
+
+        if self.frog.lives <= 0:
+            self.stop = 1
+}}}
+Notice how similar the LogLane code is to the Lane code before? I will probably try to re-factor the code to make it more simple later. Right now though, there is a problem with the logs floating on top of the frogs.
+
+That's easy enough to fix. Just add the frog at a higher level and it will be drawn on top.
+{{{
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        self.pads = self.addGroup()
+        for p in range(5):
+            pad = Pad()
+            pad.set_position(50 + 155*p, 5)
+            self.sprites.add(pad)
+            self.pads.add(pad)
+
+        frog = Frog()
+        self.sprites.add(frog, level=1)
+        self.frog = frog
+
+        self.score =  Score(text='', position=(610, 550))
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+        self.cars = self.addGroup()
+        for n in [1, 2, 3, 4]:
+            lane = Lane(n, 0.5, 120)
+            self.sprites.add(lane.cars)
+            self.cars.add(lane.cars)
+
+        self.logs = self.addGroup()
+        for n in [6, 7, 8]:
+            lane = LogLane(n, 0.3, 120)
+            self.sprites.add(lane.logs)
+            self.logs.add(lane.logs)
+}}}
+
+
+Variation
+
+The way it is now, the logs and cars are produced at completely regular intervals, and they always have the same speeds.
+
+By using a random method, we can get a nice distribution of cars and logs and make the game much more interesting.
+{{{
+class LogLane:
+    def __init__(self, lane_number, freq, speed, sigma, delaysigma):
+        self.number = lane_number
+        self.freq = freq
+        speed = abs(speed)
+        speed = random.normalvariate(speed, sigma)
+        self.delaysigma = delaysigma
+
+        assert 6 <= lane_number <= 8, 'logs only allowed in the water'
+
+        if lane_number % 2:
+            direction = -1
+        else:
+            direction = 1
+        self.vx = direction * speed
+
+        self.logs = conf.game.addGroup()
+
+        self.spawn()
+
+    def spawn(self, ev=None):
+        log = Log(self.number, self.vx)
+        self.logs.add(log)
+        conf.game.sprites.add(log)
+        conf.game.logs.add(log)
+
+        delay = random.normalvariate(1000/self.freq, self.delaysigma)
+        conf.game.events.add(TIMEOUT_Event(delay=delay, callback=self.spawn))
+
+
+class Lane:
+    def __init__(self, lane_number, freq, speed, sigma, delaysigma):
+        self.number = lane_number
+        self.freq = freq
+        speed = abs(speed)
+        speed = random.normalvariate(speed, sigma)
+        self.delaysigma = delaysigma
+
+        assert 1 <= lane_number <= 4, 'cars only allowed on the road'
+
+        if lane_number > 2:
+            self.vx = -speed
+        else:
+            self.vx = speed
+
+        wavelength = speed / freq
+
+        self.cars = conf.game.addGroup()
+
+        x = random.randrange(int(wavelength))
+        while x < conf.WINWIDTH:
+            car = Car(lane_number, self.vx)
+            self.cars.add(car)
+            car_x, car_y = car.get_position()
+            car.set_position(x, car_y)
+            x += wavelength
+
+        self.spawn()
+
+    def spawn(self, ev=None):
+        car = Car(self.number, self.vx)
+        self.cars.add(car)
+        conf.game.sprites.add(car)
+        conf.game.cars.add(car)
+
+        delay = random.normalvariate(1000/self.freq, self.delaysigma)
+        conf.game.events.add(TIMEOUT_Event(delay=delay, callback=self.spawn))
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        self.pads = self.addGroup()
+        for p in range(5):
+            pad = Pad()
+            pad.set_position(50 + 155*p, 5)
+            self.sprites.add(pad)
+            self.pads.add(pad)
+
+        frog = Frog()
+        self.sprites.add(frog, level=1)
+        self.frog = frog
+
+        self.score = Score(text='', position=(610, 550))
+        self.sprites.add(self.score)
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+        self.cars = self.addGroup()
+        for n in [1, 2, 3, 4]:
+            lane = Lane(n, 0.3, 120, 30, 500)
+            self.sprites.add(lane.cars)
+            self.cars.add(lane.cars)
+
+        self.logs = self.addGroup()
+        for n in [6, 7, 8]:
+            lane = LogLane(n, 0.2, 100, 40, 1000)
+            self.sprites.add(lane.logs)
+            self.logs.add(lane.logs)
+}}}
+At this point, the game is playable. It still needs some tweaking -- to add levels of difficulty and to clean up the graphics.
+{{{
+# Frog-1.0.py
+from pygsear.Drawable import Image, MultiImage, RotatedImage
+from pygsear.Game import Game
+from pygsear.Event import KEYDOWN_Event, TIMEOUT_Event
+from pygsear.Widget import Score
+from pygsear.locals import PI
+from pygsear import conf
+
+from pygame.locals import K_UP, K_DOWN, K_LEFT, K_RIGHT
+
+import random
+
+
+class Frog(Image):
+    def __init__(self):
+        Image.__init__(self, filename='frog.png')
+        self.JUMP = 60
+        self.WALK = 30
+        self.floating = False # set if standing on something that floats
+        self.lives = 3
+
+        self.restart()
+ 
+    def croak(self):
+         print 'croak' # fill this in later ...
+         self.lives -= 1
+
+    def sploosh(self):
+         print 'sploosh' # fill this in later ...
+         self.croak()
+
+    def restart(self):
+        self.path.set_velocity(vx=0)
+        self.center(y=-5)
+        self.lane = 0
+
+    def up(self, ev=None):
+        self.nudge(dy=-self.JUMP)
+        self.lane += 1
+    def down(self, ev=None):
+        self.nudge(dy=self.JUMP)
+        self.lane -= 1
+    def left(self, ev=None):
+        self.nudge(dx=-self.WALK)
+    def right(self, ev=None):
+        self.nudge(dx=self.WALK)
+
+
+class Pad(MultiImage):
+    def __init__(self):
+        MultiImage.__init__(self, filenames=('pad.png', 'padfull.png'))
+        self.flip('pad.png')
+        self.occupied = False
+ 
+    def occupy(self):
+         self.occupied = True
+         self.flip('padfull.png')
+
+
+class Car(RotatedImage):
+     def __init__(self, lane, vx):
+         color = random.choice(['01', '02', '03', '04'])
+         fn = 'car%s.png' % color
+         RotatedImage.__init__(self, filename=fn, steps=2)
+         if vx > 0:
+             x = -100
+         else:
+             x = conf.WINWIDTH + 148
+             self.set_rotation(PI)
+ 
+         y = conf.WINHEIGHT - 25 - (60 * lane)
+ 
+         self.set_position(x, y)
+         self.path.set_velocity(vx=vx)
+         self.set_closest()
+
+
+class Lane:
+    def __init__(self, lane_number, freq, speed, sigma, delaysigma):
+        self.number = lane_number
+        self.freq = freq
+
+        speed = abs(speed)
+        speed = random.normalvariate(speed, sigma)
+        self.delaysigma = delaysigma
+
+        assert 1 <= lane_number <= 4, 'cars only allowed on the road'
+
+        if lane_number > 2:
+            self.vx = -speed
+        else:
+            self.vx = speed
+
+        wavelength = speed / freq
+
+        self.cars = conf.game.addGroup()
+
+        x = random.randrange(int(wavelength))
+        while x < conf.WINWIDTH:
+            car = Car(lane_number, self.vx)
+            self.cars.add(car)
+            car_x, car_y = car.get_position()
+            car.set_position(x, car_y)
+            x += wavelength
+
+        self.spawn()
+
+    def spawn(self, ev=None):
+        car = Car(self.number, self.vx)
+        self.cars.add(car)
+        conf.game.sprites.add(car)
+        conf.game.cars.add(car)
+        #conf.game.events.add(TIMEOUT_Event(delay=(1000/self.freq), callback=self.spawn))
+
+        delay = random.normalvariate(1000/self.freq, self.delaysigma)
+        conf.game.events.add(TIMEOUT_Event(delay=delay, callback=self.spawn))
+
+ 
+
+class Log(Image):
+    def __init__(self, lane, vx):
+        Image.__init__(self, filename='log.png')
+        if vx > 0:
+            x = -200
+        else:
+            x = conf.WINWIDTH + 50
+
+        y = conf.WINHEIGHT - 50 - (60 * lane)
+
+        self.set_position(x, y)
+        self.path.set_velocity(vx=vx)
+
+
+class LogLane:
+    def __init__(self, lane_number, freq, speed, sigma, delaysigma):
+        self.number = lane_number
+        self.freq = freq
+        speed = abs(speed)
+
+        speed = random.normalvariate(speed, sigma)
+        self.delaysigma = delaysigma
+
+        assert 6 <= lane_number <= 8, 'logs only allowed in the water'
+
+        if lane_number % 2:
+            direction = -1
+        else:
+            direction = 1
+        self.vx = direction * speed
+
+        self.logs = conf.game.addGroup()
+
+        self.spawn()
+
+    def spawn(self, ev=None):
+        log = Log(self.number, self.vx)
+        self.logs.add(log)
+        conf.game.sprites.add(log)
+        conf.game.logs.add(log)
+        #conf.game.events.add(TIMEOUT_Event(delay=(1000/self.freq), callback=self.spawn))
+
+        delay = random.normalvariate(1000/self.freq, self.delaysigma)
+        conf.game.events.add(TIMEOUT_Event(delay=delay, callback=self.spawn))
+
+
+
+
+
+class FrogGame(Game):
+    def initialize(self):
+        self.set_background(filename='bg.png')
+
+        self.pads = self.addGroup()
+        for p in range(5):
+            pad = Pad()
+            pad.set_position(50 + 155*p, 5)
+            self.sprites.add(pad)
+            self.pads.add(pad)
+
+        frog = Frog()
+        self.sprites.add(frog, level=1)
+        self.frog = frog
+ 
+        self.score = Score(text='', position=(610, 550))
+        self.sprites.add(self.score)
+
+
+        self.events.add(KEYDOWN_Event(key=K_UP, callback=frog.up))
+        self.events.add(KEYDOWN_Event(key=K_DOWN, callback=frog.down))
+        self.events.add(KEYDOWN_Event(key=K_LEFT, callback=frog.left))
+        self.events.add(KEYDOWN_Event(key=K_RIGHT, callback=frog.right))
+
+        self.cars = self.addGroup()
+        for n in [1, 2, 3, 4]:
+            lane = Lane(n, 0.3, 120, 30, 500)
+            self.sprites.add(lane.cars)
+            self.cars.add(lane.cars)
+
+        self.logs = self.addGroup()
+        for n in [6, 7, 8]:
+            lane = LogLane(n, 0.2, 100, 40, 1000)
+            self.sprites.add(lane.logs)
+            self.logs.add(lane.logs)
+
+    def checkCollisions(self):
+        if self.frog.lane == 9:
+            pads = self.pads.sprites()
+            pad = self.frog.collidelist(pads)
+            if pad and not pad.occupied:
+                 pad.occupy()
+                 self.score.addPoints(1)
+                 self.score.updateScore()
+                 self.frog.restart()
+
+        if self.frog.lane == 5:
+             self.frog.floating = 0
+             self.frog.path.set_velocity(vx=0)
+
+        if 6 <= self.frog.lane <= 9:
+            logs = self.logs.sprites()
+            log = self.frog.collidelist(logs)
+            if log:
+                self.frog.floating = 1
+                vx, vy = log.path.get_velocity()
+                self.frog.path.set_velocity(vx=vx)
+            else:
+                self.frog.floating = 0
+                self.frog.path.set_velocity(vx=0)
+
+            if not self.frog.floating:
+                self.frog.sploosh()
+                self.frog.restart()
+
+        if 1 <= self.frog.lane <=4:
+             cars = self.cars.sprites()
+             car = self.frog.collidelist(cars)
+             if car:
+                 self.frog.croak()
+                 self.frog.restart()
+
+        if not self.frog.onscreen():
+            self.frog.croak()
+            self.frog.restart()
+
+        if self.frog.lives <= 0:
+            self.stop = 1
+
+
+
+
+
+if __name__ == '__main__':
+    g = FrogGame()
+    g.mainloop()
+}}}
+
+
+Este artigo foi traduzido do original encontrado em http://staff.easthighschool.net/lee/computers/book/Start_Programming.html, escrito por Lee Harr. Ele possui uma licença livre, o que significa que você pode se sentir à vontade para modificá-lo e usá-lo conforme desejar. Para mais detalhes sobre a licença veja: http://www.gnu.org/copyleft/fdl.html

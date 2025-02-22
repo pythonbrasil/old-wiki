@@ -1,0 +1,15 @@
+= Palestra E Agora Para Algo Completamente Diferente: Python =
+
+Por volta do começo do ano de 2005, o Professor '''Sergio Moraes''' perguntou a CarlosMoraisDosSantos e EduardoDeOliveiraPadoan, seus alunos na FatecSorocaba, se eles não estariam interessados em apresentar uma palestra na [http://www.uniso.br UNISO] sobre a linguagem de programação Python.
+
+Eles resolveram aproveitar a oportunidade e aceitaram o desafio. A palestra foi apresentada, então, em Abril daquele ano.
+
+Carlos apresentou as partes ''teóricas'' e Eduardo apresentou a parte prática, demonstrada no IDLE. Essa seção corresponde aos slides ''O Shell'' até ''There and back again'' (quando o Carlos reassume) na apresentação atual.
+
+Eles gostaram da experiência, mas achavam que podiam melhorar muito. Outra oportunidade seria a [http://www.fatecsorocaba.edu.br/semtec/index.htm 12a. Semana de Tecnologia] na FatecSorocaba. A palestra foi aceita, e eles revisaram os slides(Carlos os refez usando '''LaTeX''', dizendo NÃO a coisas feitas pela M$ para apresentações) e os exemplos (exaustivamente!). A apresentação foi na [http://www.fatecsorocaba.edu.br/semtec/palestras/pl_quinta.htm Quinta, 6 de outubro de 2005].
+
+O [attachment:andnow.pdf pdf] aqui publicado é da segunda apresentação. Algumas mudanças podem ser vistas nos slides em relação à primeira apresentação: eram cães ao invés de baratas, foi adiconada uma explicação sobre troca de mensagens e slides para ilustrar explicações durante a parte prática: sobre tipagem estática e dinâmica e sobre o GarbageCollector. A parte sobre aplicações que utilizam Python estão bem mais ilustradas (e geraram muitos  ''ohhh!''s :) ) e foi adicionado BitTorrent. Proximo do fim, a parte de links foi bem reforçada. É interessante para quem viu a primeira palestra que veja o [attachment:andnow.pdf pdf] anexado aqui.
+
+A versão 3.0 foi apresentada para a turma de SI (Seminários em Informática) do curso de Processamento de Dados da FATEC-SO e mais alguns interessados (a quem agradecemos muito a presença), no dia 10 de Abril de 2006.
+
+Ambos agradecem imensamente o Professor Sergio Moraes pela proposta e incentivos.

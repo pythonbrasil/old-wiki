@@ -1,0 +1,5 @@
+1115220714000000	00000001	SAVENEW	ManipulandoStringsComPython	200.168.58.218	200-168-58-218.speedyterra.com.br	1115218772.41.13212		
+1115221569000000	00000002	SAVE	ManipulandoStringsComPython	200.168.58.218	200-168-58-218.speedyterra.com.br	1115218772.41.13212		
+1115237192000000	00000003	SAVE	ManipulandoStringsComPython	200.167.194.20	200.167.194.20	1069111771.32.31279		removi espaços para seguir a PEP8 (python coding style)
+1115237403000000	00000004	SAVE	ManipulandoStringsComPython	200.167.194.20	200.167.194.20	1069111771.32.31279		citando fontes
+1222437993537105	00000005	SAVE	ManipulandoStringsComPython	127.0.0.1	localhost			converted to 1.6 markup

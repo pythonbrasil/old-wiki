@@ -1,0 +1,225 @@
+[[TableOfContents]]
+
+=== O que é Python? ===
+
+Python é uma linguagem de altíssimo nível (''VHLL - Very High Level Language''), Orientada a Objetos, Interpretada, Dinamicamente Tipada, Modular, Multiplataforma, de fácil aprendizado e Livre. Python foi criada por GuidoVanRossum.
+
+=== Como se pronuncia Python? ===
+
+"Páitfon" (lembrando que "th" pronuncia-se colocando a língua entre os dentes e emitindo um som de "f")
+
+=== De onde surgiu esse nome? ===
+
+Ao contrário do que normalmente se pensa, a origem do nome da linguagem não é a espécie de serpente "Pitón" e sim o grupo inglês de humoristas "Monty Python". O uso da serpente como símbolo da linguagem se difundiu depois da publicação do ProgrammingPython da editora O'Reilly.
+
+=== Em que tipo de aplicações Python é usada? ===
+
+Python é uma linguagem de uso geral que pode ser empregada em vários tipos de problemas. A biblioteca padrão inclui módulos para processamento de texto e expressões regulares, protocolos de rede (HTTP, FTP, SMTP, POP, XML-RPC, IMAP), acesso aos serviços do sistema operacional, criptografia, interface gráfica etc. Além da biblioteca padrão, existe uma grande variade de extensões adicionais para todo tipo de aplicação.
+
+Python é mais tipicamente usado em aplicações web e como linguagem de ''scripting'' para administração de sistemas. A facilidade de integração com C faz de Python uma linguagem embutida atrativa em aplicações de maior porte. A possibilidade de uso de componentes COM faz de Python uma alternativa mais agradável (e barata) ao Visual Basic. Finalmente, com o uso de ferramentas como o freeze ou py2exe (ver questão abaixo), é possível distribuir aplicações Python ''stand-alone'', sem que o usuário tenha que instalar o interpretador Python separadamente.
+
+=== Qual a licença usada e quais as restrições de uso? ===
+
+Python é distribuída sob uma licença própria (compatível com a GPL), que impõe poucas restrições. É permitida a distribuição, comercial ou não, tanto da linguagem quanto de aplicações desenvolvidas nela, em formato binário ou código fonte, bastando cumprir a exigência de manter o aviso de ''Copyright'' da PSF (''Python Software Foundation''). Veja a licença em mais detalhes aqui: http://www.python.org/2.3.2/license.html .
+
+=== Como achar uma boa lista de sites de hospedagem gratuitos que suportam Python (e ZOPE) ? ===
+
+Você pode encontrar uma lista em http://www.oinko.net/freepython/
+
+=== Por que aprender Python? ===
+
+Porque Python é uma linguagem simples e elegante. Porque Python é fácil de aprender. Porque Python pode ser usado para resolver uma grande variedade de problemas. Porque Python incentiva você a escrever seus programas da maneira correta, sem que isso se torne um empecilho à produtividade.
+
+Python tem uma curva de aprendizado bastante interessante, permitindo que novos programadores, mesmo os que nunca tenham programado antes, sejam imediatamente produtivos escrevendo scripts procedurais. O programador pode executar o interpretador como um ''shell'', vendo imediatamente o resultado da saída de cada comando e explorando os recursos da linguagem interativamente.
+
+Para construir aplicações mais complexas, Python possibilita a fácil migração para a programação orientada a objetos. Um programa pode evoluir naturalmente para esse paradigma à medida que se torna mais complexo. A facilidade inicial do Python não barateia a linguagem, como é comum em linguagens que têm por objetivo expresso serem fáceis de aprender. Python é simples de aprender porque é uma linguagem bem planejada.
+
+== Divulgando Python ==
+
+Todos que trabalham com Python já devem estar acostumados com as mesmas perguntas sempre, começando com "Python? O que é isto?", acompanhadas de um nariz meio torto e uma testa franzida. Nossa intenção é criar uma lista de Perguntas Freqüentes, com o objetivo de mostrar que Python é uma linguagem que pode ser utilizada no ensino de lógica e programação em cursos de graduação. Apesar deste objetivo, acreditamos que as respostas podem ser úteis a todos os interessados em conhecer um pouco mais sobre Python. Esta seção de perguntas e respostas foi compilada pelo MarcoAndréLopesMendes a partir de respostas de diversos participantes da lista de discussão python-brasil@yahoogrupos.com.br.
+
+=== Por que Python e não X? Onde X pode ser "C", "C++", "Java", "PHP", "Pascal", "Visual Basic", ... ===
+
+Python foi criada inicialmente como uma linguagem para ser usada no ensino de programação. Posteriormente, essa linguagem foi se tornando extremamente poderosa e iniciou-se o uso no desenvolvimento de software comercial.
+
+Python é fácil de ser aprendida, fácil de ser usada, não policia o programador experiente e ao mesmo tempo promove boas práticas de programação para o programador menos experiente.
+
+Para o ensino de programação, você precisa de uma linguagem que não entre no caminho do estudante. Ele está precisando aprender a programar - de uma maneira resumida, encadear ações para resolver um problema complexo - e isso, por si só, já é complicado. Se é colocada alguma dificuldade adicional, a "impedância" aumenta, e pode levar a uma série de frustrações.
+
+Python sempre é descrito como "pseudo-código que roda" em listas de discussão mundo afora. Obviamente, para estudantes no Brasil, isso não é exatamente verdade, porque pseudo-código aqui é em português. Mas isso é verdade para qualquer uma das linguagens citadas. Além disso, Python é uma linguagem interpretada, o que significa que o estudante pode ver imediatamente o resultado do que está pensando, e isso é bom para o estudo.
+
+É possível fazer tudo o que se faz com linguagens como C, C++, Java, PHP, Pascal, ou VB. A diferença é que se faz de forma mais simples e rápida.
+
+Linguagens compiladas complicam a vida de quem está iniciando, pois são mais conceitos a trabalhar (usar o ambiente, se submeter à tipagem do compilador) e precisam de um tempo maior para dar resultado, justamente pelo ciclo editar, compilar, executar, que muita vezes torna o ambiente complicado para quem está iniciando.
+
+C é médio nível, e assim como o ''assembly'', expõe conceitos estruturais da arquitetura da máquina e complica a implementação de conceitos modernos com OO. C++ e Java são bons, mas são linguagens "barrocas" para se expressar, quer dizer que demora mais para "pegar" o jeito de usar a linguagem.
+
+Pascal é "linguagem de brinquedo" (não estou falando de Object Pascal), nos anos 80 era uma ótima linguagem para iniciar a programar, mas hoje este papel é cumprido por Python.
+
+Visual Basic e PHP causam danos ao cérebro (sem brincadeira). Viciam de forma errada o programador. Globais, implementações fracas de OO, falta de namespace etc.
+
+A principal dificuldade do ensino de programação a leigos utilizando C, C++, Java ou PHP é a sintaxe, uma vez que elas jamais se propuseram a serem simples. Na verdade, C surgiu como uma linguagem de programação de sistemas em baixo nível, e as outras copiaram sua sintaxe lastimável. Das acima, apenas Pascal é realmente adequada ao ensino de programação, mas ela começa a falhar quando conceitos mais avançados são necessários.
+
+Mas veja que é prejudicial ensinar apenas uma linguagem no curso inteiro. Seria ótimo se outras linguagens, ainda que mais limitadas, sejam vistas, porque são necessárias. Mas essas linguagens devem aparecer no contexto certo.
+
+=== Uma linguagem interpretada não é lenta? ===
+
+Sim e não. Uma linguagem interpretada em geral é mais lenta que uma linguagem compilada. Se a linguagem estará sendo utilizada por estudantes em iniciação, então os programadores deveriam ter uma preocupação maior com a corretude e a facilidade de programação do que com o desempenho do código, desenvolvendo programas simples, mais fáceis de entender, onde a velocidade não é a maior das considerações.
+
+Além do mais, é possível fazer código otimizado muito mais rápido em Python do que em C, por exemplo. Além disso, atualmente estão se desenvolvendo tecnologias de compilação JIT (''just in time'') que reduzem drasticamente a diferença entre aplicações desenvolvidas em linguagens compiladas e linguagens interpretadas.
+
+Para ver uma prova disto, basta uma visita rápida a: BenchmarkAdHoc
+
+Se o programa a ser implementado for algum tipo de programa mastigador de grandes volumes de dados ou um sistema de tempo real para controle de hardware, talvez a lentidão seja perceptível. A maioria dos problemas não requer tanto processamento assim, computadores pessoais têm poder de CPU suficiente para rodar satisfatoriamente a maioria dos programas interpretados. Não estamos mais nos anos 80, com Pascal e máquinas de 8 bits para justificar o argumento de lentidão. Ainda mais com o advento do ''bytecoding'' e compiladores JIT, o fato de ser interpretado há muito tempo deixou de ser um penalizador. É claro que é difícil chegar ao tempo de execução de uma aplicação feita em C, mas por outro lado, uma perda de velocidade significa um aumento no "tempo do programador", no fato dele escrever mais rápido e menos propenso ao erro.
+
+Alguns dados sobre a produtividade do programador podem ser vistos neste [http://pythonbrasil.com.br/moin.cgi/OsvaldoSantanaNeto?action=AttachFile&do=get&target=jccpprtTR.pdf estudo] (PDF em inglês) realizado por Lutz Prechelt. 
+
+Programas escritos em Python podem ser mais lentos para executar em algumas situações, mas, em geral, levam menos tempo para implementá-los. Se o problema é realmente desempenho, deve-se implementar as partes críticas em linguagens compiladas ou até mesmo em ''assembly''. A questão é quanto do código total possui estes requisitos.
+
+=== Que empresas usam Python? ===
+
+Quanto à utilização comercial de Python: Muitas empresas de grande porte vêm adotando Python em suas linhas de desenvolvimento. A mais importante delas é o Google. Pode-se citar ainda outras: Industrial Light and Magic, NASA, Thawte, Inktomi, IBM. No Brasil: Serpro, Haxent, Async, Conectiva, Embratel, GPr, Hiperlógica. Sem falar nas que utilizam Python indiretamente, através do Zope e do Plone.
+
+Atualmente, a linguagem ocupa a sexta posição no ranking de linguagens utilizadas em projetos de Software Livre hospedados no [http://www.sourceforge.net SourceForge].
+
+Uma pergunta importante a ser feita é que empresas não usam e por quê?
+
+No site oficial do [http://www.python.org/community/users.html Python], pode-se encontrar uma lista de empresas que usam Python. Outra fonte é o [http://www.pythonology.org Pythonology].
+
+=== Que escolas/faculdades/universidades usam Python? ===
+
+São ainda poucas, mas com resultados excelentes.
+
+O IME e a POLI na USP, na UFSC, nos departamentos de Física e Matemática. Na Unicamp em cursos de extensão e na PUC-Campinas em cursos de graduação. Na Universidade Federal Rural de Pernambuco no curso de Licenciatura em Computação. O [http://napi.ucpel.tche.br NAPI] (Nucleo de Apoio a Projetos de Informática), da [http://www.ucpel.tche.br UCPel] (Universidade Católica de Pelotas), utiliza Python em grande parte dos projetos de pesquisa realizados. 
+
+Na Suíça na Fachhochschule de Zurique em cursos de Pós-Graduação.
+
+O caso mais famoso talvez seja o da Yorktown High School, Arlington, Virginia. O Prof. Jeffrey Elkner, desta escola, é um dos autores do livro ''How to Think Like a Computer Scientist - Learning with Python''.
+
+A partir deste ano, estamos introduzindo Python na disciplina de Programação I do curso de [http://www.sociesc.com.br/ensino/ist/cursos/sistemas_de_informacao.htm Bacharelado em Sistemas de Informação] do [http://www.sociesc.com.br/ensino/ist/index.htm Instituto Superior Tupy] em [http://www.joinville.sc.gov.br/ Joinville], [http://www.sc.gov.br/ Santa Catarina], substituindo o C++.
+
+Para maiores informações sobre este tema, acesse a lista [http://www.python.org/sigs/edu-sig/ EDU-SIG].
+
+=== Python é uma linguagem séria ou de brinquedo? ===
+
+As duas coisas, dependendo do ponto de vista.
+
+Python não é uma linguagem de brinquedo se isso significar que é impossível fazer aplicações de uso real com ela, como editores ou desktops. Aliás, muito pelo contrário. Diversas empresas utilizam Python de maneira 'séria' para ligar seus muitos componentes - veja o [http://www.pythonology.org Pythonology] novamente. Python é utilizada como linguagem de ''scripting'' em diversos programas sérios, como jogos, renderizadores (desses que fazem filmes de sucesso). Se Python não fosse séria - nesse sentido - a NASA e a OTAN não a usariam.
+
+Por outro lado, Python é uma linguagem de brinquedo se isso significa que é possível se divertir com ela. Python segue as definições de "brinquedo" do projetista de jogos [http://www.costik.com/ Greg Cotikyan], mas isso depende muito mais do
+estado de espírito de quem está o.
+
+Python é uma linguagem séria, ótima para quem está iniciando e, melhor ainda, poderosa para quem já é programador. Algo difícil de se obter em uma linguagem, diga-se de passagem. É possível se desenvolver qualquer tipo de aplicação em Python. É uma linguagem que dá liberdade ao programador e faz com que ele tenha que se preocupar em resolver os seus problemas e não se preocupar em deixar o compilador "feliz".
+
+Por outro lado, uma linguagem cujo nome vem de um seriado de comédia não deve ficar feliz em ser considerada uma linguagem "séria". Definitivamente ela é de brinquedo. Programa em Python é resgatar o prazer e a diversão do ato de criar e interagir.
+
+=== Dá pra escrever programas sérios com Python? ===
+
+Se você é um programador sério, sim. ;)
+
+O que existe de "programa sério" que utiliza Python não é brincadeira (perdão pelo trocadilho), o Google pode ser citado como o principal exemplo mais uma vez.
+
+Dá para escrever programas "profissionais" com Python, sendo o Zope talvez o exemplo mais notório. Além dele podemos citar: skencil, txt2tags, ERP5, Plone, Schooltool, Chandler, Plucker, ...
+
+=== Dá pra escrever programas gráficos com Python? ===
+
+Sim, e as opções são tantas que podem até atrapalhar. Pode-se utilizar quase a totalidade dos widgetsets disponíveis para Linux em Python e em Windows é possível utilizar a MFC e as APIs de mais alto nível desta plataforma.
+
+Pode-se utilizar: wxPython, PyGTk, PyQt, !PythonCard, Tkinter, !PyGlade, PMW, Kiwi, ncurses, OpenGL. Tem também: PIL, VPython.
+
+Para uma comparação mais extensa entre as diversas opções para desenvolvimento de aplicações GUI, dêem uma olhada na ["ComparaçãoDeGUIs"].
+
+Uma boa referência é o [http://www.python-eggs.org/links.html Python Eggs].
+
+O [http://www.blender3d.org Blender] é um excelente exemplo de programa gráfico que [http://projects.blender.org/softwaremap/trove_list.php?form_cat=178 utiliza python] no desenvolvimento de seu código. Permite inclusive a facilidade de se inserir plug-ins através desta linguagem.
+
+=== Ser fácil não é um problema? ===
+
+Sim e não.
+
+Sim, isto pode acontecer. Mas nada que não seja controlável. A facilidade pode gerar um péssimo hábito: o de sentar em um computador e começar a programar sem planejar ou sem de fato resolver o problema desejado antes. Mas acredito que todas as
+linguagens, mesmo as compiladas, hoje em dia, não estão livres desse problema.
+
+Se você ensina um estudante a utilizar um IDE, ele terá um botão para "compilar e executar" automaticamente o programa. É praticamente a mesma coisa. O professor portanto deve trabalhar isso com os alunos, de tal maneira que esse hábito não se desenvolva.
+
+Ser fácil pode também ser um problema para masoquistas que desejam usar Python ou não-masoquistas que insistem em não usar e ainda assim competir em tempo e qualidade com quem usa.
+
+Não. Ser fácil quer dizer que você não vai perder tempo "traduzindo mentalmente" o que pensa do problema em sua solução em Python, ou seja, você não tem muito "atrito" com a linguagem. Isto é muito importante, principalmente para cursos introdutórios.
+
+=== Os alunos não ficarão com os conceitos fracos ou mal acostumados? ===
+
+Sim e não.
+
+Sim. Os alunos tendem a ficar com alguns conceitos fracos. Isso, no entanto, não é culpa da linguagem. Os alunos que estudarem de fato vão aprender e reter os conceitos - desde que o professor não tente ensinar história da computação, programação estruturada, programação lógica e funcional, inteligência artificial e construção de compiladores em seu curso de 4 meses. Se seguir um currículo mínimo: introdução a computação e programação estruturada (''if-then-else'', laços, e conceitos básicos), os alunos que praticarem vão absorver tudo o que é ensinado.
+
+Se os alunos só aprenderem Python, as chances são maiores. Universidade não tem esse nome à toa, não existe um único conceito que se for aprendido torna todos os demais obsoletos. Python é uma excelente ferramenta, ponto final.
+
+Não. Python suporta os paradigmas estrutural, modular, funcional e Orientado a Objetos. São vários conceitos a serem explorados.
+
+Os conceitos serão ensinados. Os algoritmos podem ser explicados normalmente em Python e, mesmo que Python já disponibilize algumas estruturas de dados como listas e dicionários, é possível fazer com que o aluno reimplemente-as. Tudo depende do foco que o professor quer dar ao seu curso.
+
+Conceitos como alocação de memória, ''heap'', pilha, listas ligadas, arvores binárias podem ser explicados numa etapa mais avançada dos cursos. No início é mais interessante explica para o aluno coisas como: implementar uma calculadora pós-fixada utilizando pilha, ordenar uma lista, fazer uma pesquisa binária nessa lista, percorrer uma árvore binária, utilizando as estruturas de dados nativas de Python.
+
+=== Dá pra ensinar X usando Python? Onde X pode ser "classes", "herança", "ponteiros", "threads", "estruturas de dados", "ordenação", "recursão", "sockets", ... ===
+
+Sim, com exceção talvez de ponteiros, o que tem um lado positivo. O conceito de ''aliases'' de Python e o método de chamada (por referência) esconde bem os ponteiros. Por outro lado, é possível simular o conceito de ponteiros usando dicionários, se for realmente necessário ensinar.
+
+De maneira geral, as bibliotecas Python procuram não modificar muito o ''modus operandi'' da API C subjacente, e isso é *muito* bom. Por exemplo, quem aprende BSD/''Sockets'' em Python vai saber lidar com ''Sockets'' em C, basta conhecer as idiossincrasias do C, como ''casts'' e estruturas.
+
+Para ser justo, é possível programar sem ponteiros também em C++ (grande parte da má fama de C++ vem do seu mau uso), mas infelizmente isso não isentará o aluno de ter de aprender ponteiros, pois em alguns casos seu uso é mandatório.
+
+Certas coisas não devem ser ensinadas utilizando Python, a não ser como linguagem de prototipagem. Por exemplo, ponteiros estão muito mais relacionados com programação de sistemas em baixo nível, e Python tem como foco um nível acima. No entanto, para o estudo de algoritmos, é difícil que exista coisa melhor.
+
+Algumas estruturas de dados já consagradas são nativas em Python, mas nada impede que elas sejam reimplementadas. Além disso, existem outras estruturas de dados que não fazem parte da linguagem.
+
+=== E o mercado de trabalho pros alunos? ===
+
+Está faltando gente qualificada em Python no mercado. E quem programa em Python pode entender Zope e Plone e assim ganhar mais espaço no mercado.
+
+No que se refere a conhecimentos, quanto mais melhor! Python não vai evitar que os alunos tenham que aprender outras linguagens ou ferramentas. Estar preparado para o mercado de trabalho é ser um curioso insaciável, ter prazer em resolver os problemas da profissão (porque trabalhar é resolver problemas) e agir com humildade e respeito com seus colegas. Seguindo estas regras, alguém tem que se esforçar muito para fracassar.
+
+O mercado de trabalho funciona com uma regra simples: de demanda e oferta. As duas necessitam crescer juntas ou ocorre um desequilíbrio.
+
+Atualmente a demanda para profissionais Python vem crescendo de forma tímida por um único motivo: falta de oferta.
+
+=== Não deveríamos esperar até haver um mercado maior, para então começar a ensinar utilizando Python? ===
+
+Depende do perfil da universidade. Existem universidades que preferem '''treinar''' o aluno para o mercado de trabalho atual. Essa é uma das características das universidades que possuem cursos de 2 anos.
+
+Por outro lado existe um outro tipo de universidade, que prefere '''preparar''' melhor o aluno e torná-lo apto a se adaptar ao mercado de forma muito mais eficiente. A não muitos anos atrás, existiam universidades que treinavam seus alunos para desenvolver software em Clipper e não em Pascal (por exemplo). A explicação para isso é a de que o mercado pedia Clipper. Quando o Delphi da Borland surgiu, quem se adaptou melhor? O aluno que aprendeu Clipper solicitado pelo mercado ou o
+aluno que aprendeu os fundamentos da programação em Pascal?
+
+As universidades deveriam estar a vários passos adiante do mercado, pois a função delas é a de '''preparar''' os alunos para o futuro e não '''treiná-los''' para o mercado.
+
+=== Que livros e outras bibliografias existem sobre Python? ===
+
+Além da documentação oficial, existem vários livros:
+
+   * [http://greenteapress.com/thinkpython.html How to Think Like a Computer Scientist - Learning with Python]
+   * [http://www.oreilly.com/catalog/lpython/ Learning Python]
+   * [http://www.oreilly.com/catalog/pythonwin32/ Python Programming on Win32]
+   * [http://www.oreilly.com/catalog/pythonian/ Python in a Nutshell]
+   * [http://starship.python.net/crew/wesc/cpp/ Core Python]
+   * [http://www.oreilly.com/catalog/pythoncook/ Python Cookbook]
+   * [http://vig.prenhall.com/catalog/academic/product/1,4096,0130923613,00.html Python How to Program]
+   * [http://www.mindview.net/Books/TIPython Thinking in Python]
+   * [http://novateceditora.com.br/guias/python/ Python - Guia de Consulta Rápida], da Novatec (Em português)
+   * [http://www.fca.pt/cgi-bin/fca_detalhado.cgi/?isbn=972-722-270-6 Python - Curso Completo]
+
+Documentacao existente na Internet:
+
+Em Português:
+
+   * [http://pensarccpy.incubadora.ansp.br PensarCCPy] - Tradução em andamento do ''"How to Think Like a Computer Scientist - Learning with Python"'', para o português.
+
+Uma boa relação está disponível aqui em DocumentaçãoPython.
+
+Além disto, o Osvaldo está escrevendo um livro sobre Python.
+
+=== Onde posso tirar minhas dúvidas? ===
+
+   * Documentação que vem junto com a linguagem
+   * O verdadeiro oráculo moderno: http://www.google.com
+   * python-list@python.org (inglês)
+   * python-brasil@yahoogrupos.com.br (português)
+   * http://www.pythonbrasil.com.br (português)

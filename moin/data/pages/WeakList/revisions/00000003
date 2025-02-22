@@ -1,0 +1,290 @@
+= Receita: Weak List =
+
+O módulo weakref contém duas implementações de weakdicts, dicionários que não aumentam a contagem de referências dos objetos: um que usa weakrefs para valores e o outro para chaves. Essa receita traz a implementação de uma weaklist, que você pode usar em situações que precise armazenar objetos sem aumentar sua contagem de referências. Caches de objetos e listas de clientes de um servidor são um bom exemplo.
+
+== Código ==
+
+{{{
+#!python
+
+import weakref
+
+
+class WeakList(list):
+
+    def __add__(self, y):
+        l = [i() for i in self]
+        return list.__add__(l, y)
+
+    def __contains__(self, y):
+        ref = weakref.ref(y)
+        return list.__contains__(self, ref)
+
+    def __eq__(self, y):
+        l = [i() for i in self]
+        return list.__eq__(l, y)
+
+    def __repr__(self):
+        return "<WeakList at %s>" % id(self)
+
+    def __getitem__(self, i):
+        ref = list.__getitem__(self, i)
+        return ref()
+
+    def __setitem__(self, i, y):
+        ref = weakref.ref(y)
+        list.__setitem__(self, i, ref)
+    
+    def append(self, y):
+        list.append(self, weakref.ref(y))
+
+    def count(self, y):
+        l = [x() for x in self]
+        return list.count(l, y)
+
+    def extend(self, y):
+        for o in y:
+            list.append(self, weakref.ref(o))
+
+    def index(self, y):
+        ref = weakref.ref(y)
+        return list.index(self, ref)
+
+    def insert(self, i, y):
+        ref = weakref.ref(y)
+        list.insert(self, i, ref)        
+
+    def pop(self):
+        ref = list.pop(self)
+        return ref()
+
+    def remove(self, y):
+        ref = weakref.ref(y)
+        list.remove(self, ref)
+
+    def sort(self, cmpfunc=None):
+
+        if cmpfunc is None:
+            def n_cmpfunc(x, y):
+                if x() >  y(): return 1
+                if x() == y(): return 0
+                if x() <  y(): return -1
+            
+        else:
+            def n_cmpfunc(x, y):
+                return cmpfunc(x(), y())
+
+        list.sort(self, n_cmpfunc)    
+
+}}}
+
+== Teste ==
+
+{{{
+#!python
+
+
+import unittest
+import weaklist
+import weakref
+import random
+
+
+class Object(object):
+    pass
+
+class TestWeakList(unittest.TestCase):
+    def setUp(self):
+        self.list = weaklist.WeakList()
+
+    def tearDown(self):
+        del self.list
+
+    def testAttributes(self):
+        for attr in dir(list):
+            self.assert_(attr in dir(self.list))
+
+    def testSetItem(self):
+        o = Object()
+        list.append(self.list, None)
+        self.list[0] = o
+        self.assert_(list.__getitem__(self.list, 0)() is o)
+
+    def testGetItem(self):
+        o = Object()
+        list.append(self.list, weakref.ref(o))
+        self.assert_(self.list[0] is o)
+
+    def testDelItem(self):
+        o = Object()
+        ref = weakref.ref(o)
+        list.append(self.list, ref)
+        del self.list[0]
+        self.assert_(not list.__contains__(self.list, ref))
+                          
+    def testAppend(self):
+        o = Object()
+        self.list.append(o)
+        self.assert_(list.pop(self.list)() is o)
+
+    def testCount(self):
+        a = Object()
+        b = Object()
+        c = Object()
+        y = {3:a, 5:b, 8:c}
+
+        for n, o in y.items():
+            for x in range(n):
+                list.append(self.list, weakref.ref(o))
+
+        for n, o in y.items():
+            x = self.list.count(o)
+            self.assertEqual(x, n)
+
+    def testExtend(self):
+        l = [Object() for x in range(10)]
+        o = Object()
+        list.append(self.list, weakref.ref(o))
+        self.list.extend(l)
+        self.assertEqual(list.__len__(self.list), 11)
+        for x in range(10):
+            self.assert_(list.pop(self.list)() is l.pop())
+        self.assert_(list.pop(self.list)() is o)
+
+    def testIndex(self):
+        l = [weakref.ref(Object()) for x in range(10)]
+        o = Object()
+        ref = weakref.ref(o)
+        list.extend(self.list, l)
+        list.__setitem__(self.list, 4, ref)
+        self.assertEqual(self.list.index(o), 4)
+
+    def testInsert(self):
+        l = [weakref.ref(Object()) for x in range(10)]
+        list.extend(self.list, l)
+        o = Object()
+        self.list.insert(5, o)
+        self.assert_(list.__getitem__(self.list, 5)() is o)
+
+    def testPop(self):
+        o = Object()
+        list.append(self.list, weakref.ref(o))
+        self.assert_(self.list.pop() is o)
+
+    def testRemove(self):
+        l = [weakref.ref(Object()) for x in range(10)]
+        list.extend(self.list, l)
+        o = Object()
+        ref = weakref.ref(o)
+        list.insert(self.list, 7, ref)
+        self.list.remove(o)
+        self.assert_(not list.__contains__(self.list, ref))
+
+    def testReverse(self):
+        a, b, c = Object(), Object(), Object()
+        for o in a, b, c:
+            list.append(self.list, weakref.ref(o))
+        self.list.reverse()
+        for o in a, b, c:
+            self.assert_(list.pop(self.list)() is o)
+
+    def testSortWithFunc(self):
+        l = []
+        f = []
+        for x in range(10):
+            o = Object()
+            o.i = x
+            f.append(o)
+            l.append(weakref.ref(o))
+        random.shuffle(l)
+
+        list.extend(self.list, l)
+
+        def cmpfunc(x, y):
+            if x.i > y.i: return 1
+            if x.i == y.i: return 0
+            if x.i < y.i: return -1
+
+        self.list.sort(cmpfunc)
+        for x in range(10):
+            self.assert_(list.pop(self.list)() is f.pop())
+
+    def testSortWithoutFunc(self):
+
+        class Object(object):
+            def __init__(self, i):
+                self.i = i
+                
+            def __lt__(self, other):
+                return self.i < other.i
+
+            def __le__(self, other):
+                return self.i <= other.i
+
+            def __eq__(self, other):
+                return self.i == other.i
+
+            def __ne__(self, other):
+                return self.i != other.i
+
+            def __gt__(self, other):
+                return self.i > other.i
+
+            def __ge__(self, other):
+                return self.i >= other.i
+        
+        l = []
+        f = []
+        for x in range(10):
+            o = Object(x)
+            f.append(o)
+            l.append(weakref.ref(o))
+        random.shuffle(l)
+
+        list.extend(self.list, l)
+
+        self.list.sort()
+        for x in range(10):
+            self.assert_(list.pop(self.list)() is f.pop())
+
+    def testAdd(self):
+        o = Object()
+        list.append(self.list, weakref.ref(o))
+        l = [1, 2]
+        f = self.list + l
+        self.assert_(o in f)
+
+    def testContains(self):
+        o = Object()
+        list.append(self.list, weakref.ref(o))
+        self.assert_(o in self.list)
+
+    def testDelSlice(self):
+        l = [Object() for x in range(10)]
+        f = [weakref.ref(o) for o in l]
+
+        list.extend(self.list, f)
+        del l[2:6]
+        del self.list[2:6]
+        while l:
+            self.assert_(l.pop() is list.pop(self.list)())
+
+    def testEq(self):
+        l = [Object(), Object(), Object()]
+        for o in l:
+            list.append(self.list, weakref.ref(o))
+        self.assert_(self.list == l)
+        self.assert_(l == self.list)
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+}}}
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

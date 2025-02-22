@@ -1,0 +1,47 @@
+Se você encontrou um erro do tipo "EncodeError: 'ascii' codec can't encode character ?? in position 2: ordinal not in range(128)" e não sabe o que fazer, então está na hora de aprender um pouquinho sobre o unicode.
+
+Neste mundo globalizado a idéia básica é que todo dado que seja "Texto" para ser compreendido tem que ter junto sua codificação. Uma cadeia de caracteres só é um texto se tiver uma codificação  junto. Se você ler um texto (como um input de usuário) e não especificar a codificação, estará usando a default, provavelmente ASCII. Esta não tem acento nenhum e só define os 128 primeiros caracteres. Se aparecer o número 128 em alguma mensagem de erro é porque o ASCII está envolvido:-)
+
+A idéia básica de usar unicode é :
+
+ 1. Você lê um dado codificado para seu programa e ao ler converte-o para unicode (decodifica ele).
+ 2. Todo o processamento dentro do seu programa é feito com o texto em unicode.
+ 3. Na hora de exportar para um arquivo, tela ou transmitir, você tem que codificá-lo para o codec apropriado.
+
+O problema em 3) é que se seu codec pode ter caracteres que não existem no codec para o qual vc está querendo resolver. A solução mais usada é sempre usar o codec UTF-8, que é compatível com o ASCII (os 128 primeiros caracteres são os mesmos) e suporta todos os carateres definidos no unicode.
+
+Independentemente de como você lê os dados para seu programa, é preciso saber o codec em que ele vem e decodificá-lo:
+
+{{{
+>>> inputUsuario = "João Ângelo"
+>>> inputUsuario.decode("iso8859-1")
+u'Jo\xe3o \xc2ngelo'
+>>> input = inputUsuario.decode("iso-8859-1")
+>>> print input.encode('iso8859-1')
+João Ângelo
+}}}
+
+O que vc vai usar para decodificar o input do usuário vai depender do ambiente de entrada e saída de dados. Normamente o iso8859-1 ou o UTF8 vão resolver. Lembre-se que você tem que saber o codec de todo texto.
+
+== O codec do seu código ==
+
+Com esta linha no início de seus programas:
+{{{# -*- coding: iso-8859-1 -*-}}}
+
+você está dizendo é o codec do texto do seu próprio código fonte, não do input do usuário. Já falei que para ser corretamente interpretado todo texto tem que ter um codec associado? Este é o codec do seu código fonte.  Com isto você poderá ter strings hardcoded no seu código que serão interpretadas corretamente.
+
+Eis algumas boas referências (em inglês) sobre o assunto:
+
+All About Python and                                                      Unicode
+http://boodebr.org/main/python/all-about-python-and-unicode traduzido em TudoSobrePythoneUnicode
+
+Joel on Software - The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)
+http://www.joelonsoftware.com/articles/.html
+
+== Artigos e posts escripts pela comunidade ==
+
+ * [[http://wiki.python.org.br/TudoSobrePythoneUnicode|Tudo sobre Python e Unicode]]
+
+ * Por que UTF-8 e não ASCII para o Português? [[http://junglecoders.blogspot.be/2012/07/por-que-utf-8-e-nao-ascii-para-o.html|Parte I]] [[http://junglecoders.blogspot.be/2012/08/por-que-utf-8-e-nao-ascii-para-o.html|Parte II]] por NiloMenezes
+
+ * [[http://blog.renzo.pro.br/2015/08/strings-em-python.html|Strings em Python]] por RenzoNuccitelli

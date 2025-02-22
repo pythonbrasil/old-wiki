@@ -1,0 +1,79 @@
+== Informações ==
+Catálogos para traduzir o [http://www.pygtk.org/tutorial.html Tutorial PyGTK 2.x].
+
+Os arquivos estão hospedados no [http://pygtk-br.googlecode.com/svn/ servidor SVN] do [http://code.google.com/p/pygtk-br/ projeto de tradução], no Google Code.
+
+Para criar uma cópia local execute o seguinte comando:
+
+{{{
+svn checkout http://pygtk-br.googlecode.com/svn/trunk/ pygtk-br
+}}}
+Interessado em ajudar? Participe do nosso [http://groups.google.com.br/group/pygtk-br?hl=pt-BR grupo PyGTK-BR] e peça o seu registro no SVN.
+
+'''''Observação:''' Os arquivos usam codificação UTF-8.''Qualquer dúvida entre em contato com Airton Arantes  Gtalk/Messenger airton.arantes[at]gmail.com ou visite a lista de discussão em http://groups.google.com.br/group/pygtk-br?hl=pt-BR.
+
+== Material ==
+ * Inglês:[http://www.moeraki.com/pygtktutorial/pygtk2tutorial/index.html PyGTK-en]
+ * Espanhol:[ http://pygtk.org/pygtk2tutorial-es/index.html PyGTK-es ]
+[[TableOfContents]]
+
+== Capítulo 1 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsao ||
+||1.1 Explorando o PyGTK ||MayronCachina ||Concluído ||
+== Capítulo 2 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+||2. Iniciando ||EliezerRiani ||Concluído ||
+||<style="vertical-align: top;">2.1.              Hello World em PyGTK ||<style="vertical-align: top;">EliezerRiani ||<style="vertical-align: top;">Concluído ||
+||<style="vertical-align: top;">2.2.              Teoria dos Sinais e Callbacks ||<style="vertical-align: top;">EliezerRiani ||<style="vertical-align: top;">Concluído ||
+||<style="vertical-align: top;">2.3. Eventos ||<style="vertical-align: top;">EliezerRiani ||<style="vertical-align: top;">Concluído ||
+== Capítulo 3 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+||<style="vertical-align: top;">3.0 Moving On ||<style="vertical-align: top;">DanielCassiano ||<style="vertical-align: top;">Concluído ||
+||3.1 Mais sobre Signal Handlers (Manipuladores de Sinais) ||DanielCassiano ||Concluído ||
+||3.2 Um Hello World atualizado ||DanielCassiano ||Concluindo... ||
+== Capítulo 4 ==
+||<tablewidth="255px" tableheight="58px">Seção ||Tradutor ||Previsão ||
+||<style="vertical-align: top;">4.1 ||<style="vertical-align: top;">AirtonArantes ||<style="vertical-align: top;">28/12/07 ||
+||<style="vertical-align: top;">4.2 ||<style="vertical-align: top;">AirtonArantes ||<style="vertical-align: top;">28/12/07 ||
+||<style="vertical-align: top;">4.3. Programa de Demonstração de Empacotamento ||<style="vertical-align: top;">IgorMontagner ||<style="vertical-align: top;">Concluído ||
+== Capítulo 5 ==
+||<style="vertical-align: top;">5.1 ||<style="vertical-align: top;">LeonardoAndrade ||<style="vertical-align: top;">21/01/08 ||
+||<style="vertical-align: top;">5.2 ||<style="vertical-align: top;">LeonardoAndrade ||<style="vertical-align: top;">21/01/08 ||
+== Capítulo 6 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+||<style="vertical-align: top;">6. O Elemento Button ||<style="vertical-align: top;">MarceloAndrade ||<style="vertical-align: top;">Concluído ||
+||<style="vertical-align: top;">6.1. Botões Normais ||<style="vertical-align: top;">MarceloAndrade ||<style="vertical-align: top;">Concluído ||
+||<style="vertical-align: top;">6.2. Botões de Pressão ||<style="vertical-align: top;">MarceloAndrade ||<style="vertical-align: top;">Concluído ||
+== Capítulo 7 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+||7.1 Creating and adjustment || MarceloAndrade || Estimando... ||
+||7.2. Using Adjustments the Easy Way || MarceloAndrade || Estimando... ||
+||7.3. Adjustment Internals || MarceloAndrade || Estimando... ||
+== Capítulo 8 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 9 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 10 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 11 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 12 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 13 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 14 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||

@@ -1,0 +1,56 @@
+#pragma section-numbers off
+
+= Colaborações =
+
+Algumas das minhas colaborações relacionadas à linguagem Python
+
+== Projetos ==
+
+ * PythonDoc - Projeto de tradução da documentação oficial da linguagem Python para o Português.
+
+ * HoneyPython - Framework de rede assíncrono para a criação de Honeypots (originalmente criado para o projeto Honeypot-BR http://www.honeypot.com.br).
+
+
+== Artigos ==
+
+ * TestDrivenDevelopment - Artigo sobre um dos aspectos da metodologia Extreme Programming e exemplos de como adotar unittests em seu código.
+
+ * ReferênciasCruzadas - Como evitar problemas com referências circulares usando os módulos weakref e gc.
+
+ * ["ComparacaoDeGUIs"] - Breve análise, vantagens, desvantagens e outros detalhes das principais bibliotecas para desenvolvimento de interfaces gráficas disponíveis para Python.
+
+
+== Traduções ==
+
+ * UnificandoTiposClasses - Tradução de artigo de Guido Van Rossum sobre as alterações radicais feitas na linguagem na versão 2.2.
+
+ * GuiaDeEstilo - Tradução da PEP-8 - Python Style Guidelines para o Português. Dicas e convenções usadas na edição e formatação de código em Python.
+
+
+== Cookbook ==
+
+ * MapeandoErrosParaExceções - Uma idéia para mapear códigos de erro do sistema operacional para exceções.
+
+ * MonitorandoSocketsComPyGtk - Exemplo de como usar as funções de monitorar IO embutidas em PyGTK para manipular sockets e arquivos de forma assíncrona.
+
+ * MonitorandoSocketsComTkinter - A mesma idéia do exemplo anterior, porém usando Tkinter.
+
+ * VerificadorDeCpf - Módulo contendo funções e classe para verificação de números de CPF.
+
+ * WeakList - Especialização da classe List para que não incremente a contagem de referências dos objetos contidos nela.
+
+ * ([http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/202052 Moving Geometry Methods in Tkinter]) - Como criar um novo componente em Tkinter através da união de componentes existentes, mantendo a utilização dos métodos uniforme 
+
+
+= Contato =
+
+Através dos e-mails: 
+
+pedro.werneck em terra.com.br
+pedro.werneck em bol.com.br
+
+Do ICQ: 35797487
+
+Costumo frequentar os canais de IRC: #python-br em irc.freenode.org e  #python em irc.brasnet.org
+
+E meu blog em http://diaspar.blogspot.com, embora não seja específico sobre o assunto, costumo comentar algo sobre Python por lá.

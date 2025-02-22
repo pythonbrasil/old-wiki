@@ -1,0 +1,38 @@
+Para quem já tentou trabalhar com arquivos CSV no Python, pode te tido algum tipo de problema ao ler .csv gerados em plataforma Windows.
+
+Acontece, que criando o arquivo pelo notepad (por exemplo), ele insere no cabeçalho o Byte-Order Marker (BOM) para identificar que esse tipo de arquivo é UTF8, mas consequentemente, sabemos também que foi gerado no Windows (uma vez que apenas ele insere esse byte). Sendo assim, ao ler com a biblioteca do CSV do Python, ele dá um erro logo no primeira linha - consequência do byte -. Abaixo, um código encontrado na web e que realmente resolve o problema, infelizmente não tenho exatamente como dar os crédito pois não consegui claramente o criador do código.
+
+== Código ==
+{{{#!python
+import os, codecs, csv, pdb
+def byPassBombChar(filename, mode='r', encoding = 'utf-8'):
+
+	hasBOM = False
+	if os.path.isfile(filename):
+		f = open(filename,'rb')
+		header = f.read(4)
+		f.close()
+
+		# Don't change this to a map, because it is ordered
+		encodings = [ ( codecs.BOM_UTF32, 'utf-32' ),
+			( codecs.BOM_UTF16, 'utf-16' ),
+			( codecs.BOM_UTF8, 'utf-8' ) ]
+
+		for h, e in encodings:
+			if header.startswith(h):
+				encoding = e
+				hasBOM = True
+				break
+
+	f = codecs.open(filename,mode,encoding)
+	# Eat the byte order mark
+	if hasBOM:
+		f.read(1)
+	return f
+
+if __name__ == "__main__":
+    fpath = "/home/sua.pasta/arquivo_teste.csv"
+
+    for row in csv.reader(byPassBombCharWithFile(open(fpath))):
+        print row
+}}}

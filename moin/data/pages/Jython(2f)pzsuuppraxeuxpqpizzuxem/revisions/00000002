@@ -1,0 +1,29 @@
+“Jython, para você que não sabe disso, é simplesmente a arma mais convincente que a plataforma Java possui para a sua sobrevivência no século XXI”SeanMcGrath
+
+Jython surgiu da união entre a linguagem Python e o JVM(Java Virtual Machine), por isso seu nome Jython. Mas para que possamos entender melhor, devemos separar a linguagem de programação Java da plataforma Java. Primeiro temos como característica essencial da linguagem o fato de ser orientada a objetos. Para quem não sabe, a POO(Programação Orientada a Objetos) é um paradigma de programação que permite o desenvolvimento de sistemas de forma rá pida, limpa, e reutilizável, cenário favorável ao ambiente de softwares atuais.
+
+Além do Java e do Python serem orientados a objetos, os dois não geram binários nativos como resultado de compilação, geram os bytecodes. Os bytecodes são equivalentes aos binários de qualquer máquina, porém são específicos para serem executados na plataforma Java.
+
+A plataforma Java é uma camada de API’s padronizada que realiza a execução destes bytecodes independente da plataforma nativa, como se fosse uma máquina virtual. Portanto, compilando um programa feito na linguagem Java é possível executá-lo em várias máquinas físicas de arquiteturas diferentes, desde que a plataforma Java esteja instalada. O problema é que a linguagem Java, por ser derivada do C++, não é um linguagem fácil de trabalhar. O Jython surge como uma solução, possibilitando que programadores utilizem a linguagem Python para desenvolver (até 8x mais rápido que a linguagem Java) programas para o JVM. Com o Python é possível ter acesso a todos os recursos e bibliotecas da plataforma e ainda compilar o bytecode. Além disso a integração que o Jython faz com o JVM é melhor que a própria linguagem Java, ao contrário do que muitos pensam. Em se tratando de compiladores, a idéia de que um programa compilado numa máquina possa ser executado em qualquer outra que tenha o JVM sem precisar recompilá-lo é fantástica. Isto pode não fazer diferença para programas pequenos visto que o tempo de compilação é curto e tanto faz compilá-los várias vezes para poder executá-los. Mas em se tratando de aplicações robustas, uma única compilação pode demorar dias e compilar os mesmos várias vezes para executá-los em máquinas diversas é custoso, daí a grande vantagem de desenvolver softwares para o JVM.
+
+Existem inúmeras outras linguagens alternativas implementadas para o JVM. A seguir são citados algumas características que justificam usar o Jython ao invés de outras:
+
+• “Compilação dinâmica para bytecodes Java, melhor desempenho sem sacrificar a interatividade”[http://wiki.python.org/jython/WhyJython]
+
+• Permite a extensão e o uso eficaz de classes abstratas Java em Jython
+
+• Compilação estática opcional – permite a criação de applets(softwares que são executados num contexto de outro programa), servlets(componentes do lado servidor que gera dados HTML/XML para a camada de apresentação de um aplicativo web), e beans(componentes reutilizáveis de software que podem ser modificados visualmente por uma ferramenta de desenvolvimento).
+
+• “Propriedades Beans – faz usos de pacotes Java de forma muito mais fácil.” [http://wiki.python.org/jython/WhyJython]
+
+• Linguagem Python - a sintaxe combina clareza com um poder notável. Por se tratar de uma linguagem orientada a objetos completa, é uma escolha natural para projetos OO em Java.
+
+O que o Jython faz bem:
+
+• Prototipagem – processo de criação de modelos de software que fazem parte da análise do ciclo de vida no desenvolvimento de sistemas.
+
+Quer aprender mais:
+
+http://wiki.python.org/jython/WhyJython http://pt.wikipedia.org/wiki/Applet
+
+http://pt.wikipedia.org/wiki/Servlet http://pt.wikipedia.org/wiki/JavaBeans http://pt.wikipedia.org/wiki/Ferramentas_de_Prototipagem

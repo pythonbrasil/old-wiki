@@ -1,0 +1,10 @@
+## page was renamed from BoaConstructorLinux
+== BoaConstructorLinux ==
+
+Recebi um Email sobre um possível BUG no Boa Constructor, quando um desenvolvedor estava criando o seu software no Windows, usando:
+
+  * Python
+  * wxPython
+  * BoaConstructor
+
+Quando este desenvolvedor foi verificar o software no linux, alguns controles não funcionaram tão perfeitamente. Estarei disponibilizando (em breve) os tipos de erros com os screenshots para que possamos, quem sabe, regularizar este impasse.

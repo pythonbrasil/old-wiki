@@ -1,0 +1,25 @@
+#pragma section-numbers off
+= Receita: StripHtml =
+
+Remove todo o html de uma determinada string.
+
+== Código ==
+
+{{{
+#!python
+def strip_html(text):
+    """
+    Remove all html tags from a given string.
+    """
+    import re
+    s = re.sub( '<[^>]*>', '', text)
+    print s
+    
+}}}
+
+
+Volta para CookBook.
+
+----
+
+ralobao

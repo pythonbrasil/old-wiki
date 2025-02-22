@@ -1,0 +1,15 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== @``ME@ ==
+
+Entusiasta da computação interessado por sistemas operacionais, Python, desenvolvimento de jogos e outras coisas mais. 
+
+Site pessoal: http://vinicius.oitobits.net
+Email: <<MailTo(you AT SPAMFREE example DOT com)>>
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+
+...
+
+----
+CategoryHomepage

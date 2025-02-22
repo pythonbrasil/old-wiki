@@ -1,0 +1,241 @@
+= Principios da Programação Funcional em Python =
+''' # E alguns Linguagismos Pythonicos sobre Funções em geral ;) '''
+
+[[TableOfContents]]
+
+== Introdução ==
+
+O conceito de funções em programação vem da matemática. Uma função serve para relacionar um conjunto (chamado de domínio) a outro (Imagem). Em programação, o domínio de uma função seriam os valores que pode-se passar como argumentos, e a Imagem é o conjunto dos possíveis valores de retorno. Para cada elemento no conjunto Domínio, deve haver apenas um elemento correspondente no conjunto imagem. Em programação funcional (e na matemática) esse é o princípio de idempotência, ou seja, para determinado valor de argumento só há uma possibilidade de retorno a cada vez que se passar um este valor como argumento.
+
+Esse conceito foi introduzido na programação no final dos anos 50 pela linguagem Lisp, numa época em que a linguagem de mais alto nível que existia era o primeiro Fortran. Muitas linguagens desde então sofreram algum tipo de influência de Lisp e seus idiomas, direta ou indiretamente. Inclusive Python, que, por exemplo, tem um '''tipo''' função.
+
+Segundo o artigo da Wikipedia [http://en.wikipedia.org/wiki/Python_programming_language#Philosophy Python programming language - seção "Philosophy"], Python é uma linguagem multiparadigma. Então por que não aprender mais um? :)
+
+== Definindo Funções em Python ==
+
+Antes de explorar os conceitos funcionais, vamos deixar os mecanismos de PYthon para criação e uso de funções bem claros.
+
+As funções em Python são definidas através da palavra chave def. Sua sintaxe é a seguinte:
+{{{
+#!python
+def NomeDaFuncao(arg1, arg2, argn):
+    <codigo>
+    return NomeDoObjetoARetornar
+}}}
+
+=== Argumentos ===
+
+Em Python, os argumentos podem ou não ter um valor inicial. Quando se dá um valor inicial na definição, não é obrigatório passar nenhum valor para esse argumento na chamada da função.
+{{{
+#!python
+def foo(a=1, b=2):
+    return a+b
+}}}
+''Na função foo, a e b são argumentos não obrigatorios''
+
+{{{
+#!python
+def bar(a, b):
+    return a+b
+}}}
+''Na função bar, a e b são argumentos obrigatorios''
+
+Ao contrário de algumas linguagens que não lhe permitem passar uma matriz como argumento, Python não faz restrições quanto a passar uma sequência (strings, listas, tuplas, unicodes) como argumento.
+{{{
+#!python
+def spam(x=[1, 2, 3]):
+    if isinstance(x, list):
+        return "É possível passar uma lista como argumento em Python!"
+}}}
+
+Você também pode definir um argumento precedido de um * (asterisco), para "capturar" o resto dos argumentos numa tupla (Ficando uma função com número de argumentos variável).
+{{{
+#!python
+# Esta função é levemente semelhante ao "cdr" do lisp, mas o cdr do Lisp recebe uma lista
+# Esta recebe o que seriam os elementos da lista
+def cdr(arg1, *argN):
+    "Retorna tupla com os argumentos, excluindo o primeiro"
+    return argN
+}}}
+
+Você pode, ainda, usar ** antes de um argumento na definição da função. #Explicar esse truque! preciso de uma explicação melhor!
+{{{
+<exemplos>
+}}}
+
+Você pode ainda se aproveitar do polimorfismo da linguagem e permitir que sejam passados "tipos afins", como tipos que podem ser usados numa iteração, e não só um tipo, como lista por exemplo, aumentado a possibilidade de reuso do código.
+
+=== Retornando valores ===
+
+Você também pode retornar qualquer objeto (até mesmo uma função) de uma função.
+{{{
+#!python
+def RetornaFuncao(x=type):
+    return x
+
+RetornaFuncao()(list)
+}}}
+''Nesse exemplo, a ultima linha deve retornar <type 'type'>, por que list é um tipo''
+
+Sua função pode ainda ter varias vezes a palavra return.
+{{{
+#!python
+def isDead(parrot):
+    "Retorna True se parrot avaliar como False"
+    if not obj:
+        return True
+    else:
+        return False
+}}}
+
+Caso existam ''return''s alinhados, no mesmo bloco, apenas o primeiro funcionará:
+{{{
+#!python
+def DoisReturns(x, y):
+    return x
+    return y
+}}}
+
+Python permite que sejam criadas funções HighOrder, ou seja, uma funções que recebem como argumento ou retornam outras funções. Isso é especialmente interessante de ser usado em conjunto com @Decorators.
+{{{
+#!python
+}}}
+
+
+== Chamadas de Função ==
+
+Na hora de chamar uma função, você pode passar como argumento outra chamada de função, e será passado o valor de retorno dessa. Assim os valores fluirão de uma função para outra, sem necessidade uma variável de "transporte".
+{{{
+#!python
+#Exemplo mais inútil impossível, mas espero que você pegue a idéia :)
+range(sum([0, 1, 2]))
+}}}
+
+Entre outras coisas "pensar funcionalmente" pode ser definido assim: projetar algoritmos onde os valores fluem do retorno de uma função para a chamada de outra.
+
+Você pode usar um asterisco antes de um argumento na chamada da função para passar os argumentos da função atravez de uma lista. 
+{{{
+#!python
+#lembra do nosso cdr?
+cdr(*range(5))
+}}}
+
+== "Side-Effects" ==
+
+"Side-Effect", ou algo como 'efeito colateral', é um termo usado para indicar que uma função faz uma operação ''' "destrutiva" ''', ou seja, ela altera, por exemplo, o valor de um objeto global, ou faz alguma operação de IO.
+{{{
+#!python
+x = 1
+def our_double_a():
+    global x
+    x += x
+
+our_double_a()
+print x
+#Isso deve imprimir 2 n tela
+}}}
+{{{
+#!python
+def our_double_b(y):
+    y += y
+    return y
+#Se o que quisermos e apenas alterar o valor de x...
+x = 1
+x = our_double_b(x)
+#Se o que quisermos e apenas imprimir o valor de retorno...
+x = 1
+print our_double_b(x)
+}}}
+
+Evite Side-Effects em suas funções. Sua função fica mais difícil de se adivinhar o que faz do que se você retornasse um valor que pudesse ser explicitamente atribuído a um nome. Procure usar sempre os argumentos e os returns. Seguindo essa regra suas funções serão inclusive mais uteis em outras ocasiões (maior reaproveitamento de código)
+
+Por exemplo, na nossa função "our_double_a" é difícil de imaginar que ela alteraria o valor de x. Além disso, ela fica limitada a isso: alterar o valor do nome x. Compare com a função our_double_b: fica claro quando eu estou alterando o valor de x ou não.
+
+Se você realmente pretende fazer uma função que tem Side-Effects, deixe isso bem claro no nome (adicionando um prefixo "set" e o que ele "seta", com "setName", por exemplo) e na docstring da função.
+{{{
+<exemplo>
+}}}
+
+== Recursão ==
+
+Uma função que chama a si mesma é uma função recursiva.
+
+Muitas pessoas acham extremamente complicado aplicar o conceito de recursão, muitos alunos de programação não conseguem desenvolver algoritmos recursivos sem gastar **muito** grafite e papel antes. Muitos programadores acostumados com paradigmas estruturados também tem essa dificuldade, A maioria dos programadores evitam implementações recursivas de seus algoritmos, por motivos de performance também, mas muitas vezes nem percebemos que um código poderia usar recursão.
+
+Certas linguagens funcionais, como Scheme, prevêem até mesmo que seus interpretadores tenham algum tipo de otimização de recursão.
+
+Pergunte a um estudante dedicado de programação "Quando colocar um trecho de código em um bloco separado?" e ele dirá algo como "Quando o código se repete". Mas quando o código se repete sucessivamente, normalmente usamos '''for''' ou '''while'''. Quando não houverem grandes problemas para a performance, a recursão pode valer a pena se trouxer um melhor estilo.
+
+{{{
+#!python
+def factorial(x):
+    if x == 0:
+        return 1
+    else:
+        return x * factorial(x-1)
+}}}
+
+No livro capitulo 2.7 [http://www.paulgraham.com/lib/paulgraham/acl2.txt ANSI Common Lisp], ''Recursion'',  PaulGraham diz: (livre tradução)
+
+''
+(...)
+Muitas pessoas pessoas acham difícil a recurção no inicio. Muita dessa dificuldade vem do uso de uma metafora enganosa para funções. Há uma tendencia a pensar em funções como um tipo de maquinas. Matéria prima entra como os parâmetros; Algumas tarefas são repassadas para outras funções; finalmente o produto acabado é montado e entregue como o valor de retorno. se nós usarmos essa metáfora para funções, a recursão se torna um paradoxo. Como uma maquina pode enviar tarefas para ela mesma? Ela já esta ocupada.''
+
+''Uma melhor metáfora para a função seria pensar nela como um processo que se passa. Recursão é natural em um processo(...)''
+
+== Closures ==
+
+Python suporta Closures (ou [http://en.wikipedia.org/wiki/Closure_%28computer_science%29 lexical closures]) desde a versão 2.0, atravéz dos recurso de '''Nested Scopes'''.
+
+Exemplo:
+
+{{{#!python
+<exemplo>
+}}}
+
+== Estilo ==
+
+Procure usar o caracter \ para quebrar a linha e evitar linhas muito longas e ilegiveis. 
+Exemplo:
+{{{
+#!python
+function1(\
+	  function11("foo"),\
+	  function12(\
+		     function121(1, "bar"),\
+		     function122("foobar")),\
+	  function13(84))
+}}}
+
+= Conclusão =
+
+= Links =
+
+== Na Wiki ==
+PythonFuncional
+
+ProgramacaoFuncional
+
+UsandoGenerators
+
+== No resto da Web ==
+[http://diveintopython.org/functional_programming/index.html Dive into Python - Chapter 16. Functional Programming]
+
+[http://en.wikipedia.org/wiki/Python_programming_language#Functional_programming Wikipedia - Python programming language - Functional programming]
+
+[http://c2.com/cgi/wiki?HigherOrderFunction C2 Wiki - Higher Order Function]
+
+[http://en.wikipedia.org/wiki/Python_programming_language#Functional_programming Python na Wikipedia - Seção Functional Programming]
+
+= Por fazer: =
+ * Adicionar Links para trechos afins do DiveIntoPython, Thinking Like a Computer Scientist, etc
+ * Adicionar mais exemplos! (de preferência tirados do UselessPython !!)
+ * Mais exemplos, mais exemplos!!! De preferência, alguns úteis ou interessantes :)
+ * Mais sobre HighOrder functions, quem sabe uma seção própria?
+ * Concluir a seção sobre  ''Closures'', com exemplos.
+ * Citar e exemplificar o {{{lambda}}}
+ * Uma seção somente com ''Exemplos Práticos''.
+ * Uma Conclusão
+
+----
+EduardoDeOliveiraPadoan

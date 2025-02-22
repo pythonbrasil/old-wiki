@@ -1,0 +1,788 @@
+'''Artigo incompleto que pode conter informações equivocadas: favor, ao encontrar um erro: edite, apague, ou envie um e-mail, etc :-) Obrigado.'''
+
+Este artigo é uma opinião do autor que através de sua breve experiência com Python visa sanar alguma dúvidas sobre programação web utilizando-se o Python.
+
+[[TableOfContents]]
+
+== Django ==
+
+"Django é um framework para web, de alto nível desenvolvido em Python, seguindo as filosofias de desenvolvimento rápido, limpo e com design pragmático".
+
+Desde seu início o foco do Django foi desenvolvimento rápido e inteligente para web, juntando isso com as melhores práticas e ferramentas para web em um framework.
+
+A rapidez no desenvolvimento utilizando Django é modelada de acordo com o princípio [http://c2.com/cgi/wiki?DontRepeatYourself DRY - Dont Repeat Yourself], evitando ao máximo códigos duplicados e gerando um ganho de agilidade excelente no ciclo de desenvolvimento web.
+
+Django utiliza MVC e outros padrões, muito bem aceitos por toda a comunidade, em sua filosofia de desenvolvimento, o que leva a fácil manutenção, melhor legibilidade dos códigos e simplicidade.
+
+Django é formado pelos principais compontes necessários para um framework web e muito mais, como mapeamento objeto relacional, sistema de administração, sistema de templates, sistema de cache, suporte para internacionalização e mapeamento elegante de urls.
+
+Todos os componentes são altamente integrados, já que os componentes não são de terceiros, proporcionando ótima integração entre as partes do framework, com maior coerência e coesão. 
+
+=== Características ===
+
+   *Mapeamento objeto-relacional - é possível definir seus modelos de dados com classes em Python e gerar automaticamente o SQL correspondente e executa-lo no banco de dados a ser utilizado. Mas, se por preciso é possível escrever os comandos SQL também.
+
+   *Interface de administração automática - o django trás automaticamente uma interface de administração automática onde é possível atualizar o conteúdo do seu sistema.
+
+   *Urls elegantes - é possível projetar URLs sem nenhuma limitação estrutural.
+
+   *Sistema de templates - o django contém um sistema de templates que separa o html do codigo em Python.
+
+   *Internacionalização - esse framework tem suporte a apliações multi-linguagem.
+
+   *NewForms - é possível gerar e manipular formulários facilmente através dos modelos de dados definidos.
+
+   *Unicode - suporta o unicode, de forma simples
+
+
+=== Mais informações ===
+No [http://www.djangoproject.com/ Site Oficial] e [http://www.djangobook.com/ Django Book].
+
+Grupos [http://groups.google.com.br/group/django-users Grupo de usuários Oficial Django-users] e [http://groups.google.com.br/group/django-brasil Grupo de usuários brasileiros Django-brasil]
+
+[http://code.djangoproject.com/wiki/TutorialInBrazilianPortuguese Documentação em Português]
+
+== TurboGears ==
+
+TurboGears é um framework para desenvolvimento web que tem como característica a flexibilidade, por utilizar diversas tecnologias já existentes em sua construção.
+
+Esta modularidade do TurboGears também permite que se possa utilizar outras tecnologias além daquelas [1]"nativas" do framework.
+
+=== Características ===
+
+O TurboGears é formado pelos seguintes componentes:
+    *Mochikit - Biblioteca JavaScript
+    *Kid - Apresentação (templates)
+    *CherryPy - Servidor WEB
+    *SQLObject - Mapeamento objeto-relacional para bancos de dados
+
+Estes componentes não são obrigatórios. Pode-se usar, por exemplo, o Cheetah no lugar do Kid, ou SQLAlchemy no lugar do SQLObject e assim por diante.
+
+=== Mais informações ===
+[http://www.turbogears.org Página oficial] e [http://oturbogears.org Comunidade brasileira]
+
+1. Coloquei "nativas" entre aspas porque não são realmente nativas, são aplicações independentes que foram agrupadas em um framework pelo pessoal do TurboGears
+
+== Pylons ==
+
+[http://pylonshq.com/ Pylons] é um framework para desenvolvimento de aplicações web focado em rapidez e flexibilidade. Sua principal característica é o suporte ao padrão [http://www.python.org/dev/peps/pep-0333/ WSGI (Web Server Gateway Interface)], possibilitando escrever aplicações portáveis entre diversos servidores web. O suporte a WSGI é provido pela integração entre o Pylons e o [http://pythonpaste.org/ Paste].
+
+=== Características ===
+É formado atualmente pelos seguintes componentes:
+    *Routes - Roteamento de urls
+    *Beaker - Middleware de sessões
+    *Mako - Templates
+    *Webhelpers - Biblioteca auxiliar, com algumas funções portadas do Ruby on Rails.
+    *Paste, PasteDeploy e PasteScript - Componentes do Paste
+    *Formencode - validação de formulários
+    *Decorator
+    *Nose - Framework de testes
+
+Essa é a composição de um projeto Pylons básico, mas como o framework é de certa forma bem 'desomntável', cada projeto Pylons poderá conter um conjunto diferente de bibliotecas. Por exemplo, Authkit para autenticação, SQLAlchemy para mapeamento objeto-relacional, Elixir, que provê uma interface estilo ActiveRecord sobre o SQLAlchemy, ToscaWisgets, um porte do sistema do widgets do Django, e outros mais.
+
+'''[:PylonsWebFramework:Mais informações]'''
+
+== Webware ==
+
+''Se ainda houver algum erro, favor notificar!''
+
+Uma das ferramentas mais conhecidas pelos pythonicos para desenvolver aplicativos web. É simples e com nível de aprendizado baixo, tanto para pythonicos quanto para aqueles que estão migrando, seja vindo do JSP, PHP ou ASP e outros servlets.
+
+''PS: esta sessão do Webware foi corrigido pelo Michel Thadeu. Obrigado! (tava tudo errado o que escrevi hahaha)'' :-)
+
+=== Características ===
+
+O webware lhe permite o desenvolvimento de servlets, tags <% %> (através de um outro modulo) e mais uma infinidade de outras opções ... mas a principal finalidade é mesmo para o desenvolvimento de servlets. ''Não tenho ainda idéia de como funciona sua arquitetura, qualquer informação seria muito bem vinda.''
+
+Possuí ótima integração com outros módulos Python, como o Cheetah para template-engine, etc.
+
+Pode ser um pouco doloroso trabalhar o webware com webdesigners se não tiverem muita experiência, mas existem algumas manhas para contornar isto.
+
+==== Para Rever ====
+
+   * Aparentemente existe uma DLL para integração com o IIS.
+
+=== Código exemplo ===
+
+Um simples código `hello world` servlet:
+
+{{{
+from WebKit.Servlet import Servlet 
+class Hello(Servlet): 
+   def respond(self, trans): 
+       trans.response().write('Content-type: text/html\\n\\nHello, world!\\n') 
+
+}}}
+
+Agora um código PSP:
+
+{{{
+<% page extends="Modelo"%>
+<% page method="writeContent"%>
+<psp:method name="title">return 'The Title'</psp:method>
+
+}}}
+
+Criação de servlets-base através do Cheetah:
+
+{{{
+#extends Base.Base
+#implements writeHTML
+#attr $titulo='um título'
+
+<h3>O título é: $titulo</h3>
+
+<p>
+#block writeBody
+O conteúdo pode ser substituído substituindo-se o método writebody, num
+template bastaria omitir a tag #implements.
+#end block writeBody
+</p>
+
+}}}
+
+Gerando um template +- (como diria o Michel :-P ) assim:
+
+{{{
+class Pagina(Base):
+  titulo='um título'
+  def writeHTML(self, **kw):
+    self.write('<h3>O título é: %s</h3>' % self.titulo)
+    self.writeBody(**kw)
+  def writeBody(self, **kw):
+
+}}}
+
+=== Prós ===
+
+   * Curva de aprendizado baixa;
+   * Boa integração com módulos existentes;
+   * Maduro, versão atual é 0.8.1.
+
+=== Contras ===
+
+   * Pode ser complicado para quem não tem experiência;
+   * Aparentemente só.
+
+=== Segurança ===
+
+Tá aí algo para arrumar :-)
+
+=== Mais Informações ===
+
+Visitem a página do [http://webware.sf.net/ Webware]. Ou veja outras informações em WebwareRapidinho.
+
+== CherryPy ==
+
+CherryPy é um framework para desenvolvimento de aplicações web extremamente pythônico. Com ele pode-se desenvolver utilizando todos os recursos da orientação a objetos de Python, ficando bem transparente entre o "problema e o programador".
+
+=== Características ===
+
+A principal característica do Cherrypy é que ele separa o código do layout HTML. Possuí um webserver embutido (que pode ser integrado ao Apache de diversas formas) e é altamente integrável com outros módulos Python (até mesmo o Cheetah). Ele funciona da seguinte maneira: ao invés de http://localhost/sub/index ser o arquivo index dentro do subdiretório sub; index() é uma função dentro da classe Sub. Piece of cake :-)
+
+=== Código exemplo ===
+
+{{{
+CherryClass Root: 
+mask: 
+    def index(self, name="you"): 
+        <html><body> 
+            Hello, <b py-eval="name"></b> ! 
+            <form py-attr="request.base" action="" method="get"> 
+                Enter your name: <input name=name type=text><br> 
+                <input type=submit value=OK> 
+            </form> 
+        </body></html>
+
+}}}
+
+Se você assustou-se com este exemplo, não se preocupe, este código utiliza a ferramenta de templating [http://www.cherrypy.org/wiki/CherryTemplate CherryTemplate] o uso dela é opcional; você pode utilizar [http://www.cherrypy.org/wiki/ChoosingATemplatingLanguage várias outras], dentre elas, [http://www.zope.org/DevHome/Wikis/DevSite/Projects/ZPT/ ZPT], [http://www.cheetahtemplate.org Cheetah] e [http://www.entrian.com/PyMeld/ PyMeld].
+
+{{{
+"""
+Tutorial - Passing variables
+
+This tutorial shows you how to pass GET/POST variables to methods.
+"""
+
+import cherrypy
+
+
+class WelcomePage:
+
+    def index(self):
+        # Perguntando pelo nome de usuário.
+        return '''
+            <form action="greetUser" method="GET">
+            Qual é o seu nome?
+            <input type="text" name="name" />
+            <input type="submit" />
+            </form>'''
+    index.exposed = True
+    
+    def greetUser(self, name = None):
+        # CherryPy passa todas as variáveis GET e POST como se fossem parâmetros de métodos.
+        
+        if name:
+            # Cumprimentando o usuário!
+            return "Qual é, %s?" % name
+        else:
+            if name is None:
+                # Se não for passado um nome
+                return 'Por favor, coloque seu nome <a href="./">aqui</a>.'
+            else:
+                return 'É sério, coloque seu nome <a href="./">aqui</a>.'
+    greetUser.exposed = True
+
+
+cherrypy.tree.mount(WelcomePage())
+
+
+if __name__ == '__main__':
+    import os.path
+    cherrypy.config.update(os.path.join(os.path.dirname(__file__), 'tutorial.conf'))
+    cherrypy.server.quickstart()
+    cherrypy.engine.start()
+}}}
+
+O exemplo acima demonstra como é o uso "puro" do CherryPy, a geração de HTML serve apenas para demonstrar de forma simples alguns aspectos fundamentais, como a passagem de variáveis GET e POST por meio dos parâmetros do método `greetUser` e o mapeamento da URL com os métodos. Note que se você deseja colocar um "diretório", é só você adicionar uma nova classe dentro da classe acima. 
+
+Existe também a possibilidade de um método atuar antes ou depois que da chamada aos métodos da classe, assim fica muito fácil abstrair camadas visuais ou conversões/validações aos dados que estão entrando ou saindo. Existem vários filtros que vem junto com o CherryPy para trabalhar com XML-RPC, GZip, Unicode, etc.. 
+
+=== Prós ===
+
+   * Excelente documentação!
+   * Muito pequeno, porém poderoso e estável;
+   * Possuí um webserver embutido, o que pode vir a calhar, dependendo da necessidade (para mim foi ótimo!);
+   * Nativamente separa código e layout HTML;
+   * Possuí diversos opcionais de configuração para desempenho(pool, thread, thread pool, etc) e integração com o Apache (CGI, Fast CGI, mod_rewrite, mod_proxy);
+   * Todo o código é compilado, isto é, há um ganho de desempenho na execução (utilizando-se Psyco o ganho pode ser muito superior; mas ainda há algumas dúvidas quanto ao uso, uma vez que usuários notaram alguns picos no uso de memória em suas aplicações que, sem o Psyco, não acontecem);
+   * Boa segurança;
+   * Muito mais próximo ao Python que o Zope, por exemplo, o que dá ao programador a liberdade de efetivamente usar ao máximo os recursos da linguagem.
+   * Ferramentas como o [http://subway.python-hosting.com Subway] e o [http://www.pythonpaste.org Paste] utilizam o CherryPy. Até mesmo outros frameworks, como o TurboGears, usam ele.
+
+=== Contras ===
+
+   * A cada versão nova, os nomes das funções e a estrutura do módulo mudam, assim como as opções de configuração. Se você cria uma aplicação para a versão 2.2, é um parto fazer rodar na 3.0...
+   * De acordo com o autor, ainda não foi testado em servidores com alta demanda de informações, portanto não se tem idéia de seu comportamento em stress extremo;
+   * A linguagem de template do CherryPy ([http://www.cherrypy.org/wiki/CherryTemplate CherryTemplate]) pode chegar a ser um pouco confusa, ao olhar de um web designer sem experiência em programação, MAS é importante lembrar que o uso dela é totalmente opcional, ainda bem :-) .
+   * Até a versão 2.0, toda vez que mudar o código, deverá seguir a procissão: killar o processo do servidor (do cherrypy), recompilar o código e executar ... um verdadeiro pé no meio. Da versão 2.1 em diante, após toda mudança no código, ele recarregará automaticamente o servidor para você. Mas veja bem; para isto, você deve definir no arquivo de configuração o seguinte: server.environment = 'development'. Quando a aplicação ficar estável e pronta, mude para 'production'.
+
+=== Segurança ===
+
+A segurança do Cherrypy foi muito bem elaborada! O programador poderá se preocupar mais com funcionalidades do que com a segurança, uma vez que dificilmente um cracker/hacker/n00b/kiddie poderá detonar o seu servidor do jeito que se detona um PHP/ASP/JSP ou semelhante. Desculpem a falta de aprofundamento quanto ao quesito segurança, estou apenas citanto características muito superficialmente. Mas pelo que andei vendo sobre o Cherrypy, sua segurança é ótima, recomendado.
+
+=== Cherrypy VS ... ===
+
+   * [http://sourceforge.net/mailarchive/forum.php?thread_id=1990353&forum_id=9986 Zope].
+   * [http://sourceforge.net/mailarchive/message.php?msg_id=5506255 Quixote].
+
+=== Mais Informações ===
+
+No [http://www.cherrypy.org/ website do Cherrypy], que contém ÓTIMA documentação.
+
+== Quixote ==
+
+O Quixote é uma framework web para Python, muito utilizada por alguns pythonicos mas não muito difundida no resto da comunidade.
+
+=== Características ===
+
+O Quixote também separa código do template, mas como não tive nenhuma experiência com o mesmo (apenas leituras), vou apenas citar poucas coisas. De acordo com a documentação, funciona através de CGI ou Fast CGI, mas deve funcionar com mod_rewrite, mod_proxy, etc.
+
+=== Código exemplo ===
+
+Exemplo de código:
+
+{{{
+from quixote import enable_ptl, Publisher
+
+enable_ptl()
+app = Publisher("quixote.demo")
+app.setup_logs()
+app.publish_cgi()
+
+}}}
+
+Exemplo de template:
+
+{{{
+template barebones_header(title=None, 
+                          description=None): 
+    """ 
+    <html><head> 
+    <title>%s</title> 
+    """ % html_quote(str(title)) 
+    if description: 
+        '<meta name="description" content="%s">' % html_quote(description) 
+    '</head><body bgcolor="#ffffff">' 
+
+}}}
+
+=== Prós ===
+
+   * Veja só, ainda não encontrei nenhum.
+
+=== Contras ===
+
+   * Aos olhos de muitos usuários em listas de discussão, o Quixote tem uma curva de aprendizado muito alta, realmente difícil mesmo para programadores eficientes (tente imaginar web designers sem experiência com programação);
+   * Encontrados problemas ao rodar em Windozes e etc;
+
+=== Mais Informações ===
+
+No [http://www.quixote.ca/ website do Quixote].
+
+== Twisted Woven ==
+
+O Twisted Woven é uma framework web para Python embutida no Twisted Matrix. Aparenta ser muito poderosa, porém descontinuada e ainda instável. O projeto passsou para mão de outra equipe. Passou a se chamar Nevow, e é mantido pelo [http://www.divmod.org Divmod].
+
+Creio que o projeto não foi descontinuado. O Twisted 2.0 foi liberado em 22/03/2005 e parece que vale a pena analisá-lo - http://twistedmatrix.com.
+(RômuloCampelo - 08/04/2005)
+
+=== Código exemplo ===
+
+Template HTML:
+
+{{{
+  <html>
+    <body>
+      <h3 model="name" view="Text" />
+      <div model="stuff" view="List">
+        <span pattern="listItem" view="Text" />
+      </div>
+    </body>
+  </html>
+
+}}}
+
+Modelo:
+
+{{{
+model = {
+      'name': 'Welcome to Woven',
+      'stuff': [
+        'Foo',
+        'Bar',
+        'Baz'
+      ]
+    }
+
+}}}
+
+Ou o código completo:
+
+{{{
+from twisted.web.woven import page
+
+model = {'name': 'Welcome to Woven', 
+         'stuff': ['Foo', 'Bar', 'Baz']}
+  
+template = """<html>
+  <body>
+      <h3 model="name" view="Text" />
+      <div model="stuff" view="List">
+        <p pattern="listItem" view="Text" />
+      </div>
+    </body>
+  </html>
+"""   
+
+resource = page.Page(model, template=template)
+
+}}}
+
+=== Mais informações ===
+
+No website do [http://twistedmatrix.com/documents/current/howto/woven Woven]. Curiosidade: acredite se quiser, mas pelo que li sobre o [http://www.twistedmatrix.com Twisted Matrix], é que o seu website roda em uma SDSL de 768 Kbps, por isso um tanto lento :-) .
+
+== Divmod Nevow ==
+
+Ah, uma boa pedida. O Nevow é a ferramenta perfeita para integrar trabalhos em equipe, separando o webdesigner do programador. Como deu para notar, o Nevow vem do Woven, por isso a semelhança nos nomes (um é o exato contrário do outro).
+
+=== Características ===
+
+A principal caracterísitas do Nevow é sua capacidade de dividir o código e o layout HTML, uma vez que os templates do Nevow são extremamente amigáveis, sendo a curva de aprendizado para webdesigners sem experiência com programação minima. O método como funciona é muito parecido com o Cherrypy, subdividido em classes e funções, ao invés de arquivos e subdiretórios (assim como o Woven, etc).
+
+=== Código exemplo ===
+
+[http://nevow.com/Nevow2004Examples.zip Pacote fechado!] ;-)
+
+=== Prós ===
+
+   * É a melhor framework web para trabalhos em equipe;
+   * Dentre todos os citados, este é o paraíso para webdesigners;
+   * Depende do Twisted para funcionar (do lado bom, é uma ferramenta poderosíssima para trabalhar com networking, portanto, já está lá!);
+   * Já falei antes? Aqui vai denovo: curva de aprendizado quase nula!;
+
+=== Contras ===
+
+   * Documentação? Acho que o Divmod esqueceu disto ... pelo menos tem lista de discussão;
+   * Depende do Twisted para funcionar (do lado ruim, depender de algo é este lado!);
+   * Aparenta ainda ser um pouco instável, o caso é testar.
+
+=== Segurança ===
+
+Funciona exatamente como o Woven, portanto, possui um esquema semelhante ao Cherrypy. Sendo assim, recomendadíssimo! :-)
+
+=== Para Rever ===
+
+Se o Nevow funcionar da mesma maneira do Cherrypy, tanto na integração com o Apache quanto em boa parte dos opcionais, com certeza será algo para ser usado. (Desculpem a falta de informação, acabei descobrindo o Nevow e o Woven ontem durante a noite!).
+
+=== Mais Informações ===
+
+No [http://www.divmod.org/Home/Projects/Nevow/index.html website do Nevow].
+
+== Spyce ==
+
+Bom, o Spyce é uma das melhores ferramentas para criação de PSP (Python Server Pages). É muito parecido com o Webware e o PSP do mod_python, e sim, (opcionalmente) misturando código com layout e tudo mais, por meio de tags [[ e ]]. 
+
+=== Características ===
+
+Um dos recursos "matadores" dele é o suporte a taglibs, de uma forma muito fácil de trabalhar (muito mais que em JSP) e com  separação entre código e layout. Além disso, ele possui as SpyLambdas, que são blocos de template do Spyce que podem ser tratados como funções. E recentemente foi adicionado um recurso chamado [http://spyce.sourceforge.net/docs/doc-lang_handlers.html Active Handler], que facilita o MUITO o tratamento de dados vindos de formulários.
+
+Igualmente às outras ferramentas de templating, o Spyce pré-compila os códigos em bytecodes antes de executá-lo, porém não requer que o programador execute algum comando para gerar a versão compilada, isso é automático. Também, a atualização a mudanças no código e nos módulos das taglibs são detectadas se a opção de debug estiver habilitada.
+
+=== Código exemplo ===
+
+{{{
+<html><body>
+  Hello [[print 'world!',]]
+  [[ for i in range(10): { ]]
+    [[=i]]
+  [[ } ]]
+</body></html>
+
+Vide exemplos bem melhores [http://spyce.sourceforge.net/docs/eg.html aqui].
+
+}}}
+
+=== Prós ===
+
+   * Curva de aprendizado baixa;
+   * taglibs, este vale por 100;
+   * Active Handlers e SpyLambdas;
+   * pode ser utilizado com mod_python e FastCGI.
+   * possui um servidor HTTP próprio que pode ser utilizado por trás do Apache;
+   * suporte a pooling e sessões;
+   * está em desenvolvimento constante e acelerado;
+   * Oh, há documentação! :-)
+
+=== Contras ===
+
+   * não possui recursos que garantem a segurança das páginas, como "sandboxing" dos códigos.
+   * ele é orientado a página, não existe uma maneira utilizar-se um "controller" sem acabar retornando para a mesma página (como em ASP.NET).
+   * existem problemas de gerenciamento de sessões e variáveis no pool quando utiliza-se o Spyce junto com o mod_python ou o FastCGI, isso pode ser contornado utilizando seu servidor embutido + mod_proxy (e com bons resultados).
+
+=== Mais informações ===
+
+No [http://spyce.sourceforge.net/ website do Spyce].
+
+== mod_python ==
+
+O Mod_python é um módulo para integração do Python com o servidor Apache (e somente o Apache). Ele é um programa de extremo baixo nível para lidar com o HTTP e o Apache - o que significa que o programador tem a opção de lidar com várias das sutilezas do protocolo HTTP e implementar tratadores em python para cada uma delas.
+
+Possivelmente é a ferramenta mais indicada a se usar quando se for fazer um sistema baseado em WEB (em oposição a um simples "SITE") possibilitando o desenvolvimento de formas inovadoras de interagir com o servidor e com o HTTP.
+
+Em suas versões mais recentes, para o Apache 2, há também uma versão de Python Server Pages (PSP) que possibilita o uso de Tags do tipo <% e %> para misturar código Python com HTML. No entanto o uso de PSPs é opcional, e em grande parte dos casos elas são usadas apenas como templates (ou seja, justamente para separar o HTML do código).
+
+Tem uma documentação razoável, mas a curva de aprendizado é bem inclinada.
+
+=== Prós ===
+
+   * Permite acesso de baixo nível ao protocolo HTTP e a toda a API do servidor Apache.
+   * Tem uma flexibilidade maior para desenvolvimento de aplicações que requeiram grande interação com a Web.
+   * Otimizado para ser rápido e eficiente.
+
+=== Contras ===
+
+   * Razoavelmente complexo para aprender.
+   * A segurança fica completamente por conta de cada programa feito.
+   * Não há nada "pronto" - não tem modelos de site prontos pra funcionar bastando preencher as lacunas, ou coisa parecida. Ou se parte de uma aplicação já escrita usando Mod Python, ou se parte do zero.
+   
+=== Mais Informações ===
+
+No [http://www.modpython.org/ site do mod_python].
+
+== Python Servlet Engine ==
+
+O Python Servlet Engine (PSE) é um framework para o desenvolvimento rápido de aplicações Web. É escrito em Python e utiliza o mod_python rodando sobre o servidor Apache. Compila os templates para byte code Python produzindo páginas web que executam muito rápido.
+
+Cada servlet tem dois componentes: o template e o módulo de código Python. Esta arquitetura permite a separação da apresentação e da implementação, de forma que o webdesigner e o programador possam trabalhar de maneira independente. Também pode ser codificado no estilo normalmente usado pelos programadores PHP.
+
+A seguir são exibidos dois trechos de código escritos em PHP e Python que realizam a mesma função. Este exemplo foi do artigo "User-Friendly Form Validation with PHP and CSS" de Jeff Cogswell, publicado no ONLamp.com em 22/04/2004. Algumas alterações foram feitas para corrigir alguns erros constantes do original. Os dois trechos foram codificados no mesmo estilo, não tendo sido utilizado o modelo PSE que permite a separação dos códigos Python e HTML.
+
+=== Código exemplo PHP ===
+{{{
+<!-- From "User-Friendly Form Validation with PHP and CSS" at
+     http://www.onlamp.com/pub/a/php/2004/04/22/php_css_forms.html -->
+<?
+    $message    = "";
+    $emailclass = "basictext";
+    $username   = "";
+
+    if ($_POST['process'] == 1) {
+        $pattern = '/.*@.*\..*/';
+        $email   = $_POST['email'];
+        $urlname = urlencode($$_POST['username']);
+
+        if (preg_match($pattern, $_POST['email']) > 0) {
+            // Here's where you would store
+            // the data in a database...
+            header(
+              "location: thankyou.php?&username=$urlname");
+        }
+        $message    = "Please enter a valid email address.";
+        $username   = $_POST['name'];
+        $emailclass = "errortext";
+    }
+?>
+
+<html>
+<style>
+    .basictext {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px; color:#000066;
+    }
+    .errortext {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px; color:#C00000; font-weight: bold;
+    }
+</style>
+<body>
+<form action="email.php" method="post">
+    <? if ($message != "") {
+        print '<span class="errortext">'.
+            $message."<span><br>\n";
+    }
+    ?>
+    <span class="<?print $emailclass; ?>">
+        Email address:</span>
+    <input name="email" type="text"
+        class="<? print $emailclass; ?>"><br>
+
+    <span class="basictext">Your name:</span>
+    <input name="name" type="text" class="basictext"
+        value="<?print $username; ?>"><br>
+    <input type="hidden" name="process" value="1">
+    <input type="submit" name="Button1" value="Sign up!">
+</form>
+</body></html>
+}}}
+
+=== Código exemplo Python ===
+
+{{{
+<!-- From "User-Friendly Form Validation with PHP and CSS" at
+     http://www.onlamp.com/pub/a/php/2004/04/22/php_css_forms.html -->
+<!-- This is a re-implementation using Python and PSE for comparison. -->
+<?
+import re, urllib
+
+message    = ""
+emailclass = "basictext"
+username   = ""
+
+if pse.form.has_key('process'):
+    pattern = r'.*@.*\..*'
+    email   = pse.form['email']
+    urlname = urllib.quote(pse.form['name'])
+
+    if re.match(pattern, email):
+        # Here's where you would store
+        # the data in a database...
+        pse.plugins.response.redirect('thankyou.pt?&username=%s' % urlname)
+
+    message    = "Please enter a valid email address."
+    username   = pse.form['name']
+    emailclass = "errortext"
+?>
+
+<html>
+<style>
+    .basictext {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px; color:#000066;
+    }
+    .errortext {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px; color:#C00000; font-weight: bold;
+    }
+</style>
+<body>
+<form action="email.pt" method="post">
+    <? if message != "":
+           print '<span class="errortext">%s<span><br>' % message
+    ?>
+    <span class="=emailclass">
+        Email address:</span>
+    <input name="email" type="text"
+        class="=emailclass"><br>
+
+    <span class="basictext">Your name:</span>
+    <input name="name" type="text" class="basictext"
+        value="=username"><br>
+    <input type="hidden" name="process" value="1">
+    <input type="submit" name="Button1" value="Sign up!">
+</form>
+</body></html>
+}}}
+
+=== Prós ===
+
+   * A execução de byte codes Python compilados aumenta muito o desempenho das aplicações, além de prover segurança ao desenvolvedor por ocultar os fontes em Python;
+   * Simples e poderoso: alia a facilidade inerente ao Python à potência do mod_python;
+   * Separa a Apresentação/Interface(HTML) e a Lógica (Python), coerente com o modelo MVC, permitindo também que o programador codifique no estilo tradicional do PHP, se desejar;
+   * API rica para o desenvimento de aplicações Web;
+   * Permite a criação de Tags customizadas, extendendo as  funcionalidades dos templates (usuários avançados);
+   * Permite a extensão de funcionalidades pela criação de plugins em Python (usuários avançados);
+   * Permite a criação de módulos que manipulam pedidos de autorização e autenticação do browser;
+   * Relatórios de erros customizáveis e amigáveis;
+   * Usuários de PHP podem fazer a transição para Python de forma muito mais rápida e fácil do que usando o mod_python e outras ferramentas de template;
+   * O colaborador que contribuiu com a análise deste framework testou sumariamente todas as ferramentas citadas neste artigo e, em sua humilde opinião, considerou este o que mais se harmoniza com a filosofia de desenvolvimento do Python, aliando simplicidade, potência, código conciso e claro, bem como por permitir rápida produtividade em curto prazo. Parece que o Zope é mais poderoso, mas também muito mais complexo.
+
+=== Contras ===
+
+   * Menos difundido que outras ferramentas e portanto pode ter sido menos submetido a testes.
+
+=== Mais Informações ===
+[http://nick.borko.org/pse].
+
+( Análise do PSE: contribuição de RômuloCampelo )
+
+== Zope ==
+
+Da [http://pt.wikipedia.org/wiki/Zope WikiPedia]:
+
+Zope é um [http://pt.wikipedia.org/w/index.php?title=Servidor_de_aplica%C3%A7%C3%B5es&action=edit servidor de aplicações] web [http://pt.wikipedia.org/wiki/Open_Source Open Source] escrito na linguagem [http://pt.wikipedia.org/wiki/Python Python]. Zope significa "Z Object Publishing Environment" (Ambiente de Publicação de Objetos). Muitas tarefas de administração de um servidor Zope podem ser realizadas através de uma interface web. Os objetos que o Zope publica na Web são escritos em linguagem Python, e tipicamente armazenados num banco de dados orientado a objetos, o ZODB, que é integrado ao sistema. Objetos básicos, tais como documentos, imagens e templates (modelos de páginas) podem ser criados ou modificados via web. Objetos especializados, tais como [http://pt.wikipedia.org/wiki/Wiki wikis], [http://pt.wikipedia.org/wiki/Blog blogs], e galerias de fotos estão disponíveis como componentes adicionais (chamados products), e existe uma comunidade pujante de pequenas empresas criando aplicações web como produtos. Existem duas gerações de Zope em uso atualmente (21/out/2005): [http://www.zope.org/Products/Zope/2.8.3 Zope 2.8.3] é a versão estável mais recente da segunda geração, e [http://www.zope.org/Products/Zope3 Zope 3.1.0] é o lançamento mais novo da terceira geração.
+
+=== Plone ===
+
+Conheça também o [http://plone.org/ Plone], um famoso e poderoso CMS (Sistema de Gerenciamento de Conteúdo) que roda sobre o Zope. Com o Plone é possível gerenciar conteúdos de forma amigável e ainda desfrutar de todo um framework para a criação de aplicativos, que interagem de forma totalmente integrada com o Zope e o Plone. Esse framework se chama Archetypes. Maiores detalhes em http://www.plone.org/documentation/archetypes.
+
+
+=== Links ===
+
+   * [http://www.tchezope.org/ Comunidade Zope Brasileira].
+   * [http://www.pythonbrasil.com.br/moin.cgi/ZopeKitDeConstru_e7_e3oDeAplica_e7_f5esWeb ZopeKitDeConstruçãoDeAplicaçõesWeb], aqui mesmo no Python Brasil;
+   * [http://www.pythonbrasil.com.br/moin.cgi/ZopeWebApplicattionDevelopmentAndContentManagement ZopeWebApplicattionDevelopmentAndContentManagement] também aqui no Python Brasil;
+   * [http://www.fabiorizzo.com/artigos], contém alguns artigos sobre Instalação e criação de páginas no Zope
+
+
+
+== SkunkWeb ==
+
+O SkunkWeb é um servidor de aplicações web feito com um grande foco em robustez e (uma boa) tolerância a faltas. Cada requisição é tratada em processos diferentes (ao contrário da Medusa e muito semelhante ao Apache) para garantir que qualquer erro em um módulo implementado em C não vá quebrar a máquina virtual do Python e indisponibilizar o serviço como um todo.
+
+Também, ele possui um sistema de templating próprio descrito [http://skunkweb.sourceforge.net/stmlrefer/ aqui].
+
+=== Prós ===
+
+   * Aparenta ser poderoso. Muitos opcionais ... é questão de estudar mais um pouco.
+   * Possui um sistema gerenciamento de conexões com DBs e sessões.
+
+=== Contras ===
+
+   * Não possui uma boa integração com o [http://www.cheetahtemplate.org/ Cheetah].
+   * A documentação é pobre, principalmente de exemplos.
+   * Só funciona no Windoze da vida com cygwin.
+
+=== Mais informações ===
+
+No site do [http://www.skunkweb.org/ SkunkWEB], aparentemente o site mais cheiroso da web. :-)
+
+== Crusader ==
+
+Funciona no estilo Python Server Pages. Mais informações no site do [http://www.movatis.com/crusader/ Crusader].
+
+== Albatross ==
+
+Apenas algum exemplo de código ...
+
+=== Exemplos de código ===
+
+==== cgi-bin/simple.html ====
+
+{{{
+<html>
+<head>
+<title>My CGI application</title>
+</head>
+<body>
+Hello from my second simple CGI application!
+</body>
+</html> 
+
+}}}
+
+==== cgi-bin/simple.py ====
+
+{{{
+#!/usr/bin/python
+
+from albatross import SimpleContext
+
+ctx = SimpleContext('.')
+templ = ctx.load_template('simple.html')
+templ.to_html(ctx)
+print 'Content-Type: text/html'
+print
+ctx.flush_content() 
+
+}}}
+
+=== Mais informações ===
+
+[http://www.object-craft.com.au/projects/albatross/ Albatross].
+
+== O que usar? ==
+
+Na minha reles opinião:
+
+   * Fácil: Webware ou Spyce;
+   * Poderoso, com estrutura para trabalhos em equipe: Nevow;
+   * Super-power: Cherrypy (ver contras!).
+
+== Links para outras comparações ==
+
+Complementando esta comparação de frameworks, existem diversos outros recursos disponíveis na Web, entre eles:
+
+   * [http://www.python.org/cgi-bin/moinmoin/WebProgramming Web Programming]
+   * http://wiki.python.org/moin/PythonAndJ2EE 
+   * [http://www.colorstudy.com/docs/shootout.html The Web Framework Shootout]
+   * [http://www.boddie.org.uk/python/web_frameworks.html Python Web Frameworks Overview]
+
+== Outras informações ==
+
+Existem diversas outras ferramentas para auxiliar no desenvolvimento de aplicações avançadas para web, tais como:
+
+   * [http://www.ailab.si/orange Orange]: excelente ferramenta de data mining com ótima documentação;
+   * Alguns projetos do [http://www.divmod.org Divmod] são ótimos, é questão de dar uma olhada;
+   * [http://www.jython.org Jython]! Para aqueles que amam Python, mas não abrem mão do Tomcat ;-) 
+
+== Alguns Links Interessantes ==
+
+Existem muitos artigos e tutoriais de assuntos específicos citados aqui, portanto, aqui vão alguns:
+
+   * HospedagemPython, para uma lista de hospedeiros web que suportam Python
+   * WebwareRapidinho, um tutorial sobre o webware;
+   * IntroducaoJython, IntroducaoJythonDidatica e ["Jython"], todos com algumas informações sobre o Jython;
+   * Os citados sobre Zope;
+   * HelpOnInstalling/TwistedWeb;
+
+== Considerações finais ==
+
+Este artigo foi apenas o meu ponto de vista sobre este assunto. Se alguém tiver alguma dúvida, favor entrar em contato pelo rkuesters (arroba) gmail (ponto) com. Por favor, qualquer erro técnico, falta de informações, etc e tal; modifiquem! :-) Obrigado!
+
+Atenciosamente,
+Richard Kuesters.
+
+
+Notas sobre o mod Python adicionadas por:
+João S. O. Bueno Calligaris
+
+Correções do Webware por:
+Michel Thadeu
+
+Complementos para Spyce, CherryPy e SkunkWeb por:
+[http://www.pythonbrasil.com.br/moin.cgi/BogdanoArendartchuk Bogdano Arendartchuk]
+
+Notificação de erros no Webware por RudaMoura

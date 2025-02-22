@@ -1,0 +1,97 @@
+= PythonComC =
+
+Exemplo básico de extenção de python atraves de C retirado de [http://docs.python.org/ext/ext.html Extending and Embedding ]
+
+Mais sobre em:
+
+http://pyspanishdoc.sourceforge.net/
+
+http://docs.python.org/
+
+[http://www.livejournal.com/users/rstm/3014.html Como fazer um binding em C para Python]
+
+== Código em C ==
+
+{{{
+
+void initspam(void); /* Forward */
+
+static PyObject *spam_system(PyObject *self, PyObject *args);
+
+static PyObject *
+spam_system(self, args)
+    PyObject *self;
+    PyObject *args;
+{
+    char *orden;
+    int sts;
+
+    if (!PyArg_ParseTuple(args, "s", &orden))
+        return NULL;
+    sts = system(orden);
+    return Py_BuildValue("i", sts);
+}
+
+static PyMethodDef SpamMethods[] = {
+    {"system",  spam_system, METH_VARARGS},
+    {NULL,      NULL}        /* centinela */
+};
+
+void
+initspam()
+{
+    (void) Py_InitModule("spam", SpamMethods);
+}
+
+int main(int argc, char **argv)
+{
+    /* Pasa argv[0] para o intérprete de Python */
+    Py_SetProgramName(argv[0]);
+
+    /* Inicializa o intérprete de Python.  Requerido. */
+    Py_Initialize();
+
+    /* Agrega un módulo estático */
+    initspam();
+
+    return 1;
+}
+
+}}}
+
+== Compilando ==
+{{{
+
+gcc -pthread -DNDEBUG -g -O3 -Wall -Wstrict-prototypes \
+	-fPIC -DMAJOR_VERSION=1 -DMINOR_VERSION=0 -I/usr/include \
+	-I/usr/include/python2.4 -c spammodule.c -o spammodule.o
+gcc -pthread -shared spammodule.o -L/usr/lib -lm -o spammodule.so
+
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+
+>>> import spam
+>>> spam.
+spam.__class__         spam.__hash__          spam.__repr__
+spam.__delattr__       spam.__init__          spam.__setattr__
+spam.__dict__          spam.__name__          spam.__str__
+spam.__doc__           spam.__new__           spam.system
+spam.__file__          spam.__reduce__
+spam.__getattribute__  spam.__reduce_ex__
+>>> status = spam.system('ls')
+spammodule.c  spammodule.o  spammodule.so
+>>> status
+0
+>>>
+
+}}}
+
+Volta para CookBook.
+
+----
+
+WiliamAlvesDeSouza

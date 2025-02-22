@@ -1,0 +1,8 @@
+= 4Suite =
+
+4Suite é uma coleção de ferramentas Python para o processamento e gerenciamento de bancos de dados XML. Ela provê suporte para ''parsing'' de XML, muitas implementações de DOM transientes e persistentes, expressões XPath, Xpointer, transformações XSLT, XLinuk, RDF e bancos de dados objeto ODMG.
+
+Mais informações:
+
+ * [http://4suite.org/index.epy Homepage]
+ * [http://4suite.org/download.epy#4Suite Download]

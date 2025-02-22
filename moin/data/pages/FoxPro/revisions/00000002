@@ -1,0 +1,25 @@
+Visual FoxPro 9.0 - Visão Geral do Produto
+
+Com seu mecanismo de cursor local, acoplamento firme entre linguagem e dados, e recursos poderosos, o Visual FoxPro 9.0 é uma excelente ferramenta para a criação de soluções com bancos de dados de todos os tamanhos. 
+Sua linguagem centrada em dados e orientada a objetos oferece aos desenvolvedores um conjunto de ferramentas robustas para a construção de aplicativos com bancos de dados para desktops, ambientes cliente-servidor ou Web. Os desenvolvedores terão a seu dispor as ferramentas necessárias para o gerenciamento de dados - de organização de tabelas de informação, execução de consultas e criação de um sistema de gerenciamento de bancos de dados relacionais (DBMS) até a programação de um aplicativo de gerenciamento de dados completo para usuários finais.
+
+Os Web services XML criados com o Visual FoxPro 9.0 podem ser consumidos pelos clientes de Web Services XML do Visual Studio .NET 2003, incluindo ASP.NET, e Web Services XML criados com o Visual Studio .NET 2003, bem como por quaisquer Web Services XML baseados em outros padrões podem ser consumidos pelo Visual FoxPro 9.0.
+
+Destaques do produto
+
+• Tratamento de dados e interoperabilidade
+Crie soluções compatíveis com o .NET com Web services XML e XML hierárquicos. Troque dados com o SQL Server por meio de recursos de linguagem SQL aprimorados e de tipos de dados recém suportados.
+ 
+• Ferramentas de produtividade extensível ao desenvolvedor
+Incremente suas interfaces de usuário com formulários encaixáveis, ancoramento automático de controles e melhor suporte a imagens. Personalize a Janela Properties com suas propriedades favoritas, editores, fontes e opções de cores personalizados.
+ 
+• Flexibilidade para criar todos os tipos de soluções de bancos de dados
+Crie e implemente aplicativos stand-alone e remotos para Tablet PCs baseados no Windows. Crie e acesse componentes COM e Web Services XML compatíveis com a tecnologia Microsoft .NET.
+ 
+• Recursos do sistema de relatórios
+A nova arquitetura de saída extensível oferece o controle preciso da saída e da formatação dos dados de relatórios. Design com várias bandas de details, rotação de texto e encadeamento de relatórios. Os relatórios de saída suportados incluem os formatos XML, HTML e imagem, bem como janelas de visualização de impressão de várias páginas. Compatibilidade reversa com relatórios anteriores do Visual FoxPro. 
+ 
+
+Upgrade fácil
+
+O upgrade para o Visual FoxPro 9.0 é fácil e gratificante, já que esta é a versão mais avançada e confiável do FoxPro já lançada, 100% compatível com o Visual FoxPro 8.0. Os desenvolvedores podem até mesmo criar aplicativos no Visual FoxPro 9.0 e instalá-los por meio do runtime do Visual FoxPro 8.0, desde que não sejam implementados novos comandos e recursos no aplicativo distribuído. Isso permite que desenvolvedores e equipes façam o upgrade para o Visual FoxPro 9.0 e se beneficiem de todos os recursos de produtividade, ao mesmo tempo em que passam os novos aplicativos para o mecanismo de runtime mais novo.

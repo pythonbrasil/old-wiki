@@ -1,0 +1,27 @@
+== Citação de Peter Norvig ==
+
+Fonte: [http://www.python.org/about/quotes/ Python Quotes]
+
+"Python tem sido uma parte importante do Google desde o início, e permance assim conforme o sistema cresce e evolui. Hoje, dezenas de engenheiros do Google usam Python, e estamos procurando por mas pessoas com conhecimento nessa linguagem." disse Peter Norvig, diretor de qualidade de busca do Google, Inc.
+
+== Desenvolvedores Python contratados pelo Google ==
+   * Alex Martelli
+   * Alexander Limi
+   * Greg Stein
+   * Guido van Rossum
+
+== Onde o Python é usado? ==
+
+Fonte: [http://panela.blog-city.com/python_at_google_greg_stein__sdforum.htm Python At Google]
+
+Internally Google has been using Python 2.2.  It has been hard for them to move forward to 2.3 or 2.4 becaue of the large number of machines that the have and they have to have compatibility amoung those machines (I'm assumming this is more of an IT issue, since Python is pretty good at backwards compatibility, but I guess if you deploy 2.4 and start using decorators any machine running 2.2 will choke).  Greg said that they will soon try to move to 2.4.
+
+Programadores Python no Google devem seguir um padrão de estilo estrito (baseado na PEP8 com identação de 2 espaços).  When engineers are first granted commit access to their SCM system, they must pass a style test. All code must pass through two sets of eyes before being checked in.  That combined with liberal doses of unittest, pychecker and code coverage eliminates most non-algorithmic issues that might appear in python code.
+Onde Python é usada?
+
+    * The Google build system is written in python.  All of Google's corporate code is checked into a repository and the dependency and building of this code is managed by python.  Greg mentioned that to create code.google.com took about 100 lines of python code.  But since it has so many dependencies, the build system generated a 3 megabyte makefile for it!
+    * Empacotamento. O Google tem internamente um formato de pacote, como o RPM. Esses pacotes são criados usando python.
+    * Binary Data Pusher.  This is the area where Alex Martelli is working, on optimizing pushing bits between thousands of servers
+    * Servidores de Produção.  All monitoring, restarting and data collection functionality is done with python
+    * Relatórios. Logs são analizados e relatórios são gerados usando  Python.
+    * Alguns serviços, incluindo code.google.com e o google groups. A maioria dos outros front end está em C++ (google.com) e Java (gmail). Todos os web services são contruídos em cima de um servidor web altamente otimizado encapsulado com SWIG.

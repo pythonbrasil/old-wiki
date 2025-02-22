@@ -1,0 +1,10 @@
+#pragma section-numbers off
+= PyQt =
+
+PyQt é uma série de módulos Python que implementam a biblioteca Qt, e foi portado para Windows, Linux e MacOS.
+
+Detalhes podem ser encontrados [http://www.riverbankcomputing.co.uk/pyqt aqui]. 
+
+----
+
+RodrigoVieira

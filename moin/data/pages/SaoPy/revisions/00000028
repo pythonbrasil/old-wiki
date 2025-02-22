@@ -1,0 +1,133 @@
+== SP Python Day ==
+
+||<#FFFF00>Atenção à nova data!!!||
+
+[[TableOfContents(2)]]
+
+==  A conferência para divulgar Python em São Paulo ==
+O Grupo de Usuários de Python de SP (["GrupySP"]) realiza encontros regulares desde 2007, mas este é diferente por dois motivos:
+
+ * é voltado para pessoas que ainda não usam a linguagem Python mas querem conhecê-la
+ * está sendo organizado com o apoio da Faculdade Impacta
+
+
+== Data e hora ==
+||<#FFFF00> '''30/Ago/2008''' (sábado)||
+
+== Local ==
+'''Faculdade Impacta, Unidade Santa Cruz, Rua Arabé, 71''', próximo ao Metrô Santa Cruz (a uma quadra da Av. Domingos de Morais). Convênio com estacionamento na Rua Luis Goes nº 1067 (Bradesco).
+
+Mapa: http://www.impacta.edu.br/imagens/mapa_faculdade.gif
+
+== Inscrições ==
+
+A inscrição é gratuita mas é '''obrigatório''' fazer um cadastro na página do [http://www.fiti.org.br/ FITI (o Fórum Impacta de Tecnologia da Informação)]. 
+
+Clique no menu esquerdo, item '''Programaça''', depois ache o nosso evento na tabela, dia 30/8, e clique (tentei dar um link direto, mas não funcionou porque o povo do ASP adora passar dados de tudo quanto é jeito menos na URL -- LR).
+
+'''Atenção''': se não for associado do FITI, clique em 'Não associados'
+
+== Programação ==
+||09:30 ||||<style="text-align: center;">CRENDENCIAMENTO ||
+||10:00 ||Show Pyrotécnico ||Rodrigo Senra ||
+||10:45 ||Orientação a Objetos em Python ||Luciano Ramalho ||
+||11:30 ||||<style="text-align: center;">INTERVALO ||
+||11:40 ||Django & Google App Engine ||Andrews Medina ||
+||12:25 ||Aplicações Desktop ||George Kussumoto ||
+||13:10 ||||<style="text-align: center;">ALMOÇO ||
+||14:30 ||Programação de Games ||João S. O. Bueno||
+||15:15 ||Aplicações Científicas ||José Alexandre Nalon ||
+||16:00 ||Administração de sistemas com Python e Mechanize ||Juliano Martinez ||
+||16:45 ||||<style="text-align: center;">INTERVALO ||
+||16:55 ||O que o Python faz quando você não está olhando ||Pedro Werneck ||
+||17:40 ||Palestras-relâmpago ||Comunidade Python ||
+||18:25 ||||<style="text-align: center;">ENCERRAMENTO ||
+
+== Palestras e palestrantes ==
+=== Show Pyrotécnico ===
+Um espetáculo de luz, som e spam, spam, spam.
+
+==== palestrante: Rodrigo Senra ====
+ * Engeheiro de Computação e Mestre pelo IC - Unicamp e doutorando na
+  . mesma instituição.
+ * Projetista e desenvolvedor sênior na GPr Sistemas desde 1996.
+ * Projetista e desenvolvedor na HI Tecnologia desde 2008.
+ * Participante ativo da comunidade de SL e entusiasta de Python.
+----
+
+=== Orientação a Objetos em Python ===
+Python não força o programador a pensar em objetos, mas eles fazem parte da linguagem desde o início, incluindo conceitos avançados como sobrecarga de operadores, herança múltipla e introspecção. Com sua sintaxe simples, é muito natural aprender orientação a objetos em Python através de exemplos, pois existem classes prontas e fáceis de usar para acessar bancos de dados, montar aplicações gráficas, processar XML e realizar inúmeras outras tarefas.
+
+==== palestrante: Luciano Ramalho ====
+Desenvolvedor Python desde 1998 e atual presidente da Associação Python Brasil, foi diretor técnico do Brasil Online (Abril S/A), um dos portais pioneiros na Web em nosso país.  Foi fundador da Hiperlógica, instrutor na Simples Consultoria e é sócio da Occam, todas elas empresas especializadas no desenvolvimento de sistemas usando tecnologia Python.
+
+----
+=== Django & Google App Engine ===
+Django é um framework feito em Python para desenvolvimento para Web. E o Google App Engine (GAE) é uma maneira simples de hospedar suas aplicações web na infra-estrutura do Google. Esta palestra mostrará como o Django e o GAE funcionam com muito código explícito.
+
+==== palestrante: Andrews Medina ====
+É professor universitário, programador, estusiasta da linguagem Python e do framework Django e é ativo na comunidade dessas ferramentas no Brasil.
+
+----
+=== Aplicações Desktop ===
+Demonstrar como Python pode ser utilizado em aplicações comerciais desktop utilizando o Stoq como um caso de sucesso. Enfatizando também a utilização de ferramentas/bibliotecas também produzidas utilizando a linguagem Python, como:
+
+ * Pygtk/Kiwi/Gazpacho: para criação de interfaces gráficas
+ * Buildbot: para automatizar a execução de testes
+ * SQLObject: para modelagem objeto-relacional com a base de dados
+ * Reportlab Toolkit: para criação de relatórios em PDF
+==== palestrante: George Kussumoto ====
+ * Graduando em Informática pela Universidade de São Paulo.
+ * Desenvolvedor e entusiasta da linguagem Python e integrante da equipe de desenvolvimento do Stoq, uma suíte de aplicativos para automação comercial open source.
+----
+=== Programação de Games ===
+Apresenta algumas das possibilidades para desenvolvimento de jogos em Python. Uma visão geral
+dos recursos disponíveis nas bibliotecas Pygame, Pyglet e Panda3D e do framework Cocos2D. Dá 
+uma idéia de como estruturar seu jogo pensando em termos de entidades dentro do python. Mostra também a possibilidade de usar Python  como linguagem de script para criação de cenários, automação de objetos dentro do jogo pelos próprios usuários. Demonstração de um exemplo simples de jogo. 
+
+==== palestrante: João S. O. Bueno ====
+ * Trabalha com software livre e Python há vários anos
+ * Analista de Sistemas na fundação CPqD
+ * Mentor do projeto para atualizar os bindings para scripts em Python do GIMP, no GSoC 2008
+
+----
+=== Aplicações Científicas ===
+Python é uma linguagem com sintaxe clara, fácil de entender, muito legível e bastante expressiva, ou seja, é possível representar muita coisa sem escrever muito. Com o desenvolvimento de inúmeras bibliotecas para a linguagem, não é de se espantar que muitos cientistas resolvam escolher essa linguagem para realizar seus experimentos computacionais: o cientista não precisa se preocupar com os detalhes da sua implementação, mas apenas com a correção do seu algoritmo. Em outras palavras, Python não fica entre a representação do problema e sua solução. O objetivo desta palestra é mostrar os diversos recursos e programas de que os cientistas podem se valer usando a linguagem.
+
+==== palestrante: José Alexandre Nalon ====
+Possui graduação em Engenharia Eletrica pela Universidade Federal de Uberlândia (1994) e mestrado em Engenharia Elétrica pela Faculdade de Engenharia Elétrica e de Computação (1997). Atualmente é Professor do Centro Universitário Salesiano de São Paulo. Tem experiência na área de Engenharia Elétrica, com ênfase em Telecomunicações. Atuando principalmente nos seguintes temas: Codificação de Sinais, Wavelets, Codificação em Sub-bandas, Decomposição de Sinais. Tem usado a linguagem Python em suas aplicações científicas já há quase 10 anos.
+
+----
+=== Administração de sistemas com Python e Mechanize ===
+Python pode ser o seu maior aliado quando falamos de administração de sistemas, principalmente ambientes de email e webserver seus módulos são de simples entendimento e facilmente adequados ao uso para monitoração, automatização de tarefas, e “tuning” de seus serviços. Com algumas ferramentas usando poplib, smtplib, WWW::Mechanize, MySQLdb e pydns conseguimos evitar horas de trabalho repetitivo. 
+==== palestrante: Juliano Martinez ====
+Consultor Linux/Unix especialista em sistemas de email, ferramentas de administração distribuída e monitoração de ambientes críticos. Tendo feito parte de empresas como EDS, UOL, Ajato, Veloxmail, Inova, Finabank.  Atualmente trabalhando na Equipe de Arquitetura Linux na Locaweb com foco em adequação de novas tecnologias ao ambiente web. Apaixonado por Python pela sua facilidade, simplicidade e robustez.
+----
+=== O que o Python faz quando você não está olhando ===
+Python diz que "deve haver uma, e de preferência apenas uma forma de fazer
+algo", mas às vezes esconde as outras formas e disponibiliza apenas uma.
+Saber e entender como e porque Python não mostra claramente algumas coisas
+que está fazendo pode ajudá-lo a entender melhor a linguagem e buscar sempre
+a maneira mais óbvia de resolver seus problemas.
+
+==== palestrante: Pedro Werneck ====
+Pedro Werneck é programador, apaixonado por Python desde seu primeiro contato
+com a linguagem em 2001, e desde então participante ativo da comunidade no
+Brasil. "O Werneck é um dos maiores gurus de Python no Brasil, capaz de responder
+às perguntas mais difíceis que aparecem nas nossa lista de discussão" (Luciano Ramalho)
+
+----
+=== Palestras-relâmpago ===
+Uma das melhores tradições da comunidade Python em todo o mundo: palestras sobre qualquer tema, com ou sem slides, em prosa ou poesia, com duração limitadas rigorosamente a 5 minutos cada uma. O moderador da sessão tem a permissão de interromper rudemente o palestrante que exceder o seu tempo, e a platéia costuma ser implacável também. Grandes inovações técnicas e algumas das melhores piadas de qualquer evento de Python aparecem nas palestras-relâmpago. Uma sessão imperdível!
+
+==== palestrante: você! ====
+As palestras-relâmpago são abertas a quem se inscrever para falar no próprio dia do evento. Como temos 45 minutos, teremos espaço para 8 palestras de 5 minutos (já reservando algum tempo para a troca de palestrantes).
+
+----
+
+== Créditos e agradecimentos ==
+=== Apoio e divulgação: Impacta ===
+Coordenação do local: Roberto Rodrigues Junior (Impacta)
+
+=== Coordenação técnica: GruPy-SP e Associação Python Brasil ===
+Coordenação do programa: Bruno Gola, Leandro Lameiro, Luciano Ramalho, Pedro Werneck

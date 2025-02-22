@@ -1,0 +1,60 @@
+Está página tem o objetivo de dar uma visão geral de como usar a ligação entre C e python, que pode servir tanto para utilizar bibliotecas binárias já existentes, como para criar módulos na sua aplicação que exigem um desempenho além do possível no interpretador Python.
+Existem pelo menos três formas de se fazer isso:
+
+= Escrever os bindings na mão =
+
+Você pode escrever os bindings em C, na mão, que não é uma tarefa
+muito complexa e garante que o código que você fez fique 'ao gosto do
+freguês'. Se você optar por essa tática recomendo ter em mãos (eu
+prefiro ter impresso em papel) os livros "Extending and Embedding the
+Python Interpreter" e o "Python/C API" que podem ser encontrados
+respectivamente em: http://docs.python.org/ext/ext.html e
+http://docs.python.org/api/api.html.
+
+Para uma visão rápida sobre como se faz isso tem o mini-artigo do Rudá
+Moura em: http://rstm.livejournal.com/3014.html
+
+Veja também [http://pythonbrasil.com.br/moin.cgi/PythonComC PythonComC].
+
+= Usando geradores de bindings =
+
+Existem algumas ferramentas geradoras de bindings. A mais famosa delas
+é o SWIG (www.swig.org) que permite a geração de bindings para
+diversas linguagens de programação, entre elas a linguagem Python. O
+SWIG é um software estável, bem mantido e usado por diversos projetos.
+
+Se a biblioteca que você pretende criar os bindings for escrita em C e
+usa o modelo de objetos da glib (usado por grande parte dos projetos
+go Gnome), você ainda pode dar uma olhada no gerador de bindings usado
+pelo pessoal do PyGTK (www.pygtk.org) chamado codegen. O codegen é
+muito fácil de ser usado.
+
+= Usando um construtor de chamadas C (ctypes) =
+
+Uma das táticas mais interessantes para acessar uma biblioteca escrita
+em outra linguagem é com o uso do módulo ctypes que entrou para o
+Python 2.5 e que pode ser baixado em
+http://starship.python.net/crew/theller/ctypes/ para casos onde se
+pretende usar uma versão mais antiga de Python.
+
+O ctypes é um binding para a biblioteca libffi que permite que
+chamadas à funções C sejam construídas em tempo de execução tornando
+desnecessário o uso de qualquer outra linguagem que não seja Python.
+
+Exemplo:
+
+{{{
+#!python
+from ctypes import *
+libc = CDLL("libc.so.6")
+libc.printf("funciona!\n")
+}}}
+
+Essa técnica tem as suas desvantagens (que são menos relacionadas à
+performance e mais relacionadas à portabilidade para certas
+plataformas mais incomuns) mas em muitos casos ela tem se mostrado a
+melhor de todas as alternativas citadas.
+
+--
+
+Texto original extraído de uma resposta do OsvaldoSantanaNeto na lista python-brasil

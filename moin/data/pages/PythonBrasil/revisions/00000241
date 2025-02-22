@@ -1,0 +1,48 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+Este site foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma (Português). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente. Veja o ComoUsarWiki para aprender a usar esta ferramenta.
+
+= Campanha: Vamos organizar este wiki! =
+
+O plano total de remodelagem vai contar com a ajuda dos usuários, ou seja, se vocês encontrarem páginas fora dos padrões estão autorizados a fazerem as modificações. Em casos onde for necessário apagar páginas ou renomeá-las mande um e-mail pra mim (osantana @ gmail.com) com a solicitação.
+
+Após a refatoração do Wiki teremos a seguinte situação:
+
+   * Todas as páginas (exceto às do sistema) terão os acentos e cedilhas removidas de seus nomes.
+   * Páginas sem atualização e com pouco acesso serão marcadas como 'abandonadas' e aos poucos o seu conteúdo, se for importante, será colocado em locais mais adequados. Sugestões serão bem vindas.
+   * Todos os links quebrados devem ser corrigidos ou retirados do site.
+ 
+= Iniciantes =
+
+Leitura recomendada para aqueles que têm interesse ou são iniciantes na linguagem Python:
+
+   * AprendaProgramar - Aprenda a Programar com a linguagem Python.
+   * DocumentacaoPython - Dezenas de tutoriais e artigos sobre Python para os mais diversos níveis de aprendizado.
+   * CookBook - Exemplos e trechos de códigos úteis.
+   * PerguntasFrequentes - Perguntas e Respostas frequentes.
+
+= Como Participar =
+
+Você pode participar da comunidade PythonBrasil diretamente aqui no site, através da lista de discussão ou via IRC.
+
+=== Lista de Discussão ===
+
+A lista oficial do site é: python-brasil@yahoogrupos.com.br ([http://br.groups.yahoo.com/group/python-brasil/ página principal]). Para se cadastrar na python-brasil, envie email (com qualquer conteúdo/assunto) para python-brasil-subscribe@yahoogrupos.com.br. Feito isso você receberá um e-mail de confirmação. É só responder a esse e-mail e pronto.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+/!\ '''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existe ainda uma lista chamada python-br que está sendo desativada. Se você tem conta nesta lista, por favor migre para a lista python-brasil.
+Pedimos a todos pythonistas e curiosos que não remetam e-mails para a lista python-br! A lista python-br não tem como ser moderada ou gerenciada
+devido a um problema de autenticação.
+
+=== Canal de IRC ===
+
+O canal oficial do '''Python''' no Brasil é o #python-br do irc.freenode.org.
+
+=== Outros ===
+
+   * CaixaDeSugestões - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PáginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuários - Outros sites de grupos de usuários Python.

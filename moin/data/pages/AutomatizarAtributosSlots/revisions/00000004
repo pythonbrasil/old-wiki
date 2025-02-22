@@ -1,0 +1,164 @@
+
+Frequentemente em Python nos deparamos com código semelhante a esse, definindo como atributos do objeto os argumentos recebidos no método __init__:
+
+
+
+{{{
+#!python
+
+class A:
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+}}}
+
+Esse é um exemplo simples. Na prática podemos chegar a casos bem mais complicados. Esse logo abaixo foi retirado de um código real, e é a classe base de uma hierarquia com uma dezena de variações:
+
+{{{
+#!python
+
+class Registro(object):
+    def __init__(self,
+                 registro=None,
+                 gaveta=None,
+                 montagem=None,
+                 numero=None,
+                 coletor=None,
+                 data=None,
+                 genero=None,
+                 especie=None,
+                 autor=None,
+                 ano=None,
+                 local=None,
+                 estado=None,
+                 latitude=None,
+                 longitude=None,
+                 altitude=None,
+                 tipo=None,
+                 familia=None,
+                 obs=None):
+        
+        self.registro = registro
+        self.gaveta = gaveta
+        self.montagem = montagem
+        self.numero = numero
+        self.coletor = coletor
+        self.data = data
+        self.genero = genero
+        self.especie = especie
+        self.autor = autor
+        self.ano = ano
+        self.local = local
+        self.estado = estado
+        self.latitude = latitude
+        self.longitude = longitude
+        self.altitude = altitude
+        self.tipo = tipo
+        self.familia = familia
+        self.obs = obs
+
+}}}
+
+Houve uma proposta de uma solução para esse problema ( http://cci.lbl.gov/~rwgk/python/adopt_init_args_2005_07_02.html ), mas não foi muito bem aceita, principalmente por envolver uma mudança de sintaxe, e também por não exigir alterações, podendo ser implementada de outras formas. Como é algo bem útil pra mim, e já estava pensando em fazer algo a respeito, resolvi com o código abaixo, a metaclasse AutoAttrs, que combinada com a metaclasse AutoSlots, definem automaticamente os atributos que iniciem com '_' e o atributo __slots__ para a classe.
+
+
+{{{
+#!python
+
+class AutoSlots(type):
+    def __new__(meta, name, bases, data):
+        if '__init__' in data:
+            slots = data.get('__slots__', [])
+            init = data['__init__']
+            varnames = init.func_code.co_varnames
+            
+            for var in varnames:
+                if var.startswith('_'):
+                    var = var[1:]
+                    if var not in slots:
+                        slots.append(var)
+
+            if slots:
+                data['__slots__'] = slots
+
+        cls = super(AutoSlots, meta).__new__(meta, name, bases, data)
+        super(AutoSlots, cls).__init__(cls, name, bases, data)
+
+        return cls
+
+
+class AutoAttrs(type):
+    def __call__(cls, *args, **kwds):
+        o = object.__new__(cls, *args, **kwds)
+        
+        if hasattr(cls, '__init__'):
+            names = cls.__init__.func_code.co_varnames
+
+            arg_names = names[1:len(args)+1]
+            kwd_names = names[len(args)+1:]
+
+            arg_attrs = zip(names[1:], args)
+            kwd_attrs = [(n, kwds.get(n)) for n in kwd_names]
+            
+            attrs = arg_attrs + kwd_attrs
+            
+            for k, v in attrs:
+                if k.startswith('_'):
+                    setattr(o, k[1:], v)
+
+        cls.__init__(o, *args, **kwds)
+
+        return o
+
+
+class AutoSlotsAttrs(AutoAttrs, AutoSlots):
+    pass
+
+
+}}}
+
+No caso do exemplo acima, podemos usar a metaclasse AutoAttrs e todos os atributos serão definidos automaticamente:
+
+
+{{{
+#!python
+    
+class Registro(object):
+    __metaclass__ = AutoAttrs
+
+    def __init__(self,
+                 _registro=None,
+                 _gaveta=None,
+                 _montagem=None,
+                 _numero=None,
+                 _coletor=None,
+                 _data=None,
+                 _genero=None,
+                 _especie=None,
+                 _autor=None,
+                 _ano=None,
+                 _local=None,
+                 _estado=None,
+                 _latitude=None,
+                 _longitude=None,
+                 _altitude=None,
+                 _tipo=None,
+                 _familia=None,
+                 _obs=None):
+
+        pass
+
+
+r = Registro(_registro="TIPO000001", _gaveta=0197, _numero=3, _montagem=0)
+
+print r.registro
+print r.gaveta
+print r.numero
+print r.montagem
+
+}}}
+
+
+No caso de objetos que não terão novos atributos criados posteriormente, pode-se usar a metaclasse AutoSlotsAttrs, que combina as duas, criando os atributos e definindo automaticamente o atributo __slots__

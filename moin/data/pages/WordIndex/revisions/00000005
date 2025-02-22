@@ -1,0 +1,13 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+= Índice de palavras =
+
+Índice de palavras usadas nos títulos das páginas.
+
+Veja também:
+ * TitleIndex - índice em órdem alfabética das páginas do site
+ * SiteNavigation - índice hierárquico das páginas do site
+
+== Índice ==
+
+[[WordIndex]]

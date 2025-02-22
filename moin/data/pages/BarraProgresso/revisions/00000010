@@ -1,0 +1,255 @@
+#pragma section-numbers off
+= Receita: Barra de Progresso para Uso Geral =
+
+Essa barra de progresso é para uso geral como: Adicionar registros no gtk.treeview e/ou Adicionar colunas no reportlab.
+
+[[TableOfContents]]
+
+== Código para PyGTK ==
+
+{{{
+#!python
+#-*- encoding: utf8 -*-
+
+##
+# Esse programa é livre, você pode distribuir e/ou modifica-lo sob os
+# termos da licença geral publica GNU publicada pela fundação de software
+# livre (Free Software Foundation),  contida na segunda versão da licença
+# ou (em sua opinião) outra versão mais recente.
+# Esse programa é distribuído na esperança de ser útil e satisfatório,
+# mas DESTITUÍDO DE QUALQUER GARANTIA, destituído igualmente da
+# COMPATIBILIDADE DE MÁQUINA ou CONVENIÊNCIA PARA PROPÓSITOS
+# PARTICULARES. Veja a licença geral publica GNU para opter mais detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+##
+
+###############################################################################
+## Nome do Arquivo: minhabarra
+## Autor: Guedes, Maurilio<billguedes>
+## Data da Criação: 26/07/2005
+## Data da Modificação: 27/07/2005
+## Finalidade: Mostrar uma barra de progresso
+##
+##
+##
+###############################################################################
+
+import pygtk
+pygtk.require('2.0')
+import gtk, gobject
+
+class BarraProgresso:
+	'''Classe principal'''
+
+	def __init__(self):
+		'''Incialização padrão'''
+		
+		self.texto= "";
+		self.registro= 1;
+		self.total_registro= 500;
+		
+	def desenhar(self):
+		'''Desenha os widgets'''
+		
+		# Cria uma janela comum
+#		self.janela = gtk.Window()
+#		self.janela = gtk.Window(gtk.WINDOW_TOPLEVEL)
+		self.janela = gtk.Window(gtk.WINDOW_POPUP)
+		self.janela.set_resizable(False)
+		self.janela.connect("destroy", self.fechar_janela)
+		self.janela.set_title("Barra de Progresso")
+		self.janela.set_border_width(0)
+		self.janela.set_position(gtk.WIN_POS_CENTER)
+
+		# Cria uma caixa vertical
+		vbox = gtk.VBox(False, 5)
+		vbox.set_border_width(10)
+		self.janela.add(vbox)
+
+		# Cria uma barra de progresso
+		self.barra_progresso = gtk.ProgressBar()
+		vbox.pack_start(self.barra_progresso, False, False, 0)
+		
+		# Chamar o método desenhar_progresso a da 5 milisegundos
+		self.tempo = gobject.timeout_add(5, self.desenhar_progresso, self.barra_progresso)
+
+		# Cria uma separador
+		separador = gtk.HSeparator()
+		vbox.pack_start(separador, False, False, 0)
+
+		# Cria uma etiqueta
+		self.etiqueta= gtk.Label()
+		self.etiqueta.set_label(self.texto)
+		vbox.pack_start(self.etiqueta, False, False, 0)
+		
+		# Mostra todas os widgets adicionados na janela
+		self.janela.show_all()
+		
+	def escrever_texto(self, widget= None):
+		'''Escreve o texto na etiqueta'''
+		
+		self.etiqueta.set_label(self.texto)
+		
+	def desenhar_progresso(self, widget= None):
+		'''Desenha ou atualiza a barra de progressso'''
+		
+		self.escrever_texto()
+		
+		# Calculo flacionário para adequação da barra de progresso
+		valor= (float(self.registro) / self.total_registro)
+		
+		 # Caso seja 1 ou maior (100%) feche a tela
+		if valor >= 1: self.fechar_janela()
+			
+		# Valor válido 0.0 à 1.0
+		self.barra_progresso.set_fraction(valor) 
+		
+		 # Exibe a porcentagem
+		self.barra_progresso.set_text("%.2f%%" % (valor * 100))
+		return True
+		
+	def fechar_janela(self, widget= None):
+		'''Fecha o aplicativo'''
+		
+		# Remove a função relativa ao tempo (Timer)
+		gobject.source_remove(self.tempo)
+		gtk.main_quit()
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+#-*- encoding: utf8 -*-
+
+##
+# Esse programa é livre, você pode distribuir e/ou modifica-lo sob os
+# termos da licença geral publica GNU publicada pela fundação de software
+# livre (Free Software Foundation),  contida na segunda versão da licença
+# ou (em sua opinião) outra versão mais recente.
+# Esse programa é distribuído na esperança de ser útil e satisfatório,
+# mas DESTITUÍDO DE QUALQUER GARANTIA, destituído igualmente da
+# COMPATIBILIDADE DE MÁQUINA ou CONVENIÊNCIA PARA PROPÓSITOS
+# PARTICULARES. Veja a licença geral publica GNU para opter mais detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+##
+
+###############################################################################
+## Nome do Arquivo: teste.py
+## Autor: Guedes, Maurilio<billguedes>
+## Data da Criação: 26/07/2005
+## Data da Modificação: 27/07/2005
+## Finalidade: Testar o uso do arquivo minhabarra.py
+##
+##
+##
+###############################################################################
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+import minhabarra
+
+class Principal:
+	'''Classe principal'''
+	
+	def __init__(self):
+		'''Incialização padrão'''
+		
+		# Cria uma janela
+		janela= gtk.Window()
+		janela.connect("destroy", gtk.main_quit)
+		
+		# Cria um botão
+		botao= gtk.Button("Executar")
+		botao.connect("clicked", self.executar)
+		janela.add(botao)
+		
+		# Mostra todas os widgets adicionados na janela
+		janela.show_all()
+		
+	def executar(self, widget= None):
+		'''Executa o código abaixo'''
+		
+		# Carrega a classe 'BarraProgresso'
+		barra= minhabarra.BarraProgresso()
+		barra.texto= "Começando o Processo..."
+		
+		# Muda a variável registro da classe 'BarraProgresso'
+		barra.registro= 0
+		
+		# Muda a variável total_registro da classe 'BarraProgresso'
+		barra.total_registro= 15000
+		
+		# Desenha os widgets da classe 'BarraProgresso'
+		barra.desenhar()
+
+		# Loop ilustrativo, mas poderia ser uma lista de clientes
+		for i in range(barra.total_registro):
+			
+			# Depuração do código
+			print "Estou no for imprimindo %s\n" % i
+			
+			# Mostra mais informação ao usuário
+			barra.texto= "Estou Processando o Cliente '%05d'" % barra.registro
+			
+			# Muda novamente a variavel registro, ou melhor, acrescenta +1 na variável
+			barra.registro+= 1
+			
+			# Pausa o processo e espera a execução do "Timer"
+			gtk.mainiteration()
+			
+# Chama a classe 'Principal'			
+p= Principal()
+
+# Inicia o aplicativo
+gtk.main()
+
+}}}
+
+== Barra de progresso no Console ==
+A biblioteca utilizada para a barra de progresso no console é a progressbar criado por Nilton Volpato disponível em http://cheeseshop.python.org/pypi/progressbar/2.2
+
+{{{
+#!python
+from progressbar import *
+def example1():
+    widgets = ['Test: ', Percentage(), ' ', Bar(marker=RotatingMarker()),' ', ETA(), ' ', FileTransferSpeed()]
+    pbar = ProgressBar(widgets=widgets, maxval=20000000).start()
+    for i in range(2000000):
+        pbar.update(10*i+1)
+    pbar.finish()
+example1()
+raw_input()
+}}}
+
+ou
+
+{{{
+#!python
+import sys
+
+def progress_bar(value, max, barsize):
+   chars = int(value * barsize / float(max))
+   percent = int((value / float(max)) * 100)
+   sys.stdout.write("#" * chars)
+   sys.stdout.write(" " * (barsize - chars + 2))
+   if value >= max:
+      sys.stdout.write("done. \n\n")
+   else:
+      sys.stdout.write("[%3i%%]\r" % (percent))
+      sys.stdout.flush()
+
+import time
+print "processing..."
+for i in xrange(11):
+   progress_bar(i, 10, 40)
+   time.sleep(1)
+print "ok"
+raw_input()
+}}}
+
+----
+Guedes, Maurilio <billguedes.python at terra.com.br>
+
+Volta para CookBook.

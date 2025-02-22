@@ -1,0 +1,11 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== @``ME@ ==
+
+Email: <<MailTo(mario.mania@gmail.com)>>
+
+...
+
+----
+CategoryHomepage

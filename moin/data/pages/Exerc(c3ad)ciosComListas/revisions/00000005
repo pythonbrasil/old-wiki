@@ -1,0 +1,84 @@
+ListaDeExercícios
+ 1. EstruturaSequencial
+ 1. EstruturaDeDecisao
+ 1. EstruturaDeRepeticao
+ 1. ExercíciosComListas
+
+== Exercícios Com Listas ==
+
+ 1. Faça um Programa que leia um vetor de 5 números inteiros e mostre-os.
+
+ 1. Faça um Programa que leia um vetor de 10 números reais e mostre-os na ordem inversa.
+
+ 1. Faça um Programa que leia 4 notas, mostre as notas e a média na tela.
+
+ 1. Faça um Programa que leia um vetor de 10 caracteres, e diga quantas consoantes foram lidas. Imprima as consoantes.
+
+ 1. Faça um Programa que leia 20 números inteiros e armazene-os num vetor. Armazene os números pares no vetor PAR e os números IMPARES no vetor impar. Imprima os três vetores.
+
+ 1. Faça um Programa que peça as quatro notas de 10 alunos, calcule e armazene num vetor a média de cada aluno, imprima o número de alunos com média maior ou igual a 7.0.
+
+ 1. Faça um Programa que leia um vetor de 5 números inteiros, mostre a soma, a multiplicação e os números.
+
+ 1. Faça um Programa que peça a idade e a altura de 5 pessoas, armazene cada informação no seu respectivo vetor. Imprima a idade e a altura na ordem inversa a ordem lida.
+
+ 1. Faça um Programa que leia um vetor A com 10 números inteiros, calcule e mostre a soma dos quadrados dos elementos do vetor.
+
+ 1. Faça um Programa que leia dois vetores com 10 elementos cada. Gere um terceiro vetor de 20 elementos, cujos valores deverão ser compostos pelos elementos intercalados dos dois outros vetores.
+
+ 1. Altere o programa anterior, intercalando 3 vetores de 10 elementos cada.
+
+ 1. Foram anotadas as idades e alturas de 30 alunos. Faça um Programa que determine quantos alunos com mais de 13 anos possuem altura inferior à média de altura desses alunos.
+
+ 1. Utilize uma lista para resolver o problema a seguir. Uma empresa paga seus vendedores com base em comissões. O vendedor recebe $200 por semana mais 9 por cento de suas vendas brutas daquela semana. Por exemplo, um vendedor que teve vendas brutas de $3000 em uma semana recebe $200 mais 9 por cento de $3000, ou seja, um total de $470. Escreva um programa (usando um array de contadores) que determine quantos vendedores receberam salários nos seguintes intervalos de valores:
+
+  a. $200 - $299
+  a. $300 - $399
+  a. $400 - $499
+  a. $500 - $599
+  a. $600 - $699
+  a. $700 - $799
+  a. $800 - $899
+  a. $900 - $999
+  a. $1000 em diante
+
+  Desafio: Crie ma fórmula para chegar na posição da lista a partir do salário, sem fazer vários ''ifs'' aninhados.
+
+
+ 1. A ACME Inc., uma organização com mais de 1500 funcionários, está tendo problemas de espaço em disco no seu servidor de arquivos. Para tentar resolver este problema, o Administrador de Rede precisa saber qual o espaço ocupado pelos usuários, e identificar os usuários com maior espaço ocupado. Através de um programa baixado da Internet, ele conseguiu gerar o seguinte arquivo, chamado usuarios.txt:
+
+{{{
+alexandre	456123789
+anderson	1245698456
+antonio		123456456
+carlos		91257581
+cesar		987458
+rosemary	789456125
+}}}
+
+
+  Neste arquivo, o primeiro campo corresponde ao login do usuário e o segundo ao espaço em disco ocupado pelo seu diretório '''home'''. 
+
+  A partir deste arquivo, você deve criar um programa que gere um relatório, chamado relatório.txt,  no seguinte formato:
+
+{{{
+ACME Inc.		Uso do espaço em disco pelos usuários
+------------------------------------------------------------------------
+Nr.  Usuário	    Espaço utilizado     % do uso
+
+1    alexandre	     434,99 MB            16,85%
+2    anderson	    1187,99 MB	          46,02%
+3    antonio	     117,73 MB	           4,56%
+4    carlos	      87,03 MB             3,37%
+5    cesar	       0,94 MB             0,04%
+6    rosemary	     752,88 MB            29,16%
+
+Espaço total ocupado: 2581,57 MB
+Espaço médio ocupado: 430,26 MB
+}}}
+
+  O arquivo de entrada deve ser lido uma única vez, e os dados armazenados em memória, caso sejam necessários, de forma a agilizar a execução do programa. A conversão da espaço ocupado em disco, de bytes para megabytes deverá ser feita através de uma função separada, que será chamada pelo programa principal. O cálculo do percentual de uso também deverá ser feito através de uma função, que será chamada pelo programa principal.
+
+----
+
+Voltar para a ListaDeExercícios

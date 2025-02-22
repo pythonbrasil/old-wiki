@@ -1,0 +1,65 @@
+O ''widget'' '''[http://pygtk.org/docs/pygtk/class-gtktreeview.html gtk.TreeView]''' permite que mudemos várias propriedades das suas células. Aqui, explicaremos como mudar a cor de fundo da célula, mas a "lógica" por trás de nossos exemplos se aplica a praticamente qualquer propriedade de célula.
+
+A cor de fundo de uma célula é definida pela propriedade '''"cell-background"''' do objeto '''[http://pygtk.org/docs/pygtk/class-gtkcellrenderer.html gtk.CellRenderer]''' que desenha a dita cuja. É possível tanto mudar a cor de todas as células renderizadas pelo objeto (o que geralmente implica em mudar a cor uma coluna) quanto só de algumas células. Aqui, veremos três exemplos de como mudar as cores. Começaremos pelo mais simples, que é justamente mudar a cor de todas as células renderizadas por um '''gtk.CellRenderer''' específico.
+
+= Mudando a cor de uma coluna =
+
+As células de uma coluna são geralmente renderizadas por um único '''gtk.CellRenderer'''. Podemos definir a cor das células desenhadas por esse renderizador associando uma cor à propriedade '''"cell-background"'''. A cor é representada por uma ''string''. Para associar a cor, basta chamar o método '''set_property()''' como abaixo:
+
+{{{#!python
+renderer = gtk.CellRendererText()
+renderer.set_property('cell-background', 'yellow')
+}}}
+
+A pequena aplicação de teste abaixo demonstra como fazer isso. Ela cria um '''gtk.TreeView''' que mostra um orçamento doméstico. Há duas colunas: a primeira descreve a despesa ou receita; a segunda mostra o valor da movimentação.
+
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# file: color-column.py
+import gtk
+
+def get_window(view):
+    window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+    window.add(view)
+    window.show_all()
+
+def get_store(pairs):
+    store = gtk.ListStore(str, int)
+    for pair in pairs:
+        store.append(pair)
+    return store
+
+def get_tree_view(store):
+    view = gtk.TreeView(store)
+    column1 = gtk.TreeViewColumn('Movimentação')
+    column2 = gtk.TreeViewColumn('Valor')
+    view.append_column(column1)
+    view.append_column(column2)
+    renderer1 = gtk.CellRendererText()
+    renderer2 = gtk.CellRendererText()
+    # O segredo está aqui:
+    renderer1.set_property('cell-background', 'yellow')
+    renderer2.set_property('cell-background', 'green')    
+    column1.pack_start(renderer1)
+    column2.pack_start(renderer2)
+    column1.add_attribute(renderer1, 'text', 0)
+    column2.add_attribute(renderer2, 'text', 1)
+    return view
+
+pairs = [
+    ('Salário', 800), 
+    ('Compras do mês', -150), 
+    ('Poupança', -300),
+    ('Ônibus', -150)
+]
+
+store = get_store(pairs)
+view = get_tree_view(store)
+window = get_window(view)
+gtk.main()
+}}}
+
+Note como nas linhas 26 e 27 nós alteramos a propriedade '''"cell-background"''' dos renderizadores. O resultado segue abaixo:
+
+attachment:color-column.png

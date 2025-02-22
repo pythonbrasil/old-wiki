@@ -1,0 +1,67 @@
+#acl ProfessoresPythonGroup:read,write,revert,admin,delete All:
+#pragma section-numbers off
+= Respostas da Lista De Exercícios =
+
+Nesta página estarão todas as respostas dos exercícios propostos na página ListaDeExercícios. Apenas os membros do ProfessoresPythonGroup é que possuem acesso à esta página.
+
+(Nota: Eu estou colocando apenas os que eu resolvi até agora. Outros membros do grupo poderiam adicionar suas respostas também.)
+
+== Estrutura sequencial: ==
+
+ 1. Faça um Programa que mostre a mensagem "Alo mundo" na tela.
+Resposta:
+{{{
+print "Alô, mundo"
+}}}
+
+ 1. Faça um Programa que peça um número e então mostre a mensagem 
+Resposta:
+{{{
+numero = int(raw_input("Digite um número qualquer: "))
+print "O número que você digitou foi",numero
+}}}
+
+ 1. Faça um Programa que peça dois números e imprima a soma.
+Resposta:
+{{{
+num1 = int(raw_input("Digite o primeiro número: "))
+num2 = int(raw_input("Digite o segundo número: "))
+soma = num1 + num2
+print "A some dos dois valores é:",soma
+}}}
+
+ 1. Faça um Programa que peça as 4 notas bimestrais e mostre a média, com uma casa decimal.
+Resposta:
+{{{
+nota1 = float(raw_input("Digite a nota do primeiro bimestre: "))
+nota2 = float(raw_input("Digite a nota do segundo bimestre: "))
+nota3 = float(raw_input("Digite a nota do terceiro bimestre: "))
+nota4 = float(raw_input("Digite a nota do quarto bimestre: "))
+
+media = (nota1 + nota2 + nota3 + nota4) / 4
+
+print "A média do aluno foi: %.1f" %media
+}}}
+
+ 1. Faça um Programa que converta metros para centímetros.
+Resposta:
+{{{
+metro = float(raw_input("Digite quantos metros você quer converter: "))
+centimetro = metro * 100
+print str(metro)+" metros são iguais à "+str(centimetro)+" centimetros"
+}}}
+
+ 1. Faça um Programa que peça um número com 5 casas decimais e arredonde para duas.
+Resposta:
+{{{
+numero = float(raw_input("Digite um número com 5 casas decimais: "))
+print "%.2" %numero
+}}}
+
+ 1. Faça um Programa que peça o raio de um círculo, calcule e mostre sua área.
+Resposta:
+{{{
+raio = float(raw_input("Digite o raio da circunferência: "))
+area = 3.14 * (raio * raio)
+print "A área da circunferência é %f" %area
+}}}

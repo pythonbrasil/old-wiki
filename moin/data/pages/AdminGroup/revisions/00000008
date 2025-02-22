@@ -1,0 +1,9 @@
+#acl AdminGroup:admin,read,write,delete,revert All:read
+ * OsvaldoSantanaNeto
+ * RodrigoSenra
+ * PedroWerneck
+ * EricoAndrei
+ * JeanRodrigoFerri
+ * MarcoAndreLopesMendes
+ * LucianoRamalho
+ * AndrewsMedina

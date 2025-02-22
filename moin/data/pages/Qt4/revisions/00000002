@@ -1,0 +1,7 @@
+python-qt4: Qt4 bindings for Python
+
+Sinopse: Qt é um toolkit multi-plataforma para desenvolvimento de aplicações utilizando poderosas intefaces gráficas em C++. Além da biblioteca, com cerca de 400 objetos, o Qt ainda conta com ferramentas para desenho de interface, tradução e ajuda com a API. O projeto "python-qt4" une os mundos Qt4 e Python, oferecendo uma forma de utlizar da maneira mais "pythonica" possível as classes do Qt.
+
+
+Para obter os fontes, visite o site do projeto:
+http://python-qt4.berlios.de

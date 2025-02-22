@@ -1,0 +1,119 @@
+[[TableOfContents]]
+
+=== O Python não gostou do meu editor de textos ===
+
+Um cuidado extra é necessário quanto ao editor de texto que você escolheu para editar arquivos em Python. Mas antes, uma breve explicação sobre a linguagem é necessária.
+
+Python usa endentação como delimitação de bloco (ao contrário das chaves usadas pela linguagem C ou as palavras-chaves {{{Begin}}}/{{{end}}} do Pascal). Instruções são consideradas pertencentes ao mesmo bloco quando usam o mesmo distanciamento em relação à coluna zero. Aconselha-se trabalhar apenas com espaços, sem misturá-los com TABs (mais detalhes sobre isso na página GuiaDeEstilo), pois fica difícil a detecção de onde um ou outro foi utilizado, ocasionando erros de sintaxe crípticos. Dito isso, a regra mais comum de endentação é que cada bloco seja deslocado quatro espaços em relação ao anterior. Mas, qualquer que seja a regra, é mais importante a adesão a uma única regra por todo o arquivo.
+
+Voltando ao editor de textos, verifique como ele trabalha com TABs e se são convertidos em espaços. Caso contrário, considere usar um editor mais apropriado para programadores. Muitos editores, como o {{{vim}}}, permitem mudar as configurações de fábrica. É uma boa idéia checar a documentação do seu editor favorito.
+
+=== Os meus programas recebem um aviso "DeprecationWarning: Non-ASCII character in file". O que é isso? ===
+
+É provavel que o seu programa esteja usando caracteres acentuados sem uma declaração de codificação no começo do programa. Até a versão 2.2 do Python, isso não representava um problema. A partir da versão 2.3, o Python passou a tratar de forma diferente os caracteres acentuados, visando uma melhor integração com a codificação Unicode. Neste sentido, é uma das poucas iniciativas válidas do ponto de vista do suporte nativo em uma linguagem de programação.
+
+O motivo para isso é que os caracteres acentuados não fazem parte da codificação padrão ASCII. Existem várias formas de codificá-los usando caracteres adicionais (chamados erroneamente por alguns de "ASCII extendido"). Isso geralmente não causa problemas porque a codificação dentro de um mesmo país é razoavelmente padronizada. Porém, se você quiser trocar arquivos de código com um usuário em outro país, é possível que o seu código fonte seja lido com os caracteres incorretos. Já o Unicode é um padrão internacional de codificação superior ao ASCII, e que pode ser codificado dentro de arquivos normais. Para isso, é preciso que seja definida a codificação correta -- e é exatamente esta informação que o Python está pedindo. No caso do Brasil, a codificação ISO-8859-1 identifica um mapeamento padrão dos acentos.
+
+Assim, é necessário informar ao Python qual a codificação em que o arquivo está escrito. Isso permitirá, por exemplo, que ele traduza as strings nativas (escritas em ASCII no código fonte) sejam traduzidas pelo programa para uma representação Unicode de forma automática. Para fazer isso, basta acrescentar uma linha de comentário contendo "{{{-*- coding: XXX -*-}}}" informando a codificação desejada. Esta linha deve ser obrigatoriamente a primeira ou segunda linha do arquivo. Por exemplo:
+
+{{{
+#!/usr/bin/env python
+# -*- coding: ISO-8859-1 -*-
+}}}
+
+Ativa a codificação {{{ISO-8859-1}}}. Para o caso de um editor que utilize {{{UTF-8}}}:
+
+{{{
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+}}}
+
+Observe que a codificação não é sensível ao uso de letras maísculas e minúsculas.
+
+=== Como usar uma variável global em uma função? ===
+
+Praticamente todo programador de Python já tentou fazer algo do tipo:
+
+{{{
+#!python
+v = 1
+def f():
+    print v
+    v = 10
+}}}
+
+E recebeu o erro {{{UnboundLocalError: local variable 'v' referenced before assignment}}}. Isso ocorre porque qualquer variável definida dentro de uma função é considerada local àquela função. Como redefinimos o valor de 'v' dentro do corpo da função, o interpretador considera esta variável como local. Sendo local, a variável 'v' no escopo global é inexistente para a função no momento do {{{print}}}, gerando o erro. A solução é explicitamente declarar a variável como global no início da função.
+
+{{{
+#!python
+v = 1
+def f():
+    global v
+    print v
+    v = 10
+}}}
+
+Em Python, variáveis que são apenas chamadas dentro de uma função são automaticamente globais. Se uma variável for definida em qualquer ponto da função, é considerada local, e você precisa declará-la explicitamente como global.
+
+=== Como atualizo vários valores de um dicionário? ===
+
+A classe de dicionários possui um método chamado {{{update}}} que recebe como parâmetro um dicionário com os novos ítens de chave e valor, como em {{{<instância>.update(<dicionário>)}}}. Por exemplo:
+{{{
+#!python
+>>> d = { 'foo': 1, 'bar': 2 }
+>>> d2 = { 'foo': 123, 'qux': 456, 'blah': 1337 }
+>>> d.update(d2)
+>>> d
+{'qux': 456, 'foo': 123, 'bar': 2, 'blah': 1337}
+}}}
+
+=== Instalei um módulo no /usr/local/lib/python e agora como faço para o Python importar esse módulo? ===
+
+É necessário adicionar o novo caminho à variável {{{path}}}, que sabe onde estão todas as bibliotecas do Python, para que o comando {{{import}}} possa abrir esse módulo. Existem duas soluções para isso, a primeira é manipular diretamente a variável {{{sys.path}}}. Essa variável é uma lista de caminhos para bibliotecas.
+
+{{{
+#!python
+import sys
+sys.path.append('/usr/local/lib/python')
+}}}
+
+Uma outra solução é definir a variável de ambiente {{{$PYTHONPATH}}} com um caminho ou vários caminhos delimitados por {{{:}}} (igual a variável {{{$PATH}}}). Essa solução é mais genérica e transparente. Basta adicionar no seu arquivo de inicialização do ''shell'' a seguinte linha:
+
+{{{
+PYTHONPATH=/usr/local/lib/python; export PYTHONPATH
+}}}
+
+Agora o comando {{{import}}} vai encontrar corretamente a sua biblioteca.
+
+=== Gosto de usar uma IDE pra desenvolver, qual a melhor IDE para Python? ===
+
+Existem diversas IDEs que podem ser usadas no desenvolvimento de aplicações em Python. Na página IdesPython você encontra informações sobre elas.
+
+
+=== Como eu configuro o vim para que utilize o padrão de alinhamento sugerido pelo python.org? ===
+Ponha em um comentário no seu arquivo .py
+{{{
+# vim:ts=4:sw=4:et
+}}}
+
+Ou seja, a tecla TAB pula 4 caracteres (ts=4), 4 caracteres para alinhamento (sw=4), expande TAB para espaços (et).
+
+=== É possível criar um arquivo executável de um programa em Python? ===
+
+É possível, mas só é recomendável se você tiver um bom motivo pra fazer isso. Se a intenção for melhorar o desempenho do código, não irá fazer diferença. Se você quer facilitar a distribuição do seu programa para aqueles que não têm o interpretador Python instalado, pode ser uma vantagem, mas também pode ser um incômodo para usuários que já o tenham. Se, mesmo assim, você tem uma necessidade real, existem algumas ferramentas capazes de fazer isso. Duas delas são o 'freeze', incluído na distribuição (no diretório Tools/freeze), que exige um compilador de C no momento de criação do executável, e o Py2exe, disponível somente para Windows e que pode ser encontrado em http://starship.python.net/crew/theller/py2exe.
+
+Além do Py2Exe há também o cx_Freeze, que funciona tanto pra Linux quanto para Windows. Mais informações no site: http://starship.python.net/crew/atuining/cx_Freeze/
+
+
+=== Como eu compilo um programa em Python? ===
+
+Python não é uma linguagem compilada, e sim interpretada. Desta forma, você nunca vai 'compilar', 'linkar' e 'gerar um executável' de um programa feito em Python; pelo menos não da maneira que você faz com um programa em C. O fonte estará quase sempre disponível e ele é sempre verificado no momento da execução. Tendo dito isso, aqui vão as diferenças da visão clássica de compiladores e interpretadores para o que acontece em Python. 
+
+A interpretação clássica diz que, ao ser executado, o programa seria analisado e interpretado linha por linha, os comandos correspondendo a instruções do que a máquina deve fazer. A compilação clássica diz que o programa é convertido para instruções em linguagem de máquina e executados diretamente pelo processador.
+
+O que Python faz é um meio termo - de vez em quando chamado de 'interpilação'. Quando você roda o seu programa em Python, o interpretador não faz a análise linha por linha, mas sim converte o seu programa para um conjunto de instruções intermediárias, que são códigos de uma máquina virtual projetada especificamente para o Python. Esses códigos são, eles sim, interpretados. O motivo da decisão por esse modelo é que ele é mais fácil de ser implementa-
+do, permite um dinamismo muito maior e torna muito mais fácil a portabilidade de programas entre sistemas. Para agilizar o carregamento do programa na execução, o interpretador grava os códigos em um arquivo .pyc que é lido e utilizado caso não esteja defasado.
+
+É o mesmo esquema utilizado pelo Java, exceto que, com o Python, o processo de compilação é transparente, e não são necessários arquivos de construção, configuração e etc.
+
+Há, no entanto, formas de gerar 'executáveis' Python. Programas como o 'freeze' para os Unices e 'py2exe' para o Windows fazem o seguinte: compilam o seu código fonte gerando os arquivos .pyc, e linkam o interpretador e as bibliotecas básicas juntos com esses dados em um arquivo 'executável'. Note que o programa não foi compilado (não mais do que antes), e portanto não vai haver ganho de velocidade. Mas pode ser uma opção se você quiser 'esconder' o seu código-fonte, ou garantir que a distribuição do seu programa vai ter todas as bibliotecas necessárias, sem dependências externas.

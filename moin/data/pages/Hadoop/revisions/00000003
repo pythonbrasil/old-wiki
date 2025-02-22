@@ -1,0 +1,12 @@
+Hadoop é uma implementação livre da [[http://www.apache.org|Apache Software Foundation]] que possibilita a utilização do modelo de processamento de dados [[http://en.wikipedia.org/wiki/MapReduce|MapReduce]], criado pelo [[http://www.google.com.br|Google]].
+Apesar de ter sido desenvolvido em Java, é possível utilizá-lo com Python.
+Até o momento, é conhecida apenas uma implementação: o [[http://github.com/klbostee/dumbo|Dumbo]], criado pelo Klaas Bosteels, do [[http://last.fm|Last.fm]].
+
+=== Links interessantes: ===
+
+ * [[http://labs.google.com/papers/mapreduce.html|Paper do MapReduce]]
+ * [[http://hadoop.apache.org|Hadoop]]
+ * [[http://github.com/klbostee/dumbo|Dumbo - biblioteca em Python para o Hadoop]]
+ * [[http://video.google.com/videoplay?docid=-6542115996113932899&ei=qcdKScPlGp7OqwK554DwCw&q=dumbo+hadoop|Vídeo do Klaas sobre o Dumbo]]
+ * [[http://blog.last.fm/2008/05/29/python-hadoop-flying-circus-elephant|Post no blog do Last.fm sobre o Dumbo]]
+ * [[GruPySPYahoo|GruPySPYahoo]] - Encontro realizado pelo [[GrupySP|GrupySP]], na sede do [[http://www.yahoo.com.br|Yahoo!]], onde houve uma palestra do Owen O'Malley, core developer do Hadoop.

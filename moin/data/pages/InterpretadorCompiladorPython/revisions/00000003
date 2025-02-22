@@ -1,0 +1,12 @@
+#pragma section-numbers off
+= Interpretador/Compilador Python =
+
+Este artigo apresenta uma visão geral da '''arquitetura do Python''', ilustrando o processo das etapas de análise léxica, sintática e geração de código. É realizada uma abordagem sobre a estrutura da arquitetura, contemplando os aspectos da linguagem, interpretador e gramática, e os estilos evidenciados na linguagem, abordando a gerência de memória, interface C/Python, reflexão, seqüência de execução de módulos (grupo-seqüêncial) e recursividade.
+
+Disponível em: http://zhang.ucpel.tche.br/Members/eduardo/content/academico/PyVM.pdf
+
+
+----
+
+''Eu renomeei a página porque aparentemente o !MoinMoin não gosta muito de !WikiNames com "/" -- OsvaldoSantanaNeto''
+

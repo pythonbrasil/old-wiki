@@ -1,0 +1,286 @@
+= PyGObject, sinais e propriedades =
+
+[[TableOfContents]]
+
+Python é uma linguagem de programação com suporte a orientação a objetos, mas C não têm essa funcionalidade. Como C é uma linguagem muito utilizada e orientação a objetos é um paradigma popular, os desenvolvedores da GLib (a biblioteca faz-tudo do projeto GNU) criaram um sistema de objetos para C chamado GObject. GObject é base de várias aplicações bibliotecas importantes, como [http://gtk.org/ GTK+] e [http://gstreamer.freedesktop.org/ GStreamer].
+
+Existe um ''binding'' de GObject para Python, chamado PyGObject. Você pode se questionar qual o sentido de portar um sistema de objetos de uma biblioteca em C para uma linguagem que já tenha suporte a orientação a objetos. Uma razão é que várias bibliotecas foram construídas sobre GObject, e possuir um binding de GObject para Python facilita o trabalho de fazer o binding das próprias bibliotecas. Pode-se imaginar que só alguém que trabalhe na construção desses bindings obterá alguma vantagem em conhecer PyGObject. Isso não é verdade: PyGObject provê uma série de ferramentas que podem ser bem interessantes de utilizar.
+
+= Sinais =
+
+É natural se perguntar quais vantagens podem se tirar de um sistema de objetos alienígena quando Python já oferece um suporte tão poderoso a orientação a objetos. De fato, a maior parte das vezes é mais adequado utilizar o próprio sistema de objetos de Python, mas GObject oferece várias funcionalidades que os objetos em Python não possuem, da qual destacaremos duas: sinais e propriedades notificadoras.
+
+Sinais são a base de um sistema de comunicação assíncrona. Se você já trabalhou com GTK+, certamente já conhece um pouco sobre seu funcionamento. ''Grosso modo'', sinais são gatilhos em um objeto aos quais podemos associar funções para serem executadas. Quando ativamos tal gatilho, todas as funções associadas ao gatilho são executadas uma a uma. Por exemplo, quando criamos um botão em PyGTK e conectamos uma função ao evento de alguém clicar no botão, estamos associando uma função a um sinal. GTK+ fica esperando que "coisas aconteçam" na interface gráfica. Quando algo acontece, GTK+ emite um sinal, e todas as funções associadas são executadas em seqüência.
+
+Se você fizer classes herdando da classe '''GObject''' do módulo '''gobject''', você pode definir seus próprios sinais, com seus parâmetros e ordem de execução. Um exemplo ajudará a compreender melhor como os sinais funcionam.
+
+== A classe Counter ==
+
+Vamos fazer uma classe que "conte" de zero até um valor ''n'', esperando um segundo entre cada número. A idéia é que cada instância dessa classe será associada a um valor, que será o alvo final da contagem. A classe terá também um método '''run()''', que iniciará a contagem. A princípio, vamos fazer apenas uma classe de Python comum:
+
+{{{#!python
+import time
+
+class Counter(object):
+
+    def __init__(self, value):
+        self.value = value
+
+    def run(self):
+        for i in xrange(0, self.value+1): # De 0 ate o valor
+            print i
+            time.sleep(1) # Espera um segundo
+}}}
+
+A classe Counter é bem simples, e parece bem funcional mas, se pensarmos bem, ela não é muito útil. O problema é que só podemos utilizá-la para imprimir o número de segundos passados na contagem, mas podemos querer fazer várias outras coisas com uma "lógica" semelhante. E se quisermos contar do valor até zero, como nas decalagens de foguetes de filmes? E se quisermos apenas informar o tempo passado quando o número de segundos passados for primo? E se, ao invés de escrever o número na tela, queiramos mostrar ele, digamos, num rótulo de uma aplicação GTK+ ou Tkinter? E se não quisermos mostrar o valor mas, por outro lado, executar uma outra operação qualquer? Nossa classe é limitada porque apenas imprime os valores, e vamos tentar remediar isso usando os sinais de GObject.
+
+== Convertendo a classe Counter para uma classe de GObject ==
+
+O primeiro passo para usar sinais em uma classe é transformá-la em uma classe herdeira da classe '''GObject'''. Devemos então importar o módulo '''gobject''':
+
+{{{#!python
+import time
+import gobject
+
+class Counter(gobject.GObject):
+}}}
+
+Agora vem a parte mais complicada, que é declarar os sinais. Antes, temos de entender um pouco mais como funcionam os sinais.
+
+== Como funcionam os sinais ==
+
+Toda vez que um sinal é emitido. uma série de fechamentos conectados a ele é executada. Um ''fechamento'' (nesse contexto) é o conjunto formado por uma função de ''callback'', parâmetros opcionais passados pelo usuário do si	nal e uma função de ''housekeeping''. Bem, aqui não falaremos sobre os parâmetros opcionais nem sobre a função de ''housekeeping'', então nossos sinais vão trabalhar apenas com as funções de ''callback'', e usaremos tanto termo callback quanto fechamento para se referir aos fechamentos.
+
+Existem dois tipos de fechamentos: ''fechamentos de classe'' e ''fechamento de usuário''. O fechamento de classe é um método da classe que sempre é executado quando um objeto da classe emite um sinal. Ele é opcional, e o veremos mais tarde. O fechamento de usuário (assim chamado porque é o usuário da classe que deve defini-lo) é mais flexível, e pode ser associado a um objeto específico. Quando queremos associar uma função de ''callback'' a um sinal, estamos ''conectando'' a função ao sinal, e a transformando num fechamento de usuário.
+
+Pois bem, a um sinal não podemos conectar qualquer função. O sinal exige  que uma função contectada a ele tenha uma certa assinatura e retorne um determinado tipo. Nossos callbacks, nesse texto, não retornarão nenhum valor significativo, de modo que sempre retornarão None. Para nós, o que mais interessa são os argumentos do sinal.
+
+Por fim, GObject permite que definamos o momento em que o fechamento de classe será executados. Uma vez que um sinal tenha sido emitido, ocorrem vários estágios durante os quais o fechamento de classe podem executados. Você pode fazer com que o fechamento de classe seja executado antes dos ''callbacks'' conectados, depois, dos ''callbacks'' conectados,  ou ainda permitir que os usuários escolham isso. Como, por ora, não trabalharemos com fechamentos de classes, a ordem em que eles serão executados é irrelevante, mas ainda assim devemos defini-la. Optaremos então pela opção mais flexível e comum (conforme explicaremos depois): os fechamentos de classes serão executados por padrão após os fechamentos de usuários.
+
+Agora, mãos à obra!
+
+== Declarando a assinatura de um sinal ==
+
+Em PyGObject, a assinatura dos sinais é definida através de um atributo de classe chamado _'''_gsignals_'''_. _'''_gsignals_'''_ é um dicionário, no qual as chaves são o nome dos sinais e o valor associado a chave é uma tupla descrevendo a assinatura do sinal. Essa tupla possui três valores: o primeiro é uma constante para informar a ordem de execução do fechamento de classe; o segundo, o tipo a ser retornado pelo fechamento; por fim, o terceiro valor deve ser uma tupla especificando os tipos dos argumentos do sinal. Tanto o valor de retorno quanto os tipos dos argumentos podem ser especificados tanto por uma constante que defina o tipo (da família de constantes '''gobject.TYPE_*''') quanto por algumas classes Python ou mesmo por uma instância de uma classe herdeira de GObject.
+
+Queremos que nosso contador emita um sinal no lugar de imprimir um número. Esse sinal deverá ter como parâmetro o número de segundos passados (i.e., o valor que atualmente a classe imprime). Vamos chamar o sinal de ''''value-counted''''. Desse modo, nossa nova classe seria definida, até agora, assim:
+
+{{{#!python
+import time
+import gobject
+
+class Counter(gobject.GObject):
+    __gsignals__ = {
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                gobject.TYPE_NONE,
+                (gobject.TYPE_INT,)
+        )
+    }
+}}}
+
+Note como o tipo de retorno ('''gobject.TYPE_NONE''') e o tipo do único argumento do sinal ('''gobject.TYPE_INT''') são constantes, os identificadores de tipos definidos por GObject. Também seria possível defini-los passando, no lugar das constantes, classes de Python correspondentes. Se o fizéssemos, a assinatura do sinal ficaria assim:
+
+{{{#!python
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                None,
+                (int,)
+        )
+}}}
+
+Esse método, porém, vale apenas para algumas poucas classes nativas de Python, e para classes quer herdem de '''gobject.GObject'''.
+
+Note também como o argumento do sinal é único, logo damos uma tupla unitária para defini-lo, e não apenas o tipo. Se não houvesse argumento nenhum, teríamos de pôr uma tupla vazia no seu lugar. Jamais faça algo como:
+
+{{{#!python
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                gobject.TYPE_NONE,
+                (gobject.TYPE_INT)
+        )
+}}}
+
+pois, nesse caso, o valor passado não é uma tupla, mas sim a constante identificadora do tipo apenas.
+
+== Emitindo um sinal ==
+
+Agora, vamos reimplementar os métodos de nossa antiga classe Counter para tirarem proveito do sinal declarado. O método '''Counter._'''_'''_init_'''_'''()''', por exemplo, terá de chamar o método  '''gobject.GObject.'''_'''_init_'''_'''()''', afinal nosso '''Counter''' também é um '''GObject''' e precisa ser inicializado:
+
+{{{#!python
+    def __init__(self, value):
+        gobject.GObject.__init__(self)
+        self.value = value
+}}}
+
+Mais interessante, porém, será o método '''Counter.run()'''. Ao invés de simplesmente imprimir o número de segundos passados, vamos fazer com que o método emita um sinal. Fazemos isso utilizando o método '''gobject.Gobject.emit()'''.
+
+{{{#!python
+    def run(self):
+        for i in xrange(0, self.value+1): # De 0 ate o valor
+            self.emit('value-counted', i)
+            time.sleep(1) # Espera um segundo
+}}}
+
+Repare na assinatura do método '''gobject.GObject.emit()'''. O primeiro argumento é o nome do sinal (no caso, '''"value-counted"'''). Os demais argumentos serão os argumentos passados para o sinal. Como nosso sinal '''"value-counted"''' espera apenas um argumento (um número inteiro), o método '''gobject.GObject.emit()''' possuirá apenas um único argumento a mais, que será o número de segundos já passados.
+
+Nossa declaração de classe ficará assim:
+
+{{{#!python
+import time
+import gobject
+
+class Counter(gobject.GObject):
+
+    __gsignals__ = {
+        'value-counted' : (
+                gobject.SIGNAL_RUN_LAST,
+                gobject.TYPE_NONE,
+                (gobject.TYPE_INT,)
+        )
+    }
+
+    def __init__(self, value):
+        gobject.GObject.__init__(self)
+        self.value = value
+
+    def run(self):
+        for i in xrange(0, self.value+1): # De 0 ate o valor
+            self.emit('value-counted', i)
+            time.sleep(1) # Espera um segundo
+}}}
+
+= Tratamento de sinais com callbacks de usuário =
+
+Para os sinais serem realmente úteis, temos de ''conectar'' ''callbacks'' aos sinais.
+
+== Conectando um callback a um sinal ==
+
+Comecemos por uma tarefa simples: vamos impririr o número de segundos que cada sinal emite. Para isso, salve a nossa classe num arquivo '''counter.py''' e em outro arquivo, que vamos chamar de '''use1.py''', defina uma função '''print_seconds''' como a que se segue:
+
+{{{#!python
+def print_seconds(counter, seconds):
+    print i
+}}}
+
+Importemos então nosso módulo '''counter.py''', e criemos uma instância de '''Counter''''. Uma vez criada a instância, podemos, enfim, conectar ''callbacks'' (no caso, nossa função '''print_seconds'''') aos sinais que tal instância emitirá. Enfim, nosso programinha '''use1.py''' ficará assim:
+
+{{{#!python
+from counter import Counter
+
+# Note que a função espera um argumento antes de 'seconds'. Esse
+# argumento será o objeto que emitiu o sinal. Voltaremos a ele em
+# breve
+def print_seconds(counter, seconds):
+    print i
+
+c = Counter(20)
+# Aqui declaramos que, toda vez que o sinal 'value-counted'
+# for emitido, a funcao print_seconds deve ser invocada e
+# receberá como argumento os argumentos do sinal.
+c.connect('value-counted', print_seconds)
+c.run()
+}}}
+
+Agora, vamos supor que queiramos, além de informar quantos segundos se passaram, também queiramos informar que o número de segundos passado é primo. Não sei por que iríamos querer fazer isso, mas certamente não é difícil e ''sequer precisamos alterar a função '''print_seconds()''''':
+
+
+{{{#!python
+from counter import Counter
+
+def print_seconds(counter, seconds):
+    print seconds
+
+def is_prime(n):
+	divisors = [j+1 for j in xrange(0, n) if (n) % (j+1) == 0]
+	return len(divisors) == 2
+
+def report_prime(counter, seconds):
+    if is_prime(seconds):
+        print "(%d is a prime number)" % seconds
+
+c = Counter(20)
+
+c.connect('value-counted', print_seconds)
+c.connect('value-counted', report_prime)
+c.run()
+}}}
+
+A saída é algo mais ou menos como:
+
+{{{
+$ python primes.py
+0
+1
+2
+(2 is a prime number)
+3
+(3 is a prime number)
+[...]
+18
+19
+(19 is a prime number)
+20
+}}}
+
+A "magia" dos sinais é que podemos conectar quantas funções forem necessárias, sem ter de alterar código em nenhum outra função. Isso é especialmente bom para separar porções de código que não são relacionadas mas que incidentalmente devem ser executadas dada uma mesma condição.
+
+== Recuperando o objeto que emitiu o sinal ==
+
+Você deve ter notado que as funções que conectamos ao sinal possuem dois argumentos. O argumento que chamamos de ''seconds'', já sabemos que corresponde ao valor que foi emitido junto com o sinal. O primeiro argumento, que chamamos de ''counter'', é o objeto que emitiu o sinal.
+
+Suponha, por exemplo, que queiramos fazer um contador regressivo. Além de ser um exemplo muito mais legal que os anteriores, já que lembra decolagem de foguetes e viradas de ano, um contador regressivo permite que vejamos como podemos utilizar o objeto que emitiu o sinal. O desafio, nesse caso, é que, supondo que faremos um contador que contará de um valor ''n'' até zero, ele deve começar a imprimir os valores a partir de ''n'', e não de zero. Então, ao invés de imprimirmos o valor que foi enviado junto com o sinal, imprimiremos o valor que está no campo '''value''' do objeto '''Counter''' subtraído do valor emitido. Como código vale mais que palavras, escreva em um aquivo '''regressive.py''' o código abaixo e veja como o callback tira proveito do objeto passado como argumento:
+
+{{{#!python
+from counter import Counter
+
+def regressive_count(counter, number):
+    print counter.value - number
+
+c = Counter(10)
+c.connect('value-counted', regressive_count)
+c.run()
+}}}
+
+Novamente, não mexemos no código da classe '''Counter'''.
+
+== Desconectando um callback de um sinal ==
+
+Assim como podemos conectar vários callbacks a um sinal, também podemos desconectar cada um deles. Para fazer isso, precisamos do ''identificador do callback''. Esse identificador é o valor retornado pelo método '''GObject.connect()'''. Uma vez que tenhamos tal valor, podemos desconectar o ''callback'' correspondente com o método '''GObject.disconnect()'''.
+
+Considere o código abaixo. Ele é uma versão trialware de nosso '''regressive.py'''. Nessa versão, nós desconectamos o ''callback'' quando faltam apenas três segundos para terminar a contagem. A função, nesse caso, espera que uma variável global '''handler''' contenha um identificador que possa ser usado para desconectar um ''callback'' de um sinal - o que a função conectada fará quando chegar no momento planejado. Como a variável '''handler''' é, logo depois, iniciada com o valor retornado pela conexão do mesmo ''callback'', o ''callback'' desconecta a ele mesmo. Salve o código abaixo em '''trialregressive.py''' e teste:
+
+{{{#!python
+from counter import Counter
+
+stop_at = 3
+
+def trial_regressive_count(counter, number):
+    global handler_id
+    diff = counter.value - number
+    if diff > stop_at:
+        print diff
+    else:
+    	   print 'For printing all seconds, BUY our PREMIUM edition!'
+    	   counter.disconnect(handler_id)
+
+c = Counter(10)
+handler_id = c.connect('value-counted', trial_regressive_count)
+c.run()
+}}}
+
+A saída será:
+
+{{{
+$ python trialregressive.py 
+10
+9
+8
+7
+6
+5
+4
+For printing all seconds, BUY our PREMIUM edition!
+}}}
+
+== Verificando se callback ainda está conectado ==

@@ -1,0 +1,134 @@
+#pragma section-numbers off
+= Introdução Python =
+
+Com nove anos de idade meus pais me inscreveram num curso de informática na
+cidade onde morava. Poderia ter sido um curso qualquer que me ensinasse a
+utilizar um aplicativo Office e me 'garantisse' no mercado de trabalho.
+Entretanto esse curso era diferente. Ele tinha a intenção de formar crianças
+que soubessem pensar e utilizavam o computador para esse trabalho.
+
+Foi nessa época que tive meu primeiro contato com um computador. Iria aprender
+programação em linguagem LOGO em um TK3000 (compatível com o Apple II). Faz
+muito tempo que isso aconteceu, e hoje vejo como foi importante para o meu
+desenvolvimento o método utilizado para me ensinar a programar.
+
+Hoje, quinze anos depois, vejo o governo equipar as escolas com computadores e
+a oportunidade de preparar as nossas crianças para um mundo que precisa de
+seres pensantes. Foi então que notei que não existia uma versão
+satisfatoriamente boa da linguagem LOGO para o ambiente Linux. No mundo do
+software livre, se você tem um problema e não existe uma solução satisfatória,
+você melhora uma existente ou cria uma a partir do zero (sempre dando
+prioridade para o reaproveitamento).
+
+Entretanto, não consegui entrar em contato com nenhum dos mantenedores dos
+interpretadores que encontrei e me vi obrigado a desenvolver um a partir do
+zero. Sempre fui um preguiçoso para o desenvolvimento em C (principalmente no
+que se trata do tratamento de strings dele) e estava querendo dar uma estudada
+na linguagem Python mais a fundo. Foi quando eu encontrei a 'perfeição'.
+
+Conforme ia estudando a linguagem, através da documentação supercompleta que ela
+provê, fui ficando encantado com a facilidade de desenvolvimento, o desempenho,
+a portabilidade e os recursos da mesma. Atualmente eu desenvolvo em 12
+linguagens de programação diferente, mas Python na minha opinião é a mais
+interessante delas.
+
+É uma linguagem fortemente orientada a objetos, interpretada, de tipagem
+dinâmica e modular. Ela herda as melhores características de diversas
+linguagens de programação. Ela provê um ambiente interativo que estaremos
+usando para mostrar algumas das características dela. Para executar o Python
+basta digitar 'python' no prompt de comandos (Python acompanha as melhores
+distribuições Linux do mercado).
+
+{{{
+$ python
+Python 2.1 (#1, Oct 10 2001, 13:27:02) 
+[GCC 2.95.3 20010315 (release)] on linux-i386
+Type "copyright", "credits" or "license" for more information.
+>>> _
+}}}
+
+O prompt '>>>' do Python diz que você já pode digitar os comandos. Nesse artigo
+vou mostrar algumas coisas interessantes da linguagem e deixar a programação
+nela para um próximo artigo (onde pretendo mostrar como desenvolver interfaces
+gráficas, aplicações web, ...). Veja agora uma seção de comandos em Python:
+
+{{{
+>>> a = 'string'
+>>> a
+'string'
+>>> a[0:1]
+'s'
+>>> a[0:-1]
+'strin'
+>>> a.upper()
+'STRING'
+}}}
+
+Como vocês podem ver Python trabalha perfeitamente com strings provendo métodos para isso. A linguagem Python também trabalha nativamente com listas:
+
+{{{
+>>> b = [ 'a', 'b', [ 1, 2, 3 ], 'c' ]
+>>> b
+['a', 'b', [ 1, 2, 3 ], 'c']
+>>> b.append('d')
+>>> b
+['a', 'b', [ 1, 2, 3 ], 'c', 'd']
+>>> b[0:2]
+['a', 'b']
+>>> b[2][2]
+3
+>>> b[2]
+[1, 2, 3]
+>>> a = 'comando parametro1 parametro2'
+>>> a.split()
+['comando', 'parametro1', 'parametro2']
+}}}
+
+Os recursos de lista também são poderosíssimos e as conversões entre strings e
+listas é superfácil. Python também trabalha com tuplas:
+
+{{{
+>>> c,d = 1,2
+>>> c
+1
+>>> d
+2
+>>> d,c = c,d
+>>> c
+2
+>>> d
+1
+}}}
+
+Uma coisa que deve ser ressaltada é que Python é totalmente orientada a
+objetos. E todos esses tipos de dados são também objetos (Python também
+apresenta um excelente sistema de garbage collector). Mais uma estrutura de
+dado em nativa em Python; dicionários:
+
+{{{
+>>> d = { 'a' : 1, 'b' : 2, 'c' : 3 }
+>>> d
+{'a': 1, 'b': 2, 'c': 3}
+>>> d['a']
+1
+>>> d.keys()
+['a', 'b', 'c']
+>>> d.values()
+[1, 2]
+}}}
+
+Além disso, Python também possui um excelente conjunto de módulos carregáveis,
+sistema de tratamento de exceções, todos os paradigmas de desenvolvimento
+orientado a objetos (herança, polimorfismo, ...), entre outras coisas.
+
+Vocês podem me dizer que Java também faz tudo isso, mas recomendo que vocês
+dêem uma olhada em Python mesmo assim. Vocês vão notar imediatamente a
+performance das aplicações desenvolvidas em Python. Quanto à portabilidade?
+Python ainda não roda em celulares (celular não serve para fazer telefonar?)
+mas está disponível para plataformas Intel (Windows, Linux, *BSD), HP (HP-UX),
+Sun (SunOS) e IBM (AIX). Quem trabalha a sério com desenvolvimento precisa mais
+que isso?
+
+----
+
+Osvaldo Santana Neto

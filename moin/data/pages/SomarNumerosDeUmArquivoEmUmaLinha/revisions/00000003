@@ -1,0 +1,55 @@
+#pragma section-numbers off
+= Receita: Somando números de um arquivo com uma linha de código =
+
+Em um [http://www.mse.com/icon/ documento] que explica o uso da linguagem Icon, tem um interessante exemplo de programa que computa a soma de todos os números de um arquivo (estes, separados por espaços), os números podem estar dispersos em várias linhas. Um arquivo de exemplo seria:
+
+{{{
+10 30 5
+5
+2 54 2 76 4 2
+2 4 
+3
+4 5 6 20 12
+}}}
+
+Em Icon o programa ficaria assim:
+
+{{{
+every sum +:= !split(!&input, ' \t')
+}}}
+
+Aonde "input" é a stream de entrada.
+
+== Código ==
+
+Este é o código para Python 2.2 e 2.3:
+
+{{{
+#!python
+print sum([sum([int(s) for s in l.split()]) for l in __import__("sys").stdin])
+}}}
+
+Para o Python 2.4 podemos utilizar 'generator expressions' para fazer a mesma coisa. Com isso temos um código muito mais 'escalável' (palavra bonita), pois não será necessário alocar uma lista com strings e outra com inteiros para cada linha do arquivo (imagine isso para um arquivo bem grande). Eis o código:
+
+{{{
+#!python
+print sum((sum((int(n) for n in sn)) for sn in (linha.split() for linha in __import__("sys").stdin)))
+}}}
+
+Usar as características de linguagens funcionais que Python traz consigo torna a programação [http://64.233.187.104/search?q=cache:aND5UNWjJm8J:www.microsoft.com/brasil/pr/ie40prev.htm+%22uma+experi%C3%AAncia+muito+mais%22++microsoft&hl=pt-BR muito mais rica e empolgante], além de servir como um divertido exercício.
+
+=== Comentário (por João Paulo F Farias) ===
+
+Achei uma forma mais simples:
+
+{{{
+sum(map(int, __import__('sys').stdin.read().split()))
+}}}
+
+:P
+
+Volta para CookBook.
+
+----
+
+BogdanoArendartchuk

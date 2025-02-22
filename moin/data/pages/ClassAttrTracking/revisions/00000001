@@ -1,0 +1,115 @@
+Por incrível que pareça, essa receita é um código de uso real, feito para uma aplicação que usaria diversas classes como estruturas, mas precisava manter um registro da ordem que os atributos foram definidos. Esse registro precisava ser simples de manter, portanto a idéia de manter uma lista com todos eles estava fora de questão.
+
+Num primeiro instante a idéia óbvia era definir o método __setattr__ na metaclasse, para registrar  a ordem que os atributos foram definidos, no entanto isso só funcionaria para os atributos definidos depois que a classe for criada, não para aqueles na definição da classe, que são passados para a chamada à metaclasse em um dicionário (portanto, sem ordem). Simplesmente definir os atributos no método __init__ e usar um __setattr__ customizado na classe também não funcionaria, porque haveriam outras subestruturas que teriam de ser criadas na compilação, não durante a execução.
+
+A solução é essa logo abaixo: complicada, mas interessante o bastante para aparecer aqui, para os interessados no assunto. A idéia é atribuir a cada objeto criado um número identificador, usado para ordená-los. MetaTrackable é uma metaclasse que registra esse número para suas classes, que por sua vez registram o número para suas instâncias. MetaTracker é outra metaclasse, cujas classes  mantém o registro da ordem e geram um iterador para ser usado quando necessário.
+
+Como as metaclasses são criadas cooperativamente, e usando super() para chamar as superclasses, criar uma metaclasse juntando o comportamento das duas, MetaTrackerTrackable, é algo bem trivial.
+
+== Código ==
+
+{{{
+#!python
+import itertools
+
+class MetaTrackable(type):
+    _counter = itertools.count()
+    
+    def __init__(cls, name, bases, attrs):
+        super(MetaTrackable, cls).__init__(name, bases, attrs)
+        cls._counter = itertools.count()        
+        cls._creation_number = cls.__class__._counter.next()
+
+    def __call__(cls, *args, **kwds):
+        obj = cls.__new__(cls, *args, **kwds)
+        cls.__init__(obj, *args, **kwds)
+        obj._creation_number = cls.__class__._counter.next()
+        return obj      
+
+
+class MetaTracker(type):
+    def __init__(cls, name, bases, attrs):
+        super(MetaTracker, cls).__init__(name, bases, attrs)
+
+        attrs_order = [(a, v._creation_number) for (a, v) in attrs.items()
+                       if hasattr(v, '_creation_number')]
+
+        cls._order = [a[0] for a in sorted(attrs_order, key=lambda x:x[1])]
+
+    def __iter__(cls):
+        for a in cls._order:
+            yield getattr(cls, a)
+
+
+class MetaTrackerTrackable(MetaTracker, MetaTrackable):
+    pass
+
+}}}
+
+== Um exemplo de uso (na verdade, um teste do funcionamento) ==
+
+{{{
+#!python
+class Value:
+    __metaclass__ = MetaTrackable
+
+class ValueX(Value):
+    pass
+
+class ValueY(Value):
+    pass
+
+class ValueZ(Value):
+    pass
+
+
+class Node:
+    __metaclass__ = MetaTrackerTrackable
+
+
+class Tree(Node):
+    a = ValueZ()
+    c = ValueX()
+    b = ValueY()
+
+    class SubA(Node):
+        e = ValueX()
+        d = ValueX()
+
+        class SubA(Node):
+            b = ValueX()
+            a = ValueY()
+
+        class SubB(Node):
+            b = ValueY()
+            c = ValueX()
+            e = ValueZ()
+            d = ValueX()
+
+        h = ValueZ()     
+
+
+assert Tree._order == ['a', 'c', 'b', 'SubA']
+for v, c in zip(Tree, (ValueZ, ValueX, ValueY, type)):
+    assert isinstance(v, c)
+
+assert Tree.SubA._order == ['e', 'd', 'SubA', 'SubB', 'h']
+for v, c in zip(Tree.SubA, (ValueX, ValueX, type, type, ValueZ)):
+    assert isinstance(v, c)
+
+assert Tree.SubA.SubA._order == ['b', 'a']
+for v, c in zip(Tree.SubA.SubA, (ValueX, ValueY)):
+    assert isinstance(v, c)
+
+assert Tree.SubA.SubB._order == ['b', 'c', 'e', 'd']
+for v, c in zip(Tree.SubA.SubB, (ValueY, ValueX, ValueZ, ValueX)):
+    assert isinstance(v, c)
+
+
+}}}
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

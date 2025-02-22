@@ -1,0 +1,175 @@
+= Webware Rapidinho =
+
+[http://www.webwareforpython.org/ Webware homepage]
+
+= O Que É? =
+
+É uma suíte OO para desenvolvimento web, obviamente feito em Python.
+O Webware é constituido de componentes chamados de ''kits'', entre eles o !WebKit é um servidor de aplicações para web.
+
+= Como Baixar O Fonte? =
+
+A última versão disponível (0.8.1) encontra-se em http://prdownloads.sourceforge.net/webware/Webware-0.8.1.tar.gz?download
+
+= Como Eu Instalo? =
+{{{
+$ cd /usr/local (/opt ou aonde for mais adequado)
+$ tar zxvf Webware-0.8.1.tar.gz
+$ cd Webware-0.8.1/
+$ python install.py
+}}}
+
+Isso vai instalar o framework, mas não é legal manter os dados do projeto (chamados de contextos) junto com o próprio Webware, por isso é melhor criar um lugar separado para o seu projeto. O Webware tem um script para isso.
+{{{
+$ cd /usr/local/Webware-0.8.1
+$ python bin/MakeAppWorkDir.py /home/ruda/MyWebKit
+}}}
+
+Substitua {{{/home/ruda/MyWebKit}}} para onde for mais ao seu gosto.
+
+= Servidor HTTP =
+Sim, precisa do Apache rodando, não esqueça. Outros servidores também são suportados, veja a documentação. O Webware inclui um servidor HTTP de brinquedo, para rodar é fácil
+{{{
+$ cd /usr/local/Webware-0.8.1/WebKit/Adapters
+$ ./HTTPAdapter --host=localhost --port=80 --daemon
+}}}
+mas não use, é muito fraquinho.
+
+= Adaptadores =
+O adaptador é o que liga a requisição do cliente via browser com o servidor de aplicações. O servidor de aplicações roda em uma porta diferente da 80 e por padrão é a porta 8086.
+{{{
+Cliente (via browser)
+ |
+Servidor HTTP (porta 80)
+ |
+Adaptador
+ |
+AppServ (porta 8086)
+}}}
+
+  * '''wkcgi''' é um CGI feito em C. É rápido e simples de usar.
+
+Para instalar:
+{{{
+$ cd /usr/local/Webware-0.8.1/WebKit/Adapters/wkcgi
+$ make
+$ cp wkcgi /var/www/cgi-bin/wkcgi.cgi
+}}}
+'''Obs 1:''' O aplicativo apxs é necessário para compilar os modulos do apache. Na distribução debian (e baseadas em .deb como o ubuntu) você pode encontra-lo no pacote apache-dev.
+'''Obs 2:''' Se mesmo depois de instalar o apache-dev o make continuar reclamando verifique o caminho do apxs dentro do arquivo Makefile e se necessário altere para o caminho correto.
+
+  * '''Webkit.cgi''' é um CGI feito em Python. Não use.
+
+  * '''!OneShot.cgi''' semelhante ao Webkit.cgi, muito útil durante a fase de desenvolvimento pois as páginas não ficam persistentes, elas são sempre relidas em cada leitura de página.
+
+  * '''mod_webkit''' é um módulo para plugar diretamente no Apache. É o método mais eficiente.
+
+Para instalar (usando a versão para apache 1.x):
+{{{
+$ cd /usr/local/Webware-0.8.1/WebKit/Adapters/mod_webkit
+$ make
+$ cp mod_webkit.so /usr/lib/apache/1.3/
+}}}
+
+Edite o arquivo de configuração do apache e acrescente:
+{{{
+LoadModule webkit_module /usr/lib/apache/1.3/mod_webkit.so
+AddType text/psp .psp
+AddHandler psp-handler .psp
+<Location /wk>
+  WKServer localhost 8086
+  SetHandler webkit-handler
+</Location>
+}}}
+
+= Como Iniciar O Servidor De Alicações? =
+  * Se escolher o modo wkcgi
+{{{
+$ cd /home/ruda/MyWebKit
+$ ./AppServ
+}}}
+
+Agora é só abrir um browser e apontar para a url http://localhost/cgi-bin/wkcgi.cgi
+
+= Como Parar O Servidor De Aplicações? =
+Basta matar o servidor !AppServ, {{{^C}}} no terminal que ele está rodando ou matar com {{{kill <processo do AppServ>}}}.
+
+= Tenho O Webware Instalado, E Agora? =
+  * Leia a documentação oficial que deve estar em {{{/usr/local/Webware-0.8.1/Docs/}}} (comece pelo index.html).
+  * Leia o Wiki do Webware http://wiki.w4py.org/
+  * Comece modificando o {{{/home/ruda/MyWebKit/MyContext/Main.py}}}
+
+= Um pequeno Exemplo =
+Este exemplo substitui o  {{{/.../MyWebkit/MyContext/Main.py}}} que foi criado
+conforme as instruções anteriores, talvez seja legal copiar o original para ter como referência.
+
+{{{#!python
+from WebKit.Page import Page
+
+class Main(Page):
+    def writeContent(self, msg=''):
+        fruits = self.session().value('fruits', [])
+        
+        self.writeln('<h1>Cesta de Frutas</h1>')
+        
+        if fruits:
+            self.writeln('Disponível na cesta:<ul>')
+            for fruit in fruits:
+                self.writeln('<li>' + fruit)
+            self.writeln('</ul>')
+        
+        self.writeln('''
+        <form action="Main" method="POST">
+        <table>
+        <tr>
+          <td><input type="submit" name="_action_add" value="Adicionar">
+          <td><input type="text" name="new_fruit">
+        <tr>
+          <td><input type="submit" name="_action_remove" value="Remover">
+          <td><input type="text" name="remove_fruit">
+        <tr>
+          <td><input type="submit" name="_action_clear" value="Limpar"
+          <td>
+        </table>
+        </form>
+        ''')
+        
+        if msg:
+            self.writeln('<small>Resultado da última operação: %s</small>'
+                         % msg)
+
+    def actions(self):
+        return Page.actions(self) + ['add', 'remove', 'clear']
+
+    def add(self):
+        fruits = self.session().value('fruits', [])
+        new_fruit = self.request().field('new_fruit')
+        if not new_fruit in fruits:
+            fruits.append(new_fruit)
+            self.session().setValue('fruits', fruits)
+            msg = 'Adicionei a fruta na cesta.'
+        else:
+            msg = 'A fruta já está na cesta.'
+        self.writeContent(msg)
+
+    def remove(self):
+        fruits = self.session().value('fruits', [])
+        rm_fruit = self.request().field('remove_fruit')
+        if rm_fruit in fruits:
+            fruits.remove(rm_fruit)
+            self.session().setValue('fruits', fruits)
+            msg = 'A fruta foi removida.'
+        else:
+            msg = 'A fruta não estava na cesta.'
+        self.writeContent(msg)
+
+    def clear(self):
+        if self.session().hasValue('fruits'):
+            self.session().delValue('fruits')
+        self.writeContent('A cesta foi limpa.')
+}}}
+
+ou baixe o attachment:Main.py
+----
+
+RudaMoura

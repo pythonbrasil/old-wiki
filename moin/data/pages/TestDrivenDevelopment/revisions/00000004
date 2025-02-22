@@ -1,0 +1,280 @@
+= UnitTests em Python =
+
+Dentre todos os aspectos da metodologia "Extreme Programming" (http://www.extremeprogramming.org), pelo menos um deles é aplicável em qualquer nível do processo de desenvolvimento, com resultados refletidos não só na melhoria do código e redução do tempo de desenvolvimento como também na facilidade de manutenção posterior do código. Esse aspecto, que estarei comentando nesse artigo é chamado de "Test-driven development" (em português, Desenvolvimento Dirigido por Testes).
+
+
+== Introdução ==
+
+No ciclo normal de desenvolvimento, você escreve parte do código da sua aplicação e testa. Corrige os eventuais problemas e testa novamente, repetindo o processo e incrementando aos poucos até atingir a funcionalidade desejada (ou a paciência se esgotar). Esse processo tem vários problemas. O mais óbvio de todos é que normalmente a etapa de testes é relegada para um momento posterior do processo de desenvolvimento, quando já há uma base de código grande a ser testada. 
+
+Segundo os proponentes da metodologia XP, esse processo tem de ser totalmente invertido. Você deve escrever os testes primeiro, antes de escrever o código que será testado. O teste irá ditar que código você deverá escrever, ou melhor, que código você '''precisa''' escrever. Você escreve apenas o código necessário para passar no teste. Nem uma linha a mais, nem uma linha a menos.
+
+
+== Um rápido exemplo ==
+
+Criar testes antes do código é algo aparentemente confuso à primeira vista, mas aos poucos você entenderá toda a mecânica do processo e uma vez que esteja "infectado", não conseguirá mais trabalhar sem eles. Começaremos por um exemplo simples. Digamos que numa aplicação qualquer, eu preciso de um objeto Pessoa, que armazene alguns dados de um cliente, retirados de um banco de dados, como nome, sobrenome, data de nascimento. Mais do que isso, nossa empresa tem um novo produto dirigido à uma determinada faixa etária, e nossa aplicação deve selecionar os clientes por idade.
+
+Parece claro que precisamos de uma classe ''Pessoa'', com atributos ''nome'', ''sobrenome'' e ''nascimento'', além de um método ''idade'', que retorna o valor da idade atual do cliente. Então, se já temos uma idéia de como o objeto deve ser, vamos criar essa classe Pessoa certo ? 
+
+Errado. Vamos primeiro criar o teste que verifica o funcionamento da classe Pessoa. "Mas como ?!?" você deve estar pensando "Eu não escrevi nenhum código ainda. Eu nem sei o que estou testando.". A resposta é simples. Você '''sabe''' o que está testando. Você só acha que não sabe porque nunca pensou dessa forma.
+
+Vamos a um exemplo mínimo do teste. Estarei usando os arquivos exemplo.py para o código e test_exemplo.py para os testes:
+
+{{{
+#!python
+
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+import unittest
+
+from exemplo import Pessoa
+
+
+class TestPessoa(unittest.TestCase):
+    def setUp(self):
+        self.pessoa = Pessoa("Pedro", "Werneck", (31, 12, 1981))
+
+    def testAtributos(self):
+        self.assertEqual(self.pessoa.nome, "Pedro")
+        self.assertEqual(self.pessoa.sobrenome, "Werneck")
+        self.assertEqual(self.pessoa.nascimento, (31, 12, 1981))
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+}}}
+
+O módulo unittest, importado logo no começo do arquivo é um port para Python do !JUnit, existente para Java, que por sua vez foi baseado em outro framework de testes para Smalltalk. A API é simples de entender e usar. 
+
+A classe !TestCase é que a será usada com mais frequência. As suas classes teste devem ser subclasses dela. Todos os métodos que começam com ''test'' são tratados pela classe como testes que devem ser executados. Os métodos setUp() e tearDown() são executados antes de cada um dos testes da classe. 
+
+O método assertEqual() recebe dois argumentos para testar igualdade, falhando o teste caso não sejam iguais. É mais ou menos o equivalente de {{{assert a == b}}}. 
+
+A função unittest.main() executa todos os métodos teste em subclasses de unittest.!TestCase que forem encontrados no arquivo. Existem maneiras mais sofisticadas de executá-los, mas foge do intuito deste artigo que é ser apenas uma introdução rápida ao conceito.
+
+Executando este exemplo acima temos a falha esperada:
+
+{{{
+Traceback (most recent call last):
+  File "test_exemplo.py", line 6, in ?
+    from exemplo import Pessoa
+ImportError: No module named exemplo
+}}}
+
+Agora que temos um teste podemos escrever algum código, apenas o suficiente para passar no teste. Vou criar o módulo exemplo.py e criar a classe Pessoa.
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding:UTF-8 -*-
+
+class Pessoa:
+    def __init__(self, nome, sobrenome, nascimento):
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.nascimento = nascimento
+
+}}}
+
+É só isso. Lembre-se que nosso objetivo é sempre de apenas passar no teste. Nada a mais, nada a menos. Agora já temos um resultado bem diferente quando executamos nosso teste novamente:
+
+{{{
+----------------------------------------------------------------------
+Ran 1 tests in 0.001s
+
+OK
+
+}}}
+
+
+É esse sempre nosso objetivo. Conseguir um OK. Testar a existência e valor de atributos como no exemplo, não é muito importante, a menos que você esteja tentando resolver algum problema envolvendo esses atributos.
+
+Seguindo o ciclo de desenvolvimento, agora que temos o código passando no teste, podemos acrescentar algumas linhas ao arquivo test_exemplo.py. Vamos agora testar o método idade() que deve calcular minha idade baseado na data de nascimento e na data atual.
+
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+import unittest
+
+from exemplo import Pessoa
+
+
+class TestPessoa(unittest.TestCase):
+    def setUp(self):
+        self.pessoa = Pessoa("Pedro", "Werneck", (31, 12, 1981))
+
+    def testAtributos(self):
+        self.assertEqual(self.pessoa.nome, "Pedro")
+        self.assertEqual(self.pessoa.sobrenome, "Werneck")
+        self.assertEqual(self.pessoa.nascimento, (31, 12, 1981))
+
+    def testIdade(self):
+        self.assertEqual(self.pessoa.idade(), 21)
+        
+if __name__ == "__main__":
+    unittest.main()
+
+
+}}}
+
+Minha idade atual é de 21 anos, mas como esperado, o teste falha antes mesmo de chegar ao valor, pois o método idade() ainda nem existe:
+
+{{{
+.E
+======================================================================
+ERROR: testIdade (__main__.TestPessoa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<stdin>", line 19, in testIdade
+AttributeError: Pessoa instance has no attribute 'idade'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.006s
+
+FAILED (errors=1)
+
+}}}
+
+Agora podemos retornar ao código. O que queremos é que ele pegue o ano da data de nascimento e calcule a idade a partir do ano atual. Para isso vamos usar a função gmtime(), contida no módulo time. Podemos calcular a idade atual subtraindo o ano de nascimento do ano atual.
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding:UTF-8 -*-
+
+import time
+
+class Pessoa:
+    def __init__(self, nome, sobrenome, nascimento):
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.nascimento = nascimento
+
+    def idade(self):
+        return time.gmtime()[0] - self.nascimento[2]
+
+}}}
+
+Como sempre, escrevemos apenas o mínimo de código necessário para passar no teste. Depois de escrever o código, podemos executar o teste novamente:
+
+
+{{{
+.F
+======================================================================
+FAIL: testIdade (__main__.TestPessoa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<stdin>", line 19, in testIdade
+  File "/usr/lib/python2.3/unittest.py", line 302, in failUnlessEqual
+    raise self.failureException, \
+AssertionError: 22 != 21
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.014s
+
+FAILED (failures=1)
+
+}}}
+
+Aqui temos o primeiro problema capturado pelos nossos testes. Minha idade é 21 anos, não 22. Usar somente o ano para calcular a idade não foi boa idéia, já que eu ainda vou completar 22 anos no final desse ano. 
+
+Obviamente o problema tem de estar nas duas linhas que eu acabei de adicionar. Nesse caso simples, isso é óbvio, mas quando estamos lidando com projetos grandes, nem sempre fica claro que parte do código está causando o problema. Desenvolvendo o código através de testes você sempre sabe onde o problema está: na sua última alteração, entre o último teste que passou e o último que falhou. É por esse motivo que é importante desenvolver o código em passos pequenos, testando antes e depois de inserir uma alteração.
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding:UTF-8 -*-
+
+import time
+
+class Pessoa:
+    def __init__(self, nome, sobrenome, nascimento):
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.nascimento = nascimento
+
+    def idade(self):
+        ano_a, mes_a = time.gmtime()[:2]
+        mes_n, ano_n = self.nascimento[1:]
+        idade = ano_a - ano_n
+
+        if mes_a < mes_n:
+            return idade -1
+
+        return idade
+    
+}}}
+
+Aqui corrigimos o problema causado por utilizar apenas o ano no cálculo da idade, acrescentando o mês de nascimento ao cálculo. Comparando o mês de nascimento com o mês atual, podemos saber se a Pessoa já fez aniversário no ano atual e saber sua idade com maior precisão. Mas ainda temos que executar o teste para saber se funciona:
+
+{{{
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+OK
+}}}
+
+OK. O teste passou, pelo menos no código atual. É lógico que ele ainda pode ter problemas, mas mais importante do que mostrar o que está correto ou não, a intenção deste exemplo trivial é dar uma idéia de como é programar utilizando unittests. Eu escrevi apenas o código necessário para passar em cada teste a cada passo. Ao escrever cada teste, eu tratei cada parte do código como se já existisse, da forma como eu quero que ele seja. É um grande exercício de aprendizado.
+
+
+== Por que escrever testes antes ? ==
+
+ * Segurança. São uma rede de proteção que protege seu código a cada vez que você precisa alterá-lo. Você sabe imediatamente se causou ou não algum problema graças ao resultado dos testes.
+
+ * Aprendizado. Escrever testes antes de escrever o código é uma ótimo maneira de mantê-lo focado apenas no seu objeto de desenvolvimento atual. De fato, mesmo que você se esqueça completamente do código, os testes sempre serão um exemplo claro de como usá-lo, até mesmo para um novo desenvolvedor dentro de um projeto.
+
+ * Rapidez. Sim, economiza-se tempo com, pois você passa a maior parte dele desenvolvendo código e não corrigindo problemas (e as vezes introduzindo muitos mais).
+
+XXXX
+
+== Desculpas mais frequentes ==
+
+Se você é um desenvolvedor solitário, não é díficil adotar unittests em seus projetos. No entanto, se você faz parte de uma equipe, é díficil manter qualquer política que exija uma certa disciplina de todos os envolvidos caso eles não concordem.
+
+As desculpas mais comuns (e alguns contra-argumentos) são:
+
+ * '''Isso é perda de tempo''' Aparentemente para alguns programadores, a velocidade de desenvolvimento é diretamente proporcional à velocidade em que você é capaz de digitar. Felizmente, existem outros fatores que influenciam o tempo de desenvolvimento e a qualidade do código escrito. É preciso entender que unittests não são uma ferramenta para sbaer se o código está certo ou não, e sim um '''ambiente''' de desenvolvimento em que só é aceito o código que está correto. Isso poupa tempo pois evita a introdução de muitos bugs, justamente os que são os mais difíceis de encontrar.
+
+ * '''Isso é inútil''' Até os melhores cometem enganos. Frequentemente, são justamente os melhores programadores os responsáveis pelos bugs mais complicados e díficeis de resolver. Esses são justamente os desenvolvedores que são beneficiados por unittests pois assim que passam a adotá-los, descobrem que seu código tem muito mais bugs do que imaginam.
+
+XXXX
+
+
+== Algumas Regras Para Unittesting ==
+
+ * Escreva os testes antes de escrever o código e '''execute-os''' antes de escrever o código. É claro que eles irão falhar, mas a finalidade desse passo inicial é apenas criar uma imagem mental mais acurada do que você está trabalhando, além de ter certeza de que todo os detalhes não diretamente ligados ao código estão corretos (sintaxe, caminhos de módulos e bibliotecas, etc). Adicionalmente, existe também a possibilidade de você alterar ou adicionar um teste e ele passar sem precisar de alterações no código sendo testado. É raro, mas acontece. :)
+
+ * Simplifique. Escreva sempre somente o mínimo de código necessário para passar em um teste. Nos casos em que esse mínimo de código seja suficiente para passar no teste atual, mas não para responder a todas as possibilidades que podem ocorrer, mentenha um ciclo curto de teste/desenvolvimento, adicionando pequenas partes de código aos poucos.
+
+ * Tenha os testes organizados em um arquivo para cada arquivo de código a ser testado. Lembre-se que você ira executá-los corriqueiramente dezenas ou mesmo centenas de vezes, então tenha uma forma de automatizar a execução de todos os testes de um arquivo, de um diretório e de todo o projeto.
+
+ * Mantenha a disciplina. Há inúmeros momentos em que escrever um teste para um determinado pedaço de código parece ser inútil ou perda de tempo. Se isso se repetir com frequência, em pouco tempo você terá uma pilha de código que não está coberta por testes e mesmo que tudo funcione perfeitamente, você não pode ter certeza se não introduziu algum bug no código.
+
+ * Nos raros casos em que não houver forma de escrever um teste antes, escreva primeiro um mínimo de código. Talvez apenas a interface básica do objeto a ser testado, e volte ao teste depois, retomando o ciclo normal de desenvolvimento.
+
+XXXX
+
+== Referências ==
+
+1. ``PyUnit`` - the standard unit testing framework for Python
+    http://pyunit.sourceforge.net
+
+2. Learning to Love Unit Testing - Dave Thomas, Andy Hunt
+    http://www.pragmaticprogrammer.com/articles/stqe-01-2002.pdf
+
+3. Demystifying Extreme Programming: Test-driven programming - Roy W. Miller
+    http://www-106.ibm.com/developerworks/java/library/j-xp042203/
+
+4. Test Driven Development: By Example -  Kent Beck - ISBN: 0321146530 
+    http://www.programming-reviews.com/Test_Driven_Development_By_Example_0321146530.html
+
+
+---- 
+
+PedroWerneck

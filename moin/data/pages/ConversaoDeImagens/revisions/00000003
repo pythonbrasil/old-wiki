@@ -1,0 +1,30 @@
+#pragma section-numbers off
+= Receita: ConversãoDeImagens =
+
+O código abaixo converte uma imagem BMP para JPG utilizando a biblioteca ["PIL: Python Imaging Library"]. O script funciona criando a figura JPG baseado na BMP e mantém o mesmo nome, alterando a extensão. 
+
+== Código ==
+
+{{{
+#!python
+import sys
+import Image
+
+arquivo = sys.argv[1]
+imagem = Image.open(arquivo).convert("RGB")
+imagem.save(arquivo[0:len(arquivo)-4] + ".jpg")
+}}}
+
+== Exemplo de uso ==
+
+{{{
+python converte.py imagem.bmp
+
+Onde "converte.py" é o arquivo contendo o código da receita.
+}}}
+
+Volta para CookBook.
+
+----
+
+Washington Coutinho Corrêa Jr

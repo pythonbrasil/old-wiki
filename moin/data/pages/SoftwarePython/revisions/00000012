@@ -1,0 +1,42 @@
+#pragma section-numbers off
+= Software Python =
+
+Nesta página você vai achar aquele software, aquele módulo, aqueles scripts que facilitarão a sua vida de desenvolvedor Python. Aqui também você poderá colocar aquele seu projeto desenvolvido em Python para que todos conheçam.
+
+[[TableOfContents]]
+
+== Ferramentas Programação ==
+
+   * EditorSpe - Editor de textos.
+   * AmbienteEric3 - Ambiente de desenvolvimento.
+
+== Módulos ==
+
+=== Web ===
+   * [http://wwwsearch.sourceforge.net/ClientForm/ ClientForm] - Manipula forms html. Parseia html com form, permite prencher o form e submeter.
+   * [http://wwwsearch.sourceforge.net/ClientCookie/ ClientCookie] - Cliente http com suporte a cookies. Equivalente ao urllib2.urlopen()
+   * [http://wwwsearch.sourceforge.net/DOMForm/ DOMForm] - Screen scrapping html com suporte a Javascript. Usa o ClientForm pra preencher forms.
+   * [http://diveintomark.org/projects/pygoogle/ pygoogle] - Faz buscas no google. Precisa se registrar no google (http://google.com/apis)
+
+=== Gráficos etc ===
+   * [http://www.reportlab.org reportlab] - Cria/monta documentos PDF.
+
+=== GUI ===
+
+   * [http://www.daa.com.au/~james/software/pygtk/ PyGTK]
+   * [http://www.wxpython.org/ wxPython]
+   * [http://www.riverbankcomputing.co.uk/pyqt/index.php PyQT]
+   * [http://pyfltk.sourceforge.net/ FLTK]
+
+== Scripts ==
+
+   * Compile2Exe - Script para facilitar o uso do módulo py2exe
+
+== Softwares desenvolvidos por Brasileiros em Python ==
+
+   * Txt2Tags - Conversor de documentos.
+   * [http://sedsed.sf.net sedsed] - Depurador para scripts SED (Stream EDitor)
+
+----
+
+OsvaldoSantanaNeto

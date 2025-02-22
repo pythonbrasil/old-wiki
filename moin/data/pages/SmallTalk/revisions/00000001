@@ -1,0 +1,14 @@
+#pragma section-numbers off
+= Smalltalk =
+
+Smalltalk é uma linguagem de programação Orientada a Objetos criada na década de 70 pelo Centro de Pesquisa de Palo Alto da Xerox (lugar onde, entre outras coisas, nasceram a Ethernet e a GUI).
+
+Ela é totalmente baseada no conceito de orientação a objetos. Realmente é uma linguagem fantástica (tanto que Python 'adota' algumas de suas características).
+
+Na minha opinião, o que falta em Smalltalk é uma implementação livre realmente de qualidade.
+
+Para um pouco mais de história sobre Smalltalk eu sugiro: http://www.cosc.canterbury.ac.nz/~wolfgang/cosc205/smalltalk1.html#history (em inglês)
+
+----
+
+OsvaldoSantanaNeto

@@ -1,0 +1,238 @@
+= Significado de ''self'' em Python =
+
+''por Adam Victor Nazareth Brandizzi <brandizzi gmail com>''[[BR]]
+
+Um dos aspectos mais incompreendidos de Python é a declaração do argumento 
+'''self''' para métodos. Esse texto tentará apresentar uma explicação 
+baseada em funções. Pressupomos que o leitor já conheça a linguagem e saiba como
+definir funções em Python.
+
+[[TableOfContents]]
+
+== Classes, funções e métodos ==
+
+Para compreender o sentido do parâmetro '''self''', temos de entender 
+o que é uma classe. Uma ''classe'' é um "modelo" para diversos 
+valores, que são chamados ''objetos''. Definir classes é bem simples, 
+e nem precisamos fazer algo em sua definição. Por exemplo, a classe 
+'''Person''' abaixo, que usaremos para representar pessoas, é definida sem 
+nenhum comando significante dentro dela, exceto o comando '''pass''', 
+que informa que nada será feito além de definir a classe.
+
+{{{
+#!python
+class Person(object):
+    pass
+}}}
+''Definição simples de classe''
+
+A definição de classe não faz nada 
+além de dizer que existe a classe '''Person'''. Para executarmos 
+operações nessa classe, precisamos definir '''funções''' que atuem sobre 
+ela. Por exemplo, funções que armazenem o nome da pessoa:
+
+{{{
+#!python
+class Person(object):
+    pass
+
+def set_name(person, name):
+    # Não aceita nomes com menos de duas letras
+    if len(name) >= 2:
+        person.name = name
+
+woman = Person()
+set_name(woman, 'Juliana')
+
+# Vai imprimir "Juliana"
+print woman.name
+
+# Não vai mudar o valor, pois len('J') < 2
+set_name(woman, 'J')
+
+# Vai imprimir "Juliana" de novo, pois não mudou o valor
+print woman.name
+}}}
+''Definição de classe e função''
+
+Acima, definimos a função 
+'''set_name''' que armazena o nome da pessoa num objeto da classe '''Person'''.
+
+Por uma questão de praticidade, é tradição declarar as funções que operam sobre 
+uma classe dentro da própria classe. Uma vez que a função foi declarada dentro 
+da classe, toda vez que a função for chamada o nome da classe deve vir antes; 
+isto é, chamar uma função declarada dentro de uma classe é como chamá-la de um 
+módulo.
+
+No código abaixo, declaramos a função dentro da classe, 
+ao invés de ficar do lado de fora. A vantagem de fazer isso é que o código que 
+altera a classe fica mais próximo da definição, ficando mais separado e 
+legível. Depois, é só chamar o nome da classe seguido do nome da função que ele 
+executa. É como se a função fosse um valor da classe.
+
+{{{
+#!python
+class Person(object):
+    def set_name(person, name):
+        if len(name) >= 2:
+            person.name = name
+
+woman = Person()
+
+# Nome da classe deve vir antes do uso da função, pois
+# a função está dentro da classe.
+Person.set_name(woman, 'Juliana')
+
+# Vai imprimir "Juliana"
+print woman.name
+}}}
+''Função dentro da classe''
+
+Entretanto, embora essa notação possa ser muito útil, ficar digitando o nome da 
+classe pode ser bem entediante. Certamente é redundante, pois todo objeto sabe 
+a qual classe pertence. Desse modo, tiveram a idéia de, ao invés de preceder o 
+nome da função com o nome da classe, precedê-lo com o objeto que é o primeiro 
+parâmetro. Obviamente, não faz sentido usar o nome do objeto antes do nome da 
+função e depois como parâmetro, como '''woman.set_name(woman, 'Juliana')'''
+. Se o nome do objeto já está lá antes do nome da função, ele deve 
+ser retirado da lista de parâmetros, como no código do objeto antes da função (abaixo).
+
+Essas "funções dentro de classes" são chamadas de ''métodos''. Para 
+chamar métodos, tanto faz chamá-los como em 
+'''Classe.metodo(objeto, parametros)''' quanto chamá-los como em '''objeto.metodo(parametros)'''
+
+As formas são equivalentes, com apenas uma ressalva: 
+'''objeto''' ''deve ser um objeto da classe'' 
+'''Classe'''. Por sinal, mesmo a primeira notação 
+'''Classe.metodo(objeto, parametros)''' resultaria em erro se 
+'''objeto''' não fosse um objeto da classe '''Classe'''.
+
+{{{
+#!python
+class Person(object):
+    def set_name(person, name):
+        if len(name) >= 2:
+            person.name = name
+
+woman = Person()
+woman.set_name('Juliana')
+print woman.name
+}}}
+''Objeto antes da função''
+
+== O nome ''self'' ==
+
+No método '''Person.set_name''' acima, o nome do primeiro parâmetro 
+do método era '''person'''. Entretanto, é tradição chamar esse 
+primeiro parâmetro de '''self'''. Por quê?
+
+Bem, não há nenhuma obrigatoriedade de se fazer assim -- tanto o é que em nosso 
+método usamos outro nome para o parâmetro. Essa tradição é mantida porque a 
+maioria dos programadores Python já reconhece esse nome como o nome do objeto a 
+ser invocado no método; ademais, esse é o padrão especificado pela [http://www.python.org/dev/peps/pep-0008/ PEP-8]. 
+Por isso mesmo, via de regra é melhor utilizar 
+'''self''' como o nome do primeiro parâmetro dos métodos.
+
+{{{
+#!python
+class Person(object):
+    def set_name(self, name):
+        if len(name) >= 2:
+            self.name = name
+
+woman = Person()
+woman.set_name('Juliana')
+print woman.name
+}}}
+''Uso do nome '''self''' ''
+
+Em outras linguagens orientadas a objetos, o parâmetro correspondente ao 
+'''self''' geralmente não é declarado na lista de parâmetros, mas sim 
+passado implicitamente. Nessas linguagens, a assinatura do método 
+'''set_name''' seria mais como 
+{{{
+#!python
+def set_name(nome)
+}}}
+
+que como
+{{{
+#!python
+def set_name(self, nome)
+}}}
+
+== Aplicações ==
+
+O '''self''' explícito é uma característica [http://www.artima.com/forums/flat.jsp?forum=106&thread=214112 polêmica] da linguagem 
+Python, mas há diversas razões em favor do seu uso.
+
+O argumento mais comum -- e provavelmente o mais subjetivo -- é que o
+'''self''' explícito está mais de acordo com o espírito da linguagem
+que um '''self''' implícito, já que, como diria o ''Zen of
+Python'', [http://www.python.org/dev/peps/pep-0020/ explícito é melhor que implícito].
+Também argumenta-se que a declaração explícita do '''self''' é, hoje
+em dia, tão intrínseca à linguagem que seria praticamente [http://www.artima.com/weblogs/viewpost.jsp?thread=214325 inviável abandoná-la].
+
+O '''self''' explícito tem, também, várias vantagens na prática 
+quotidiana. Uma das mais notáveis é a habilidade de chamar métodos de classes
+ancestrais sobre objetos de classes herdadas. Por exemplo, voltando ao nosso
+exemplo com pessoas, suponhamos que definamos uma nova classe 
+'''CapitalizedPerson''', herdeira de '''Person''', na qual o 
+nome da pessoa deve começar com uma letra maiúscula. Nessa classe, também 
+queremos que todas as restrições que o método '''set_name''' da classe
+'''Person''' ainda sejam seguidas. Como fazer?
+
+{{{
+#!python
+import string
+
+class CapitalizedPerson(Person):
+    def set_name(self, name):
+        if name[0] in string.uppercase:
+            Person.set_name(self, name)
+
+woman = Person()
+woman.set_name('Juliana')
+print woman.name
+}}}
+''Chamando métodos de classes ancestrais''
+
+Em Python, é bem simples: basta usar a notação de chamada de método na forma
+'''Classe.metodo(self, parametros)''' ou, mais especificamente,
+'''Person.set_name(self, name)''', conforme demostrado no código acima. Note que, se fizermos uma outra
+classe herdando de '''CapitalizedPerson''' e não queiramos usar o
+método '''set_name''' de '''CapitalizedPerson''', podemos
+chamar diretamente o método '''set_name''' da classe
+'''Person'''. Essa é, provavelmente, uma solução bem mais elegante que 
+o famoso objeto '''super''' de várias linguagens; certamente, é mais
+explícita e flexível.
+
+Como Python suporta herança múltipla, essa funcionalidade pode se tornar 
+indispensável. Suponha uma classe que herde, ao mesmo tempo, de duas classes.
+Para inicializar essa classe com o método inicializador de cada uma de suas
+classes-mães, basta chamar o método '''__init__''' de cada uma
+das classes, como no código:
+
+{{{
+#!python
+class ButtonPerson(Button, Person):
+    """Uma pessoa que é um botão(?!)"""
+    def __init__(self, name):
+        Person.__init__(self)
+        Button.__init__(self, "Pessoa: " + name)
+        self.set_name(name)
+}}}
+''Múltipla inicialização''
+
+== Conclusão ==
+
+O '''self''' explícito de Python é uma decisão de projeto polêmica.
+Entretanto, há inúmeras vantagens oriundas dela, como o caráter explícito da
+decisão e a maior flexibilidade na chamada de métodos. Suspeito até que o 
+'''self''' explícito torne mais fácil a apreensão do conceito dos 
+objetos '''self'''/'''this''': se, por um lado, programadores
+oriundos de linguagens nas quais os objetos '''self''' ou 
+'''this''' são implícitos sentem-se confusos com o '''self'''
+explícito, programadores que não estão acostumados com esse conceito parecem
+apreender melhor a idéia quando apresentados à "maneira ''pythônica''"
+de se tratar do conceito.

@@ -1,0 +1,67 @@
+ImagemRasterTkinter
+(por JoaoBueno)
+
+Python é famoso, entre outras coisas, por ser simples para fazer coisas rápidas. Tkinter é um toolkit que acompanha essa "fama", especialmente por não exigir a instalação de nenhum módulo adicional ao Python.
+
+No entanto, se alguém quer desenhar - quer com elementos vetoriais, quer usando imagens raster (compostas por pixels), anos de história do desenvolvimento da Python Imaging Libray de um lado, e do toolkit Tk de outro entram no caminho da simplicidade.
+
+Um objeto Canvas do Tkinter é praticamente um programa de edição vetorial auto-contido, em que elementos como linhas, retângulos, imagens e mesmo outros widgets de Tkinter podem ser dispostos, eventos de entrada tratados, e até é possível gerar um arquivo postscript com uma versão vetorial do conteúdo do Canvas.
+
+No entanto, a documentação para criação desses elementos é escassa - e a documentação oficial do TKinter bastante rasa, chata de entender e com quase nenhum exemplo. 
+
+Esta receita  contém uma classe para de se criar desenhos raster em tkinter, que faz toda a burocracia necessária - você cria uma instância da classe ScreenImage (uma subclasse de uma imagem da PIL), e tem disponíveis, entre outros, os métodos imagem.putpixel((x,y), (r,g,b))) para plotar um pixel, os métodos de desenho como rectangle, polygon, text - disponíveis numa instâncias de ImageDraw em imagem.draw, e sobretudo, 
+deve chamar o método imagem.update() para sincronizar o buffer em memória com a imagem exibida na tela pelo TKinter.
+
+Esta receita  é necessária por que para se exibir uma imagem raster em TKinter é preciso ter um Tkinter.Canvas que contém uma instância de ImagemTk.PhotoImage, adicionada com o parcamente documentado Canvas.create_image. A PhotoImage, por sua vez, não pode ser objeto dos métodos de desenho disponibilizados em ImageDraw, nem tem "putpixel" - então é necessária uma imagem do módulo Image que é copiada para a PhotoImage através do update()
+
+== Código ==
+
+{{{
+#!python
+#! /usr/bin/env python
+
+import Tkinter
+import Image, ImageTk, ImageDraw
+
+class ScreenImage(Image.Image):
+    """
+    Helper Class to get a drawable raster surface in a tkinter app.
+    Tries to bypass most bureacracy.
+    """
+    def __init__(self, widget=None, size=(640,480), color=(255,255,255)):
+        """
+        Widget should be the container Tkinter widget for the canvas contaning this
+        image
+        """
+        width, height = size
+        #Inheriting from PIL's image class is not very clean.
+        #we have to re-issue the statements found in its "_new"  constructor:
+        Image.Image.__init__(self)
+        self.im = Image.core.fill("RGB", size, color)
+        self.mode = "RGB"
+        self.size = size
+        self.draw = ImageDraw.Draw(self)
+        self.photoimage = ImageTk.PhotoImage("RGB", (width, height))
+        self.canvas = Tkinter.Canvas(widget, width=width, height=height)
+        self.canvas.create_image(width // 2, height // 2, image=self.photoimage)
+        self.canvas.pack()
+        self.update()
+        
+    def update(self):
+        """Updates memory buffer to Tkinter screen"""
+        self.photoimage.paste(self)
+        
+
+if __name__ == "__main__":
+    tk = Tkinter.Tk()
+    
+    i = ScreenImage(tk)
+    
+    import math
+    
+    for x in range(640):
+        y = 240 + 120 * math.sin((x - 320) / 320.0 * 4 * math.pi)     
+        i.putpixel((x, y) , (0,0,0))
+    i.update()
+    tk.mainloop()
+}}}

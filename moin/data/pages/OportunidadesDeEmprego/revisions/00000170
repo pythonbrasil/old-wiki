@@ -1,0 +1,1308 @@
+#pragma section-numbers off
+
+= Oportunidades de emprego =
+Oportunidades de emprego em Python no Brasil. Para vagas em outros países, veja a [[http://www.python.org/community/jobs/|lista no site oficial]] do Python. Ver também:
+
+ * [[http://www.pythonbrasil.com.br/moin.cgi/OportunidadesDeEmprego/Dicas|Dicas e Recados para Profissionais]]
+ * Lista de [[http://www.pythonbrasil.com.br/moin.cgi/OportunidadesDeEmprego/Profissionais|profissionais Python]] disponíveis para contratação
+
+Esta página serve para que você empresário ofereça uma vaga para aquele programador inteligente (afinal ele programa em Python), e para você programador Python que está cansado daquela vida no sofá 'coçando' e quer garantir o leite das crianças...
+
+Dica: Ao cadastrar uma vaga, coloque a data da inclusão pois assim podemos identificar de quando é a oportunidade.
+
+
+== Dualtec Cloud Builders - São Paulo, SP  ==
+
+Data: 10/03/2015
+
+Vaga para desenvolvedor Python - Projetos OpenStack
+
+A Dualtec Cloud Builders, empresa localizada em São Paulo procura um desenvolvedor Python para trabalhar em projetos de integrações e desenvolvimento de novos serviços de Cloud Computing para nossa plataforma de nuvem pública e projetos de private e hybrid cloud baseados em OpenStack.
+
+Principais tecnologias: Python, Django, Web2py, SQL (MySQL) e MongoDb
+Conhecimentos desejáveis em: Cloud Computing, OpenStack, Redis, Puppet e Ansible.
+
+A Dualtec Cloud Builders é pioneira na implantação de nuvens OpenStack no Brasil e a primeira a lançar uma oferta de nuvem pública OpenStack (Saiba mais: http://www.dualtec.com.br/openstack/), buscamos um profissionail para atuar na equipe de inovação que goste dos desafios de trabalhar com novas tecnologias e queira contribuir e ampliar seus conhecimentos atuando em projetos ligados a OpenStack, DevOps e Cloud Computing. 
+
+Envie seu currículo para: renato@dualtec.com.br
+
+
+== Digesto - São Paulo, SP  ==
+
+Data: 20/02/2015 
+
+Vaga de Estágio – Desenvolvimento
+
+Aplicamos ferramentas e conhecimentos avançados de computação para melhorar a prática do direito no Brasil, facilitando a obtenção e análise de processos, causas e sentenças por parte de empresas, advogados e cidadãos. Fazemos uso de web scraping, armazenamento de dados em larga escala e machine learning para oferecer aos clientes dados confiáveis e centralizados, análises e apoio para tomadas de decisão críticas.
+
+
+Atualmente, além de serviços específicos para grandes clientes, somos responsáveis por dois portais de informação de jurisprudência e acompanhamento processual:
+
+- Digesto Pesquisa de Jurisprudência - http://www.digesto.com.br/ e
+- Radar Oficial - https://www.radaroficial.com.br/
+
+Algumas tecnologias e serviços que usamos: Python, Java, PHP, MySQL, AWS e DO,  BigQuery, ElasticSearch e ferramentas de big data e machine learning.
+
+
+O que buscamos: pessoas motivadas e com vontade de aprender e se desenvolver nas áreas listadas acima. Conhecimento de Python é desejável, mas não é necessária experiência.
+
+
+Envie seu currículo para t@digesto.com.br
+
+
+== SkyOne - São Paulo  ==
+
+Data: 09/02/2015 
+
+A SkyOne é uma startup que desenvolve soluções para Cloud Computing.
+Estamos montando um time de primeira linha e precisamos de desenvolvedores em Python para atuar no produto principal da empresa.
+
+O ambiente inclui:
+
+- Django
+- RabbitMQ
+- nginx
+- Postgres
+- AWS
+- OpenStack
+
+Localização: Estamos ao lado do Shopping Morumbi - São Paulo
+
+Perfil: Precisamos de alguém inteligente, com iniciativa e que esteja disposto a aprender e contribuir no ambiente de Cloud. Estamos abertos para desenvolvedores com níveis de experiência variados. 
+
+Benefícios: Além do pacote básico CLT oferecemos um ambiente técnico com discussões de alto nível, desafios com tecnologias de ponta e um ambiente super agradável.
+
+Envie o seu CV com pretensão salarial para caio@skyone.solutions.
+
+
+== Vaga na Navegg - Curitiba  ==
+
+Data: 29/01/2015 
+
+A Navegg está com duas vagas para Desenvolvedor - uma Junior e  uma Pleno. 	
+
+Esses profissionais atuarão na arquitetura e no desenvolvimento de aplicativos em ambiente Linux e Freebsd, tanto em sistemas backoffice, como em diversos tipos de interfaces web e mobile. Conhecimento em modelagem e manutenção de bases de dados é fundamental.
+ 
+Vaga para Curitiba – PR (Batel/Água Verde)
+ 
+Skills: Linux; Python; MySQL, Oracle ou SQL Server; JavaScript, Scrum;
+Plus: Nginx; WebServices; RabbitMQ; Multi-threaded Programming;
+ 
+Formado ou cursando Tecnologia da Informação ou Engenharia/Ciência da Computação.
+ 
+O que a gente oferece:
+ Remuneração atraente no regime CLT
+ Plano de saúde, plano odontológico
+ Vale refeição e transporte
+ Estacionamento
+ Bolsa de estudos
+ Horário flexível incluindo para estudantes matutino e vespertino.
+ Ambiente descontraído com lounge, frutas, pães e frios.
+
+É você? Envie seu currículo para vagas@navegg.com
+
+
+== Desenvolvedor Python/Django, Itaim, São Paulo ==
+
+Data: 20/01/2015
+
+Superior Completo ou cursando Informática;
+
+Experiência em desenvolvimento com Python, Django, HTML, MySql, CSS, JavaScript e JQuery.
+
+Diferenciais AngularJS, aws e mobile
+
+Contratação CLT
+Salário + Benefícios
+
+Email rubio admag com br
+
+== Desenvolvedor Python, Barra Funda, São Paulo ==
+
+Data: 27/08/2014
+
+Vaga: 1 
+
+Descrição: Desenvolvedor Python (Barra Funda , São Paulo-SP)
+
+Procuramos um Desenvolvedor Python para a área de TI da Dafiti, o e-commerce que mais cresce na América Latina e que está presente em 5 países: Brasil, Argentina, México, Colômbia e Chile. Proporcionamos um ambiente bastante dinâmico, informal, com espirito de startup, colaborativo e interdisciplinar.
+
+Principais responsabilidades:
+- Desenvolvimento de projetos de inteligência artificial e machine learning para sistemas de recomendação de produtos;
+- Projetos com Cloud e BigData.
+
+Requisitos obrigatórios:
+- Conhecimentos avançados em Python;
+- Conhecimento em Framework Web (preferencialmente Flask ou Django);
+- Experiência com Testes Unitários;
+- Conhecimento em MVC e Design Patterns; 
+- Experiência com MySQL e NoSQL DB;
+- Experiência com Linux;
+- Inglês Intermediário
+Diferenciais:
+- Conhecimento em PHP;
+- Experiência em Couchbase;
+- Experiência com Solr;
+- Conhecimento em AWS;
+- Experiência em BigData;
+- Conhecimento em Cython;
+- Experiência com Machine Learning;
+- ExperiÊncia com TDD;
+- Atuação prévia com Scrum.
+
+A Dafiti é uma empresa dinâmica, jovem e fashion fundada em 2011 e é hoje a maior loja on-line de moda e lifestyle do Brasil. 
+
+Com mais de 900 marcas nacionais e internacionais e 95.000 produtos de moda distribuídos em 6 categorias, possui o maior portfólio do país. 
+
+Também é uma empresa multinacional presente em 5 países da América Latina: Brasil, Chile, Argentina, Colômbia e México. 
+
+Sua missão é revolucionar a forma como os latino-americanos compram produtos de moda e lifestyle através do amplo portfólio e da melhor experiência de compra. A Dafiti acredita que fazer compras pela internet deve ser divertido, prazeroso, fácil e conveniente. Desta forma, quer levar sempre o famoso “aaahhhhhh!!!” para os clientes.
+
+Favor enviar email para: pierre.sandora@dafiti.com.br / Assunto: Vaga Python
+
+
+== Desenvolvedor Python/Django, Butantã , São Paulo ==
+
+Data: 29/04/2014
+
+Vaga: 2 
+
+Descrição: Desenvolvedor Python/Django (Butantã , São Paulo-SP)
+
+Oportunidade de liderar novos projetos e frentes de trabalho (Web ou Web Mobile). Será responsável por desenvolver e melhorar funcionalidades e algoritmos no Profes.
+
+Requisitos
+- Formado em Ciência da Computação, Engenharia da Computação ou Sistemas de Informação.
+- Morar em São Paulo (atualmente estamos no Cietec - USP).
+- Bom raciocínio lógico, ser autodidata, aprender rápido e ser movido por resultados.
+- Período integral
+
+Conhecimentos Web
+- Python, Django
+- JavaScript, HTML5, CSS3.
+- MySQL e banco de dados
+- Infraestrutura
+- Desenvolvimento ágil
+
+Bolsa-auxílio
+R$ 3.000,00 (Líquido sem descontos)
+
+Por que fazer parte da equipe Profes?
+O Profes é uma startup promissora, vencedora do Start-UP Brasil, recém acelerada na Aceleratech e líder no mercado em que atua. Somos o maior marketplace de aulas particulares do Brasil.
+Você que curte tecnologia e quer aplicar seus conhecimentos na área da educação, o Profes oferece uma ótima oportunidade para você ingressar no nosso time.
+
+Favor enviar email para: selecao@portalprofes.com / Assunto: Vaga Dev
+
+Atenciosamente
+Equipe PROFES
+
+
+== Desenvolvedor Python/Django Startup, Barra da Tijuca, Rio de Janeiro ==
+
+Data: 25/03/2014
+
+Vaga: 2 
+
+Descrição: Desenvolvedor Python/Djando, Barra da Tijuca, Rio de Janeiro
+
+Quem quer uma oportunidade em um time extremamente ágil e auto gereciavel em uma startup super descontraída e com um time focado em fazer um produto foda???
+
+Somos o Trippics.com, uma nova rede social voltada para o segmento de viagens e turismo. Estamos contratando desenvolvedores Python com nível de pleno a especialista. 
+
+Alguém que acredita no produto, curta viajar e que acima de tudo seja um potencial usuário da ferramenta.
+
+Procuramos programadores que acreditem no produto, sejam dedicados e perfeccionistas com o trabalho produzido.
+
+É necessário que o candidato tenha sólidos conhecimentos em:
+Python
+Django
+PostgreSQL
+HTML5, CSS3
+Javascript, Coffescript, jQuery
+Infra estrutura em ambientes *nix e Amazon AWS
+Desenvolvimento Ágil
+TDD
+
+É um plus se tiver conhecimentos em:
+Integração com Facebook
+Elasticsearch
+Redis
+Integração com Forsquare
+
+Ama viajar, tem o perfil e está interessado ?
+
+Favor enviar email para: jobs@trippics.com / Assunto: Oportunidade Python/Django
+
+Atenciosamente
+Equipe Trippics
+
+
+== Desenvolvedor Python ==
+
+Data: 13/01/2014
+
+Vaga: 1 
+
+Descrição: Desenvolvedor Python em Joinville/SC
+
+Desenvolvimento de soluções linux para gerenciamento de serviços de rede. Firewall, QoS, VPN, Redundância de Links, Telefonia IP Asterisk, E-mail e Controle de Spam
+
+CLT + Plano de Saúde + Ticket Refeição
+
+Requisitos: 
+ * Desenvolvimento em Linguagem Python, Shell Scripts (Bash), SQL (MySQL)
+ * HTML, Javascript e Expressões Regulares
+ * Sólidos fundamentos em LINUX e serviços de rede
+ * Cursando (ou concluído) faculdade em sistemas de informação, ciências da computação, ou redes
+ * Fundamentos em segurança da informação
+ * Inglês: Fluência na leitura / escrita de textos técnicos
+
+Diferenciais
+
+ * Conhecimento em Telefonia IP Asterisk
+ * Metologia Scrum
+ * Utilização do Redmine
+
+Os interessados devem consultar os demais requisitos e processo de seleção através do link:
+
+http://www.itflex.com.br/noticias/24
+
+
+== Desenvolvedor Python ==
+
+Data: 16/12/2013
+
+Vaga: 1 
+Descrição: Desenvolvedor Python 
+Cargo: Desenvolvedor 
+
+Requisitos: 
+- Experiência com plataforma Python; 
+
+Desejável:  
+- Bom relacionamento interpessoal, responsabilidade e dinamismo; 
+- Inglês e espanhol (o profissional ficará uma semana no Chile para treinamento em Rave, em regime de “On the Job Trainning”); 
+
+Regime de contratação: CLT
+
+Benefícios: VR R$ 396,00, plano de saúde, odontológico, VT.
+
+O candidato deve enviar Currículo para nercijacob.p@tcs.com . 
+
+
+== Desenvolvedor Zope/Plone/Python Câmara dos Deputados ==
+
+Data: 19/09/2013
+
+Vaga: 1 
+Descrição: Desenvolvedor Plone/Zope/Python 
+Cargo: Técnico de Apoio ao Desenvolvimento Junior 
+Formação Básica: Ensino médio, sendo desejável nível superior em andamento na área de Informática. 
+
+- Especificar, desenvolver, testar e implementar aplicações; 
+- Experiência com plataforma Zope/Plone/Python para Portais; 
+- Experiência em aplicações que disponibilizem web services; 
+- Noções de testes; 
+
+Desejável: 
+- Bom conhecimento em Python; 
+- Bom relacionamento interpessoal, responsabilidade e dinamismo; 
+- Dominar tecnologias como CSS, XHTML, JavaScript, Ajax; 
+- Inglês; 
+
+Cargo TADJ 
+Salário R$ 3.247,64 
+Vale alimentação R$ 486,64 
+
+O candidato deve enviar Currículo para romesouza@hotmail.com da empresa Plansul. 
+Os documentos necessários para o cargo são: comprovante  de escolaridade e certificados que comprovem cursos na área de desenvolvimento.
+
+
+== Desenvolvedor Web - São Paulo ==
+
+Data: 01/09/2013
+
+Local: São Paulo
+
+Vaga para desenvolvedor Web com experiência em Django;
+
+Enviar currículo para: rh@omelete.com.br
+
+== Desenvolvedor Junior (part-time) - São Paulo ==
+
+Data: 30/08/2013
+
+Local: São Paulo
+
+Busco um desenvolvedor junior, que tenha um day-job, mas que esteja disposto a trabalhar por hora para uma startup no seu tempo livre. Isso como período de entendimento mútuo para eventualmente tornar-se parte do time da startup.
+Ou seja, começa como um trabalho de freela, mas com a perspectiva de se tornar um membro permanente da equipe.
+O trabalho por hora se mantém até que o modelo seja validado e esteja pronto para buscar investimento e/ou ter faturamento.
+Já trabalhei neste modelo antes e funciona muito bem, desde que a pessoa esteja realmente disposta a aprender e experimentar coisas novas, seja auto-motivada, organizada e responsável.
+É uma forma de diminuir o risco para o desenvolvedor (que vai se manter no seu emprego e ainda ganhar uma graninha extra) e diminuir o custo inicial para nós, pois pagamos por hora até que o produto esteja validado. Ao mesmo tempo que treinamos alguém para a equipe.
+
+É preciso saber:
+Python/Django (nível de conhecimento junior, mas é essencial já ter trabalhado/estar trabalhando como desenvolvedor Python em algum emprego "de verdade").
+Desejável API do Facebook e desenvolvimento mobile Android e/ou iOS.
+Desejável significa que certamente vamos precisar do conhecimento, se já tem, melhor. Se não tem, estar disposto a correr atrás, rápido e conseguir entregar as tarefas.
+
+valor: R$ 30,00 por hora (acerto semanal)
+
+O MVP básico já está sendo feito, o trabalho será aprimorar e desenvolver funcionalidades em cima do básico que já foi criado.
+Expectativa de poder trabalhar entre 6 e 8 horas por semana.
+
+Sobre a startup:
+Frequento.com.br - startup com o objetivo de criar um "analytics" para bares e restaurantes.
+Estamos no estágio pré-MVP para desenvolver um programa de fidelidade aliado a um site interativo que dará ao dono do restaurante informações básicas, mas importantes sobre seus clientes. Desde o essencial, como email, até hábitos de consumo no  estabelecimento.
+
+contato: rodrigohgpontes no gmail.
+
+
+== Cooperativa de Programadores - Rio de Janeiro ==
+
+Data: 29/08/2013
+
+Local: Rio de Janeiro
+
+Estou organizando uma cooperativa de programadores para o desenvolvimento de sistemas em Python para aplicações web, dispositivos móveis e ambiente desktop, com enfoque em pequenos negócios e organizações não-governamentais. Os interessados podem entrar em contato por e-mail: maurobio (at) gmail (dot) com.
+
+== Vaga para Desenvolvedor - São Paulo ==
+
+Data: 26/08/2013
+
+Local: São Paulo
+
+CARGOBR é uma start-up, que tem o objetivo de transformar o processo de cotação, compra e venda de fretes.
+ 
+A vaga é para trabalhar em São Paulo, estão procurando tanto um Dev Jr ou PL.
+Necessário conhecimentos conhecimentos em Django.
+A forma de contratação pode ser CLT ou PJ.
+
+Uma ótima oportunidade para quem deseja aprender e desenvolver seus conhecimentos.
+
+== Vaga Desenvolvedor web Django - Paraná (Curitiba) ==
+
+Data: 19/08/2013
+
+Grupo de comunicação no Paraná (Curitiba) está em busca de programadores web com foco em Python/Django para formar um banco de profissionais
+Buscamos profissionais com:
+
+Conhecimento avançados em Python
+
+Experiência com o framework Django
+
+Trabalhem com MVC e GIT
+
+Entendam de SQL
+
+Conhecimentos intermediários em Java
+
+Responsabilidade e comprometimento
+
+Formação acadêmica nas áreas de TI.
+
+Interessados enviar currículo com pretensão salarial para jobs@mowebiz.com.br
+
+== Vaga Programador Python - São Paulo ==
+
+Data da inclusão da Vaga: 21/02/13
+Local de trabalho: São Paulo  Metro Conceição
+
+Vagas para 2 profissionais 
+
+Trabalho de seg. a sex.: 09h00 às 18h00 (estudo de horário flexivel)
+
+Requisitos para a vaga:
+ * Experiência em desenvolvimento Web
+ * Experiência em desenvolvimento com Python, preferencialmente utilizando Django.
+ * Experiência com HTML 5.
+
+Conhecimentos desejáveis:
+ * Conhecimentos em Jquery, Javascript, CSS, Banco de dados MySQL e PHP.
+
+Atividades:
+
+ * Profissional fará parte de um time de dedicado no desenvolvimento de ferramentas web com foco em monitoria de ativos de T.I. 
+
+Contratação imediata como CLT ou PJ
+
+Interessados enviar CV para rh@komputer.com.br com a pretensão salarial
+
+== Vaga Python - São Paulo ==
+
+Data de inclusão da vaga: 10/08/2012
+
+Vaga: 1
+
+Local de trabalho: São Paulo - SP
+
+Procuramos profissional com o seguinte perfil:
+ * Modelagem de dados
+ * Experiência de no mínimo 2 anos com desenvolvimento Web
+ * Experiência e conhecimentos avançados em programação Python
+ * Experiência e conhecimentos na plataforma Django
+ * Experiência em programação com metodologia ágil Scrum
+ * Noções de infra-estrutura e redes
+ * Desejável Inglês em nível intermediário
+ * Desejável Java
+
+Benefícios:
+* Regime CLT
+* Vale-transporte
+* Assistência Médica
+* Alimentação
+
+Interessados devem encaminhar o cv com pretensão salarial para recrutamentovssp@gmail.com
+
+Vanessa
+
+== Vaga de Python - Curitiba ==
+
+Data: 17/05/2012
+
+Olá Pessoal,
+
+Estamos com uma nova vaga em aberto para programador Python Pleno ou Senior para trabalhar no MuccaShop em Curitiba.  Dessa vez é para um novo projeto que estamos desenvolvendo, uma rede social de livros: orelhadelivro.com.br
+
+Mande seu CV para carlos@muccashop.com.br com a pretensão salarial.
+
+Obrigado!
+Carlos
+
+
+
+== Vaga de Python - Curitiba ==
+
+Data: 17/05/2012
+
+Olá Pessoal,
+
+Estamos com uma nova vaga em aberto para programador Python Pleno ou Senior.
+
+O MuccaShop é uma uma start-up de internet jovem, bacana e descolada.  É um ambiente bom para se trabalhar e com um grande potencial de crescimento. 
+
+Mande seu CV para carlos@muccashop.com.br com a pretensão salarial.
+
+Obrigado!
+Carlos
+
+
+
+== Vaga de Python - Curitiba ==
+
+Data: 02/11/2011
+
+Olá Pessoal,
+
+Temos uma vaga em aberto para um programador Python Pleno/Senior na Mucca Company.
+
+A Mucca tem sede em Curitiba e é dona dos sites MuccaShop e MuccaClub.  Fundada em Maio de 2010 por 4 sócios, sendo dois deles empreendedores do site Imobox, recentemente adquirido pelo Grupo Apontador. A Mucca tem hoje 12 pessoas trabalhando nos atuais sites, e estamos desenvolvendo um novo projeto com integração ao Facebook e por isso estamos buscando um novo programador para fazer parte do time.
+
+Somos uma empresa jovem, flexível, inovadora e sempre em busca de novas oportunidades. Respeitamos os momentos de genialidade dos nossos programadores quando quiserem trabalhar em casa, a noite e etc. Aqui não há burocracia e suas idéias serão ouvidas, sempre.
+
+Local: Curitiba
+
+Salário e forma de contratação: A combinar
+
+Interessados, envie seu currículo e pretensão salarial para carlos@muccashop.com.br
+
+
+
+== Programador Python ==
+Data: 10/05/2011
+
+Vagas: 2
+
+Empresa:
+ * Storm Security & Safety Systems
+
+Local:
+ * Ipanema - RJ
+
+Contratação:
+ * CLT
+
+Benefícios:
+ * Vale-transporte
+ * Assistência Médica e Odontológica
+ * Telefone Nextel com 100 horas grátis
+ * Alimentação
+
+Perfil:
+ * Experiência de no mínimo 3 anos com desenvolvimento Web
+ * Experiência e conhecimentos avançados em programação Python 2.6
+ * Experiência e conhecimentos na plataforma Django 1.0
+ * Modelagem de dados (MySQL e Oracle)
+ * Desejável conhecer HTML, CSS, JS
+ * Experiência em programação de games será um diferencial
+ * Familiaridade com mídia digital (sites e blogs) e redes sociais (twitter, facebook, etc.)
+ 
+Quem tiver interesse e perfil deve encaminhar o cv para wanderley@stormsec.com.br até o dia 15/06/2011.
+
+== Desenvolvedor Python ==
+'''Data:''' 26/04/2011
+
+'''Oportunidade:''' Desenvolvedor Python
+
+'''Detalhes:'''
+
+ * Desenvolvimento de integrações com APIs Java usando Jython
+ * Desenvolvimento de frontend em Django integrado por WebService (Restful) com o item acima 
+ 
+'''Perfil:'''
+
+ * Imprescindível: Ser auto-didata, esforçado, responsável e pró-ativo
+ * Diferencial: Estar antenado com TDD, DOJO, PyPi, GitHub etc
+ * Python 2.6+
+ * Java e Jython
+ * Django
+ * Linux
+
+Salário a combinar.
+
+Caso haja interesse na oportunidade, enviar o CV para o e-mail rogerio.luz@companhiadesistemas.com.br
+
+== Desenvolvedor Python ==
+'''Data:''' 24/01/2011
+
+'''Vagas:''' 1
+
+'''Oportunidade:''' Participar do desenvolvimento de um sistema na plataforma Google App Engine.
+
+'''Características da proposta:'''
+ * Sem local fixo de trabalho
+ * Horário livre
+ * Pagamento acordado pelo projeto completo, em parcelas entregues mediante o término de etapas pré-definidas do desenvolvimento
+ * Valor do pagamento de R$10.000 a R$30.000, variando de acordo com o escopo acordado
+
+'''Perfil:'''
+
+ * Experiência em Python e Google App Engine
+ * Experiência com framework Django
+ * Capacidade para desenvolver módulos completos com pouca supervisão
+ * Auto motivado
+
+
+Caso haja interesse na oportunidade, enviar o CV para o e-mail ivan.barboza@yahoo.com.br. 
+
+
+== Analista Programador Python ==
+Data: 17/11/2010
+
+Vagas: 1
+
+Empresa: Systemplan Consultoria
+
+Local: Zona Sul da capital de SP.
+
+Contratação: CLT
+
+Beneficios: VR, VT, assistência médica e odontológica AMIL 
+
+Perfil:
+
+-Superior completo ou cursando;
+-Experiência em Python;
+-Criativo, proativo e dedicado;
+
+Caso haja interesse no perfil da vaga, enviar o CV para o e-mail alan.andrade@systemplan.com.br. 
+
+
+== Programador Python ==
+Data: 05/08/2010
+
+Vagas: 1
+
+Empresa:
+ * Editora Globo
+
+Local:
+ * Jaguaré - SP
+
+Contratação:
+ * CLT
+
+Benefícios:
+ * Estacionamento ou Vale-transporte
+ * Assistência Médica e odontológica
+ * Seguro de Vida
+ * Previdência Privada
+ * Auxílio funeral
+ * Cooperativa de Crédito
+ * Restaurante no local
+ * Lanchonete
+ * Parceria com SESC
+
+Perfil:
+ * Superior completo na área da tecnologia
+ * Experiência de no mínimo 3 anos com desenvolvimento Web
+ * Experiência e conhecimentos avançados em programação Python
+ * Java avançado
+ * Modelagem de dados (MySQL e Oracle)
+ * Desejável conhecer CSS, JS
+ * Experiência em programação de games será um diferencial
+ * Familiaridade com mídia digital (sites e blogs) e redes sociais (twitter, facebook, etc.)
+
+Quem tiver interesse e perfil deve encaminhar o cv para falves@edglobo.com.br até o dia 10/08/2010.
+
+== Programador Python ==
+Data: 27/07/2010
+
+Vagas: 2
+
+    A Mares Telecom, empresa focada no desenvolvimento de solucoes para o mercado de telecomunicacao baseadas em software OpenSource, procura programadores Python para desenvolver aplicacoes Django.
+
+Requisitos:
+ * Python
+ * Inglês técnico (leitura)
+ * Facilidade de aprendizado
+
+Diferenciais:
+ * Django 
+ * SQL
+ * HTML/CSS 
+ * JQuery
+
+Local: 
+ * Fortaleza
+
+Por favor enviem CV para robert@marestelecom.net com pretensão salarial.
+
+== Analista Desenvolvedor ==
+
+Data: 05/04/2010
+
+Vaga: 1 
+
+A Resource empresa Integradora de Soluções, busca para atuação em um dos seus grande clientes:
+Analista Desenvolvedor
+É necessário conhecimentos em Django e desenvolvimento Web em Python.
+Para atuação na região da Lapa
+Projeto por tempo indeterminado.
+Encaminhar cv para charliane.loures@resource.com.br com a pretensão salarial.
+
+== Analista programador web ==
+Data: 09/04/2009
+
+Vagas: 1
+
+O Now!Digital, criado em 1976 é o mais respeitado grupo de comunicação brasileiro do mercado de Tecnologia da Informação. Possui as seguintes publicações online: Computerworld, IDG Now!, Macworld, PC World, CIO e Channelworld. Oferece oportunidade na área de desenvolvimento com sólidos conhecimentos em web.
+
+Requisitos:
+
+ * Superior completo em ciência da computação ou áreas afins
+ * Sólidos conhecimentos em orientação a objetos
+ * Experiência em desenvolvimento web
+ * HTML/CSS (W3C standards)
+ * Javascript
+ * RDMS + SQL
+ * Inglês técnico
+
+Diferenciais:
+
+ * LAMP
+ * Python, Zope, Plone, Django
+ * Postgres
+ * AJAX, jquery
+
+Benefícios:
+
+ * Vale refeição
+ * Previdência privada
+ * Vale transporte
+ * Plano de saúde Lincx
+
+Contratação:
+ * CLT
+
+Local:
+ * São Paulo, Itaim
+
+Interessado? Envie seu CV para marcos.iuato@nowdigital.com.br com a pretensão salarial.
+
+== Desenvolvedor Zope/Grok ==
+Data: 04/03/2009
+
+Vagas: 4
+
+O Grupo openEHR Brasil, membro do Instituto Nacional de Ciência e Tecnologia – Medicina Assistida por Computação Científica (INCT-MACC) está contratando profissionais e estudantes de graduação para trabalharem em seus projetos de informática em saúde. Há 01 (uma) bolsa disponível para profissionais já formados em nível de graduação (R$1.045,00/mês) e até 03 (três) para estudantes de graduação (R$300,00/mês). Os interessados podem viver em qualquer parte do país, e é esperado que eles estejam acostumados a trabalhar remotamente e com produtividade baseada na entrega de produtos com prazo. Não há restrições de formação (curso de graduação realizado ou em realização). Não há necessidade de conhecimento específico na área de ciências da saúde. Entretanto, não é possível contratar funcionários públicos de quaisquer esferas de governo (federal, estadual ou municipal).
+
+Os requisitos necessários são:
+
+ * Capacidade de comunicação muito boa em inglês (pelo menos escrita)
+ * Experiência de programação em Python, Zope e/ou Grok
+
+Os interessados devem enviar o seu curriculum vitae (em português e inglês) para e-pid@vm.uff.br até 20 de abril de 2009. Pode ser necessária alguma comunicação adicional via e-mail e/ou mensagens instantâneas com os pré-selecionados. A implementação da bolsa está prevista para maio de 2009.
+
+Mais informações, por favor entre em contato pelo e-mail e-pid@vm.uff.br .
+
+== Programador Python ==
+Data: 10/02/2009
+
+Vagas: 6
+
+Vagas abertas para programadores Python, numa consultoria de TI.
+
+Breve perfil:
+
+ * Fluência em Python
+ * Experiência com Django ou Webpy (preferível)
+ * Conhecimento em MySQL
+ * XML e JSON
+ * Plus: Java e GWT
+
+Os interessados podem enviar o CV para o e-mail arnaldo.pereira@ymail.com , com pretensão salarial.
+
+== Desenvolvedor Web Senior ==
+Data: 08/01/2009
+
+Vagas: 1
+
+Vaga para São Paulo, região da Av. Paulista, com foco em Zope/Plone.
+
+Requisitos:
+
+ * Formação Superior Completa na área de TI
+ * Inglês Técnico
+
+Conhecimentos avançados em:
+
+ * CSS/HTML/XHTML
+ * Javascript
+ * Plone, Zope e Python
+ * GNU/Linux
+ * Balanceamento / Performance
+ * SQL
+
+Será diferencial conhecimento em:
+
+ * JBOSS / TOMCAT
+ * SOAP / WSDL
+ * PostgreSQL / Mysql
+ * AJAX
+ * Infra-Estrutura
+
+Benefícios:
+
+ * VR
+ * VA
+ * Vale Transporte
+ * Convênio Médico
+ * Plano Odontolôgico
+ * Desconto em Universidades
+
+Salário a combinar (CLT).
+
+Interessados favor enviar currículo para rh@certisign.com.br colocando no assunto, Desenvolvedor Web Sr.
+
+== Desenvolvedor Júnior ==
+Data: 07/01/2009
+
+Vagas: 5
+
+A ThreePointsWeb, empresa especializada em consultoria e treinamento nas tecnologias Python, Zope e Plone, abre processo seletivo para as seguintes vagas para trabalho em Brasília-DF:
+
+ * Curso superior completo
+ * Experiência em desenvolvimento de aplicações Web (PHP, Java, Rails, Django)
+
+São grandes diferenciais:
+
+ * XHTML, CSS
+ * Desenvolvimento com Python
+ * Desenvolvimento com Zope e Plone
+ * RDBMS + SQL
+ * (HTTP, WebDAV, REST, Atom/RSS, etc.)
+
+Nós oferecemos:
+
+ * Assistência Médica (Bradesco Top)
+ * Vale-transporte
+ * Vale-refeição
+ * Participação nos resultados
+ * Salários compatíveis com o cargo.
+
+Curriculos devem ser enviados para vaga@threepointsweb.com .
+
+== Consultor PZP ==
+Data: 07/01/2009
+
+Vagas: 2
+
+A ThreePointsWeb, empresa especializada em consultoria e treinamento nas tecnologias Python, Zope e Plone, abre processo seletivo para trabalho em Brasília-DF.
+
+Descrição:
+
+ * Conhecimento Avançado em Python
+ * Conhecimento avançado em desenvolvimento de soluções Zope e Plone, principalmente soluções de integração
+ * Excelentes habilidades de comunicação e iniciativa
+ * Auto-didata
+ * Tunning de Servidores Zope/Plone
+ * Experiência em ambientes Linux e/ou MacOS
+
+São grandes diferenciais:
+
+ * XHTML, CSS
+ * RDBMS + SQL
+ * (HTTP, WebDAV, REST, Atom/RSS, etc.)
+
+Nós oferecemos:
+
+ * Assistência Médica (Bradesco Top)
+ * Vale-transporte
+ * Vale-refeição
+ * Participação nos resultados
+ * Salários compatíveis com o cargo.
+
+Os interessados devem enviar currículo para vaga@threepointsweb.com .
+
+== Desenvolvedor Python ==
+Data: 28/11/2008
+
+Vagas: 1
+
+A GPr Sistemas está ampliando suas fileiras. Temos algumas posições disponíveis para trabalho primordialmente em Python.
+
+A GPr é uma empresa que cultiva um ambiente hospitaleiro, valorizando a autonomia e o empreendedorismo. Nela, você terá a oportunidade de participar da concepção do projeto, empacotamento, manutenção e interação com o cliente.
+
+Que tipo de projeto? Tem de tudo: sistemas web, mobile, compiladores, bibliotecas digitais, gateways, media servers, monitores de tráfego, geoprocessamento. Diga adeus ao tédio.
+
+Se você estiver interessado, mande um currículo para marco@gpr.com.br aos cuidados de Marco Antônio Rossi. Indique por favor a carga horária semanal que terá disponibilidade, a partir de quando pode começar e pretensão salarial. Se tiver dúvidas, além do e-mail, pode falar consoco através do telefone (19) 3253-1888.
+
+A priori, estamos interessados em quem tenha experiência com Python para ingressar na empresa (não é um mero trabalho temporário) e por isso contato presencial é importante.
+
+A sede da GPr é em Campinas no bairro Cambuí.
+
+== Desenvolvedor Django ==
+Data: 11/11/2008
+
+Vagas: 1
+
+Localização: São Paulo, SP
+
+Sobre a empresa:
+
+A Rede Colibri nasceu de uma parceria entre um grupo americano especializado em propaganda imobiliária e engenheiros brasileiros da área de software.
+
+Após estudos sobre a implementação do sistema de troca de ofertas no mercado imobiliário norte americano e uma pesquisa de campo no mercado Paulista, a Rede Colibri desenvolveu um sistema de rede de uso exclusivo do corretor imobiliário.
+
+Assim, procuramos promover a melhor composição de tecnologias e serviços aos corretores imobiliários de São Paulo para que esses possam oferecer melhores condições de atendimento aos seus clientes
+
+Sobre o candidato ideal:
+
+ * Conhecimento de Desenvolvimento Web (intermediário+)
+ * Conhecimento de modelo MVC e OO (intermediário+)
+ * Conhecimento de Python e do framework Django (intermediário)
+ * Conhecimento de Banco de Dados SQL (intermediário+)
+ * Conhecimento de Javascript e do framework Jquery (intermediário+) Conhecimento de XHTML e CSS2 (basico)
+ * Conhecimento de Sistema de Controle de Versão SVN (opcional)
+ * Conhecimento de Ferramenta de Tickets TRAC (opcional)
+ * Conhecimento de Ambiente de Trabalho Linux (intermediário)
+ * Conhecimento de Inglês (intermediário)
+
+Sobre a vaga:
+
+40 horas semanais de segunda à sexta.
+
+Horário de trabalho das 9:00 às 18:00 (podemos estudar flexibilidade)
+
+R$2.000,00 ~ R$3.500,00 CLT (beneficios inclusos)
+
+Descrição do Cargo:
+
+ 1. Desenvolver novas funcionalidade do sistema mediante especificação
+ 1. Atuar na manutenção do sistema (correção de bugs e defeitos)
+ 1. Atuar na melhoria do sistema (desenvolvimento de melhorias)
+ 1. Auxiliar no suporte técnico on-line ao cliente
+ 1. Sempre registrar novos bugs e melhorias no sistema de tickets
+ 1. Sempre registrar as horas trabalhadas em cada ticket
+ 1. Classificar corretamente defeitos e melhorias no sistema (mediante treinamento)
+ 1. Sempre commitar seu trabalho ao final do ticket ou do dia (o que ocorrer primeiro)
+ 1. Trabalho em equipe e comprometimento
+ 1. Sempre testar o sistema após alguma alteração (correção de defeito ou melhoria)
+ 1. Garantir um código limpo e bem documentado
+ 1. Participar de reuniões de planejamento/acompanhamento semanais
+
+Os candidatos devem entrar em contato, enviando currículo para: felipe@redecolibri.com.br
+
+== Desenvolvedor Plone ==
+Data: 05/11/2008
+
+Vaga para trabalhar em Brasília no governo federal.
+
+Conhecimentos necessários:
+
+ * Desenvolvimento com Python
+ * Desenvolvimento com Zope e Plone
+ * XHTML, CSS
+
+Conhecimentos desejáveis:
+
+ * Administração de servidores Linux
+ * RDMS + SQL
+
+Encaminhar currículo para gustavolepri at gmail at com
+
+== Desenvolvedor Júnior ==
+Data: 27/10/2008
+
+Vagas: 2
+
+A ThreePointsWeb, empresa especializada em consultoria e treinamento nas tecnologias Python, Zope e Plone, abre processo seletivo para as seguintes vagas para trabalho em Brasília-DF:
+
+ * Curso superior completo
+ * Experiência em desenvolvimento de aplicações Web (PHP, Java, Rails, Django)
+
+São grandes diferenciais:
+
+ * XHTML, CSS
+ * Desenvolvimento com Python
+ * Desenvolvimento com Zope e Plone
+ * RDBMS + SQL
+ * (HTTP, WebDAV, REST, Atom/RSS, etc.)
+
+Nós oferecemos:
+
+ * Assistência Médica (Bradesco Top)
+ * Vale-transporte
+ * Vale-refeição
+ * Participação nos resultados
+ * Salários compatíveis com o cargo.
+
+Curriculos devem ser enviados para vaga@threepointsweb.com .
+
+== Estágio Python ==
+Data: 27/10/2008
+
+Vagas: 2
+
+A ThreePointsWeb, empresa especializada em consultoria e treinamento nas tecnologias Python, Zope e Plone, abre processo seletivo para as seguintes vagas para trabalho em Brasília-DF:
+
+ * Cursando 2º ano
+ * Matriculado no(s) curso(s): Ciência da Computação, Análise de Sistemas e afins.
+ * Atividades - desenvolvimento de aplicações em Python, Zope e Plone.
+ * Desejável menos de um ano de experiência em desenvolvimento web (PHP, Java, Rails, Django)
+ * Desejável experiência básica em desenvolvimento de aplicações em Python, Zope e Plone.
+
+Bolsa Auxilio de R$800.00
+
+Curriculos devem ser enviados para vaga@threepointsweb.com .
+
+== Consultor ==
+Data: 27/10/2008
+
+Vagas: 1
+
+A ThreePointsWeb, empresa especializada em consultoria e treinamento nas tecnologias Python, Zope e Plone, abre processo seletivo para as seguintes vagas para trabalho em Brasília-DF:
+
+ * Conhecimento Avançado em Python
+ * Conhecimento avançado em desenvolvimento de soluções Zope e Plone, principalmente soluções de integração
+ * Excelentes habilidades de comunicação e iniciativa
+ * Auto-didata
+ * Tunning de Servidores Zope/Plone
+ * Experiência em ambientes Linux e/ou MacOS
+ * Ter atividade comprovada de participação em alguma comunidade Livre
+
+São grandes diferenciais:
+
+ * XHTML, CSS
+ * RDBMS + SQL
+ * (HTTP, WebDAV, REST, Atom/RSS, etc.)
+
+Nós oferecemos:
+
+ * Assistência Médica (Bradesco Top)
+ * Vale-transporte
+ * Vale-refeição
+ * Participação nos resultados
+ * Salários compatíveis com o cargo.
+
+Curriculos devem ser enviados para vaga@threepointsweb.com .
+
+== Desenvolvedor Plone ==
+Data: 20/10/2008
+
+Vagas: 1
+
+Vaga para Desenvolvedor/Administrador Plone.
+
+Local de trabalho: Brasília-DF
+
+Empresa: EBC (Empresa Brasil de Comunicação)
+
+Interessados entrar em contato Com David através do email davidvitor@gmail.com .
+
+== Programador Python ==
+Data: 15/10/2008
+
+Vagas: 1
+
+Empresa: Mondial Eletrodomésticos - www.mondialline.com.br
+
+Local de trabalho: Alphaville, Barueri - SP
+
+Carga horária: de 6 a 8 hs.
+
+Conhecimentos Necessários:
+
+ * Python
+ * HTML
+ * CSS
+ * JavaScript
+ * SQL
+ * Subversion
+
+Conhecimentos Desejáveis:
+
+ * Zope
+ * PostgreSQL
+ * MSSQL Server
+ * Linux
+ * SQLAlchemy
+
+Perfil: iniciativa, facilidade de comunicação, auto-ditada
+
+Foco de trabalho: aplicação web gerencial
+
+Salário: à combinar, a depender da qualificação do candidato
+
+Interessados favor enviar CV com pretensão salarial para: ruda@mondialline.com.br
+
+== Desenvolvedor Web ==
+Data: 03/10/2008
+
+vagas: 1
+
+A Interzone Entertainment está em busca de mais um membro para o seu time brasileiro de desenvolvedores web.
+
+Conhecimentos requeridos:
+
+ * Python
+ * Linux
+ * SVN
+ * Javascript
+ * HTML/CSS (W3C standards)
+ * SQL
+ * Inglês (para leitura)
+
+Conhecimentos desejados:
+
+ * Django
+ * Pylons
+ * ORMs
+ * JQuery
+ * WSGI
+ * PHP
+ * Postgres
+ * Shell Script
+ * Inglês fluente
+ * Flash
+ * Action Script
+
+Sobre a Interzone Games: http://www.interzoneentertainment.com/about/
+
+Interessados enviem o cv para sergio.campos@interzonegames.com com o assunto "Web/Python". Dúvidas e mais informações podem ser requisitadas através do mesmo email.
+
+== Desenvolvedor Python ==
+Data: 30/09/2008
+
+Vagas: 1
+
+Nós somos uma produtora mutante baseada em SP e em novas mídias. Hoje internet, celular, games. Amanhã, ninguém sabe.
+
+Somos reconhecidos nacional e internacionalmente pela capacidade e qualidade de produção. Tentamos a sorte na gringa e já estamos produzindo os primeiros projetos internacionais.
+
+Você quer trabalhar conosco? Prepare-se para assinar um cheque em branco. A gente dá garantias de que vai tentar aproveitar todo e qualquer talento seu. Aqui, ninguém vai te prender num cargo ou especialidade. Nossa política de Recursos Humanos é muito clara. Gente aqui não é recurso. Talento e vontade é coisa séria na Colmeia.
+
+REQUISITOS
+
+1) Imprescindível:
+
+ * Conhecer bem Python, Ruby, Java ou PHP.
+
+2) Desejável:
+
+ * Conhecer algumas linguagens de programação e não se apegar a nenhuma delas;
+ * Conhecer as metodologias XP e Scrum, e ter uma boa explicação do porque não as usa;
+ * Experiência com frameworks ágeis (RoR, Django, Pylons, etc);
+ * Manter algum projeto pessoal na web.
+
+3) Ah, é?
+
+ * Cocoa (Obj-C);
+ * C++;
+ * OpenFrameworks;
+ * J2ME.
+
+Interessados enviar curriculo para arthur@colmeia.tv .
+
+Info: http://colmeia.tv
+
+== Programador Python ==
+Data: 29/09/2008
+
+Vagas: 1
+
+Empresa localizada na Bélgica está em busca de programadores com conhecimento em Python. Um dos requisitos é o idioma inglês. É preciso também estar formado na área, em qualquer curso relacionado. Não precisa ser super fluente, mas precisa compreender e conseguir se comunicar em inglês no ambiente de trabalho.
+
+Conhecimentos desejados:
+
+ * Python
+ * Java
+ * Tivoli
+ * SAP
+
+*Não é necessário conhecer todas as tecnologias listadas. Basta conhecer uma ou mais.
+
+Benefícios:
+
+A empresa paga:
+
+ * Todo o seu processo de contratação e aquisição de visto e permissão de trabalho na Bélgica para você e sua família
+ * Passagems para você e sua família
+ * Carro e combustível para uso pessoal e profissional
+ * 1 mês de moradia para que você tenha tempo para se organizar e encontrar um lugar para ficar na Bélgica.
+ * Celular
+ * Laptop
+
+Não é contrato temporário. Interessados devem enviar um curriculum vitae em inglês para Adriano, através do e-mail: py.adriano@gmail.com .
+
+== Desenvolvedor Python ==
+Data: 29/09/2008
+
+vagas: 1
+
+A Visionnaire Informática S/A está procurando profissional com conhecimentos em linguagem Python. Conhecimento em análise e linguagem Java são diferenciais. A empresa fica em Curitiba-PR.
+
+Interessados podem enviar o curriculo diretamente para o responsável pelo recrutamento da empresa: antonio@visionnaire.com.br
+
+== Desenvolvedor Zope/Plone ==
+Data: 03/09/2008
+
+Vagas: 1
+
+Vaga em Brasília para profissional Zope/Plone. Procuramos um profissional de nível intermediário ou superior.
+
+Requisitos:
+
+ * Conhecimentos sólidos de CSS e HTML;
+ * Conhecimentos sólidos de Archetype;
+ * Conhecimentos básicos de Banco de dados Relacional (qualquer um);
+ * Conhecimentos sólidos em Plone (cutomizações e interface, implementação de novas funcionalidade);
+ * Conhecimentos sólidos em ZPT e Python;
+ * Conhecimentos básicos de UML;
+
+Desejáveis:
+
+ * Usuário Linux;
+ * Conhecimento em FIVE;
+ * Conhecimento em Plone 3;
+ * Conhecimento JavaScript, AJAX;
+
+Benefícios:
+
+ * Vale Transporte;
+ * Vale Alimentação;
+ * Convênio médico;
+ * Convênio odontológico;
+ * Salário: R$ 3.000,00 CLT;
+
+Os interessados deverão enviar email para: andre.climaco@gmail.com com assunto "VAGA Zope/Plone Brasilia".
+
+== Programador Python/Django ==
+Data: 28/08/2008
+
+Vagas: 1
+
+Vaga para programador Python, com foco em Django. A empresa é uma das principais na adocão do Django. O trabalho é remoto, full time (carga de 40h a 45h/semana).
+
+Necessário fluência em inglês, experiência em torno de 5 anos com Python e boa experiência com o framework Django.
+
+Salário à combinar, porém é acima da média nacional.
+
+Interessados, contactar através do e-mail marinho@gmail.com - Marinho Brandão.
+
+== Analista Desenvolvedor Python ==
+Data: 02/09/2008
+
+Vagas: 2
+
+O candidato deve ter bons conhecimentos em:
+
+ * Framework Django
+ * Linguagem Python
+ * HTML
+ * CSS
+ * JavaScript
+ * SQL
+ * Banco de Dados MySQL.
+
+O local de trabalho é Vila Olímpia–SP, nosso vínculo é PJ, hora-aberta e o valor está a definir.
+
+Interessados por favor encaminhem CV para rh@gonow.com.br .
+
+Contato RH - Gonow: (11)3847-7967
+
+== Estágio Python ==
+Data: 01/09/2008
+
+Vagas: 4
+
+A Samurai busca estagiários em PZP (python, zope, plone) para início imediato.
+
+A empresa fica em São Paulo - capital, no bairro do Brooklin com valor a combinar dependendo do nível de conhecimento do candidato
+
+ * http://www.samurai.com.br
+
+Favor enviar currículos para sandro@samurai.com.br
+
+== Desenvolvedor Python ==
+Data: 25/08/2008
+
+Vagas: 1
+
+A Gonow está buscando um desenvolvedor Python com pelo menos 3 anos de experiência para trabalhar por tempo indeterminado.
+
+A empresa fica em São Paulo capital, na Vila Olímpia. O vínculo é PJ com salário a combinar.
+
+ * http://www.gonow.com.br
+
+Interessados encaminhem CV para rh@gonow.com.br .
+
+== Desenvolvedor Python ==
+Data: 19/08/2008
+
+Vagas: 1
+
+Procuramos um programador ninja (experiente e versátil) voltado para o ambiente linux que domine Python para realizar desenvolvimento de aplicações web, módulos de integração de sistemas e web services. Por favor, não envie currículo caso você seja iniciante ou júnior.
+
+O profissional irá trabalhar no Centro do Rio de Janeiro, 8h por dia. Contratação imediata e permanente.
+
+Empresa: Mondial Eletrodomésticos - [[www.mondialline.com.br]]
+
+Local de trabalho: Alphaville, Barueri - SP
+
+Carga horária: de 6 a 8 hs.
+
+Conhecimentos Necessários:
+
+ * Python
+ * HTML
+ * CSS
+ * JavaScript
+ * SQL
+
+Conhecimentos Desejáveis:
+
+ * Django
+ * Zope
+ * Plone
+ * PostgreSQL
+ * MSSQL Server
+ * Linux
+
+Salário variando de R$ 1.500,00 à 2.500,00, dependendo da carga horária e do conhecimento do candidato.
+
+Foco de trabalho: análise de requisitos e desenvolvimento de aplicação web gerencial para extração de relatórios de faturamento/produção/custos.
+
+Obs: a vaga inicialmente é temporária (4 a 6 mêses) mas existe chance de efetivação
+
+Interessados favor enviar CV com pretensão salarial para: ruda@mondialline.com.br

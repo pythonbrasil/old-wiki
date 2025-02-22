@@ -1,0 +1,49 @@
+= Tab Completion =
+
+Uma dica legal para quem gosta de xeretar no ambiente interativo do Python é fazer a tecla <TAB> completar automagicamente nomes de funções, métodos e outros.
+
+Como se faz isso? É simples. Acompanhe.
+
+Ponha no seu {{{$HOME/.bash_profile}}} ou {{{$HOME/.profile}}} ou ainda {{{$HOME/.bashrc}}} (conforme o caso, não esqueça de adicionar permissão de execução ao arquivo):
+
+{{{
+PYTHONSTARTUP="$HOME/.pythonrc"
+export PYTHONSTARTUP
+}}}
+
+Agora edite o arquivo {{{$HOME/.pythonrc}}} e acrescente as seguintes linhas:
+
+{{{
+#!python
+import readline
+import rlcompleter
+readline.parse_and_bind('tab: complete')
+}}}
+
+Abra um novo shell, rode o Python e faça o seguinte teste:
+
+{{{
+>>> import sys
+>>> sys.<TAB><TAB>
+sys.__class__             sys.argv                  sys.maxint
+sys.__delattr__           sys.builtin_module_names  sys.maxunicode
+...
+}}}
+
+Use então {{{sys.ar<TAB>}}} para completar sys.argv, igual ao comportamento do Bash ou de outros aplicativos que usam a biblioteca {{{readline}}}.
+
+NOTAS:
+  * A variável de ambiente {{{$PYTHONSTARTUP}}} deve conter o nome de um arquivo que o Python vai ler e interpretar antes de entrar no prompt interativo. Neste caso, escolhi o nome {{{.pythonrc}}} mas poderia ser qualquer outro.
+
+  * Se não funcionar, veja se a variável {{{$PYTHONSTARTUP}}} está definida com {{{echo $PYTHONSTARTUP}}}. Lembre-se que o {{{.bash_profile}}} (ou {{{.profile}}}) é lido só pelo shell de login, isso quer dizer que se você entrou no ambiente gráfico, editou o arquivo e abriu um novo shell para testar é bem provável que não funcione, saia do seu ambiente, entre novamente e teste.
+
+  * Rodando {{{python -E}}} a variável {{{$PYTHONSTARTUP}}} não é lida.
+
+''Ao procurar mais detalhes sobre o rlcompleter (o módulo usado nesse exemplo acima, acabei encontrando o [[http://codespeak.net/rlcompleter2/index.cgi?home|rlcompleter2]], que achei mais interessante por imprimir o __doc__ string da funcao explicando os parâmetros, por exemplo, funcao(<TAB> mostra informações sobre a funcao, como parâmetros, etc. Maiores detalhes na página sobre [[http://codespeak.net/rlcompleter2/index.cgi?install|instalação]] -- SergioBruder''
+
+''Tem tambem o [[http://ipython.scipy.org/|IPython]], que tem alem de tab completion e history ja configurados por padrao, tem um monte de outras funcionalidades, como colorizacao de tracebacks por exemplo -- SidneidaSilva''
+
+''Uma adição interessante é a possibilidade de manter um histórico dos últimos comandos utilizados de dentro do interpretador. O link http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/473900 contém informações de como fazer isto -- RudaMoura''
+----
+
+RudaMoura

@@ -1,0 +1,41 @@
+Neste exemplo foi utilizado o SOAPpy.
+
+Servidor
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+import sys
+import os
+import base64
+
+from SOAPpy import *
+
+def upload_file(file, name):
+        out = open(name,'wb')
+        out.write(str(base64.decodestring(file)))
+        out.close()
+    
+server = SOAPServer(('localhost',8080))
+server.registerFunction(upload_file)
+server.serve_forever()
+}}}
+
+Cliente
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+import base64
+from SOAPpy import *
+import os
+server = SOAPProxy('http://localhost:8080')
+file_name = 'upf.zip'
+file=open(file_name, 'rb')
+data=file.read()
+server.upload_file(base64.encodestring(data), file_name)
+file.close()
+}}}
+ 

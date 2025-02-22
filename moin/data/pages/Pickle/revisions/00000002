@@ -1,0 +1,142 @@
+#pragma section-numbers off
+= Receita: Exemplo de uso do Pickle =
+
+Código de exemplo sobre o uso do Pickle. É um mini gerenciador para grade curricular.
+Ele usa o cPickle, por questão de desempenho, mas nada que impeça de usá-lo com o Pickle normal.
+
+== Código ==
+
+{{{
+#!python
+import cPickle
+
+
+def write_file():       
+    """
+    Funcao que escreve num arquivo um dicionario.
+    Isto eh, escreve um arquivo binario de um objeto
+    Python usando o Pickle
+    """
+    CIT = ["Academic Computer Skills", "Database Management", "Intro to Computer scince",\
+        "ACCESS","Systems Analysis and Design", "Visual Basic",\
+        "Intermediate Visual Basic", "Decision Support Using Excel"]
+    pickle_file = open("pickles1.dat","w")
+
+    cPickle.dump(CIT, pickle_file)
+    print "A file has been created and the required specifications have been added"
+    pickle_file.close()
+
+
+def read_file():
+    """
+    Le o dicionario do arquivo.
+    """
+    pickle_file = open("pickles1.dat","r")
+    CIT = cPickle.load(pickle_file)
+    pickle_file.close()
+   
+    for course in CIT:
+        print CIT.index(course), "-", course
+
+
+def delete_file():
+    """
+    Deleta uma entrada do dicionario
+    Tambem atualiza no arquivo.
+    """
+    word_delete = int(raw_input("Which record do u want to delete?[key of the record]: "))
+   
+    pickle_file = open("pickles1.dat", "r")
+    CIT = cPickle.load(pickle_file)
+    pickle_file.close()
+   
+    try:
+        CIT.pop(word_delete)
+        pickle_file = open("pickles1.dat","w")
+        cPickle.dump(CIT, pickle_file)
+        pickle_file.close()
+    except:
+        print "There isnt a record with this key"
+
+
+def add_record():
+    """
+    Adiciona um registro ao dicionario.
+    Tambem atualiza o arquivo
+    """
+    pickle_file = open("pickles1.dat", "r")
+    CIT = cPickle.load(pickle_file)
+    CIT.append("SQL Programming")
+    CIT.append("Database Programming")
+    pickle_file.close()
+   
+    pickle_file = open("pickles1.dat","w")
+    cPickle.dump(CIT, pickle_file)
+    print "New data was added to the file"
+    pickle_file.close()
+
+
+def display_instructions():
+    """Display the Main menue"""
+    print \
+          """
+        Main Menu:
+        
+          1. Exit
+          2. Create a new file and add specifications
+          3. Add more courses to the file
+          4. Read the file
+          5. Delete a course
+          6. Display instructions
+
+          """
+
+
+# exit the program                               >>> 1 <<<
+def over_program():
+    """Exit the program"""
+    print "Good Bye!"
+
+  
+def main():
+    choice = None
+    display_instructions()
+  
+  
+    while choice != 1:
+        choice = raw_input("\nChoice: ")
+        if choice == "1":
+            over_program()
+            break
+  
+        elif choice == "2":
+            write_file()
+
+        elif choice == "3":
+            add_record()
+          
+        elif choice == "4":
+            read_file()
+
+        elif choice == "5":
+            delete_file()
+       
+        elif choice == "6":
+            display_instructions()
+
+        else:
+            print "\nSorry, but", choice, "isn! 't a valid choice."
+
+
+main()
+raw_input("Press Enter Key to Exit.")    
+}}}
+
+
+Volta para CookBook.
+
+----
+
+Murtog
+----
+CategoryTemplate

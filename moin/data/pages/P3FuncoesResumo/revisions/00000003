@@ -1,0 +1,83 @@
+MarcoAndreLopesMendes
+
+'''Objetivos: '''
+
+ 1. Escrever suas próprias funções;
+ 1. Aceitar valores em sua função através de parâmetros;
+ 1. Retornar informação de uma função através de valores;
+ 1. Trabalhar com variáveis globais e constantes;
+ 1. Criar componentes que executem tarefas específicas.
+
+Construir um programa grande a partir de pequenos componentes, cada um dos quais é mais gerenciável que o programa original é uma técnica chamada dividir e conquistar.
+
+Componentes em Python são chamados funções, classes, módulos e pacotes. 
+
+Programas Python tipicamente são escritos através da combinação de novas funções e classes que o programador escreve com funções de “pré-empacotadas” ou classes disponíveis em numerosos módulos de Python. 
+
+O programador pode escrever funções para definir tarefas específicas que podem ser usadas em muitos pontos num programa. 
+
+Uma função é invocada (i.e., feita executar sua tarefa designada) por uma chamada de função. 
+
+A chamada de função especifica o nome de função e fornece informação (como uma lista separada por vírgulas de argumentos) que a função chamada necessita para fazer seu trabalho. 
+
+Todas as variáveis criadas em definições de função são variáveis locais—são conhecidas só na função em que elas são criadas. 
+
+A maioria das funções têm uma lista de parâmetros que fornece o meio para comunicar informação entre funções. Um parâmetro da uma função é também uma variável local.
+
+A abordagem dividir-e-conquistar torna o desenvolvimento de programas mais gerenciável.
+
+Outra motivação para usar a abordagem dividir-e-conquistar é a reutilização de software — usando funções existentes como blocos de construção para criar novos programas.
+
+
+Uma terceira motivação para usar a abordagem dividir-e-conquistar é evitar a repetição de código num programa. Empacotar o código como uma função permite que o código seja executado de vários locais num programa simplesmente chamando a função. 
+
+As funções do módulo math (matemática) permitem ao programador executar certos cálculos matemáticos comuns. 
+
+Funções normalmente são chamadas escrevendo o nome da função, seguido por um parêntese esquerdo, seguido pelo argumento (ou uma lista de argumentos separados por vírgula) da função, seguido por um parêntese direito. 
+
+Para usar uma função que é definida num módulo, um programa tem que importar o módulo, usando a palavra-chave import. Depois que o módulo foi importado, o programa pode acessar uma função ou uma variável no módulo, usando o nome de módulo, um ponto (.) e a função ou nome da variável. 
+
+Funções são definidas com a palavra-chave def. 
+
+As instruções endentadas que seguem uma declaração def formam o corpo de função. O corpo de função também é chamado de um bloco.
+
+Há três meios de retornar controle ao ponto em que uma função foi invocada. Se a função não retorna um resultado, o controle é retornado simplesmente quando a última linha endentada é alcançada, ou ao executar um return. Se a função retorna um resultado, a declaração [return expressão] retorna o valor de expressão ao chamador. 
+
+None é um valor de Python que representa nulo — indicando que nenhum valor foi declarado — e isso é avaliado como falso em expressões condicionais. 
+
+O elemento de possibilidade pode ser introduzido em aplicações de computador usando o módulo random. 
+
+A função randrange gera um número inteiro entre o primeiro argumento e o segundo, não incluindo, este último. Se randrange verdadeiramente produz números inteiros aleatoriamente, cada número entre o primeiro argumento e o segundo argumento tem uma possibilidade igual (ou probabilidade) de ser escolhido cada vez que a função é chamada. 
+
+Python tem regras estritas que descrevem como e quando um valor da variável pode ser acessado. Estas regras são descritas em termos de espaço de nomes (namespaces) e escopos.
+
+Espaços de nome armazenam informações sobre um identificador e o valor ao qual ele está ligado.
+
+Python define três espaços de nome; quando um programa tenta acessar um valor de um identificador, Python procura nos espaços de  nome numa ordem específica para ver se e onde o identificador existe. 
+
+O espaço de nome local armazena ligações criadas num bloco. Todos os parâmetros de função e qualquer identificador que a função cria são armazenados no espaço de nome local da função. 
+
+O espaço de nome global (ou de módulo) contém as ligações para todos os identificadores, nomes de função e nomes de classe definido num arquivo ou módulo. 
+
+Cada espaço de nome global de um módulo contém um identificador chamado __name__ que fornece o nome desse módulo. Quando uma sessão do interpretador Python é iniciada ou quando o interpretador Python é invocado num programa armazenado num arquivo, o valor de __name__ é "__main__". 
+
+O espaço de nomes built-in (padrão) contém identificadores que correspondem a muitas funções e erros de Python. Python cria o espaço de nome padrão quando o interpretador começa, e programas normalmente não modificam o espaço de nome (p.e., por adicionar um identificador ao espaço de nome). 
+
+Um escopo de um identificador descreve a região de um programa que pode acessar o valor do identificador. 
+
+Se um identificador é definido no espaço de nome local (p.e.,de uma função), esse identificador tem escopo local. Uma vez que o bloco de código termina (p.e.,quando uma função retorna), todos os identificadores nesse espaço de nome local do bloco “saem do escopo” e não podem mais ser acessados. 
+
+Se um identificador é definido no espaço de nome global, o identificador tem escopo global. Um identificador global é conhecido por todo código que executa dentro desse módulo, do ponto em que o identificador é criado até o fim do arquivo. 
+
+Quando uma função cria um identificador local com o mesmo nome que um identificador no espaço de nome do módulo ou padrão, o identificador local é dito que sombreia (shadows) o identificador global ou padrão. O programador pode introduzir um erro de lógica no programa se ele referencia uma variável local, mas pretende referenciar um identificador global ou padrão.
+
+Algumas chamadas de função geralmente passam um valor particular de um argumento. O programador pode especificar que esse argumento é um argumento padrão (default), e o programador podem fornecer um valor padrão para esse argumento. Quando um argumento padrão é omitido numa chamada de uma função, o interpretador automaticamente insere o valor padrão desse argumento e passa o argumento na chamada. 
+
+Argumentos padrão devem ser os argumentos mais a direita (finais) numa lista de parâmetros de uma função. Quando chamando uma função com dois ou mais argumentos padrão, se um argumento omitido não é o argumento mais a direita na lista de argumento, todos argumentos à direita desse argumento também devem ser omitidos. 
+
+O programador pode especificar que uma função recebe um ou mais argumentos de palavra-chave. A definição de função pode designar um valor a um argumento de palavra-chave. Tanto uma função pode associar um valor padrão para um argumento de palavra-chave ou um chamado de função pode designar um novo valor ao argumento de palavra-chave, usando o formato [keyword = valor].
+
+
+''' Referências '''
+
+ 1. Deitel, H. M. et ali. Python How to Program. Prentice Hall,2002

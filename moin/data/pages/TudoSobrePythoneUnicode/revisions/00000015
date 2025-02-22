@@ -1,0 +1,1310 @@
+= Tudo Sobre Python e Unicode =
+
+Tradução de [http://boodebr.org/main/python/all-about-python-and-unicode "All about Python and Unicode"].
+Escrito por Frank !McIngvale, traduzido por [:NiloMenezes:Nilo Menezes].
+
+[[TableOfContents]]
+
+== Um ponto de partida ==
+
+Duas semanas antes de começar a escrever este documento, meu conhecimento sobre [http://www.python.org/ Python] e [http://www.unicode.org/ Unicode] era algo como:
+
+Tudo que precisa para usar Unicode em Python é passar suas strings para unicode()
+
+Agora, onde eu fui arranjar uma idéia tão estranha? Ah, certo, do [http://docs.python.org/tut/node5.html#SECTION005130000000000000000 tutorial de Python sobre Unicode], que afirma:
+
+"Criar strings Unicode em Python é tão simples quanto criar strings normais":
+
+>>> u'Alô Mundo !' u'Alô Mundo !'
+
+Ainda que este exemplo seja tecnicamente correto, ele pode enganar o iniciante em Unicode, uma vez que ele esconde diversos detalhes necessários para o uso prático. Esta explicação ultra simplificada me deu um entendimento completamente errado sobre como Unicode funciona em Python.
+
+Se você também foi guiado pelo caminho ultra simplificado, então este tutorial irá provavelmente ajudá-lo. Este tutorial contém um conjunto de exemplos, testes e demonstrações que documentam meu "reaprendizado" da forma correta de trabalhar com Unicode em Python. Ele inclui problemas de portabilidade, assim como questões que surgem quando lidamos com [http://www.w3.org/MarkUp/HTML HTML],  [http://www.w3.org/XML/ XML] e sistemas de arquivo.
+
+Aproveitando, Unicode é justamente simples, eu só queria ter aprendido a usá-lo corretamente da primeira vez.
+
+=== Onde começar? ===
+
+Em alto nível, computadores utilizam três tipos de representação de textos:
+
+ 1. ASCII
+ 1. Conjuntos de caracteres Multibyte
+ 1. Unicode
+
+Eu acho que Unicode é mais fácil de entender se você entender como ele evoluiu a partir do código ASCII. A parte seguinte é umá breve sinópse desta evolução.
+
+=== Do ASCII ao Multibyte ===
+
+No início, existia ASCII. (OK, também existia o [http://www.dynamoo.com/technical/ascii-ebcdic.htm#asciibetter EBCDIC]), mas este nunca pegou fora dos mainframes, então eu o estou omitindo aqui). O conjunto de caracteres ASCII contém 256 caracteres, como você pode ver nesta [http://www.asciitable.com/ tabela ASCII]. Ainda que 256 caracteres sejam disponíveis, os primeiros 128 (códigos de 0 a 127) são normalmente os mais utilizados. Na verdade, os primeiros sistemas de email só permitiam a transmissão de caracteres 0-127 (isto é texto de "7-bits") e de fato isto continua valendo para muitos sistemas ainda hoje. Como você pode constatar na tabela, o código ASCII é suficiente apenas para documentos escritos em inglês.
+
+Problemas começaram a surgir quando computadores começaram a ser usados em países onde não bastavam apenas os caracteres ASCII. O código ASCII não possui a capacidade de ser utilizado em textos escritos em grego, cirílico ou japonês, para citar poucos. Além disso, textos em japonês precisam de milhares de caracteres, logo não há como fazer isso usando apenas 8-bits. Para superar esta limitação, Conjuntos de Caracteres Multibyte foram inventados.  A maioria (senão todos) dos Conjuntos de Caracteres Multibyte se aproveitam do fato  de que apenas os 128 primeiros caracteres do código ASCII são comumente utilizados (códigos 0-127 em decimal, ou 0x00-0x7f em hexadecimal). Os códigos superiores (128..255 em decimal, ou 0x80-0xff em hexadecimal) são utilizados para definir conjuntos estendidos (não utilizados em inglês).
+
+Vamos olhar um exemplo: Shift-JIS é uma das codificações para texto em japonês. Você pode ver a [http://www.rikai.com/library/kanjitables/kanji_codes.sjis.shtml tabela de caracteres aqui]. Observe que o primeiro byte de cada caractere começa com um valor hexadecimal entre 0x80 e 0xfc. Esta é uma propriedade interessante, porque ela faz com que texto em japonês e inglês possam ser misturados livremente! A string "Hello World!" é perfeitamente válida na codificação Shift-JIS para textos em inglês. Quando analisamos, caracter a caracter (parse), um texto que utiliza o Shift-JIS, se você encontrar um byte na faixa 0x80-0xff, você saberá que este é o primeiro caracter de uma seqüência de dois códigos. Caso contrário, é um caracter de apenas um byte como no ASCII comum.
+
+Isto funciona muito bem enquanto você trabalhar apenas em japonês, mas o que acontece se você trocar para o [http://czyborra.com/charsets/iso8859.html#ISO-8859-7 conjunto de caracteres gregos]? Como você pode observar, na tabela do ISO-8859-7 os códigos de 0x80-0xff são definidos de uma forma completamente diferente do Shift-JIS. Logo, ainda que você possa misturar inglês com japonês, você não pode misturar grego e japonês uma vez que esses códigos se sobrepõem. Este é um problema comum ao se misturar conjuntos de caracteres multibyte.
+
+=== De Multibyte a Unicode ===
+Para resolver o problema de misturar linguagens diferentes, o código Unicode propõe combinar todos os conjuntos de caracteres do mundo em uma única tabela gigantesca. Dê uma olhada no [http://www.unicode.org/charts/ conjunto de caracteres Unicode].
+
+De início, parecem existir tabelas diferentes para cada linguagem, assim você pode não perceber melhorias em relação ao ASCII. Na realidade, todos estão na mesma tabela, e estão agrupados aqui simplesmente para facilitar a referência(por humanos). A princial característica a observar é que uma vez que todos estes caracteres são parte da mesma tabela, não há sobreposição de código entre eles como ocorre no mundo ASCII/Multibyte. Isto permite a documentos Unicode misturar linguagens livremente sem conflitos de codificação.  
+
+=== Terminologia Unicode ===
+
+Vamos olhar a [http://www.unicode.org/charts/PDF/U0370.pdf tabela de caracteres Gregos] a pegar alguns caracteres:
+
+||||||<style="background-color: #E0E0FF;">Exemplos de Símbolos Unicode ||
+||03A0||Π||Greek Capital Letter Pi (Grego Letra Maiúscula Pi)||
+||03A3||Σ||Greek Capital Letter Sigma (Grego Letra Maiúscula Sigma)||
+||03A9||Ω||Greek Capital Letter Omega (Grego Letra Maiúscula Omega)||
+
+É comum referenciar estes símbolos usando a notação {{{U+NNNN}}}, por exemplo {{{U+03A0}}}. Logo, nós poderíamos definir uma string que contenha estes caracteres usando a seguinte notação (eu adicionei colchetes para facilitar o entendimento):
+
+{{{
+#!python numbers=off
+uni = {U+03A0} + {U+03A3} + {U+03A9} 
+}}}
+
+Agora, mesmo que saibamos exatamente o que 'uni' representa (ΠΣΩ), observe que não sabemos como:
+ * Imprimir uni na tela.
+ * Salvar uni em um arquivo.
+ * Dizer quantos bytes uni ocupa
+
+Por que? Porque uni é uma string Unicode idealizada - nada mais que um conceito até agora. Veremos brevemente como imprimir, salvar e manipular, mas por enquanto, lembre-se desta última afirmação: Não há como dizer quantos bytes serão necessários para armazenar uni. De fato, você deve esquecer tudo sobre bytes e pensar em strings Unicode como conjuntos de símbolos.
+
+||<style="background-color: #E0E0FF;">Nome da Codificação||<style="background-color: #E0E0FF;">Representação Binária||
+||ISO-8859-7||\xD9 (codificação grega nativa)||
+||UTF-8||\xCE\xA9||
+||UTF-16||\xFF\xFE\xA9\x03||
+||UTF-32||\xFF\xFE\x00\x00\xA9\x03\x00\x00||
+
+Cada um destas representações é uma codificação válida de Ω, mas tentar trabalhar com bytes como acima não é melhor que lidar com o mundo ASCII/Multibyte. É por isso que eu digo que você deve pensar em Unicode como símbolos (Ω) e  não como bytes.
+
+== Texto Unicode em Python ==
+
+Para converter nossa string Unicode idealizada uni ('''ΠΣΩ''') de forma a poder ser utilizada, nós temos que observar algumas coisas:
+ 1. Representação de literais Unicode
+ 1. Convertendo Unicode para binário
+ 1. Convertendo binário para Unicode
+ 1. Usando operações com strings
+
+=== Convertendo símbolos Unicode em literais Python ===
+
+Criar uma string Unicode com símbolos é muito fácil. Vamos relembrar os símbolos gregos:
+
+||||||<style="background-color: #E0E0FF;">Exemplos de Símbolos Unicode ||
+||03A0||Π||Greek Capital Letter Pi (Grego Letra Maiúscula Pi)||
+||03A3||Σ||Greek Capital Letter Sigma (Grego Letra Maiúscula Sigma)||
+||03A9||Ω||Greek Capital Letter Omega (Grego Letra Maiúscula Omega)||
+
+Vamos dizer que nós queremos uma string Unicode com esses caracteres, mais alguns caracteres ASCII a moda antiga.
+
+'''''Pseudo-código''''':
+{{{
+#!python numbers=off
+uni = 'abc_' + {U+03A0} + {U+03A3} + {U+03A9} + '.txt'
+}}}
+
+Fazendo isto em Python:
+{{{
+#!python numbers=off
+uni = u"abc_\u03a0\u03a3\u03a9.txt"
+}}}
+
+Algumas coisas a observar:
+ * Caracteres ASCII comuns podem ser escritos normalmente. Você pode simplesmente colocar "a", não precisa escrever o símbomo Unicode "\u0061". (Mas lembre-se, "a" é realmente '''{U+0061}'''; não existe essa coisa de símbolo Unicode "a".)
+ * A seqüência de escape '''\u''' é usada para representar códigos Unicode.
+  * Isto é algo como o tradicional estilo-C '''\xNN''' para inserir valores binários. Entretanto, uma olhada na tabela Unicode nos revela valores de até 6 dígitos. Estes não podem ser convenientemente representados por '''\xNN''', assim o '''\u''' foi inventado.
+  * Para valores Unicode até (e incluindo) 4 dígitos, use a versão de 4 dígitos: '''\uNNNN''' (Observe que você deve usar todos os 4 dígitos, usando zeros a esquerda se necessário).
+  * Para valore Unicode maiores que 4 dígitos, use a versão de 8 dígitos: '''\UNNNNNNNN''' (Observe que você deve usar todos os 8 dígitos, usando zeros a esquerda se necessário)
+  
+Aqui está um outro exemplo:
+
+'''''Pseudo-código''''':
+{{{
+uni = {U+1A} + {U+B3C} + {U+1451} + {U+1D10C}
+}}}
+
+'''''Python''''':
+{{{#!python numbers=off
+uni = u'\u001a\u0bc3\u1451\U0001d10c'
+}}}  
+
+Note como eu adicionei zeros a cada um destes valores para que eles tivessem de 4 a 8 dígitos. Você receberá um erro do Python se não fizer isso. Observe também que você pode usar tanto letras maiúsculas quanto minúsculas no código. O exemplo abaixo resultaria exatamente na mesma coisa:
+
+'''''Python''''':
+{{{#!python numbers=off
+uni = u'\u001A\u0BC3\u1451\U0001D10C'
+}}} 
+
+=== Por que o "print" não funciona? ===
+Você lembra que anteriormente eu disse que '''uni''' não possuía uma representação determinada no computador. Então, o que acontece se nós tentarmos imprimir '''uni''' ?
+
+{{{#!python numbers=off
+uni = u"\u001A\u0BC3\u1451\U0001D10C"
+print uni
+}}}
+
+Você veria:
+
+{{{
+Traceback (most recent call last):
+  File "t6.py", line 2, in ?
+    print uni
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 1-4:
+ordinal not in range(128)
+}}}
+
+O que aconteceu? Bem, você pediu ao Python para imprimir '''uni''', mas uma vez que '''uni''' não tem uma representação determinada no computador, Python tem que primeiro converter '''uni''' em alguma forma imprimível. Já que você não disse ao Python como fazer a conversão, ele assumiu que você queria ASCII. Infelizmente, ASCII só manipula valores entre 0 e 127, e uni contém valores fora da faixa, por isso você tem um erro.
+
+Um método rápido de imprimir '''uni''' é usar o método do Python chamado repr():
+
+{{{
+uni = u"\u001A\u0BC3\u1451\U0001D10C"
+print repr(uni)
+}}}
+
+Que imprime:
+
+{{{
+u'\x1a\u0bc3\u1451\U0001d10c'
+}}}
+
+Que, claro, faz sentido, uma fez que é exatamente como nós definimos '''uni'''. Mas '''repr(uni)''' é simplesmente inútil no mundo real assim como '''uni'''. O que nós realmente precisamos é aprender sobre codecs.
+
+=== Codecs ===
+'''Codecs'''
+Em geral, os codecs da linguagem Python permitem transformações arbitrárias entre objetos. Entretanto, no contexto deste artigo, é suficiente entender codecs como funções que transformam objetos Unicode em strings Python em formato binário, e vice-versa.
+
+'''Por que precisamos deles?'''
+Objetos Unicode não possuem uma representação determinada no computador. Antes que um objeto Unicode possa ser impresso, armazenado em disco, ou enviado pela rede, ele deve ser codificado em um representação especifica. Isto é feito utilizando-se um codec.  Alguns codecs populares que você pode ter ouvido falado no seu dia-a-dia: ascii, iso-8859-7, UTF-8, UTF-16.
+
+==== De Unicode para binário ====
+
+Para converter um valor Unicode em uma representação binária, você chama o método '''.encode''' com o nome do codec. Por exemplo, para converter um valor Unicode par UTF-8:
+
+{{{
+binary = uni.encode("utf-8")
+}}}
+
+O que você acha tornarmos '''uni''' mais interessante, adicionando alguns caracteres comuns:
+{{{
+uni = u"Hello\u001A\u0BC3\u1451\U0001D10CUnicode" 
+}}}
+
+Agora, vamos observar como diferente codecs representam '''uni'''. Aqui um pequeno programa de teste:
+
+'''test_codec01.py'''
+{{{#!python numbers=off
+
+if __name__ == '__main__':
+
+    # Define nossa string Unicode
+    uni = u"Hello\u001A\u0BC3\u1451\U0001D10CUnicode"
+
+    # UTF-8 e UTF-16 podem codificar completamente qualquer string Unicode
+    print "UTF-8", repr(uni.encode('utf-8'))
+    print "UTF-16", repr(uni.encode('utf-16'))
+
+    # ASCII pode apenas codificar valore entre 0-127. Abaixo, dizemos ao Python
+    # para trocar caracteres que não podem ser codificados por '?'
+    print "ASCII",uni.encode('ascii','replace')
+
+    # ISO-8859-1 é similar ao ASCII
+    print "ISO-8859-1",uni.encode('iso-8859-1','replace')
+
+}}}
+
+Que produz a seguinte saída:
+
+{{{
+UTF-8 'Hello\x1a\xe0\xaf\x83\xe1\x91\x91\xf0\x9d\x84\x8cUnicode'
+UTF-16 '\xff\xfeH\x00e\x00l\x00l\x00o\x00\x1a\x00\xc3\x0bQ\x144
+        \xd8\x0c\xddU\x00n\x00i\x00c\x00o\x00d\x00e\x00'
+ASCII Hello????Unicode
+ISO-8859-1 Hello????Unicode
+}}}
+
+Note que eu continuei a usar '''repr()''' para imprimir as strings UTF-8 e UTF-16. Por que? Bem, de outra forma os valores teriam sido impressos na tela utilizando seu conteúdo binário, o que seria difícil de mostrar neste documento.
+
+==== De binário para Unicode  ====
+
+Digamos que alguém tenha dado a você um objeto Unicode codificado com UTF-8. Como converter de volta para Unicode? Você pode ingenuamente tentar isso:
+
+|||||| A forma ingênua (e errada)||
+|| uni = unicode( utf8_string )
+
+Por que errada? Aqui temos um programa que faz exatamente isso:
+
+{{{#!python numbers=off
+uni = u"Hello\u001A\u0BC3\u1451\U0001D10CUnicode"
+utf8_string = uni.encode('utf-8')
+
+# Ingenuamente converte de volta para Unicode
+uni = unicode(utf8_string)
+}}}
+
+Aqui o que acontece:
+{{{
+Traceback (most recent call last):
+    File "t6.py", line 5, in ?
+    uni = unicode(utf8_string)
+
+    UnicodeDecodeError: 'ascii' codec can't decode byte 0xe0
+    in position 6: ordinal not in range(128)
+}}}
+
+Você sabe, a função '''unicode()''' possui realmente dois parâmetros:
+{{{#!python numbers=off
+def unicode(string, encoding):
+     ....
+}}}
+
+No exemplo acima, nós omitimos a codificação (encoding) logo o Python, na melhor das intenções, assumiu mais uma vez que nós queríamos ASCII ([#nota1 nota 1]), e nos deu a coisa errada.
+
+Aqui está a forma correta de fazer isso:
+
+{{{#!python numbers=off
+uni = u"Hello\u001A\u0BC3\u1451\U0001D10CUnicode"
+utf8_string = uni.encode('utf-8')
+
+# Tem que decodificar usando o mesmo codificador usado na codificação!
+uni = unicode(utf8_string,'utf-8')
+print "De volta para UTF-8: ",repr(uni)
+}}}
+
+Que resulta em:
+{{{
+De volta para UTF-8:  u'Hello\x1a\u0bc3\u1451\U0001d10cUnicode'
+}}}
+
+
+=== Operações com Strings ===
+Os exemplos acima devem ter dado uma boa idéia do por quê você quer evitar tratar valores Unicode em formato binário o máximo possível! A versão UTF-8 tinha 23 bytes, a versão UTF-16 tinha 36 bytes, a versão ASCII tinha 16 bytes (mas ela descartou completamente 4 valores Unicode) e de forma similar com ISO-8859-1.
+
+Isto é o por quê, desde o começo, sugeri que você esquecesse sobre bytes!
+
+A boa nova é que uma vez que você tem um objeto Unicode, ele se comporta exatemente como um objeto string comum, logo não há sintaxe adicional a aprender (outra que os códigos de escape '''\u''' e '''\U'''). Aqui temos um pequeno exemplo que mostra objetos Unicode se comportando do jeito que você espera:
+
+'''test_strings01.py'''
+{{{#!python
+if __name__ == '__main__':
+
+    uni = u"Hello\u001A\u0BC3\u1451\U0001D10CUnicode"
+
+    print "uni = ",repr(uni)
+
+    print "len(uni) = ",len(uni)
+
+    # print the "Hello" part
+    print "uni[:5] = ",uni[:5]
+
+    # print the Unicode characters one at a time
+    print "uni[5] = ",repr(uni[5])
+    print "uni[6] = ",repr(uni[6])
+    print "uni[7] = ",repr(uni[7])
+
+    # Depending on how Python was compiled, \U characters
+    # may be stored as two Unicode characters -- see the
+    # section "A wrinkle in \U" below for more details ...
+    print "uni[8] = ",repr(uni[8])
+    print "uni[9] = ",repr(uni[9])
+
+    # print the "Unicode" text at the end
+    print "uni[10:] = ",repr(uni[10:])
+}}}
+
+Executando este exemplo, obtemos o seguinte resultado:
+
+{{{
+uni =  u'Hello\x1a\u0bc3\u1451\U0001d10cUnicode'
+len(uni) =  17
+uni[:5] =  Hello
+uni[5] =  u'\x1a'
+uni[6] =  u'\u0bc3'
+uni[7] =  u'\u1451'
+uni[8] =  u'\ud834'
+uni[9] =  u'\udd0c'
+uni[10:] =  u'Unicode'
+}}}
+
+==== O problema do \U ====
+Dependendo de como seu interpretador Python foi compilado, ele armazena objetos Unicode internamente em UTF-16 (2 bytes por caracter) ou UTF-32 (4 bytes por caracter). Infelizmente este nível de detalhe é exposto na interface normal de string.
+
+Para caracteres de 4 dígitos(16 bits) como '''\u03a0''', não há diferença.
+
+{{{#!python numbers=off
+a = u'\u03a0'
+print len(a)
+}}}
+Mostrará tamanho 1, não importa como o seu Python foi compilado, e {{{a[0]}}} será sempre {{{\u03a0}}}. Entretanto, para caracteres de 8 dígitos (32 bits), como {{{\U0001FF00}}}, você verá uma diferença. Obviamente, valores de 32 bits não podem ser diretamente representados em código de 16 bits, logo um par de valores de 16 bits é usado. (Códigos '''0xD800 - 0xDFFF'''), chamdos "surrogate pairs", são reservados para estas sequências de dois caracteres. Estes valores são invalidos se utilizados separadamente pela especificação Unicode.)
+
+A programa exemplo que mostra o que acontece:
+
+O que acontece com \U...
+{{{#!python numbers=off
+a = u'\U0001ff00'
+print "Length:",len(a)
+
+print "Chars:"
+for c in a:
+    print repr(c)
+}}} 
+
+Se você executar este exemplo em um Python UTF-16, você verá:
+
+Resultado, Python UTF-16
+{{{
+Length: 2
+Chars:
+u'\ud83f'
+u'\udf00'
+}}}
+
+Em um Python UTF-32, você verá:
+
+Resultado com Python UTF-32:
+{{{
+Length: 1
+Chars:
+u'\U0001ff00'
+}}}
+
+Este é um detalhe irritante de se preocupar. Eu escrevi um módulo que deixa você passar caracter a caracter dentro de uma string Unicode, independete de você utilizar Python UTF-16 ou Python UTF-32. Ele é chamado '''xmlmap''' e é parte dos [http://freshmeat.net/projects/gnosisxml/ utilitários Gnosis]. Aqui estão dois exemplos, um usando o xmlmap e outro não.
+
+'''Sem xmlmap'''
+{{{#!python numbers=off
+a = u'A\U0001ff00C\U0001fafbD'
+print "Length:",len(a)
+
+print "Chars:"
+for c in a:
+    print repr(c)
+}}}
+
+'''Resultados sem o xmlmap, em um Python UTF-16'''
+{{{
+Length: 7
+Chars:
+u'A'
+u'\ud83f'
+u'\udf00'
+u'C'
+u'\ud83e'
+u'\udefb'
+u'D'
+}}}
+
+Agora, usando a função '''usplit()''' para conseguir os caracteres um por um, combinando valores quando necessário:
+
+'''Com xmlmap'''
+{{{#!python numbers=off
+from gnosis.xml.xmlmap import usplit
+
+a = u'A\U0001ff00C\U0001fafbD'
+print "Length:",len(a)
+
+print "Chars:"
+for c in usplit(a):
+    print repr(c)
+}}}
+
+'''Resultados com xmlmap, em um Python UTF-16'''
+{{{
+Length: 7
+Chars:
+u'A'
+u'\U0001ff00'
+u'C'
+u'\U0001fafb'
+u'D'
+}}}
+
+Agora você terá resultados idênticos, independente de como seu interpretador Python foi compilado. (Note que o tamanho continua o mesmo, mas '''usplit()''' combinou os "surrogate pairs" de forma que você não os vê aqui.)
+
+==== Bugs do Python 2.0 & 2.1 ====
+
+Você pode pensar quem liga quando isso vem do Python 2.0 e 2.1, mas ao  escrevermos código supostamente portátil, isso importa!
+
+O Python 2.0.x e 2.1.x tem um erro fatal quando tenta manipular códigos de um caracter na faixa '''\uD800-\uDFFF'''.
+
+O exemplo abaixo apresenta o problema:
+
+{{{#!python numbers=off
+ u = unichr(0xd800)
+ print "Orig: ",repr(u)
+
+ # Cria utf-8 a partir de '\ud800'
+ ue = u.encode('utf-8')
+ print "UTF-8: ",repr(ue)
+
+ # Decodifica de volta para Unicode
+ uu = unicode(ue,'utf-8')
+ print "Back: ",repr(uu)
+}}}
+
+Rodando isso no Python 2.2 e versões superiores produz o resultado esperado:
+
+{{{
+ Orig:  u'\ud800'
+ UTF-8:  '\xed\xa0\x80'
+ Back:  u'\ud800'
+}}}
+
+Python 2.0.x retorna:
+{{{
+ Orig:  u'\uD800'
+ UTF-8:  '\240\200'
+ Traceback (most recent call last):
+   File "test_utf8_bug.py", line 9, in ?
+     uu = unicode(ue,'utf-8')
+ UnicodeError: UTF-8 decoding error: unexpected code byte
+}}}
+
+
+Python 2.1.x retorna:
+{{{
+ Orig:  u'\ud800'
+ UTF-8:  '\xa0\x80'
+ Traceback (most recent call last):
+   File "test_utf8_bug.py", line 9, in ?
+     uu = unicode(ue,'utf-8')
+ UnicodeError: UTF-8 decoding error: unexpected code byte
+}}}
+
+Como voocê pode ver, ambos falharam ao codificar '''\ud800''' quando usado como um caracter único. Ainda que seja verdade que caracteres entre 0xD800 .. 0xDFF não sejam válidos quando usados sozinhos, o fato é que Python lhe deixa usá-los.
+
+=== Mas se são inválidos, por que o Python se importa? ===
+
+Eu arranjei um bom exemplo, completamente por acidente enquanto trabalhava no código deste tutorial. Crie dois arquivos em Python:
+
+'''aaa.py'''
+{{{#!python numbers=off
+x = u'\ud800'
+}}} 
+
+'''bbb.py'''
+{{{#!python numbers=off
+import sys
+sys.path.insert(0,'.')
+import aaa
+}}}
+
+Agora, use o Python 2.0.x/2.1.x para executar '''bbb.py''' duas vezes (precisa executar duas vezes para que ele carregue aaa.pyc na segunda vez). Na segunda execução, você terá:
+
+{{{
+Traceback (most recent call last):
+    File "bbb.py", line 3, in ?
+      import aaa
+  UnicodeError: UTF-8 decoding error: unexpected code byte
+}}}
+
+É isso mesmo: o Python 2.0.x/2.1.x não é capaz de recarregar seu próprio bytecode de um arquivo .pyc se o fonte contém uma string como '''\u0d800'''. Uma forma de resolver este problema seria usar '''unichr(0xd800)''' no lugar de '''\ud800''' (e é isto que o gnosis.xml.pickle faz).
+
+=== Python como um "recodificador universal" ===
+
+Até este ponto, eu converti Unicode de e para UTF para fins de demonstração. Entretanto, Python lhe permite fazer muito mais que isso. Python permite que você converta praticamente qualquer string multibyte em Unicode (e vice-versa). Implementando todas estas conversões dá um monte de trabalho. Felizmente, já foi feito, tudo que temos que fazer é usar.
+
+Vamos revisitar nossa tabela grega, mas desta vez eu vou apresentar os caracteres tanto em Unicode quanto em ISO-8859-7 ("grego nativo").
+
+||<style="background-color: #E0E0FF;">Caracter||<style="background-color: #E0E0FF;">Nome||<style="background-color: #E0E0FF;">Unicode||<style="background-color: #E0E0FF;">ISO-8859-7||
+||Π||Greek Capital Letter Pi (Grego Letra Maiúscula Pi)||03A0||0xD0||
+||Σ||Greek Capital Letter Sigma (Grego Letra Maiúscula Sigma)||03A3||0xD3||
+||Ω||Greek Capital Letter Omega (Grego Letra Maiúscula Omega)||03A9||0xD9||
+
+Com Python, usando '''unicode()''' e '''.encode()''' é trivial converter entre eles.
+
+{{{#!python numbers=off
+# {Pi}{Sigma}{Omega} como uma string codificada com ISO-8859-7
+b = '\xd0\xd3\xd9'
+
+# Converte para Unicode ('formato universal')
+u = unicode(b, 'iso-8859-7')
+print repr(u)
+
+# ... e de volta para ISO-8859-7
+c = u.encode('iso-8859-7')
+print repr(c)
+}}}
+
+Mostra:
+{{{
+u'\u03a0\u03a3\u03a9'
+\xd0\xd3\xd9
+}}}
+
+Você também pode usar Python como um "recodificador universal". Digamos que você tenha recebido um arquivo em japonês, usando a codificação [http://www.rikai.com/library/kanjitables/kanji_codes.sjis.shtml ShiftJIS] e queira convertê-lo para a codificação [http://www.rikai.com/library/kanjitables/kanji_codes.euc.shtml EUC-JP]:
+
+{{{#!python numbers=off
+txt = ... texto codificado com ShiftJIS ...
+
+# converte para Unicode ("formato universal")
+u = unicode(txt, 'shiftjis')
+
+# converte para EUC-JP
+out = u.encode('eucjp')
+}}}
+
+Claro que isto só funciona quando convertemos entre conjuntos de caracteres compatíveis. Tentar converter entre conjuntos de caracteres japoneses e gregos desta forma não funcionaria.
+
+== Agora começa a diversão... Unicode e o Mundo Real ==
+Agora você já sabe tudo que precisa para trabalhar com objetos Unicode em Python. E isso é muito legal, não? Entretanto, o resto do mundo não é tão bacana quanto Python, você precisa saber como a porção do mundo não-Python suporta Unicode. Não é tão difícil, mas há muitos casos especiais a considerar.
+
+De agora em diante, nós estaremos lidando com problemas que surgem quando trabalhamos com Unicode e:
+
+ 1. Nomes de arquivos (problemas específicos de sistemas operacionais)
+ 1. XML
+ 1. HTML
+ 1. Compartilhamento de rede (Samba)  
+
+=== Nomes de arquivo com caracteres Unicode ===
+Parece simples, certo? Se você quiser nomear um arquivo com minhas letras gregas, eu diria:
+
+{{{
+open(unicode_name, 'w')
+}}}
+
+Teoricamente, sil, isto é supostamente tudo que deveríamos fazer. Mas, há muitas formas disto não funcionar, e elas dependem da plataforma que seu programa está rodando.
+
+==== Microsoft Windows ====
+Existem pelo menos duas formas de rodar Python em Windows. A primeira delas é usar os arquivos compilados para Win32 da [http://www.python.org/ www.python.org]. Eu vou me referir a este método como "Python nativo-Windows".
+
+O outro método é usar a versão do Python que vem com o [http://www.cygwin.org/ Cygwin]. Esta versão do Python se parece mais (para o código do usuário) com POSIX do que um ambiente nativo Windows.
+
+Para muitas coisas, as duas versões são compatíveis. Uma vez que se você escreve código Python multiplataforma, não deveria se preocupar com que interpretador você estará rodando. Porém, uma importante exceção é o suporte Unicode. Isto é o por quê de eu ser específico aqui sobre qual versão eu estou rodando.
+
+==== Usando Python nativo-Windows ====
+Vamos continuar a usar nossa tabela se símbolos gregos:
+
+||||||<style="background-color: #E0E0FF;">Exemplos de Símbolos Unicode ||
+||03A0||Π||Greek Capital Letter Pi (Grego Letra Maiúscula Pi)||
+||03A3||Σ||Greek Capital Letter Sigma (Grego Letra Maiúscula Sigma)||
+||03A9||Ω||Greek Capital Letter Omega (Grego Letra Maiúscula Omega)||
+
+Nosso nome de arquivo Unicode exemplo será:
+{{{#!python numbers=off
+# this is: abc_{PI}{Sigma}{Omega}.txt
+uname = u"abc_\u03A0\u03A3\u03A9.txt"
+}}}
+
+Vamos criar um arquivo com este nome, contendo uma única linha de texto:
+{{{#!python numbers=off
+open(uname,'w').write('Hello world!\n')
+}}}
+
+Abrir uma janela do Explorer mostra os resultados (clique na imagem para uma versão maior):
+
+[http://boodebr.org/python/pyunicode/win32_01.png http://boodebr.org/python/pyunicode/win32_01.jpg]
+
+Lá está o nome do arquivo com toda sua glória Unicode.
+
+Agora, vamos ver como {{{os.listdir()}}} funciona com este nome. A primeira coisa a saber é que {{{os.listdir()}}} tem dois modos de operação:
+ * Não-unicode, obtido ao se passar uma string não Unicode para {{{os.listdir()}}}, exemplo: {{{os.listdir('.')}}}
+ * Unicode, obtido ao se passar uma string Unicode para {{{os.listdir()}}}, exemplo: {{{os.listdir(u'.')}}}
+
+Primeiro, vamos tentar como Unicode:
+{{{#!python numbers=off
+os.chdir('ttt')
+# Há apenas um arquivo no diretório 'ttt'
+name = os.listdir(u'.')[0]
+print "Nome: ",repr(name)
+print "Linha: ",open(name,'r').read()
+}}}
+
+Executando-se este programa temos o seguinte resultado:
+{{{
+Nome:  u'abc_\u03a0\u03a3\u03a9.txt'
+Linha:  Hello world!
+}}}
+
+Comparando acima, parece correto. Observe que {{{print repr(name)}}} foi requerido, uma vez que teria ocorrido um erro caso eu tentasse imprimir o nome diretamente na tela. Por que? Ora, mais uma vez o Python teria assumido que você queria uma codificação ASCII, e teria então falhado com um erro.
+
+Agora vamos tentar o exemplo acima novamente, mas usando a versão não-Unicode de {{{os.listdir()}}}:
+
+{{{#!python numbers=off
+os.chdir('ttt')
+# Há apenas um arquivo no diretório 'ttt'
+name = os.listdir('.')[0]
+print "Nome: ",repr(name)
+print "Linha: ",open(name,'r').read()
+}}}
+
+Resulta na seguinte saída:
+
+{{{
+Nome:  'abc_?SO.txt'
+Linha: 
+Traceback (most recent call last):
+  File "c:\frank\src\unicode\t2.py", line 8, in ?
+    print "Line: ",open(name,'r').read()
+IOError: [Errno 2] No such file or directory: 'abc_?SO.txt'
+}}}
+
+Credo! O que aconteceu? Bem vindo ao maravilhoso mundo "API-dupla" win32.
+
+Um pouco sobre isso:
+ O Windows NT/2000/XP sempre escreve nomes de arquivo usando Unicode no sistema de arquivos ([#nota2 nota 2]). Então, em teoria, nomes de arquivo Unicode deveriam funcionar perfeitamente em Python.
+ Infelizmente, a win32 fornece duas APIs para fazer a interface com o sistema de arquivos. E usando o legítimo estilo Microsoft, elas são incompatíveis. As duas APIs são:
+  1. Uma APIs para aplicações que suportam Unicode, que retornam nomes Unicode de verdade.
+  1. Uma API para aplicações que não suportam Unicode que retornam uma representação dos nomes de arquivo Unicode usando uma codificação dependente do [http://en.wikipedia.org/wiki/Locale local].
+  O Python (para melhor ou pior) segue estas convenções na plataforma win32, então você acaba ficando com duas formas incompatíveis de chamar {{{os.listdir()}}} e {{{open()}}}:
+  1. Quando você chama {{{os.listdir()}}},{{{open()}}}, etc. com uma string Unicode, o Python chama a versão Unicode da API e você recebe os nomes de arquivo em Unicode de verdade. (Isto corresponde a primeira API que falamos acima).
+  1. Quando você chama {{{os.listdir()}}},{{{open()}}}, etc. com uma string não-Unicode, o Python chama a versão não-Unicode da API, e é aqui que mora o problema. A API não-Unicode suporta Unicode com um codec particular chamado MBCS. MBCS é um codec que perde informação no processo: todo nome MBCS pode ser representado como Unicode, mas o contrário não é válido. A codificação MBCS também muda dependendo das configurações de local da máquina. Em outras palavras, se eu escrever um CD com um arquivo cujo nome possua caracteres multibytes em MBCS na minha máquina configurada para Inglês, e depois enviar o CD para o Japão, o nome do arquivo pode aparecer com caracteres completamente diferentes.
+
+Agora que falamos do que há por trás disso, nós podemos entender o que aconteceu acima. Ao usarmos {{{os.listdir('.'}}}, você estará recebendo a versão MBCS do nome Unicode que está armazenado no sistema de arquivos. E, na minha máquina configurada para Inglês, não existe um mapeamento preciso para os caracteres gregos, e você acaba com "?", "S" e "O". Isto nos leva ao segundo resultado estranho que é não haver jeito de abrir nosso arquivo com letras gregas usando a API MBCS em uma máquina configurada com os parâmetros de localização em inglês(!!).
+
+'''Fundo do poço'''
+Eu recomendo sempre usar strings Unicode em {{{os.listdir()}}}, open(), etc. Lembre-se que o Windows NT/2000/XP sempre armazena os nomes de arquivo como Unicode, e esse é o comportamento padrão. E, como mostrado acima, pode algumas vezes ser a única forma de abrir um arquivo com nome em Unicode.
+  
+||<rowstyle="text-align: center;background-color: #FF1010">Perigo ! Cygwin||
+|| O Cygwin tem um grande problema aqui. Ele (pelo menos por enquanto) não tem suporte a Unicode. Isto é, ele nunca irá chamar as versões Unicode da API win32. Assim, é impossível abrir certos arquivos (como o nosso arquivo com caracteres gregos no nome) no Cygwin. Não importa se você usa {{{os.listdir(u'.')}}} ou {{{os.listdir('.')}}}; você sempre receberá a versão codificada em MBCS. ||
+|| Note também que isto não é um problema específico do Python; é um problema sistemático com Cygwin. Todos os utilitários Cygwin como zsh, ls, zip, unzip, mkisofs, não serão capazes de reconhecer um nome de arquivo com letras gregas, e irão reportar diversos errors. ||
+
+==== Unix/POSIX/Linux ====
+
+Diferente do Windows NT/2000/XP, que sempre gravam os nomes de arquivo em Unicode, os sistemas POSIX (incluindo o Linux) sempre armazenam os nomes de arquivo como strings binárias. Isto é de alguma forma mais flexível, uma vez que o sistema operacional não precisa saber (ou se preocupar) com qual codificação é utilizada nos nomes de arquivo. A desvantagem é que o usuário é responsável por configurar seu ambiente ("locale") para a codificação apropriada.
+
+===== Configurando o local =====
+
+Os detalhes de como configurar seu POSIX para suportar nomes de arquivo Unicode estão além do escopo deste documento, mas geralmente é feito pela configuração de algumas variáveis de ambiente. No meu caso, eu quis usar a codificação UTF-8 em um local inglês EUA, logo minha configuração envolveu adicionar algumas linhas aos meus arquivos de inicialização (eu tentei isso no Gentoo e Ubuntu), mas deve ser parecido em todos os sistemas Linux):
+
+Adições ao '''.bashrc''':
+{{{
+LANG="en_US.utf8"
+LANGUAGE="en_US.utf8"
+LC_ALL="en_US.utf8"
+
+export LANG
+export LANGUAGE
+export LC_ALL
+}}}
+
+Por precaução, eu adicionei essas mesmas linhas ao meu arquivo  '''.zshrc'''.
+
+Adicionalmente, eu adicionei as primeiras três linhas ao '''/etc/env.d/02locale'''.
+
+|| Aviso ||
+|| '''Por favor''' não faça modificações como as acima em seu sistema se você não tem certeza do que está fazendo. Você pode tornar seus arquivos ilegíveis alternando locais. O exemplo acima é apenas um caso simples de se alterar o local de ASCII para UTF-8 ||
+
+==== Python no Posix ====
+
+Uma grande vantagem no Posix, no que diz respeito ao Python, é que você pode usar tanto:
+{{{
+os.listdir('.')
+}}}
+ou
+{{{
+os.listdir(u'.')
+}}}
+Ambos retornarão strings que você pode passar para {{{open()}}} para abrir arquivos. Isto é muito melhor do que no Windows, que retornaria uma versão capada dos nomes se você usar {{{os.listdir('.')}}}, que como vimos acima pode algumas vezes falhar em retornar um nome de arquivo válido para abertura. Você sempre tem um nome válido no POSIX/Linux.
+
+Aqui está uma pequena função para demostrar isso:
+
+'''test_posix01.test()'''
+{{{#!python numbers=off
+def test():
+    # Demonstra que listdir(u'.') e listdir('.')
+    # funcional no POSIX(diferente do win32)
+
+    import os
+
+    uname = u'abc_\u03a0\u03a3\u03a9.txt'
+
+    # Cria um diretório temporário para que tenhamos apenas um arquivo nele
+    os.mkdir('ttt')
+    os.chdir('ttt')
+
+    open(uname,'w').write("Hello unicode!\n")
+
+    # usa listdir()  para obter o nome como Unicode
+    name = os.listdir(u'.')[0]
+    print "Como unicode: ",repr(name)
+    print "  Linha lida: ",open(name,'r').read()
+
+    # agora pega o nome como string de bytes
+    name = os.listdir('.')[0]
+    print "Como string de bytes: ",repr(name)
+    print "          Linha lida: ",open(name,'r').read()
+
+}}}
+Se você executá-lo, você obterá:
+{{{
+Como unicode:  u'abc_\u03a0\u03a3\u03a9.txt'
+  Linha lida:  Hello unicode!
+
+Como string de bytes:  'abc_\xce\xa0\xce\xa3\xce\xa9.txt'
+          Linha lida:  Hello unicode!
+}}}
+
+Como você pode ver, nós fomos capazes de ler o arquivo com sucesso, não importa se usamos o nome do arquivo na versão Unicode ou a sring de bytes.
+
+==== Demonstrações de Aplicação ====
+Diferente do mundo Microsoft Windows onde você basicamente tem uma "janela DOS" e o Windows Explorer, no Linux você tem muitas alternativas para terminais e gerenciadores de arquivos que você quer usar. Isto é tanto uma benção quanto uma maldição: uma benção porque você pode pegar a aplicação que melhor se adapta a suas preferências, mas uma maldição em relação ao fato de que nem todas as aplicações tem o mesmo nível de suporte a Unicode.
+
+Abaixo temos uma pesquisa de várias aplicações populares para ver o que elas suportam. 
+
+===== Aplicações que suportam nomes de arquivo Unicode =====
+Meu favorito é '''mlterm''', um terminal multilíngue (clique para uma versão maior):
+
+ [http://boodebr.org/python/pyunicode/mlterm_01.png http://boodebr.org/python/pyunicode/mlterm_01.jpg]
+
+O terminal GNOME ('''gnome-terminal'''):
+
+ [http://boodebr.org/python/pyunicode/gnome_terminal_01.png http://boodebr.org/python/pyunicode/gnome_terminal_01.jpg]
+
+O terminal KDE ('''konsole'''):
+
+ [http://boodebr.org/python/pyunicode/konsole_01.png http://boodebr.org/python/pyunicode/konsole_01.jpg]
+
+Uma versão modificada do rxvt('''rxvt-unicode''') suporta Unicode, porém tem alguns problemas com sublinhas ("_") na fonte que eu escolhi...
+
+ [http://boodebr.org/python/pyunicode/urxvt_01.png http://boodebr.org/python/pyunicode/urxvt_01.jpg]  
+
+Aqui temos nosso nome de arquivo com letras gregas em uma janela do gerenciador de arquivido do KDE (konqueror):
+
+ [http://boodebr.org/python/pyunicode/konq_01.png http://boodebr.org/python/pyunicode/konq_01.jpg]
+
+Aqui o gerenciador de arquivos do GNOME (Nautilus):
+
+ [http://boodebr.org/python/pyunicode/naut_01.png http://boodebr.org/python/pyunicode/naut_01.jpg]
+
+O gerenciador de arquivos do XFCE 4:
+
+ [http://boodebr.org/python/pyunicode/xfce_01.png http://boodebr.org/python/pyunicode/xfce_01.jpg]
+
+A janela de abertura arquivos padrão do KDE suporta nomes de arquivo Unicode:
+
+ [http://boodebr.org/python/pyunicode/kfilesel_01.png http://boodebr.org/python/pyunicode/kfilesel_01.jpg]
+
+Assim como a janela de abertura de arquivos do GNOME:
+
+ [http://boodebr.org/python/pyunicode/gfilesel_01.png http://boodebr.org/python/pyunicode/gfilesel_01.jpg]
+
+===== Aplicações que não suportam nomes de arquivo Unicode =====
+ 
+O rxvt padrão não suporta Unicode corretamente:
+ 
+ [http://boodebr.org/python/pyunicode/rxvt_01.png http://boodebr.org/python/pyunicode/rxvt_01.jpg]
+ 
+O gerenciador de arquivos XFM não suporta nomes de arquivo Unicode:
+ 
+ [http://boodebr.org/python/pyunicode/xfm_01.png http://boodebr.org/python/pyunicode/xfm_01.jpg]
+
+
+
+==== Mac OS/X  ====
+Eu não tenho uma máquina com OSX para testar, mas leitores prestativos tem contribuído com alguma informação do suporte Unicode no OSX.
+
+Um leitor destacou que {{{os.listdir('.')}}} e {{{os.listdir(u'.')}}} retornam objetos que podem ser passados diretamente para {{{open()}}}, como você pode fazer no POSIX.
+
+O leitor [http://www.fiee.net/ Hraban] observou:
+ Você deve mencionar que o MacOS X usa um tipo especial de UTF-8 desagrupado para armazenar nomes de arquivos. Se você precisa, por exemplo, ler e gravar nomes de arquivo em um arquivo UTF-8 "normal", você precisa normalizá-los (pelo menos se seu editor, ou meu TeX, não suportarem UTF-8 desagrupado):
+ {{{
+ filename = unicodedata.normalize('NFC', unicode(filename, 'utf-8')).encode('utf-8')
+ }}}
+
+Para quem está lendo isso e não está familiarizado com este problema (como eu não estava) aqui vão algumas referências:
+ * [http://developer.apple.com/qa/qa2001/qa1173.html Codificações de texto no VFS]
+ * [http://mail.python.org/pipermail/python-list/2003-February/189641.html Nomes de arquivo Unicode] 
+
+Meu entendimento disto é que quando você passa um nome com um caracter acentuado como '''é''', ele será desagrupado em '''e''' mais '''\'''' antes de ser salvo no sistema de arquivos (este comportamento é definido no padrão Unicode).
+
+Se você pode adicionar algo a esta sessão, deixe um comentário abaixo!
+
+=== Unicode e HTML ===
+Você pode se achar gerando HTML em Python (por exemplo, usando [http://www.modpython.org/ mod_python], [http://www.cherrypy.org/ CherryPy], ou algo semelhante). Mas como você usa caracteres Unicode em documentos HTML?
+
+A resposta envolve estes simples passos:
+ 1. Use a tag {{{<meta>}}} para informar o browser que codificação você usou ([#nota3 nota 3])
+ 1. Gere seu documento HTML como um objeto Unicode
+ 1. Escreva a stream binária do seu documento HTML usando o codec que você preferir
+
+Aqui um exepmo, escrevendo a mesma string com caracteres gregos que eu tenho usando no texto:
+
+{{{#!python numbers=off
+    code = 'utf-8' # torna mais fácil trocar o codec depois
+ 
+    html = u'<html>'
+
+    # Use a tag <meta> tag para especificar a codificação utilieada no documento
+    html += u'<meta http-equiv="content-type" content="text/html; charset=%s">' % code
+    html += u'<head></head><body>'
+
+    # Meu conteúdo atual Unicode ...
+    html += u'abc_\u03A0\u03A3\u03A9.txt'
+
+    html += u'</body></html>'
+
+    # Agora, você pode escrever Unicode diretamente para um arquivo. 
+    # Primeiro você deve ou convertê-lo para seqüência de bytes usando um codec, ou
+    # abrir o arquivo com o módulo 'codecs'.
+
+    # Método #1, fazendo a conversão você mesmo:
+    open('t.html','w').write( html.encode( code ) )
+
+    # Ou, usando o módulo codecs:
+    import codecs
+    codecs.open('t.html','w',code).write( html )
+
+    # .. o método que você utiliza depende da sua preferência pessoal e/ou
+    # conveniência no código que você está escrevendo.
+}}}
+
+Agora vamos abrir a página (t.html) no Firefox:
+
+ [http://boodebr.org/python/pyunicode/win32_02.png http://boodebr.org/python/pyunicode/win32_02.jpg]
+
+Como esperado !
+
+Agora, se você você voltar no exemplo e trocar a linha:
+{{{#!python numbers=off
+ code = 'utf-8'
+}}}
+com ...
+{{{#!python numbers=off
+ code = 'utf-16'
+}}}
+... o arquivo HTML será escrito usando o formato UTF-16, mas o resultado mostrado na janela do browser será exatamente o mesmo.
+
+=== Unicode e XML ===
+O [http://www.w3.org/TR/2004/REC-xml-20040204/ padrão XML 1.0] requer que todos os parsers suportem as codificações UTF-8 e UTF-16. Logo, seria óbvio que um parser XML permitiria qualquer documento codificado com UTF-8 ou UTF-16 fosse utilizado como entrada, certo?
+
+'''Que nada!'''
+
+Olhe este programa exemplo:
+{{{#!python numbers=off
+   xml = u'<?xml version="1.0" encoding="utf-8" ?>'
+   xml += u'<H> \u0019 </H>'
+
+   # Codifica como UTF-8
+   utf8_string = xml.encode( 'utf-8' )
+}}}
+
+Neste ponto, utf8_string é uma string UTF-8 perfeitamente válida representando o XML. Então, deveriamos ser capazes de fazer o seu parse, certo?:
+
+{{{#!python numbers=off
+from xml.dom.minidom import parseString
+parseString( utf8_string )
+}}}
+
+Aqui o que acontece quando nós executamos o código acima:
+{{{
+Traceback (most recent call last):
+   File "t9.py", line 9, in ?
+     parseString( utf8_string )
+   File "c:\py23\lib\xml\dom\minidom.py", line 1929, in parseString
+     return expatbuilder.parseString(string)
+   File "c:\py23\lib\xml\dom\expatbuilder.py", line 940, in parseString
+     return builder.parseString(string)
+   File "c:\py23\lib\xml\dom\expatbuilder.py", line 223, in parseString
+     parser.Parse(string, True)
+xml.parsers.expat.ExpatError: not well-formed (invalid token): line 1, column 43
+}}}
+
+Eita - o que aconteceu aqui? Retornou um erro na coluna 43. Vamos ver o que a coluna 43 é:
+{{{
+>> print repr(utf8_string[43])
+
+'\x19'
+}}}
+
+Você pode perceber que ele não gostou do caracter Unicode '''U+0019'''. Por que isso? A seção 2.2 do padrão XML 1.0 define que o conjunto legal de caracteres que podem aparecer em um documento. Do padrão:
+
+{{{
+/* any Unicode character, excluding the surrogate blocks, FFFE, and FFFF. */
+Char ::= #x9 | #xA | #xD | [#x20-#xD7FF] |
+         [#xE000-#xFFFD] | [#x10000-#x10FFFF]
+}}}
+
+Claramente, há alguns grandes intervalos nos caracteres que são legais de ser incluidos em um documento XML. Vamos transformar isso em uma função Python que pode ser utilizada para testar se um valor Unicode informado é válido para ser escrito em um stream XML:
+
+'''gnosis.xml.xmlmap.raw_ilegal_xml_regex()'''
+{{{#!python numbers=off
+def raw_illegal_xml_regex():
+    """    
+    Eu quero definir uma expressão regular para casar caracteres *ilegais*.
+    Desta forma, eu posso fazer "re.search()" para encontrar um único caracter,
+    ao invés de "re.match()" para casar uma string inteira. [Baseado na
+    minha suposição que .search() seria mais rápida neste caso.]
+
+    Aqui é um mapa do espaço de caracteres XML (como definido
+    na seção 2.2 da especficação XML):
+    
+         u0000 - u0008           = Ilegal
+         u0009 - u000A           = Legal
+         u000B - u000C           = Ilegal
+         u000D                   = Legal
+         u000E - u001F           = Ilegal
+         u0020 - uD7FF           = Legal
+         uD800 - uDFFF           = Ilegal (Veja observação!)
+         uE000 - uFFFD           = Legal
+         uFFFE - uFFFF           = Ilegal
+         U00010000 - U0010FFFF   = Legal (Veja observação!)
+    
+    Observação:
+    
+       A faixa U00010000 - U0010FFFF é codificada com seqüência de dois caracteres
+       usando códigos (D800-DBFF),(DC00-DFFF), que são ambos ilegais
+       quando exibidos com caracteres independentes, vide acima.
+    
+       Python não permite que você defina faixas de caracter para \U, logo você não pode
+       simplesmente dizer '\U00010000-\U0010FFFF'. Entretanto, você pode tirar vantagem
+       do fato que (D800-DBFF) e (DC00-DFFF) são ilegais, salvo
+       se parte de uma seqüência de 2 caracteres, para casar os caracteres
+       \U.
+    """
+
+    # Primeiro, adicione um grupo para todas as áreas ilegais básicas acima
+    re_xml_illegal = u'([\u0000-\u0008\u000b-\u000c\u000e-\u001f\ufffe-\uffff])'
+
+    re_xml_illegal += u"|"
+
+    # Depois, sabemos que (uD800-uDBFF) devem ser SEMPRE seguidas de (uDC00-uDFFF),
+    # e (uDC00-uDFFF) devem SEMPRE ser precedidas por (uD800-uDBFF), então assim
+    # é como nós verificamos a faixa U00010000-U0010FFFF. Há também casos especiais
+    # a verificar no início e fim de strings.
+
+    # Eu defini isso de forma estranha devido ao bug mencionado no início deste arquivo
+    re_xml_illegal += u'([%s-%s][^%s-%s])|([^%s-%s][%s-%s])|([%s-%s]$)|(^[%s-%s])' % \
+                      (unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
+                       unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff),
+                       unichr(0xd800),unichr(0xdbff),unichr(0xdc00),unichr(0xdfff))
+
+    return re_xml_illegal
+}}} 
+
+'''Usando o código'''
+{{{#!python numbers=off
+def make_illegal_xml_regex():
+    return re.compile( raw_illegal_xml_regex() )
+
+c_re_xml_illegal = make_illegal_xml_regex()
+}}}
+
+Finalmente:
+
+'''gnosis.xml.xmlmaps.is_legal_xml()'''
+{{{#!python numbers=off
+def is_legal_xml( uval ):
+    """
+    Dado um objeto Unicode, descubra se é legal
+    colocá-lo em um arquivo XML.
+    """
+    return (c_re_xml_illegal.search( uval ) == None)
+}}}
+
+A função acima é boa quando você tem uma string Unicode, mas pode ser um pouco lenta ao pesquisar um caracter por vez. Aqui está uma função alternativa para fazer isso (observe que ela usa a função usplit() definida anteriormente):
+
+'''gnosis.xml.xmlmap.is_legal_xml_char()'''
+{{{#!python numbers=off
+def is_legal_xml_char( uchar ):
+    """
+    Verifica se um caracter é XML válido.
+    (Isto é mais rápido que rodar a expressão regular 'is_legal_xml()' completa
+    quando você precisa ir caracter a caracter. Para uma string a cada vez,
+    claro, você precisa da usar is_legal_xml().)
+
+    Observação de uso:
+       Se você quer usar isso num laço 'for',
+       certifique-se de usar usplit(), exemplo:
+          
+       for c in usplit( uval ):
+          if is_legal_xml_char(c):
+                 ... 
+
+       Senão, o primeiro caracter legal (válido) de uma seqüência de 2 caracteres
+       será incorretamente marcado como ilegal,
+       em Pythons onde o \U é armazenado como 2 caracteres.
+    """
+
+    # Devido a inconsistências no suporte do \U (baseado em
+    # como Python foi compilado) é mais rápido testar por 
+    # caracteres ilegais do que legais, e inverter o resultado.
+    #
+    # (um exemplo: (u'\ud900' > u'\U00100000') por ser verdadeiro,
+    # dependendo de como o Python foi compilado. Testar por caracteres ilegais
+    # nos permite nos concentrar nas seqüências de 1 só caracter (todas as seqüências
+    # de 2 caracteres são legais no XML).
+
+    if len(uchar) == 1:
+        return not \
+               (
+               (uchar >= u'\u0000' and uchar <= u'\u0008') or \
+               (uchar >= u'\u000b' and uchar <= u'\u000c') or \
+               (uchar >= u'\u000e' and uchar <= u'\u001f') or \
+               # always illegal as single chars
+               (uchar >= unichr(0xd800) and uchar <= unichr(0xdfff)) or \
+               (uchar >= u'\ufffe' and uchar <= u'\uffff')
+               )
+    elif len(uchar) == 2:
+        # todas os códigos de 2 caracteres são legais em XML
+        # (parece estranho, mas lembre-se que mesmo depois de chamar
+        # usplit(), \U00010000 continua com len() de 2, usplit() simplesmente
+        # faz como ele seja apenas um item na lista
+        return True
+    
+    else:
+        raise Exception("Tem que passar apenas um caracter para is_legal_xml_char")
+}}}
+
+Aqui é o caso de teste mais completo para demonstrar as funções acima:
+
+'''text_xml_legality'''
+{{{#!python numbers=off
+from xml.dom.minidom import parseString
+import re
+import sys
+
+# Define True/False se o Python não os tem definidos
+try:
+    a = True
+except:
+    True = 1
+    False = 0
+
+from gnosis.xml.xmlmap import *
+
+# Verificação de sanidade para fins de teste
+def try_in_xml( uval ):
+    "Tenta colocar a string Unicode uval em um documento XML & fazer o parse."
+    
+    xml = u'<?xml version="1.0" encoding="utf-8" ?>'
+    xml += u'<H>' + uval + '</H>'
+
+    #print [u for u in usplit(xml) if u >= u'\U00010000']
+
+    try:
+        parseString(xml.encode('utf-8'))
+        return True # passou
+    except:
+        return False # falhou
+
+# --- Casos de teste ---
+
+bad_unicode = [
+    # 0000-0008 é ilegal
+    u'abc\u0001def',
+    # 000B-000C é ilegal
+    u'abc\u000cdef',
+    # 000E-0019 é ilegal
+    u'abc\u0015def',
+    # D800-DBFF é ilegal, a não ser que inicie uma seqüência de 2 caracteres
+    u'abc\ud900def',
+    # DC00-DFFF é ilegal, a não ser que termine uma seqüência de 2 caracteres
+    u'abc\uDDDDdef',
+    # FFFE-FFFF é ilegal
+    u'abc\ufffedef',
+    # caso de D800-DBFF no final da string (next to last segment of regex)
+    u'abc\ud800',
+    # caso do DC00-DFFF no inicio da string (last segment of regex)
+    u'\udc00'
+    ]
+
+good_unicode = [
+    # 0009-000A é legal
+    u'abc\u0009def\u000aghi',
+    # 000D é legal
+    u'abc\u000ddef',
+    # 0020-D7FF é legal
+    u'abc\u0020def\u8112ghi\ud7ffjkl',
+    # E000-FFFD é legal
+    u'abc\ue000def\uF123ghi\ufffdjkl',
+    # U00010000 - U0010FFFF é legal
+    u'abc\U00010000def\U00023456ghi\U00101234jkl'
+    ]
+
+if __name__ == '__main__':
+
+    print "** VALORES RUINS **"
+    for u in bad_unicode:
+        # Imprime o valor Unicode, verifica a legalidade, e testa de sanidade 
+        # colocando em um documento XML e fazendo o parse
+        print "%-50s %8s %1d" % (repr(u), is_legal_xml(u), try_in_xml(u))
+
+    print "\n** VALORES BONS **"
+    for u in good_unicode:
+        # Imprime o valor Unicode, testa legalidade, e testa sanidade
+        # colocando em um documento XML e fazendo o parse
+        print "%-50s %8s %1d" % (repr(u), is_legal_xml(u), try_in_xml(u))
+
+    # Uma string toda ilegal
+    u = u'\u0000\u0005\u0008\u000b\u000c\u000e\u0010\u0019' + \
+        u'\ud800\ud900\u0000\udc00\udd00\udfff\ufffe\uffff'
+
+    print "\nTestando um caracter por vez ..."
+    print repr(u)
+    for c in usplit(u):
+        # testa como um caracter
+        if is_legal_xml_char(c):
+            raise "ERRO(1)"
+
+        # testa como string
+        if is_legal_xml(c):
+            raise "ERRO(2)"
+
+        # Coloca em um documento XML para checar de novo
+        if try_in_xml(c) != False:
+            raise "ERRO(3)"
+
+    print "OK\n"
+
+    # Um string toda ilegal
+    u = u'\u0009\u000a\u000d\u0020\u2345\ud7ff' + \
+        u'\ue000\ue876\ufffd' + \
+        u'\U00010000\U00012345\U00100000\U0010ffff'
+    # súbito -- tenha certeza que se permite uma seqüência de 2 caracteres feita a mão (isto
+    # é o caso que força usplit() a fazer um passe completomesmo se \U é
+    # armazenado como um só caracter)
+    u += u'\ud800\udc00' 
+
+    print repr(u)
+    for c in usplit(u):
+        # test como caracter
+        if not is_legal_xml_char(c):
+            raise "ERRO(1)"
+
+        # testa como string
+        if not is_legal_xml(c):
+            raise "ERRO(2)"
+
+        # Coloca em um documento XML para verificar novamente
+        if try_in_xml(c) != True:
+            raise "ERROR(3)"
+
+    print "OK"
+}}}
+
+Eu vou executar em duas diferentes versões de Python para mostrar as diferenças que você pode ver na codificação do '''\U'''.
+
+Primeiro, no Python 2.0 (que usa codificação do \U em 2 caracteres, na minha máquina ):
+
+{{{
+ ** VALORES RUINS **
+ u'abc\001def'                                             0 0
+ u'abc\014def'                                             0 0
+ u'abc\025def'                                             0 0
+ u'abc\uD900def'                                           0 0
+ u'abc\uDDDDdef'                                           0 0
+ u'abc\uFFFEdef'                                           0 0
+ u'abc\uD800'                                              0 0
+ u'\uDC00'                                                 0 0
+
+ ** VALORES BONS **
+ u'abc\011def\012ghi'                                      1 1
+ u'abc\015def'                                             1 1
+ u'abc def\u8112ghi\uD7FFjkl'                              1 1
+ u'abc\uE000def\uF123ghi\uFFFDjkl'                         1 1
+ u'abc\uD800\uDC00def\uD84D\uDC56ghi\uDBC4\uDE34jkl'        1 1
+
+ Testando um caracter por vez ...
+ u'\000\005\010\013\014\016\020\031\uD800\uD900\000\uDC00\uDD00
+ \uDFFF\uFFFE\uFFFF'
+ OK
+
+ u'\011\012\015 \u2345\uD7FF\uE000\uE876\uFFFD\uD800\uDC00\uD808
+ \uDF45\uDBC0\uDC00\uDBFF\uDFFF\uD800\uDC00'
+ OK
+}}}
+
+E agora usando Python 2.3, que na minha máquina armazena '''\U''' como um caracter apenas:
+
+{{{
+ ** VALORES RUINS **
+ u'abc\x01def'                                         False 0
+ u'abc\x0cdef'                                         False 0
+ u'abc\x15def'                                         False 0
+ u'abc\ud900def'                                       False 0
+ u'abc\udddddef'                                       False 0
+ u'abc\ufffedef'                                       False 0
+ u'abc\ud800'                                          False 0
+ u'\udc00'                                             False 0
+
+ ** VALORES BONS **
+ u'abc\tdef\nghi'                                       True 1
+ u'abc\rdef'                                            True 1
+ u'abc def\u8112ghi\ud7ffjkl'                           True 1
+ u'abc\ue000def\uf123ghi\ufffdjkl'                      True 1
+ u'abc\U00010000def\U00023456ghi\U00101234jkl'          True 1
+
+ Testando um caracter por vez ...
+ u'\x00\x05\x08\x0b\x0c\x0e\x10\x19\ud800\ud900\x00\udc00\udd00
+   \udfff\ufffe\uffff'
+ OK
+
+ u'\t\n\r \u2345\ud7ff\ue000\ue876\ufffd\U00010000\U00012345
+   \U00100000\U0010ffff\U00010000'
+ OK
+}}}
+
+Você poder ver que ambas versões de Python retornam as mesmas respostas (exceto que o Python 2.0 usa 1/0 ao invés de True/False). Mas você pode ver pela codificação repr() no final que as duas versões representam \U de formas diferentes. Enquanto você usar a função usplit() definida anteriormente, você não verá qualquer diferença no seu código.
+
+Ok, então agora nós estabelecemos que você não pode colocar certos caracteres em um arquivo XML. Como contornar isso? Talvez possamos codificar os valores ilegais como entidades XML?
+
+{{{#!xml
+ xml = u'<?xml version="1.0" encoding="utf-8" ?>'
+
+ # Tenta por \u0019 como uma entidade ...
+ xml += u'<H> &#x19; </H>'
+
+ # Codifica como UTF-8
+ utf8_string = xml.encode( 'utf-8' )
+
+ # Faz o parse
+ from xml.dom.minidom import parseString
+ parseString( utf8_string )
+}}}
+ 
+Executando este script teremos como resultado:
+{{{
+ Traceback (most recent call last):
+  File "t10.py", line 11, in ?
+    parseString( utf8_string )
+  File "c:\py23\lib\xml\dom\minidom.py", line 1929, in parseString
+    return expatbuilder.parseString(string)
+  File "c:\py23\lib\xml\dom\expatbuilder.py", line 940, in parseString
+    return builder.parseString(string)
+  File "c:\py23\lib\xml\dom\expatbuilder.py", line 223, in parseString
+    parser.Parse(string, True)
+ xml.parsers.expat.ExpatError: reference to invalid character number: line 1, column 43
+}}}
+
+Não! De acordo com o padrão XML 1.0, os caracteres ilegais não são permitidos, não importa como nós tentamos trapacear e colocar alguns lá. De fato, se um parser permitir qualquer um dos caracteres ilegais, pela definição '''ele não será um parser XML'''. A ideia principal do XML é que os parsers não podem "perdoar", para evitar a bagunça de incompatibilidade que existe no mundo HTML.
+
+ '''Então como nós gerenciammos os caracteres ilegais?'''
+  Deviao ao fato de que os caracteres ilegais são ilegais, não há uma forma padrão de trabalhar com eles. Isso fica para o autor do XML (ou aplicação) de encontrar um outra forma de representar os caracteres ilegais. Talvez numa versão futura do padrão XML possa ajudar nessa situação.
+
+
+=== Unicode e diretórios compartilhados (Samba) ===
+
+O Samba 3.0 e superiores tem a capacidade de compartilhar arquivos com nomes em Unicode. De fato, o teste foi muito inesperado: Eu simplesmente abri um compartilhamento Samba (da minha máquina Linux) em um cliente Windows, abri o diretório com os nome de arquivo com letras em grego e o resultado foi:
+
+ [http://boodebr.org/python/pyunicode/samba_01.png http://boodebr.org/python/pyunicode/samba_01.jpg]
+
+Talvez existam outras configurações mais complicadas por aí a fora onde este caso não funcionaria tão bem, mas isso foi completamente indoloar para mim. O Samba tem como padrão a codificação UTF-8, por isso eu não tive nem mesmo que modificar meu arquivo '''smb.conf'''.
+
+== Sumário ==
+
+Existem alguns tópicos que eu omiti, mas eu planejo inclui-los depois. Entre eles:
+ 1. Alguns exemplos de como resolver problemas com caracteres XML ilegais, definindo nosso próprio código de transformação.
+ 1. É perfeitamente possível para {{{os.listdir(u'.')}}} retornar strings não-Unicode (isso significa que o nome do arquivo não foi armazenado com uma codificação legal(válida) no local corrente). O problema é que se você misturar nomes válidos e inválidos, exemplo {{{/a-legal/b-ilegal/c-legal}}}, você não poderá usar {{{os.path.join()}}} para concatenar as partes Unicode e não-Unicode, uma vez que não seria o nome do arquivo correto (devido ao {{{b-ilegal}}}) não ter uma codificação Unicode, no exemplo anterior). A única solução que eu encontrei é trocar de diretório com {{{os.chdir()}}} para cada componente do caminho (path), um por vez, ao abrir arquivos, vasculhando diretórios, etc. Eu preciso escrever uma seção para falar mais sobre esse problema.
+
+Diversas funções definidas neste documento({{{usplit(), is_legal_xml(), is_legal_xml_string()}}}) são disponíveis como para dos [http://freshmeat.net/projects/gnosisxml/ utilitários Gnosis](dos quais eu sou coautor). A versão 1.2.0 é a primeira com as funções. Eles estão disponíveis no pacote {{{gnosis.xml.xmlmap}}}. Em versões futuras, eu planejo incorporar as transformações Unicode->XML mencionadas acima.
+
+== Notas ==
+
+ 1. [[Anchor(nota1)]]Na minha opinião, os criadores do suporte a Unicode do Python poderiam simplesmente ter omitido a lógica "padrão ASCII", isso teria sido muito mais claro, por forçar iniciantes a entender o que está acontecendo, ao invés de usar {{{unicode(value)}}} cegamente, sem uma codificação explicita. Agora, para ser justo, usando ASCII como codificação padrão é racional. Uma vez que o codificador ASCII do Python só permite caracteres de 0-127, se {{{unicode()}}} funcionar, ASCII é quase que certamente o codificador correto.
+
+ 1. [[Anchor(nota2)]]Eu não tenho certeza sobre o que as versões mais antigas fazem (95/98), mas eu arriscaria dizer que o suporte a Unicode não é o da versão corrente do padrão.
+
+ 1. [[Anchor(nota3)]]Atualmente, Firefox e Internet Explorer são capazes de mostrar corretamente uma paga mesmo sem a tag {{{<meta>}}} correta, mas em geral você deve sempre inclui-la, uma vez que a auto detecção pode não funcionar em todas as plataformas, ou para todos os documenos HTML.
+ 
+== Sobre este documento ==
+
+Autor: Frank !McIngvale
+
+Versão: 1.3
+
+Última revisão: 22 de abril de 2007
+
+Tradutor para português do Brasil: [:NiloMenezes:Nilo Menezes]
+
+Traduzido em: 22 de fevereiro de 2008

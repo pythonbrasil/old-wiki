@@ -1,0 +1,32 @@
+#pragma section-numbers off
+= Receita: Nome da Receita =
+
+Comentário sobre a receita...
+
+== Código ==
+
+{{{
+#!python
+import sys
+
+if __name__ == '__main__':
+   print "Aqui entra o código"
+
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+import sys
+
+if __name__ == '__main__':
+   print "Aqui entra o exemplo de uso. Essa seção é opcional."
+
+}}}
+
+Volta para CookBook.
+
+----
+
+FelipeAlmeidaLessa

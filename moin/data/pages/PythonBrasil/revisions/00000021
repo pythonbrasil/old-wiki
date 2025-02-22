@@ -1,0 +1,32 @@
+#pragma section-numbers off
+
+= Python Brasil =
+
+Este site, foi idealizado para abrigar todo o material sobre Python editado em nosso idioma. Ele utiliza o software MoinMoin que é um Wiki inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente.
+
+= Notícias =
+
+   * '''[[DateTime(2003-11-13T23:18:00)]] - Criado site da comunidade Python brasileira''' - A primeira página dedicada à comunidade brasileira de usuários de Python foi criada. Agora é com você usuário. É você quem manterá essa página viva e atualizada. E lembrem-se: qualquer dúvida ou problema entre em contato com o WikiMaster mais próximo.
+
+= Seções =
+
+Aqui estão algumas das seções desse site. Se você gostaria de sugerir outras é só entrar em contato com o WikiMaster mais próximo.
+
+   * PerguntasFrequentes - Perguntas e Respostas frequentes.
+   * DocumentaçãoPython - Documentação, Livros, Manuais, Tutoriais e afins.
+   * CookBook - Trechos de códigos úteis.
+   * ComoUsarWiki - Como usar esse site. Introdução Rápida.
+   * SoftwarePython - Módulos, Editores, Ferramentas para desenvolvimento Python.
+
+= Artigos =
+
+ Alguns artigos sobre python.
+
+   * IntroduçãoPythonRaLobao - Uma Simples introdução a programação Python (escrito por RaLobao)
+   * UsandoVariáveis - Artigo ensinando a usar as "variáveis" no Python, e expressões (escrito por RaLobao).
+
+/!\ Inicialmente os artigos podem ser colocados aqui. Depois de um tempo eu vou movê-los para a página: ArtigosTutoriais.
+
+= Observações =
+
+Esse site é um Wiki e está aberto para a participação de todos. Sejam responsáveis e organizados que ele continuará sempre aberto para todos.

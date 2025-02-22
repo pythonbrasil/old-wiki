@@ -1,0 +1,26 @@
+= XML-RPC =
+
+XML-RPC é uma especificação para execução de procedimentos remotamente que usa o HTTP como protocolo de transporte. É uma das maneiras mais simples e poderosas de se trabalhar com WebService em Python.
+
+Abaixo um simples exemplo de servidor e cliente usando XML-RPC
+
+== Servidor ==
+{{{
+import SimpleXMLRPCServer
+from datetime import datetime
+
+server = SimpleXMLRPCServer.SimpleXMLRPCServer(("localhost", 8888))
+server.register_instance(datetime)
+
+server.serve_forever()
+}}}
+
+== Cliente ==
+
+{{{
+import xmlrpclib
+
+server = xmlrpclib.ServerProxy("http://localhost:8888")
+
+print server.now()
+}}}

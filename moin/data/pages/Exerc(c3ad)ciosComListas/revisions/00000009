@@ -1,0 +1,66 @@
+Voltar para a ListaDeExercicios
+----
+
+== Exercícios Com Listas ==
+
+ 1. Faça um Programa que leia um vetor de 5 números inteiros e mostre-os.
+
+ 1. Faça um Programa que leia um vetor de 10 números reais e mostre-os na ordem inversa.
+
+ 1. Faça um Programa que leia 4 notas, mostre as notas e a média na tela.
+
+ 1. Faça um Programa que leia um vetor de 10 caracteres, e diga quantas consoantes foram lidas. Imprima as consoantes.
+
+ 1. Faça um Programa que leia 20 números inteiros e armazene-os num vetor. Armazene os números pares no vetor PAR e os números IMPARES no vetor impar. Imprima os três vetores.
+
+ 1. Faça um Programa que peça as quatro notas de 10 alunos, calcule e armazene num vetor a média de cada aluno, imprima o número de alunos com média maior ou igual a 7.0.
+
+ 1. Faça um Programa que leia um vetor de 5 números inteiros, mostre a soma, a multiplicação e os números.
+
+ 1. Faça um Programa que peça a idade e a altura de 5 pessoas, armazene cada informação no seu respectivo vetor. Imprima a idade e a altura na ordem inversa a ordem lida.
+
+ 1. Faça um Programa que leia um vetor A com 10 números inteiros, calcule e mostre a soma dos quadrados dos elementos do vetor.
+
+ 1. Faça um Programa que leia dois vetores com 10 elementos cada. Gere um terceiro vetor de 20 elementos, cujos valores deverão ser compostos pelos elementos intercalados dos dois outros vetores.
+
+ 1. Altere o programa anterior, intercalando 3 vetores de 10 elementos cada.
+
+ 1. Foram anotadas as idades e alturas de 30 alunos. Faça um Programa que determine quantos alunos com mais de 13 anos possuem altura inferior à média de altura desses alunos.
+
+ 1. Utilizando listas faça um programa que faça 5 perguntas para uma pessoa sobre um crime. As perguntas são:
+
+  a. "Telefonou para a vítima?"
+  a. "Esteve no local do crime?"
+  a. "Mora perto da vítima?"
+  a. "Devia para a vítima?"
+  a. "Já trabalhou com a vítima?"
+
+  O programa deve no final emitir uma classificação sobre a participação da pessoa no crime. Se a pessoa responder positivamente a 2 questões ela deve ser classificada como "Suspeita", entre 3 e 4 como "Cúmplice" e 5 como "Assassino". Caso contrário, ele será classificado como "Inocente".
+
+ 1. Faça um programa que leia um número indeterminado de valores, correspondentes a notas, encerrando a entrada de dados quando for informado um valor igual a -1 (que não deve ser armazenado). Após esta entrada de dados, faça: 
+
+  a. Mostre a quantidade de valores que foram lidos;
+  a. Exiba todos os valores na ordem em que foram informados, um ao lado do outro;
+  a. Exiba todos os valores na ordem inversa à que foram informados, um abaixo do outro;
+  a. Calcule e mostre a soma dos valores;
+  a. Calcule e mostre a média dos valores;
+  a. Calcule e mostre a quantidade de valores acima da média calculada;
+  a. Calcule e mostre a quantidade de valores abaixo de sete;
+  a. Encerre o programa com uma mensagem;
+
+ 1. Utilize uma lista para resolver o problema a seguir. Uma empresa paga seus vendedores com base em comissões. O vendedor recebe $200 por semana mais 9 por cento de suas vendas brutas daquela semana. Por exemplo, um vendedor que teve vendas brutas de $3000 em uma semana recebe $200 mais 9 por cento de $3000, ou seja, um total de $470. Escreva um programa (usando um array de contadores) que determine quantos vendedores receberam salários nos seguintes intervalos de valores:
+
+  a. $200 - $299
+  a. $300 - $399
+  a. $400 - $499
+  a. $500 - $599
+  a. $600 - $699
+  a. $700 - $799
+  a. $800 - $899
+  a. $900 - $999
+  a. $1000 em diante
+
+  Desafio: Crie ma fórmula para chegar na posição da lista a partir do salário, sem fazer vários ''ifs'' aninhados.
+
+----
+Voltar para a ListaDeExercicios

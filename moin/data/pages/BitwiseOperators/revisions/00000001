@@ -1,0 +1,15 @@
+Python possui 6 operadores obscuros. Os operadores binários <<, >>, &, |, ~, e ^.
+
+A base numérica binária é composta apenas de dois algarismos(0 e 1), enquanto a base decimal é composta de dez(0, 1, 2, 3, 4, 5, 6, 7, 8 e 9). A forma como os números são representados é drásticamente diferente. Por exemplo:
+1 é representado como 1.
+2 é representado como 10.
+3 é representado como 11.
+4 é representado como 100.
+5 é representado como 101.
+
+...e assim vai. O número 987123 é representado como 11110000111111110011. 
+
+Isso é binário. Na base decimal você pode representar nove como 9. Um dez é representado como 10, ou seja, você adiciona mais um dígito, para indicar uma dezena.
+Para mais informações, veja http://en.wikipedia.org/wiki/Binary_numeral_system .
+
+Os operadores binários são diferentes dos operadores "normais" porque eles não encaram os números "14" e "9" como 14 e 9, mas sim como as sequências de bits que compõem esses números, ou seja, 1110 e 1001. Vejamos o que cada operador faz:

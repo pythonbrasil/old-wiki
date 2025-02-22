@@ -1,0 +1,1041 @@
+[[TableOfContents]]
+
+= Guia de Introdução à Linguagem Python =
+
+== Apresentação ==
+
+Bem-vindo(a) ao nosso guia de introdução à linguagem Python. Este guia exige que se tenha noção de linguagens de programação e para isso é necessário saber o que são algoritmos e estruturas de dados. Quem já programou em uma outra linguagem, como Visual Basic, Delphi ou C poderá se sentir mais apto a programar em Python com esse guia.
+
+Quem sabe você tem dúvidas conceituais sobre a linguagem. Se for este o seu caso, faça uma leitura na seção de [http://www.pythonbrasil.com.br/moin.cgi/PerguntasFrequentes/SobrePython Perguntas e Respostas freqüentes sobre Python].
+
+Pronto para começar? Talvez não, porque é necessário ter certeza que o interpretador Python está instalado na sua máquina. Se você utiliza o Mac OS X, Linux ou outro sistema tipo o Unix então a resposta é provavelmente sim, pois esses sistemas constumam vir com o Python pré-instalado. Se você utiliza o Windows é quase certo que você não tem o interpretador. Para verificar, abra um terminal e digite o comando {{{python -V}}}, uma típica resposta será
+
+{{{
+Dharma:~ ruda$ python -V
+Python 2.3
+}}}
+
+indicando que eu tenho instalado a versão 2.3 da linguagem Python.
+
+Se você tem o Windows é um bom momento para baixar o instalador da linguagem Python, que pode ser obtido em http://www.python.org/ftp/python/2.4.1/python-2.4.1.msi
+
+== Primeiras Idéias ==
+
+Se você NUNCA programou antes, é necessário entender alguns conceitos básicos.
+
+Por exemplo: você sabe o que é um "executável" certo? Experimente abrir um arquivo desses em algum editor de textos. A não ser que você tenha vivido anos na Matrix, não entenderá nada!
+
+Isso acontece porque o programa está escrito, ali, em linguagem de máquina, ou seja, apesar de você não entender nada, o computador entende muito bem.
+
+Mas não pense que alguém escreveu aquilo do jeito que está. Também não foi escrito ao estilo "morse" (10010010110)... inicialmente, o programador escreveu o que chamamos de "código-fonte" em alguma linguagem de programação, como C, C++, Pascal, e, depois de terminado, compilou o código, ou seja, traduziu de C, C++, Pascal para linguagem de máquina (também chamada de Assembly).
+
+Essas linguagens que eu citei acima são as linguagens compiladas, pois antes de serem executadas, seus códigos-fonte devem ser devidamente compilados.
+
+Python não é compilada, mas sim interpretada, assim como PHP, Perl e muitas outras, ou seja, não há o processo de compilação. O que acontece é que o código-fonte (ou script) é "traduzido" direto, através de um interpretador (imagine que ele é um intérprete mesmo, pois é assim que funciona!). Observação: Geralmente, quando uma linguagem é interpretada, existe um código intermediário (''bytecode''), com o qual o programador não precisa se preocupar. Seria muito lento interpretar diretamente o texto do código fonte. No caso do Python, o ''bytecode'' é salvo em arquivos '''.pyc''' e '''.pyo''' (''bytecode'' otimizado)
+
+Tal fato adiciona muita produtividade à linguagem, já que o processo de programar é somente escrever-rodar, ao contrário de escrever-compilar-rodar. Veja que o ciclo de um programa interpretado é bem mais eficiente, pois a fase de testes é MUITO simplificada:
+
+Python: escrever-testar-corrigir-escrever-testar-distribuir
+
+Linguagem C: escrever-compilar-testar-corrigir-compilar-testar-distribuir
+
+Tecnicamente, qualquer linguagem pode ser compilada ou interpretada, mas as linguagens mais dinâmicas geralmente são interpretadas e as mais estáticas (estilo declare-antes-de-usar) são compiladas.
+
+Se você já tem um interpretador instalado em seu sistema, experimente escrever o seguinte script:
+ 
+{{{
+#!python
+print "Olá, mundo"
+}}}
+  Depois, num terminal, digite "python nome_do_script", e veja como é simples!
+
+== Modo interativo ==
+
+O Python também pode ser usado em modo interativo. Para isso, basta digitar '''python'''. E deve aparecer algo parecido com isso:
+
+{{{
+Python 2.3.4 (#1, Feb 22 2005, 04:09:37)
+[GCC 3.4.3 20041212 (Red Hat 3.4.3-9.EL4)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+}}}
+
+Em modo interativo, o Python executa o que voce digitar imediatamente (ou quase...), o que é muito bom para testes e para aprender.
+
+O sinal '''>>>''' é o ''prompt'' padrão Python. Significa que ele está de prontidão esperando um comando. Se o comando tiver algum resultado, este será mostrado na tela.
+
+Para sair, aperte Control + D (nos UNIXes) ou Control + Z seguido de Enter (no Windows)
+
+== Tipos de dados, constantes, variáveis e expressões ==
+
+Python é dinamicamente tipado, o que significa que se você usou uma variável para armazenar um inteiro, nada lhe impede de usá-la posteriormente para armazenar uma string (frase). Na verdade, variáveis em Python não são declaradas, o que lhe dá muita flexibilidade.
+
+Quem determina o tipo de uma variável é o próprio interpretador. Se você escreve:
+
+{{{
+#!python
+x = 2
+FRASE = 'Isso é um exemplo simples e bobo'
+}}}
+
+  O interpetador já sabe que x é um inteiro e FRASE é uma ''string''. Mas isso não lhe impede de, posteriormente, escrever
+
+{{{
+#!python
+x = 'agora tudo mudou'
+FRASE = 3.2
+}}}
+
+Como x já disse, tudo mudou, e isso é bem natural. Na verdade, raras são as vezes em que você precisa se preocupar com tipos. Geralmente você simplesmente atribui um valor a uma variável e pronto! Isso é bem simples. Mas não abuse desse recurso, senão seus programas vão virar uma confusão.
+
+Então aqui vão alguns exemplos de tipos:
+
+{{{
+#!python
+x = 2                           # Inteiro
+
+p = 3.1415                      # Real, ou ponto flutuante
+
+verdadeiro = True               # Boolean
+
+estringue = 'alguma frase'      # String
+
+c = 3 + 2j                      # Complexo
+
+lista = [3, 4, 5]               # Lista com elementos inteiros
+
+lista2 = [2,'tres',4.0,[5,6]]   # Lista mista e aninhada
+
+tupla = (1,2,3,'quatro')        # Tupla. É como uma lista, mas não pode ser mudada
+
+# tuplas de 0 ou 1 elementos têm sintaxes especiais:
+tupla0 = ()
+tupla1 = ('primeiro e único item',) # repare na vírgula
+
+# Em alguns casos (atribuições, returns), os parênteses são opcionais,
+# mas na maioria das vezes (tuplas dentro de listas, tuplas dentro de chamadas de funções)
+# os parênteses são necessários porque a vírgula faz parte de outra sintaxe
+
+coord = 4.5, 9.1
+cor_branca = 255, 255, 255 # cor no formato RGB
+funcao((4.5, 9.1), 'string')
+
+dic = {'site':'Python Brasil','url':'www.pythonbrasil.com.br'} # Isso é um dicionário
+}}}
+
+=== Tipos simples ===
+
+    * str (Strings, como 'blabla')
+    * unicode (São strs em que os caracteres podem representar qualquer língua, u'blabla')
+    * bool (True ou False)
+    * float (Números em ponto flutuante, como 4.5 ou 3.14e-10)
+    * int (Números inteiros, como 99)
+    * long (Números inteiros muito grandes, como 1234567890123456789123456789L)
+    * complex (Números complexos, como 3.1j ou 7+3.14e-10j)
+    * file (Arquivos)
+    * decimal ''(integrado ao Python 2.4 como módulo)'' (Números fracionários representados de forma decimal em vez de binária)
+
+=== Tipos agrupados ===
+
+    * list (listas)
+    * tuple (tuplas - listas imutáveis)
+    * dict (dicionários)
+    * set (novo tipo incluso no Python 2.4 - uma lista sem repetições)
+
+=== Tipos mutáveis e imutáveis ===
+
+Alguns tipos no Python permitem que elementos que fazem parte de sua estrutura sejam modificados, como as listas e dicionários. Estes tipos são chamados '''mutáveis'''.
+
+Exemplo:
+
+{{{
+#!python
+
+>>> l = ['Nirvana', 'Rush', 'Bauhaus']
+>>> l[1] = 'Who'
+>>> l
+['Nirvana', 'Who', 'Bauhaus']
+>>>
+
+}}}
+
+Outros tipos não permitem isso, como tuplas e strings. Estes são chamados '''imutáveis'''.
+
+Exemplo:
+
+{{{
+#!python
+
+>>> s = 'MYSQL'
+>>> s[1] = 'y'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in 
+TypeError: object does not support item assignment
+
+}}}
+
+=== Listas ===
+
+O tipo lista do Python é bastante sofisticado e flexível. Como classe, a lista conta com métodos para ordenar (sort), inverter (reverse), contar ocorrências de um determinado elemento (count) e outros.
+
+{{{
+#!python
+
+>>> # Criando a lista de bandas
+...
+>>> lista = ['Led Zeppelin', 'King Crimson', 'Yes', 'The Who', 'Pink Floyd']
+>>>
+>>> # Acessando um ítem da lista
+...
+>>> lista[0]
+'Led Zeppelin'
+>>>
+>>> # Para elementos de listas dentro de listas ou caracteres de strings dentro de listas
+...
+>>> lista[0][0]
+'L'
+>>>
+>>> # Retornando uma parte da lista (do terceiro até o quarto ítem)
+...
+>>> lista[2:4]
+['Yes', 'The Who']
+>>>
+>>> # Retornando uma parte da lista (do segundo até o fim)
+...
+>>> lista[1:]
+['King Crimson', 'Yes', 'The Who', 'Pink Floyd']
+>>>
+>>> # Retornando uma parte da lista (a partir do inicio até penúltimo)
+...
+>>> lista[:-1]
+['Led Zeppelin', 'King Crimson', 'Yes', 'The Who']
+>>>
+>>> # acessando a lista em passos
+...
+>>> lista[::2]
+['Led Zeppelin', 'Yes', 'Pink Floyd']
+>>>
+>>> # Passo negativo
+...
+>>> lista[::-1]
+['Pink Floyd', 'The Who', 'Yes', 'King Crimson', 'Led Zeppelin']
+>>>
+>>> # Convertendo para uma string
+...
+>>> ', '.join(lista)
+'Led Zeppelin, King Crimson, Yes, The Who, Pink Floyd'
+>>>
+>>> # Contando ocorrências
+...
+>>> lista.count('Yes')
+1
+>>>
+}}}
+
+== Estuturas de controle ==
+
+As estruturas condicionais disponíveis no Python são '''if''', '''elif''' e '''else'''.
+
+O '''if''', o '''elif''' e o '''else''' servem para examinar expressões. À grosso modo, pode-se dizer que eles avaliam se determinada expressão retorna Verdadeiro (True) ou Falso (False).
+
+Em Python os valores vazios: None, [] (* Lista vazia), "", 0. São tidos como Falso (False). E os outros valores são verdadeiros (True).
+
+Explicado isso, vamos às explicações:
+
+=== if ===
+
+Antes uma breve explicação do que vem a ser '''if'''. Como é sabido, '''if''' é traduzido em português para "se". Nas linguagens de programação esse "se" ('''if''') atua como um verificador de condições, algo como:
+    
+{{{
+se ( essa condição for verdadeira ):
+    esse bloco de comandos
+    será executado
+}}}
+
+Traduzindo em um exemplo bobo em Python, teriamos:
+    
+{{{
+#!python
+if (10 > 5):
+    print "10 é maior do que 5"
+}}}
+
+No caso, o bloco (composto apenas por um comando, no caso) seria sempre executado. Os parênteses na "condição" são opcionais.
+
+Vamos a outros exemplos.
+
+Obs: Os exemplos são do modo interativo ('''shell''') do Python.
+    
+{{{
+#!python
+# Exemplo IF 01
+In [1]: meuNome = "Juares"
+In [2]: seuNome = "Adolfo"
+In [3]: if meuNome == seuNome:
+   ...:     print "Nos temos os nomes iguais"
+   ...:
+}}}
+
+Você notou que o '''print''' não ocorreu, já que as variáveis meuNome e  seuNome são diferentes. Na linha 3 o '''if''' verifica essa igualdade, mas como o valor retornado da verificação é falso, ele não executa o comando print.
+
+
+Agora observe esse outro exemplo:
+
+{{{
+#!python
+# Exemplo IF 02
+In [1]: meuNome = "Adolfo"
+In [2]: seuNome = "Adolfo"
+In [3]: if meuNome == seuNome:
+   ...:     print "Temos os nomes iguais"
+   ...:
+Temos os nomes iguais
+}}}
+
+Viu? Agora imprimiu, já que as variáveis são iguais. O '''if''', novamente na linha 3, fez a verificação de igualdade ('''==''') e obteve resultado Verdadeiro ('''True'''), logo executou o comando '''print'''.
+
+=== else ===
+
+Se o '''if''' refere-se ao "se", quando traduzido, o '''else''' refere-se ao "senão". Exemplificando:
+
+{{{
+se ( condição for verdadeira ):
+    execute esses comandos
+    esse também
+senão:
+    execute
+    esses comandos
+}}}
+
+No caso o "se" é o '''if''' e o "senão" o '''else'''. Note que o '''else''' é executado se o '''if''' não for executado, ou seja, a condição do '''if''' não foi atendida. Caso o '''if''' tenha sido executado, o '''else''' não é executado.
+
+Vamos a um exemplo em código Python: 
+    
+Obs: Estes códigos também são exemplos do '''shell''' do Python.
+    
+{{{
+#!python
+#Exemplo ELSE 01
+In [1]: meuNome = "Ruivaldo"
+In [2]: seuNome = "Adolfo"
+In [3]: if meuNome == seuNome:
+   ...:     print "Temos nomes iguais"
+   ...: else:
+   ...:     print "Nossos nomes sao diferentes"
+   ...:
+Nossos nomes sao diferentes
+}}}
+
+Reiterando. O '''else''' não verifica nada. Ele é só uma delimitação de código a ser executado caso o '''if''' não ocorra.
+
+Mais um exemplo, só para fixar:
+
+{{{
+#!python
+# Exemplo ELSE 02
+In [1]: x = 5
+In [2]: y = 10
+In [3]: if x > 5:
+   ...:     print "X maior que Y"
+   ...: else:
+   ...:     print "Y maior ou igual a X"
+   ...:
+Y maior ou igual a X
+}}}
+
+Nesse exemplo nós não sabemos quando o Y é igual ao X. Teríamos que usar o '''elif''', que veremos agora.
+
+=== elif ===
+
+O '''elif''' é uma mistura de '''if''' com '''else'''. Calma, não se assuste. Ele é um '''else''', logo só é executado se o '''if''' não ocorrer, só que além de '''else''' ele também é um '''if''', então pro bloco '''elif''' ser executado além do primeiro '''if''' não ser executado, deve-se atender a uma determinada condição.
+
+Em portugol seria algo como:
+{{{
+se ( condição ):
+    executa comando
+    comando
+se-if-não-foi-executado-e ( condição ):
+    executa comando
+    comando
+senão:
+    comando comando
+    comando
+}}}
+
+Como já foi dito: o "se" é o '''if''', o "se-if-não-foi-executado-e" é o '''elif''' e o "senão" é o '''else'''.
+
+Vamos a um exemplo similar ao anterior:
+
+{{{
+#!python
+#Exemplo ELIF 01
+In [1]: x = 5
+In [2]: y = 10
+In [3]: if x > y:
+   ...:     print "X maior que Y"
+   ...: elif x == y:
+   ...:     print "X igual a Y"
+   ...: else:
+   ...:     print "Y maior que X"
+   ...:
+Y maior que X
+}}}
+
+Note que agora se o x for igual ao y ele irá imprimir uma mensagem. Veja esse outro exemplo:
+    
+{{{
+#!python
+# Exemplo ELIF 02
+In [1]: x = 5
+
+In [2]: y = 5
+
+In [3]: if x > y:
+   ...:     print "X > Y"
+   ...: elif x == y:
+   ...:     print "X == Y"
+   ...: else:
+   ...:     print "X < Y"
+   ...:
+X == Y
+}}}
+
+Pronto. Estude os códigos, o conceito do '''elif''' é um pouco estranho mesmo, mas um pouco de estudo é o suficiente para dominá-lo.
+
+=== Modificador not ===
+
+O modificador '''not''' é uma palavrinha que serve pra negar a expressão do '''if''' ou '''elif'''. Ao invés de esperar o valor verdadeiro da expressão ,o '''if''' vai esperar pelo valor falso. Estudemos-o por um exemplo:
+    
+{{{
+#!python
+# Exemplo not
+In [1]: x = 5
+In [2]: y = 6
+In [3]: if not x == y:
+   ...:     print "X eh diferente de Y"
+   ...:
+X eh diferente de Y
+}}}
+
+
+=== Tabela de expressões válidas ===
+
+Você pode usar os seguintes símbolos em suas expressões '''if''', '''elif''':
+
+{{{
+>= (Maior Igual)
+> (Maior)
+<= (Menor Igual)
+< (Menor)
+== (Igual)
+= (Diferente)
+<> (Diferente)
+}}}
+
+ E para finalizar essa seção do tutorial, o modificador in.
+ 
+=== Modificador in ===
+
+O '''in''' verifica se um elemento está dentro de outro. É como o símbolo de contido da matemática. Em portugol seria algo:
+    
+{{{
+se elemento está-contido-em elemento-listável:
+    comando
+    comando
+}}}
+
+Traduzindo. O "se" está para o '''if''' e o "está-contido-em" para o modificador '''in'''. Porém temos ali um "elemento-listável". Meio estranho esse termo. Calma. Existem cinco tipos de elementos listáveis em Python: dicionários, listas, tuplas, strings (que são no fundo listas de caracteres) sets.
+
+Isto é, no lugar de elemento-listável só pode haver uma variável dos tipos acima.
+
+Vejamos esses exemplos:
+
+{{{
+#!python
+In [1]: if 1 in [1,2,3]: print "Esta"
+   ...:
+Esta
+In [2]: if 'a' in "aloha":
+   ...:     print "Esta tambem"
+   ...:
+Esta tambem
+In [3]: if [2,3] in [1,2,3]:
+   ...:     print "Esta"
+   ...:
+In [4]: if [2,3] in [[2,3],[2,4]]:
+   ...:     print "Esta denovo"
+   ...:
+Esta denovo
+}}}
+
+Conselho: Para fixar os conceitos copie e execute todos os exemplos no '''shell''' do Python, assim você aprenderá.
+
+== Estruturas de iteração ou loop ==
+
+=== for ===
+    
+Se você programa em C, vai perceber que o {{{for}}} em Python é diferente. Ele itera sobre listas. Por exemplo:
+
+{{{
+if not odeio_metallica:
+    metallica = ['James','Kirk','Lars','Trujillo']
+    for membro in metallica:
+        print membro
+}}}
+
+Ou seja, para cada elemento da lista, itere. Você terá acesso ao item corrente ({{{print membro}}}). Se quiser fazer iterações sobre progressões aritméticas, use a função {{{range}}}, que cria uma lista de inteiro em seqüência. Exemplo:
+
+{{{
+#!python
+for i in range(50):
+   print i
+}}}
+
+Isso vai imprimir na tela os números de 0 a 49.
+
+=== while ===
+
+O '''while''' é muito simples. Ver o exemplo já vai ajudar muito:
+
+{{{
+#!python
+opc = 1
+while opc != 0:
+   # código e mais código...
+   opc = int(raw_input("Digite 0 para sair \n > "))
+}}}
+
+Veja, o laço vai continuar iterando até que o usuário digite 0 na hora que o programa perguntar. Simples. O '''while''' é literalmente um "enquanto ISSO faça AQUILO".
+
+Tando o '''for''' quanto o '''while''' podem ser interrompidos por '''break''' (o '''loop''' termina). O comando '''continue''' interrompe a iteração corrente e passa para a próxima.
+
+== Funções ==
+
+Simplificando, uma função é um bloco de código que tem nome (pelo qual ele pode ser chamado), recebe paramêtros (opcional) e gera um resultado (opcional)
+
+Exemplo:
+
+{{{
+#!python
+
+def media(lista = [0]):
+    return float(sum(lista)) / len(lista)
+
+print media([1,2,3,4,5])
+
+}}}
+
+'''media''' é o nome da função. '''lista''' é o paramêtro da função (no caso de vários paramêtros, seus nomes devem ser separados por vírgula). '''[0]''' é o valor padrão para '''lista''' (opcional)
+
+'''return''' termina a execução da função, retornando o resultado (opcional) e o controle para a rotina que a chamou.
+
+== Arquivos ==
+
+Trabalhar com arquivos no Python é bem fácil. Como o Python é uma linguagem orientada a objetos, um arquivo é um objeto da classe '''file'''.
+
+Um arquivo pode ser aberto para leitura ('r', o padrão), escrita ('w') ou inclusão ('a') ou para ler e gravar no mesmo arquivo ('w+'). Se um arquivo já existir e for aberto apenas para escrita ('w'), ele será zerado.
+
+{{{
+#!python
+
+# Um texto para teste...
+
+texto = '''Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.'''
+
+# Salvando em um arquivo chamado "zen.txt"
+
+f = file('zen.txt', 'w')
+f.write(texto)
+f.close()
+
+# Posso fazer em uma única linha:
+
+file('zen.txt', 'w').write(texto)
+
+# Para ler o arquivo:
+
+arq = file('zen.txt')
+
+# Trazendo o texto de volta:
+
+texto = arq.read()
+
+# Se preferir uma lista contendo as linhas do arquivo
+
+linhas = arq.readlines()
+
+# Se movendo para o inicio do arquivo
+
+arq.seek(0)
+
+# Imprimindo as linhas do arquivo:
+
+for linha in arq: print linha,
+
+# Fechando o arquivo
+
+arq.close()
+
+}}}
+
+== Tratamento de erros e exceções ==
+
+    * try / except
+    * try / finally
+
+As sentenças '''try / except''' e '''try / finally''' são mutuamente excludentes, não podem misturadas (embora possam ser usadas uma no interior da outra)
+
+A sentença '''try / except''' especifica um ou mais manipuladores de exceção. Caso não ocorra erros, nenhum manipulador será executado. Ainda é possível definir um '''else''' opcional que será executado quando nenhum erro ocorrer. Exemplo:
+
+{{{
+#!python
+try:
+    # Vou tentar fazer isso:
+    x = 1/0
+except ZeroDivisionError:
+    # Se houver divisão por zero, farei isso:
+    print 'Divisão por zero...'
+else:
+    # Senão...
+    print 'Não ocorreu nenhum erro!'
+}}}
+
+A sentença '''try / finally''' especifica um manipulador de limpeza, que será executado sempre. Quando não ocorre erros, '''finally''' é executado. Quando ocorre um erro, a exceção é salva, '''finally''' é executado, e logo após a exceção salva é executada novamente. Exemplo:
+
+{{{
+#!python
+try:
+    x = 1/0
+finally:
+    print 'Tentando dividir um 1 por 0... Ops!'
+}}}
+
+Nesse caso, o '''traceback''' aparecerá na tela, depois da mensagem.
+
+=== Raise ===
+
+Com a sentença '''raise''', você pode provocar uma exceção, que ser pode tratada pelo código que chamou aquela parte do programa. Exemplo:
+
+{{{
+#!python
+try:
+    z, y = 1, 0
+    if y == 0:
+        raise ZeroDivisionError
+    else:
+        print '%d divido por %d é %d' % (z, y, z/y)
+except ZeroDivisionError:
+    print 'Divisão por zero...'
+else:
+    print 'ocorreu algo inesperado!'
+}}}
+
+Dica: '''raise SystemExit''' termina o programa.
+
+== Módulos ==
+
+Um módulo em Python não é nada mais que um arquivo .py com definições de funções e classes. É isso mesmo. Apenas um arquivo.
+
+Para facilitar o entedimento vamos exemplificar.
+
+Escrevemos o código do seguinte módulo (logicamente, para fins didáticos apenas):
+    
+{{{
+#!python
+# Exemplo de módulo
+# Módulo matematica.py
+
+def somar(a,b):
+    """
+    Funcao que soma dois numeros
+    """
+    return a+b
+    
+def subtrair(a,b):
+    """
+    Funcao que subtrai dois numeros
+    """
+    return a - b
+    
+def multiplicar(a,b):
+    """
+    Funcao que multiplica dois numeros
+    """
+    return a * b
+    
+def dividir(a,b):
+    """
+    Funcao que divide dois numeros
+    """
+    return a / b
+}}}
+
+Salvamos ele como ""matematica.py"".
+
+Agora vamos escrever três exemplos de uso do módulo.
+
+    * Importando o módulo inteiro
+    
+Vamos ao código:
+    
+{{{
+#!python
+import matematica
+
+print matematica.somar(1,2)
+print matematica.dividir(100,25)
+}}}
+
+Executando esse arquivo nós temos como resultado:
+    
+{{{
+3
+4
+}}}
+
+Note que ao importar o módulo inteiro é obrigatório usar o nome do módulo antes de suas funções, classes... 
+Esse tipo de import evita problemas de namespace.
+
+    * Importando o que a gente quer do módulo
+    
+{{{
+#!python
+from matematica import somar, dividir
+
+print somar(1,2)
+print dividir(100,25)
+}}}
+
+O resultado é o mesmo do exemplo anterior:
+    
+{{{
+3
+4
+}}}
+
+A única diferença é que nós só importamos duas funções do módulo e não precisamos por "matematica" para chamá-los, ou seja, as duas funções importadas foram colocadas dentro do namespace do arquivo que está usando o módulo. Esse tipo de import é bom para módulos muito grandes em que só se use uma fcoisa ou poucas coisas dele, há um certo aumento de desempenho nesse caso e economia de memória.
+
+     * Importando tudo do módulo (diferente de importar o módulo inteiro)
+     
+{{{
+#!python
+from matematica import *
+
+print somar(1,2)
+print dividir(100,25)
+print subtrair(10,8)
+}}}
+
+O resultado será:
+    
+{{{
+3
+4
+2
+}}}
+
+É como o primeiro tipo de import, ele pega tudo do módulo, todas funções, classes, enfim. A diferença é que usando o """from modulo import *""" eliminamos a necessidade de ficar digitando "matematica" toda vez que quisermos chamar algo do módulo.
+
+
+Observações:
+
+    * Os arquivos de exemplo de uso do módulo devem estar na mesma pasta do módulo.
+    * Ao fazer módulos procure não deixá-lo tão grande. É uma boa prática de programação.
+
+Adendo: Um módulo Python é como se fosse um pedaço de programa que você, como programador, decidiu que ficaria melhor separado do todo. Essa decisão geralmente é tomada sobre estruturas que são usadas em diversos programas. Isso facilita nossa vida, pois já não precisamos "copiar e colar" as coisas de um lado para outro.
+Claro, módulos podem ser mais complexos em certos pontos de vista. Eu mesmo não vejo nada de muita complexidade. Pura praticidade!
+
+=== Módulos distribuídos com o Python ===
+
+Com o Python, são distribuídos muitos módulos, para servem para diversos propósitos (antes escrever algo do zero, verifique se existe algo pronto nos módulos do Python)
+
+Exemplos de módulos:
+
+    * os - suporte para recursos do sistema operacional (exemplos: mudar o diretório corrente e deletar arquivo)
+    * sys - rotinas que controlam o ambiente de execução do Python (exemplos: consultar o PYTHONPATH (lista de diretórios aonde o Python procura módulos) e encerrar o programa)
+    * copy - copia de objetos
+    * subprocess - rotinas para executar processos (incluso no Python 2.4)
+
+== Packages ==
+
+O '''Package''' é uma maneira estruturar o '''namespace''' dos módulos através da ''notação do ponto''. Por exemplo, '''web.forms''' é uma referência ao módulo '''forms''' que faz parte do package '''web'''.
+
+Com packages, os autores de módulos não precisam se preocupar com a colisão de nomes.
+
+Para criar um package:
+
+    * Crie um diretório (que terá o nome do package);
+
+    * Crie um arquivo (que pode estar vázio) chamado {{{__init__.py}}} dentro do diretório;
+
+    * Coloque os módulos do package dentro do mesmo diretório.
+
+Um módulo que faz parte de um package pode ser importado como {{{import package.modulo}}} ou {{{from package import modulo}}}.
+
+Opcionalmente, o arquivo {{{__init__.py}}} pode inicializar uma lista chamada {{{__all__}}}, que contém quais módulos serão importados usando {{{from package import *}}}.
+
+== Classes ==
+
+Criar uma classe em Python é muito simples. Acompanhe o exemplo:
+{{{
+#!python
+class Pessoa:
+  def __init__(self):
+    self.nome = ""
+    self.x = 0
+    self.y = 0
+  def andar(self, x, y):
+    self.y = self.y + y
+    self.x = self.x + x
+
+eu = Pessoa()
+eu.nome = "Cléber"
+eu.andar(2, 0)
+}}}
+
+A classe criada chama-se {{{Pessoa}}}. É costume nomear classes {{{DesteJeito}}} em vez de {{{deste_jeito}}}. Assim, fica fácil de distinguir as classes dos objetos, das variáveis, das funções, etc. Essa convenção de nomenclatura é usada em Java, Ruby, Python e em outras linguagens (já que os programadores acabam levando esse costume de uma linguagem pra outra). Voltando à classe {{{Pessoa}}}.
+
+Nela definimos duas funções (funções dentro classes geralmente são chamadas de ''métodos''). A função ''andar'', sob um ponto de vista muito abstrato, faz "a pessoa andar", ou seja, altera os valores x e y de sua posição (faça de conta que também existe uma função pra desenhar a pessoa :-) ). Perceba que eu não declarei nenhuma das variáveis. Classes servem mesmo é pra criar métodos (agrupar funções), e não tanto para criar estruturas de variáveis (apesar de classes em Python serem ótimos containers).
+
+A função {{{__init__()}}} é especial: ela é chamada toda a vez que é criada uma nova instância da classe (obs.: '''instância de classe''' é o mesmo que '''objeto'''), por isso o nome '''init''': ela inicializa o objeto, e é opcional. O argumento '''self''' é obrigatório, e deve ser o primeiro da função. Perceba que foi usado '''self''' na definição das variáveis. Isso quer dizer que estamos mexendo nas variáveis do objeto (Repare no detalhe: fora da classe usamos o nome do objeto criado, no caso {{{eu}}}. Dentro da classe, o código serve pra qualquer objeto criado a partir dessa classe, e o primeiro argumento, o {{{self}}}, representa o objeto sendo usado.).
+
+Classes podem servir como os "struct" do C ou "record" do Pascal. {{{dict}}}s também podem servir como {{{struct}}}s. {{{dict}}}s são mais usados pra simplesmente agrupar dados acessados por nome. Classes são mais usadas quando a estrutura é complexa, necessita de métodos de acesso e serão usadas várias instâncias da mesma estrutura. Pra simular uma {{{struct}}}, basta definir uma classe vazia, por exemplo:
+
+{{{
+#!python
+
+class conteiner:
+   pass
+
+# E depois criar as variáveis dela "por fora",
+conteiner.var = "fácil, não?"
+conteiner.num = 1
+}}}
+
+O '''pass''' serve para indicar que nada precisa ser feito (porém a síntaxe exige que exista uma sentença naquele lugar)
+
+Classes podem ser muito bem utilizadas, mas algumas vezes são péssimas opções. Assim como tudo em programação, saiba usá-las com parcimônia.
+
+Exemplos, pra terminar:
+
+{{{
+#!python
+class Carro:
+   def __init__(self, preco):
+      self.marca = "Ford"
+      self.modelo = "Maverick"
+      self.ano = 74
+      self.cor = [0,200,50]
+      self.pos = [0,0]
+   def andar(self, x, y):
+      self.pos[0] = self.pos[0]+x
+      self.pos[1] = self.pos[1]+y
+
+carango = Carro(5000)   #passa o valor 5000 para __init__()
+
+for i in range(300):
+   carango.andar(1,0)  #o carro anda 300m
+}}}
+ 
+== Herança ==
+
+Herança é um recurso poderoso da programação orientada a objetos que permite reutilizar o código de classes já definidas. Com a herança, é possível extender, especializar ou até mesmo fundir classes.
+
+O Python suporta herança múltipla, ou seja, é possível criar uma nova classe a partir de várias outras (esse recurso deve ser usado com cuidado, pois isso pode criar dificuldades na manutenção)
+
+Exemplo:
+
+{{{
+#!python
+
+# definindo uma classe 'pai'
+
+class CD:
+  def __init__(self, titulo):
+    self.titulo = titulo
+
+  def mudarTitulo(self, novoTitulo):
+    self.titulo = novoTitulo
+
+# definindo uma classe 'filha'
+# O nome da class 'mãe' (Na herança múltipla, os nomes das 'mães')
+# é passado para a classe filha
+
+class CDAudio(CD):
+
+  def __init__(self, titulo, autor):
+    CD.__init__(self, titulo)
+    self.autor = autor
+    self.faixas = []
+
+  def adicionarFaixa(self, numero, nome):
+    self.faixas.append((numero, nome))
+
+  def removerFaixa(self, numero, nome):
+    self.faixas.remove((numero, nome))
+
+# Criando objeto
+
+novoCD = CDAudio('Physical Graphitte', 'Led Zeppelin');
+
+# Evocando métodos:
+
+novoCD.adicionarFaixa(1,'Custard Pie')
+novoCD.adicionarFaixa(2,'The Rover')
+
+# Listando a estrutura do objeto
+
+print dir(novoCD)
+
+# Acesando atributos
+
+print "CD: %s, %s" % (novoCD.titulo, novoCD.autor)
+print novoCD.faixas
+}}}
+
+== Namespaces ==
+
+Um '''Namespace''' é um dicionário com os nomes válidos em um programa durante a sua execução. Sendo assim, quando fazemos '''i = 1''', o nome '''i''' é colocado em um namespace. O nome pode ser localizado de duas formas:
+
+    * Nome não qualificado
+
+    * Nome qualificado
+
+=== Nomes não qualificados ===
+
+Quando o nome da variável não foi qualificado (exemplo: '''i = 0''', a busca é feita primeiro entre as variáveis locais (dica: para listar as variáveis locais: '''locals()'''), depois entre as variáveis globais (dica: para listar as variáveis globais: '''globals()''') e por fim entre as variáveis pré-definidas do Python ('''builtins'''. Exemplos: '''True''' e '''False''')
+
+=== Nomes qualificados ===
+
+Quando o nome da variável foi qualificado (exemplo: '''livro.pagina''', a busca é feita primeiro no objeto, depois na classe do objeto e segue a hierarquia de herança.
+
+== List Comprehensions ==
+
+'''List Comprehension''' é um nome pomposo para algo simples - uma construção que permite processar listas de uma forma bem próxima a matemática.
+
+A sintaxe é [<expressão> for <variável> in <lista> if <condição>]
+
+Aonde:
+
+    * <lista> é a lista original a ser processada;
+
+    * <variável> ítem da lista  a ser processada;
+
+    * <expressão> expressão a ser aplicada em cada ítem;
+
+    * <condição> condição que deve ser cumprida para que o ítem seja processado.
+
+A parte for <variável> in <lista> pode se repetir N vezes.
+
+A condição é opcional.
+
+Exemplo:
+
+
+{{{
+#!python
+>>> # Multiplos de 4 entre 0 em 99:
+...
+>>> [x for x in range(100) if x % 4 == 0]
+[0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96]
+>>>
+}}}
+
+== Generators ==
+
+Muitas vezes, em programação, é necessário processar listas de elementos. Porém, manter listas inteiras em memória, dependendo do tamanho, podem causar problemas de performance. Para isso, no Python, temos os Generators.
+
+Na sintaxe, os generators são parecidos com as funções, porém existem algumas diferenças significativas:
+
+    * Um objeto do tipo generator retorna um elemento de cada vez quando evocado (através do método '''next'''
+    * O '''return''' habitual é substituido por '''yield'''
+    * Como os elementos são gerados apenas quando (e se) necessário, o resultado é menos consumo de recursos (isto é chamado '''Lazy Evaluation''')
+
+Exemplo:
+
+{{{
+#!python
+>>> def getchar(word):
+...     for c in word:
+...         yield c
+...
+>>> pythonchars = getchar('Python')
+>>> pythonchars
+<generator object at 0x009D5EE0>
+>>> pythonchars.next()
+'P'
+>>> pythonchars.next()
+'y'
+>>> pythonchars.next()
+'t'
+>>> pythonchars.next()
+'h'
+>>> pythonchars.next()
+'o'
+>>> pythonchars.next()
+'n'
+>>>
+}}}
+
+=== Generator Expressions ===
+
+Generator Expressions (também chamadas de ''Genexps'') são o equivalente a List Comprehensions para se criar Generators. 
+
+A sintaxe é semelhante a da List Comprehension, porém, numa Generator Expression se usa () (parantesis) para delimitar a expressão, ao invez de [] (colchetes) como na List Comprehension.
+
+Uma Generator Expression pode ser vista também como a versão ''Lazy Evaluated'' da List Comprehension, já que cada elemento é gerado apenas quando necessario, e não todos de ''uma vez''.
+
+Exemplo (baseado num [http://www.artima.com/forums/flat.jsp?forum=106&thread=98196 post] de Guido Van Rossum em seu blog):
+
+{{{#!python
+>>> # funções uteis para usar com genexps
+>>> def any(S):
+...    for x in S:
+...         if x:
+...            return True
+...    return False
+...
+>>> def all(S):
+...     for x in S:
+...         if not x:
+...            return False
+...     return True
+...
+>>> S = [42, 42]
+>>> # Usando Genexps
+>>> any(x > 42 for x in S)     # True se algum elemento de S for > 42
+>>> all(x != 0 for x in S)     # True se todos os elemtos de S forem diferentes de zero
+}}}
+
+== Um exemplo Completo ==
+
+''Pretendo deixar um aplicativo de exemplo para sintetizar tudo. Uma idéia que me ocorreu agora é fazer um programinha gráfico (usando tk) de perguntas e repostas (quiz). Não sei se é confundir muito botar tk no meio, mas creio que se a pessoa entendeu o tutorial vai ser capaz de entender um pouco do código, mesmo porque com o quiz eu posso usar dicionários, listas, abrir/fechar arquivos (aka usar módulos), talvez usar classes e mostrar um exemplo prático que teoricamente rodaria em todas as plataformas''.
+
+(Sugestão: Coloca o programa sim! Assim o tutorial "cresce" junto com o leitor, em vez de ficar só no conhecimento básico - tem é que mergulhar fundo! Ao infinito e além!!)
+
+(Muito bom! Este exemplo completo seria muito interessante. De repente não utilizar a biblioteca gráfica, para não complicar, tendo em vista que a sintaxe do Python é bem particular, não tendo muitas semelhanças com as linguagens de uso corriqueiro)
+
+(Po! Eu acho legal colocar o exemplo de quiz... ia simplificar muito o aprendizdo, visto que editar codigo eh um otimo aprendizado...)
+
+(Acho que toolkits gráficos atrapalham para quem está aprendendo (até porque tem toneladas deles). Seria legal ter um tutorial só de tk com o programa completo. Pessoalmente, preferia que fosse PyGTK...)
+
+(Eu tenho um pouco de experiencia com PyGTK, mas poderiamos fazer um no console tambêm. ~YuriSchlesner)
+
+(Se esta página e´sobre uma introdução em Python nada mais justo que usar algo fraquinho como Tkinter. Andrik Machado Batista)
+
+(Se Tkinter é fraquinho, portanto não muito útil, então porque não algo mais prático? Interface Web, por exemplo)
+
+(Outra coisa - não seria melhor separar a página em partes? Ela está ficando um pouco grande...)
+
+== Próximos passos ==
+
+Existem muitos caminhos para continuar aprendendo Python. Algumas possibilidades são:
+
+    * Esse próprio site ([http://www.pythonbrasil.com.br/ PythonBrasil])
+
+    * A documentação oficial do Python, em inglês ([http://www.python.org/doc/2.4.1/ Python 2.4.1 Documentation])

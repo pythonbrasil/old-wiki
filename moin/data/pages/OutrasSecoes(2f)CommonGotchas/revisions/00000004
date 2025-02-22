@@ -1,0 +1,113 @@
+Aqui é uma página que irá prover uma discussão sobre os problemas mais comuns encontrado em Python que parecem deixar o usuário novato encucado (tá, o experiente também), juntamente da solução deles. São comumente chamados de 'gotchas', uma forma abreviada de 'got you'. Alguns lhe pegam de surpresa quando você está começando, outros são comportamentos esotéricos (jeito bonito de dizer 'bizarro') do Python.
+
+== Atribuição cria referências e não cópias ==
+
+Isso pode ser um ''gotcha'' se você não entender como Python referencia variáveis.
+
+{{{
+#!python
+>>>L = [1,2,3]
+>>>M = ['X', L, 'Y'] # Coloca uma referência a L
+>>>M
+['X', [1, 2, 3], 'Y']
+>>>L[1] = 0 # Muda M também
+>>>M
+['X', [1, 0 ,3], 'Y']
+}}}
+
+'''Solução'''
+
+Este efeito pode se tornar importante em programas grandes, e algumas vezes referências compartilhadas é exatamente o que você quer. Se não são, você pode evitar isso copiando-os explicitamente; para listas, você pode fazer um cópia top-level usando slice sem limites definido.
+
+{{{
+#!python
+>>>L = [1,2,3]
+>>>M = ['X', L[:], 'Y'] # Coloca uma cópia de L
+>>>M
+['X', [1, 2, 3], 'Y']
+>>>L[1] = 0 # Só muda L, não M
+>>>M
+['X', [1, 2 ,3], 'Y']
+>>>L
+[1, 0, 3]
+}}}
+
+Lembre-se, cópias top-level não copiam listas dentro de listas, por exemplo. Se quiser copiar uma estrutura destas, use o módulo copy padrão.
+
+== Repetição adiciona um nível de profundidade ==
+
+Quando sequências são aninhadas, o efeito pode não ser o que você espera. Veja o exemplo a seguir:
+
+{{{
+#!python
+>>>L = [4,5,6]
+>>>X = L * 4   # Como [4,5,6] + [4,5,6] + ...
+>>>Y = [L] * 4 # Como [L] + [L] + ... = [L, L, ...]
+>>>X
+[4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6]
+>>>Y
+[[4, 5, 6], [4, 5, 6], [4, 5, 6], [4, 5, 6]
+}}}
+
+Como L foi aninhado na segunda reptição, Y termina colocando referências de volta a lista original referenciada por L e fica passível do mesmo tipo de erro da seção anterior. (ver seção acima)
+
+'''Solução'''
+
+A mesma do problema anterior.
+
+== Estruturas de dados cíclicas não podem ser impressas ==
+
+Se um objeto contêm uma referência a ele mesmo, é chamado de um objeto cíclico. Nas versões de Python anterior a 1.5.1, executar 'print' nesses objetos falhava, pois o 'print' do Python não era esperto o suficiente para reconhecer o ciclo (você via o mesmo texto sendo impresso repetidamente, até você parar a execução). Este caso é detectado agora, mas é bom saber: estraturas cíclicas podem fazer seu código cair em loops inesperados.
+
+{{{
+#!python
+>>>L = ['oi.']; L.append(L) # Faz um append ao mesmo objeto
+>>>L                        # Antes da versão 1.5.1, ocorre um loop infinito
+}}}
+
+'''Solução'''
+
+Simplesmente, não faça isso. Pode haver boas razões para criar ciclos, mas a menos que você tenha código que saiba como manipular isso, você provavelmente não vai querer que seus objetos façam referências a eles mesmos.
+
+== Tipos imutáveis não podem ser mudados por índice ==
+
+NÃO DÁ PRA MUDAR TIPOS IMUTÁVEIS PELO ÍNDICE. 
+:D
+
+{{{
+#!python
+T = (1, 2, 3)
+T[2] = 4         # erro!
+T = T[:2] + (4,) # agora sim!
+}}}
+
+'''Solução'''
+
+Construa um novo objeto com slice, concatenação, etc e retorne o valor ao objeto original. Parece ser trabalho adicional, mas a vantagem é que os efeitos colaterais que atingem listas (mutáveis) não atingem tipos imutáveis como strings e tuplas.
+
+
+---- /!\ '''Edit conflict - other version:''' ----
+== Não espere sempre um resultado ==
+
+Lembrete: operações como list.append() e list.sort() não retornam valor (tá, retornam None). Chame-as sem atribuir a nenhuma variável. É comum que iniciantes façam operações como:
+
+{{{
+#!python
+>>>list = list.append(X)
+}}}
+
+E pensam que list contém a nova lista. De fato, perderam a referência para 'list', pois 'list' fica com valor 'None'.
+
+---- /!\ '''Edit conflict - your version:''' ----
+== Não espere sempre um resultado ==
+
+Lembrete: operações como list.append() e list.sort() não retornam valor (tá, retornam None). Chame-as sem atribuir a nenhuma variável. É comum que iniciantes façam operações como:
+
+{{{
+#!python
+>>>list = list.append(X)
+}}}
+
+E pensam que list contém a nova lista. De fato, perderam a referência para 'list', pois 'list' fica com valor 'None'.
+
+---- /!\ '''End of edit conflict''' ----

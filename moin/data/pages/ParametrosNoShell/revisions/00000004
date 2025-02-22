@@ -1,0 +1,108 @@
+## page was renamed from ParâmetrosnoShell
+= Receita: Entrada de parâmetros pela linha de comando =
+
+Há duas formas de se passar parâmetros pela linha de comando, uma pelo módulo optparse e outra pelo sys.argv, veja as duas:
+
+
+{{{
+#!python
+
+#!/usr/bin/python
+# Rod Senra 2005
+# This code is in the public domain.
+# Quick, rough, ugly and dirty holiday hack, not robust at all!
+
+# Uso:
+# $ python translate.py paz pt-br en
+# peace
+# 
+
+import sys
+from urllib2 import urlopen, Request
+from string import Template
+
+# Not in stdlib, but handy for
+# quick&dirty hacks like this
+from BeautifulSoup import BeautifulSoup
+
+# Some google magic spells
+google_template = Template("http://translate.google.com/translate_t"\
+                            "?text=$word&langpair=$from_lang%7C$to_lang"\
+                            "&hl=en&ie=$encoding")
+
+# extremely user-enemy interface
+# people can improve on this with their
+# optparse knowledge. I'm not in the mood right now ;o)
+params={'word':sys.argv[1].strip(),
+         'from_lang':sys.argv[2].strip(),
+         'to_lang':sys.argv[3].strip(),
+         'encoding':'ISO-8859-15'}
+
+query_url = google_template.substitute(params)
+
+req = Request(query_url)
+
+# I had to lie here to be accepted, did not bothered
+# to explore further ;o)
+req.add_header('User-Agent','User-Agent: Mozilla/5.0')
+req.add_header('Accept','text/xml,application/xml,application/xhtml\
++xml,text/html,text/plain')
+req.add_header('Accept-Encoding','identity')
+req.add_header('Accept-Charset','ISO-8859-1,utf-8;q=0.7,*;q=0.7')
+req.add_header('Connection','keep-alive')
+
+page = urlopen(req)
+page_result = page.read()
+# print page.headers, page_result
+
+# get the beef ;o)
+soup = BeautifulSoup()
+soup.feed(page_result)
+beef = soup.first('textarea')
+translated = beef.contents[0].string
+print translated
+}}}
+
+
+{{{
+#!python
+
+#!/usr/bin/python
+
+# Uso:
+# $ python parametros.py -o argumento_requerido
+# teste
+# 
+
+from optparse import OptionParser
+
+def main():
+    parser = OptionParser()
+
+    parser.add_option("-f", "--arquivo",  help="Imprime em arquivo")
+    parser.add_option("-q", "--silencia", help="Não imprime a mensagem de saída")
+    parser.add_option("-o", "--saida",    help="Imprime a mensagem de saída")
+
+    (options, args) = parser.parse_args()
+
+    if options.arquivo:
+        import codecs
+        f = codecs.open('optparse_teste.txt', 'a', 'utf-8')
+        f.write("teste")
+        f.close()
+                
+    if options.silencia:
+        print ("")
+        
+    if options.saida:
+        print ("teste")
+
+if __name__ == "__main__":
+    main()
+}}}
+
+Volta para CookBook.
+
+----
+
+LeonardoGregianin

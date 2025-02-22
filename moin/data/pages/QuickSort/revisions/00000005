@@ -1,0 +1,89 @@
+= Quicksort =
+
+Script de ordenação rádida, inventado por C.A.R. Hoare. O algoritmo gasta o tempo proporcional a n log(n) em média e a n² no pior caso. 
+
+O código abaixo foi extraído de http://www.hetland.org/python/quicksort.html e foi escrito por Magnus Lie Hetland  e os comentários foram removidos.
+
+Logo abaixo, outro exemplo.
+
+{{{
+#!/usr/bin/env python
+# Written by Magnus Lie Hetland 
+
+ def partition(list, start, end):
+    pivot = list[end]
+    bottom = start-1
+    top = end
+
+    done = 0          
+    while not done:
+
+        while not done:
+            bottom = bottom + 1
+
+            if bottom == top:
+                done = 1
+                break
+
+            if list[bottom] > pivot:
+                list[top] = list[bottom]
+                break
+
+        while not done:
+            top = top-1
+
+            if top == bottom:
+                done = 1
+                break
+
+            if list[top] < pivot:
+                list[bottom] = list[top]
+                break
+
+    list[top] = pivot
+    return top
+
+ def quicksort(list, start, end):
+   if start < end:
+        split = partition(list, start, end)
+        quicksort(list, start, split-1)
+        quicksort(list, split+1, end)
+   else:
+        return
+
+ if __name__=="__main__":
+    import sys
+    list = map(int,sys.argv[1:])
+    start = 0
+    end = len(list)-1
+    quicksort(list,start,end)
+    import string
+    print string.join(map(str,list))
+}}}
+
+Exemplo retirado da http://en.wikipedia.org/wiki/Quicksort:
+
+{{{
+#!/usr/bin/env python
+def partition(array, begin, end, cmp):
+    while begin < end:
+         while begin < end:
+            if cmp(array[begin], array[end]):
+                (array[begin], array[end]) = (array[end], array[begin])
+                break
+            end -= 1
+         while begin < end:
+            if cmp(array[begin], array[end]):
+                (array[begin], array[end]) = (array[end], array[begin])
+                break
+            begin += 1
+    return begin
+
+def sort(array, cmp=lambda x, y: x > y, begin=None, end=None):
+    if begin is None: begin = 0
+    if end   is None: end   = len(array)
+    if begin < end:
+        i = partition(array, begin, end-1, cmp)
+        sort(array, cmp, begin, i)
+        sort(array, cmp, i+1, end)
+}}}

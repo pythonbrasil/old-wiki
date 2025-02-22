@@ -1,0 +1,35 @@
+#pragma section-numbers off
+= Python Doc =
+
+Projeto de tradução da documentação [http://www.python.org/doc/ oficial] do Python para o português.
+
+|| Coordenador || PedroWerneck ||
+|| Colaboradores || OsvaldoSantanaNeto ||
+|| Página do Projeto || http://www.codigolivre.org.br/projects/pythondoc/ ||
+
+== Dicionário ==
+
+Termos utilizados nas traduções. Adicione/Comente os termos. Se for adicionar, fique atento para que fique em ordem alfabética.
+
+   * '''array''' - array.
+   * '''callable''' - executável. Chamável também seria válido, mas fica muito estranho, mas em alguns casos, dependendo do contexto pode ficar melhor. (?)
+   * '''call (substantivo)''' - chamada.
+   * '''to call (verbo)''' - chamar, executar.
+   * '''dictionary''' - dicionário.
+   * '''indent''' - Acho que indentação fica melhor. (?)
+   * '''immutable''' - imutável.
+   * '''key''' - chave (dicionário).
+   * '''list comprehension''' - compreensão de lista(?) ''Eu sugiro interpretação de lista -- OsvaldoSantanaNeto''
+   * '''list''' - lista
+   * '''operadores lógicos''' - ficam com nome em inglês.
+   * '''race condition''' - (?) o osvaldo citou a tradução dos livros do tanenbaum, não lembro ''Condição de corrida -- OsvaldoSantanaNeto''
+   * '''shell''' - interpretador, interpretador interativo
+   * '''string''' - string (adicionar nota de rodapé caso o documento seja para newbies)
+   * '''subclass (substantivo)''' - Subclasse, classe derivada, classe filha.
+   * '''to subclass (verbo)''' - herdar (esse é um uso estrito), derivar.
+   * '''tuple''' - tupla
+   * '''value''' - valor (dicionário) - conteúdo(?)
+
+----
+
+OsvaldoSantanaNeto

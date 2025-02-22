@@ -1,0 +1,61 @@
+= Tutorial de instalação de GTK / PYGTK / GLADE no windows =
+
+Este é o meu primeiro tutorial para o pythonbrasil, então espero que ele seja útil pra você.
+Estarei falando sobre como instalar o GTK / GLADE / PYGTK no windows. Vou falar passo-a-passo como fazer e espero que de certo aí ;)
+
+Fiz um teste com um fonte feito no linux e o resultado foi muito bom, e não tive de mexer em nada pra funcionar.
+
+Só uma coisa, por incrível que pareça, achei o wxPython mais estável que o pygtk no windows, então a escolha é sua.
+
+Então, vamos lá !
+
+== Baixando os programas ==
+
+=== GTK / GLADE ===
+
+Site: [http://gladewin32.sourceforge.net/]
+
+Agora vamos instalar o GTK na sua máquina para que programas feitos em GTK possam rodar na sua máquina.
+No site tem dois arquivos, um é o '''pacotão da alegria''', que tem tudo - GLADE, RUNTIME GTK, LIBGLADE, e algumas coisa a mais e o outro é o '''pacotinho da contentação''' - que tem apenas o RUNTIME - Eu instalei o pacotão da alegria, que já vem com tudo, mas como disse antes, a escolha é sua.
+
+'''Pacotão da alegria''' = gtk-win32-aio-2.4-rc12
+'''Pacotinho da contentação''' = gtk-win32-2.4.4-rc3
+
+Com o GTK instalado já podemos rodar programas como o GIMP e outros...
+
+Simbora....
+
+=== PYGTK ===
+
+Site: http://www.pcpm.ucl.ac.be/~gustin/win32_ports/pygtk.html
+
+Observação: Baixe o pacote em desenvolvimento. 
+            Aqui eu instalei a versão: '''PyGTK 2.3.96 for Python 2.3'''
+
+Agora é hora de fazer a ponte entre o GTK e o PYTHON - '''''Supergêmeos Ativar ! Forma de PyGTK'''' :)
+
+Basta baixar o pacote e instalar, o que é bem simples...
+
+=== Testando ===
+
+Para testar, execute o IDLE ou o próprio interpletador python e de o comando:
+
+{{{ >>> import gtk }}}
+
+Se o interpletador não chiar, você conseguiu :) * 100 , senão tente novamente...
+
+Se quiser rodar algum programa, baixe o programa abaixo:
+
+[http://www.pygtk.org/pygtk2tutorial/ch-GettingStarted.html#sec-HelloWorld]
+
+=== Conclusão ===
+
+É isso aí... Espero ter ajudado e até a próxima.
+
+Qualquer coisa, entre em contato.
+
+--
+
+DouglasAndrade
+
+

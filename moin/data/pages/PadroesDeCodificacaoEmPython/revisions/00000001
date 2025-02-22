@@ -1,0 +1,70 @@
+Estilos de Codificação e Padrões em Python
+
+Esta página é uma tradução do documento "Python code style and standards", cujo original pode ser consultado em http://www.voidspace.org.uk/python/articles/python_style_guide.shtml
+
+---
+
+http://www.voidspace.org.uk/python/articles/images/source-code.jpg
+
+Meu guia de estilo pessoal para códigos-fonte em Python
+
+Guia de estilo de programação em Python
+
+Table Of Contents (se aplicável)
+
+== Introdução ==
+
+Este texto foi originalmente postado em meu [blog;http://www.voidspace.org.uk/python/weblog/arch_d7_2006_04_01.shtml#e296]  em Abril de 2006, depois disso eu abandonei meu status de amador e me tornei um profissional desenvolvedor de software.  Recentemente eu vi uma referência a este texto em uma mensagem num grupo de notícias e decidi revisitá-lo.  Após cerca de dois anos minhas preferências em estilos de programação, surpreendentemente pouco mudaram.
+
+Obviamente, este texto é parcialmente influenciado pela excelente e popularíssima Bíblia dos estilos de programação em Python: a [PEP 8;http://www.python.org/peps/pep-0008.html]. 
+Ainda há uma relação considerável de orientações de estilo no texto [Idiomas Python e sugestões para eficiência;http://jaynes.colorado.edu/PythonIdioms.html] .  Pessoalmente eu sinto alguma dificuldade em ler código que esteja muito longe destes padrões, mas também tendo em mente ''que sua irrestrita obediência pode ser um grande tormento aos mais cabeças-duras''.
+
+== Padrões e Estilo ==
+
+Python usa indentação para dar uma indicação visual da estrutura de seu código.  Adicionalmente, tem-se um interpretador interativo que provê uma representação padronizada para muitos objetos e estruturas de dados.  Com um estilo consistente e o uso da representação do interpretador para objetos, ficará mais fácil para você absorve o significado do código.  :D
+
+Python é uma linguagem elegante, então mantenha seu código elegante também...
+
+=== Identação de quatro espaços ===
+
+E, definitivamente, nenhuma tabulação.
+
+=== Docstrings ===
+
+Eu prefiro docstrings com um dos dois estilos seguintes:
+
+[code]
+def funcao_classe_ou_metodo(object):
+    """Docstring de uma única linha."""
+[/code]
+
+ou
+
+[code]
+def function_class_or_method(object):
+    """
+    Diversas linhas de docstring.
+
+    Preferencialmente usando marcação ReST.
+    """
+[/code]
+
+=== Comprimento de Linha ===
+
+Longas linhas de código compromete seriamente a legibilidade, mas isso também acontece quebrando-se linhas meramente para se ater a um máximo de comprimento definido.  Um limite de 79 caracteres é uma boa recomendação, mas a legibilidade deve vir em primeiro lugar.
+
+Linhas mais longas que isso devem ser encapsuladas em expressões em parênteses ao invés de se usar \.  Strings longas podem ser quebradas em váras linhas usando-se parênteses:
+
+[code]
+('Esta é uma linha de texto excessivamente longa. '
+'Então, o que podemos fazer é quebrá-la em diversas, '
+'several %s.  Ao invés de se ter apenas uma única longa linha.  Legal, não é ?' %
+'linhas')
+[/code]
+
+// transcrevendo...
+
+
+
+
+Parágrafo adicionado posteriormente. [[FootNote(Marcelo de Freitas Andrade)]]

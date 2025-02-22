@@ -1,0 +1,172 @@
+#pragma section-numbers off
+= Receita: Verificador de CPF =
+
+Quase tudo é cópia do script de verificação de CPF do Pedro Werneck, mas voltado para Cnpj (usei um algoritmo que achei na internet, o algoritmo referia-se a CGC/CNPJ, se algo estiver errado, ou se tudo estiver errado podem falar :). Esse módulo contém algumas funções e classes úteis para aplicações que envolvam cadastros e necessitem validar números de CNPJ antes de incluir no banco de dados..
+
+== Código ==
+
+
+{{{
+#!python
+#/usr/bin/env python
+# -*- coding:UTF-8 -*-
+
+
+"""
+
+Este módulo fornece uma classe wrapper para ser usada com números de
+CNPJ(CGC), que além de oferecer um método simples de verificação, também
+conta com métodos para comparação e conversão.
+
+
+>>> a = CNPJ('12345678000199')
+>>> b = CNPJ('12.345.678/0001-99')
+>>> c = CNPJ([1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0, 1, 9, 8])
+>>> assert a.valido()
+>>> assert b.valido()
+>>> assert not c.valido()
+>>> assert a == b
+>>> assert not b == c
+>>> assert not a == c
+>>> assert eval(repr(a)) == a
+>>> assert eval(repr(b)) == b
+>>> assert eval(repr(c)) == c
+>>> assert str(a) == \"12.345.678/0001-99\"
+>>> assert str(b) == str(a)
+>>> assert str(c) == \"12.345.678/0001-98\"
+
+"""
+
+
+
+
+class CNPJ(object):
+
+    def __init__(self, cnpj):
+        """Classe representando um número de CNPJ
+
+        >>> a = CNPJ('12345678000199')
+        >>> b = CNPJ('12.345.678/0001-99')
+        >>> c = CNPJ([1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0, 1, 9, 8])
+
+        """
+        if isinstance(cnpj, basestring):
+            if not cnpj.isdigit():
+                cnpj = cnpj.replace(".", "")
+                cnpj = cnpj.replace("-", "")
+                cnpj = cnpj.replace("/", "")
+
+            if not cnpj.isdigit:
+                raise ValueError("Valor não segue a forma xx.xxx.xxx/xxxx-xx")
+
+        if len(cnpj) < 14:
+            raise ValueError("O número de CNPJ deve ter 14 digítos")
+
+        self.cnpj = map(int, cnpj)
+
+
+    def __getitem__(self, index):
+        """Retorna o dígito em index como string
+
+        >>> a = CNPJ('12345678000199')
+        >>> a[9] == '0'
+        True
+        >>> a[10] == '0'
+        True
+        >>> a[9] == 0
+        False
+        >>> a[10] == 0
+        False
+
+        """
+        return str(self.cnpj[index])
+
+    def __repr__(self):
+        """Retorna uma representação 'real', ou seja:
+
+        eval(repr(cnpj)) == cnpj
+
+        >>> a = CNPJ('12345678000199')
+        >>> print repr(a)
+        CNPJ('12345678000199')
+        >>> eval(repr(a)) == a
+        True
+
+        """
+        return "CNPJ('%s')" % ''.join([str(x) for x in self.cnpj])
+
+    def __eq__(self, other):
+        """Provê teste de igualdade para números de CNPJ
+
+        >>> a = CNPJ('12345678000199')
+        >>> b = CNPJ('12.345.678/0001-99')
+        >>> c = CNPJ('12345678000198')
+        >>> a == b
+        True
+        >>> a != c
+        True
+        >>> b != c
+        True
+
+        """
+        if isinstance(other, CNPJ):
+            return self.cnpj == other.cnpj
+        return False
+
+    def __str__(self):
+        """Retorna uma string do CNPJ na forma com pontos e traço
+
+        >>> a = CNPJ('12345678000199')
+        >>> str(a)
+        '12.345.678/0001-99'
+
+        """
+        d = ((2, "."), (6, "."), (10, "/"), (15, "-"))
+        s = map(str, self.cnpj)
+        for i, v in d:
+            s.insert(i, v)
+        r = ''.join(s)
+        return r
+
+    def valido(self):
+        """Valida o número de cnpj
+
+        >>> a = CNPJ('12.345.678/0001-99')
+        >>> a.valido()
+        True
+        >>> b = CNPJ('12345678000198')
+        >>> b.valido()
+        False
+
+        """
+        cnpj = self.cnpj[:12]
+        while len(cnpj) < 14:
+
+            prod = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+            r = sum([x*y for (x, y) in zip(cnpj, prod)])%11
+
+            if r > 1:
+                f = 11 - r
+            else:
+                f = 0
+            cnpj.append(f)
+            prod.append(f*2)
+
+        # se o número com os digítos faltantes coincidir com o número
+        # original, então ele é válido
+        return bool(cnpj == self.cnpj)
+
+
+
+if __name__ == "__main__":
+
+    import doctest, sys
+    doctest.testmod(sys.modules[__name__])
+
+}}}
+
+Volta para CookBook.
+
+----
+
+MichelThadeuSabchuk

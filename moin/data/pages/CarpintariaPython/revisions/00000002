@@ -1,0 +1,209 @@
+''(Esse texto é uma tradução de [[http://ivory.idyll.org/articles/advanced-swc/|Intermediate and Advanced Software Carpentry in Python]], de C Titus Brown. O original, segundo o autor, estão licenciados sob a Creative Commons, então a tradução também está.)''
+
+= Carpintaria de Software Intermediária e Avançada em Python =
+
+Bem-vindo! Você acabou de cair nas apostilas de um curso que eu apresentei no ''Lawrence Livermore National Lab'', entre 12 e 14 de junho de 2007.
+
+Essas notas foram planejadas para acompanhar minha palestra, que era uma demostração de de várias características e pacotes "intermediários" de Python. Como a demonstração era interativa, essas notas não são notas completas do que foi apresentado no curso. (Perdoe-me por isso; eles atualizaram minhas apostilas para serem mais completas...)
+
+Entretanto, todas as 70 páginas são livres para ver e imprimir; então, aproveite.
+
+Todos os erros são, naturalmente, meus. Note que quase todos os exemplos começando com {{{>>>}}} são ''doctests'', então você pode pegar o fonte e rodar doctest sobre ela para garantir que eu fui honesto. Só faça-me um favor e rode os ''doctests'' com Python 2.5 ;)
+
+Note que o primeiro dia do curso foi até o final de "Testando seu ''software''"; o segundo dia foi até o final de "Recursos ''online'' sobre Python"; e o terceiro dia terminou o curso.
+
+Códigos de exemplo (a maior parte das seções sobre sobre extensões em C) estão disponíveis [[http://ivory.idyll.org/articles/advanced-swc/code.tar.gz|aqui]]; veja o [[http://ivory.idyll.org/articles/advanced-swc/code/README.txt|README]] para mais informações.
+
+<<TableOfContents>>
+
+= Python Idiomático =
+
+== Alguns tipos de dados básicos ==
+
+== List comprehentions ==
+
+== Criando seus próprios tipos ==
+
+== Iterators ==
+
+== Generators ==
+
+== assert ==
+
+== Conclusões ==
+
+= Estruturando, Testando e Mantendo Programas Python =
+
+== Programando para reusabilidade ==
+
+== Módulos e scripts ==
+
+== Pacotes ==
+
+== Uma pequena digressão: nomes e formatação ==
+
+== Outra pequena digressão: doctstrings ==
+
+== Compartilhando dados entre código ==
+
+== Escopo: uma digressão ==
+
+== De volta ao compartilhamento de dados ==
+
+== Como módulos são carregados (e quando código é executado) ==
+
+== PYTHONPATH, e encontrando pacotes e módulos duranto o desenvolvimento ==
+
+== setup.py e distutils: a maneira à antiga de instalar pacotes Python ==
+
+== setup.py, eggs e easy_install: a nova maneira da moda de instalar pacotes Python ==
+
+= Testando seu software =
+
+== Uma introdução a conceitos sobre teste ==
+
+== O módulo doctest ==
+
+== Tests unitários com unittest ==
+
+== Testes com nose ==
+
+== Análise de cobertura de código ==
+
+== Adicionando testes para um projeto existente ==
+
+== Pensamentos finais sobre testes automatizados ==
+
+
+= Uma Introdução Estendida ao Framework de Teste Unitiário nose =
+
+== O que são testes unitários? ==
+
+== Por que usar um framework? (e por que nose?) ==
+
+== Alguns poucos exemplos simples ==
+
+=== Suporte a testes ===
+
+=== Exemplos são incluídos! ===
+
+== Um guia um tanto mais completo para descoberta de testes e execução ==
+
+=== Rodando testes ===
+
+=== Depurando descoberta de testes ===
+
+
+== A linha de comando do nose ==
+
+=== -w: Especificando o diretório corrente ===
+
+=== -s: Não capturar stdout ===
+
+=== -v: Saída de informação e debug ===
+
+=== Especificando uma lista de testes para rodar ===
+
+== Rodando doctests no nose ===
+
+== O plugin 'attrib'  -- rodando seletivamente subconjuntos de testes ==
+
+== Rodando nose programaticamente ==
+
+== Escrevendo plugins -- um guia simples ==
+
+== Ressavlas ao nose  -- avise o comprador, ocasionamente ==
+
+== Créditos==
+
+
+= Python Idiomático revisitado =
+
+== sets ==
+
+== any e all ==
+
+== Exceções e hierarquia de exceções ==
+
+== Decorators de funções ==
+
+== try/finally ==
+
+== Argumentos de funções e wrapping functions ==
+
+= Mensurando e Aumentando Performance =
+
+== Que profiler devo usar? ==
+
+== Mensurando snippets de código com timeit ==
+
+= Acelerando Python =
+
+== psyco ==
+
+=== Instalando psyco ===
+
+=== Usando psyco ===
+
+== pyrex ==
+
+= Ferramentas para Ajudar Você a Trabalhar =
+
+== IPython ==
+
+== screen e VNC ==
+
+== Trac ==
+
+= Recursos Online sobre Python =
+
+= Embrulhando(?) C/C++ para Python =
+
+== Wrapping manual ==
+
+== Embrulhando código Python com SWIG ==
+
+== Embrulhando código C com pyrex ==
+
+== ctypes ==
+
+== SIP ==
+
+== Boost.Python==
+
+== Recomendações ==
+
+== Uma ou duas outras notas sobre wrapping ==
+
+= Pacotes para Multiprocessamento =
+
+== threading ==
+
+
+== Escrevendo (e indicando) extensões C threadsafe ==    
+
+== parallelpython ==
+
+== Rpyc ==
+
+== pyMPI ==
+
+== multitask ==
+
+= Pacotes úteis =
+
+== subprocess ==
+
+== rpy ==
+
+== matplotlib ==
+
+= Python Idiomático 3: new-style classes =
+
+== Atributos gerenciados ==
+
+== Descriptors ==
+
+= GUI Gossip =
+
+= Python 3.0 =

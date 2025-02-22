@@ -1,0 +1,86 @@
+= doctest: teste automatizado utilizando DocStrings =
+
+Você que é bom programador e cuidadoso, aposto que procuras documentar
+direito o código que escreves. A linguagem Python é bem amiga nesse aspecto,
+com a utilização de DocStrings. Por exemplo:
+
+{{{#!python
+def fat(n):
+  """Calcula o fatorial de n.
+  >>> f(0)
+  1
+  >>> f(5)
+  120
+  """
+  if x == 0:
+    return 1
+  else:
+    return x * f(x-1)
+}}}
+
+é uma implementação bem documentada da função fatorial dentro de um hipotético
+módulo {{{minhasfuncoes.py}}}.
+
+Uma preocupação maior seria sempre assegurar que o que escrevemos
+está correto, mesmo quando procuramos melhorar ou até mesmo reescrever
+a implementação de uma função ou classe em Python. Mas como certificar
+que não quebramos nada enquanto mudamos?
+
+A resposta está nos testes automatizados.
+Escolher bem o que testar e como testar é uma arte em si.
+Repare nos exemplos que eu escrevi para
+descrever a função fatorial, que tal eu usar esses exemplos
+como teste?
+
+Eu poderia escrever a uma função test() e assim escrever
+novamente esses exemplos dentro desta função e conferir
+se não tem nada errado com a entrada e a saída da função.
+
+{{{#!python
+def fat(n):
+  """Calcula o fatorial de n.
+  >>> f(0)
+  1
+  >>> f(5)
+  120
+  """
+  if x == 0:
+    return 1
+  else:
+    return x * f(x-1)
+
+def test():
+  assert f(0) == 1
+  assert f(5) == 120
+
+if __name__ == '__main__':
+  test()
+}}}
+
+Mas tem um jeito melhor e mais amigo de fazer isso, através do módulo
+{{{doctest}}} do Python. Aproveitando os próprios exemplos documentados
+e sem copiar tudo novamente (passível de falha isso).
+
+{{{#!python
+def fat(n):
+  """Calcula o fatorial de n.
+  >>> f(0)
+  1
+  >>> f(5)
+  120
+  """
+  if x == 0:
+    return 1
+  else:
+    return x * f(x-1)
+
+def _test():
+  import doctest, minhasfuncoes
+  return doctest.testmod(minhasfuncoes)
+
+if __name__ == '__main__':
+  _test()
+}}}
+
+
+

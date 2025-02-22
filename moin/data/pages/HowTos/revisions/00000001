@@ -1,0 +1,15 @@
+#pragma section-numbers off
+= How-Tos =
+
+Como-Fazer são documentos que explicam como implementar determinado tipo de solução de maneira objetiva. Para outros tipos de documentos: DocumentaçãoPython.
+
+== Endereços ==
+
+   * [http://www.cienciaaberta.org/modules.php?name=Content&pa=showpage&pid=7 Implementando Grafos em Python] (por) - GuidoVanRossum, traduzido por FlávioCodeçoCoelho.
+   * [http://www.amk.ca/python/howto/advocacy/ Python Advocacy] (eng) - A. M. Kuchling.
+   * [http://www.amk.ca/python/howto/curses/ Curses Programming] (eng) - A. M. Kuchling / Eric Raimmond.
+
+----
+
+Osvaldo Santana Neto
+

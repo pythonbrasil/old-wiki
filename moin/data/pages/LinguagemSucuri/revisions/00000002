@@ -1,0 +1,106 @@
+A sucuri é uma cobra constritora comum no Brasil. É também o nome desta brincadeira: traduzir a linguagem Python para o português. 
+
+== Exemplo: fibonacci.py ==
+
+{{{
+#!python
+# coding: sucuri
+
+def fibonacci(a=1, b=1): 
+    enquanto 1: 
+        produzir a 
+        a, b = b, a+b
+
+t = fibonacci()
+para i em faixa(100): 
+    exibir t.next()
+}}}
+
+O comentário especial `coding: sucuri` faz com que o interpretador Python invoque o nosso codec para pré-processar o programa-fonte. 
+
+
+== O codec: sucuri_dec.py ==
+
+{{{
+#!python
+# coding: utf-8
+
+import codecs
+
+RESERVADAS = (
+    ('and', 'e'),
+    ('as', 'como'),
+    ('assert', 'assegurar'),
+    ('break', 'interromper'),
+    ('class', 'classe'),
+    ('continue', 'continuar'),
+    ('def', 'def'),
+    ('del', 'apagar'),
+    ('elif', 'senãose'),
+    ('else', 'senão'),
+    ('except', 'exceto'),
+    ('exec', 'exec'),
+    ('finally', 'finalmente'),
+    ('for', 'para'),
+    ('from', 'de'),
+    ('global', 'global'),
+    ('if', 'se'),
+    ('import', 'importar'),
+    ('in', 'em'),
+    ('is', 'é'),
+    ('lambda', 'lambda'),
+    ('not', 'não'),
+    ('or', 'ou'),
+    ('pass', 'passar'),
+    ('print', 'exibir'),
+    ('raise', 'levantar'),
+    ('return', 'devolver'),
+    ('try', 'tentar'),
+    ('while', 'enquanto'),
+    ('with', 'com'),
+    ('yield', 'produzir'),
+)
+
+
+class StreamReader(codecs.StreamReader):
+    def decode(self, entrada, erros='strict'): 
+        saida = entrada   
+        for orig, trad in RESERVADAS:
+            trad += ' '
+            if trad in saida:
+                saida = saida.replace(trad, orig+' ')
+        return unicode(saida), len(entrada)
+
+def get_my_codec(name):
+    if name == 'sucuri':
+        return (codecs.utf_8_encode, None, StreamReader, None)
+
+codecs.register(get_my_codec)
+
+# eis como daria para traduzir as funções embutidas:
+
+__builtins__['tam'] = len
+__builtins__['faixa'] = range
+
+}}}
+
+== Exemplo de uso ==
+
+Para usar o codec, é preciso invocar o script a partir da linha de comando, desta maneira:
+
+{{{
+$ python -c "import sucuri_dec; import fibonacci"
+}}}
+
+== Motivação e utilidade ==
+
+Este experimento foi inspirado pelo blog do Benji York da Zope Corp (http://benjiyork.com/blog/2008/02/programmable-python-syntax-via-source.html). 
+
+É um uso criativo da infra-estrutura de codecs criada para pré-processar arquivos-fonte em Python, de acordo com o PEP-0263 (http://www.python.org/dev/peps/pep-0263/).
+
+Não sei se isso tem algum valor pedagógico. Acho muito melhor ensinar Python do que Portugol como primeira linguagem, por exemplo, porque realmente não acho que decorar algumas palavras em inglês seja o maior obstáculo. O pulo do gato é aprender a pensar como programador, e isso não é uma questão de memorização, mas sim de prática em resolução de problemas. Uma linguagem ágil e versátil como Python é muito mais motivante, simplesmente porque permite apresentar uma gama muito maior de problemas interessantes para serem resolvidos, que se seriam complicados ou trabalhosos demais em um dialeto de Pascal ou C.
+
+Mas talvez entre Python e Portugol, a melhor opção para primeira linguagem seja mesmo Sucuri...
+----
+
+LucianoRamalho, inspirado por Benji York

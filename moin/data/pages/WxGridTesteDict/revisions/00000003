@@ -1,0 +1,72 @@
+= Teste de dicionário (WxGrid) =
+
+== Código ==
+
+{{{
+#!python
+import random
+
+def gera_str():
+    tamanho = random.randint(3, 8)
+    texto = ''
+    for i in range(tamanho):
+        texto += chr(random.randint(97, 122))
+    return texto
+
+def gera_str2():
+    p1 = random.randint(1000, 9999)
+    p2 = random.randint(1000, 9999)
+    s = "%s-%s" % (p1, p2)
+    return s
+
+def gera_str3():
+    p1 = random.randint(100, 999)
+    p2 = random.randint(100, 999)
+    p3 = random.randint(100, 999)
+    p4 = random.randint(10, 99)
+    s = "%s.%s.%s-%s" % (p1, p2, p3, p4)
+    return s
+
+class T:
+    def __init__(self, **d):
+        self.__dict__ = d
+
+print "Dois objetos com os mesmos atributos (criados na mesma ordem)"
+t1 = T(nome='Teste', telefone='1234-5678')
+t2 = T(nome='Teste2', telefone='5678-1234')
+print t1.__dict__
+print t2.__dict__
+print
+
+print "Dois objetos com os mesmos atributos (criados em ordem diferente)"
+t1 = T(cpf='012.345.678-90', nome='Teste', telefone='1234-5678')
+t2 = T(nome='Teste2', telefone='5678-1234', cpf='111.222.333-44')
+print t1.__dict__
+print t2.__dict__
+print
+
+print "Lista com 100 objetos: ora o nome está na frente, ora o cpf é que está (na construção do objeto)"
+lista = []
+for i in range(50):
+    lista.append(T(nome=gera_str(), telefone=gera_str2(), cpf=gera_str3()))
+    lista.append(T(cpf=gera_str3(), telefone=gera_str2(), nome=gera_str()))
+for i in lista:
+    print i.__dict__
+print
+
+print "Lista com 50 objetos: atributos criados na mesma ordem, porém existe um atributo dinâmico"
+lista = []
+for i in range(50):
+    codigo = 'lista.append(T(nome=gera_str(), telefone=gera_str2(), cpf=gera_str3(), %s=%i))' % (gera_str(), random.randint(0, 10))
+    exec codigo
+for i in lista:
+    print i.__dict__
+print
+
+}}}
+
+Volta para WxGrid.
+
+----
+
+WashingtonCoutinhoCorrêaJr

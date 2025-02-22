@@ -1,0 +1,66 @@
+= Tudo Sobre Python e Unicode =
+
+Tradução de [http://boodebr.org/main/python/all-about-python-and-unicode "All about Python and Unicode"]
+
+[[TableOfContents]]
+
+
+== Um ponto de partida ==
+Duas semanas antes de começar a escrever este documento, meu conhecimento sobre [http://www.python.org/ Python] e [http://www.unicode.org/ Unicode] era algo como:
+
+ Tudo que precisa para usar Unicode em Python é passar suas strings para unicode()
+
+Agora, onde eu fui arranjar uma idéia tão estranha? Ah, certo, do [http://docs.python.org/tut/node5.html#SECTION005130000000000000000 tutorial de Python sobre Unicode], que afirma:
+
+ "Criar strings Unicode em Python é tão simples quanto criar strings normais":
+
+ >>> u'Alô Mundo !' u'Alô Mundo !'
+
+Ainda que este exemplo seja tecnicamente correto, ele pode enganar o iniciante em Unicode, uma vez que ele esconde diversos detalhes necessários para o uso prático. Esta explicação ultra simplificada me deu um entendimento completamente errado sobre como Unicode funciona em Python.
+
+Se você também foi guiado pelo caminho ultra simplificado, então este tutorial irá provavelmente ajudá-lo. Este tutorial contém um conjunto de exemplos, testes e demonstrações que documentam meu "reaprendizado" da forma correta de trabalhar com Unicode em Python. Ele inclui problemas de portabilidade, assim como questões que surgem quando lidamos com [http://www.w3.org/MarkUp/HTML HTML],  [http://www.w3.org/XML/ XML] e sistemas de arquivo.
+
+Aproveitando, Unicode é justamente simples, eu só queria ter aprendido a usá-lo corretamente da primeira vez.
+
+=== Onde começar? ===
+
+Em alto nível, computadores utilizam três tipos de representação de textos:
+
+ 1. ASCII
+ 1. Conjuntos de caracteres Multibyte
+ 1. Unicode
+
+Eu acho que Unicode é mais fácil de entender se você entender como ele evoluiu a partir do código ASCII. A parte seguinte é umá breve sinópse desta evolução.
+
+=== Do ASCII ao Multibyte ===
+
+No início, existia ASCII. (OK, também existia o [http://www.dynamoo.com/technical/ascii-ebcdic.htm#asciibetter EBCDIC]), mas este nunca pegou fora dos mainframes, então eu o estou omitindo aqui). O conjunto de caracteres ASCII contém 256 caracteres, como você pode ver nesta [http://www.asciitable.com/ tabela ASCII]. Ainda que 256 caracteres sejam disponíveis, os primeiros 128 (códigos de 0 a 127) são normalmente os mais utilizados. Na verdade, os primeiros sistemas de email só permitiam a transmissão de caracteres 0-127 (isto é texto de "7-bits") e de fato isto continua valendo para muitos sistemas ainda hoje. Como você pode constatar na tabela, o código ASCII é suficiente apenas para documentos escritos em inglês.
+
+Problemas começaram a surgir quando computadores começaram a ser usados em países onde não bastavam apenas os caracteres ASCII. O código ASCII não possui a capacidade de ser utilizado em textos escritos em grego, cirílico ou japonês, para citar poucos. Além disso, textos em japonês precisam de milhares de caracteres, logo não há como fazer isso usando apenas 8-bits. Para superar esta limitação, Conjuntos de Caracteres Multibyte foram inventados.  A maioria (senão todos) dos Conjuntos de Caracteres Multibyte se aproveitam do fato  de que apenas os 128 primeiros caracteres do código ASCII são comumente utilizados (códigos 0-127 em decimal, ou 0x00-0x7f em hexadecimal). Os códigos superiores (128..255 em decimal, ou 0x80-0xff em hexadecimal) são utilizados para definir conjuntos estendidos (não utilizados em inglês).
+
+Vamos olhar um exemplo: Shift-JIS é uma das codificações para texto em japonês. Você pode ver a [http://www.rikai.com/library/kanjitables/kanji_codes.sjis.shtml tabela de caracteres aqui]. Observe que o primeiro byte de cada caractere começa com um valor hexadecimal entre 0x80 e 0xfc. Esta é uma propriedade interessante, porque ela faz com que texto em japonês e inglês possam ser misturados livremente! A string "Hello World!" é perfeitamente válida na codificação Shift-JIS para textos em inglês. Quando analisamos, caracter a caracter (parse), um texto que utiliza o Shift-JIS, se você encontrar um byte na faixa 0x80-0xff, você saberá que este é o primeiro caracter de uma seqüência de dois códigos. Caso contrário, é um caracter de apenas um byte como no ASCII comum.
+
+Isto funciona muito bem enquanto você trabalhar apenas em japonês, mas o que acontece se você trocar para o [http://czyborra.com/charsets/iso8859.html#ISO-8859-7 conjunto de caracteres gregos]? Como você pode observar, na tabela do ISO-8859-7 os códigos de 0x80-0xff são definidos de uma forma completamente diferente do Shift-JIS. Logo, ainda que você possa misturar inglês com japonês, você não pode misturar grego e japonês uma vez que esses códigos se sobrepõem. Este é um problema comum ao se misturar conjuntos de caracteres multibyte.
+
+== Texto Unicode em Python ==
+=== Convertendo símbolos Unicode em literais Python ===
+=== Por que o "print" não funciona? ===
+=== Codecs ===
+==== De Unicode para binário ====
+==== De binário para Unicode  ====
+=== Operações com Strings ===
+==== Uma pegadinha do \U ====
+==== Bugs do Python 2.0 & 2.1 ====
+=== Python como um "recodificador universal" ===
+
+== Agora começa a diversão... Unicode e o Mundo Real ==
+
+=== Nomes de arquivo com caracteres Unicode ===
+==== Microsoft Windows ====
+==== Unix/POSIX/Linux ====
+==== Mac OS/X  ====
+=== Unicode e HTML ===
+=== Unicode e XML ===
+=== Unicode e diretórios compartilhados (Samba) ===
+
+== Sumário ==

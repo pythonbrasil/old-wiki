@@ -1,0 +1,20 @@
+#pragma section-numbers off
+= Nome do Software =
+
+Esse software realmente é muito completo. Pena ele não fazer parte da maioria das distribuições por aí. Ele é desenvolvido usando QScintilla, QT e PyQT. Foi um pouco complicado eu colocar ele pra funcionar, mas ele é bastante completo.
+
+   * '''Prós:''' Muito completo. Integra com CVS, possui uma série de ferramentas para desenvolvimento GUI.
+   * '''Contras:''' Relativamente pesado, complicado de se compilar e usa bibliotecas com licença QT (não que isso realmente seja um 'contra').
+
+== Ficha técnica ==
+
+URL: http://python.org/ [[BR]]
+Licença: GPL
+
+== Tela ==
+
+attachment:eric3.png
+
+----
+
+Osvaldo Santana Neto

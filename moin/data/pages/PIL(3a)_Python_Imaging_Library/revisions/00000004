@@ -1,0 +1,12 @@
+= PIL: Python Imaging Library =
+
+Processe e manipule imagens com esta biblioteca. Você pode cortar, colar, juntar e converter entre os diversos formatos suportados.
+
+== Ficha técnica ==
+
+URL: http://www.pythonware.com/products/pil/ [[BR]]
+Licença: [http://www.pythonware.com/products/pil/license.htm Livre].
+
+----
+
+Washington Coutinho Corrêa Jr

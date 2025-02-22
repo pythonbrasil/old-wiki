@@ -1,0 +1,46 @@
+Pygame Tutorials
+Import and Initialize
+by Pete Shinners
+pete@shinners.org
+Revision 1.0, January 28th, 2002
+
+
+Ter o pygame importado e inicializado é um processo muito simples. Ele tambén é flexivel o bastante para dar a você controle sobre o que esta acontecendo. Pygame é uma coleção de módulos diferentes num único pacote python. Alguns desses módulos estão escritos em C e outros em python. Alguns também são opcionais e poderá nem sempre estar presentes.
+
+Esta é apenas uma rápida introdução sobre o que está acontecendo quando você importa pygame. Para uma definitivamente clara explanação veja os exemplos do pygame.
+ 
+
+== Import == 
+
+Primeiro nós devemos importar o pacote pygame. Desde pygame versão 1.4 este processo   se tornou muito fácil. Muitos jogos irão importar tudo de pygame como aqui:
+
+import pygame
+from pygame.locals import *
+
+A primeira linha aqui é a única realmente necessária. Ela importa todos os módulos disponíveis dentro do pacote pygame. A segunda é opcional, e coloca um limitado jogo de constantes e funções dentro do namespace global* de seu script.
+
+Algo importante a ter em mente é que vários módulos pygame são opcionais. Por exemplo, um desses é o módulo fonte. Quando você faz "import pygame", pygame irá checar para ver se o modulo fonte está disponível. Se estiver ele irá ser importado como "pygame.font". Se não estiver, "pygame.font" será setado para None. Isto torna fácil testar mais tarde se o módulo fonte está disponível.
+
+
+== Init ==
+
+Antes que você fazer algo com pygame, você precisa inicializa-lo. O modo mais comum de fazr isto é 
+ 
+Init
+Before you can do much with pygame, you will need to initialize it. The most common way to do this is just make one call.
+
+      pygame.init()
+
+This will attempt to initialize all the pygame modules for you. Not all pygame modules need to be initialized, but this will automatically initialize the ones that do. You can also easily initialize each pygame module by hand. For example to only initialize the font module you would just call.
+
+      pygame.font.init()
+
+Note that if there is an error when you initialize with "pygame.init()", it will silently fail. When hand initializing modules like this, any errors will raise an exception. Any modules that must be initialized also have a "get_init()" function, which will return true if the module has been initialized.
+ 
+It is safe to call the init() function for any module more than once.
+ 
+ 
+Quit
+Modules that are initialized also usually have a quit() function that will clean up. There is no need to explicitly call these, as pygame will cleanly quit all the initilized modules when python finishes. 
+
+*Para saber mais sobre namespaces: [http://www.pythonbrasil.com.br/moin.cgi/ProgramacaoOrientadaObjetoPython#head-8e4c72a0ab0daeb1a9816879cf51051950ab3966]

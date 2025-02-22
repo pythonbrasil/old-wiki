@@ -1,0 +1,18 @@
+#pragma section-numbers off
+= Antes de Perguntar =
+
+Nossa intenção com esta página é dar algumas dicas às pessoas que participam da lista de discussão do PythonBrasil. Seguindo estas dicas, você conseguirá esclarecer as suas dúvidas muito mais rapidamente.
+
+   * '''Procure no PythonBrasil''' - O sistema de buscas do PythonBrasil funciona muito bem. Antes de perguntar algo na lista de discussão, certifique-se de que não existe algum documento aqui que resolva o seu problema.
+   * '''Procure no [http://www.google.com Google]''' - É muito raro não encontrar algum esclarecimento de dúvidas no [http://www.google.com Google]. Lembre-se: o Google é seu amigo.
+   * '''Verifique o [http://br.groups.yahoo.com/group/python-brasil/messages histórico da lista]''' - O histórico da lista serve como uma base de conhecimento. É bastante comum que outras pessoas já tenham passado pelo mesmo problema que você está enfrentando e já tiveram suas dúvidas esclarecidas na lista. Verifique no histórico da lista se não é este o caso antes de postar a mesma dúvida.
+   * '''[http://pt.wikipedia.org/wiki/Como_fazer_perguntas_de_forma_inteligente Aprenda a fazer perguntas de forma inteligente]''' - Enviando uma mensagem com um ''subject'' adequado e formulando a questão adequadamente, você facilitará o trabalho de quem irá te ajudar e, no nosso caso, isso é muito importante. Coisas como enviar o trecho de código com problema e as mensagens de erro emitidas são de vital importância para que uma resposta possa ser dada.
+   * '''Somos uma comunidade de voluntários''' - Lembre-se sempre que o PythonBrasil é uma comunidade formada por programadores voluntários. Ninguém tem a obrigação de te ajudar, apesar de todos se esforçarem para fazê-lo.
+   * '''Se você souber inglês...''' - Se você conseguir ler documentação escrita em inglês, vale a pena consultar também o histórico da lista [http://mail.python.org/pipermail/python-list/ Python-Users]. O Google provê a indexação dessas páginas, portanto, basta usá-lo para fazer pesquisas nela. Vale a pena ainda verificar o site oficial de [http://www.python.org Python].
+
+== Algumas regras da lista ==
+
+Algumas regras da lista que devem ser seguidas para evitar problemas com a moderação:
+
+   * '''Não envie e-mails no formato HTML''' - Além de impossibilitar o uso de leitores de e-mail em modo texto (que é o caso da maioria das pessoas que usam GNU/Linux), você ainda possibilitará que o Yahoo! Groups adicione imagens de propaganda nos e-mail fazendo com que pessoas que usem acesso discado tenham problemas para ler suas mensagens. Consulte a documentação do seu leitor de e-mail para desligar essa opção.
+   * '''Não fuja do tópico da lista''' - A lista foi criada para discussões sobre Python. Apesar de [http://zope.org/ Zope] e [http://plone.org/ Plone] serem duas aplicações desenvolvidas em Python, é importante lembrar que existem outras listas de discussão com mais profissionais qualificados na utilização dessas aplicações, como as que se encontram na comunidade brasileira [http://tchezope.org TcheZope].

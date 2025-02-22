@@ -1,0 +1,39 @@
+#pragma section-numbers off
+= Receita: RemoveRepetidosLista =
+
+Função para remover elementos repetidos de uma lista.
+Retorna uma nova lista.
+
+== Código ==
+
+{{{
+#!python
+
+def RemoveRepetidosLista(l):
+    # cria um dicionario em branco
+    dict = {}
+    # para cada valor na lista l
+    for word in l:
+        # adiciona ao dicionario: valor:1
+        # note que se for repetido o valor somente sobrescreve ele :)
+        dict[word] = 1
+    # retorna uma copia das 'keys'
+    l[:] = dict.keys()
+    return l
+
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+
+lista_nova_sem_repeticao = RemoveRepetidosLista(lista)
+
+}}}
+
+Volta para CookBook.
+
+----
+
+ralobao

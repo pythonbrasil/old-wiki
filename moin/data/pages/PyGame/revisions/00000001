@@ -1,0 +1,7 @@
+= PyGame =
+
+PyGame (http://www.pygame.org) é um módulo Python que fornece a API da biblioteca [http://www.libsdl.org SDL] (feita em C) e mais algumas funcionalidades para a programação gráfica, em especial jogos.
+
+Provê facilidades tais como Sprites, Render Groups, deteção de colisão básica (retângulos) e muito mais.
+
+'''É multi plataforma! Funciona em Linux, Windows, Sun, MacOS, BeOS, ...'''

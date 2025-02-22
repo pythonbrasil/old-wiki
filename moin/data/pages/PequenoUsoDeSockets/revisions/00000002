@@ -1,0 +1,160 @@
+#pragma section-numbers off
+= Receita: Pequeno uso de sockets =
+
+Este é o primeiro programa que fiz e ele explora um pouco o uso de sockets. Quando fiz o programa a seguir encontrei uma certa dificuldade em encontrar material explicando a usar sockets para iniciantes, portanto o que consegui fazer é o que segue. Minha intenção com este cookbook é tentar ajudar novos usuarios e pedir ajuda aos mais experientes para desenvolver um programa mais otimisado e bem feito. Espero que sirva de aprendizado para todos.
+
+== Código ==
+
+{{{
+#!python
+import socket
+import string
+import sys
+
+class LenghtError(Exception):
+    pass
+class RepeatedDigitsError(Exception):
+    pass
+
+def testNum(num): 
+"""Funcao para testar se o número possui digitos repetidos ou se é maior que 4."""
+    if len(num) != 4:
+        raise LenghtError 
+    for i in num:
+        if num.count(i) > 1: raise RepeatedDigitsError
+        
+class GameCon:
+    """Classe para cuidar da conexao do jogo"""
+    def __init__(self):
+        self.sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    def con(self, ip, port=1911):
+        self.sock.connect((ip, port))
+
+    def waitCon(self, ip='', port=1911, l=1):
+        self.sock.bind((ip, port))
+        self.sock.listen(l) 
+        (clientsocket, address) = self.sock.accept()
+        self.sock = clientsocket 
+    
+    def send(self, msg):
+        sent = self.sock.send(msg)
+        if sent == 0:
+            raise BrokenCon, "socket connection broken"
+
+    def receive(self, bytes):
+        return self.sock.recv(bytes)
+
+    def close(self):
+        self.sock.close()
+
+
+class Senha: 
+    """Classe do jogo senha"""
+    def __init__(self, myNum, hisNum):
+        self.myNum  = str(myNum)  #Numero do cliente
+        self.hisNum = str(hisNum) #Numero do server(adversario)
+
+    def check(self, checkNum):
+    """Metodo para checar o numero de bombas e tiros de um determinado numero em relacao ao self.hisNum(numero do adversrio)"""
+        total    = 0  #Total de numeros coicidentes
+        bombs    = 0
+        for a in checkNum:
+            total+=self.hisNum.count(a)
+            
+        for i in xrange(4):
+            if checkNum[i] == self.hisNum[i]: bombs+=1
+
+        shots = total - bombs
+        return bombs, shots
+
+   
+def sender(skt, pwd):
+"""Funcao que recebe o numero a ser testado e o envia para o adversario e verifica vitoria"""
+    while True:
+        try:
+            num=string.strip(raw_input('Digite o numero a ser testado: '))
+            testNum(num)
+            skt.send(num)
+            break
+        except LenghtError:
+            print '!!\nO numero deve ter quatro digitos\n...'
+        except RepeatedDigitsError:
+            print '!!\nO numero nao pode ter digitos repetidos\n...'
+        
+       
+    print 'Bombas: %s Tiros: %s' % pwd.check(num)
+    if num == pwd.hisNum: #Se o numero que testei eh igual do adversario, eu ganho
+        print '\n\nVOCE GANHOU! Parabens :-)'
+        skt.close()
+        if raw_input('Jogar denovo? [s/n] ').startswith('s'):
+            main()
+        else: sys.exit()
+    getter(skt, pwd) #Um metodo que chama o outro num loop continuo, deve ser a pior solucao para meu problema :-/
+
+def getter(skt, pwd):      
+"""Funcao que recebe o numero tentado pelo adversrio, o imprime na tela e verifica derrota"""
+    print '\nEsperando a escolha do adversario...'
+    hisNum = skt.receive(4)
+    print '::Ele chutou: %s\n' % hisNum
+    if hisNum == pwd.myNum:
+        print '\n\nVOCE PERDEU! :-('
+        skt.close()
+        if raw_input('Jogar denovo? [s/n] ').startswith('s'):
+            main()
+        else: sys.exit()
+    sender(skt, pwd)
+
+def main():
+    talker = GameCon()           #Cria um objeto socket
+    while True:
+        print '1. Servidor\n2. Cliente'
+        choice = input('Escolha: ')
+        if choice == 1 or choice == 2: break
+
+    if choice == 1:
+        print 'Esperando conexao...'
+        talker.waitCon()
+            
+    else:
+        while True:
+            ip = string.strip(raw_input('Digite o IP do servidor: '))
+            try:
+                talker.con(ip)
+                break
+            except: print 'Conexao nao aceita'
+    
+    while True:
+        try:
+            myNum = string.strip(raw_input('Digite seu numero: '))
+            testNum(myNum)
+            talker.send(myNum)
+            hisNum = talker.receive(4) #Get his number throught internet
+            game = Senha(myNum, hisNum)
+            break
+        except LenghtError:
+            print '!!\nO numero deve ter quatro digitos\n...'
+        except RepeatedDigitsError:
+            print '!!\nO numero nao pode ter digitos repetidos\n...'
+
+
+    if choice == 1:
+       sender(talker, game)
+    else:
+       getter(talker, game)
+
+if __name__ == '__main__':
+    main()
+}}}
+
+== Explicação do jogo ==
+
+Senha é um jogo a ser jogado por duas pessoas, os dois escolhem suas respectivas senhas (números de quatro digitos sem repetição de digito) e tentam adivinhar a do adversario. Para conseguir descobrir a senha do outro o jogador chuta um número qualquer e, se tiver acertado a posição de algum digito ele fez uma "bomba", se tiver acertado um digito mas não na posição correta ele fez um "tiro" (ex. sendo o número do adversário 1234, e o chute 3214, o jogador fez dois tiros e duas bombas). 
+
+A versão do jogo na internet precisa que o chute seja alternado (cada hora um), no caso os dois jogadores tem em seu computador o número escolhido e o número do adversario, então a conexão existe apenas para saber quando é a vez de cada e enviar o número testado para o adversário saber quão perto esta da derrota (ou não). Creio que um metodo melhor seria que cada cliente recebesse o número a ser testado do adversário e retornasse a este o tanto de bombas e tiros acertados. Todavia, acho que já deu para pegar o espirito da coisa, espero alterações no código e sugestçoes.
+
+Volta para CookBook.
+
+----
+
+Rafael Cunha de Almeida (aFlag)

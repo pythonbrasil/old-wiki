@@ -1,0 +1,356 @@
+## page was renamed from IntroducaoOOP
+## page was renamed from IntroduçãoaOOP
+Tradução do "Introduction to OOP with Python" do site www.voidspace.org.uk
+
+= Introdução =
+
+Eu tenho programado com python por mais de 2 anos [1]. Antes, havia feito alguma programação procedural por cerca de 8 anos - mas eu não estava familiarizado com objetos ou POO.
+
+The whole design philosophy of Python encourages a clean programming style. It's basic datatypes and system of namespaces makes it easier to write elegant, modular code [2].
+
+These factors, and the unique block structure by indentation rule, make Python an ideal first language. Despite this I struggled with learning classes and objects. It seemed a huge hurdle to overcome, like all new systems do.
+
+In fact the basic principles of object oriented programming are relatively easy to learn. Like other aspects of Python they are nicely implemented and well thought out. This tutorial is the introduction to object oriented programming that I wished I'd had back then.
+
+This article assumes a basic knowledge of Python syntax. If you know how to create the basic data-types and call functions, but want to know more about objects and classes - you should find this article helpful.
+Objects and OOP
+
+Objects and OOP are at the heart of the way Python works. You aren't forced to use the OOP paradigm in your programs - but understanding the concepts is essential to becoming anything more than a beginner. Not least because you will need to use the classes and objects provided in the standard library.
+
+= OOP o Novo Paradigma =
+
+Programming itself is a relatively young discipline. Surprisingly, object oriented programming goes back as far as the 1960's. Simula is considered to be the first object oriented programming language.
+
+It's not an uncontroversial paradigm, in fact it's not even clear what a strict definition of Object Oriented programming is.
+
+Some people think that OOP has nearly had it's day, and we need to find the Post OOP Paradigm.
+
+Others like Paul Graham think it was never necessary in the first place.
+
+= Então, o quê é um Objeto? =
+
+What is an Object ? Well, this is programming - so an object is a concept. Calling elements of our programs objects is a metaphor - a useful way of thinking about them.
+
+In Python the basic elements of programming are things like strings, dictionaries, integers, functions, and so on [3] ... They are all objects [4]. This means they have certain things in common.
+
+Before we look closer at what this means we'll hurriedly cover some basic programming concepts.
+Procedural Programming
+
+If you have done any programming before, you will be familiar with the procedural style of programming. This divides your program into reusable 'chunks' called procedures or functions [5].
+
+As much as possible you try to keep your code in these modular chunks - using logic to decide which chunk is called. This makes it less mental strain to visualise what your program is doing. It also makes it easier to maintain your code - you can see which parts does what job. Improving one function (which is reused) can improve performance in several places of your program.
+
+Note
+
+For an interesting look at the development of procedural programming, read a mini history of programming
+
+= Separação de Dados =
+
+The procedural style of programming maintains a strict separation between your code and your data.
+
+You have variables, which contain your data, and procedures. You pass your variables to your procedures - which act on them and perhaps modify them.
+
+If a function wants to modify the contents of a variable by passing it to another function it needs access to both the variable and the function it's calling. If you're performing complex operations this could be lots of variables and lots of functions.
+
+= Entra o Objeto =
+
+Basic Elements of OOP
+
+Any traditional OOP programmer might tell you that essential elements of OOP are encapsulation and message passing.
+
+The Python equivalents are namespaces and methods.
+
+Python doesn't subscribe to protecting the code from the programmer, [6] like some of the more BSD languages. Python does encapsulate objects as a single namespace but it's a transluscent encapsulation. Smile
+
+It turns out that lots of operations are common to objects of the same type. For example most languages have built in ways to create a lowercase version of a string.
+
+There are lots of standard operations that are associated only with strings. These include making a lowercase version, making an uppercase version, splitting the string up, and so on. In an object oriented language we can build these in as properties of the string object. In Python we call these methods [7].
+
+Every string object has a standard set of methods - some of which you've probably already used.
+
+For example :
+
+
+{{{original_string = ' some text '
+
+# remove leading and trailing whitespace
+string1 = original_string.strip()
+
+# make uppercase
+string2 = string1.upper()
+print string2
+SOME TEXT
+
+# make lowercase
+string2.lower() == string1
+True
+}}}
+Python uses the dot syntax to access attributes of objects. The statement string2.lower() means call the lower method of the object string2. This method returns a new string - the result of calling the method.
+
+So every string is actually a string object - and has all the methods of a string object [8]. In Python terminology we say that all strings are of the string type.
+
+In the object model the functions (methods) and other attributes that are associated with a particular kind of object become part of the object. The data and the functions for dealing with it are no longer separate - but are bound together in one object.
+Creating New Objects
+
+Let's look a bit more clearly at what's going on.
+
+In Python there is a blueprint string object called the string type. It's actual name is str. It has all the methods and properties associated with the string.
+
+Everytime a new string is created, the blueprint is used to create a new object with all the properties of the blueprint.
+
+All the built in datatypes have their own 'blueprint' - the integer (int), the float (float), booleans (bool), lists (list), dictionaries (dict), and more.
+
+For these built in datatypes, we can either use normal Python syntax to create them - or we can use the blueprint itself (the type).
+{{{
+# create a dictionary the normal way
+a_dict = {
+    'key' : 'value',
+    'key2' : 'value2'
+    }
+# use 'dict' to create one
+list_of_tuples = [('key', 'value'),
+                 ('key2', 'value2')]
+a_dict_2 = dict(list_of_tuples)
+#
+print a_dict == a_dict_2
+True
+print type(a_dict)
+<type 'dict'>
+print type(a_dict_2)
+<type 'dict'>
+}}}
+See how we created a_dict_2 by passing a list of tuples to dict. All basic stuff, but it illustrates that new objects are created from blueprints. These objects have all the methods defined in the blueprint.
+
+The new object is called an instance - and the process of creating it is called instantiation (meaning creating an instance). For the built in datatypes the blueprint is known as the type of the object. You can test the type of an object By using the built in function type [9].
+
+That might seem like a lot to digest in one bite - but it probably doesn't involve anything you don't do already.
+
+= Python como uma Linguagem Orientada a Objeto =
+
+If you scour the internet you may find some unhelpful discussion as to whether Python is really object oriented or not. (For some value of object oriented). This debate is particularly beloved of Ruby programmers who like to claim thier language is more object oriented than Python.
+
+This seems to come from the pre Python 2.2 days when there was a big difference between the built in types and user defined classes. Since 2.2 you can subclass the built in types. In Python 3.0 the unification will be complete.
+
+We've already seen an example of using some string methods. We'll close off this section by using some dictionary methods.
+{{{
+a_dict = {
+    'key' : 'value',
+    'key2' : 'value2'
+    }
+a_dict_2 = a_dict.copy()
+print a_dict == a_dict_2
+True
+a_dict.clear()
+print a_dict
+{}
+print a_dict.clear
+<built-in method clear of dict object at 0x0012E540>
+print type(a_dict.clear)
+<type 'builtin_function_or_method'>
+}}}
+Above we used the clear method of a_dict by calling a_dict.clear(). When we printed clear, instead of calling it, we can see that it's just another object. It's a method object of the appropriate type.
+
+Functions are Objects
+
+Just to demonstrate that functions are objects, I'll show you a neat trick with them.
+
+Have you ever written code that looks a bit like this ?
+if value == 'one':
+    # do something
+    function1()
+elif value == 'two':
+    # do something else
+    function2()
+elif value == 'three':
+    # do something else
+    function3()
+
+Other languages have a construct called switch that makes writing code like that a bit easier.
+
+In Python we can achieve the same thing (in less lines of code) using a dictionary of functions.
+
+As an example, suppose we have three functions. You want to call one of the functions, depending on the value in a variable called choice.
+def function1():
+    print 'You chose one.'
+def  function2():
+    print 'You chose two.'
+def  function3():
+    print 'You chose three.'
+#
+# switch is our dictionary of functions
+switch = {
+    'one': function1,
+    'two': function2,
+    'three': function3,
+    }
+#
+# choice can eithe be 'one', 'two', or 'three'
+choice = raw_input('Enter one, two, or three :')
+#
+# call one of the functions
+try:
+    result = switch[choice]
+except KeyError:
+    print 'I didn\'t understand your choice.'
+else:
+    result()
+
+The magic happens in the line result = switch[choice]. switch[choice] returns one of our function objects (or raises a KeyError). The we do result(), which calls it. Smile
+
+Caution!
+
+You could save a line or two of code by making the final block :
+# call one of the functions
+try:
+    switch[choice]()
+except KeyError:
+    print 'I didn\'t understand your choice.'
+
+This directly calls the function returned by switch[choice]. However, if that function raises a KeyError (due to a bug) - it will get trapped by the try...except block. This error can be very hard to track down, because your error handling code is reporting the wrong error.
+
+In general you should have your try...except blocks wrapping as little code as possible.
+User Defined Classes
+
+The real trick is that we can create our own blueprints. These are called classes. We can define our own class of object - and from this create as many instances of this class as we want. All the instances will be different - depending on what data they are given when they are created. They will all have the methods (and other properties) from the blueprint - the class.
+
+So lets look at a simple example. We define our own class using the class keyword.
+
+Methods are defined like functions - using the def keyword. They are indented to show that they are inside the class.
+class OurClass(object):
+    """Class docstring."""
+
+    def __init__(self, arg1, arg2):
+        """Method docstring."""
+        self.arg1 = arg1
+        self.arg2 = arg2
+
+    def printargs(self):
+        """Method docstring."""
+        print self.arg1
+        print self.arg2
+
+I guess there are a few things that need explaining here. This will be easier if you see an example of it at work as well.
+instance = OurClass('arg1', 'arg2')
+print type(instance)
+<class 'OurClass'>
+instance.printargs()
+arg1
+arg2
+
+In this example we create an instance of OurClass, and call it instance. When we create it, we pass in the arg1 and arg2 as arguments. When we call instance.printargs() these original arguments are printed.
+Mentioning Inheritance
+
+The class definition starts with :
+class OurClass(object):
+
+The class definition allows for something called inheritance. This means that your class can inherit properties from another class. I'm not going to explain this yet. Smile
+
+All you need to know now is - if you're not inheriting from another class then you ought to inherit from object. Your class definitions should look like :
+class ClassName(object):
+
+Old Style Classes
+
+It has only been possible to inherit from object since Python 2.2. These are called new style classes. You might still see some old style class definitions floating around.
+class ClassName:
+    """
+    An old style class that
+    isn't using inheritance.
+    """
+
+They still work - but they are deprecated and will probably stop working in Python 3.
+The __init__ Method
+
+The __init__ method (init for initialise) is called when the object is instantiated. Instantiation is done by (effectively) calling the class.
+
+From our example :
+instance = OurClass('arg1', 'arg2')
+
+Here a new instance is created. Then it's __init__ method is called and passed the arguments 'arg1' and 'arg2'.
+
+To properly understand the __init__ method you need to understand self.
+The self Parameter
+
+The arguments accepted by the __init__ method (known as the method signature) are :
+def __init__(self, arg1, arg2):
+
+But we only actually pass it two arguments :
+instance = OurClass('arg1', 'arg2')
+
+What's going on, where has the extra argument come from ?
+
+When we access attributes of an object we do it by name (or by reference). Here instance is a reference to our new object. We access the printargs method of the instance object using instance.printargs.
+
+In order to access object attributes from within the __init__ method we need a reference to the object.
+
+Whenever a method is called, a reference to the main object is passed as the first argument. By convention you always call this first argument to your methods self.
+
+Is self a Wart ?
+
+Some people regard it as a Python 'wart' that we have to include self. Java (?) includes it automatically and calls it this.
+
+The main argument in favour of self is the Pythonic principle explicit is better than implicit [10]. This way we can see exactly where all our variable names come from.
+
+This means in the __init__ method we can do :
+self.arg1 = arg1
+self.arg2 = arg2
+
+Here we are setting attributes on the object. You can verify this by doing the following :
+instance = OurClass('arg1', 'arg2')
+print instance.arg1
+arg1
+
+values like this are known as object attributes. Here the __init__ method sets the arg1 and arg2 attribute of the instance.
+printargs
+
+We now know enough to understand what is happening in the printargs method.
+
+This method doesn't take any arguments - so when we define it, we only need to specify the self parameter which is always passed to object methods.
+def printargs(self):
+
+When this method is called it looks up (and prints) the original arguments which were saved as object attributes by __init__.
+
+Hint
+
+Let's get our terminology straight.
+
+The 'functions' that are part of an object are called methods.
+
+The values are called 'attributes'.
+
+You can examine all the methods and attributes that are associated with an object using the dir command :
+print dir(some_obj)
+The Power of Objects
+
+As you can see objects combind data and the methods used to work with the data. This means it's possible to wrap complex processes - but present a simple interface to them. How these processes are done inside the object becomes a mere implementation detail. Anyone using the object only needs to know about the public methods and attributes. This is the real principle of encapsulation. Other parts of your application (or even other programmers) can use your classes and their public methods - but you can update the object without breaking the interface they use.
+
+You can also pass around objects instead of just data. This is one of the most useful aspects of object oriented programming. Once you have a reference to the object you can access any of the attributes of the object. If you need to perform a complex group of operations as part of a program you could probably implement it with procedures and variables. You might either need to use several global variables for storing state (which are slower to access than local variables and not good if a module needs to be reusable within your application) - or your procedures might need to pass around a lot of variables.
+
+If you implement a single class that has lots of attributes representing the state of your application, you only need to pass around a reference to that object. Any part of your code that has access to the object, can also access its attributes.
+
+The main advantage of objects though is that it is a useful metaphor. It fits in with the way we think. In real life objects have certain properties and interact with each other. The more our programming language fits in with our way of thinking, the easier it is to use it to think creatively.
+Advanced Subjects
+
+We've only covered the basics in this tutorial. Hopefully you now understand enough to create and use your own classes.
+
+There is lots more still to learn. Some subjects I could expand this tutorial to cover include :
+
+    * inheritance
+    * class attributes
+    * __dict__
+    * subclassing built in types
+    * __new__
+    * __getattr__ and __setattr__
+    * private attributes (single and double underscore)
+    * classmethods and staticmethods
+
+Footnotes
+||[1]||It was two years in June 2005.... I started learning Python for a project called atlantibots.||
+||[2]||It's system of modules and packages as well - these are related to namespaces, and are the envy of other languages.||
+||[3]||These are called the basic datatypes - plus lots more things like classes, instances, and methods that we'll meet soon in this introduction.||
+||[4]||Like smalltalk - which is sometimes spoken of as the archetypal object oriented language.||
+||[5]||The technical difference used to be that a function returns a value but a procedure doesn't. Nowadays they tend to all get called functions. We don't call it functional programming though, that's something else altogether. Very Happy||
+||[6]||Or is that to protect the programmer from the code ?||
+||[7]||The 'old' object oriented name for this is 'message passing'. These days it's not a helpful metaphor.||
+||[8]||You can see a list of string methods at string methods.||
+||[9]||Actually type isn't a function - it's a type. It is the type of types (type(type) is type). Very Happy We can use it as a function though.|
+||[10]||Try import this at an interactive interpreter prompt. This is called the Zen of Python.||

@@ -1,0 +1,102 @@
+= Python Bug Day =
+
+'''Python Bug Day''' (http://wiki.python.org/moin/PythonBugDay) é um mutirão de solução de bugs no interpretador CPython e na biblioteca padrão. É coordenado via IRC e os core developers estão à disposição para ajudar e orientar. Além de solucionar bugs, o intuito é incentivar programadores a participarem ativamente do desenvolvimento da linguagem em si!
+
+Está chegando o próximo Bug Day? Prepare-se! PythonBugDay/ComoSePreparar
+
+= Global Python Sprint Weekend: 10 e 11 e Maio de 2008 =
+
+A próxima edição do Bug Day é voltada para participação presencial de grupos de usuários. Coordene a participação com seu grupo de usuários local, ou participe online!
+
+== Participantes ==
+
+=== Individuais ===
+
+- Coloque aqui seu nome, se você pretende participar!
+
+=== Grupy-SP ===
+
+Local: IME/USP (Ainda não confirmado)
+
+- RodrigoPimentel
+
+- PedroWerneck
+
+- BrunoGola
+
+=== Coloque aqui seu grupo de usuários! ===
+
+
+----
+
+= Bug Days anteriores: =
+
+= PythonBugDay em Santos =
+
+== Notebooks preparados para formar duplas ==
+
+- PedroWerneck - Linux Slackware
+
+- BrunoGola - Linux Ubuntu
+
+- RBP - Linux Ubuntu
+
+== Outros participantes ==
+
+- DaviKwast - OSX
+
+- LucianoRamalho - OSX
+
+- FelipeFaria
+
+- PauloAmorim - Windows
+
+- RafaelAntonio
+
+- SanroFernandes - Windows
+
+== Sugestões de issues ==
+
+http://bugs.python.org/issue2157
+
+http://bugs.python.org/issue1911
+
+http://bugs.python.org/issue1949
+
+http://bugs.python.org/issue1160
+
+http://bugs.python.org/issue449227
+
+http://bugs.python.org/issue1174606
+
+http://bugs.python.org/issue1040026
+
+http://bugs.python.org/issue1858
+
+http://bugs.python.org/issue687648
+
+http://bugs.python.org/issue1367711
+
+http://bugs.python.org/issue1835
+
+http://bugs.python.org/issue1714
+
+http://bugs.python.org/issue1597000
+
+http://bugs.python.org/issue1286
+
+http://bugs.python.org/issue2118
+
+http://bugs.python.org/issue1579
+
+== Issues trabalhadas ==
+
+http://bugs.python.org/issue2101 - BrunoGola
+
+http://bugs.python.org/issue2149 - RBP
+
+http://bugs.python.org/issue2118 - PedroWerneck 
+
+http://bugs.python.org/issue1375
+
+http://bugs.python.org/issue1040026 - RBP e LucianoRamalho

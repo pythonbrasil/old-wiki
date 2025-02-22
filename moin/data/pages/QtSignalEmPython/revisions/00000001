@@ -1,0 +1,129 @@
+== Uma implementação de QT Signals em Python ==
+
+Muitas vezes nós precisamos tratar eventos em geral em nossas aplicações. O caso mais comum ocorre em GUIs, mas este não é um caso único. Em alguns casos, queremos simplesmente criar um Observer.
+
+Por exemplo, poderíamos querer observar quando um atributo foi alterado e executar uma determinada ação. Ou ainda executar ações bem mais complexas. Poderíamos querer enviar o valor alterado para um arquivo, para a interface com o usuário e mandar por e-mail, tudo ao mesmo tempo. É aqui que o padrão de sinais e slots, criados com a biblioteca Qt (PyQt, em nosso caso), é extremamente útil.
+
+Em PyQt, nós podemos utilizar os sinais-slots de um modo extremamente simples:
+
+{{{
+#!python
+import sys, qt # Eu gosto de namespaces.
+
+def digaOla():
+	print 'Olá Mundo!'
+
+def main():
+   app = qt.QApplication(sys.argv)
+
+   helloButton = qt.QPushButton('Olá Mundo', None)
+   app.setMainWidget(helloButton)
+   helloButton.show()
+   # Conecta um sinal a um slot.
+   helloButton.connect(helloButton, qt.SIGNAL('clicked()'), digaOla) # (1)
+
+   app.exec_loop()
+
+if __name__ == '__main__':
+   main()
+}}}
+
+Aqui em ''(1)'' dizemos para a função digaOla() observar o nosso botão e executar caso ele seja clicado. Simples não? A grande sacada é que podemos conectar quantas funções quisermos, e observar uma série de propriedades do botão.
+
+Se você ainda não conhece este modo de tratar eventos, procure informação a respeito pois com certeza faz a diferença.
+
+Agora nós queremos reproduzir isto, certo? Por quê? Para que possamos utilizar com qualquer classe, e de um modo mais ''pythônico''. Primeiro a receita, depois as explicações.
+
+== Código ==
+
+{{{
+#!python
+class Signal(object):
+   def __init__(self):
+      self.__slotList = []
+
+   def __call__(self, *args, **kwds):
+      for slot in self.__slotList:
+         slot(*args, **kwds)
+
+   def addSlot(self, slot):
+      if not callable(slot):
+         raise ValueError('slots must be callable')
+      if not slot in self.__slotList:
+         self.__slotList.append(slot)
+
+   def delSlot(self, slot):
+      try:
+         self.__slotList.remove(slot)
+      except ValueError:
+         pass
+
+   def isConnected(self, slot):
+      return slot in self.__slotList
+
+def connect(signal, slot):
+   signal.addSlot(slot)
+
+def disconnect(signal, slot):
+   signal.delSlot(slot)
+}}}
+
+O que fazemos aqui é simplesmente definir um objeto que armazenará uma lista de ações que executará. Quando chamarmos um objeto Signal, ele chamará cada uma das ações conectadas a ele. Vamos ao exemplo de uso:
+
+== Exemplo de uso ==
+
+{{{
+#!python
+def showChange(obj, oldValue):
+   print 'Valor alterado de %s para %s.' % (oldValue, obj.value)
+
+def showObject(obj, oldValue):
+   print 'Objeto com valor alterado:', obj
+
+class MyClass(object):
+   def __init__(self, value):
+      self.__value = value
+      # Define um sinal observável.
+      self.valueChanged = Signal() # (1)
+
+   def setValue(self, value):
+      oldValue = self.__value
+      self.__value = value
+      # Emite um sinal informando o objeto e o valor antigo.
+      self.valueChanged(self, oldValue) # (2)
+
+   def getValue(self):
+      return self.__value
+
+   value = property(getValue, setValue)
+
+def main():
+   myObj = MyClass(3)
+   # Conecta sinais aos slots.
+   connect(myObj.valueChanged, showChange) # (3)
+   connect(myObj.valueChanged, showObject) # Simples, não?
+
+   try:
+      while True:
+         value = raw_input('Novo valor: ')
+         myObj.value = value
+   except KeyboardInterrupt:
+      pass
+
+if __name__ == '__main__':
+	main()
+}}}
+
+Este programa irá ficar perguntando por novos valores, e os setará no objeto criado, até receber uma interrupção do teclado (em geral, Ctrl+C). A parte interessante é que existem duas funções monitorando mudanças no valor do atributo ''value''.
+
+Em ''(1)'' simplesmente definimos um sinal. Em ''(2)'' nós o emitimos, quando a propriedade ''value'' for alterada. A classe ''Signal'' fica responsável por chamar todos os slots que observam o sinal. Note como fica simples trasmitir informações para nossos observadores. Em ''(3)'', conectamos os observadores (slots) ao sinal observado.
+
+Uma outra facilidade provida pela classe é poder verificar se um slot está conectado a um determinado sinal, ou em algum ponto desconectar a ação do sinal.
+
+Lendo sobre o assunto, você poderá encontrar vários termos para os Slots, como Observers ou Observadores e Listeners ou Ouvintes.
+
+Volta para CookBook.
+
+----
+
+JoaoPauloSilva

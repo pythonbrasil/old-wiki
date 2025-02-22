@@ -1,0 +1,20 @@
+#pragma section-numbers off
+= Felipe Almeida Lessa (meteficha) =
+
+Bom, eu sou Felipe, sou aquele cara que, apesar de falar mais do que faz, escreveu UsandoGenerators e ExecutandoEmIntervalos e ajuda no que pode no PythonDoc. Aqui tem algumas informações minhas:
+
+  * Nickname: meteficha (antigo kernel-panic)
+  * Blog: [http://meteficha.cjb.net/ meteficha.cjb.net]
+  * Atualmente em: Brasília, Distrito Federal
+  * E-mail: felipe.lessa@gmail.com
+  * MSNM: meteficha@msn.com
+  * ICQ UIN: 111194465
+
+== Principais Contribuições ==
+
+ * '''PythonDoc''' -- Projeto de tradução da documentação do Python.
+ * '''ExecutandoEmIntervalos''' -- Como executar funções em determinados intervaos de tempo.
+ * '''UsandoGenerators''' -- Como usar generators, implementados no Python 2.3 (e no Python 2.2 através do módulo {{{__future__}}}).
+
+----
+CategoryHomepage

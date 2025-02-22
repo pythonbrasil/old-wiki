@@ -1,0 +1,109 @@
+#pragma section-numbers off
+= Game of Life, de Conway =
+
+Essa classe foi criada para executar o [http://www.math.com/students/wonders/life/life.html Game of Life] em uma matriz de 0s e 1s, onde 1 representa uma célula "viva". Já existe código para o Game of Life em Python (bem, em qualquer linguagem que você pensar, pois é um problema matemático clássico) mas eu estou querendo desenvolver por conta própria e ver quão longe eu chego, principalmente em termos de desempenho e funcionalidade.
+
+Estou usando essa classe para implementar uma [http://www20.brinkster.com/rodviking/game.gif versão gráfica] do Life usando PyQt e Numarray. Caso tenha interesse nesse código também, contate-me através do link no fim da página :)
+
+Por enquanto o código não está otimizado pois meu enfoque é primeiro ter meu programa funcionando pra depois melhorar o desempenho (que está razoável), mas estou aberto a sugestões, em especial nos métodos "applyRules" e "countNeighbours" que é onde estão os "gargalos".
+
+Em breve essa classe também irá suportar o carregamento de arquivos de "pattern" (extensão .lif), que inclui regras dinâmicas.
+
+== Código ==
+
+{{{
+#!python
+from numarray import *
+
+class LifeGame:
+
+    def countNeighbours (self, x, y):
+        total = 0
+        
+        #count the living neighbours (=1) on the row above
+        if x > 0:
+            total += self.world[x-1, y]
+            if y > 0:
+                total += self.world[x-1, y-1]
+            if y < self.num_cols - 1:
+                total += self.world[x-1, y+1]
+        
+        #count the living neighbours on the left and right
+        if y > 0:
+            total += self.world[x, y-1]
+        if y < self.num_cols - 1:
+            total += self.world[x, y+1]
+        
+        #count the living neighbours on the row below
+        if x < self.num_rows - 1:
+            total += self.world[x+1, y]
+            if y > 0:
+                total += self.world[x+1, y-1]
+            if y < self.num_cols - 1:
+                total += self.world[x+1, y+1]
+        return total
+    
+    def emptyGrid (self):
+        return zeros([self.num_rows, self.num_cols])
+    
+    def printGrid (self, world):
+        print world
+        
+    def playLife (self, world, debug=False):
+        self.world = world
+        self.num_rows = len(world)
+        self.num_cols = len(world[0])
+        
+        if debug:
+            print "Original grid:"
+            self.printGrid(world)
+    
+        result = self.emptyGrid()
+        for row in range(self.num_rows):
+            for col in range(self.num_cols):
+                result [row, col] = self.applyRules(row, col)
+    
+        if debug:
+            print "Result grid:"
+            self.printGrid(result)
+        return result
+    
+    
+    def applyRules (self, x, y):
+        # - Rule 1: if the cell is "alive" (1), it stays
+        #   alive only if it has 2 or 3 neighbours ('if' block)
+        # - Rule 2: if a cell is "dead" (0), it becomes
+        #   alive if it has exactly 3 neighbours ('else' block)
+        cell = 0
+        sum_neighb = self.countNeighbours(x,y)
+        if self.world[x,y] == 1:
+            if 2 <= sum_neighb <= 3:
+                cell = 1
+        else: 
+            if sum_neighb == 3:
+                cell = 1
+        return cell
+
+if __name__ == '__main__':
+    #initialize grids
+    testworld  = array([[0, 0, 0, 0, 0, 0, 0, 0], 
+                        [1, 1, 1, 0, 0, 0, 0, 0], 
+                        [0, 0, 0, 0, 0, 0, 0, 0], 
+                        [0, 0, 0, 0, 0, 0, 0, 1], 
+                        [0, 0, 0, 0, 0, 0, 1, 1]])
+
+    #play Life!
+    lg = LifeGame()
+    for i in range(2):
+        print "-" * 20
+        print "Iteration", i
+        testworld = lg.playLife(testworld, True)
+                
+
+}}}
+
+Volta para CookBook.
+
+----
+
+RodrigoVieira

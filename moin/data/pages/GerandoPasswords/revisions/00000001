@@ -1,0 +1,131 @@
+# -*- coding: cp1252 -*-
+# Pass Generator
+# Rodrigo Calanca Nishino
+#
+# Programa simples que gera passwords
+# Atenção: Ele usa o anyguy
+
+from random import choice
+from anygui import *
+
+# Tamanho Padrao do password
+pass_tamanho = 5
+
+
+def password(vezes, opti):
+    if opti == "maius" :
+        a = "ABCDEFGHIJKLMNOPQRSTUVXWYZ"
+    elif opti == "minus":
+        a = "abcdefghijklmnopqrstuvwxyz"
+    elif opti == "numeros":
+        a = "0123456789"
+    elif opti == "todas":
+        a = "0123456789abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMOPQRSTUVWXYZ"
+    lista = [] # Lista vazia
+    for p in range(vezes):
+        bb = choice(a) # Escolhe um caractere da variavel "a"
+        lista.append(bb) # Coloca este caractere no fim da lista 
+    cc = ""
+    for g in lista:
+        cc = str(cc)+str(g) # Pega as letras e numeros e poe elas em uma string vazia
+    return cc #retorna a string
+
+app = Application()
+
+janela = Window()
+janela.title = "Password Generator"
+
+texto = TextField()
+texto.hstretch = 1
+
+##### Botoes de escolha
+
+# Todos os tipos de caracteres
+ball = Button()
+ball.position = 5, 65
+ball.text = "ToDa5"
+
+# Caracteres em letras minusculas
+bmin = Button()
+bmin.text = "a-z"
+
+# Maiusculas
+bmaius = Button()
+bmaius.text = "A-Z"
+
+# Numeros
+bnum = Button()
+bnum.text = "0-9"
+
+
+tamanho = TextField() # Espaço onde aparece o tamanho dos passwords
+tamanho.text = "5" # Texto que aparece por padrão quando o programa começa
+
+bot_mais = Button()
+bot_mais.text = "+"
+
+bot_menos = Button()
+bot_menos.text = "-"
+
+titulo = Label(text="Cria novos passwords")
+
+janela.add(titulo, hstretch = 1)
+
+janela.add(texto, position=(0,30), right=5, hstretch=1)
+
+janela.add(ball, top=(texto, 5), hmove=0)
+janela.add(bmin, top=(ball,5), left = 5, hmove=0)
+janela.add(bmaius, top=(bmin,5), left = 5, hmove=0)
+janela.add(bnum, top=(bmaius,5), left = 5, hmove=0)
+
+janela.add(tamanho, top=(bnum, 15), left=5, width = 35, hmove=0)
+
+#botoes de controle do tamanho do password
+janela.add(bot_menos, top=(tamanho, 15), left=5, width = 35, hmove=0)
+janela.add(bot_mais, top=(tamanho, 15), left=(bot_menos, 5), width = 35, hmove=0)
+
+janela.size = 180, 280
+
+#########
+###### Funções que os botões acessam quando clicados
+#########
+
+def handler_ball(event, source, time):
+    texto.text = password(pass_tamanho, "todas")
+
+def handler_bmin(event, source, time):
+    texto.text = password(pass_tamanho, "minus")
+
+def handler_bmaius(event, source, time):
+    texto.text = password(pass_tamanho, "maius")
+
+def handler_bnum(event, source, time):
+    texto.text = password(pass_tamanho, "numeros")
+
+def handler_size(event, source, time):
+    pass_tamanho = int(tamanho.text)
+
+def mais_tamanho(event, source, time):
+    global pass_tamanho 
+    pass_tamanho = pass_tamanho + 1
+    tamanho.text = pass_tamanho
+
+def menos_tamanho(event, source, time):
+    global pass_tamanho
+    pass_tamanho = pass_tamanho - 1
+    tamanho.text = pass_tamanho
+          
+###
+# Associando o botão a função
+###
+
+link(ball, handler_ball)
+link(bmin, handler_bmin)
+link(bmaius, handler_bmaius)
+link(bnum, handler_bnum)
+link(bot_mais, mais_tamanho)
+link(bot_menos, menos_tamanho)
+
+app.add(janela) # Coloca a janela dentro do programa
+
+app.run() # Roda o programa

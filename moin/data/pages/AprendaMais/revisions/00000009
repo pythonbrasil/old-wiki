@@ -1,0 +1,52 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+[[HTML(<div id="special_page">)]]
+
+== Livros ==
+
+=== Português ===
+
+attachment:mergulhando.png '''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=8576080931 Mergulhando no Python]'''
+
+Tradução do livro ''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=1590593561 Dive into Python]'' é muito útil para aqueles que já sabem programar e que gostam de livros que possuem uma abordagem mais prática.
+
+[[BR]]
+
+attachment:guia.png '''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=8576081067 Python - Guia de bolso]'''
+
+Esse guia é muito útil naqueles momentos de dúvida sobre alguma característica da linguagem. Este livro é tradução do livro ''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=0596009402 Python - Pocket Reference]''.
+
+[[BR]]
+
+=== Inglês ===
+
+attachment:learning.png
+'''[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=0596002815 Learning Python]'''
+
+Sem dúvida este é o melhor livro para quem está interessado em aprender Python. Completo, com uma linguagem simples e fácil além de uma ótima estrutura.
+
+[[BR]]
+
+== Documentação On-line ==
+
+Se o que você procura é documentação on-line para aprender Python você estará bem servido. Dê uma olhada com atenção na nossa página com DocumentacaoPython que está repleta de excelentes tutoriais, cursos e artigos dos mais diversos tipos.
+
+== Vídeos On-line ==
+
+A grande maioria dos screencasts disponíveis atualmente foram produzidos em inglês. Para aqueles que possuem um bom conhecimento do idioma segue um breve resumo desse material:
+
+ * [http://showmedo.com/videos/python ShowMeDo] - O melhor repositório de tutoriais Python em vídeo.
+ * [http://www.youtube.com/results?search_type=search_videos&search_query=python%20-monty&search_sort=relevance&search_category=26&page=2 YouTube] - Existem dezenas de vídeo sobre Python no site YouTube. Ignore os vídeos que falam sobre pitóns.
+ * [http://video.google.com/videosearch?q=python+-monty+genre%3ASCI_TECH&so=0&num=100 Google Video] - Também no Google Video você irá encontrar dezenas de vídeos sobre Python. Ignore os vídeos que falam sobre pitóns.
+
+== Cursos ==
+
+attachment:simples.png '''[http://www.simplesconsultoria.com.br Simples Consultoria]'''
+
+Pioneira e a única empresa certificada para ministrar os treinamentos oficiais da Zope Corp. no Brasil ela oferece treinamentos em Plone, Zope e Python para sua empresa. A Simples também esse site e a comunidade.
+
+[[BR]]
+
+[http://www.visie.com.br Visie] - A Visie é uma das mais renomadas empresas brasileiras na área de treinamentos para desenvolvimento Web. Eles possuem treinamento nas mais diversas tecnologias para desenvolvimento Web, entre elas Python
+
+[[HTML(</div>)]]

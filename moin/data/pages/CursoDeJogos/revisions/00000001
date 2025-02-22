@@ -1,0 +1,19 @@
+Este espaço foi criado com a intenção de armazenar conteúdo sobre o curso de Jogos em python, a ser realizado em 2008 ainda.
+
+= O curso =
+
+O curso deve ser oferecido em EaD (Educação a Distância), atingindo assim o maior número de pessoas possível. O objetivo do mesmo é motivar e ensinar a comunidade em geral com assuntos relevantes a python e desenvolvimento de jogos. 
+
+* '''Duração do curso''': 1 mês - mais que isso pode ficar muito extenso.
+* '''Ensinando''': A principal forma de ensino a distância é através da criação de tutoriais e trabalhos a fazer. Podemos incrementar com jogos em comum, dinâmica de grupos e até alguns vídeos-tutoriais.
+* '''Formato da avaliação''': Como todo bom curso (ainda mais se for para considerarmos extensão universitária) precisamos de uma forma de avaliação que não seja carrasca com os alunos mas que cobrem para que todos estudem os conteúdos fornecidos. Pensei em dar então trabalhos práticos na maior parte do curso, sendo alguns individuais e a maioria em grupos diversificados. A idéia é cada 'disciplina' ter seus trabalhos e talvez bolarmos um trabalho final bem legal. (ps - se desejarmos que seja extensão universitária pela USP, essa mesma exige que seja realizada uma prova presencial, o que não me agrada muito)
+
+= Disciplinas do Curso =
+
+Uma idéia é dividir o curso em 'disciplinas', que na realidade são assuntos. Eis uma lista que pensei [[RobertoFaga]]:
+* '''Python''': começa ensinando o básico de python (calculadora, listas, estruturas for, etc), seguido de técnicas mais avançadas, como OO (será que vale a pena ensinar OO?). Boa parte daqui já temos em português (até pelo PythonNaPratica), essa parte vai ser mais sussegada.
+* '''Pygame básico''': Ensinar os módulos básicos de pygame. Essa seria a disciplina mais pesada, e visa cobrir os módulos principais para se produzir um jogo simples. Apesar dos tutoriais que temos, vai ser um pouco chato pois precisamos ter materiais maiores, algo que ainda não encontrei.
+* '''Técnicas de jogos''': game loops, sistemas de tiles, sprites (não com pygame necessariamente), alguma AI, e tudo que for relevante a jogos mas não atrelado a pygame necessariamente. Eu tenho alguma dificuldade em termos de material de referência para preparar isso.
+* '''Sockets''': É bem fácil quem já sabe sockets programar isso em Python, mas teríamos de passar algum conteúdo introdutório sobre sockets mesmo. Acho interessante para jogos online, podendo usar algumas coisas mais avançadas, como servidor xml e tals.
+* '''Python em 3D''': Acho que seria interessante usar a Soya ou Panda (Soya é mais popular, não?), o problema é que eu sei muito pouco dessas para preparar material, precisaria ser outra pessoa.
+* '''Pygame avançado''': Ensinar algumas técnicas como otimizações, uso dos módulos adicionais (fonte, som, etc) e o que mais não for básico em pygame. Seria interessante nesse ponto mixar com a biblioteca 3D também.

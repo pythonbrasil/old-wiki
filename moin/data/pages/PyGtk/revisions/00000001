@@ -1,0 +1,21 @@
+= PyGTK =
+
+Olá Pessoal!
+
+Estou criando esta página para abrigar documentação e material sobre ["PyGTK"] dentro do nosso portal. Tomei essa decisão por ver muita pergunta sobre isso na lista, e pra não ficar atrás do PyQT que tem uma página aqui no Wiki :)
+
+Eu estava muito em dúvida sobre qual toolkit gráfico para usar em aplicações multiplataforma, testei o Tkinter e não gostei muito, por achar que a interface fica um pouco feia e porque a API do TkInter é um pouco estranha. Note que essas opiniões são minhas.
+
+Testei o ["PyGTK"]/GTK no Linux e gostei muito, achei a API simples, o toolkit é realmente livre e o visual é muito legal (GTK2). Porém, estava faltando o fundamental: rodar o ["PyGTK"]/GTK em Windows sem nenhum problema e de maneira simples para o usuário final.
+
+Então o primeiro tutorial será sobre isso :), ou seja, vou descrever como fiz para instalar o GTK, o ["PyGTK"] e o Python em windows. No caso, usei um windows XP e testei com um fonte que tinha gerado no Linux.
+
+Até mais e sucesso!
+
+== Tutoriais ==
+
+   * PyGtkWin - Tutorial de como instalar ["PyGTK"]/GTK no Windows XP
+
+----
+
+DouglasAndrade

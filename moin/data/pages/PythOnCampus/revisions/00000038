@@ -1,0 +1,50 @@
+Este nome ainda é provisório mas esta página foi criada para que tivéssemos algumas referências do que está sendo organizado.
+
+
+Pelo já apresentado podemos ter 8 palestras ou mais envolvendo Python.
+
+* 4 - Introdução (Linguagem, Web, Casos de Uso, Jogos, CG, Celulares(PyS60), Sistemas de Informação(ERP), etc.)
+    
+* 4  - Intermediário, Avançado (Linguagem, Web, CG, IA, Celulares(PyS60), PyScience, etc.)
+
+Referente ao Software Livre
+
+* 4  - Introdução (BrOffice, CG(Inkscape, Gimp, Blender), Casos de Uso, Banco de Dados, Servidores, Jogos, Distribuições, Filosofia, etc.)
+ 
+* 4  - Intermediário, Avançado (Linguagens, Web, CG, IA, Técnicas de Programação etc.)
+
+
+== Auditório para 150 pessoas ==
+
+
+||||||<tablestyle="width: 100%" style="background-color: #0066FF;"> '''Grade Provisória'''||
+||||||<tablestyle="width: 100%" style="background-color: #E0E0FF;"> Iniciante - 08/11/2008 - 09:00h - 12:00h||
+||<style="background-color: #E0E099;"> Horário ||<style="background-color: #E0E099;"> Palestrante ||<style="background-color: #E0E099;"> Título da Palestra||
+|| 09:00   || SL-RJ || Introdução ao Software Livre ||
+|| 09:45   || GiuseppeRomagnoli e LuisGuilherme - Serpro || Introdução ao Python ||
+|| 10:30   || Cadunico || Computação Gráfica - Inkscape ||
+|| 11:15   || AndrewsMedina - Globo.com || FrameWorks Web - Django ||
+||||||<tablestyle="width: 100%" style="background-color: #E0E0FF;"> Iniciante - 08/11/2008 - 13:00h - 16:00h||
+||<style="background-color: #E0E099;"> Horário ||<style="background-color: #E0E099;"> Palestrante ||<style="background-color: #E0E099;"> Título da Palestra||
+|| 13:00   || LuisGustavo - Petrobras || Web 2.0 - Python ||
+|| 13:45   || SL-RJ ||  ||
+|| 14:30   || Rafael Monnerat - Nexedi SA || ERP5 ||
+|| 15:15   || SL-RJ || SoftwarePublico ||
+
+
+= Auditório para 50 pessoas =
+
+
+||||||<tablestyle="width: 100%" style="background-color: #0066FF;"> '''Grade Provisória'''||
+||||||<tablestyle="width: 100%" style="background-color: #E0E0FF;"> Iniciante - 08/11/2008 - 09:00h - 12:00h||
+||<style="background-color: #E0E099;"> Horário ||<style="background-color: #E0E099;"> Palestrante ||<style="background-color: #E0E099;"> Título da Palestra||
+|| 09:00   || MauroCavalcanti - EcoInformatics Studio || Python na Informática para Biodiversidade ||
+|| 09:45   || RodolfoCarvalho - UFRJ || XXXXXX ||
+|| 10:30   || LuisEduardo || Computação Gráfica ||
+|| 11:15   || HenriqueBastos - MyFreeComm - Gama Filho || XXXXXX ||
+||||||<tablestyle="width: 100%" style="background-color: #E0E0FF;"> Iniciante - 08/11/2008 - 13:00h - 16:00h||
+||<style="background-color: #E0E099;"> Horário ||<style="background-color: #E0E099;"> Palestrante ||<style="background-color: #E0E099;"> Título da Palestra||
+|| 13:00   || JonhEdson || PyS60 ||
+|| 13:45   || PythOnRio || XXXXXX ||
+|| 14:30   || PythOnRio || XXXXXX ||
+|| 15:15   || PythOnRio || XXXXXX ||

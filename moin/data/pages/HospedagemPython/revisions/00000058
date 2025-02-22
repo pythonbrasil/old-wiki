@@ -1,0 +1,66 @@
+#pragma section-numbers off
+= Hospedagem Python =
+
+Compilação de empresas de hospedagem web que suportam Python.  
+
+'''Esta relação está sempre incompleta e desatualizada, por definição. Em 2012 é impossível manter uma relação deste tipo porque as opções são muitas.'''
+
+''Existe a necessidade das colunas: Indicado por; Última verificação; Contato ?''
+
+== Brasileiras ==
+
+||'''Link'''||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+||[[https://www.homehost.com.br/|HomeHost]] || 2.7, 3.3, 3.4 e 3.5 || mod_wsgi, Django || Todas as versões do Django, aplicações Python ilimitadas, projetos Django ilimitados e possibilidade de projetos com versões diferentes do Python e do Django. ||
+||[[https://www.infolink.com.br/|InfoLink]] || 2.7.5 e 3.4.2 || mod_wsgi, Django || Integração via Painel de Controle, acesso SSH e Servidores 100% cloud em datacenters no Brasil. Disponível para Hospedagem Compartilhada. ||
+||[[http://getupcloud.com|GetupCloud]] || 2.6, 2.7, 3.3 || mod_wsgi, Django, Web2py || Platform as a Service (PaaS) OpenShift / Amazon ||
+||[[http://www.ativahost.com|AtivaHost]] || Python 2.3.x || Python CGI || Disponível nos planos de hospedagem Linux ||
+||[[http://www.Emmex.com.br|Emmex]] || Customizável || Customizável || Plataforma de Cloud Computing, Acesso ROOT, Total Controle (VPS ou Cloud) e Data Center no Brasil ||
+||[[http://www.tehospedo.com.br/hospedagem_de_sites_django|TeHospedo]]|| Python 2.4.x e 2.5.x || Django versões 0.96 e SVN com FastCGI || Hospedagem profissional com tecnologia especial para desenvolvedores ||
+||[[http://www.redehost.com.br|RedeHost]] || Python 2.6.6 || || Django, RedHat Enterprise 5.5 64 bits, Apache 2.2 ||
+||[[http://www.pytown.com|Pytown]]||  || Planos compartilhados, servidores virtuais e dedicados || Hospedagem especializada em sites Python, Zope, Plone e DJango ||
+||[[http://www.locaweb.com.br|LocaWeb]] || 1.5, 2.2 em modo CGI || || Tem acesso SSH, mas, não tem acesso ao Shell do Python, Somente disponível para os planos de Servidores Dedicados ou Hospedagem Cloud. Não disponível para Hospedagem Compartilhada ||
+||[[http://hospedagem.hostmidia.com.br/members.php?page=planos|HostMídia]] || 1.5.2 || || ||
+||[[http://www.byhost.com.br/|Byhost]]|| 2.2.3-6 || || ||
+||[[http://www.sitehosting.com.br|Sitehosting]]|| 2.2.3 || || Nos planos de hospedagem Linux ||
+||[[http://www.virtuaserver.com.br/|VirtuaServer]] || customizavel || customizavel || Maquina dedicada, total controle, senha de root ||
+||[[http://www.maxihost.com.br/|MaxiHost]] || 2.3.4 || || Possui Zope e Plone ||
+||[[http://www.kinghost.com.br/|KingHost]] || 2.4.3 || mod_wsgi || Possui Django, Turbogears, Pylons e Web.py, pode-se instalar eggs no home do usuário, acesso SSH ||
+||[[http://www.nodegrid.com/|Nodegrid]] || Python 2.7.2 || uWSGI || Você precisa de todo o espaço que paga, ou somente o espaço que precisar pagar? ||
+||[[http://www.uolhost.com.br/|UOL Host]] || ??? || ??? || Informa as versões do ASP.NET e PHP mas não do Python na descrição dos planos ||
+||[[http://www.targethost.com.br/|Target Host]] || Python 2.6.6 || FastCGI || São bastante flexíveis para a instalação de algum módulo necessário, como por exemplo psycopg2 ||
+||[[http://www.host-on.com.br/|Host-ON]] || Python 2.6 || mod_python || Existe a possbilidade de instalar/configurar ou outro gateway (mod_fastcgi ou mod_wsgi) e também flexíveis para a instalação de módulos adicionais como por exemplo psycopg2 ||
+||[[http://www.arw.com.br/|ARW]] || Python 2.6 e Python 2.7 || mod_fastcgi || ||
+
+== Estrangeiras ==
+
+|| '''Link''' ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [[https://www.alwaysdata.com|alwaysdata]] || 2.6 e 3.1 || django, mysql 5.1, postgresql 9.0 || ||
+|| [[http://www.site5.com|Site5]] || 2.2.2 || || ||
+|| [[http://www.dreamhost.com/|DreamHost]] || 2.3 e 2.4 || MySQLdb, FastCGI || Aceita CheryPy, TurboGears em modo FastCGI ||
+|| [[http://www.webfaction.com|WebFaction]] || 2.3 e 2.4 || apache2, mod_python 3.2, plone, django, turbogears || barato, $7.50/month ||
+
+== Gratuitas ==
+
+|| '''Link''' ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [[http://getupcloud.com|GetupCloud]] || 2.6, 2.7, 3.3, 3.4 || mod_wsgi, Django, Web2py || 1 gear (servidor)  grátis para devs (promo code: "pybr2014x" ||
+|| [[http://www.objectis.org/|Objectis]] ||  ||Zope, Plone, Plone2 e uma grande variedade de produtos Zope || Exclusivo para sites não comerciais ||
+|| [[http://www.freezope.org/|Freezope]] ||  || Zope e alguns produtos || Exclusivo para sites não comerciais ||
+|| [[http://www.alwaysdata.com/|AlwaysData]] || Python e Django ||
+
+== Script de Teste ==
+
+Quem tiver acesso a estes provedores tente verificar a exata versão do python, e se possui modulos extras. Segue código de exemplo (convencionei chama-lo de {{{PythonInfo.py}}}) para verificar a versão e talvez as bibliotecas:
+
+{{{
+#!python
+#!/usr/bin/env python
+# Não esqueçam de colocar no diretório para cgi e dar
+# direito de execução
+
+import sys
+
+print 'Content-type: text/plain\n'
+print sys.version
+print '\nPath das bibliotecas:'
+print '\n'.join(sys.path)
+}}}

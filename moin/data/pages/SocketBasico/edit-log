@@ -1,0 +1,5 @@
+1147020540000000	00000001	SAVENEW	SocketBasico	200.184.17.72	dial-up-200-184-17-72.intelignet.com.br	1096154790.11.15967		
+1169230398000000	00000002	SAVE	SocketBasico	192.168.1.1	192.168.1.1	1169229735.5.57857		Quando vários client's se conectavam ao servidor as mensagens se referiam ao último cliente conectado.
+1169230712000000	00000003	SAVE	SocketBasico	192.168.1.1	192.168.1.1	1169229735.5.57857		
+1169505268000000	00000004	SAVE	SocketBasico	192.168.1.1	192.168.1.1	1096154790.11.15967		ajuste de formatação
+1222437987254272	00000005	SAVE	SocketBasico	127.0.0.1	localhost			converted to 1.6 markup

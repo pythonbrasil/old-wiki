@@ -1,0 +1,528 @@
+## page was renamed from PythonInstantâneo
+#pragma section-numbers off
+= Python Instantâneo =
+
+[[TableOfContents]]
+
+Este é um curso intensivo mínimo para a linguagem de programação [http://www.python.org/doc/Introduction.html Python]. Para aprender mais, veja a documentação no site [http://www.python.org www.python.org]; especialmente o [http://www.python.org/doc/tut tutorial]. Se você está se perguntando porque deveria se interessar, veja esta [http://www.python.org/doc/Comparisons.html comparação] entre o Python e outras linguagens.
+
+Esta introdução tem recebido [http://www.idi.ntnu.no/~mlh/python/praise.html elogios] de leitores satisfeitos, e está sendo traduzida para vários idiomas, entre os quais russo, norueguês, português (esta página!) e espanhol. A versão original, em inglês, está [http://www.idi.ntnu.no/~mlh/python/different.html aqui].
+
+== O básico ==
+
+Para começar, pense em Python como sendo pseudo-código. Isto é quase uma verdade. Variáveis não têm tipos, assim você não precisa declará-las. Elas são criadas quando você lhes atribui um valor, e são destruídas quando não forem mais usadas. A atribuição é feita pelo operador =. A igualdade é testada com o operador ==. Você pode atribuir mais de uma variável ao mesmo tempo:
+
+{{{
+#!python
+x,y,z = 1,2,3
+}}}
+
+    primeiro, segundo = segundo, primeiro
+{{{
+#!python
+a = b = 123
+}}}
+
+Os blocos são indicados somente pela indentação (nada de BEGIN/END ou chaves). Algumas estruturas de controle são:
+
+{{{
+#!python
+if x < 5 or (x > 10 and x < 20):
+    print "O valor está correto."
+
+if x < 5 or 10 < x < 20:
+    print "O valor está correto."
+
+for i in [1,2,3,4,5]:
+    print "Esta é a iteração número", i
+
+x = 10
+while x >= 0:
+    print "x ainda não é negativo."
+    x = x - 1
+}}}
+
+Os primeiros dois exemplos são equivalentes.
+
+A variável de índice no laço {{{for}}} varia de acordo com os elementos de uma lista (escrita como no exemplo). Para fazer um laço for comum (isto é, um laço de contagem), use a função embutida {{{range()}}}.
+
+{{{
+#!python
+# Mostra os valores de 0 a 99 inclusive. 
+for valor in range(100):
+    print valor
+}}}
+
+(A linha começando por "#" é um comentário, sendo ignorada pelo interpretador.)
+
+Vejamos: agora você já sabe o suficiente (em teoria) para implementar qualquer algoritmo em Python. Vamos incluir alguma interação básica com o usuário. Para obter dados do usuário (a partir de um ''prompt'' texto), use a função embutida {{{input()}}}.
+
+{{{
+#!python
+x = input("Por favor digite um número: ")
+print "O quadrado desse número é", x*x
+}}}
+
+A função {{{input()}}} mostra o texto dado (o qual pode ser vazio) e deixa o usuário entrar qualquer valor válido em Python. Neste caso nós estamos esperando um número - se alguma outra coisa (como uma string) for fornecida, o programa poderá falhar. Para evitar isto nós devemos implementar alguma checagem de erro. Eu não vou entrar em detalhes aqui; é suficiente dizer que se você deseja receber o dado do usuário, literalmente como uma string (assim qualquer coisa pode ser fornecida), use a função {{{raw_input()}}}. Se você deseja converter uma ''string'' s para um inteiro, você poderia usar {{{int(s)}}}.
+
+Nota: Se o usuário deseja fornecer uma ''string'' com {{{input()}}}, ele deverá escrever as aspas explicitamente. Em Python, as ''strings'' podem ser delimitadas com aspas simples ou duplas.
+
+Assim, já que temos estruturas de controle, entrada e saída - agora nós precisamos de algumas estruturas de dados. As mais importantes são as listas e os dicionários. As listas são escritas com colchetes, e podem ser (naturalmente) aninhadas:
+
+{{{
+#!python
+nome = ["Cleese", "John"]
+x = [[1,2,3],[y,z],[[[]]]]
+}}}
+
+Uma das coisas mais interessantes sobre as listas é que os seus elementos podem ser acessados separadamente ou em grupos, através de indexação e corte em fatias. A indexação é feita (como em muitas outras linguagens) pela colocação do índice entre os colchetes (Note que o primeiro elemento tem índice 0).
+
+{{{
+#!python
+print nome[1], nome[0] # Mostra "John Cleese"
+nome[0] = "Smith"
+}}}
+
+O corte em fatias é parecido com a indexação, indicando-se os índices inicial e final separados por dois pontos (":")
+
+{{{
+#!python
+x = ["spam","spam","spam","spam","spam","eggs","and","spam"]
+print x[5:7] # Mostra a lista ["eggs","and"]
+}}}
+
+Observe que o índice final não se inclui no resultado. Se um dos índices é omitido, assume-se que você deseja todos os elementos na direção correspondente. Por exemplo, {{{lista[:3]}}} significa "cada elemento desde o início da lista até o elemento 3, este não incluído." (Poderia-se dizer na verdade que vai até o elemento 4, desde que a contagem inicia do 0... Oh, tudo bem) {{{list[3:]}}} significaria, por outro lado, "cada elemento da lista, começando do elemento 3 (inclusive) até o último inclusive." Para outros resultados bem interessantes, você pode usar números negativos também: {{{list[-3]}}} é o terceiro elemento desde o final da lista...
+
+Já que estamos falando de indexação, é interessante saber que a função embutida {{{len()}}} fornece o tamanho de uma lista (em número de elementos).
+
+E agora, o que há sobre os dicionários? Para ser breve, eles são como listas, mas o seu conteúdo não está ordenado. Como você os indexa então? Bem, cada elemento tem uma chave, ou um "nome" que é usado para buscar o elemento tal qual um dicionário de verdade. Eis dois dicionários como exemplo:
+
+{{{
+#!python
+{ "Alice" : 23452532, "Boris" : 252336,
+  "Clarice" : 2352525, "Doris" : 23624643}
+
+pessoa = { 'nome': "Robin", 'sobrenome': "Hood",
+           'ocupação': "Ladrão" }
+}}}
+
+Agora, para obter a ocupação da pessoa, nós usamos a expressão {{{pessoa["ocupação"]}}}. Se nós desejarmos alterar o seu sobrenome, nos poderíamos escrever:
+
+{{{
+#!python
+pessoa['sobrenome'] = "de Locksley"
+}}}
+
+Simples, não? Como as listas, os dicionários podem armazenar outros dicionários. Ou listas, que já conhecemos. E naturalmente listas podem armazenar dicionários também. Desta forma, você pode conseguir estruturas de dados bastante avançadas.
+
+== Funções ==
+
+Próximo passo: Abstração. Queremos dar um nome a um pedaço de código, e chamá-lo com um parâmetro. Em outras palavras - nós queremos definir uma função (ou "procedimento"). Isto é fácil. Use a palavra-chave {{{def}}} assim:
+
+{{{
+#!python
+def quadrado(x):
+    return x*x
+
+print quadrado(2) # Mostra 4
+}}}
+
+Para os que podem entender: Quando você passa um parâmetro à uma função, você vincula o parâmetro ao valor (passado), criando, portanto, uma nova referência. Se você mudar o "conteúdo" deste parâmetro não afetará o original. Funciona como em Java, por exemplo. Vamos dar uma olhada em um exemplo:
+
+{{{
+#!python
+def mudar(lista_qualquer):
+    lista_qualquer[1] = 4
+
+x = [1,2,3]
+mudar(x)
+print x # Mostra [1,4,3]
+}}}
+
+Como você pode ver, a lista original é que foi passada, e se a função mudá-la, essas mudanças serão refletidas para o local de onde a função foi chamada. Note, entretanto, o comportamento no seguinte exemplo:
+
+{{{
+#!python
+def naoMudar(x):
+    x = 0
+
+y = 1
+naoMudar(y)
+print y # Mostra 1
+}}}
+
+Por que não há mudança agora? Porque nós ''não mudamos o valor''! O valor passado é o número 1 -- nós não podemos mudar um número do mesmo modo que mudamos uma lista. O número 1 é (e sempre será) o número 1. O que nós realmente fizemos foi mudar o conteúdo da variável local (parâmetro x), e isto não afetará o ambiente (fora da função).
+
+Para os que não entenderam: Não se preocupem com isso :)
+
+Python tem muitas coisas "legais" como argumentos com nome e argumentos com valor padrão, podendo manipular um número variável de argumentos para uma função. Para mais informações sobre isto, veja a [http://www.python.org/doc/tut/defining.html seção 4.7] do tutorial de Python.
+
+Se você sabe como usar funções em geral, isto é basicamente o que você precisa saber sobre elas em Python. (Ah, sim... A palavra-chave {{{return}}} termina a execução da função e retorna o valor dado.)
+
+Uma coisa que é útil saber, entretanto, é que as função são valores em Python. Assim se você tem uma função como quadrado, você pode fazer alguma coisa assim:
+
+{{{
+#!python
+figura = quadrado
+figura(2) # Mostra 4
+}}}
+
+Para chamar uma função sem argumentos você deve lembrar de escrever {{{func()}}} e não {{{func}}}. A segunda forma, como mostrado, somente retorna a própria função, como um valor. (Isto ocorre com os métodos dos objetos também... Veja abaixo.)
+
+== Objetos e coisas... ==
+
+Eu suponho que você saiba como funciona a programação orientada a objetos. (De outra forma, esta seção não faria muito sentido. Sem problemas... Comece a brincar sem os objetos :).) Em Python você define classes com a palavra-chave (surpresa!) {{{class}}}, assim:
+
+{{{
+#!python
+class Cesta:
+
+    # Lembre-se sempre do argumento *self*
+    def __init__(self,conteudo=None):
+        self.conteudo = conteudo or []
+
+    def adicione(self,elemento):
+        self.conteudo.append(elemento)
+
+    def mostre_me(self):
+        result = ""
+        for elemento in self.conteudo:
+            resultado = resultado + " " + `elemento`
+        print "Contém: "+resultado
+}}}
+
+Coisas novas aqui:
+
+   1. Todos os métodos (funções dentro de um objeto) recebem um argumento adicional no início da lista de argumentos, contendo o próprio objeto. (Chamado self neste exemplo, por convenção.)
+   2. Métodos são chamados assim: {{{objeto.método(arg1, arg2)}}}.
+   3. Alguns nomes de métodos, como {{{__init__}}} são pré-definidos, e têm significado especial. {{{__init__}}} é o nome do construtor da classe, isto é, esta é a função que é chamada quando você cria uma instância.
+   4. Alguns argumentos podem ser opcionais e ter um valor padrão (como mencionado acima, na seção sobre funções). Isto é feito escrevendo-se a definição desta forma:
+
+{{{
+#!python
+def spam(idade=32): # ...
+}}}		
+
+      Aqui, {{{spam}}} pode ser chamado com um ou zero parâmetros. Se nenhum for usado, então o parâmetro idade terá o valor 32.
+   5. "Lógica de curto-circuito." Este é um ponto... Veja abaixo.
+   6. Aspas simples invertidas convertem um objeto para sua representação como string. (Assim se elemento contém o número 1, então `elemento` é o mesmo que "1" sendo 'elemento' uma string literal.)
+   7. O sinal de adição + é usado também para concatenação de listas, e strings são na verdade listas de caracteres (o que significa que você pode usar indexação e corte em fatias e a função len com strings. Legal, não acha?)
+
+Nenhum método ou variável membro é protegido (nem privado, nem nada parecido) em Python. Encapsulação é na maioria das vezes um estilo de programação. (Se você realmente precisar, existem convenções para nomes de variáveis, que permitem alguma privacidade :)).
+
+E agora, sobre a lógica de curto-circuito...
+
+Todos os valores em Python podem ser usados como valores lógicos. Alguns dos mais "vazios", tais como [], 0, "" e None representam o valor lógico "falso", enquanto o resto dos valores (como [0], 1 ou "Olá Mundo" representam o valor lógico "verdadeiro".
+
+Assim, expressões lógicas como {{{a and b}}} são avaliadas deste modo: Primeiro, verifique se a é verdadeiro. Se não, então simplesmente retorne-o. Se sim, então simplesmente retorne b (o que irá representar o valor lógico da expressão.). A lógica correspondente para {{{a or b}}} é: se a é verdadeiro, então retorne-o, Se não é, então retorne b.
+
+Este mecanismo faz com que {{{and}}} e {{{or}}} se comportem como os operadores booleanos que implementam, mas eles também permitem escrever expressões condicionais muito curiosas. Por exemplo, o código
+
+{{{
+#!python
+if a:
+    print a
+else:
+    print b
+}}}
+
+Poderia ser substituído por:
+
+{{{
+#!python
+print a or b
+}}}
+
+Na verdade, isto já é alguma coisa do idioma Python, assim é melhor você ir se acostumando. Isto é o que foi feito no método {{{Cesta.__init__}}}. O argumento conteudo tem um valor padrão {{{None}}} (o que é, entre outras coisas, falso). Portanto, para verificar se ele tem um valor, nós poderíamos escrever:
+
+{{{
+#!python
+if conteudo:
+    self.conteudo = conteudo
+else:
+    self.conteudo = []
+}}}
+
+É claro, agora você sabe como fazer de uma forma melhor. E por que nós não demos o valor padrão [] no começo? Porque da maneira como o Python funciona, isto daria a todas as Cestas a mesma lista vazia como valor padrão. Tão logo uma das listas começasse a ser preenchida, todas as outras teriam os mesmo elementos, e o padrão não seria mais vazio... Para aprender mais sobre isto você deveria ler a documentação e procurar a diferença entre identidade e igualdade.
+
+Outra forma de fazer o anterior é:
+
+{{{
+#!python
+def __init__(self, conteudo=[]):
+    self.conteudo = conteudo[:]
+}}}
+
+Você pode adivinhar como isto funciona? Ao invés de usar a mesma lista vazia para todos, nós usamos a expressão {{{conteudo[:]}}} para fazer uma cópia (Usamos uma fatia que contém a lista toda.)
+
+Assim, para fazer uma Cesta e usá-la (isto é. para chamar alguns dos seus métodos) nós devemos fazer algo assim:
+
+{{{
+#!python
+b = Cesta(['maçã','laranja'])
+b.adicione("limão")
+b.mostre_me()
+}}}
+
+Há outros métodos mágicos além do {{{__init__}}}. Um desses métodos é {{{__str__}}} que define como o objeto será conhecido quando for tratado como uma ''string''. Nós poderíamos usar este método ao invés de {{{mostre_me()}}}:
+
+{{{
+#!python
+def __str__(self):
+    result = ""
+    for elemento in self.conteudo:
+        resultado = resultado + " " + str(elemento)
+    return "Contém: "+resultado
+}}}
+
+Agora, se nós desejamos mostrar a cesta b, nós usaríamos simplesmente:
+
+{{{
+#!python
+print b
+}}}
+
+Legal, não acha?
+
+Subclasses são feitas assim:
+
+{{{
+#!python
+class CestaSpam(Cesta):
+    # ... 
+}}}
+
+Python permite herança múltipla, assim você pode ter várias superclasses entre parênteses, separadas por vírgulas. Classes são instanciadas assim: {{{x = Cesta()}}}. Construtores são implementados, como disse, com a definição de uma função membro especial {{{__init__}}}. Digamos que {{{CestaSpam}}} tem um construtor {{{__init__(self,tipo)}}}. Então você poderia fazer uma cesta spam assim: {{{y = CestaSpam("maças")}}}.
+
+Se você, no construtor de {{{CestaSpam}}} precisar chamar o construtor de uma ou mais superclasses, você poderia chamá-los desta forma: {{{Cesta.__init__(self)}}}. Note que além dos parâmetros comuns, você deve fornecer explicitamente o {{{self}}}, já que a superclasse {{{__init__}}} não sabe qual instância está tratando.
+
+Para saber mais sobre as maravilhas da programação orientada a objeto em Python, veja [http://www.python.org/doc/current/tut/node11.html seção 9] do tutorial de Python.
+
+== Um truque mental de Jedi ==
+
+(Esta seção está aqui porque eu acho que ela é muito interessante. Definitivamente esta seção não é necessária para começar a aprender Python.)
+
+Você gosta de exercícios mentais? Então, se você é realmente ousado, você gostará de ver o ensaio do GuidoVanRossum sobre [http://www.python.org/doc/essays/metaclasses/ metaclasses]. Se, entretanto, você prefere não explodir sua mente, irá igualmente satisfazer-se com este pequeno truque.
+
+Python usa espaços de nomes dinâmicos (não léxicos). Isto quer dizer que se há uma função como esta:
+
+{{{
+#!python
+def suco_laranja():
+    return x*2
+}}}
+
+... onde uma variável (neste caso x) não está ligada a um argumento e não é dado um valor dentro da função, Python usará o valor que ela tiver onde e quando a função for chamada. Neste caso:
+
+{{{
+#!python
+x = 3
+y = suco_laranja()
+# y agora é 6
+x=1
+y = suco_laranja()
+# y agora é 2
+}}}
+
+Normalmente este é o tipo de comportamento esperado (apesar do exemplo ser um pouco rebuscado - raramente acessamos variáveis desta forma.) Entretanto, algumas vezes pode ser útil ter um espaço de nomes estático, ou seja, armazenar alguns valores do ambiente em que a função é criada. A maneira de fazer isto em Python é por meio dos argumentos padrão.
+
+{{{
+#!python
+x = 4
+def suco_maca(x=x):
+    return x*2
+}}}
+
+Aqui, ao argumento x é atribuído o valor padrão que é o mesmo valor da variável x quando a função é definida. Assim, se nenhum valor é fornecido como argumento para a função, ela irá funcionar assim:
+
+{{{
+#!python
+x = 3
+y = suco_maca():
+# y agora é 8
+x = 1
+y = suco_maca():
+# y agora é 8
+}}}
+
+Assim - o valor de {{{x}}} não é alterado. Se isto era tudo que nós queríamos, poderíamos simplesmente ter escrito
+
+{{{
+#!python
+def suco_tomate():
+    x = 4
+    return x*2
+}}}
+
+ou mesmo
+
+{{{
+#!python
+def suco_cenoura():
+    return 8
+}}}
+
+Entretanto, o ponto é que o valor de {{{x}}} é obtido do ambiente quando a função é definida. O quanto isto é útil? Vejamos um exemplo: uma função composta.
+
+Nós queremos uma função que funcione assim:
+
+{{{
+#!python
+from math import sin, cos
+
+sincos = componha(sin,cos)
+x = sincos(3)
+}}}
+
+Onde componha é a função que queremos fazer, e {{{x}}} tem o valor -0.836021861538, que é o mesmo que sin(cos(3)). Agora, como faremos isto?
+
+(Note que nós estamos usando funções como argumentos... Este é o próprio truque.)
+
+Claramente, componha toma duas funções como parâmetros, e retorna uma função que por sua vez recebe um parâmetro. Assim, um esqueleto da solução seria:
+
+{{{
+#!python
+def componha(fun1, fun2):
+    def interior(x):
+        pass # ...
+    return interior
+}}}
+
+Nós poderíamos tentar return fun1(fun2(x)) dentro da da função interior e deixá-lo tal qual. Não, não, não. Isto teria um comportamento muito estranho. Imagine o seguinte cenário:
+
+{{{
+#!python
+from math import sin, cos
+
+def fun1(x):
+    return x + " mundo!"
+
+def fun2(x):
+    return "Olá,"
+
+sincos = componha(sin,cos)  # Usando a versão incorreta
+
+x = sincos(3)
+}}}
+
+Agora, qual valor x terá? Resposta: "Olá, mundo!". Por que isto? Porque quando é chamada, ela toma o valor de fun1 e fun2 do ambiente, não aqueles de quando foi criada. Para conseguir a solução correta, tudo que teremos que fazer é usar a técnica descrita anteriormente:
+
+{{{
+#!python
+def componha(fun1, fun2):
+    def interior(x, fun1=fun1, fun2=fun2):
+        return fun1(fun2(x))
+    return interior
+}}}
+
+Agora nós só temos que esperar que ninguém forneça mais de um argumento à função resultante, pois isto quebraria os esquemas :). E, a propósito, já que nós não precisamos do nome interior, e esta função contém somente uma expressão, nós podemos usar uma função anônima, usando a palavra-chave lambda:
+
+{{{
+#!python
+def componha(f1, f2):
+    return lambda x, f1=f1, f2=f2: f1(f2(x))
+}}}
+
+Sucinto, porém claro. Você tem que gostar :)
+
+(E se você não entendeu nada, não se preocupe. Pelo menos eu espero tê-lo convencido que Python é muito mais do que "uma linguagem para scripts"... :))
+
+== E agora... ==
+
+Só umas coisinhas para terminar. A maioria das funções e classes mais úteis são colocadas em módulos, os quais são na verdade arquivos-texto contendo código Python. Você pode importá-los e usá-los em seus programas. Por exemplo, para usar o método split do módulo padrão string, você pode ter estas duas formas:
+
+{{{
+#!python
+import string
+
+x = string.split(y)
+}}}
+
+Ou...
+
+{{{
+#!python
+from string import split
+
+x = split(y)
+}}}
+
+Para mais informações sobre a biblioteca de módulos padrão, de uma olhada em www.python.org/doc/lib. Contém muitos módulos úteis.
+
+Todo o código em um módulo/script se executa quando é importado. Se você quer que o seu programa seja tanto um módulo importável quanto um programa executável, você pode adicionar alguma coisa parecida com isto no final do programa:
+
+{{{
+#!python
+if __name__ == "__main__":
+    executar()
+}}}
+
+Esta é uma forma mágica de dizer que se este módulo esta sendo executado como um script executável (isto é, que não está sendo importado por outro script), então a função executar deve ser chamada. E é claro, você poderia fazer qualquer coisa após os dois pontos... :)
+
+E para aqueles que desejam fazer um script UN*X executável, escreva isto como primeira linha do arquivo:
+
+{{{
+#!python
+#!/usr/bin/env python
+}}}
+
+Finalmente, uma breve menção de um conceito importante: Exceções. Algumas operações (como divisão por zero ou ler de um arquivo não-existente) produzem condições de erro ou exceções. Você pode até criar suas próprias exceções e lançá-las em momentos adequados.
+
+Se nada é feito para tratar a exceção, seu programa termina e mostra uma mensagem de erro. Você pode evitar isto com uma construção try/except. Por exemplo:
+
+{{{
+#!python
+def divisao_segura(a,b):
+    try:
+        return a/b
+    except ZeroDivisionError:
+        return None
+}}}
+
+{{{ZeroDivisionError}}} é uma exceção padrão. Neste caso, você poderia ter verificado se b era zero, mas em muitos casos, esta estratégia não é viável. Além disso, se não tivermos a cláusula try em divisao_segura, e dessa forma tornando arriscada a sua chamada, nós poderíamos ainda fazer alguma coisa assim:
+
+{{{
+#!python
+try:
+    divisao_insegura(a,b)
+except ZeroDivisionError:
+    print "Foi tentada uma divisão por zero em divisao_insegura"
+}}}
+
+Nos casos onde normalmente não haveriam problemas específicos, mas eles poderiam ocorrer, o uso de exceções evita tediosos testes, etc.
+
+Bem - era isto. Espero que você tenha aprendido alguma coisa. Agora pode ir [http://www.python.org/ brincar]. E lembre-se do lema do aprendizado em Python: "Use os fontes, Lucas." (Tradução: leia todo código fonte a que você tiver acesso :)) Para começar, aqui está um [http://www.idi.ntnu.no/~mlh/python/quicksort.py exemplo]. É o conhecido algoritmo QuickSort, de Hoare. Uma versão com a sintaxe destacada em cores está [http://www.idi.ntnu.no/~mlh/python/quicksort.html aqui].
+
+Vale a pena mencionar uma coisa sobre este exemplo. A variável done controla se partition foi finalizada, ou não, na busca entre os elementos. Assim quando um dos dois laços internos querem terminar a sequência de trocas, eles atribuem 1 à variável done e interrompem-se a si próprios com break. Por que os laços internos usam done? Porque, quando o primeiro laço interno finaliza com um break, o laço seguinte só será executado se done não estiver com o valor 1:
+
+{{{
+#!python
+while not done:
+    while not done:
+        # Repete-se até ocorrer um break
+
+    while not done:
+        # Só executado se o primeiro não atribuir 1 para "done"
+}}}
+
+Uma versão equivalente, possivelmente mais clara, mas em minha opinião menos elegante que a anterior poderia ser:
+
+{{{
+#!python
+while not done:
+    while 1:
+        # Repete-se até ocorrer um break
+
+    if not done:
+        while 1:
+            # Só executado se o primeiro não atribuir 1 para "done"
+}}}
+
+A única razão para eu usar a variável done no primeiro laço foi porque eu preferi manter a simetria entre os dois laços. Desta forma poderia ser invertida a ordem e mesmo assim o algoritmo funcionaria.
+
+Mais alguns exemplos podem ser encontrados na página [http://www.strout.net/python/tidbits.html tidbit] de Joe Strout.
+
+----
+
+Magnus Lie Hetland - Tradução: WanderleiAntonioCavassin [[BR]]
+Post no Wiki: OsvaldoSantanaNeto

@@ -1,0 +1,80 @@
+#pragma section-numbers off
+= Receita: LendoXmlComLibxml2 =
+
+ Todo o manejo de XML no GNOME é feito a través da libxml, 
+ com ele podemos ler e modificar arquivos XML.
+
+Vejamos um exemplo.
+
+= O arquivo XML =
+
+{{{
+<?xml version="1.0"?>
+<story>
+	<storyinfo>
+		<author>John Fleck</author>
+		<datewritten>June 2, 2002</datewritten>
+		<keyword>example keyword</keyword>
+	</storyinfo>
+	<body>
+		<headline>This is the headline</headline>
+		<para>This is the body text.</para>
+	</body>
+</story>
+}}}
+
+== Código ==
+
+{{{
+#!python
+
+import sys
+
+import libxml2
+
+def parseStory (cur):
+
+	cur = cur.children
+
+	while cur != None:
+		if cur.name == "keyword":
+			print "Keyword: %s" % cur.getContent()
+		cur = cur.next
+	sys.exit(0)
+
+doc = libxml2.parseFile("sample_Document.xml")
+
+if doc == None:
+	print "Document not parsed successfully."
+	doc.freeDoc()
+	sys.exit
+
+cur = doc.getRootElement()
+
+if cur == None:
+	print "Empty Document."
+	doc.freeDoc()
+	sys.exit(1)
+
+if cur.name != "story":
+	print "Document of the wrong type, root node != story"
+	doc.freeDoc()
+	sys.exit(1)
+
+cur = cur.children
+
+while cur != None:
+	if cur.name == "storyinfo":
+		parseStory(cur)
+	cur = cur.next
+doc.freeDoc()
+}}}
+
+Voçê pode ver o codigo C em [http://www.xmlsoft.org/tutorial/apc.html Libxml Tutorial por John Fleck]
+
+
+Volta para CookBook.
+
+----
+
+WiliamAlvesDeSouza -- (waa) -- wiliamsouza83(arroba)gmail(ponto)com

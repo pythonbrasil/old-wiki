@@ -1,0 +1,19 @@
+#pragma section-numbers off
+= Software Python =
+
+Parágrafo explicativo da página...
+
+[[TableOfContents]]
+
+== Ferramentas Programação ==
+
+   * EditorSpe - Editor de textos.
+   * AmbienteEric3 - Ambiente de desenvolvimento.
+
+== Scripts ==
+
+   * Compile2Exe - Script para facilitar o uso do módulo py2exe
+
+----
+
+Osvaldo Santana Neto

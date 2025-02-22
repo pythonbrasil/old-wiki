@@ -1,0 +1,64 @@
+#pragma section-numbers off
+= BoaConstructor =
+
+IDE RAD para Python que utiliza wxPython para as interfaces. Muito parecido com o ambiente de trabalho do Delphi/Kylix, o BoaConstructor cria automaticamente os códigos em Python, a medida que você vai "desenhando" as janelas. OBS: Você precisará das extensões [http://www.wxpython.org/ wxPython] para utilizar o Boa Constructor.
+
+
+   * '''Prós:''' 
+    * Grande variedade de controles.
+    * Ótimo depurador. 
+    * Integração com FTP, CVS, Zope, distutils (geraração de um instalador).
+    * Completation - "Ctrl+Spaço".
+    * RAD mais parecido com o VB/Delphi.
+    * Plugins. 
+    * Configurável (vá em "Explorer" e "Preferences").
+    * UML, gera o UML das suas classes.
+    * TODO list.
+    * Documentation, Gera um HTML dos """ strings docs""" de seus módulos.
+    * Totalmente em Python (pode-se aprender bastante com ele).
+    * Documentação simples de entender. 
+
+
+   * '''Contras:''' 
+    * Relativamente instável (ainda em estágio inicial de desenvolvimento), na versão 0.4.0 está um pouco melhor. 
+    * sem suporte a controles de versão, na verdade existe, mas é muito precário. :(
+    * As integrações com os protocolos citados acima ainda estão bastante instáveis.
+    * Controles podem não funcionar perfeitamente em Linux (BoaConstructorLinuxBug)
+
+ Veja como instalar a versão CVS em ["BoaConstructorCVS"].
+
+== Ficha técnica ==
+
+URL: http://boa-constructor.sourceforge.net/ [[BR]]
+Licença: GPL
+
+== Tela ==
+
+attachment:screenshotBoa.png
+
+== Apresentação ==
+ [http://www.pythonbrasil.com.br/moin.cgi/PyConDayBrasil?action=AttachFile&do=get&target=ApresentacaoBoa.tar.gz Apresentação do Boa Constructor] no '''{{{I}}}''' PyConBrasil
+
+----
+
+Washington Coutinho Corrêa Jr
+
+----
+
+''Boa tem até um desempenho razoável, mas  tem um tempo de inicialização enorme (culpa da wxPython na verdade). Não acredito que ele possa ser considerado 'rápido'. Discordo quanto à estabilidade. Eu pelo menos tive muitos problemas usando ele. Gerar ou não um atalho não é um defeito, já que ele ainda se encontra em Alpha. Na minha opinião o maior defeito é não ter suporte a CVS (pelo menos eu não achei). :) - PedroWerneck''
+
+Integração com o CVS: 
+ * Na Janela "Editor" 
+ * vá na Aba "Explorer" selecione o arquivo e clique com o botão direito 
+ * nesse Menu clique em CVS 
+ * Abrirá uma janela para digitar o comando CVS - ''Nesse momento que é precário, pois é necessário saber o comando do CVS que você quer executar. :( - LucianoPacheco''
+
+
+----
+
+Daniel Schmitz (DanielSchmitz)
+
+----
+''
+Comecei a trabalhar no BoaConstructor e até agora estou gostando. Me parece uma ferramenta fácil e com uma boa documentação em Inglês. Estou criando um aplicativo no estilo bloco de notas, vou postar um screenshot oK! Depois pretendo traduzir o tutorial do bloco de notas também.
+''

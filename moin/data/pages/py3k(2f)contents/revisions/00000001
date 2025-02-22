@@ -1,0 +1,2025 @@
+ 
+||[[py3k|Python v3.1.1]] ||[[py3k/genindex|índice]] ||[[py3k/modindex|módulos]] || [[py3k/whatsnew/index|próximo]] ||
+
+
+----
+
+'''Python Documentation contents'''
+
+What’s New in Python
+What’s New In Python 3.1
+PEP 372: Ordered Dictionaries
+PEP 378: Format Specifier for Thousands Separator
+Other Language Changes
+New, Improved, and Deprecated Modules
+Optimizations
+IDLE
+Build and C API Changes
+Porting to Python 3.1
+What’s New In Python 3.0
+Common Stumbling Blocks
+Print Is A Function
+Views And Iterators Instead Of Lists
+Ordering Comparisons
+Integers
+Text Vs. Data Instead Of Unicode Vs. 8-bit
+Overview Of Syntax Changes
+New Syntax
+Changed Syntax
+Removed Syntax
+Changes Already Present In Python 2.6
+Library Changes
+PEP 3101: A New Approach To String Formatting
+Changes To Exceptions
+Miscellaneous Other Changes
+Operators And Special Methods
+Builtins
+Build and C API Changes
+Performance
+Porting To Python 3.0
+What’s New in Python 2.7
+Python 3.1
+PEP 372: Adding an ordered dictionary to collections
+Other Language Changes
+Optimizations
+New, Improved, and Deprecated Modules
+importlib: Importing Modules
+ttk: Themed Widgets for Tk
+Build and C API Changes
+Port-Specific Changes: Windows
+Port-Specific Changes: Mac OS X
+Other Changes and Fixes
+Porting to Python 2.7
+Acknowledgements
+What’s New in Python 2.6
+Python 3.0
+Changes to the Development Process
+New Issue Tracker: Roundup
+New Documentation Format: reStructuredText Using Sphinx
+PEP 343: The ‘with’ statement
+Writing Context Managers
+The contextlib module
+PEP 366: Explicit Relative Imports From a Main Module
+PEP 370: Per-user site-packages Directory
+PEP 371: The multiprocessing Package
+PEP 3101: Advanced String Formatting
+PEP 3105: print As a Function
+PEP 3110: Exception-Handling Changes
+PEP 3112: Byte Literals
+PEP 3116: New I/O Library
+PEP 3118: Revised Buffer Protocol
+PEP 3119: Abstract Base Classes
+PEP 3127: Integer Literal Support and Syntax
+PEP 3129: Class Decorators
+PEP 3141: A Type Hierarchy for Numbers
+The fractions Module
+Other Language Changes
+Optimizations
+Interpreter Changes
+New, Improved, and Deprecated Modules
+The ast module
+The future_builtins module
+The json module: JavaScript Object Notation
+The plistlib module: A Property-List Parser
+ctypes Enhancements
+Improved SSL Support
+Build and C API Changes
+Port-Specific Changes: Windows
+Port-Specific Changes: Mac OS X
+Port-Specific Changes: IRIX
+Porting to Python 2.6
+Acknowledgements
+What’s New in Python 2.5
+PEP 308: Conditional Expressions
+PEP 309: Partial Function Application
+PEP 314: Metadata for Python Software Packages v1.1
+PEP 328: Absolute and Relative Imports
+PEP 338: Executing Modules as Scripts
+PEP 341: Unified try/except/finally
+PEP 342: New Generator Features
+PEP 343: The ‘with’ statement
+Writing Context Managers
+The contextlib module
+PEP 352: Exceptions as New-Style Classes
+PEP 353: Using ssize_t as the index type
+PEP 357: The ‘__index__’ method
+Other Language Changes
+Interactive Interpreter Changes
+Optimizations
+New, Improved, and Removed Modules
+The ctypes package
+The ElementTree package
+The hashlib package
+The sqlite3 package
+The wsgiref package
+Build and C API Changes
+Port-Specific Changes
+Porting to Python 2.5
+Acknowledgements
+What’s New in Python 2.4
+PEP 218: Built-In Set Objects
+PEP 237: Unifying Long Integers and Integers
+PEP 289: Generator Expressions
+PEP 292: Simpler String Substitutions
+PEP 318: Decorators for Functions and Methods
+PEP 322: Reverse Iteration
+PEP 324: New subprocess Module
+PEP 327: Decimal Data Type
+Why is Decimal needed?
+The Decimal type
+The Context type
+PEP 328: Multi-line Imports
+PEP 331: Locale-Independent Float/String Conversions
+Other Language Changes
+Optimizations
+New, Improved, and Deprecated Modules
+cookielib
+doctest
+Build and C API Changes
+Port-Specific Changes
+Porting to Python 2.4
+Acknowledgements
+What’s New in Python 2.3
+PEP 218: A Standard Set Datatype
+PEP 255: Simple Generators
+PEP 263: Source Code Encodings
+PEP 273: Importing Modules from ZIP Archives
+PEP 277: Unicode file name support for Windows NT
+PEP 278: Universal Newline Support
+PEP 279: enumerate()
+PEP 282: The logging Package
+PEP 285: A Boolean Type
+PEP 293: Codec Error Handling Callbacks
+PEP 301: Package Index and Metadata for Distutils
+PEP 302: New Import Hooks
+PEP 305: Comma-separated Files
+PEP 307: Pickle Enhancements
+Extended Slices
+Other Language Changes
+String Changes
+Optimizations
+New, Improved, and Deprecated Modules
+Date/Time Type
+The optparse Module
+Pymalloc: A Specialized Object Allocator
+Build and C API Changes
+Port-Specific Changes
+Other Changes and Fixes
+Porting to Python 2.3
+Acknowledgements
+What’s New in Python 2.2
+Introduction
+PEPs 252 and 253: Type and Class Changes
+Old and New Classes
+Descriptors
+Multiple Inheritance: The Diamond Rule
+Attribute Access
+Related Links
+PEP 234: Iterators
+PEP 255: Simple Generators
+PEP 237: Unifying Long Integers and Integers
+PEP 238: Changing the Division Operator
+Unicode Changes
+PEP 227: Nested Scopes
+New and Improved Modules
+Interpreter Changes and Fixes
+Other Changes and Fixes
+Acknowledgements
+What’s New in Python 2.1
+Introduction
+PEP 227: Nested Scopes
+PEP 236: __future__ Directives
+PEP 207: Rich Comparisons
+PEP 230: Warning Framework
+PEP 229: New Build System
+PEP 205: Weak References
+PEP 232: Function Attributes
+PEP 235: Importing Modules on Case-Insensitive Platforms
+PEP 217: Interactive Display Hook
+PEP 208: New Coercion Model
+PEP 241: Metadata in Python Packages
+New and Improved Modules
+Other Changes and Fixes
+Acknowledgements
+What’s New in Python 2.0
+Introduction
+What About Python 1.6?
+New Development Process
+Unicode
+List Comprehensions
+Augmented Assignment
+String Methods
+Garbage Collection of Cycles
+Other Core Changes
+Minor Language Changes
+Changes to Built-in Functions
+Porting to 2.0
+Extending/Embedding Changes
+Distutils: Making Modules Easy to Install
+XML Modules
+SAX2 Support
+DOM Support
+Relationship to PyXML
+Module changes
+New modules
+IDLE Improvements
+Deleted and Deprecated Modules
+Acknowledgements
+The Python Tutorial
+1. Whetting Your Appetite
+2. Using the Python Interpreter
+2.1. Invoking the Interpreter
+2.1.1. Argument Passing
+2.1.2. Interactive Mode
+2.2. The Interpreter and Its Environment
+2.2.1. Error Handling
+2.2.2. Executable Python Scripts
+2.2.3. Source Code Encoding
+2.2.4. The Interactive Startup File
+3. An Informal Introduction to Python
+3.1. Using Python as a Calculator
+3.1.1. Numbers
+3.1.2. Strings
+3.1.3. About Unicode
+3.1.4. Lists
+3.2. First Steps Towards Programming
+4. More Control Flow Tools
+4.1. if Statements
+4.2. for Statements
+4.3. The range() Function
+4.4. break and continue Statements, and else Clauses on Loops
+4.5. pass Statements
+4.6. Defining Functions
+4.7. More on Defining Functions
+4.7.1. Default Argument Values
+4.7.2. Keyword Arguments
+4.7.3. Arbitrary Argument Lists
+4.7.4. Unpacking Argument Lists
+4.7.5. Lambda Forms
+4.7.6. Documentation Strings
+4.8. Intermezzo: Coding Style
+5. Data Structures
+5.1. More on Lists
+5.1.1. Using Lists as Stacks
+5.1.2. Using Lists as Queues
+5.1.3. List Comprehensions
+5.1.4. Nested List Comprehensions
+5.2. The del statement
+5.3. Tuples and Sequences
+5.4. Sets
+5.5. Dictionaries
+5.6. Looping Techniques
+5.7. More on Conditions
+5.8. Comparing Sequences and Other Types
+6. Modules
+6.1. More on Modules
+6.1.1. Executing modules as scripts
+6.1.2. The Module Search Path
+6.1.3. “Compiled” Python files
+6.2. Standard Modules
+6.3. The dir() Function
+6.4. Packages
+6.4.1. Importing * From a Package
+6.4.2. Intra-package References
+6.4.3. Packages in Multiple Directories
+7. Input and Output
+7.1. Fancier Output Formatting
+7.1.1. Old string formatting
+7.2. Reading and Writing Files
+7.2.1. Methods of File Objects
+7.2.2. The pickle Module
+8. Errors and Exceptions
+8.1. Syntax Errors
+8.2. Exceptions
+8.3. Handling Exceptions
+8.4. Raising Exceptions
+8.5. User-defined Exceptions
+8.6. Defining Clean-up Actions
+8.7. Predefined Clean-up Actions
+9. Classes
+9.1. A Word About Names and Objects
+9.2. Python Scopes and Name Spaces
+9.2.1. Scopes and Namespaces Example
+9.3. A First Look at Classes
+9.3.1. Class Definition Syntax
+9.3.2. Class Objects
+9.3.3. Instance Objects
+9.3.4. Method Objects
+9.4. Random Remarks
+9.5. Inheritance
+9.5.1. Multiple Inheritance
+9.6. Private Variables
+9.7. Odds and Ends
+9.8. Exceptions Are Classes Too
+9.9. Iterators
+9.10. Generators
+9.11. Generator Expressions
+10. Brief Tour of the Standard Library
+10.1. Operating System Interface
+10.2. File Wildcards
+10.3. Command Line Arguments
+10.4. Error Output Redirection and Program Termination
+10.5. String Pattern Matching
+10.6. Mathematics
+10.7. Internet Access
+10.8. Dates and Times
+10.9. Data Compression
+10.10. Performance Measurement
+10.11. Quality Control
+10.12. Batteries Included
+11. Brief Tour of the Standard Library – Part II
+11.1. Output Formatting
+11.2. Templating
+11.3. Working with Binary Data Record Layouts
+11.4. Multi-threading
+11.5. Logging
+11.6. Weak References
+11.7. Tools for Working with Lists
+11.8. Decimal Floating Point Arithmetic
+12. What Now?
+13. Interactive Input Editing and History Substitution
+13.1. Line Editing
+13.2. History Substitution
+13.3. Key Bindings
+13.4. Alternatives to the Interactive Interpreter
+14. Floating Point Arithmetic: Issues and Limitations
+14.1. Representation Error
+Using Python
+1. Command line and environment
+1.1. Command line
+1.1.1. Interface options
+1.1.2. Generic options
+1.1.3. Miscellaneous options
+1.2. Environment variables
+1.2.1. Debug-mode variables
+2. Using Python on Unix platforms
+2.1. Getting and installing the latest version of Python
+2.1.1. On Linux
+2.1.2. On FreeBSD and OpenBSD
+2.1.3. On OpenSolaris
+2.2. Building Python
+2.3. Python-related paths and files
+2.4. Miscellaneous
+2.5. Editors
+3. Using Python on Windows
+3.1. Installing Python
+3.2. Alternative bundles
+3.3. Configuring Python
+3.3.1. Excursus: Setting environment variables
+3.3.2. Finding the Python executable
+3.3.3. Finding modules
+3.3.4. Executing scripts
+3.4. Additional modules
+3.4.1. PyWin32
+3.4.2. Py2exe
+3.4.3. WConio
+3.5. Compiling Python on Windows
+3.6. Other resources
+4. Using Python on a Macintosh
+4.1. Getting and Installing MacPython
+4.1.1. How to run a Python script
+4.1.2. Running scripts with a GUI
+4.1.3. Configuration
+4.2. The IDE
+4.3. Installing Additional Python Packages
+4.4. GUI Programming on the Mac
+4.5. Distributing Python Applications on the Mac
+4.6. Application Scripting
+4.7. Other Resources
+The Python Language Reference
+1. Introduction
+1.1. Alternate Implementations
+1.2. Notation
+2. Lexical analysis
+2.1. Line structure
+2.1.1. Logical lines
+2.1.2. Physical lines
+2.1.3. Comments
+2.1.4. Encoding declarations
+2.1.5. Explicit line joining
+2.1.6. Implicit line joining
+2.1.7. Blank lines
+2.1.8. Indentation
+2.1.9. Whitespace between tokens
+2.2. Other tokens
+2.3. Identifiers and keywords
+2.3.1. Keywords
+2.3.2. Reserved classes of identifiers
+2.4. Literals
+2.4.1. String and Bytes literals
+2.4.2. String literal concatenation
+2.4.3. Numeric literals
+2.4.4. Integer literals
+2.4.5. Floating point literals
+2.4.6. Imaginary literals
+2.5. Operators
+2.6. Delimiters
+3. Data model
+3.1. Objects, values and types
+3.2. The standard type hierarchy
+3.3. Special method names
+3.3.1. Basic customization
+3.3.2. Customizing attribute access
+3.3.2.1. Implementing Descriptors
+3.3.2.2. Invoking Descriptors
+3.3.2.3. __slots__
+3.3.2.3.1. Notes on using __slots__
+3.3.3. Customizing class creation
+3.3.4. Emulating callable objects
+3.3.5. Emulating container types
+3.3.6. Emulating numeric types
+3.3.7. With Statement Context Managers
+3.3.8. Special method lookup
+4. Execution model
+4.1. Naming and binding
+4.1.1. Interaction with dynamic features
+4.2. Exceptions
+5. Expressions
+5.1. Arithmetic conversions
+5.2. Atoms
+5.2.1. Identifiers (Names)
+5.2.2. Literals
+5.2.3. Parenthesized forms
+5.2.4. Displays for lists, sets and dictionaries
+5.2.5. List displays
+5.2.6. Set displays
+5.2.7. Dictionary displays
+5.2.8. Generator expressions
+5.2.9. Yield expressions
+5.3. Primaries
+5.3.1. Attribute references
+5.3.2. Subscriptions
+5.3.3. Slicings
+5.3.4. Calls
+5.4. The power operator
+5.5. Unary arithmetic and bitwise operations
+5.6. Binary arithmetic operations
+5.7. Shifting operations
+5.8. Binary bitwise operations
+5.9. Comparisons
+5.10. Boolean operations
+5.11. Lambdas
+5.12. Expression lists
+5.13. Evaluation order
+5.14. Summary
+6. Simple statements
+6.1. Expression statements
+6.2. Assignment statements
+6.2.1. Augmented assignment statements
+6.3. The assert statement
+6.4. The pass statement
+6.5. The del statement
+6.6. The return statement
+6.7. The yield statement
+6.8. The raise statement
+6.9. The break statement
+6.10. The continue statement
+6.11. The import statement
+6.11.1. Future statements
+6.12. The global statement
+6.13. The nonlocal statement
+7. Compound statements
+7.1. The if statement
+7.2. The while statement
+7.3. The for statement
+7.4. The try statement
+7.5. The with statement
+7.6. Function definitions
+7.7. Class definitions
+8. Top-level components
+8.1. Complete Python programs
+8.2. File input
+8.3. Interactive input
+8.4. Expression input
+9. Full Grammar specification
+The Python Standard Library
+1. Introduction
+2. Built-in Functions
+3. Built-in Constants
+3.1. Constants added by the site module
+4. Built-in Objects
+5. Built-in Types
+5.1. Truth Value Testing
+5.2. Boolean Operations — and, or, not
+5.3. Comparisons
+5.4. Numeric Types — int, float, complex
+5.4.1. Bit-string Operations on Integer Types
+5.4.2. Additional Methods on Integer Types
+5.4.3. Additional Methods on Float
+5.5. Iterator Types
+5.5.1. Generator Types
+5.6. Sequence Types — str, bytes, bytearray, list, tuple, range
+5.6.1. String Methods
+5.6.2. Old String Formatting Operations
+5.6.3. Range Type
+5.6.4. Mutable Sequence Types
+5.6.5. Bytes and Byte Array Methods
+5.7. Set Types — set, frozenset
+5.8. Mapping Types — dict
+5.8.1. Dictionary view objects
+5.9. File Objects
+5.10. memoryview Types
+5.11. Context Manager Types
+5.12. Other Built-in Types
+5.12.1. Modules
+5.12.2. Classes and Class Instances
+5.12.3. Functions
+5.12.4. Methods
+5.12.5. Code Objects
+5.12.6. Type Objects
+5.12.7. The Null Object
+5.12.8. The Ellipsis Object
+5.12.9. Boolean Values
+5.12.10. Internal Objects
+5.13. Special Attributes
+6. Built-in Exceptions
+6.1. Exception hierarchy
+7. String Services
+7.1. string — Common string operations
+7.1.1. String constants
+7.1.2. String Formatting
+7.1.3. Format String Syntax
+7.1.3.1. Format Specification Mini-Language
+7.1.4. Template strings
+7.1.5. Helper functions
+7.2. re — Regular expression operations
+7.2.1. Regular Expression Syntax
+7.2.2. Matching vs Searching
+7.2.3. Module Contents
+7.2.4. Regular Expression Objects
+7.2.5. Match Objects
+7.2.6. Examples
+7.2.6.1. Checking For a Pair
+7.2.6.2. Simulating scanf()
+7.2.6.3. Avoiding recursion
+7.2.6.4. search() vs. match()
+7.2.6.5. Making a Phonebook
+7.2.6.6. Text Munging
+7.2.6.7. Finding all Adverbs
+7.2.6.8. Finding all Adverbs and their Positions
+7.2.6.9. Raw String Notation
+7.3. struct — Interpret bytes as packed binary data
+7.3.1. Struct Objects
+7.4. difflib — Helpers for computing deltas
+7.4.1. SequenceMatcher Objects
+7.4.2. SequenceMatcher Examples
+7.4.3. Differ Objects
+7.4.4. Differ Example
+7.4.5. A command-line interface to difflib
+7.5. textwrap — Text wrapping and filling
+7.6. codecs — Codec registry and base classes
+7.6.1. Codec Base Classes
+7.6.1.1. Codec Objects
+7.6.1.2. IncrementalEncoder Objects
+7.6.1.3. IncrementalDecoder Objects
+7.6.1.4. StreamWriter Objects
+7.6.1.5. StreamReader Objects
+7.6.1.6. StreamReaderWriter Objects
+7.6.1.7. StreamRecoder Objects
+7.6.2. Encodings and Unicode
+7.6.3. Standard Encodings
+7.6.4. encodings.idna — Internationalized Domain Names in Applications
+7.6.5. encodings.utf_8_sig — UTF-8 codec with BOM signature
+7.7. unicodedata — Unicode Database
+7.8. stringprep — Internet String Preparation
+8. Data Types
+8.1. datetime — Basic date and time types
+8.1.1. Available Types
+8.1.2. timedelta Objects
+8.1.3. date Objects
+8.1.4. datetime Objects
+8.1.5. time Objects
+8.1.6. tzinfo Objects
+8.1.7. strftime() Behavior
+8.2. calendar — General calendar-related functions
+8.3. collections — Container datatypes
+8.3.1. ABCs - abstract base classes
+8.3.2. Counter objects
+8.3.3. deque objects
+8.3.3.1. deque Recipes
+8.3.4. defaultdict objects
+8.3.4.1. defaultdict Examples
+8.3.5. namedtuple() Factory Function for Tuples with Named Fields
+8.3.6. OrderedDict objects
+8.3.7. UserDict objects
+8.3.8. UserList objects
+8.3.9. UserString objects
+8.4. heapq — Heap queue algorithm
+8.4.1. Theory
+8.5. bisect — Array bisection algorithm
+8.5.1. Examples
+8.6. array — Efficient arrays of numeric values
+8.7. sched — Event scheduler
+8.7.1. Scheduler Objects
+8.8. queue — A synchronized queue class
+8.8.1. Queue Objects
+8.9. weakref — Weak references
+8.9.1. Weak Reference Objects
+8.9.2. Example
+8.10. types — Names for built-in types
+8.11. copy — Shallow and deep copy operations
+8.12. pprint — Data pretty printer
+8.12.1. PrettyPrinter Objects
+8.12.2. pprint Example
+8.13. reprlib — Alternate repr() implementation
+8.13.1. Repr Objects
+8.13.2. Subclassing Repr Objects
+9. Numeric and Mathematical Modules
+9.1. numbers — Numeric abstract base classes
+9.1.1. The numeric tower
+9.1.2. Notes for type implementors
+9.1.2.1. Adding More Numeric ABCs
+9.1.2.2. Implementing the arithmetic operations
+9.2. math — Mathematical functions
+9.2.1. Number-theoretic and representation functions
+9.2.2. Power and logarithmic functions
+9.2.3. Trigonometric functions
+9.2.4. Angular conversion
+9.2.5. Hyperbolic functions
+9.2.6. Constants
+9.3. cmath — Mathematical functions for complex numbers
+9.3.1. Conversions to and from polar coordinates
+9.3.2. Power and logarithmic functions
+9.3.3. Trigonometric functions
+9.3.4. Hyperbolic functions
+9.3.5. Classification functions
+9.3.6. Constants
+9.4. decimal — Decimal fixed point and floating point arithmetic
+9.4.1. Quick-start Tutorial
+9.4.2. Decimal objects
+9.4.2.1. Logical operands
+9.4.3. Context objects
+9.4.4. Signals
+9.4.5. Floating Point Notes
+9.4.5.1. Mitigating round-off error with increased precision
+9.4.5.2. Special values
+9.4.6. Working with threads
+9.4.7. Recipes
+9.4.8. Decimal FAQ
+9.5. fractions — Rational numbers
+9.6. random — Generate pseudo-random numbers
+9.7. itertools — Functions creating iterators for efficient looping
+9.7.1. Itertool functions
+9.7.2. Recipes
+9.8. functools — Higher order functions and operations on callable objects
+9.8.1. partial Objects
+9.9. operator — Standard operators as functions
+9.9.1. Mapping Operators to Functions
+10. File and Directory Access
+10.1. os.path — Common pathname manipulations
+10.2. fileinput — Iterate over lines from multiple input streams
+10.3. stat — Interpreting stat() results
+10.4. filecmp — File and Directory Comparisons
+10.4.1. The dircmp class
+10.5. tempfile — Generate temporary files and directories
+10.6. glob — Unix style pathname pattern expansion
+10.7. fnmatch — Unix filename pattern matching
+10.8. linecache — Random access to text lines
+10.9. shutil — High-level file operations
+10.9.1. Example
+10.10. macpath — Mac OS 9 path manipulation functions
+11. Data Persistence
+11.1. pickle — Python object serialization
+11.1.1. Relationship to other Python modules
+11.1.2. Data stream format
+11.1.3. Module Interface
+11.1.4. What can be pickled and unpickled?
+11.1.5. Pickling Class Instances
+11.1.5.1. Persistence of External Objects
+11.1.5.2. Handling Stateful Objects
+11.1.6. Restricting Globals
+11.1.7. Examples
+11.2. copyreg — Register pickle support functions
+11.3. shelve — Python object persistence
+11.3.1. Restrictions
+11.3.2. Example
+11.4. marshal — Internal Python object serialization
+11.5. dbm — Interfaces to Unix “databases”
+11.5.1. dbm.gnu — GNU’s reinterpretation of dbm
+11.5.2. dbm.ndbm — Interface based on ndbm
+11.5.3. dbm.dumb — Portable DBM implementation
+11.6. sqlite3 — DB-API 2.0 interface for SQLite databases
+11.6.1. Module functions and constants
+11.6.2. Connection Objects
+11.6.3. Cursor Objects
+11.6.4. Row Objects
+11.6.5. SQLite and Python types
+11.6.5.1. Introduction
+11.6.5.2. Using adapters to store additional Python types in SQLite databases
+11.6.5.2.1. Letting your object adapt itself
+11.6.5.2.2. Registering an adapter callable
+11.6.5.3. Converting SQLite values to custom Python types
+11.6.5.4. Default adapters and converters
+11.6.6. Controlling Transactions
+11.6.7. Using sqlite3 efficiently
+11.6.7.1. Using shortcut methods
+11.6.7.2. Accessing columns by name instead of by index
+11.6.7.3. Using the connection as a context manager
+12. Data Compression and Archiving
+12.1. zlib — Compression compatible with gzip
+12.2. gzip — Support for gzip files
+12.2.1. Examples of usage
+12.3. bz2 — Compression compatible with bzip2
+12.3.1. (De)compression of files
+12.3.2. Sequential (de)compression
+12.3.3. One-shot (de)compression
+12.4. zipfile — Work with ZIP archives
+12.4.1. ZipFile Objects
+12.4.2. PyZipFile Objects
+12.4.3. ZipInfo Objects
+12.5. tarfile — Read and write tar archive files
+12.5.1. TarFile Objects
+12.5.2. TarInfo Objects
+12.5.3. Examples
+12.5.4. Supported tar formats
+12.5.5. Unicode issues
+13. File Formats
+13.1. csv — CSV File Reading and Writing
+13.1.1. Module Contents
+13.1.2. Dialects and Formatting Parameters
+13.1.3. Reader Objects
+13.1.4. Writer Objects
+13.1.5. Examples
+13.2. configparser — Configuration file parser
+13.2.1. RawConfigParser Objects
+13.2.2. ConfigParser Objects
+13.2.3. SafeConfigParser Objects
+13.2.4. Examples
+13.3. netrc — netrc file processing
+13.3.1. netrc Objects
+13.4. xdrlib — Encode and decode XDR data
+13.4.1. Packer Objects
+13.4.2. Unpacker Objects
+13.4.3. Exceptions
+13.5. plistlib — Generate and parse Mac OS X .plist files
+13.5.1. Examples
+14. Cryptographic Services
+14.1. hashlib — Secure hashes and message digests
+14.2. hmac — Keyed-Hashing for Message Authentication
+15. Generic Operating System Services
+15.1. os — Miscellaneous operating system interfaces
+15.1.1. File Names, Command Line Arguments, and Environment Variables
+15.1.2. Process Parameters
+15.1.3. File Object Creation
+15.1.4. File Descriptor Operations
+15.1.5. Files and Directories
+15.1.6. Process Management
+15.1.7. Miscellaneous System Information
+15.1.8. Miscellaneous Functions
+15.2. io — Core tools for working with streams
+15.2.1. Module Interface
+15.2.2. I/O Base Classes
+15.2.3. Raw File I/O
+15.2.4. Buffered Streams
+15.2.5. Text I/O
+15.3. time — Time access and conversions
+15.4. optparse — More powerful command line option parser
+15.4.1. Background
+15.4.1.1. Terminology
+15.4.1.2. What are options for?
+15.4.1.3. What are positional arguments for?
+15.4.2. Tutorial
+15.4.2.1. Understanding option actions
+15.4.2.2. The store action
+15.4.2.3. Handling boolean (flag) options
+15.4.2.4. Other actions
+15.4.2.5. Default values
+15.4.2.6. Generating help
+15.4.2.7. Printing a version string
+15.4.2.8. How optparse handles errors
+15.4.2.9. Putting it all together
+15.4.3. Reference Guide
+15.4.3.1. Creating the parser
+15.4.3.2. Populating the parser
+15.4.3.3. Defining options
+15.4.3.4. Standard option actions
+15.4.3.5. Option attributes
+15.4.3.6. Standard option types
+15.4.3.7. Parsing arguments
+15.4.3.8. Querying and manipulating your option parser
+15.4.3.9. Conflicts between options
+15.4.3.10. Cleanup
+15.4.3.11. Other methods
+15.4.4. Option Callbacks
+15.4.4.1. Defining a callback option
+15.4.4.2. How callbacks are called
+15.4.4.3. Raising errors in a callback
+15.4.4.4. Callback example 1: trivial callback
+15.4.4.5. Callback example 2: check option order
+15.4.4.6. Callback example 3: check option order (generalized)
+15.4.4.7. Callback example 4: check arbitrary condition
+15.4.4.8. Callback example 5: fixed arguments
+15.4.4.9. Callback example 6: variable arguments
+15.4.5. Extending optparse
+15.4.5.1. Adding new types
+15.4.5.2. Adding new actions
+15.5. getopt — Parser for command line options
+15.6. logging — Logging facility for Python
+15.6.1. Logging tutorial
+15.6.1.1. Simple examples
+15.6.1.2. Loggers
+15.6.1.3. Handlers
+15.6.1.4. Formatters
+15.6.1.5. Configuring Logging
+15.6.1.6. Configuring Logging for a Library
+15.6.2. Logging Levels
+15.6.3. Useful Handlers
+15.6.4. Module-Level Functions
+15.6.5. Logger Objects
+15.6.6. Basic example
+15.6.7. Logging to multiple destinations
+15.6.8. Adding contextual information to your logging output
+15.6.9. Sending and receiving logging events across a network
+15.6.10. Handler Objects
+15.6.10.1. StreamHandler
+15.6.10.2. FileHandler
+15.6.10.3. NullHandler
+15.6.10.4. WatchedFileHandler
+15.6.10.5. RotatingFileHandler
+15.6.10.6. TimedRotatingFileHandler
+15.6.10.7. SocketHandler
+15.6.10.8. DatagramHandler
+15.6.10.9. SysLogHandler
+15.6.10.10. NTEventLogHandler
+15.6.10.11. SMTPHandler
+15.6.10.12. MemoryHandler
+15.6.10.13. HTTPHandler
+15.6.11. Formatter Objects
+15.6.12. Filter Objects
+15.6.13. LogRecord Objects
+15.6.14. LoggerAdapter Objects
+15.6.15. Thread Safety
+15.6.16. Configuration
+15.6.16.1. Configuration functions
+15.6.16.2. Configuration file format
+15.6.16.3. Configuration server example
+15.6.17. More examples
+15.6.17.1. Multiple handlers and formatters
+15.6.17.2. Using logging in multiple modules
+15.7. getpass — Portable password input
+15.8. curses — Terminal handling for character-cell displays
+15.8.1. Functions
+15.8.2. Window Objects
+15.8.3. Constants
+15.9. curses.textpad — Text input widget for curses programs
+15.9.1. Textbox objects
+15.10. curses.wrapper — Terminal handler for curses programs
+15.11. curses.ascii — Utilities for ASCII characters
+15.12. curses.panel — A panel stack extension for curses
+15.12.1. Functions
+15.12.2. Panel Objects
+15.13. platform — Access to underlying platform’s identifying data
+15.13.1. Cross Platform
+15.13.2. Java Platform
+15.13.3. Windows Platform
+15.13.3.1. Win95/98 specific
+15.13.4. Mac OS Platform
+15.13.5. Unix Platforms
+15.14. errno — Standard errno system symbols
+15.15. ctypes — A foreign function library for Python
+15.15.1. ctypes tutorial
+15.15.1.1. Loading dynamic link libraries
+15.15.1.2. Accessing functions from loaded dlls
+15.15.1.3. Calling functions
+15.15.1.4. Fundamental data types
+15.15.1.5. Calling functions, continued
+15.15.1.6. Calling functions with your own custom data types
+15.15.1.7. Specifying the required argument types (function prototypes)
+15.15.1.8. Return types
+15.15.1.9. Passing pointers (or: passing parameters by reference)
+15.15.1.10. Structures and unions
+15.15.1.11. Structure/union alignment and byte order
+15.15.1.12. Bit fields in structures and unions
+15.15.1.13. Arrays
+15.15.1.14. Pointers
+15.15.1.15. Type conversions
+15.15.1.16. Incomplete Types
+15.15.1.17. Callback functions
+15.15.1.18. Accessing values exported from dlls
+15.15.1.19. Surprises
+15.15.1.20. Variable-sized data types
+15.15.2. ctypes reference
+15.15.2.1. Finding shared libraries
+15.15.2.2. Loading shared libraries
+15.15.2.3. Foreign functions
+15.15.2.4. Function prototypes
+15.15.2.5. Utility functions
+15.15.2.6. Data types
+15.15.2.7. Fundamental data types
+15.15.2.8. Structured data types
+15.15.2.9. Arrays and pointers
+16. Optional Operating System Services
+16.1. select — Waiting for I/O completion
+16.1.1. Edge and Level Trigger Polling (epoll) Objects
+16.1.2. Polling Objects
+16.1.3. Kqueue Objects
+16.1.4. Kevent Objects
+16.2. threading — Higher-level threading interface
+16.2.1. Thread Objects
+16.2.2. Lock Objects
+16.2.3. RLock Objects
+16.2.4. Condition Objects
+16.2.5. Semaphore Objects
+16.2.5.1. Semaphore Example
+16.2.6. Event Objects
+16.2.7. Timer Objects
+16.2.8. Using locks, conditions, and semaphores in the with statement
+16.2.9. Importing in threaded code
+16.3. dummy_threading — Drop-in replacement for the threading module
+16.4. _thread — Low-level threading API
+16.5. _dummy_thread — Drop-in replacement for the _thread module
+16.6. multiprocessing — Process-based “threading” interface
+16.6.1. Introduction
+16.6.1.1. The Process class
+16.6.1.2. Exchanging objects between processes
+16.6.1.3. Synchronization between processes
+16.6.1.4. Sharing state between processes
+16.6.1.5. Using a pool of workers
+16.6.2. Reference
+16.6.2.1. Process and exceptions
+16.6.2.2. Pipes and Queues
+16.6.2.3. Miscellaneous
+16.6.2.4. Connection Objects
+16.6.2.5. Synchronization primitives
+16.6.2.6. Shared ctypes Objects
+16.6.2.6.1. The multiprocessing.sharedctypes module
+16.6.2.7. Managers
+16.6.2.7.1. Namespace objects
+16.6.2.7.2. Customized managers
+16.6.2.7.3. Using a remote manager
+16.6.2.8. Proxy Objects
+16.6.2.8.1. Cleanup
+16.6.2.9. Process Pools
+16.6.2.10. Listeners and Clients
+16.6.2.10.1. Address Formats
+16.6.2.11. Authentication keys
+16.6.2.12. Logging
+16.6.2.13. The multiprocessing.dummy module
+16.6.3. Programming guidelines
+16.6.3.1. All platforms
+16.6.3.2. Windows
+16.6.4. Examples
+16.7. mmap — Memory-mapped file support
+16.8. readline — GNU readline interface
+16.8.1. Example
+16.9. rlcompleter — Completion function for GNU readline
+16.9.1. Completer Objects
+17. Interprocess Communication and Networking
+17.1. subprocess — Subprocess management
+17.1.1. Using the subprocess Module
+17.1.1.1. Convenience Functions
+17.1.1.2. Exceptions
+17.1.1.3. Security
+17.1.2. Popen Objects
+17.1.3. Replacing Older Functions with the subprocess Module
+17.1.3.1. Replacing /bin/sh shell backquote
+17.1.3.2. Replacing shell pipeline
+17.1.3.3. Replacing os.system()
+17.1.3.4. Replacing the os.spawn family
+17.1.3.5. Replacing os.popen(), os.popen2(), os.popen3()
+17.1.3.6. Replacing functions from the popen2 module
+17.2. socket — Low-level networking interface
+17.2.1. Socket Objects
+17.2.2. Example
+17.3. ssl — SSL wrapper for socket objects
+17.3.1. Functions, Constants, and Exceptions
+17.3.2. SSLSocket Objects
+17.3.3. Certificates
+17.3.4. Examples
+17.3.4.1. Testing for SSL support
+17.3.4.2. Client-side operation
+17.3.4.3. Server-side operation
+17.4. signal — Set handlers for asynchronous events
+17.4.1. Example
+17.5. asyncore — Asynchronous socket handler
+17.5.1. asyncore Example basic HTTP client
+17.6. asynchat — Asynchronous socket command/response handler
+17.6.1. asynchat - Auxiliary Classes and Functions
+17.6.2. asynchat Example
+18. Internet Data Handling
+18.1. email — An email and MIME handling package
+18.1.1. email: Representing an email message
+18.1.2. email: Parsing email messages
+18.1.2.1. FeedParser API
+18.1.2.2. Parser class API
+18.1.2.3. Additional notes
+18.1.3. email: Generating MIME documents
+18.1.4. email: Creating email and MIME objects from scratch
+18.1.5. email: Internationalized headers
+18.1.6. email: Representing character sets
+18.1.7. email: Encoders
+18.1.8. email: Exception and Defect classes
+18.1.9. email: Miscellaneous utilities
+18.1.10. email: Iterators
+18.1.11. email: Examples
+18.1.12. Package History
+18.1.13. Differences from mimelib
+18.2. json — JSON encoder and decoder
+18.2.1. Basic Usage
+18.2.2. Encoders and decoders
+18.3. mailcap — Mailcap file handling
+18.4. mailbox — Manipulate mailboxes in various formats
+18.4.1. Mailbox objects
+18.4.1.1. Maildir
+18.4.1.2. mbox
+18.4.1.3. MH
+18.4.1.4. Babyl
+18.4.1.5. MMDF
+18.4.2. Message objects
+18.4.2.1. MaildirMessage
+18.4.2.2. mboxMessage
+18.4.2.3. MHMessage
+18.4.2.4. BabylMessage
+18.4.2.5. MMDFMessage
+18.4.3. Exceptions
+18.4.4. Examples
+18.5. mimetypes — Map filenames to MIME types
+18.5.1. MimeTypes Objects
+18.6. base64 — RFC 3548: Base16, Base32, Base64 Data Encodings
+18.7. binhex — Encode and decode binhex4 files
+18.7.1. Notes
+18.8. binascii — Convert between binary and ASCII
+18.9. quopri — Encode and decode MIME quoted-printable data
+18.10. uu — Encode and decode uuencode files
+19. Structured Markup Processing Tools
+19.1. html.parser — Simple HTML and XHTML parser
+19.1.1. Example HTML Parser Application
+19.2. html.entities — Definitions of HTML general entities
+19.3. xml.parsers.expat — Fast XML parsing using Expat
+19.3.1. XMLParser Objects
+19.3.2. ExpatError Exceptions
+19.3.3. Example
+19.3.4. Content Model Descriptions
+19.3.5. Expat error constants
+19.4. xml.dom — The Document Object Model API
+19.4.1. Module Contents
+19.4.2. Objects in the DOM
+19.4.2.1. DOMImplementation Objects
+19.4.2.2. Node Objects
+19.4.2.3. NodeList Objects
+19.4.2.4. DocumentType Objects
+19.4.2.5. Document Objects
+19.4.2.6. Element Objects
+19.4.2.7. Attr Objects
+19.4.2.8. NamedNodeMap Objects
+19.4.2.9. Comment Objects
+19.4.2.10. Text and CDATASection Objects
+19.4.2.11. ProcessingInstruction Objects
+19.4.2.12. Exceptions
+19.4.3. Conformance
+19.4.3.1. Type Mapping
+19.4.3.2. Accessor Methods
+19.5. xml.dom.minidom — Lightweight DOM implementation
+19.5.1. DOM Objects
+19.5.2. DOM Example
+19.5.3. minidom and the DOM standard
+19.6. xml.dom.pulldom — Support for building partial DOM trees
+19.6.1. DOMEventStream Objects
+19.7. xml.sax — Support for SAX2 parsers
+19.7.1. SAXException Objects
+19.8. xml.sax.handler — Base classes for SAX handlers
+19.8.1. ContentHandler Objects
+19.8.2. DTDHandler Objects
+19.8.3. EntityResolver Objects
+19.8.4. ErrorHandler Objects
+19.9. xml.sax.saxutils — SAX Utilities
+19.10. xml.sax.xmlreader — Interface for XML parsers
+19.10.1. XMLReader Objects
+19.10.2. IncrementalParser Objects
+19.10.3. Locator Objects
+19.10.4. InputSource Objects
+19.10.5. The Attributes Interface
+19.10.6. The AttributesNS Interface
+19.11. xml.etree.ElementTree — The ElementTree XML API
+19.11.1. Functions
+19.11.2. The Element Interface
+19.11.3. ElementTree Objects
+19.11.4. QName Objects
+19.11.5. TreeBuilder Objects
+19.11.6. XMLTreeBuilder Objects
+20. Internet Protocols and Support
+20.1. webbrowser — Convenient Web-browser controller
+20.1.1. Browser Controller Objects
+20.2. cgi — Common Gateway Interface support
+20.2.1. Introduction
+20.2.2. Using the cgi module
+20.2.3. Higher Level Interface
+20.2.4. Functions
+20.2.5. Caring about security
+20.2.6. Installing your CGI script on a Unix system
+20.2.7. Testing your CGI script
+20.2.8. Debugging CGI scripts
+20.2.9. Common problems and solutions
+20.3. cgitb — Traceback manager for CGI scripts
+20.4. wsgiref — WSGI Utilities and Reference Implementation
+20.4.1. wsgiref.util – WSGI environment utilities
+20.4.2. wsgiref.headers – WSGI response header tools
+20.4.3. wsgiref.simple_server – a simple WSGI HTTP server
+20.4.4. wsgiref.validate — WSGI conformance checker
+20.4.5. wsgiref.handlers – server/gateway base classes
+20.4.6. Examples
+20.5. urllib.request — extensible library for opening URLs
+20.5.1. Request Objects
+20.5.2. OpenerDirector Objects
+20.5.3. BaseHandler Objects
+20.5.4. HTTPRedirectHandler Objects
+20.5.5. HTTPCookieProcessor Objects
+20.5.6. ProxyHandler Objects
+20.5.7. HTTPPasswordMgr Objects
+20.5.8. AbstractBasicAuthHandler Objects
+20.5.9. HTTPBasicAuthHandler Objects
+20.5.10. ProxyBasicAuthHandler Objects
+20.5.11. AbstractDigestAuthHandler Objects
+20.5.12. HTTPDigestAuthHandler Objects
+20.5.13. ProxyDigestAuthHandler Objects
+20.5.14. HTTPHandler Objects
+20.5.15. HTTPSHandler Objects
+20.5.16. FileHandler Objects
+20.5.17. FTPHandler Objects
+20.5.18. CacheFTPHandler Objects
+20.5.19. UnknownHandler Objects
+20.5.20. HTTPErrorProcessor Objects
+20.5.21. Examples
+20.5.22. urllib.request Restrictions
+20.6. urllib.response — Response classes used by urllib.
+20.7. urllib.parse — Parse URLs into components
+20.7.1. Results of urlparse() and urlsplit()
+20.8. urllib.error — Exception classes raised by urllib.request
+20.9. urllib.robotparser — Parser for robots.txt
+20.10. http.client — HTTP protocol client
+20.10.1. HTTPConnection Objects
+20.10.2. HTTPResponse Objects
+20.10.3. Examples
+20.10.4. HTTPMessage Objects
+20.11. ftplib — FTP protocol client
+20.11.1. FTP Objects
+20.12. poplib — POP3 protocol client
+20.12.1. POP3 Objects
+20.12.2. POP3 Example
+20.13. imaplib — IMAP4 protocol client
+20.13.1. IMAP4 Objects
+20.13.2. IMAP4 Example
+20.14. nntplib — NNTP protocol client
+20.14.1. NNTP Objects
+20.15. smtplib — SMTP protocol client
+20.15.1. SMTP Objects
+20.15.2. SMTP Example
+20.16. smtpd — SMTP Server
+20.16.1. SMTPServer Objects
+20.16.2. DebuggingServer Objects
+20.16.3. PureProxy Objects
+20.16.4. MailmanProxy Objects
+20.17. telnetlib — Telnet client
+20.17.1. Telnet Objects
+20.17.2. Telnet Example
+20.18. uuid — UUID objects according to RFC 4122
+20.18.1. Example
+20.19. socketserver — A framework for network servers
+20.19.1. Server Creation Notes
+20.19.2. Server Objects
+20.19.3. RequestHandler Objects
+20.19.4. Examples
+20.19.4.1. socketserver.TCPServer Example
+20.19.4.2. socketserver.UDPServer Example
+20.19.4.3. Asynchronous Mixins
+20.20. http.server — HTTP servers
+20.21. http.cookies — HTTP state management
+20.21.1. Cookie Objects
+20.21.2. Morsel Objects
+20.21.3. Example
+20.22. http.cookiejar — Cookie handling for HTTP clients
+20.22.1. CookieJar and FileCookieJar Objects
+20.22.2. FileCookieJar subclasses and co-operation with web browsers
+20.22.3. CookiePolicy Objects
+20.22.4. DefaultCookiePolicy Objects
+20.22.5. Cookie Objects
+20.22.6. Examples
+20.23. xmlrpc.client — XML-RPC client access
+20.23.1. ServerProxy Objects
+20.23.2. DateTime Objects
+20.23.3. Binary Objects
+20.23.4. Fault Objects
+20.23.5. ProtocolError Objects
+20.23.6. MultiCall Objects
+20.23.7. Convenience Functions
+20.23.8. Example of Client Usage
+20.23.9. Example of Client and Server Usage
+20.24. xmlrpc.server — Basic XML-RPC servers
+20.24.1. SimpleXMLRPCServer Objects
+20.24.1.1. SimpleXMLRPCServer Example
+20.24.2. CGIXMLRPCRequestHandler
+20.24.3. Documenting XMLRPC server
+20.24.4. DocXMLRPCServer Objects
+20.24.5. DocCGIXMLRPCRequestHandler
+21. Multimedia Services
+21.1. audioop — Manipulate raw audio data
+21.2. aifc — Read and write AIFF and AIFC files
+21.3. sunau — Read and write Sun AU files
+21.3.1. AU_read Objects
+21.3.2. AU_write Objects
+21.4. wave — Read and write WAV files
+21.4.1. Wave_read Objects
+21.4.2. Wave_write Objects
+21.5. chunk — Read IFF chunked data
+21.6. colorsys — Conversions between color systems
+21.7. imghdr — Determine the type of an image
+21.8. sndhdr — Determine type of sound file
+21.9. ossaudiodev — Access to OSS-compatible audio devices
+21.9.1. Audio Device Objects
+21.9.2. Mixer Device Objects
+22. Internationalization
+22.1. gettext — Multilingual internationalization services
+22.1.1. GNU gettext API
+22.1.2. Class-based API
+22.1.2.1. The NullTranslations class
+22.1.2.2. The GNUTranslations class
+22.1.2.3. Solaris message catalog support
+22.1.2.4. The Catalog constructor
+22.1.3. Internationalizing your programs and modules
+22.1.3.1. Localizing your module
+22.1.3.2. Localizing your application
+22.1.3.3. Changing languages on the fly
+22.1.3.4. Deferred translations
+22.1.4. Acknowledgements
+22.2. locale — Internationalization services
+22.2.1. Background, details, hints, tips and caveats
+22.2.2. For extension writers and programs that embed Python
+22.2.3. Access to message catalogs
+23. Program Frameworks
+23.1. cmd — Support for line-oriented command interpreters
+23.1.1. Cmd Objects
+23.2. shlex — Simple lexical analysis
+23.2.1. shlex Objects
+23.2.2. Parsing Rules
+24. Graphical User Interfaces with Tk
+24.1. tkinter — Python interface to Tcl/Tk
+24.1.1. Tkinter Modules
+24.1.2. Tkinter Life Preserver
+24.1.2.1. How To Use This Section
+24.1.2.2. A Simple Hello World Program
+24.1.3. A (Very) Quick Look at Tcl/Tk
+24.1.4. Mapping Basic Tk into Tkinter
+24.1.5. How Tk and Tkinter are Related
+24.1.6. Handy Reference
+24.1.6.1. Setting Options
+24.1.6.2. The Packer
+24.1.6.3. Packer Options
+24.1.6.4. Coupling Widget Variables
+24.1.6.5. The Window Manager
+24.1.6.6. Tk Option Data Types
+24.1.6.7. Bindings and Events
+24.1.6.8. The index Parameter
+24.1.6.9. Images
+24.2. tkinter.ttk — Tk themed widgets
+24.2.1. Using Ttk
+24.2.2. Ttk Widgets
+24.2.3. Widget
+24.2.3.1. Standard Options
+24.2.3.2. Scrollable Widget Options
+24.2.3.3. Label Options
+24.2.3.4. Compatibility Options
+24.2.3.5. Widget States
+24.2.3.6. ttk.Widget
+24.2.4. Combobox
+24.2.4.1. Options
+24.2.4.2. Virtual events
+24.2.4.3. ttk.Combobox
+24.2.5. Notebook
+24.2.5.1. Options
+24.2.5.2. Tab Options
+24.2.5.3. Tab Identifiers
+24.2.5.4. Virtual Events
+24.2.5.5. ttk.Notebook
+24.2.6. Progressbar
+24.2.6.1. Options
+24.2.6.2. ttk.Progressbar
+24.2.7. Separator
+24.2.7.1. Options
+24.2.8. Sizegrip
+24.2.8.1. Platform-specific notes
+24.2.8.2. Bugs
+24.2.9. Treeview
+24.2.9.1. Options
+24.2.9.2. Item Options
+24.2.9.3. Tag Options
+24.2.9.4. Column Identifiers
+24.2.9.5. Virtual Events
+24.2.9.6. ttk.Treeview
+24.2.10. Ttk Styling
+24.2.10.1. Layouts
+24.3. tkinter.tix — Extension widgets for Tk
+24.3.1. Using Tix
+24.3.2. Tix Widgets
+24.3.2.1. Basic Widgets
+24.3.2.2. File Selectors
+24.3.2.3. Hierarchical ListBox
+24.3.2.4. Tabular ListBox
+24.3.2.5. Manager Widgets
+24.3.2.6. Image Types
+24.3.2.7. Miscellaneous Widgets
+24.3.2.8. Form Geometry Manager
+24.3.3. Tix Commands
+24.4. tkinter.scrolledtext — Scrolled Text Widget
+24.5. turtle — Turtle graphics for Tk
+24.5.1. Introduction
+24.5.2. Overview over available Turtle and Screen methods
+24.5.2.1. Turtle methods
+24.5.2.2. Methods of TurtleScreen/Screen
+24.5.3. Methods of RawTurtle/Turtle and corresponding functions
+24.5.3.1. Turtle motion
+24.5.3.2. Tell Turtle’s state
+24.5.3.3. Settings for measurement
+24.5.3.4. Pen control
+24.5.3.4.1. Drawing state
+24.5.3.4.2. Color control
+24.5.3.4.3. Filling
+24.5.3.4.4. More drawing control
+24.5.3.5. Turtle state
+24.5.3.5.1. Visibility
+24.5.3.5.2. Appearance
+24.5.3.6. Using events
+24.5.3.7. Special Turtle methods
+24.5.3.8. Excursus about the use of compound shapes
+24.5.4. Methods of TurtleScreen/Screen and corresponding functions
+24.5.4.1. Window control
+24.5.4.2. Animation control
+24.5.4.3. Using screen events
+24.5.4.4. Input methods
+24.5.4.5. Settings and special methods
+24.5.4.6. Methods specific to Screen, not inherited from TurtleScreen
+24.5.5. The public classes of the module turtle
+24.5.6. Help and configuration
+24.5.6.1. How to use help
+24.5.6.2. Translation of docstrings into different languages
+24.5.6.3. How to configure Screen and Turtles
+24.5.7. Demo scripts
+24.5.8. Changes since Python 2.6
+24.5.9. Changes since Python 3.0
+24.6. IDLE
+24.6.1. Menus
+24.6.1.1. File menu
+24.6.1.2. Edit menu
+24.6.1.3. Windows menu
+24.6.1.4. Debug menu (in the Python Shell window only)
+24.6.2. Basic editing and navigation
+24.6.2.1. Automatic indentation
+24.6.2.2. Python Shell window
+24.6.3. Syntax colors
+24.6.4. Startup
+24.6.4.1. Command line usage
+24.7. Other Graphical User Interface Packages
+25. Development Tools
+25.1. pydoc — Documentation generator and online help system
+25.2. doctest — Test interactive Python examples
+25.2.1. Simple Usage: Checking Examples in Docstrings
+25.2.2. Simple Usage: Checking Examples in a Text File
+25.2.3. How It Works
+25.2.3.1. Which Docstrings Are Examined?
+25.2.3.2. How are Docstring Examples Recognized?
+25.2.3.3. What’s the Execution Context?
+25.2.3.4. What About Exceptions?
+25.2.3.5. Option Flags and Directives
+25.2.3.6. Warnings
+25.2.4. Basic API
+25.2.5. Unittest API
+25.2.6. Advanced API
+25.2.6.1. DocTest Objects
+25.2.6.2. Example Objects
+25.2.6.3. DocTestFinder objects
+25.2.6.4. DocTestParser objects
+25.2.6.5. DocTestRunner objects
+25.2.6.6. OutputChecker objects
+25.2.7. Debugging
+25.2.8. Soapbox
+25.3. unittest — Unit testing framework
+25.3.1. Basic example
+25.3.2. Organizing test code
+25.3.3. Re-using old test code
+25.3.4. Skipping tests and expected failures
+25.3.5. Classes and functions
+25.3.5.1. Test cases
+25.3.5.2. Grouping tests
+25.3.5.3. Loading and running tests
+25.4. 2to3 - Automated Python 2 to 3 code translation
+25.4.1. Using 2to3
+25.4.2. Fixers
+25.4.3. lib2to3 - 2to3’s library
+25.5. test — Regression tests package for Python
+25.5.1. Writing Unit Tests for the test package
+25.5.2. Running tests using test.regrtest
+25.6. test.support — Utility functions for tests
+26. Debugging and Profiling
+26.1. bdb — Debugger framework
+26.2. pdb — The Python Debugger
+26.3. Debugger Commands
+26.4. The Python Profilers
+26.4.1. Introduction to the profilers
+26.4.2. Instant User’s Manual
+26.4.3. What Is Deterministic Profiling?
+26.4.4. Reference Manual – profile and cProfile
+26.4.4.1. The Stats Class
+26.4.5. Limitations
+26.4.6. Calibration
+26.4.7. Extensions — Deriving Better Profilers
+26.5. timeit — Measure execution time of small code snippets
+26.5.1. Command Line Interface
+26.5.2. Examples
+26.6. trace — Trace or track Python statement execution
+26.6.1. Command Line Usage
+26.6.2. Programming Interface
+27. Python Runtime Services
+27.1. sys — System-specific parameters and functions
+27.2. builtins — Built-in objects
+27.3. __main__ — Top-level script environment
+27.4. warnings — Warning control
+27.4.1. Warning Categories
+27.4.2. The Warnings Filter
+27.4.3. Temporarily Suppressing Warnings
+27.4.4. Testing Warnings
+27.4.5. Available Functions
+27.4.6. Available Context Managers
+27.5. contextlib — Utilities for with-statement contexts
+27.6. abc — Abstract Base Classes
+27.7. atexit — Exit handlers
+27.7.1. atexit Example
+27.8. traceback — Print or retrieve a stack traceback
+27.8.1. Traceback Examples
+27.9. __future__ — Future statement definitions
+27.10. gc — Garbage Collector interface
+27.11. inspect — Inspect live objects
+27.11.1. Types and members
+27.11.2. Retrieving source code
+27.11.3. Classes and functions
+27.11.4. The interpreter stack
+27.12. site — Site-specific configuration hook
+27.13. fpectl — Floating point exception control
+27.13.1. Example
+27.13.2. Limitations and other considerations
+28. Custom Python Interpreters
+28.1. code — Interpreter base classes
+28.1.1. Interactive Interpreter Objects
+28.1.2. Interactive Console Objects
+28.2. codeop — Compile Python code
+29. Importing Modules
+29.1. imp — Access the import internals
+29.1.1. Examples
+29.2. zipimport — Import modules from Zip archives
+29.2.1. zipimporter Objects
+29.2.2. Examples
+29.3. pkgutil — Package extension utility
+29.4. modulefinder — Find modules used by a script
+29.4.1. Example usage of ModuleFinder
+29.5. runpy — Locating and executing Python modules
+29.6. importlib – An implementation of import
+29.6.1. Introduction
+29.6.2. Functions
+29.6.3. importlib.abc – Abstract base classes related to import
+29.6.4. importlib.machinery – Importers and path hooks
+29.6.5. importlib.util – Utility code for importers
+29.6.6. Example
+30. Python Language Services
+30.1. parser — Access Python parse trees
+30.1.1. Creating ST Objects
+30.1.2. Converting ST Objects
+30.1.3. Queries on ST Objects
+30.1.4. Exceptions and Error Handling
+30.1.5. ST Objects
+30.1.6. Examples
+30.1.6.1. Emulation of compile()
+30.1.6.2. Information Discovery
+30.2. Abstract Syntax Trees
+30.2.1. Node classes
+30.2.2. Abstract Grammar
+30.2.3. ast Helpers
+30.3. symtable — Access to the compiler’s symbol tables
+30.3.1. Generating Symbol Tables
+30.3.2. Examining Symbol Tables
+30.4. symbol — Constants used with Python parse trees
+30.5. token — Constants used with Python parse trees
+30.6. keyword — Testing for Python keywords
+30.7. tokenize — Tokenizer for Python source
+30.8. tabnanny — Detection of ambiguous indentation
+30.9. pyclbr — Python class browser support
+30.9.1. Class Objects
+30.9.2. Function Objects
+30.10. py_compile — Compile Python source files
+30.11. compileall — Byte-compile Python libraries
+30.12. dis — Disassembler for Python bytecode
+30.12.1. Python Bytecode Instructions
+30.13. pickletools — Tools for pickle developers
+30.14. distutils — Building and installing Python modules
+31. Miscellaneous Services
+31.1. formatter — Generic output formatting
+31.1.1. The Formatter Interface
+31.1.2. Formatter Implementations
+31.1.3. The Writer Interface
+31.1.4. Writer Implementations
+32. MS Windows Specific Services
+32.1. msilib — Read and write Microsoft Installer files
+32.1.1. Database Objects
+32.1.2. View Objects
+32.1.3. Summary Information Objects
+32.1.4. Record Objects
+32.1.5. Errors
+32.1.6. CAB Objects
+32.1.7. Directory Objects
+32.1.8. Features
+32.1.9. GUI classes
+32.1.10. Precomputed tables
+32.2. msvcrt – Useful routines from the MS VC++ runtime
+32.2.1. File Operations
+32.2.2. Console I/O
+32.2.3. Other Functions
+32.3. winreg – Windows registry access
+32.3.1. Registry Handle Objects
+32.4. winsound — Sound-playing interface for Windows
+33. Unix Specific Services
+33.1. posix — The most common POSIX system calls
+33.1.1. Large File Support
+33.1.2. Notable Module Contents
+33.2. pwd — The password database
+33.3. spwd — The shadow password database
+33.4. grp — The group database
+33.5. crypt — Function to check Unix passwords
+33.6. termios — POSIX style tty control
+33.6.1. Example
+33.7. tty — Terminal control functions
+33.8. pty — Pseudo-terminal utilities
+33.9. fcntl — The fcntl() and ioctl() system calls
+33.10. pipes — Interface to shell pipelines
+33.10.1. Template Objects
+33.11. resource — Resource usage information
+33.11.1. Resource Limits
+33.11.2. Resource Usage
+33.12. nis — Interface to Sun’s NIS (Yellow Pages)
+33.13. syslog — Unix syslog library routines
+34. Undocumented Modules
+34.1. Platform specific modules
+Extending and Embedding the Python Interpreter
+1. Extending Python with C or C++
+1.1. A Simple Example
+1.2. Intermezzo: Errors and Exceptions
+1.3. Back to the Example
+1.4. The Module’s Method Table and Initialization Function
+1.5. Compilation and Linkage
+1.6. Calling Python Functions from C
+1.7. Extracting Parameters in Extension Functions
+1.8. Keyword Parameters for Extension Functions
+1.9. Building Arbitrary Values
+1.10. Reference Counts
+1.10.1. Reference Counting in Python
+1.10.2. Ownership Rules
+1.10.3. Thin Ice
+1.10.4. NULL Pointers
+1.11. Writing Extensions in C++
+1.12. Providing a C API for an Extension Module
+2. Defining New Types
+2.1. The Basics
+2.1.1. Adding data and methods to the Basic example
+2.1.2. Providing finer control over data attributes
+2.1.3. Supporting cyclic garbage collection
+2.1.4. Subclassing other types
+2.2. Type Methods
+2.2.1. Finalization and De-allocation
+2.2.2. Object Presentation
+2.2.3. Attribute Management
+2.2.3.1. Generic Attribute Management
+2.2.3.2. Type-specific Attribute Management
+2.2.4. Object Comparison
+2.2.5. Abstract Protocol Support
+2.2.6. Weak Reference Support
+2.2.7. More Suggestions
+3. Building C and C++ Extensions with distutils
+3.1. Distributing your extension modules
+4. Building C and C++ Extensions on Windows
+4.1. A Cookbook Approach
+4.2. Differences Between Unix and Windows
+4.3. Using DLLs in Practice
+5. Embedding Python in Another Application
+5.1. Very High Level Embedding
+5.2. Beyond Very High Level Embedding: An overview
+5.3. Pure Embedding
+5.4. Extending Embedded Python
+5.5. Embedding Python in C++
+5.6. Linking Requirements
+Python/C API Reference Manual
+Introduction
+Include Files
+Objects, Types and Reference Counts
+Reference Counts
+Reference Count Details
+Types
+Exceptions
+Embedding Python
+Debugging Builds
+The Very High Level Layer
+Reference Counting
+Exception Handling
+Exception Objects
+Standard Exceptions
+Utilities
+Operating System Utilities
+System Functions
+Process Control
+Importing Modules
+Data marshalling support
+Parsing arguments and building values
+String conversion and formatting
+Reflection
+Abstract Objects Layer
+Object Protocol
+Number Protocol
+Sequence Protocol
+Mapping Protocol
+Iterator Protocol
+Buffer Protocol
+Concrete Objects Layer
+Fundamental Objects
+Type Objects
+The None Object
+Numeric Objects
+Integer Objects
+Boolean Objects
+Floating Point Objects
+Complex Number Objects
+Complex Numbers as C Structures
+Complex Numbers as Python Objects
+Sequence Objects
+Bytes Objects
+Byte Array Objects
+Unicode Objects and Codecs
+Unicode Objects
+Built-in Codecs
+Methods and Slot Functions
+Buffer Objects
+Buffer related functions
+MemoryView objects
+Tuple Objects
+List Objects
+Mapping Objects
+Dictionary Objects
+Other Objects
+Set Objects
+Function Objects
+Instance Method Objects
+Method Objects
+File Objects
+Module Objects
+Initializing C modules
+Iterator Objects
+Descriptor Objects
+Slice Objects
+Weak Reference Objects
+Capsules
+CObjects
+Cell Objects
+Generator Objects
+DateTime Objects
+Initialization, Finalization, and Threads
+Thread State and the Global Interpreter Lock
+Asynchronous Notifications
+Profiling and Tracing
+Advanced Debugger Support
+Memory Management
+Overview
+Memory Interface
+Examples
+Object Implementation Support
+Allocating Objects on the Heap
+Common Object Structures
+Type Objects
+Number Object Structures
+Mapping Object Structures
+Sequence Object Structures
+Buffer Object Structures
+Supporting Cyclic Garbage Collection
+Distributing Python Modules
+1. An Introduction to Distutils
+1.1. Concepts & Terminology
+1.2. A Simple Example
+1.3. General Python terminology
+1.4. Distutils-specific terminology
+2. Writing the Setup Script
+2.1. Listing whole packages
+2.2. Listing individual modules
+2.3. Describing extension modules
+2.3.1. Extension names and packages
+2.3.2. Extension source files
+2.3.3. Preprocessor options
+2.3.4. Library options
+2.3.5. Other options
+2.4. Relationships between Distributions and Packages
+2.5. Installing Scripts
+2.6. Installing Package Data
+2.7. Installing Additional Files
+2.8. Additional meta-data
+2.9. Debugging the setup script
+3. Writing the Setup Configuration File
+4. Creating a Source Distribution
+4.1. Specifying the files to distribute
+4.2. Manifest-related options
+5. Creating Built Distributions
+5.1. Creating dumb built distributions
+5.2. Creating RPM packages
+5.3. Creating Windows Installers
+5.4. Cross-compiling on Windows
+5.4.1. The Postinstallation script
+5.5. Vista User Access Control (UAC)
+6. Registering with the Package Index
+6.1. The .pypirc file
+7. Uploading Packages to the Package Index
+7.1. PyPI package display
+8. Examples
+8.1. Pure Python distribution (by module)
+8.2. Pure Python distribution (by package)
+8.3. Single extension module
+8.4. Checking a package
+9. Extending Distutils
+9.1. Integrating new commands
+9.2. Adding new distribution types
+10. Command Reference
+10.1. Installing modules: the install command family
+10.1.1. install_data
+10.1.2. install_scripts
+10.2. Creating a source distribution: the sdist command
+11. API Reference
+11.1. distutils.core — Core Distutils functionality
+11.2. distutils.ccompiler — CCompiler base class
+11.3. distutils.unixccompiler — Unix C Compiler
+11.4. distutils.msvccompiler — Microsoft Compiler
+11.5. distutils.bcppcompiler — Borland Compiler
+11.6. distutils.cygwincompiler — Cygwin Compiler
+11.7. distutils.emxccompiler — OS/2 EMX Compiler
+11.8. distutils.archive_util — Archiving utilities
+11.9. distutils.dep_util — Dependency checking
+11.10. distutils.dir_util — Directory tree operations
+11.11. distutils.file_util — Single file operations
+11.12. distutils.util — Miscellaneous other utility functions
+11.13. distutils.dist — The Distribution class
+11.14. distutils.extension — The Extension class
+11.15. distutils.debug — Distutils debug mode
+11.16. distutils.errors — Distutils exceptions
+11.17. distutils.fancy_getopt — Wrapper around the standard getopt module
+11.18. distutils.filelist — The FileList class
+11.19. distutils.log — Simple PEP 282-style logging
+11.20. distutils.spawn — Spawn a sub-process
+11.21. distutils.sysconfig — System configuration information
+11.22. distutils.text_file — The TextFile class
+11.23. distutils.version — Version number classes
+11.24. distutils.cmd — Abstract base class for Distutils commands
+11.25. distutils.command — Individual Distutils commands
+11.26. distutils.command.bdist — Build a binary installer
+11.27. distutils.command.bdist_packager — Abstract base class for packagers
+11.28. distutils.command.bdist_dumb — Build a “dumb” installer
+11.29. distutils.command.bdist_msi — Build a Microsoft Installer binary package
+11.30. distutils.command.bdist_rpm — Build a binary distribution as a Redhat RPM and SRPM
+11.31. distutils.command.bdist_wininst — Build a Windows installer
+11.32. distutils.command.sdist — Build a source distribution
+11.33. distutils.command.build — Build all files of a package
+11.34. distutils.command.build_clib — Build any C libraries in a package
+11.35. distutils.command.build_ext — Build any extensions in a package
+11.36. distutils.command.build_py — Build the .py/.pyc files of a package
+11.37. distutils.command.build_scripts — Build the scripts of a package
+11.38. distutils.command.clean — Clean a package build area
+11.39. distutils.command.config — Perform package configuration
+11.40. distutils.command.install — Install a package
+11.41. distutils.command.install_data — Install data files from a package
+11.42. distutils.command.install_headers — Install C/C++ header files from a package
+11.43. distutils.command.install_lib — Install library files from a package
+11.44. distutils.command.install_scripts — Install script files from a package
+11.45. distutils.command.register — Register a module with the Python Package Index
+11.46. distutils.command.check — Check the meta-data of a package
+11.47. Creating a new Distutils command
+Installing Python Modules
+Introduction
+Best case: trivial installation
+The new standard: Distutils
+Standard Build and Install
+Platform variations
+Splitting the job up
+How building works
+How installation works
+Alternate Installation
+Alternate installation: the home scheme
+Alternate installation: Unix (the prefix scheme)
+Alternate installation: Windows (the prefix scheme)
+Custom Installation
+Modifying Python’s Search Path
+Distutils Configuration Files
+Location and names of config files
+Syntax of config files
+Building Extensions: Tips and Tricks
+Tweaking compiler/linker flags
+Using non-Microsoft compilers on Windows
+Borland/CodeGear C++
+GNU C / Cygwin / MinGW
+Documenting Python
+1. Introduction
+2. Style Guide
+3. reStructuredText Primer
+3.1. Paragraphs
+3.2. Inline markup
+3.3. Lists and Quotes
+3.4. Source Code
+3.5. Hyperlinks
+3.5.1. External links
+3.5.2. Internal links
+3.6. Sections
+3.7. Explicit Markup
+3.8. Directives
+3.9. Footnotes
+3.10. Comments
+3.11. Source encoding
+3.12. Gotchas
+4. Additional Markup Constructs
+4.1. Meta-information markup
+4.2. Module-specific markup
+4.3. Information units
+4.4. Showing code examples
+4.5. Inline markup
+4.6. Cross-linking markup
+4.7. Paragraph-level markup
+4.8. Table-of-contents markup
+4.9. Index-generating markup
+4.10. Grammar production displays
+4.11. Substitutions
+5. Differences to the LaTeX markup
+5.1. Inline markup
+5.2. Information units
+5.3. Structure
+Python HOWTOs
+Python Advocacy HOWTO
+Reasons to Use Python
+Programmability
+Prototyping
+Simplicity and Ease of Understanding
+Java Integration
+Arguments and Rebuttals
+Useful Resources
+Porting Extension Modules to 3.0
+Conditional compilation
+Changes to Object APIs
+str/unicode Unification
+long/int Unification
+Module initialization and state
+Other options
+Curses Programming with Python
+What is curses?
+The Python curses module
+Starting and ending a curses application
+Windows and Pads
+Displaying Text
+Attributes and Color
+User Input
+For More Information
+Idioms and Anti-Idioms in Python
+Language Constructs You Should Not Use
+from module import *
+Inside Function Definitions
+At Module Level
+When It Is Just Fine
+from module import name1, name2
+except:
+Exceptions
+Using the Batteries
+Using Backslash to Continue Statements
+Functional Programming HOWTO
+Introduction
+Formal provability
+Modularity
+Ease of debugging and testing
+Composability
+Iterators
+Data Types That Support Iterators
+Generator expressions and list comprehensions
+Generators
+Passing values into a generator
+Built-in functions
+The itertools module
+Creating new iterators
+Calling functions on elements
+Selecting elements
+Grouping elements
+The functools module
+The operator module
+The functional module
+Small functions and the lambda expression
+Revision History and Acknowledgements
+References
+General
+Python-specific
+Python documentation
+Regular Expression HOWTO
+Introduction
+Simple Patterns
+Matching Characters
+Repeating Things
+Using Regular Expressions
+Compiling Regular Expressions
+The Backslash Plague
+Performing Matches
+Module-Level Functions
+Compilation Flags
+More Pattern Power
+More Metacharacters
+Grouping
+Non-capturing and Named Groups
+Lookahead Assertions
+Modifying Strings
+Splitting Strings
+Search and Replace
+Common Problems
+Use String Methods
+match() versus search()
+Greedy versus Non-Greedy
+Not Using re.VERBOSE
+Feedback
+Socket Programming HOWTO
+Sockets
+History
+Creating a Socket
+IPC
+Using a Socket
+Binary Data
+Disconnecting
+When Sockets Die
+Non-blocking Sockets
+Performance
+Unicode HOWTO
+Introduction to Unicode
+History of Character Codes
+Definitions
+Encodings
+References
+Python’s Unicode Support
+The String Type
+Converting to Bytes
+Unicode Literals in Python Source Code
+Unicode Properties
+References
+Reading and Writing Unicode Data
+Unicode filenames
+Tips for Writing Unicode-aware Programs
+References
+Revision History and Acknowledgements
+HOWTO Fetch Internet Resources Using The urllib Package
+Introduction
+Fetching URLs
+Data
+Headers
+Handling Exceptions
+URLError
+HTTPError
+Error Codes
+Wrapping it Up
+Number 1
+Number 2
+info and geturl
+Openers and Handlers
+Basic Authentication
+Proxies
+Sockets and Layers
+Footnotes
+HOWTO Use Python in the web
+The low-level view
+Common Gateway Interface
+Simple script for testing CGI
+Setting up CGI on your own server
+Common problems with CGI scripts
+mod_python
+FastCGI and SCGI
+Setting up FastCGI
+mod_wsgi
+Step back: WSGI
+WSGI Servers
+Case study: MoinMoin
+Model-view-controller
+Ingredients for web sites
+Templates
+Data persistence
+Frameworks
+Some notable frameworks
+Django
+TurboGears
+Other notable frameworks
+Glossary
+About these documents
+Contributors to the Python Documentation
+Reporting Bugs in Python
+Copyright
+História e Licença
+História do software
+Termos e condições de acesso ou utilização Python
+Licenças e Agradecimentos para Software Incorporado
+Mersenne Twister
+Sockets
+Controle de exceção de ponto flutuante
+Serviços de socket assíncronos
+Gerenciamento de cookies
+Profiling
+Execução de rastreamento
+Funções UUencode e UUdecode
+XML Remote Procedure Calls
+test_epoll
+Select kqueue
+strtod e dtoa

@@ -1,0 +1,31 @@
+#pragma section-numbers off
+= Empresas que usam Python =
+
+Aqui os empresários poderão colocar as informações sobre as suas empresas, como Python os ajudou a aumentar os lucros. Os usuários do site também poderão colocar aqui o nome de empresas que usam Python no Brasil. A intenção dessa página é mostrar para outros empresários que Python é uma excelente ferramenta de trabalho.
+
+Uma lista de empresas de hospedagem web que suportam Python está disponível em HospedagemPython.
+
+== Empresas ==
+
+   * [http://www.cpqd.com.br/ CPqD] - O CPqD é o maior centro de TI e telecom da América Latina. Líder nacional no desenvolvimento de técnologias de comutação de voz e VoIP. A DSNG, Diretoria de Sistemas de Nova Geração, monitora centrais telefonicas NGN com um sistema em grande parte implementado em Python. 
+   * [http://www.serpro.gov.br Serpro] - Usa Python/Zope/Plone para a confecção rápida de portais Web. Principal ferramenta de sua Fábrica de Sítios.
+   * [http://www.haxent.com.br Haxent] - Usa Python no desenvolvimento de seus softwares para clientes.
+   * [http://www.async.com.br Async] - Implementa sistemas de gestão utilizando Python, baseados nos frameworks [http://www.async.com.br/projects/kiwi/ Kiwi] e [http://www.async.com.br/projects/indexedcatalog/ IndexedCatalog] (este último baseado no ZODB). Um dos seus produtos é um sistema de automação comercial escrito em Python, e disponível como software livre: [http://www.stoq.com.br/ Stoq]. Eu [http://www.async.com.br/~kiko/ Kiko] trabalho aqui.
+   * [http://www.conectiva.com.br Conectiva] - Usa Python para gerenciar os pacotes da distribuição Linux, checagem e geração de snapshots, e diversas ferramentas de uso interno.
+   * [http://www.gpr.com.br GPr Sistemas] - Desenvolve soluções em Python há mais de 4 anos, oferece treinamento em Python, e patrocinou a tradução do Tutorial do GvR para o Português. Também trabalhamos com desenvolvimento e hospedagem de aplicações Zope/Plone. Eu (RodrigoSenra) trabalho aqui.
+   * [http://www.hiperlogica.com.br Hiperlógica] / [http://www.hipercursos.com.br Hipercursos] - Uma das pioneiras do Brasil em desenvolvimento de soluções com Zope e a única empresa credenciada à fornecer certificados reconhecidos pela [http://www.zope.com Zope Corporation].
+   * [http://www.simplesconsultoria.com.br Simples Consultoria] - Empresa parceira da [http://www.hipercursos.com.br Hipercursos] fornece treinamentos em Python, Zope e Plone para todo o Brasil.
+   * [http://www.embratel.com.br/embratelonline Embratel] - Todas as interfaces do backbone e clientes internet são monitorados através de um sistema desenvolvido em Python. A idéia dessa ferramenta foi totalmente inspirada no [http://cricket.sourceforge.net Cricket], porem este não atendia a escalabilidade da rede. Varios outras sistemas de menor porte foram desenvolvidos usando Python, e varios scripts para controle e supervisão dos servidores foram feitos em Python. Eu (MarcoCatunda) fui o responsavel pela adoção de Python na Empresa.
+   * [http://www.samba-choro.com.br Agenda do Samba & Choro] Um dos mais antigos sites brasileiros e uma das principais referências musicais. Totalmente feito em Python e Zope.
+   * [http://www.paradigma.com.br Paradigma] Empresa líder em serviços Zope na América Latina. Desenvolve aplicações web com gestão de conteúdos, gestão de documentos, sites editoriais, gestão de conhecimentos, comércio eletrônico, etc. Fornece consultoria e treinamento em Zope & Plone, além de hospedagem Zope. 
+   * [http://www.propus.com.br Propus Software Livre] Uma empresa de Porto Alegre que utiliza Python na retaguarda de seus projetos e é lider na prestação de serviços de software livre para toda região sul do país. 
+   * [http://www.x3ng.com.br X3ng Web Technology] Empresa que trabalha com Zope/Plone/Python em Caxias do Sul-RS com atuação em todo o mundo através de parcerias com a comunidade.
+   * [http://www.katatudo.com.br Katatudo] Ferramenta de busca que utiliza Python em partes do backend e ferramentas administrativas do servidor de e-mails. Python também é utilizado em utilitários nas páginas de busca.
+   * [http://www.luz-ef.com Luz Engenharia Financeira] Empresa desenvolvedora de softwares financeiros (Risco de mercado e Controladoria), além de serviços de consultoria, utiliza python no sistema interno de atualização de dados (cotações e taxas), buscando-os na web e formatando-os para posterior uso no BD Oracle.  
+   * [http://www.coop-sp.com.br Coop - Cooperativa de Consumo] Maior cooperativa de consumo da américa latina, utiliza Python na manutenção do seu sistema de ERP e uma intranet em Plone. Eu (FabioRizzo) fui o responsável por implementar a linguagem.
+   * [http://www.alfalyncis.net AlfaLyncis Tecnologia] Somos uma empresa de São Paulo e trabalhamos com Python para desenvolver nossos projetos. Nossa atuação é na área de desenvolvimento de software e suporte técnico.
+   * [http://www.dualconsultores.com Dual Consultores] Consultoria e desenvolvimento (soluções em tecnologia).
+   * [http://ww.grameyer.com.br Grameyer Equipamentos Eletrônicos] Empresa fabricante de equipamentos eletrônicos para controle de energia elétrica. O portal interno (intranet) da empresa foi desenvolvido inteiramente em Python (+ PostgreSQL), além softwares e scripts para monitoração e controle dos servidores e rede. Também é usado no desenvolvimento de softwares específicos para os equipamentos produzidos.
+   * [http://www.dotx.com.br dotX Consultoria, Serviços e Conectividade] Empresa de Recife - PE. Presta consultoria e suporte em Software Livre. Utiliza Python no desenvolvimento de softwares para integração entre sistemas, provê treinamentos e também desenvolve soluções com o Servidor de Aplicações ZOPE e o Gerenciador de Conteúdo Plone.
+
+/!\ Fiquem à vontade para linkar o nome da sua empresa para uma página em separado (dentro do PythonBrasil ou fora, tanto faz) onde vocês poderão fazer um pouco de propaganda para garantir o leitinho das crianças :) .

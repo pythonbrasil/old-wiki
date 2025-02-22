@@ -1,0 +1,188 @@
+= Formatando XML com ElementTree =
+Uma busca rápida na web sobre como formatar um arquivo XML de forma que ele fique "bonito" para humanos resulta em poucas ocorrências. Com Python, uma das poucas coisas é um artigo de BruceEckel de 2003 - que também não dá a resposta.
+
+Felizmente temos vários geradores de XML na biblioteca padrão. E, para alterar um gerador de XML bem escrito de forma que ele insira quebras de linha e identação num arquivo XML são necessárias bem poucas alterações.
+
+Escolhi o ElementTree por ter um código python bem fácil de entender. Poderia ter herdado o ElementTree e feito as alterações necessárias na sub-classe, (o jeito "certo" ) - mas para o que eu precisava aqui, uma alteração do tipo "monkey patch" se prestava melhor.
+
+Como é CookBook, também fica exemplo de como fazer o Monkey Patching - sempre lembrando que todos os outros usuários do módulo alterado na mesma aplicação serão afetados. 
+
+== Formatador de XML ==
+
+{{{#!python
+#!/usr/bin/env python
+#coding: utf-8
+
+# Author: Firederich Lung, João S. O. Bueno
+
+# Copyright (c) 1999-2005 by Fredrik Lundh (geração de XML)
+#Copyrigjt (c) 2009 Fundação CPqD - Formatação do XML e partes auxiliares do script
+#
+# By obtaining, using, and/or copying this software and/or its
+# associated documentation, you agree that you have read, understood,
+# and will comply with the following terms and conditions:
+#
+# Permission to use, copy, modify, and distribute this software and
+# its associated documentation for any purpose and without fee is
+# hereby granted, provided that the above copyright notice appears in
+# all copies, and that both that copyright notice and this permission
+# notice appear in supporting documentation, and that the name of
+# Secret Labs AB or the author not be used in advertising or publicity
+# pertaining to distribution of the software without specific, written
+# prior permission.
+#
+# SECRET LABS AB AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANT-
+# ABILITY AND FITNESS.  IN NO EVENT SHALL SECRET LABS AB OR THE AUTHOR
+# BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY
+# DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+# WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+# ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
+# OF THIS SOFTWARE.
+# --------------------------------------------------------------------
+
+# Licensed to PSF under a Contributor Agreement.
+# See http://www.python.org/2.4/license for licensing details.
+
+"""
+ Modifies the XML generator in ElementTree in order to create
+ a "human-readable", indentend by level, XML output.
+ Can be used as a stand alone script, or to change ElementTree XML generation
+ on the fly  through a call to  "monkey_patch_etree" function.
+
+"""
+import xml.etree.ElementTree
+from xml.etree.ElementTree import Comment, _encode, ProcessingInstruction,\
+                           QName, fixtag, _escape_attrib, _escape_cdata
+
+def Etree_pretty__write(self, file, node, encoding, namespaces,
+                        level=0, identator="    "):
+    # write XML to file
+    tag = node.tag
+    if tag is Comment:
+        file.write(level * identator + "<!-- %s -->" % _escape_cdata(node.text, encoding))
+    elif tag is ProcessingInstruction:
+        file.write("<?%s?>" % _escape_cdata(node.text, encoding))
+    else:
+        items = node.items()
+        xmlns_items = [] # new namespaces in this scope
+        try:
+            if isinstance(tag, QName) or tag[:1] == "{":
+                tag, xmlns = fixtag(tag, namespaces)
+                if xmlns: xmlns_items.append(xmlns)
+        except TypeError:
+            _raise_serialization_error(tag)
+        file.write("\n" + level * identator + "<" + _encode(tag, encoding))
+        if items or xmlns_items:
+            items.sort() # lexical order
+            for k, v in items:
+                try:
+                    if isinstance(k, QName) or k[:1] == "{":
+                        k, xmlns = fixtag(k, namespaces)
+                        if xmlns: xmlns_items.append(xmlns)
+                except TypeError:
+                    _raise_serialization_error(k)
+                try:
+                    if isinstance(v, QName):
+                        v, xmlns = fixtag(v, namespaces)
+                        if xmlns: xmlns_items.append(xmlns)
+                except TypeError:
+                    _raise_serialization_error(v)
+                file.write(" %s=\"%s\"" % (_encode(k, encoding),
+                                            _escape_attrib(v, encoding)))
+            for k, v in xmlns_items:
+                file.write(" %s=\"%s\"" % (_encode(k, encoding),
+                                            _escape_attrib(v, encoding)))
+        if node.text or len(node):
+            file.write(">")
+            if node.text:
+                file.write(_escape_cdata(node.text.replace("\n", (level + 1) * identator + "\n"), encoding))
+            for n in node:
+                self._write(file, n, encoding, namespaces, level + 1, identator)
+            file.write("\n" + level * identator + "</" + _encode(tag, encoding) + ">")
+        else:
+            file.write(" />")
+        for k, v in xmlns_items:
+            del namespaces[v]
+    if node.tail:
+        file.write(_escape_cdata(node.tail.replace("\n", level * identator + "\n"), encoding))
+
+
+
+original__write = xml.etree.ElementTree.ElementTree._write
+def monkey_patch_etree():
+    """
+       Call this method to overwrite python's native library
+       xml.etree.ElementTree.ElementTree _write method in order to produce
+       humam-pleasant formated output
+    """
+    xml.etree.ElementTree.ElementTree._write = Etree_pretty__write
+
+def un_monkey_patch_etree():
+    """Use to restore default behavior to ElementTree's XML generation"""
+    xml.etree.ElementTree.ElementTree._write = original__write
+
+def de_tokenize(text):
+    """removes html tokens from the "&#195;" type """
+    r = re.compile(r"\&\#([0-9]{1,3})\;")
+    caracteres = set(r.findall(text))
+    textn = text
+    for caracter in caracteres:
+        caracter = int(caracter)
+        r = re.compile(r"\&\#%d\;" % caracter)
+        textn = r.subn(chr(caracter), textn)[0]
+    return textn
+
+
+
+if __name__ == "__main__":
+    import sys, re
+    if len(sys.argv) != 3:
+        sys.stderr.write("Usage: prettyxml.py <inputfile> <outputfile>\n")
+        sys.exit(1)
+
+    infile = open(sys.argv[1], "rt")
+    outfile = open(sys.argv[2], "wt")
+    monkey_patch_etree()
+    xmldata = xml.etree.ElementTree.parse(infile)
+    xmlstring = de_tokenize(xml.etree.ElementTree.tostring(xmldata.getroot()))
+    outfile.write(xmlstring)
+    outfile.close()
+
+
+}}}
+
+== Muita hora nessa calma ==
+
+Embora o código que gera XML acima possa "assustar", é bom lembrar que foram feitas poucas alterações em cima do código original da ElementTree, qeu só foi copiado e colado.
+
+Segue uma pequena listagem só com as diferenças entre o método _write do objeto Element de xml.etree.ElementTree e o méotodo que eu ponho em seu lugar - pode se observar que não fiz mais que inserir as uquberas de linha e espaçamento nos pontos em que eu gostaria:
+
+{{{#!diff
+--- orig.py     2009-02-09 11:12:44.000000000 -0200
++++ changed.py  2009-02-09 11:09:45.000000000 -0200
+@@ -1 +1,2 @@
+-def _write(self, file, node, encoding, namespaces):
++def Etree_pretty__write(self, file, node, encoding, namespaces,
++                        level=0, identator="    "):
+@@ -5 +6 @@
+-        file.write("<!-- %s -->" % _escape_cdata(node.text, encoding))
++        file.write(level * identator + "<!-- %s -->" % _escape_cdata(node.text, encoding))
+@@ -17 +18 @@
+-        file.write("<" + _encode(tag, encoding))
++        file.write("\n" + level * identator + "<" + _encode(tag, encoding))
+@@ -41 +42 @@
+-                file.write(_escape_cdata(node.text, encoding))
++                file.write(_escape_cdata(node.text.replace("\n", (level + 1) * identator + "\n"), encoding))
+@@ -43,2 +44,2 @@
+-                self._write(file, n, encoding, namespaces)
+-            file.write("</" + _encode(tag, encoding) + ">")
++                self._write(file, n, encoding, namespaces, level + 1, identator)
++            file.write("\n" + level * identator + "</" + _encode(tag, encoding) + ">")
+@@ -50 +51 @@
+-        file.write(_escape_cdata(node.tail, encoding))
++        file.write(_escape_cdata(node.tail.replace("\n", level * identator + "\n"), encoding))
+
+}}}
+
+CookBook

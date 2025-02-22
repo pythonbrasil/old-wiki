@@ -1,0 +1,3 @@
+pylize é um script Python que torna a criação de apresentações na tela em uma questão de poucos minutos. Ele gera um template principal, que você pode editar com seu editor de páginas HTML preferido. Esse documento principal é processado pelo pylize para gerar arquivos para cada slide e um arquivo com a tabela de conteúdo adicional. É possível visualizar a apresentação com um navegador web com capacidade de usar CSS. {Traduzido do site do projeto}
+
+[http://www.chrisarndt.de/en/software/pylize/]

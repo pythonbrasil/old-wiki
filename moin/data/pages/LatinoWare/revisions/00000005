@@ -1,0 +1,47 @@
+Página de organização da grade de eventos da Latinoware.
+
+== Ano de 2008 ==
+ * I - Encontro Latino-Americano de programadores Python
+  * Palestrantes confirmados:
+   * Luciano Ramalho
+   * Marco André Lopes Mendes
+
+=== Lista de pendencias ===
+ * Organizar confraternização.
+ * Apoio aos palestrantes, translado, etc...
+
+ * Palestras(Para adicionar sua palestra pode enviar um email
+para < ramiroluz em gmail ponto com > incluindo as informações abaixo, ou editar a página adicionando um ítem à lista):
+
+ATENÇÂO: Ainda NÂO foi definida data limite para submeter palestras. Pedimos a gentileza de enviar sua proposta o quanto antes(preferencialmente até dia 29 de agosto, sexta feira próxima), obrigado.
+
+||<tablewidth="531px" tableheight="152px">Nome: ||DIGITE_SEU_NOME ||
+||Email: ||DIGITE_SEU_EMAIL ||
+||Minicurriculo: ||DIGITE_SEU_MINICURRICULO ||
+||Pagina Web: ||DIGITE_SEU_SITE_WEB ||
+||Descrição da Palestra: ||DIGITE_A_DESCRICAO_DA_PALESTRA ||
+||Precisa de patrocinio?(Sim/Não): ||DIGITE_SIM_OU_NAO ||
+
+----
+
+ * Palestras relâmpago(de 5 a 10 minutos):
+
+||<tablewidth="531px" tableheight="152px">Nome: ||DIGITE_SEU_NOME ||
+||Email: ||DIGITE_SEU_EMAIL ||
+||Minicurriculo: ||DIGITE_SEU_MINICURRICULO ||
+||Pagina Web: ||DIGITE_SEU_SITE_WEB ||
+||Descrição da Palestra: ||DIGITE_A_DESCRICAO_DA_PALESTRA ||
+||Precisa de patrocinio?(Sim/Não): ||DIGITE_SIM_OU_NAO ||
+
+----
+
+ * Mini-cursos:
+
+||<tablewidth="531px" tableheight="152px">Nome: ||DIGITE_SEU_NOME ||
+||Email: ||DIGITE_SEU_EMAIL ||
+||Minicurriculo: ||DIGITE_SEU_MINICURRICULO ||
+||Pagina Web: ||DIGITE_SEU_SITE_WEB ||
+||Descrição do Curso: ||DIGITE_A_DESCRICAO_DO_CURSO ||
+||Precisa de patrocinio?(Sim/Não): ||DIGITE_SIM_OU_NAO ||
+
+----

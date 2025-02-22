@@ -1,0 +1,167 @@
+ <<TableOfContents>>
+
+= Usando sqlalchemy =
+== Usando somente a query expression language ==
+
+db.py
+{{{#!python
+from sqlalchemy import create_engine, Table, Column, MetaData
+from sqlalchemy import Boolean, Integer, Unicode, String
+from sqlalchemy.engine.url import URL
+
+### para conexao no sqlite:
+_url = 'sqlite://'
+### para conexao no firebird
+# _url = URL('firebird', 'SYSDBA', 'masterkey', '192.168.1.11', '3052', 'bdband')
+### para conexao no mysql
+# _url = 'mysql://usuario:senha@servidor/banco'
+
+# cria o engine e metadata
+engine = create_engine(_url)
+metadata = MetaData(bind=engine)
+
+#cria as tabelas
+tb_usuarios = Table('usuarios', metadata,
+                 Column('id', Integer, primary_key=True),
+                 Column('nome', Unicode(20), nullable=False),
+                 Column('senha', String(10), nullable=False),
+                 Column('ativo', Boolean, nullable=False)
+        )
+
+#cria as tabelas no banco (caso nao existam)
+metadata.create_all()
+}}}
+
+Exemplo de uso do arquivo acima
+
+{{{#!python
+import db
+
+# na hora de usar pega uma conexao
+con = db.engine.connect()
+ins = db.tb_usuarios.insert()
+con.execute(ins, [
+                dict(nome=u'jack', senha='senha', ativo=True),
+                dict(nome=u'jonh', senha='ahnes', ativo=False), 
+            ])
+con.close()
+}}}
+
+
+Um outro exemplo de uso, desta vez para consulta, e usando o contextlib.closing para fechar a conexão:
+
+{{{#!python
+import db
+from contextlib import closing
+
+with closing(db.engine.connect()) as con:
+    sel_usuarios = db.tb_usuarios.select(db.tb_usuarios.c.ativo) 
+    resultado = con.execute(sel_usuarios)
+    for registro in resultado:
+        print registro.nome, registro.id, registro.senha, registro.ativo
+# conexao fechada automaticamente, mesmo se der algum erro
+}}}
+
+
+== Usando o ORM e classes mapeadas ==
+
+db.py
+db.py
+{{{#!python
+from sqlalchemy import create_engine, Table, Column, MetaData
+from sqlalchemy import Boolean, Integer, Unicode, String
+from sqlalchemy.engine.url import URL
+from sqlalchemy.orm import sessionmaker, mapper
+import random
+import string
+
+### para conexao no sqlite:
+_url = 'sqlite://'
+### para conexao no firebird
+# _url = URL('firebird', 'SYSDBA', 'masterkey', '192.168.1.11', '3052', 'bdband')
+### para conexao no mysql
+# _url = 'mysql://usuario:senha@servidor/banco'
+
+# cria o engine e metadata
+engine = create_engine(_url, echo=True)
+metadata = MetaData(bind=engine)
+
+#cria as tabelas
+tb_usuarios = Table('usuarios', metadata,
+                 Column('id', Integer, primary_key=True),
+                 Column('nome', Unicode(20), nullable=False),
+                 Column('senha', String(10), nullable=False),
+                 Column('ativo', Boolean, nullable=False)
+        )
+
+#cria as classes
+class Usuario(object):
+    def __init__(self, nome, senha=None, ativo=False):
+        if senha is None:
+            # gera uma senha aleatoria
+            senha = ''.join(random.choice(string.letters + string.digits)
+                            for x in xrange(10))
+        self.nome = nome
+        self.senha = senha
+        self.ativo = ativo
+
+    # um metodo simples para demontrar que a classe pode ter quaisquer metodos
+    def verifica_senha(self, senha_verificar):
+        return self.senha == senha_verificar
+
+# mapeia a classe -> tabela
+mapper(Usuario, tb_usuarios)
+
+#cria as tabelas no banco (caso nao existam)
+metadata.create_all()
+
+#cria o sessionmaker
+Session = sessionmaker(bind=engine)
+}}}
+
+Usando:
+
+{{{#!python
+import db
+
+#posso criar uma instancia da minha classe
+u = db.Usuario(u'big_rid')
+# alterar atributos
+u.senha = '123456'
+
+# na hora de usar pega uma sessao
+s = db.Session()
+s.add(u) # adiciona o objeto a sessao
+s.add_all([ # para adicionar varios objetos mesmo tempo
+        db.Usuario(nome=u'jack', ativo=True),
+        db.Usuario(nome=u'jonh', senha='senha'),
+    ])
+s.commit()
+
+# Posso alterar minha instancia, o sqlalchemy gera um UPDATE automaticamente
+u.ativo = True
+s.commit() # UPDATE usuarios SET ativo = 1 WHERE id = ?
+
+s.close()
+}}}
+
+
+Consultando (queries)
+{{{#!python
+from contextlib import closing
+import db
+
+with closing(db.Session()) as s:
+    # uma query retornara instancias da classe definida acima
+    for usu in s.query(db.Usuario).filter(db.Usuario.ativo == True):
+        print usu.nome, usu.id, usu.senha, usu.ativo
+        # chamo um metodo customizado no objeto retornado:
+        if usu.verifica_senha('123456'):
+            # posso alterar o objeto, sqlalchemy gera UPDATE
+            usu.senha = '321321'
+            print 'senha alterada'
+    s.commit()
+
+# sessao fechada automaticamente, mesmo se der erro. (no caso de erro
+# um ROLLBACK sera dado na transacao automaticamente)
+}}}

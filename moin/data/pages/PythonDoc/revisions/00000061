@@ -1,0 +1,105 @@
+#pragma section-numbers off
+= Python Doc =
+
+Projeto de tradução da documentação [http://www.python.org/doc/ oficial] do Python para o português.
+
+|| Coordenador || PedroWerneck ||
+|| Colaboradores || OsvaldoSantanaNeto, RodrigoSenra, FelipeLessa, RafaelAlmeida, AlexandreNalon ||
+|| Página do Projeto || http://www.codigolivre.org.br/projects/pythondoc/ ||
+
+[[TableOfContents]]
+
+== Dicionário ==
+
+Termos utilizados nas traduções. Adicione/Comente os termos. Se for adicionar, fique atento para que fiquem em ordem alfabética.
+
+   * '''array''' - matriz.
+   * '''assignment''' - ("(...)targets that are identifiers if occurring in an assignment.") designação (?)
+   * '''binding''' - ligação? (name binding)
+   * '''built-in''' - interno (como em: built-in method), embutido
+   * '''to bind''' - ligar (?).
+   * '''callable''' - executável (que feio)
+   * '''call (substantivo)''' - chamada.
+   * '''to call (verbo)''' - chamar, executar.
+   * '''to catch (verbo)''' - capturar (contexto: ...catching a exception...)
+   * '''dictionary''' - dicionário.
+   * '''environment''' - (code block environment) ambiente (?) 
+   * '''escape sequences''' - sequências de escape
+   * '''fallback''' - chamada alternativa (?)
+   * '''frame''' - quadro (era: ? (execution frame). Frame HTML deixar frame mesmo.)
+   * '''garbage collect''' - coleta de lixo.
+   * '''to garbage collect''' - coletar o lixo. ''Ai que falta que faz um 'garbage-coletar' no português :) -- OsvaldoSantanaNeto''
+   * '''identifier''' - identificador (?)
+   * '''indent''' - indentação (ou identação?)
+   * '''immutable''' - imutável.
+   * '''key''' - chave (dicionário).
+   * '''list comprehension''' - compreensão de lista(?) ''Eu sugiro interpretação de lista -- OsvaldoSantanaNeto'' ''Eu acho que o comprehension é usado no sentido de compreensão, termo vindo da lógica: "Extensão é o conjunto de objetos designados por um termo ou uma categoria. Compreensão é o conjunto de propriedades que esse mesmo termo ou essa categoria designa. -- GuilhermeManika'' ''Que tal Construção ou Contenção ? -- PedroWerneck''
+   * '''list''' - lista
+   * '''namespace''' - namespace (?)
+   * '''operadores lógicos''' - ficam com nome em inglês.
+   * '''parser''' - fica parser mesmo (?) ''Analisador gramatical é uma alternativa, mas o termo parser é tão comum que não vale a pena mexer - mesmo caso que 'string' -- GuilhermeManika''
+   * '''race condition''' - Condição de corrida
+   * '''raise''' - levantar (contexto: to raise an exception).
+   * '''raw''' - não processado (?) ''eu sugiro 'bruto'. Ex. raw value == valor bruto -- OsvaldoSantanaNeto''
+   * '''return value''' - valor de retorno
+   * '''seek, seekable''' - rastrear, rastreável (?)
+   * '''shell''' - interpretador, interpretador interativo
+   * '''slice, slicing''' - fatiar, fatiando (?)
+   * '''statement''' - instrução, comando (?)
+   * '''string''' - string (adicionar nota de rodapé caso o documento seja para ''newbies'')
+   * '''subclass (substantivo)''' - Subclasse, classe derivada, classe filha.
+   * '''to subclass (verbo)''' - herdar (esse é um uso estrito), derivar.
+   * '''token''' - símbolo (?)
+   * '''trace (tracing)''' - mantém em inglês mesmo
+   * '''debug (debugging)''' - depurar
+   * '''tuple''' - tupla
+   * '''value''' - valor (dicionário, retorno de funções)
+
+== Nome dos Manuais Traduzidos ==
+
+||||||<tablewidth="100%" #C0C0C0>'''Nomes dos Manuais'''||
+||'''Diretório'''||'''Título Original'''||'''Título Traduzido'''||
+||ref||Python Reference Manual||Manual de Referência Python||
+||lib||Python Library Reference||Referência da Biblioteca Python||
+||tut||Python Tutorial||Tutorial Python||
+||ext||Extending and Embedding the Python Interpreter||Estendendo e Embutindo o Interpretador Python||
+||api||Python/C API Reference Manual||Manual de Referência da API Python/C||
+||||||* Falta a definição dos outros títulos||
+
+
+== Arquivos ==
+
+||||||||||<tablewidth="100%" #C0C0C0>'''Status da tradução dos arquivos'''||
+||<|2>'''Arquivo'''||||'''Tradução'''                       ||||'''Revisão'''||
+||                   '''Status''' ||'''Responsável'''       ||'''Status'''   ||'''Responsável'''||
+||ref/ref.tex      ||<#80FF80>100%||OsvaldoSantanaNeto      ||<#80FF80> 100% ||PedroWerneck     ||
+||ref/ref1.tex     ||<#80FF80>100%||OsvaldoSantanaNeto      ||<#80FF80> 100% ||PedroWerneck     ||
+||ref/ref2.tex     ||<#FFFF80>30% ||PedroWerneck            ||<#FF8080> 0%   || -               ||
+||ref/ref3.tex     ||<#FFFF80>10% ||OsvaldoSantanaNeto      ||<#FF8080> 0%   || -               ||
+||ref/ref4.tex     ||<#FFFF80>50% ||RafaelAlmeida           ||<#FF8080> 0%   || -               ||
+||lib/asttable.tex ||<#80FF80>100%||AlexandreNalon          ||<#FF8080> 0%   || -               ||
+||lib/compiler.tex ||<#FF8080>0%  ||AlexandreNalon          ||<#FF8080> 0%   || -               ||
+||lib/lib.tex      ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||PedroWerneck     ||
+||lib/libaifc.tex  ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||PedroWerneck     ||
+||lib/liballos.tex ||<#80FF80>100%||FelipeLessa             ||<#80FF80> 100% ||PedroWerneck     ||
+||lib/libal.tex    ||<#80FF80>100%||FelipeLessa             ||<#FF8080> 0%   || -               ||
+||lib/libamoeba.tex||<#FFFF80>60% ||FelipeLessa (abandonado)||<#FF8080> 0%   || -               ||
+||lib/libanydbm.tex||<#80FF80>100%||FelipeLessa             ||<#FF8080> 0%   || -               ||
+||lib/libintro.tex ||<#80FF80>100%||FelipeLessa             ||<#FF8080> 0%   || -               ||
+||lib/libobjs.tex  ||<#80FF80>100%||FelipeLessa             ||<#FF8080> 0%   || -               ||
+||tut/tut.tex      ||<#FFFF80>75% ||RodrigoSenra            ||<#FF8080> 0%   || -               ||
+||tut/glossary.tex ||<#FFFF80>34% ||PedroWerneck            ||<#FF8080> 0%   || -               ||
+
+''Ficou 'bunitinha' essa tabela, né? :) -- OsvaldoSantanaNeto''
+
+''Muito bom :) Show ! Quando (se ?) habilitarem o host http://pythondoc.codigolivre.org.br para a página do projeto, eu vou botar um redirect pra cá. O wiki é bem mais fácil de manter. -- PedroWerneck'' 
+
+''Faltava o ".br" ali no endereço -- WashingtonCoutinhoCorrêaJr''
+
+''Favor não removerem os 'tils' dos caracteres. O correto é 'são' e não 'sao'. -- OsvaldoSantanaNeto''
+
+Acho que existe um erro na ref4: "It is illegal to unbind a name that is referenced by an enclosing scope; the compiler will report a !SyntaxError.". Se alguém tiver mais informações, me avise. -- RafaelAlmeida
+
+----
+
+OsvaldoSantanaNeto

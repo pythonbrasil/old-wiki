@@ -1,0 +1,6 @@
+import PgSQL
+
+con = PgSQL.connect(host='servidor',
+                    database='banco de dados',
+                    user='usuario',
+                    password='senha')

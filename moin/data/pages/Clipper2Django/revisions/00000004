@@ -1,0 +1,206 @@
+= Receita: De Clipper para DJango =
+
+Essa receita foi criada após ter feito um sistema em DJango com intenção de substituir um sistema feito em Clipper. Ela segue passos simples, converter arquivos dbf em arquivos csv, criar as tabelas no banco e importar os registros. Junto com a receita vai o código para converter arquivos csv num model do Django. 
+
+A linguagem Clipper, foi muito utilizada para fazer sistemas em pequenas e médias
+empresas e ainda hoje é comum encontrá-los em produção. Porém, é comum também, 
+descobrir que a empresa que forneceu o sistema já nem existe mais, ou pior, 
+ninguém possui os fontes do sistema, esse é meu caso.
+
+Eu sou um programador Python que gosta de usar o framework django, então graças
+à minha necessidade desenvolvi uma maneira de converter sistemas que usam tabelas
+(xbase|*.dbf) para django.
+
+Primeiramente transformei tudo em csv com o programa dbfxtrct. Em seguida desenvolvi 
+um script para ler os arquivos csv e gerar um arquivo model.py de acordo com as regras
+do django. Outro script foi desenvolvido para importar os dados, em seguida é só ajustar
+os relacionamentos no model.py e começar a escrever suas views e configurar o url.py.
+
+
+== Procedimento ==
+
+
+ * Converter os arquivos .dbf em arquivos csv, eu usei o programa dbfxtrct. {Há fazer - Encontrar referencia/download}.
+ * Gerar o model com o modelfromcsv.py e gerar o script de importação com o insertfromcsv.py.
+ * Gerar a aplicação django e colocar o model gerado no diretório.
+ * Configurar o arquivo settings.py para reconhecer a aplicação e acessar o banco.
+ * Criar as tabelas à partir do model.
+ * Inserir os dados com o script sql.
+ * Nesse momento já é possível usar o site Admin do django com todas as tabelas e informações do sistema anterior.
+ * Desenvolver as views e configurar o arquivo urls.py
+
+
+== Código ==
+
+Obtenha um arquivo compactado com os 3 módulos: attachment:clipper2django.zip
+
+csv_functions.py
+
+{{{
+#!python
+d={'C':'models.CharField(maxlength=%d)',
+   'D':'models.DateField()',
+   'N':'models.FloatField(max_digits=%d, decimal_places=%d)'}
+
+def getFieldList(row):
+    field_list = []
+    for field_def in row:
+        def_list = field_def.split('|')
+        field_name = def_list[0].lower()
+        field_type = def_list[1]
+        field_precision = int(def_list[2])
+        field_decimal = int(def_list[3])
+        field_list.append({'field_name':field_name,
+                           'field_type':field_type,
+                           'field_precision':field_precision,
+                           'field_decimal':field_decimal})
+    return field_list
+
+}}}
+
+modelfromcsv.py
+
+{{{
+#!python
+import csv
+import glob
+from csv_functions import d, getFieldList
+from getopt import getopt
+import sys
+
+def model(type, digits=0, decimal_places=0, maxlength=0):
+    if type == 'N':
+        return d[type] % (digits,decimal_places)
+    elif type == 'C':
+        return d[type] % maxlength
+    else:
+        return d[type]
+
+def ModelFromCSV(filename):
+    ''' Usage : ModelFromcsv('<LOCATION>/<CSVFILE>')
+    '''
+    class_template = 'class %s(models.Model):\n'
+    field_template = '    %s = %s\n'
+    result_list = []
+    f=open(filename)
+    f.seek(0)
+    class_name = filename.split('/')[-1].split('.')[0].capitalize()
+    csv_reader = csv.reader(f)
+    row = csv_reader.next()
+    field_list = getFieldList(row)
+
+    class_def = class_template % class_name
+    field_list = [field_template % 
+                 (x['field_name'],
+                 model(x['field_type'],
+                       x['field_precision'],
+                       x['field_decimal'],
+                       x['field_precision'])) for x in field_list]
+    result_list.append([class_def]+field_list)
+
+    return ''.join([''.join(x) for x in result_list])
+
+def ModelFromFiles(globstring):
+    file_list = glob.glob(globstring)
+    result_list = []
+    for file_name in file_list:
+        result_list.append(ModelFromCSV(file_name))
+
+    return '\n'.join(result_list)
+
+def main(args=sys.argv):
+    optlist, list = getopt(args[1:], ':f:')
+    for opt in optlist:
+        if opt[0] == '-f':
+            globExpr = opt[1]
+    print '# Model genereted by modelfromcsv\n'
+    print ModelFromFiles(globExpr)
+
+if __name__ == '__main__':
+    main()
+
+}}}
+
+insertfromcsv.py
+{{{
+#!python
+import csv
+import glob
+from csv_functions import d, getFieldList
+from getopt import getopt
+import sys
+
+def InsertFromCSV(filename=''):
+    insert_template = 'INSERT INTO %s (%s) VALUES (%s);\n'
+    result_list = []
+    f=open(filename)
+    f.seek(0)
+    table_name = filename.split('/')[-1].split('.')[0].lower()
+    csv_reader = csv.reader(f)
+    row = csv_reader.next()
+    field_list = getFieldList(row)
+    result_list = []
+    for row in csv_reader:
+        value_list = []
+        field_name_list = []
+        for idx, field_def in enumerate(field_list):
+            field_value = insert_field_format(field_def['field_type'],row[idx])
+            value_list.append(field_value)
+            field_name_list.append(field_def['field_name'])
+        result_list.append(insert_template % (table_name,','.join(field_name_list),','.join(value_list)))
+    return ''.join(result_list)
+
+def insert_field_format(field_type,field_value):
+    if field_type == 'N':
+        return field_value
+    else:
+        return '"%s"' % field_value
+
+def SQLInsertFromFiles(globstring):
+    file_list = glob.glob(globstring)
+    result_list = []
+    for file_name in file_list:
+        result_list.append(InsertFromCSV(file_name))
+
+    return '\n'.join(result_list)
+
+def main(args=sys.argv):
+	optlist, list = getopt(args[1:], ':f:')
+    for opt in optlist:
+        if opt[0] == '-f':
+            globExpr = opt[1]
+    print '-- SQL - Insert\n'
+    print SQLInsertFromFiles(globExpr)
+
+if __name__ == '__main__':
+    main()
+
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+
+import modelfromcsv
+
+if __name__ == '__main__':
+   modelText = modelfromcsv.ModelFromFiles('./csv/*dbfxtract')
+   insertText = insertfromcsv.InsertFromFiles('./csv/*dbfxtract')
+   print modelText
+   print insertText
+}}}
+
+
+Para utilizar na linha de comando, supondo que todos os arquivos .dbfxtract estão no subdiretório csv:
+{{{
+ramiro@debianhome:~/src$ python modelfromcsv.py -f './csv/*dbfxtract' > model.py
+ramiro@debianhome:~/src$ python insertfromcsv.py -f './csv/*dbfxtract' > model.sql
+}}}
+
+Volta para CookBook.
+
+----
+
+Nome do autor da Receita
+[:RamiroLuz:Ramiro Batista da Luz]

@@ -1,0 +1,49 @@
+#pragma section-numbers off
+= Rodrigo Cesar Herefeld =
+
+<hso.suporte |at| ig.com.br>
+
+== Projetos ==
+
+=== JPA ===
+
+JPA é a união das palavras Java Python Administração.
+
+Ele é um filho do último projeto de uma consultoria que eu tive  com um amigo, o projeto chamava
+SEC (Sistema Empresarial Cathedral, sendo que Cathedral era a empresa). A  ultima versão do SEC foi 
+feita em TCL (a única que ficou pronta) mas nunca chegou ao mercado. A primeira foi em Java e houve 
+uma intermediaria em C++. A idéia é criar um programa de administração de empresas para pequenas e
+médias empresas, a versão que  eu  tenho em TCL funciona mas o codigo é feio demais pra administrar.
+Eu preciso de um programa assim pra uso própio e prentendo escrever em Python pra Java
+
+11-01-2003 A base do JPA estava bastante adiantada quando surgiu um problema , eu precisa de uma conexão
+via SSL, o Socket do Jython não suporta, logo tinha que fazer usando o do Java.O problema é qua a API do
+java estava terrivelmente mal documentada, a busca por uma documetação que prestasse passou por uma verdadeira peregrinação(Site java.sun,site sun.(Nãomelembro),java Tutor,google,etc) em penultimo entrei
+no canal do java (#java) do irc.freenode.
+
+17-01-2003 Novos problemas com a cryptografia do Java, o SSL do java não acessa meu Apache porque o apache
+usa chaves "grandes demais" , o problema é que o Java somente possue modulos de criptografia que o governo
+americano permite a exportação ou seja "quebraveis",apos alguns ajustes no apache (gerei uma nova chave menor
+com 128 (a anterior era de 418) que é o maximo que o Java suporta,alem do tamanho da chave tem a questão de algoritimos , que são historicamente fracos.Eu acho que não vou implantar estes mecanismos de segurança internamente(é possivel usar programas externos para obter um nivel de segurança real,talvez seja melhor deixar que estes softwares se encarregem da proteção e retirar esta tarefa do programa, ja que o Java não pode 
+realiza-la a contento) 
+
+CONTINUO PROCURANDO
+Se alguem biblioteca de relatorios para PythonC me avise, que o JPA vai virar PA.
+(Eu testei algumas estes dias mas nada que tenha a simplicidade do datavision)
+
+== Material nesta pagina ==
+
+
+Introdução ao Jython, uma pequena apresentação do Jython: IntroduçãoJythonRodrigo
+
+Estou colocando alguns programinhas nesta pagina.(Acho que este setor vai ser o mais movimentado
+ja que eu ando meio preguiçoso para códigos maiores)
+Mas como eu aprendi pelo metódo Jedi(Get the source Lucke) acho que também pode ajudar
+
+||||||'''Programas''' ||
+||'''Programa para impressao de recibo:'''||attachment:recibo.tar.bz2||
+||||Este programa imprime recibos. É um programinha bem simples. Na verdade ele é um remendo para suprir a falta de um programa maior (o JPA acima) que estou escrevendo (a impressao de recibos vai ficar no controle de vendas). Ele demonstra bem a impressão de html do wxPython. Eu fiz ele com o wxglade http://wxglade.sourceforge.net/. Inclusive o wgl (arquivo do mesmo) ta junto pra quem quiser ver como funciona||
+
+----
+
+RodrigoCesarHerefeld

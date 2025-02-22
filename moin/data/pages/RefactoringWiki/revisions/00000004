@@ -1,0 +1,28 @@
+= Páginas para Remover =
+
+   * BancoDeDadosSql e BancodeDadosSQL são mais antiga que BancosDeDadosSql
+   * ContarOcorrênciasEmLista está idêntica a ContarOcorrenciasEmLista
+
+= Páginas para renomear =
+
+   * CaixaDeSugestões -> CaixaDeSugestoes
+   * AndréFarina -> AndreFarina
+   * CacheDeFunções -> CacheDeFuncoes
+   * CaixaDeSugestões -> CaixaDeSugestoes (#)
+   * ChamarFunçãoEmDll -> ChamarFuncaoEmDll
+   * ComparaçãoDeGUIs -> ComparacaoDeGuis
+   * ComunicaçãoComPipes -> ComunicacaoComPipes
+   * ConexãoOracle -> ConexaoOracle (#)
+   * conisli2005 -> Conisli2005 (#)
+   * ConversãoDeImagens -> ConversaoDeImagens
+
+   (#) Em duplicidade.
+
+= Páginas para reverter para versão anterior =
+
+   * ReverterEssaPagina -> versão anterior
+   * ReverterEssaPagina -> 2 versões anteriores
+
+= Edição em páginas protegidas =
+
+   * PythonBrasil -> Remover a notícia da campanha depois que a mesma terminar!

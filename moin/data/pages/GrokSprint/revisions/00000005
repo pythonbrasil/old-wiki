@@ -1,0 +1,23 @@
+= Passos pra quem esta começando: =
+
+1. baixe o código do grok do svn:
+
+{{{
+svn co svn://svn.zope.org/repos/main/grok/trunk grok
+e
+svn co svn://svn.zope.org/repos/main/grokproject/trunk grokproject
+}}}
+
+2. Siga o tutorial do grok, ele ensina como instalar e te deixa onde o pessoal está trabalhando:
+http://grok.zope.org/tutorial.html
+
+
+= Objetivos =
+O Sprint é para completar o tutorial do grok. Já existe um outline com os topicos que devem ser abordados;
+http://svn.zope.org/grok/trunk/doc/tutorial_outline.txt?view=markup
+
+== Divisão de trabalho em duplas ==
+|| '''Dupla''' || '''Trabalho''' ||
+||Ramalho (RAMgarlic) e tomas_ || trabalhando no capitulo de interfaces e autoforms||
+||Ruda Porto e Dirceu|| trabalhando no capitulo sobre XML-RPC e busca||
+||dvainsencher|| trabalhando no capitulo sobre testes||

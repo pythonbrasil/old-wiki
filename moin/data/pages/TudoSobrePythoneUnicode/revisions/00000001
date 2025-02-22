@@ -1,0 +1,30 @@
+= Tudo Sobre Python e Unicode =
+
+Tradução de [http://boodebr.org/main/python/all-about-python-and-unicode "All about Python and Unicode"]
+
+[[TableOfContents]]
+
+
+== Um ponto de partida ==
+== Texto Unicode em Python ==
+=== Convertendo símbolos Unicode em literais Python ===
+=== Por que o "print" não funciona? ===
+=== Codecs ===
+==== De Unicode para binário ====
+==== De binário para Unicode  ====
+=== Operações com Strings ===
+==== Uma pegadinha do \U ====
+==== Bugs do Python 2.0 & 2.1 ====
+=== Python como um "recodificador universal" ===
+
+== Agora começa a diversão... Unicode e o Mundo Real ==
+
+=== Nomes de arquivo com caracteres Unicode ===
+==== Microsoft Windows ====
+==== Unix/POSIX/Linux ====
+==== Mac OS/X  ====
+=== Unicode e HTML ===
+=== Unicode e XML ===
+=== Unicode e diretórios compartilhados (Samba) ===
+
+== Sumário ==

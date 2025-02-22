@@ -1,0 +1,108 @@
+= Receita: TreeView Como "GRID" =
+__author__ = "Carlos E. C. Leite" __
+__
+
+__version__ = "0.1" __date__ = "Date: 2006/12/28" __license__ = "GPL"
+
+[[http://www.znc.com.br/cadu/downloads/treeview.zip|O arquivo Glade pode ser baixado aqui]]
+
+{{{
+#!python
+import gtk
+import pygtk
+import gtk.glade
+import gobject
+data = [
+   ['col1 lin1','coluna2', 1,'', '#333', 10  ],
+   ['col1 lin2','coluna2', 2,'green','#ccc', 20 ],
+   ['col1 lin3','coluna2', 3,'','#eee',30 ],
+   ['coluna1','coluna2', 4,'','#fff',40 ]]
+class gtktreelegal:
+   def __init__(self):
+      self.domainNew=''
+      self.domainNewCustom=''
+      # le arvore XML
+      self.wTree=gtk.glade.XML("treeview.glade")
+      # Inicia janela
+      self.window = self.wTree.get_widget("janela")
+      #COnecta built in handler  grt.main_quit
+      self.window.connect("destroy", gtk.main_quit)
+      self.tabela = self.wTree.get_widget("tabela")
+      # definicicao do object MODEL ao qual meu TREEVIEW esta conectado.
+      # Toda altarecao no modelo é seguinda pelo objecto visual .
+      self.modelo = gtk.ListStore(
+            gobject.TYPE_STRING,
+            gobject.TYPE_STRING,
+            gobject.TYPE_UINT,
+            gobject.TYPE_STRING,
+            gobject.TYPE_STRING,
+            gobject.TYPE_UINT)
+      self.tabela.set_model(self.modelo)
+      #Uso 3 argumentos do Column
+      # 1 - Primeiroargumento é o título
+      # 2 - tipo da coluna, como será mostrada
+      # 3 -  posicao do dado(text) no modelo.
+      #  4 ... n  - Outras propriedades
+      #Coluna 1
+      renderer = gtk.CellRendererText()
+      renderer.set_property("background", "black") # Cor do foreground como propriedade
+      renderer.set_property("foreground", "white") # Cor do foreground como propriedade
+      renderer.set_property('editable', True) # A primeira coluan é editável
+      column = gtk.TreeViewColumn("First Name", renderer,text=0)
+      column.set_sort_column_id(0)
+      self.tabela.append_column(column)
+      # Abaixo é adicionada a coluna 2, com a cor definida pelo meu dado, onde foreground=3 indica que
+      # a cor de fundo esta na quarta coluna do liststore.
+      # e outra maneira de se setar as propriedadesda de cor  da  coluna.
+      #Coluna 2
+      column = gtk.TreeViewColumn('Titulo Coluna 2', gtk.CellRendererText(), text=1, foreground=3)
+      column.set_sort_column_id(1)
+      self.tabela.append_column(column)
+      #Coluna 3
+      column = gtk.TreeViewColumn('Titulo Coluna 3', gtk.CellRendererText(), text=2, background=4)
+      column.set_sort_column_id(2)
+      self.tabela.append_column(column)
+     #Coluna 4
+      # Para o "progress bar"  a p[ropriedade a ser setada é o VALUE e não text.
+      column = gtk.TreeViewColumn('Titulo Coluna 3', gtk.CellRendererProgress() , value=5)
+      column.set_sort_column_id(2)
+      self.tabela.append_column(column)
+      #Sinal de selecao de linha
+      # somente é emitido este sinal, quando uma linha editável e DOBLE clicada
+      self.tabela.connect('row-activated', self.on_row_activated)
+      # OBS:  como temos uma coluna editável, não podemos utilizar o sinal "select-cursor-row"
+      # um outro sinal que pode ser utilizado é o cursor-changed, porém é não é passado o PATH
+      # veja on_data_select que difere do on_row_activated
+      # Este sinal é emitido quando dado um único clique em uma linha editável ou não.
+      self.tabela.connect('cursor-changed', self.on_cursor_changed)
+      self.tabela_selection = self.tabela.get_selection()
+      self.tabela_selection.set_mode(gtk.SELECTION_SINGLE)
+      self.fillTable()
+   def on_row_activated(self, widget, path, column):
+      print '----------------------------------------------------------------------------------------------'
+      print "# Duplo Clique recebido - ROW ACTIVATED emitido"
+      model,iter = self.tabela_selection.get_selected()
+      print 'Path= %s , Column=  %s' % (path, column)
+      print 'Model = %s ,Iter =  %s' % (model,iter)
+      print " COLUNA =0 - DADO =  %s  " % ( model.get_value(iter,0))
+      print " COLUNA =1 - DADO =  %s  " % ( model.get_value(iter,1))
+      print '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^'
+   def on_cursor_changed(self, widget):
+      print '----------------------------------------------------------------------------------------------'
+      print "# Um Unico clique foi recebido - CURSOR CHANGE emitido"
+      model,iter = self.tabela_selection.get_selected()
+      print 'Model = %s ,Iter =  %s' % (model,iter)
+      print "COLUNA =0 - DADO =  %s  " % ( model.get_value(iter,0))
+      print "COLUNA =1 - DADO =  %s  " % ( model.get_value(iter,1))
+      print '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^'
+   def fillTable(self):
+      for item in data:
+           self.modelo.append(item)
+if __name__=="__main__":
+   app=gtktreelegal()
+   gtk.main()
+}}}
+Volta para CookBook.
+
+----
+ Carlos Leite

@@ -1,0 +1,42 @@
+Voltar para a ListaDeExercicios
+----
+ 
+== Exercícios com Classes ==
+
+ 1. Faça um programa completo utilizando funções e classes que:
+  a. Possua uma classe chamada Ponto, com os atributos x e y.
+  a. Possua uma classe chamada Retangulo, com os atributos largura e altura.
+  a. Possua uma função para imprimir os valores da classe Ponto
+  a. Possua uma função para encontrar o centro de um Retângulo.
+  a. Você deve criar alguns objetos da classe Retangulo.
+  a. Cada objeto deve ter um vértice de partida, por exemplo, o vértice inferior esquerdo do retângulo, que deve ser um objeto da classe Ponto.
+  a. A função para encontrar o centro do retângulo deve retornar o valor para um objeto do tipo ponto que indique os valores de x e y para o centro do objeto.
+  a. O valor do centro do objeto deve ser mostrado na tela
+  a. Crie um menu para alterar os valores do retângulo e imprimir o centro deste retângulo.
+
+ 1. Faça um programa completo utilizando classes e métodos que:
+  a. Possua uma classe chamada bombaCombustível, com no mínimo esses atributos:
+   i. tipoCombustivel.
+   i. valorLitro
+   i. quantidadeCombustivel
+  a. Possua no mínimo esses métodos:
+   i. abastecerPorValor( ) – método onde é informado o valor a ser abastecido e mostra a quantidade de litros que foi colocada no veículo
+   i. abastecerPorLitro( ) – método onde é informado a quantidade em litros de combustível e mostra o valor a ser pago pelo cliente.
+   i. alterarValor( ) – altera o valor do litro do combustível.
+   i. alterarCombustivel( ) – altera o tipo do combustível.
+   i. alterarQuantidadeCombustivel( ) – altera a quantidade de combustível restante na bomba.
+  OBS: Sempre que acontecer um abastecimento é necessário atualizar a quantidade de combustível total na bomba.
+
+ 1. Faça uma classe contaInvestimento que seja semelhante a classe contaBancaria, com a diferença de que se adicione um atributo taxaJuros. Forneça um construtor que configure tanto o saldo inicial como a taxa de juros. Forneça um método adicioneJuros (sem parâmetro explícito) que adicione juros à conta. Escreva um programa que construa uma poupança com um saldo inicial de R$1000,00 e uma taxa de juros de 10%. Depois aplique o método adicioneJuros() cinco vezes e imprime o saldo resultante.
+
+ 1. Implemente a classe Funcionário. Um empregado tem um nome (um string) e um salário(um double). Escreva um construtor com dois parâmetros (nome e salário) e métodos para devolver nome e salário. Escreva um pequeno programa que teste sua classe.
+
+ 1. Aprimore a classe do exercício anterior para adicionar o método aumentarSalario (porcentualDeAumento) que aumente o salário do funcionário em uma certa porcentagem.         
+  Exemplo de uso:
+{{{  
+  harry=funcionário("Harry",25000)
+  harry.aumentarSalario(10)
+}}}
+
+----
+Voltar para a ListaDeExercicios

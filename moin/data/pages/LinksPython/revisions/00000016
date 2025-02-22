@@ -1,0 +1,78 @@
+Inclua nesta seção links interessantes e artigos externos que falam sobre Python e suas técnicas.
+
+<<TableOfContents>>
+
+== Documentação ==
+
+=== Documentos avulsos ===
+
+ * A documentação básica, busque sempre aqui primeiro - http://docs.python.org
+ * !CherryPy for CGI programmers -  http://www-128.ibm.com/developerworks/opensource/library/os-cherrypy/
+ * Building and filling out templates with Python and Cheetah - http://www-128.ibm.com/developerworks/opensource/library/os-cherrypy/
+ * Charming Python: Scaling a new PEAK -  http://www-128.ibm.com/developerworks/library/l-cppeak2/?ca=dnt-637
+ * Python Tutorials - http://www.awaretek.com/tutorials.html - Uma das maiores coleções de Tutoriais sobre Python organizada na Web.
+ * Documentação Django Framework - http://www.djangoproject.com/documentation/
+ * Python SOAP libraries, Part 1 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries/page1.html
+ * Python SOAP libraries, Part 2 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-2/page1.html
+ * Python SOAP libraries, Part 3 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-3/page1.html
+ * Python SOAP libraries, Part 4 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-4/page1.html
+ * Python SOAP libraries, Part 5 - http://www.opensourcetutorials.com/tutorials/Server-Side-Coding/Python/python-soap-libraries-5/page1.html
+ 
+=== Python Gtk ===
+
+ * Tutorial oficial - http://www.pygtk.org/tutorial.html
+   Tutorial oficial do PyGtk. Um pouco antigo, versão 2.4 ainda, mas básico para quem queira aprender.
+ * Outros artigos - http://www.pygtk.org/articles.html
+ * Tutorial LibGlade aqui do site mesmo - LibGlade
+ * Desenvolvimento rápido com Glade e Python, artigo do LinuxJornal - http://www.linuxjournal.com/article/7421
+ * FAQ do PyGTK no site da Async, excelente - http://www.async.com.br/faq/pygtk/index.py?req=index
+ * Instalando o pyGTK e o Glade no Windows - PyGtkWin
+ * Internacionalizar programas em pyGTK - InternacionalizePyGtk
+
+=== Zope e Plone ===
+
+ * Comunidade Zope e Plone Brasileira - http://www.tchezope.org/
+ * Traduções - http://www.tchezope.org/traducoes
+ * Comunidade Zope Internacional - http://www.zope.org/
+ * Comunidade Plone Internacional - http://plone.org/
+ * Zope Book - http://www.plope.com/Books/2_7Edition
+ * Documentação do Plone - http://plone.org/documentation
+ * Definitive Guide to Plone - http://plone.org/documentation/manual/definitive-guide/definitive_guide_to_plone.pdf
+ * Documentação do Archetypes - http://plone.org/documentation/archetypes/
+ * Documentação do ArchGenXML - http://plone.org/documentation/tutorial/archgenxml-getting-started
+
+== Notícias ==
+
+ * Planet Python - http://www.planetpython.org/ e http://planet.python.org
+   Agregador de ''blogs'' sobre Python.
+ * !PythonWare Daily - http://www.pythonware.com/daily/
+   Site com links, normalmente diários, de projetos ou artigos relacionado a Python
+ * Pythonhispano - http://www.pythonhispano.org/
+   Portal de notícias Python da comunidade Espanhola
+ 
+
+== Blogs ==
+
+ * '''Pythonologia''' - [[http://pythonologia.blogspot.com/|http://pythonologia.blogspot.com/]]
+   'Blog' do OsvaldoSantanaNeto que fala sobre Python e algumas outras coisas não relacionadas.
+ * '''Aprendendo Python''' - http://ericstk.wordpress.com/
+   'Blog' do Eric Hideki que fala sobre Python para iniciantes, tanto dicas de aprendizado, produtividade e novidades da linguagem.
+ * '''Aprenda Python''' - [[http://aprenda-python.blogspot.com.br/|http://aprenda-python.blogspot.com.br/]]
+   'Blog' do Vinicius Assef ensinando as características da linguagem Python para iniciantes.
+ * '''Jonathan Hepp''' - [[http://www.jonathanhepp.com.br/|http://www.jonathanhepp.com.br/]]
+   'Blog' do Jonathan Hepp ensinando Web2py e PyQT de forma divertida e com ótima didática.
+ * '''Programe em Python''' - [[http://programeempython.blog.br/|http://programeempython.blog.br/]]
+   'Blog' do Julio Cesar comentando o básico de Python com a manipulação de listas, banco de dados e diversas outras estruturas da linguagem.
+
+== Tutoriais ==
+
+ * [[http://programming-crash-course.com/pt_br|Tutorial de Programação para Iniciantes]] - Um bom começo para quem nunca programou.
+
+== Miscelâneos ==
+
+ * Cookbook - http://aspn.activestate.com/ASPN/Python/Cookbook/
+   Esse é "O Cookbook". Uma preciosa coletânea de dicas, programas e técnicas sobre Python.
+ * Pythonmexico — http://pythonmexico.org
+   Portal sobre Python da comunidade Mexicana
+ * Del.icio.us — http://del.icio.us/tag/python
+   O Del.icio.us é um site no qual você pode compartilhar seus links favoritos. Você procura por "tags" e pode ver tags combinadas, como [[http://del.icio.us/tag/python+gtk|python+gtk]] ou [[http://del.icio.us/tag/python+emacs|python+emacs]]. Também tem feeds RSS pra maioria das páginas.

@@ -1,0 +1,46 @@
+= Receita: Polinômios com Itertools =
+
+Adaptado de um e-mail de Rodrigo Senra
+
+== Código ==
+
+{{{
+from itertools import izip
+class Polinomio(object):
+    def __init__(self, coef_exp, varname='x'):
+        # lista de pares ordenados
+        # (coeficiente, expoente)
+        self.coef_exp = coef_exp
+        self.varname = varname
+    def __str__(self):
+           """Vinicius dizia que beleza é fundamental!"""
+        def fmt(c, v, e):
+            if e==0: return '%d'%c
+            elif e==1: return '%d%s'%(c,v)
+            else: return  '%d%s**%d'%(c,v,e)
+        return " + ".join([ fmt(c, self.varname, e) for c, e in self.coef_exp])
+    def __iter__(self):
+        def _gen():
+            for c,e in self.coef_exp:
+                yield c, e
+        return _gen()
+    def __add__(self, polinomio):
+        if polinomio.varname != self.varname:
+            raise ValeuError
+        return Polinomio([(p1[0]+p2[0],p1[1]) for p1, p2\
+                          in zip(polinomio, self.coef_exp)
+                          if p1[1]==p2[1]], self.varname)
+
+if __name__ == "__main__":
+    p1=Polinomio(((3,2),(7,1),(5,0)))
+    p2=Polinomio(((2,2),(4,1),(1,0)))
+    print "p1", p1
+    print "p2", p2
+    print "p1+p2", p1+p2
+
+}}}
+
+
+Volta para CookBook.
+----
+RodrigoSenra

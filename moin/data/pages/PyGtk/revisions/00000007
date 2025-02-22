@@ -1,0 +1,17 @@
+Esta página irá abrigar documentação e outros materiais sobre PyGtk dentro do nosso portal.
+
+Testei o PyGtk no Linux e gostei muito, achei a API simples, o toolkit é realmente livre e o visual é muito legal (quando usamos a Gtk2). Porém, estava faltando o fundamental: rodar o PyGtk em Windows sem nenhum problema e de maneira simples para o usuário.
+
+Então o primeiro tutorial será sobre esse tema, ou seja, vou descrever como fiz para instalar o Gtk, o PyGtk e o Python no Windows. Para o tutorial usei um Windows XP e testei com uma aplicação que tinha sido desenvolvida no Linux.
+
+== Tutoriais ==
+
+   * PyGtkWin - Tutorial de como instalar PyGtk no Windows XP
+   * LibGlade - Tutorial de sobre PyGTK/libglade
+   * InternacionalizePyGtk - Como internacionalizar seu programa feito com PyGtk e LibGlade
+
+== Livro de Receitas ==
+
+   * PyGtkCellRenderCombo - Treeview com Combo
+   * PyGtkMensagens - Como criar mensagens padronizadas, como alertas e etc
+   * MonitorandoSocketsComPyGtk - Lidando com conecções socket atravez do PyGTK

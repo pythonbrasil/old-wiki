@@ -1,0 +1,7 @@
+IronPython é um projeto da Microsoft que é a implementação do Python para a plataforma .NET.
+
+Com isso temos a integração do .NET Framework e sua bibliotecas, como o WindowsForms, com o Python.
+
+Para que o IronPython funcione direitinho é necessário o .NET Framework.
+
+Site do projeto: http://www.codeplex.com/IronPython

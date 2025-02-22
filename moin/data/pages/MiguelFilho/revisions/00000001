@@ -1,0 +1,16 @@
+##master-page:HomepageTemplate
+#format wiki
+== Miguel Di Ciurcio Filho ==
+ * Email: miguel.filho@gmail.com
+
+== Sobre ==
+ * Analista de Suporte do Instituto de Computação da Unicamp
+ * Bacharel em Ciência da Computação pelo Centro Universitário Salesiano de São Paulo - Campinas (UNISAL)
+ * Certificado LPIC-2
+ * Distribuição preferida: Debian
+
+== Projetos em Python ==
+ * [http://www.apolicy.org ACL Policy Daemon]: Policy Daemon para o Postfix que faz greylisting, validação SPF e possui um sistema de ACLs que permite controles refinados. Usa twisted, pyspf, pydns e ipy.
+
+== Palestras ==
+FISL 9.0 2008: [http://fisl.softwarelivre.org/9.0/papers/pub/programacao/371 Access Policy Delegation: transformando o Postfix no melhor MTA do planeta]

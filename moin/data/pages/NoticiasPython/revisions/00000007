@@ -1,0 +1,26 @@
+#pragma section-numbers off
+= Notícias =
+   * '''[[DateTime(2004-07-31T14:00:00)]] - No primeiro [http://www.inf.ufes.br/~encontro-sl/ 1o Encontro de Software Livre da UFES]''' a cobra vai fumar na palestra 'Python no Ensino de Graduação' ministrada pelo RodrigoSenra
+   * '''[[DateTime(2004-07-27T12:00:00)]] - Lançada a nova versão do txt2tags!''' - Foi anunciado no [http://www.dicas-l.unicamp.br/ Dicas-L] pelo próprio Aurelio Marinho Jargas a versão 2.0 do txt2tags. Para saber mais entre [http://www.dicas-l.unicamp.br/dicas-l/20040725.php aqui!] Para conferir as novidades do txt2tags 2.0 clique [http://txt2tags.sf.net/pt aqui!]
+
+   * '''[[DateTime(2004-05-18T12:00:00)]] - Nokia e Python''' - Para aquele que defendem o uso irrestrito de Java argumentando que "Java roda em celulares": [http://www.mobilewhack.com/programming/python/python_on_nokia_screenshots.html Python também roda] e agora está despertando o [http://www.forum.nokia.com/main/0,,4_22,00.html interesse da Nokia]. Começa rodando sobre Java, mas daí para o 'domínio total' é um pulinho :)
+   * '''[[DateTime(2004-02-05T12:00:00)]] - PythonBrasil (Portal e Lista) anunciados no  [http://www.python.org/doc/NonEnglish.html#portuguese site oficial de Python].
+   * '''[[DateTime(2004-02-03T12:00:00)]] - PythonBrasil anunciado em [http://www.pythonware.com/daily/ Daily Python-URL].
+
+   * '''[[DateTime(2004-01-13T12:00:00)]] - Python 12 Conference''' - A [http://conferences.oreillynet.com/os2004/ O'Reilly Open Source Convention / Python 12 Conference] estão recebendo [http://conferences.oreillynet.com/cs/os2004/create/e_sess sugestões de palestras] até o dia 9 de fevereiro. Em certos casos a organização do evento auxilia com as despesas de viagem e de hospedagem.
+
+   * '''[[DateTime(2003-12-19T12:00:00)]] - Python versão 2.3.3 final liberada''' - A lista de alterações e correções encontra-se em: http://www.python.org/2.3.3/NEWS.html . Download em: http://www.python.org/2.3.3/
+
+   * '''[[DateTime(2003-12-13T12:00:00)]] - Lunatic Python foi lançado!''': Realmente o GustavoNiemeyer está com tudo. Não bastasse ele ser um dos brasileiros que contribuem com a distribuição oficial de Python ainda sobra tempo pra ele desenvolver alguns projetos paralelos. Este é para quem gosta de Python e também gosta de Lua (Linguagem de programação criada no Brasil). Para dar uma conferida no resultado: https://moin.conectiva.com.br/LunaticPython.
+
+   * '''[[DateTime(2003-12-12T12:00:00)]] - Back to the Future II "2o Python-lunch no SDSL"''': 6a-feira, dia 12, estaremos lá de novo, e combinamos um local de encontro mais preciso: a portaria do bloco E da FEEC, que fica bem  próxima do local dos mini-cursos e na frente da banquinha da livraria  Tempo Real. Entre 12:00 e 12:30 estaremos esperando formar um grupo para escolher onde almoçar.
+
+   * '''[[DateTime(2003-12-05T12:00:00)]] - Python versão 2.3.3 release candidate 1 liberada''' - A versão é uma correção de vários bugs na versão 2.3.2, incluindo alguns problemas sérios com weakrefs e garbage colector, além de várias correções em módulos da biblioteca padrão. http://www.python.org/2.3.3/
+
+   * '''[[DateTime(2003-12-10T12:00:00)]] - Back to the Future: Almoço durante SDSL''' - Toda comunidade Pythonica está convidada a participar de um (ou vários) almoço de confraternização durante o [http://rau-tu.ccuec.unicamp.br/sdsl/ SDSL] em Campinas no período de 9 a 12/12/2003. Podemos (e devemos) usar este espaço para conciliar a agenda dos diversos participantes. Ponto de encontro sugerido: Entrada principal da FEEC - Faculdade de Eng.Elétrica e de Computação, onde estará sendo realizado o evento. Horário de encontro: 12:00 (tolerância de 15 min -- já prevendo à fome). Quasiquer outras sugestões...isto é um Wiki!
+
+Leia mais em NotíciasAntigas.
+
+----
+
+OsvaldoSantanaNeto

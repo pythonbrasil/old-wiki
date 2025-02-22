@@ -1,0 +1,269 @@
+#pragma section-numbers off
+= Receita: Executando Funções em Intervalos de Tempo =
+
+Em fevereiro de 2004 surgiu na lista python-brasil [[http://br.groups.yahoo.com/group/python-brasil/message/213|uma pergunta]] sobre como se pode executar uma determinada função de intervalos em intervalos, como a [[http://www.devguru.com/Technologies/ecmascript/quickref/win_setInterval.html|função setInterval]] do {{{JavaScript}}}. Uma primeira solução utilizando apenas funções e timers foi proposta por [[http://jonasgalvez.com/br/blog|Jonas Galvez]], uma segunda foi proposta por mim (FelipeLessa) e uma outra terceira foi achada também por Jonas. Cada solução tem suas vantagens e desvantagens, veja cada uma e tire sua própria conclusão quanto preferências de implementação e aplicabilidade no seu código. '''Atualização''' (02/07/04): E agora temos uma quarta solução, usando a API do Twisted.
+
+<<TableOfContents>>
+
+== Primeira solução -- usando funções ==
+
+=== Descrição ===
+
+Essa é a primeira solução proposta. Basicamente uma função geradora cria uma outra que possui dentro de si um [[http://www.python.org/doc/current/lib/timer-objects.html|Timer()]] que, ao invés de chamar a função que foi solicitada, chama a si própria, recriando o {{{Timer()}}} que foi destruído e executando a função. Uma outra função acessa um valor interno da função que está rodando o {{{Timer()}}} e a instrui para parar o loop.
+
+=== Vantagens e desvantagens ===
+
+A vantagem clara é a simplicidade do código e de como ele é mantido, porém essa solução tem um ponto fraco: os ciclos de CPU e os recursos de sistema que são gastos com a criação e a destruição contínua dos objetos {{{Timer()}}}. É claro que essa diferença pode não ser percebida em intervalos grandes como o dos exemplos abaixo, porém em intervalos de décimos ou centésimos de segundo essa pode ser uma grande diferença.
+
+=== Código ===
+
+{{{
+#!python
+from threading import Timer
+
+def setInterval(function, interval, *params, **kwparams):
+    def setTimer(wrapper):
+        wrapper.timer = Timer(interval, wrapper)
+        wrapper.timer.start()
+
+    def wrapper():
+        function(*params, **kwparams)
+        setTimer(wrapper)
+    
+    setTimer(wrapper)
+    return wrapper
+
+def clearInterval(wrapper):
+    wrapper.timer.cancel()
+}}}
+
+=== Exemplo de uso ===
+
+{{{
+#!python
+# Nos exemplos assumirei que o módulo "cookbook" contém todos os códigos
+from cookbook import setInterval
+from os.path import getsize
+
+FILE = '/var/log/syslog'
+
+def monitor(lastsize = [-1])
+    size = getsize(FILE)
+    if size <> lastsize[0]:
+        print 'O tamanho do arquivo agora é %d kilobytes (%d bytes)' % \
+              (round(size / 1024.0), size)
+        lastsize[0] = size
+
+if __name__ == '__main__':
+    print 'Checando a cada um minuto o tamanho do arquivo "%s".' % FILE
+    print 'Atenção: esse programa NUNCA termina.'
+    interval_monitor = setInterval(monitor, 60)
+    while True:
+        pass
+}}}
+
+== Segunda solução -- usando classes e sleep ==
+
+=== Descrição ===
+
+Essa é a segunda solução proposta por FelipeLessa também na [[http://br.groups.yahoo.com/group/python-brasil/message/217|lista python-brasil]]. Ao invés de um {{{Timer()}}} ser recriado constantemente, a função [[http://www.python.org/doc/current/lib/module-time.html|time.sleep()]] é utilizada dentro de um laço {{{while}}}, dessa forma evitando a contrução/destruição de objetos constante.
+
+Para os curiosos, as únicas diferenças entre o exemplo dessa solução e da primeira estão nas linhas 17, 18 e 19.
+
+=== Vantagens e desvantagens ===
+
+Essa implementação praticamente não gasta qualquer tipo de recurso entre uma execução e outra, tendo entre elas apenas a função {{{time.sleep()}}} e a checagem do laço {{{while}}}, dessa forma tendo praticamente nenhuma sobrecarga mesmo em intervalos curtos.
+
+A única desvantagem é visual: há quem não goste de utilizar classes para esse tipo de tarefa.
+
+=== Código ===
+
+{{{
+#!python
+from threading import Thread
+from time import sleep
+
+class IntervalRunner(Thread):
+    def __init__(self, interval, function, *args, **kwargs):
+        super(self, IntervalRunner).__init__(self)
+
+        self.interval = interval
+        self.function = function
+        self.args = args
+        self.kwargs = kwargs
+        self.executing = False
+
+    def run(self):
+        self.executing = True
+        while self.executing:
+            self.function(*self.args, **self.kwargs)
+            time.sleep(self.interval)
+
+    def stop(self):
+        self.executing = False
+}}}
+
+=== Exemplo de uso ===
+
+{{{
+#!python
+# Nos exemplos assumirei que o módulo "cookbook" contém todos os códigos
+from cookbook import IntervalRunner
+from os.path import getsize
+
+FILE = '/var/log/syslog'
+
+def monitor(lastsize = [-1])
+    size = getsize(FILE)
+    if size <> lastsize[0]:
+        print 'O tamanho do arquivo agora é %d kilobytes (%d bytes)' % \
+              (round(size / 1024.0), size)
+        lastsize[0] = size
+
+if __name__ == '__main__':
+    print 'Checando a cada um minuto o tamanho do arquivo "%s".' % FILE
+    print 'Atenção: esse programa NUNCA termina.'
+    interval_monitor = IntervalRunner(60, monitor)
+    interval_monitor.start()
+    interval_monitor.join() # Opcional, claro
+}}}
+
+== Terceira solução -- usando classes e eventos ==
+
+=== Descrição ===
+
+Essa é a terceira solução proposta (e última, pelo menos enquanto eu escrevo :) ), originalmente postada no [[http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65222|ASPN Python Cookbook]]. Para utilizá-la você precisa criar uma subclasse da mesma e o checador de atividade é implementado usando um objeto [[http://www.python.org/doc/current/lib/event-objects.html|Event()]].
+
+=== Vantagens & Desvantagens ===
+
+Pode-se dizer que essa solução é uma irmã da segunda, filosofia igual e implementação diferente. Ao invés dela chamar uma função, ela já possui em si a função, o que significa que você deve criar uma subclasse. Essa é então a vantagem e a desvantagem. Se você precisa de um maior controle talvez goste dessa implementação, mas para tarefas simples é o mesmo que matar mosca com rifle de elefante.
+
+=== Código ===
+
+{{{
+#!python
+import threading
+
+class TaskThread(threading.Thread):
+    """Thread that executes a task every N seconds"""
+
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self._finished = threading.Event()
+        self._interval = 15.0
+
+    def setInterval(self, interval):
+        """Set the number of seconds we sleep between executing our task"""
+        self._interval = interval
+
+    def shutdown(self):
+        """Stop this thread"""
+        self._finished.set()
+
+    def run(self):
+        while 1:
+            if self._finished.isSet(): return
+            self.task()
+
+            # sleep for interval or until shutdown
+            self._finished.wait(self._interval)
+
+    def task(self):
+        """The task done by this thread - override in subclasses"""
+        pass
+}}}
+
+=== Exemplo de uso ===
+
+{{{
+#!python
+# Nos exemplos assumirei que o módulo "cookbook" contém todos os códigos
+from cookbook import TaskThread
+from os.path import getsize
+
+FILE = '/var/log/syslog'
+
+class FileSizeTracker(TaskThread):
+    def __init__(self):
+        super(self, FileSizeTracker).__init__(self)
+        self._interval = 60.0 #segundos
+        self._lastsize = -1
+
+    def task(self):
+        size = getsize(FILE)
+        if size <> self._lastsize:
+            print 'O tamanho do arquivo agora é %d kilobytes (%d bytes)' % \
+                  (round(size / 1024.0), size)
+            self._lastsize = size
+
+if __name__ == '__main__':
+    print 'Checando a cada um minuto o tamanho do arquivo "%s".' % FILE
+    print 'Atenção: esse programa NUNCA termina.'
+    thread = FileSizeTracker()
+    thread.start()
+    thread.join() # Opcional, claro
+}}}
+
+== Quarta solução -- usando o Twisted ==
+
+=== Descrição ===
+
+O [[http://www.twistedmatrix.com/|Twisted Matrix]] é uma plataforma pra desenvolvimento de aplicações para a Internet. Obviamente não compensa usar uma biblioteca dessa magnitude simplesmente para executar uma função em determinados intervalos, porém, caso seu programa já utilize o Twisted, então dessa forma você vai poder continuar usando o loop principal do Twisted para todo seu programa. O exemplo é uma versão ligeiramente modificada da documentação do Twisted.
+
+Devo lembrar que o Twisted '''não''' utiliza múltiplos ''threads'' ou processos, portanto não sofre dos problemas dos mesmos (a implementação do Python é a melhor possível).
+
+Para maiores informações sobre a class {{{LoopingCall}}} do Twisted, veja [[http://twistedmatrix.com/documents/TwistedDocs/TwistedDocs-1.3.0/api/twisted.internet.task.LoopingCall.html|a documentação referente]].
+
+=== Código ===
+
+{{{
+#!python
+# Nenhum. Tudo já foi feito =).
+}}}
+
+=== Exemplo de uso ===
+
+{{{
+#!python
+from twisted.internet import reactor, task
+from os.path import getsize
+
+FILE = '/var/log/syslog'
+
+def monitor(lastsize = [-1])
+    size = getsize(FILE)
+    if size <> lastsize[0]:
+        print 'O tamanho do arquivo agora é %d kilobytes (%d bytes)' % \
+              (round(size / 1024.0), size)
+        lastsize[0] = size
+
+if __name__ == '__main__'
+    print 'Checando a cada um minuto o tamanho do arquivo "%s".' % FILE
+    print 'Atenção: esse programa NUNCA termina.'
+    l = task.LoopingCall(monitor)
+    l.start(1.0)
+    reactor.run()
+}}}
+
+== Conclusão Final ==
+
+Basicamente pode-se criar o seguinte caminho de perguntas e respostas:
+
+'''1)''' Você já usa o Twisted Matrix no seu programa?
+  * Se sim, prefira a quarta solução.
+  * Se não, vá para a próxima pergunta.
+
+'''2)''' Você tem algo contra o uso de classes no código que usa o intervalo?
+  * Se sim, utilize a primeira solução e tenha a certeza de que não vai ter a performance alterada.
+  * Se não, vá para a pergunta 3.
+
+'''3)''' Você precisa criar algum tipo de controle avançado da função que será executada ou precisa de outras funcionalidades que só podem ser obtidas usando uma classe (como ''multiple inheritance'')?
+  * Se sim, utilize a terceira solução. Com ela você cria a sua própria subclasse e pode reutilizá-la quantas vezes quiser.
+  * Se não, utilize a segunda solução. Esta solução provê uma interface igual à primeira solução porém sem o gargalo que pode vir a existir nesta última.
+
+
+Volta para CookBook.
+
+----
+
+FelipeLessa

@@ -1,0 +1,51 @@
+==  Combinando Cairo com Pygame ==
+
+Por JoaoBueno
+
+A biblioteca Pygame é a que provê uma das maneiras mais simples de podermos trabalhar com imagens 2D em tela cheia. A biblioteca Cairo provê primitivas poderosas de desenho e permite efeitos de texto avançados, uso de degradês (gradientes de cores) com transparência e uma API bem mais completa para desenhar.
+
+Combinar os duas no entanto, pode ser difícil para quem for tentar faze-lo pela primeira vez - então estou deixando um exemplo aqui. O desenho em Cairo e bem simples - um único "X" para manter o exemplo curto - mas esse X é desenhado com linhas anti-aliased desenahdas pelo Cairo, que não estão disponíveis no pygame. 
+
+O segredo do funcionamento está na obtenção dos dados "brutos" da imagem gerada pelo cairo, e seu uso para sobre-escrever os dados da superfície do Pygame - na função "commit"
+
+{{{
+
+# -*- coding: utf-8 -*-
+import cairo
+import pygame
+
+SIZE = 640, 480
+
+def init():
+    global surf, ctx, display
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, *SIZE)
+    ctx = cairo.Context(surf)
+    pygame.init()
+    display = pygame.display.set_mode(SIZE)
+
+
+def draw_x(ctx, width=8.0, color=(1.0,0,0)):
+    ctx.set_line_width(width)
+    ctx.set_source_rgb(*color)
+    ctx.move_to(0,0) 
+    ctx.line_to(SIZE[0],SIZE[1]) 
+    ctx.move_to(SIZE[0],0)
+    ctx.line_to(0, SIZE[1])
+    ctx.stroke()
+
+def commit(pygame_surface, cairo_surface):
+        dest = pygame.surfarray.pixels2d(pygame_surface)
+        dest.data[:] = cairo_surface.get_data()
+
+init()
+draw_x(ctx)
+commit(display, surf)
+pygame.display.flip()
+
+# Keeps the program running while <ESC> is not pressed
+while not pygame.key.get_pressed()[pygame.K_ESCAPE]:
+    pygame.event.pump()
+    pygame.time.delay(30)
+
+
+}}}

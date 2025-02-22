@@ -1,0 +1,65 @@
+#pragma section-numbers off
+= Introdução ao Jython =
+
+[[TableOfContents]]
+
+== O que é Jython? ==
+
+Jython é a união entre o Java e o Python, devemos aqui fazer uma separação entre a linguagem de programação Java e a plataforma Java.
+
+Primeiro temos a linguagem (um C++ que não deu certo) que possui certas características. Podemos citar por exemplo a orientação a objetos e o fato de Java não ser compilada de forma a gerar um binário nativo (características em comum com o Python). É ai que entra a plataforma Java, todos que conhecem o Java sabem que a propaganda do Java é "Compile once, run many" algo como compile uma vez rode em qualquer lugar. Java funciona assim porque ele não roda diretamente em contato com a plataforma nativa e sim em cima de uma máquina virtual que cria uma camada com API's padronizadas. Bom se é assim eu preciso usar "aquela linguagem " para programar para Java?
+
+    Na verdade hoje ja existem varias linguagens para a plataforma Java (Ruby, Perl e um tclsh ainda incompleto) e de todas estas linguagens a que consegui ir mais fundo na integração com a plataforma Java foi com Python (Python tem acesso a todos os recursos da plataforma Java e a todas as bibliotecas, além de possuir a capacidade de "compilar" o bytecode resultante. O resultado final não é totalmente indepedente do Jython porque ele estende um pouco as classes nativas do Java, mas é possível incluir todas as dependecias em um jar com cerca de 83KB, dependendo do que é usado).
+
+== As vantagens do Jython ==
+
+   1 - Velocidade de desenvolvimento: Python é uma linguagem de desenvolvimento rápido (cerca de 8 vezes mais rápido que em linguagem Java).
+   2 - Praticidade: Você não precisa compilar o código Jython pra testá-lo. Isto torna a depuração muito mais rápida. Depois de terminado o processo você utiliza o compilador Jythonc para compilar o programa, para incluir as biliotecas do Jython existe a opção do freeze.
+   3 - Tempo de aprendizado: É muito mais rápido que no caso da linguagem Java (até por esta ser derivada do C++ que tradicionalmente não é uma linguagem fácil).
+
+== Pondo a mão na massa ==
+
+=== Instalação ===
+
+Aqui nós cobriremos apenas a instalação do pacote binário, mas como o Jython é distribuido seguindo uma licença bem liberal
+você pode compilar ele do fonte. Não é nescessario, já que a plataforma Java é unificada.
+
+==== Download ====
+
+Em http://www.jython.org/download.html você encontrará as versões mais recentes do Jython.
+
+Baixe uma versão atualizada da VM do Java (dhuu!!). Jython funciona a partir da versão 1.1. Nos meus testes ele não rodou em nada mais velho que a versão 1.2. Estou utilizando o 1.4 no meu Linux mas os programas rodam igualmente bem em um 1.3 (instalado em OS/2).
+
+A instalação é simples. Simplesmente execute o .class:
+
+{{{
+java jython-????
+}}}
+
+e siga as instruções da interface gráfica de instalação.
+
+==== O primeiro programa em Python no Java ====
+
+Vamos fazer um {{{Hello world!}}} rapidinho:
+
+Execute o Jython (normalmente existe um script pra isso no diretório onde você instala o Jython).
+
+{{{
+Jython 2.1 on java1.4.1 (JIT: null)
+Type "copyright", "credits" or "license" for more information.
+
+>>>from javax.swing import *
+>>>
+>>> janela = JFrame('Teste')
+>>> label = JLabel('Ola mundo!')
+>>> janela.getContentPane().add(label)
+>>> janela.setBounds(20,20,200,200)
+>>> janela.setVisible(1)
+
+E temos o nosso {{{Hello world!}}}.
+
+----
+
+RodrigoCesarHerefeld
+
+Editado e formatado: Osvaldo Santana Neto

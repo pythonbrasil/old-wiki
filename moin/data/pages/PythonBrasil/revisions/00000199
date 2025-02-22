@@ -1,0 +1,72 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+Este site foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma (Português). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente. Veja o ComoUsarWiki para aprender a usar esta ferramenta.
+
+= Atualização =
+
+Pessoa, como vocês já devem ter percebido o MoinMoin recebeu um upgrade neste fim-de-semana. Foi um processo de migração enorme e provavelmente ainda não terminou. Gostaria que vocês me reportassem qualquer problema que encontrar com a utilização do site (mande um e-mail para osantana |arroba| gmail (ponto) com). Alguns problemas que já notei mas que ainda não tratei:
+
+ * Traduções - algumas mensagens estão em inglês
+ * URLs - Não está funcionando o mecanismo que permitia digitar o nome das páginas com acentos na URL do navegador. Esse problema parece que vai ser o mais complicado de ser resolvido.
+ * Versões de Python - O Moin exige o Python 2.3 pra funcionar e a hospedagem disponibiliza o 2.2 que não tem um punhado de opções.
+ * UTF-8 - O Moin só funciona com UTF-8 e a máquina onde roda o PythonBrasil usa um sistema operacional preparado para iso-8859-1.
+ * Gráficos - Gráficos de acesso/visita não estão sendo gerados
+ * Permissões - Verificar as permissões de alguns arquivos.
+
+= Iniciantes =
+
+Leitura recomendada para aqueles que têm interesse ou são iniciantes na linguagem Python ou em ["Jython"]:
+
+   * IntroPython - '''Em desenvolvimento'''. O Guia da comunidade Python Brasil para iniciantes da linguagem Python.
+   * IntroduçãoPythonSimples - Uma Simples introdução a programação Python (escrito por RaLobao)
+   * IntroduçãoPython e PythonApresentação - Artigos de OsvaldoSantanaNeto.
+   * PythonInstantâneo - Artigo Magnus Lie Hetland traduzido por WanderleiAntonioCavassin.
+   * IntroduçãoJythonDidática - Uma introdução bastante didática e relativamente completa dessa ferramenta que permite usar o poderio de Python e de Java juntos.
+   * IntroduçãoJython - Uma introdução ao Jython: panorama,  conceituações e prática. Artigo, apresentação e uma aplicação  cliente/servidor (chat), por Eduardo Bastos e Juliano Freitas.
+
+= Destaques =
+
+'''Screenshots do smart''' - Mais uma promissora ferramenta baseada em Python está sendo desenvolvida. Trata-se do [http://zorked.net/smart/ smart], uma ferramenta de atualização de pacotes agnóstica (funciona no Conectiva, Fedora, Slackware e outros) que veio para competir com as ferramentas urpmi, yum e apt. Além de ser feita em Python, o software é desenvolvido pelo Gustavo Niemeyer, que trabalha na Conectiva e faz parte da comunidade PythonBrasil! Aguardem mais novidades!
+
+'''Saiu o primeiro Beta do Python 2.4''' - Nesta semana o pessoal da PSF anunciou o lançamento do primeiro Beta da versão 2.4 do Python. Entre os destaques desta nova versão podemos ver os tipos 'Set' builtin, generator expressions, novas funções builtin reversed()/sorted(), entre muitas outras melhorias que estão listadas no endereço http://www.python.org/2.4/highlights.html. Para todos os Pythoneiros brasileiros que já se sentem confortáveis com essa linguagem eu recomendo o uso e o envio de ocorrências de problemas que vierem a encontrar para a equipe de desenvolvimento do Python. Já para aqueles que usam Python em ambientes de produção fica o alerta: trata-se de uma versão beta, portanto, não é indicada para ambientes de produção.
+
+= Seções =
+
+Aqui estão algumas das seções desse site. Se você gostaria de sugerir outras é só entrar em contato com o WikiMaster mais próximo.
+
+   * PerguntasFreqüentes - Perguntas e Respostas frequentes.
+   * NotíciasPython - Notícias sobre Python.
+   * ProjetosPythonBrasil - Projetos apoiados pelo site.
+   * DocumentaçãoPython - Documentação, Livros, Manuais, Tutoriais e afins.
+   * PythonNaEducação - Página mantida por professores e coordenadores de cursos de Python {NEW}
+   * CookBook - Trechos de códigos úteis.
+   * SoftwarePython - Módulos, Editores e Ferramentas para desenvolvimento Python, bem como projetos desenvolvidos por brasileiros.
+   * EmpresasPython - Empresas Brasileiras que já usam Python para aumentar seus lucros :)
+   * OportunidadesDeEmprego - Vamos fazer a nossa parte no 'espetáculo do crescimento'. Empregue-se e ofereça empregos. Alguns recadinhos profissionais também estão aqui.
+   * DiscussõesAleatórias - Se você não sabe em que página contribuir, use esta.
+
+= Como Participar =
+
+Você pode participar da comunidade PythonBrasil diretamente aqui no site, através da lista de discussão ou via IRC.
+
+=== Lista de Discussão ===
+
+A lista oficial do site é: python-brasil@yahoogrupos.com.br ([http://br.groups.yahoo.com/group/python-brasil/ página principal]). Para se cadastrar na python-brasil, envie email (com qualquer conteúdo/assunto) para python-brasil-subscribe@yahoogrupos.com.br. Feito isso você receberá um e-mail de confirmação. É só responder a esse e-mail e pronto.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+'''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existe ainda uma lista chamada python-br que está sendo desativada. Se você tem conta nesta lista, por favor migre para a lista python-brasil.
+Pedimos a todos pythonistas e curiosos que não remetam e-mails para a lista python-br! A lista python-br não tem como ser moderada ou gerenciada
+devido a um problema de autenticação.
+
+=== Canal de IRC ===
+
+O canal oficial do '''Python''' no Brasil é o #python-br do irc.freenode.org.
+
+=== Outros ===
+
+   * CaixaDeSugestões - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PáginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuários - Outros sites de grupos de usuários Python.

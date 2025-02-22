@@ -1,0 +1,389 @@
+= Módulos e Pacotes =
+
+A modularização de uma aplicação é algo extremamente importante. Ela deve ser feita por duas razões:
+
+ * Para escrever módulos e reutilizar o código escrito em outras aplicações;
+ * Queremos que o código de nossa aplicação esteja organizado de modo a facilitar o controle e o entendimento do todo, facilitando assim a expansão organizada e a manutenção.
+
+== Módulos ==
+
+=== O que são? ===
+
+Em poucas palavras: módulos são arquivos de código Python cuja interface é conhecida e que podem ser importados por outros módulos (daremos uma definição formal mais tarde). Dizer que a "interface é conhecida" siginifica que quando um programador importar um módulo, ele saberá (ou tem meios de saber) quais funções e classes o módulo possui. Ele também saberá como usá-las, isto é, conhecendo seus nomes, parâmetros, que excessões pretende tratar, dentre outras características.
+
+=== Como funcionam? ===
+
+Para começar, vamos criar um módulo simples:
+
+{{{#!python
+# -*- iso:8859-1 -*-
+# strformat.py
+"""Módulo de formatação de strings.
+"""
+
+def frmt_bytes(bytes):
+    """Formata um inteiro enviado em "bytes" para um
+    forma mais bonitinha, GB, MB, enfim. [1]
+    """
+    if bytes < 1024:
+        return '%dB' % (bytes)
+    elif bytes < (1024 * 1024):
+        return '%.1fKB' % (bytes / 1024.0)
+    elif bytes < (1024 * 1024 * 1024):
+        return '%.1fMB' % (bytes / 1024.0 / 1024.0)
+    else:
+        return '%.1fGB' % (bytes / 1024.0 / 1024.0 / 1024.0)
+
+def strip_html(text):
+    """Remove todo o html de uma determinada string. [2]
+    """
+    import re
+    s = re.sub('<[^>]*>', '', text)
+    return s
+
+# Código de inicialização:
+print "Inicializando módulo strformat"
+}}}
+
+Primeiro vamos ao caso mais simples. Vamos considerar que "strformat.py" está na mesma pasta que o módulo que irá importá-lo. Assim:
+
+{{{#!python
+# -*- iso-8859-1 -*-
+"""Módulo principal.
+"""
+
+import strformat
+
+def main():
+    """Função principal da aplicação.
+    """
+    print strformat.frmt_bytes(502356)
+    print strformat.strip_html("<b>Texto</b>")
+
+if __name__ == "__main__":
+    main()
+}}}
+
+Agora vamos explicar as linhas de código aonde podem surgir dúvidas.
+
+Na linha 1 de ambos os arquivos o "-*- iso:8859-1 -*-" significa que estamos especificando explicitamente qual a codificação de caracteres utilizada em nosso módulo. Faça a experiência: copie o código do módulo que escrevemos e retire esta linha. O interpretador Python irá exibir um aviso. Isso ocorrerá porque utilizamos caracteres acentuados em nosso comentários e strings, e o interpretador precisa saber qual o código de caracteres usados. Porque ele não adivinha? Porque não existe uma regra padrão de adivinhação. E se houvesse comentários com caracteres japoneses, por exemplo, como o interpretador saberia que deve usar uma determinada codificação (se mesmo humanamente é difícil adivinhar)?
+
+Uma observação sobre idiomas em códigos e comentários: muitos projetos adotam a regra de escrever tudo em inglês. As vantagens disso é que você se livra de ter que especificar codificações e, mais importante, seu código poderá ser entendido por muito mais gente no mundo inteiro. Por outro lado, pode ser que o seu colega de classe não entenda uma linha. O bom é que isso não é uma regra e você é livre para usar o bom senso :-). Mas nunca use acentos em nomes de funções e classes.
+
+Em seguida, vemos as DocStrings do nosso módulo. Este é o modo utilizado para documentarmos o propósito do módulo.
+
+Em seguida, a definição do módulo. Note o modo como usamos DocStrings para os elementos do módulo. Este é o modo correto de documentar, pois tais strings podem ser recuperadas por comandos como o help().
+
+Antes de continuarmos, devemos saber que nosso arquivo principal (o que possui a função main) também é um módulo. Na verdade, todos os arquivos com código Python são módulos, mesmo que não sejam importados. A definição dada inicialmente serve na aplicação deste documento, afinal esta é uma de suas principais utilidades. Então vamos à definição formal:
+
+'''''Um módulo é um arquivo Python contendo definições e sentenças.''''' [3]
+
+=== Tabela de Símbolos e Namespaces ===
+
+Note em nosso módulo principal o modo como chamamos as funções de strformat. O detalhe é que nós especificamos o nome do módulo para chamar a função. Para entender porque isso é feito, devemos entender que todo módulo Python possui uma ''tabela de símbolos''.
+
+Uma tabela de símbolos é um dicionário de dados que cada módulo possui, onde são armazenadas todas as variáveis, funções e classes definidas neste módulo.
+
+Vamos a uma pequena demonstração prática. Abra o interpretador de comandos. Se chamarmos a função dir(), o interpretador nos retornará uma lista de nomes de todos os símbolos da tabela do módulo atual. Assim:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__']
+}}}
+
+Quando inserimos um comando import, o que estamos fazendo é simplesmente adicionar um novo símbolo à nossa tabela. Vamos testar:
+
+{{{#!python
+>>> import math
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'math']
+>>> type(math) # Investigando o símbolo
+<type 'module'>
+}}}
+
+Sabemos que math possui a função sqrt(), que calcula a raiz quadrada de um número. Se quisermos chamar srqt(), ele deve estar em nossa tabela de símbolos. Caso contrário, o interpretador Python não irá saber aonde procurá-la. Neste caso, por exemplo, srqt() não está. Mas sabemos que ele está presente na tabela de símbolos de math. Como sabemos? Podemos usar dir(módulo):
+
+{{{#!python
+>>> dir(math)
+['__doc__', '__file__', '__name__', 'acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'cosh', 'degrees', 'e', 'exp', 'fabs', 'floor', 'fmod', 'frexp', 'hypot', 'ldexp', 'log', 'log10', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh']
+}}}
+
+Felizmente Python permite chamarmos diretamente os símbolos da tabela math. Basta fazermos:
+
+{{{#!python
+>>> math.sqrt(9)
+3.0
+}}}
+
+Agora podemos entender porque fizemos {{{print strformat.frmt_bytes(502356)}}}.
+
+E os namespaces? Esse é outro nome muito encontrado para a tabela de símbolos de um módulo atual. Por exemplo, podemos dizer que srqt() pertence ao namespace de math.
+
+Agora vamos explorar outra alternativa. Python também permite importar diretamente os símbolos de outro namespace para o atual. Vamos reiniciar o interpretador (para limpar a tabela de símbolos) e fazer um novo teste:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> from math import sqrt
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'sqrt'] # Novo símbolo importado.
+}}}
+
+Veja agora que utilizamos o comando na forma "do módulo math, importe o símbolo srqt". É muito importante ressaltar que nós NÃO importamos math. O símbolo math não está na tabela atual. Apenas importamos a função sqrt. Como a função está na tabela atual, podemos fazer:
+
+{{{#!python
+>>> sqrt(25)
+5.0
+}}}
+
+Mas não podemos fazer:
+
+{{{#!python
+>>> math.sqrt(25)
+
+Traceback (most recent call last):
+  File "<pyshell#15>", line 1, in -toplevel-
+    math.sqrt(25)
+NameError: name 'math' is not defined
+}}}
+
+Se quisermos utilizar o módulo math, podemos importá-lo normalmente como no exemplo anterior.
+
+{{{#!python
+>>> import math
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'math', 'sqrt']
+}}}
+
+Os símbolos math e sqrt podem coexistir na mesma tabela sem nenhum problema. A única coisa que não pode ocorrer, por razões óbvias, são dois nomes iguais na mesma tabela.
+
+Também podemos importar diversos símbolos de uma única vez:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> from math import sin, cos
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'cos', 'sin']
+}}}
+
+Há um terceiro modo de se usar import. Podemos importar diretamente todos os símbolos de um módulo. Vamos reiniciar novamente o interpretador e testar:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> from math import * # Importamos tudo.
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'cosh', 'degrees', 'e', 'exp', 'fabs', 'floor', 'fmod', 'frexp', 'hypot', 'ldexp', 'log', 'log10', 'modf', 'pi', 'pow', 'radians', 'sin', 'sinh', 'sqrt', 'tan', 'tanh'] # Os símbolos de math estão aqui agora.
+}}}
+
+Novamente, nós NÃO importamos math. Apenas todos os símbolos de math, EXCETO os nomes que começam com um _ (sublinhado). O símbolo _ é utilizado para que você possa definir nomes internos que não devem ser exportados para outros módulos.
+
+=== Código de inicialização ===
+
+Em nossos módulos, podemos definir código que será executado automaticamente quando forem importados. Se você executar o programa do primeiro exemplo, será exibida a mensagem "Inicializando módulo strformat", que definimos em strformat.
+
+A regra é simples: todo código que estiver definido em primeiro nível, isto é, fora da definição de classes e funções será executado como código de inicialização do módulo.
+
+Entretanto, existem algumas situações aonde queremos que nosso código seja executado apenas sob condições especiais. É o caso dos módulos principais. Sò queremos que nossa função main() seja executada se o módulo for o principal. Caso ele tenha sido importado, a aplicação só deverá ser executada se main() for chamado explicitamente. Para isso, utilizamos o seguinte código:
+
+{{{#!python
+if __name__ == "__main__":
+    main()
+}}}
+
+A variável {{{__name__}}} armazena o nome do módulo atual. Neste caso, o código de inicialização investiga através dela se o módulo é o principal, e executa de acordo. Você encontrará este código muito frequentemente. Apesar de parecer um artifício, este é o modo correto de se fazer módulos principais.
+
+== Pacotes ==
+
+Quando nossos módulos ficarem maiores, não vamos querer ter cinquenta classes e trezentas funções em um único arquivo. Vamos querer separar em diversos módulos. É para isso que pacotes existem.
+
+=== O que são? ===
+
+Pacotes são módulos Python que podem conter outros pacotes. Em termos de armazenamento, enquanto módulos são estruturados em arquivos, pacotes são estruturados em pastas.
+
+=== Como funcionam? ===
+
+Para demonstração, vamos criar um pacote de utilitários com a seguinte estrutura e tabela de símbolos (apenas algumas classes e funções de exemplo):
+
+{{{
+util/
+    __init__.py
+    sort.py [quicksort(), bubblesort()]
+    string/
+        __init__.py
+        format.py [Parser, Validator]
+        io.py [StringIO]
+    number/
+        __init__.py
+        format.py [DoubleFormat, IntFormat]
+}}}
+
+E o que são esses arquivos {{{__init__.py}}}? Esses são arquivos especiais e servem para que o interpretador possa identificar quais diretórios são pacotes e quais não são. Isso serve para que você possa explicitamente especificar quais pastas fazem parte da interface de seu pacote. Afinal, algumas podem conter apenas dados, por exemplo, imagens, dentre outros arquivos que não são módulos Python. Na maioria dos casos, o conteúdo dos arquivos {{{__init__.py}}} podem ser vazios. Adiante veremos algumas utilidades extras para ele.
+
+Existem vários modos importar o conteúdo de um pacote. Considerando que nosso módulo está no mesmo diretório que util, temos:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> from util import sort
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'sort'] # Nosso módulo importado.
+>>> sort.quicksort([2, 1, 5, -1]) # Usamos então o módulo normalmente.
+[-1, 1, 2, 5]
+}}}
+
+Outra forma possível:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> import util.sort
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'util']
+>>> util.sort.quicksort([2, 1, 5, -1]) # Precisamos informar o mesmo de módulo nome importado.
+[-1, 1, 2, 5]
+}}}
+
+Note que neste caso o uso da função quicksort() requereu o uso do caminho completo do módulo. Isso porque sempre utilizamos o mesmo nome importado.
+
+Para os pacotes internos, procedemos de modo similar. Apenas utilizamos o caminho separado por '.' (pontos) até o módulo desejado.
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> from util.string.format import *
+>>> dir()
+['Parser', 'Validator', '__builtins__', '__doc__', '__name__'] # Importamos o conteúdo do módulo.
+>>> parser = Parser()
+}}}
+
+Faça testes com as várias possibilidades de import e estude o seu comportamento.
+
+=== Cuidados especiais ===
+
+O primeiro cuidado especial é:
+
+'''Todos os pacotes devem conter um arquivo {{{__init__.py}}}.'''
+
+O segundo diz respeito a importar um pacote diretamente. Veja:
+
+{{{#!python
+>>> import util
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'util'] # Nosso módulo está aqui.
+>>> util.sort.quicksort([2, 1, 5, -1])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in -toplevel-
+AttributeError: 'util' object has no attribute 'sort'
+>>> dir(util)
+['__builtins__', '__doc__', '__file__', '__name__', '__path__'] # Onde está o conteúdo?
+}}}
+
+Se nosso pacote está presente, e sabemos o módulo sort está contido nele, porque simplesmente não funciona? Porque o interpretador Python não possui meios de saber precisamente o nome de todos os módulos contidos em um pacote de modo totalmente portável. Por exemplo, o sistema operacional Windows não diferencia caracteres maiúsculos e minúsculos em nomes de arquivo, e ainda possui o hábito de capitalizar a inicial dos mesmos. E como em Python é sensível ao caso, poderia acabar cometendo erros como:
+
+{{{#!python
+>>> dir(util)
+['__builtins__', '__doc__', '__file__', '__name__', '__path__', 'Sort']
+}}}
+
+Atualmente, quando importamos um pacote, o interpretador importa os símbolos do arquivo {{{__init__.py}}}. Por exemplo, se o arquivo {{{util/__init__.py}}} tivesse o seguinte conteúdo:
+
+{{{#!python
+# -*- coding: iso-8859-1 -*-
+
+teste = "Apenas um exemplo."
+}}}
+
+Teríamos:
+
+{{{#!python
+>>> import util
+>>> dir(util)
+['__builtins__', '__doc__', '__file__', '__name__', '__path__', 'teste']
+>>> print util.teste
+Apenas um exemplo.
+}}}
+
+Assim, é possível com o seguinte {{{util/__init__.py}}}
+
+{{{#!python
+# -*- coding: iso-8859-1 -*-
+
+import sort
+import string
+import number
+}}}
+
+termos:
+
+{{{#!python
+>>> import util
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'util'] # Nosso módulo está aqui.
+>>> util.sort.quicksort([2, 1, 5, -1])
+[-1, 1, 2, 5]
+>>> dir(util)
+['__builtins__', '__doc__', '__file__', '__name__', '__path__', 'sort', 'string', 'number']
+}}}
+
+Mas cuidado! Esta possibilidade é apenas uma demonstração do que pode ser feito. Entretanto, este uso pode trazer duas complicações. Primeiro, você pode acabar duplicando a sua interface. Por exemplo, se em {{{util/__init__.py}}} adicionássemos o código
+
+{{{#!python
+from string.format import Parser
+}}}
+
+geraríamos dois caminhos de acesso à classe Parser, o que provavelmente não é desejável. Segundo, se você tornar a interface de seu pacote dependente desta técnica, torna-se necessário sincronizar manualmente os arquivos {{{__init__.py}}} para manter a consistência.
+
+Felizmente, temos a diretiva {{{__all__}}} que nos permite importar de modo consistente todo o conteúdo de nossos pacotes sem utilizar o recurso agora citado.
+
+=== A diretiva __all__ ===
+
+Em alguns casos, podemos querer importar todo o conteúdo de um pacote, assim:
+
+{{{#!python
+from util import *
+}}}
+
+Conforme vimos na seção anterior, o interpretador Python não possui um modo totalmente portável de identificar o conteúdo de um pacote. Por isso, podemos definir nos arquivos {{{__init__.py}}} a diretiva {{{__all__}}}. Trata-se de uma lista de módulos que a importação de todo o conteúdo deve considerar. Em nosso arquivo {{{util/__init__.py}}}, podemos ter:
+
+{{{#!python
+__all__ = ['sort', 'string', 'number']
+}}}
+
+Com isso, o seguinte código funcionará:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> from util import *
+>>> dir()
+['__builtins__', '__doc__', '__name__', 'sort', 'string', 'number'] # Funcionou.
+}}}
+
+Mas é importante ressaltar que funcionará apenas para o comando de importar tudo. Ou seja:
+
+{{{#!python
+>>> dir()
+['__builtins__', '__doc__', '__name__'] # Tabela inicial.
+>>> import util
+['__builtins__', '__doc__', '__name__', 'util']
+>>> util.sort.quicksort([2, 1, 5, -1])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in -toplevel-
+AttributeError: 'util' object has no attribute 'sort'
+}}}
+
+== O PythonPath ==
+
+Até o momento, tratamos apenas de casos aonde os módulos importados estavam no mesmo nível de diretório daqueles que os importavam. Em outros casos, precisamos entender como o interpretador Python busca por módulos em outros diretórios.
+
+'''''Breve'''''
+
+== Referências ==
+
+[1] http://pythonbrasil.com.br/moin.cgi/FrmtBytes
+
+[2] http://pythonbrasil.com.br/moin.cgi/StripHtml
+
+[3] http://docs.python.org/tut/node8.html

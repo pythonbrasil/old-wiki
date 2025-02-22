@@ -1,0 +1,15 @@
+#pragma section-numbers off
+= Compile2Exe =
+
+Script para facilitar o uso do módulo py2exe (que permite gerar um executável Win32 a partir de scripts Python). Para usá-lo basta chamar: 
+
+   python compile2exe.py seuprograma.py
+
+== Ficha técnica ==
+
+URL: http://www.graymalkin.globalhosts.com.br/stuff/compile2exe.zip [[BR]]
+
+
+----
+
+Washington Coutinho Corrêa Jr

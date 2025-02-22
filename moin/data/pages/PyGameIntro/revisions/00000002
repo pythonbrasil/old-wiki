@@ -1,0 +1,130 @@
+[[TableOfContents]]
+
+
+= Introdução ao PyGame =
+
+por Pete Shinners
+pete at shinners dot org
+
+
+Traduzido para o português por: 
+Murilo R. Esplugues 
+
+Críticas e sugestões para:
+murilo_esplugues at yahoo.com.br
+
+
+Este artigo é uma introdução à Biblioteca Pygame <www.pygame.org> para programadores Python <www.python.org>. A versão original deste artigo apareceu pela primeira vez na PyZine <www.pyzine.com>, volume 1 edição 3. Esta versão contêm algumas revisões que foram feitas por todo o artigo. PyGame é uma biblioteca de extensão Python que facilita o acesso a biblioteca SDL <www.sdl.org>.
+
+[[Anchor(Historia)]]
+== História ==
+
+Pygame foi criado no verão de 2000. Depois de trabalhar como programador C por muitos anos, eu descobri tanto Python como SDL mais ou menos ao mesmo tempo. Se você já está familiarizado com Python que está na versão 1.5.2 (N.T.: Isto se refere no momento da escrita do artigo orginal, hoje está na versão 2.4), agora você precisa de uma introdução à SDL ou  Simple Directmedia Library. Criada por Sam Lantinga, SDL é uma biblioteca C multiplataforma para controle de multimídia, comparável à DirectX. Ele está sendo usado em centenas de jogos comerciais e opensource. Fiquei impressionado de como ambos os projetos eram claros e diretos, mas não antes de realizar a mistura de Python com SDL numa  projeto bem interessante.
+
+Eu descobrí um pequeno projeto que tinha exatamente a mesma idéia, PySDL. Criado por Mark Baker, PySDL era uma implementação direta de SDL como uma extensão Python. A interface era mais clara que um adaptador SWIG genérico, mas eu senti um "Estilo C" forçado no código. A morte repentina de PySDL possibilitou-me  criar meu próprio projeto.
+
+Eu queria um projeto que realmente tirasse proveito de Python. Meu objetivo era criá-lo de modo que pudesse realizar as coisas simples de maneira fácil e coisas difíceis de maneira direta. O desenvolvimento de PyGame começou em outubro de 2000. Seis meses depois PyGame 1.0 foi liberado.
+
+[[Anchor(Experimentando)]]
+== Experimentando ==
+
+Eu descobrí que a melhor maneira para entender uma biblioteca nova é indo direto para um exemplo. Nos primeiros dias de PyGame, eu criei uma pequena animação de uma bola saltando com apenas 7 linhas de código. Vamos dar uma olhada numa versão amigável que faz a mesma coisa. Será simples o bastante para ser seguido e uma explicação detalhada vêm a seguir:
+
+{{{
+#!python
+ 	import sys, pygame
+ 	pygame.init()
+ 
+ 	size = width, height = 320, 240
+ 	speed = [2, 2]
+ 	black = 0, 0, 0
+ 
+ 	screen = pygame.display.set_mode(size)
+ 
+        ball = pygame.image.load("ball.bmp")
+     	ballrect = ball.get_rect()
+  
+  	while 1:
+ 		for event in pygame.event.get():
+  			if event.type == pygame.QUIT: sys.exit()
+  
+  	ballrect = ballrect.move(speed)
+  	if ballrect.left < 0 or ballrect.right > width:
+  		speed[0] = -speed[0]
+  	if ballrect.top < 0 or ballrect.bottom > height:
+  		speed[1] = -speed[1]
+  
+  	screen.fill(black)
+  	screen.blit(ball, ballrect)
+ 	pygame.display.flip()
+}}}
+Esta é uma simples, como você pode ver de uma animação saltando. Primeiro nós vemos que importar e inicializar PyGame não é nada complicado. O "import pygame" importa o pacote com todos os módulos PyGame disponíveis. A chamada "pygame.init()" inicializa cada um desses módulos.
+
+Na linha 8, nós criamos uma janela gráfica com a chamada "pygame.display.set_mode()". PyGame e SDL fazem a utilização dos melhores modos gráficos para o hardware gráfico. Você pode sobreescrever o modo e SDL irá compensar o que o hardware não puder fazer. PyGame representa imagens como objetos Surface (superfície). A função "display.set_mod()" cria um novo objeto Surface que representa o gráficos mostrados atualmente. Qualquer desenho que você fizer a este Surface se tornará visível no monitor.
+
+Na linha 10 nós carregamos nossa imagem da bola. Pygame suporta uma grande variedade de formatos através da biblioteca SDL_image, incluindo JPG, PNG, TGA e GIF. A função "pygame.image.load()"  nos retorna um Surface com os dados da bola. O Surface irá manter qualquer código de cores (colorkey) ou transparência alpha do arquivo. Depois de carregar a imagem da bola nós criamos uma variável chamada ballrect. PyGame vêm com um conveniênte utilitário tipo objeto chamado Rect, que representa uma área retangular. Depois na parte do código da animação, nós iremos ver o que o objeto Rect pode fazer.
+
+Até este ponto, na linha 13, nosso programa é inicializado e pronto pra rodar. Dentro de um loop inifinito, nós checamos se há alguma entrada pelo usuário (N.T. mouse, teclado...), movemos a bola e também desenhamos a bola. Se você estiver familiarizado com programação GUI, você têm experiência com eventos e loop de evento. Em PyGame isto não é diferente, nós checamos se um evento QUIT aconteceu. Se aconteceu, nós simplesmente fechamos o programa, PyGame irá garantir que o programa feche sem mais complicações pra você.
+
+E é hora de atualizar a posição da nossa bola. Linhas 17 a 21 movem a variável ballrect na velocidade atual. Se a bola é movida pra fora da tela, nós revertemos a velocidade naquela direção. Não é necessariamente física Newtoniana, mas é tudo que precisamos.
+
+Na linha 23 nós apagamos a tela por enchê-la com cor preta no padrão RGB. Se você nunca trabalhou com animações isto pode parecer estranho. Você deve estar se perguntando: "Por que nós precisamos apagar algo, por que não apenas movemos a bola pela tela?" Esta não é a maneira que animações de computador funcionam. Animações não são nada mais que uma série de imagens, quando as mostramos em sequência, ela faz o bom trabalho de enganar o olho humano em ver o movimento. Esta tela é apenas uma simples imagem que o usuário vê. Se nós não tiramos tempo para apagar a bola da tela, iremos ver um "rastro" que continuamente desenha a bola em suas novas posições.
+
+Na linha 24 nós desenhamos a imagem da bola sobre a tela. O desenho das imagens é garantido pelo método "Surface.blit()". Um blit significa basicamente cópia de cores de pixel de uma imagem para outra. Nós passamos ao método blit uma fonte Surface para ele copiar e uma posição para colocar a fonte no destino.
+
+A última coisa que precisamos fazer é atualizar a tela visível. PyGame gerência a tela com um buffer duplo (double buffer). Quando terminamos de desenhar, chamamos o método "pygame.display.flip()". Isto cria tudo que desenhamos no Surface se torne visível. Este buffer certifica-se de que vejamos somente frames completamente desenhados na tela. Sem ele, o usuário iria ter apenas meias partes da tela a medida que iriam sendo criadas.
+
+Isto conclui esta pequena introdução ao PyGame. PyGame possui também módulos que fazem coisas como pegar a entrada do teclado, mouse e joystick. Pode mixar audio e decodificar música streaming. Com o Surfaces você pode desenhar formas simles, girar, escalar a figura. Pode até mesmo manipular os pixels de uma imagem em tempo real como disposições Python Numeric. Há um playback de vídeo MPEG, e suporte a de CD de áudio. PyGame também possui a habilidade de agir como uma camada transversal multiplataforma para PyOpenGL. A maioria dos módulos de PyGame são escritos em C, poucos são atualmente escritos em Python.
+
+(N.T: O fato de a maioria dos módulos serem escritos em C é uma vantagem e não uma desvantagem. Isso torna a ferramenta portável e também mais veloz tarefas   que fazem uso intenso de memória e CPU como o trabalho com imagens e vídeo).
+
+O website do PyGame possui documentação com referências completas para toda função de PyGame e tutoriais para todos os níveis de usuários. O código fonte do PyGame vem com exemplos de coisas como esmurrando macacos e atirando em naves alienígenas de um tanque (Alien).
+
+[[Anchor(Python e Jogos)]]
+== Python e Jogos ==
+
+"É Python apropriada para jogos?" A resposta é, "isto depende do jogo."
+
+Python é realmente completamente capaz de executar jogos. Ela irá provavelmente surpreendê-lo ao descobrir o que é possível em 30 milissegundos. Ainda, não é difícil alcançar o pico logo que seu jogo começa a ficar complexo. Todo jogo que funciona em tempo real estará fazendo uso de todos os recursos do computador.
+
+Nos últimos anos houve uma tendência interessante no desenvolvimento de jogos, um movimento para linguagens de nível mais elevado. Um jogo normalmente é dividido em duas partes principais. O engine do jogo, que deve ser o mais rápido possível e a lógica do jogo, que faz com que o engine realmente faça algo. Não faz muito tempo em que o engine do jogo era escrito em Assembly, com porções escritas em C. Hoje em dia, C se moveu para o engine do jogo, enquanto que o próprio jogo está sendo escrito em linguagens de script de alto nível. Jogos como Quake3 e Unreal executam esses scripts como bytecode portátil.
+
+No início de 2001, a desenvolvedora Rebel Act Studios terminou seu jogo, Severance: Blade of Darkness. Usando seu próprio engine 3D e restante do jogo é escrito em Python. O jogo é uma ação sangrenta com a perspectiva do lutador em 3º pessoa. Você controla lutadores medievais numa intricada combinação de ataques de decapitação enquanto explora perigos e castelos. Você pode fazer o download de addons deste jogo, e descobrir que não são nada além do que arquivos de fonte Python.
+
+Mais recentemente, Python foi usado em uma variedade de jogos como Freedom Force, e Humungous Backyard Sports Series.
+
+Python e SDL funciona como um excelente engine C para jogos 2D. Você irá descobrir que grande parte de seu runtime de um jogo é gasto dentro de SDL que captura os gráficos. SDL pode fazer uso da vantagem de aceleração gráfica por hardware. Ativando isso, ele pode mudar um jogo sendo executado a cerca de 40 frames por segundo para mais de 200 fps. Quando você vê seu jogo em Python funcionando em 200 fps, você descobre que Python e jogos podem trabalhar juntos.
+
+É impressionante é quão bem tanto Python com SDL podem trabalhar em múltiplas plataformas. Por exemplo em maio de 2001, e lancei meu próprio projeto todo em PyGame, SolarWolf, um jogo de ação num estilo arcade. Uma coisa que me surpreendeu é que um ano depois não houve necessidade de algum patch, fixar bugs ou updates. O jogo foi desenvolvido inteiramente em MS Windows, mas pode pode ser executado em Linux, MacOSX, e em muitos Unixes sem nenhum trabalho extra da minha parte.
+
+Ainda há muitas limitações muito claras. A melhor maneira de controlar gráficos acelerados por hardware nem sempre é a melhor maneira de se obter os mais rápidos resultados na renderização por software. Suporte a renderização por Hardware não é disponível em todas as plataformas. Quando um jogo se torna mais e mais complexo, terá de escolher entre um e outro. SDL também possui outros problemas de limitação de design, coisas como gráficos em tela cheia com scrolling podem fazer seu jogo rapidamente ir a  poucos fps, velocidades impossíveis  de jogar. Enquanto SDL não é recomendado para alguns tipos de jogos, lembre-se que companhias como Loki tem usado SDL para executar uma grande variedade de títulos no varejo de qualidade.
+
+PyGame é de pouco baixo nível quando isto significa escrever jogos. Você sentirá a necessidade de passar funções comuns dentro do seu próprio ambiente de jogo. A grande coisa sobre isto é que não há nada dentro de PyGame que ficará no seu caminho. Seu programa terá controle de tudo. O efeito colateral é que você se achará trabalhando com um monte de código para poder utilizar um framework mais avançado.
+
+[[Anchor(Encerramento)]]
+== Encerramento ==
+
+O desenvolvimento de jogos é muito gratificante, há alguma coisa excitante sobre como você pode ver e interagir com o código que escreveu. Atualmente há cerca de 30 projetos utilizando PyGame. Muitos deles estão prontos para jogar agora. Você ficará surpreso ao visitar o website do PyGame, e ver o que outros usuários são capazes de fazer com Python.
+
+Uma coisa que tem chamado minha atenção é a quantidade de pessoas que estão sendo atraídas a Python para tentar pela primeira vez desenvolvimento de jogos. Eu posso ver que jogos são um sonho de novos programadores, mas isto pode ser bem difícil já que a criação de jogos requer um conhecimento profundo da linguagem. E tento ajudar este grupo de usuários por escrever muitos exemplos e tutoriais do PyGame para pessoas que não tem estes conceitos.
+
+Para finalizar, meu conselho é mantenha-o simples. Eu não posso stressa-lo muito. Se você estiver planejando criar seu primeiro jogo, há muito pra aprender. Mesmo um jogo simples irá desafiará seus projetos, e jogos complexos não significam necessariamente que são jogos divertidos. Quando você entender Python, poderá escrever um jogo simples com PyGame em uma ou duas semanas. Daí você precisará de uma quantidade surpreendente de horas para adicionar a polidez necessária para torná-lo um jogo apresentável.
+
+----
+
+||||||<tablewidth="70%">'''Relação de Módulos do PyGame'''||
+||cdrom||controla o dispositivo de cdrom e execução de audio||
+||cursors||carrega imagens de cursores (N.T. mouse), ínclui cursores padrão||
+||display||controla a exibição da janela ou tela||
+||draw||desenha formas simples sobre uma Surface||
+||event||controla eventos e fila de eventos||
+||font||cria e renderiza fontes Truetype||
+||image||salva e carrega imagens||
+||joystick||controla dispositivos joystick||
+||key||controla o teclado||
+||mouse||controla o mouse||
+||movie||executa filmes no formato mpeg||
+||sndarray||manipula sons com Numeric||
+||surfarray||manipula imagens com Numeric||
+||time||controla o temporização||
+||transform||escalar, rotacionar e girar imagens||

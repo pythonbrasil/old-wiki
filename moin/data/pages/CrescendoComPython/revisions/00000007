@@ -1,0 +1,136 @@
+'''Crescendo com python V0.1'''[[BR]]
+'''Author:''' Cleber de Jesus santos[[BR]]
+'''Email:''' [mailto:cleber37@hotmail.com cleber37@hotmail.com][[BR]]
+
+'''Sobre o autor.'''
+
+	Me chamo Cleber de Jesus Santos, muitos até devem ter ouvido falar de mim, atuei nos Telecentros de São Paulo ministrando aulas de Linux (Debian), o básico da coisa né..rsrsr, no começo achei tudo tão chato que nem queria continuar no projeto dos Telecentros, por que tinha uma senha chamada ROOT, que me impedia de descobrir o que era o Linux e como eu não tinha computador em casa as coisas ficavam muito difíceis, por incrível que pareça sempre gostei de desafios do tipo, mexer e aprender, acho que foi isso que fez eu me descobrir.
+Com o tempo fui descobrindo coisas incríveis sobre o Linux, daí eu li uma revista chamada Seleções, que contava um pouco sobre o criador do Linux, nossa achei super 10 a história dele, tenho guardada ainda, a partir dai comecei a me tornar um fã de Linux, quando descobri o que era software livre que maravilha, fiquei fascinado, tanto quanto ver um terminal aberto com belos comandos..huummm. Conheci pessoas maravilhosas os quais me tornei fã de carteirinha, Sérgio Amadeu o qual tive o enorme prazer de trabalhar e ser amigo, Beatriz Tibiriça (Beá) pessoa super maravilhosa, Marcelo Tossatti, Richard Stallman, dentre muitos outros....
+
+	O mais legal foram as pessoas que durante o tempo que comecei com Software Livre me deram o maior apoio, tem muitas coisas que se eu fosse escrever aqui não chegaria onde quero, mas vamos lá, conheci um amigo chamado Federico que também não fica para trás no Software Livre, ele me apresentou um doido chamado Luiz Pasquall o qual me falou do Python, eu falo doido por que ele me fez mudar muito em questão ao que eu pensava de python rsrsrsr, e até ai eu estava programando e ministrando aulas de TCL/TK, ele me mostrou python e eu realmente não havia gostado muito, não sei dizer o por que, mas  aquilo não me chamava a atenção acho que por que eu estava tão fascinado em TCL/TK...Fui fazer um curso com um cara que hoje posso me dizer também um fã, ele é muito conhecido na comunidade Python, Luciano Ramalho, simplesmente quando comecei a falar com ele, já fiquei pasmo, o cara manja muito e acabou ele me falando mais sobre python, comecei a falar muito de TCL/TK para ele, tipo querendo tirar a Banana do macaco rsrsrsrsr, durante um das maravilhosas aula dele, ele virou para mim e disse “Eu passo para python qualquer programa que você fizer em TCL/TK, e ainda comento as linhas para você ver o quanto é fácil programar em python”, cara aquilo para mim foi um desafio que comentava com o Luiz e com o Federico, e para terminar os dois ficavam falando e ai Cleber, não vai fazer o programinha em TCL, cade! Desistiu do desafio..rsrssr
+
+E não foi que foi o primeiro desafio que eu desisti! Mas por uma boa causa, comecei a ver Python, até por que eles me fizeram gostar da cobra, sem maldade...rsrsrsr, essa breve introdução sobre min é apenas para lançar este documento que espero que todos ajudem, e vão gostar muito....
+
+
+'''Sobre o Documento.'''
+
+	A ideía é que iniciantes em python escrevam neste documento o que estão aprendendo em python, sei lá isso é uma forma também de iniciantes discutirem ao invés de postar em listas, sou iniciante e gostaria de aprender tal coisa, eu não vou me dizer um iniciante até por que para quem conheceu Luiz Pasquall e teve aula com Luciano Ramalho e ainda falar que é iniciante tem de ser internado, me internem com um computador por favor...rsrsrsrrsrs Sugiro que sempre que for mudado colocarem no nome do documento a data no estilo 
+dd-mm-aa.
+
+Então para começar estou escrendo aqui coisas que todos já devem saber, mas que vai servir para iniciantes, é quase um tutorial OK. Se eu estiver errado por favor corrijam ah! Já estava me esquecendo, para cada correção coloque, a cor vermelha no local onde está sendo corrigido beleza.
+
+'''Onde baixar o Python:'''
+Existe versões de Python para Unix, Windows e Mac, essas versões podem ser baixadas no site oficial do Python que é: [http://www.python.org/ Python], para instalar os arquivos e a biblioteca padrão basta ir para [http://www.python.org/download/ Download]
+
+'''Cleber J Santos:'''
+
+---- /!\ '''Edit conflict - your version:''' ----
+'''Versão:''' 0.1[[BR]]
+'''Autor:''' Cleber de Jesus santos[[BR]]
+'''Email:''' cleber37 (arroba) hotmail (ponto) com[[BR]]
+
+== Sobre o autor ==
+
+Me chamo Cleber de Jesus Santos, muitos até devem ter ouvido falar de mim, atuei nos Telecentros de São Paulo ministrando aulas de Linux (Debian), o básico da coisa né :), no começo achei tudo tão chato que nem queria continuar no projeto dos Telecentros, por que tinha uma senha chamada {{{root}}}, que me impedia de descobrir o que era o Linux, e como eu não tinha computador em casa as coisas ficavam muito difícil. Por incrível que pareça sempre gostei de desafios do tipo mexer e aprender. Acho que foi isso que fez eu me descobrir.
+
+Com o tempo fui descobrindo coisas incríveis sobre o Linux e quando li em uma revista, chamada Seleções, um pouco da história sobre o criador do Linux eu achei super 10 (tenho a revista guardada ainda). A partir daí comecei a me tornar um fã de Linux. Quando descobri o que era software livre, que maravilha, fiquei facinado, tanto quanto ver um terminal aberto com belos comandos. huummm... Conheci pessoas maravilhosas das quais me tornei fã de carteirinha: Sérgio Amadeu com quem tive o enorme prazer de trabalhar e ser amigo; Beatriz Tibiriça (Beá) pessoa super maravilhosa; Marcelo Tossatti; Richard Stallman, dentre muitos outros...
+
+O mais legal foram as pessoas que durante o tempo me deram o maior apoio. Tem muitas coisas que se eu fosse escrever aqui não chegaria onde quero, mas vamos lá.
+
+Conheci um amigo chamado Federico que também não fica para trás no Software Livre, ele me apresentou um doido chamado Luiz Pasquall que me falou do Python (eu falo doido por que ele me fez mudar muito em questão ao que eu pensava sobre Python :) ) e até ai eu estava programando e ministrando aulas de Tcl/Tk. Ele me mostrou Python e eu realmente não havia gostado muito, não sei dizer o porque, mas  aquilo não me chamava a atenção (acho que porque eu estava muito fascinado pelo Tcl/Tk). Fui fazer um curso com um cara, que hoje posso dizer também sou fã, chamado Luciano Ramalho (ele é muito conhecido na comunidade Python). Quando comecei a falar com ele já fiquei pasmo. O cara manja muito e acabou me falando mais sobre Python. Comecei a falar muito de TCL/TK para ele (tipo querendo tirar a Banana do macaco :) ). Durante um das maravilhosas aula dele, ele virou para mim e disse: "Eu passo para Python qualquer programa que você fizer em Tcl/Tk, e ainda comento as linhas para você ver o quanto é fácil programar em Python". Cara, aquilo para mim foi um desafio, sobre o qual eu comentei com o Luiz e com o Federico, e isso fez com que os dois ficassem falando: "E aí Cleber, não vai fazer o programinha em Tcl? Cade? Desistiu do desafio?" :)
+
+E não que foi o primeiro desafio que eu não encarei? Mas por uma boa causa: comecei a ver Python, até por que eles me fizeram gostar da cobra (sem maldade :) ), essa breve introdução sobre mim é apenas para lançar este documento onde espero que todos ajudem a desenvolver.
+
+''Deixei o seu testemunho aqui, mas o pessoal já tinha iniciado uma página +/- com essa mesma idéia que você teve. Ela já está um pouco mais adiantada e seria legal se você contribuisse com ela no lugar de começar algo semelhante. Mas... se quiser levar esta página adiante é só mandar bala (A página que me refiro é a IntroPython) -- OsvaldoSantanaNeto''
+
+== Sobre o Documento ==
+
+A idéia é que iniciantes em Python escrevam neste documento o que estão aprendendo em Python. Isso é uma forma de iniciantes discutirem ao invés de postar em listas. Sou iniciante e gostaria de aprender tal coisa, eu não vou me dizer um iniciante até por que para quem conheceu Luiz Pasquall e teve aula com Luciano Ramalho e ainda falar que é iniciante tem de ser internado. (me internem com um computador por favor... :) ).
+
+''Daqui...''
+Sugiro que sempre que for mudado colocarem no nome do documento a data no estilo dd-mm-aa.
+
+Então para começar estou escrendo aqui coisas que todos já devem saber, mas que vai servir para iniciantes. É quase um tutorial, Ok? Se eu estiver errado por favor corrijam.
+
+Ah! Já estava me esquecendo, para cada correção coloque, a cor vermelha no local onde está sendo corrigido beleza.
+
+''... até aqui -- "O sistema aqui do site controla esse tipo coisa pra você. Qualquer mudança aqui nesta página ficará registrada e o histórico dela será guardado indefinidamente... Só não removi esse trecho para que você veja se vai alterá-lo ou remover você mesmo." -- OsvaldoSantanaNeto''
+
+== Onde baixar o Python ==
+
+Existe versões de python para Unix, Windows e Mac, essas versões podem ser baixada no site oficial do [http://www.python.org/ Python]. Para instalar os arquivos e a biblioteca padrão basta ir para http://www.python.org/download/.
+
+== Começando ==
+
+---- /!\ '''End of edit conflict''' ----
+
+Após ter instalado o python vamos ao que nos interessa de verdade, execute o python no console e vamos brincar...
+
+
+---- /!\ '''Edit conflict - other version:''' ----
+'''>>>''' print “Olá, Mundo”[[BR]]
+Olá, mundo[[BR]]
+'''>>>'''[[BR]]
+
+Que maravilha heim! Agora vamos ver algumas coisas que todos estão cansados de saber, variável e expressões;
+
+---- /!\ '''Edit conflict - your version:''' ----
+{{{
+>>> print “Olá, Mundo”
+Olá, mundo[[BR]]
+>>>
+}}}
+
+Que maravilha hein? Agora vamos ver algumas coisas que todos estão casados de saber, variável e expressões;
+
+---- /!\ '''End of edit conflict''' ----
+
+||||||||||<tablewidth="100%" #efe9ef>||
+||'''X''' = 3                     '''#'''Isso é uma variável com um valor do tipo INT||
+||'''Y''' = 'Exemplo bobo'        '''#'''Isso é uma variável com um valor do tipo STRING||
+
+O interpretador já sabe que X é um inteiro e que Y é uma String, mas isso não impede que atribuimos novos valores a essa variáveis, como exemplo;
+
+||||||||||<tablewidth="100%" #efe9ef>||
+||'''X''' = “Tudo mudou”       '''#'''Isso é uma variável com um valor do tipo STRING||
+||'''Y''' = 3.2                          '''#'''Isso é uma variável com um valor do tipo FLOAT||
+
+Viu! Como o X já diz, tudo mudou, ou seja agora temos o X como String e o Y agora é um ponto Flutuante, claro que isso é muito comum acontecer, e claro também que se abusarmos disso nosso programa acaba ficando confuso, abaixo alguns exemplos e explicações;
+
+||||||||||<tablewidth="100%" #efe9ef>||
+||'''A''' = 1                                     '''#'''inteiro||
+||'''B''' = 3.5                                  #real ou ponto flutuante||
+||'''C''' = “Algum texto”               '''#'''String||
+||'''D''' = [3, 5, 7]                         '''#'''lista com elementos inteiros||
+||'''E''' = [3, 'slackware', 5.9]       '''#'''lista mista||
+||'''F''' = (3, 5, 9, 'Slackware')     '''#'''isso se chama tupla, é como uma lista, mas não pode ser mudada||
+||'''G''' = {'documento' : 'tutorial', 'autor' : 'Cleber de Jesus Santos'} '''#'''Isso é um dicionário||
+
+Nada complicado, tudo muito simples não é mesmo, até aqui tudo bem, vou colocar mais este aqui em baixo, acho importante;
+
+'''Estruturas de controle'''
+
+if...elif...else
+
+Claro que isso muitos devem saber né, então apenas iremos ver algumas coisas simples de como pedem ser aplicados, dai se alguém tiver dúvidas basta selecionar o local, colocar a cor verde e abaxo colocar um * com a dúvida.
+
+||||||||||<tablewidth="100%" #efe9ef>||
+||'''meuNome''' = 'Cleber'                      '''#'''Variável String||
+||'''seuNome''' = 'João'                   ||
+||'''minhaIdade''' = 20                            '''#'''Variával inteiro||
+||'''suaIdade''' = 33                      ||
+||'''>>>''' '''if''' seuNome == meuNome:   ||
+||...         print 'Nós temos nomes iguais' ||
+||...     '''elif''' suaIdade == minhaIdade: ||
+||...         print 'Nossas idades são iguais' ||
+||...     '''else:'''                           ||
+||...         print 'Somos diferentes' ||
+
+
+---- /!\ '''Edit conflict - other version:''' ----
+Ja perceberam que em Python não usamos { e muito menos } para limitar as condições....
+
+---- /!\ '''Edit conflict - your version:''' ----
+Ja perceberam que em python não usamos { e muito menos } para limitar as condições....
+
+---- /!\ '''End of edit conflict''' ----

@@ -1,0 +1,72 @@
+'''Operações com Listas:'''
+
+{{{
+Operação        	Descrição
+x in s          	1 se x estiver contido em s, caso contrário 0.
+n not in s      	1 se x não estiver contido em s, caso contrário 0.
+s + t           	concatenação de s + t.
+s * n           	n cópias de s concatenado.
+s[i]            	elemento cujo índice é i, primeiro índice é 0.
+s[i:j]          	seqüencia de elementos entre os índices i e j.
+len(s)          	números de elementos da seqüência (comprimento).
+min(s)          	menor valor da seqüência.
+max(s)          	maior valor da seqüência.
+s[i] = j        	substitui um elemento.
+s[i:j] = t      	substitui um grupo de elementos.
+del s[i]        	remove o elemento da posição i.
+del s[i:j]      	remove um grupo de elementos.
+s.append(x)     	adiciona um elemento (no final da lista).
+s.extend(x)     	adiciona uma lista (ao final da lista).
+s.count(x)      	retorna o número de vezes que um elemento está presente na lista
+s.index(x)           	retorna o menor índice do elemento.
+s.insert(i,x)        	insere o elemento x na posição i.
+s.pop([i])           	retira um elemento da posição i. Padrão i = -1.
+s.remove(x)          	remove um elemento.
+s.reverse()          	inverte a ordem da lista.
+s.sort([cmpfunc])    	ordena a lista.
+}}}
+
+'''Exemplos:'''
+
+{{{
+>>> a = [1,2,3]
+>>> s = [1,2,3]
+>>> t = [4,5,6]
+>>> x = 2
+>>> x in s
+True
+>>> x not in s
+False
+>>> s + t
+[1, 2, 3, 4, 5, 6]
+>>> s * 2
+[1, 2, 3, 1, 2, 3]
+>>> s[2]
+3
+>>> s[1:3]
+[2, 3]
+>>> len(s)
+3
+>>> min(s)
+1
+>>> max(s)
+3
+>>> a = [1,2,3,4]
+>>> a[1] = 10
+>>> a
+[1, 10, 3, 4]
+>>> a.append(30)
+>>> a
+[1, 10, 3, 4, 30]
+>>> a.extend([90,32])
+>>> a
+[1, 10, 3, 4, 30, 90, 32]
+>>> a.index(30)
+4
+>>> a.reverse()
+>>> a
+[32, 90, 30, 4, 3, 10, 1]
+>>> a.pop()
+1
+
+}}}

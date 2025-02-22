@@ -1,0 +1,55 @@
+#pragma section-numbers 1
+
+<<TableOfContents()>>
+
+= Criando um instalador para Ruindow$$ =
+
+== Motivos ==
+Um belo dia precisei criar um instalador de uma aplicação PyGTK para windows aqui no serviço.
+
+Procurei vários tutoriais, e a maioria deles apontava para o uso do py2exe.  Mas minha aplicação não era uma aplicação comum, ela utilizava matplotlib para gerar gráficos.  O grande problema disso é:
+ * py2exe me parece mais uma gambiarra para esconder o código do programa que não funciona direito.
+   * Não faça isso! Seja livre! Não caia na besteira de tentar ganhar dinheiro por domínio de conhecimento. Ganhe com seu serviço! Com seu esforço! Python existe graças a esses princípios! Vamos passar a diante esse bom exemplo!
+ * py2exe é muito complicado
+   * No meu caso, para utilizar GTK junto com py2exe ja existe uma configuração "especial" para funcionar descrito no site oficial, e para utilizar matplotlib existia outra configuração diferente, mas as 2 não casavam.  Perdi muitas horas tentando fazer funcionar meu instalador com py2exe.
+
+E a solução foi:
+ * Retirei o py2exe da jogada
+ * Instalei tudo que precisava numa máquina virtual e fiz funcionar normalmente
+ * Copiei toda a instalação do python dessa máquina virtual e a instalação do gtk para a pasta do instalador, do jeito que ficou após a instalação
+ * Utilizei os truques do [[http://www.portablepython.com/|portable python]] para transformar minha instalação do Python portável
+ * Customizei meu script de inicialização do programa para adicionar o GTK
+ * Criei o instalador NSIS
+
+Adiante vou mostrar em detalhes cada um desses passos!
+
+== Instalação ==
+Primeiro de tudo, instale o Python e os módulos necessários para rodar seu programa no windows.  No meu caso, instalei os seguintes pacotes:
+ * python-2.6.4.msi
+ * pygobject-2.14.2-2.win32-py2.6.exe
+ * pycairo-1.4.12-2.win32-py2.6.exe
+ * pygtk-2.12.1-3.win32-py2.6.exe
+ * gtk2-runtime-2.16.6-2009-12-01-ash.exe
+ * numpy-1.4.0rc1-win32-superpack-python2.6.exe
+ * matplotlib-0.99.1.win32-py2.6.exe
+ * pyserial-2.5-rc1.win32.exe
+ * PyMEC1000-0.1.zip (minha aplicação)
+
+Tenha certeza de conseguir executar seu programa após a instalação/configuração:
+
+||{{attachment:pymec1000_win.png|pymec1000_win}}||
+||Aplicação rodando                             ||
+
+== Transformando o Python Portável ==
+O [[http://www.portablepython.com/|portable python]] utiliza um truque não muito difícil de reproduzir.  Se voce copiar sua instalação do Python para outra máquina, ela vai executar tranquilamente se o computador possuir as DLLs necessárias para rodar o Python.  O que acontece nessa distribuição é exatamente isso, é colocado na pasta do Python as DLLs necessárias para a execução do mesmo.
+Só precisamos baixar o seguinte [[attachment:dlls_portablepython.zip|arquivo]] e descompactar na pasta do Python.
+
+== Criando o instalador ==
+Para criar o instalador, copiamos a pasta do Python e do GTK para outra pasta. No meu exemplo, copiei para c:\instalador, conforme a figura abaixo.
+
+||{{attachment:ambiente_instalador.png|ambiente_instalador}}||
+||Ambiente do instalador                                    ||
+
+Logo após, utilizamos os programa NSIS e NSIS
+
+----

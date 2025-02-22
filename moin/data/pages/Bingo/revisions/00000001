@@ -1,0 +1,142 @@
+Código que postei na intenção de aprender a usar o wiki, espero que ele ajude alguem aprender python, fiz esse código na intenção de mostrar para meu primo que está aprendendo algumas coisas básicas da linguagem.
+
+== Código ==
+
+{{{
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import random
+import sys
+
+class Numeros:
+    """
+    Gera os numeros para cada letra do bingo.
+    
+    O bingo inicia em 1 até o numero 75, dividido em 5 colunas 
+    B de 1 a 15, I de 16 a 30, N de 31 a 45, G de 46 a 60 e O de 61 a 75
+    """
+    def __init__(self):
+        self.numeros = [[],[],[],[],[]]
+        for x in range(0,5):
+            for y in range(x*15+1,(x+1)*15+1):
+                self.numeros[x].append(y)
+
+class Cartela:
+    """
+    Gerencia as cartelas do bingo.
+    
+    Cria uma nova cartela gerada apartir de numeros aletorio preenchendo cada 
+    coluna da cartela do bingo de acordo com a quantidade de numeros informadas
+    nos parametros de inicialização da classe
+    """                
+    def __init__(self,num,chave,b=5,i=5,n=5,g=5,o=5):
+        self.pedrasmarcadas = 0
+        self.cartela = [[],[],[],[],[]]
+        self.quantidade = [b,i,n,g,o]
+        self.chave = chave
+        for x in range(0,5):
+            self.cartela[x] = random.sample(num.numeros[x],self.quantidade[x])
+            self.cartela[x].sort()
+            
+    def exibeCartela(self):
+        """
+        Imprime na saida padrão os numeros da cartela.
+        """
+        print "=" * 3*5
+        print "Cartela n %d" % (self.chave)        
+        print "=" * 3*5
+        print "%3s%3s%3s%3s%3s" % ("B","I","N","G","O")
+        for x in range(0,5):
+            print "%3d%3d%3d%3d%3d" % (self.cartela[0][x],self.cartela[1][x], \
+            self.cartela[2][x],self.cartela[3][x],self.cartela[4][x])
+        print "=" * 3*5
+    
+    def existePedra(self,pedra):
+        """
+        Verifica a existencia da pedra na cartela.
+
+        Identifica qual coluna a pedra pertence em seguida verifica se nesta
+        coluna à existencia da pedra que é usada como retorno caso exista, e uma
+        lista vazia é retornada caso não exista a pedra na cartela
+        """
+        col = pedra / 15
+        if pedra % 15 == 0:
+            col = col - 1
+
+#        retorno = []
+#        for x in self.cartela[col]:
+#            if pedra == x:
+#                retorno = [x]
+#        return(retorno) 
+
+# O mesmo codigo pode ser escrito como abaixo:
+        
+        return([x for x in self.cartela[col] if pedra == x])
+
+class Bingo: 
+    def __init__(self):
+        self.cartelas = []
+        self.restantes = range(1,76)
+        self.pedras = Numeros()
+        
+    def removeNumerodosrestantes(self,numero):
+        self.restantes = filter(lambda arg:arg != numero,self.restantes)
+        
+        for cartela in self.cartelas:
+            if cartela.existePedra(numero):
+#                cartela.pedrasmarcadas = cartela.pedrasmarcadas + 1            
+                cartela.pedrasmarcadas +=  1
+    
+    def adicionaCartela(self,chave):
+        """
+        Adiciona uma nova cartela a lista de cartelas do bingo.
+        """
+#        self.cartelas.append(self.confereCartela(Cartela(self.pedras,chave)))
+        self.cartelas.append(Cartela(self.pedras,chave))
+
+    def confereCartela(self,comparar):
+        """
+        Compara se uma carte exite identica na lista de cartelas do bingo.
+        
+        Retorna a cartela comparada caso não exista uma com os mesmos numeros na
+        lista de cartelas do bingo e False caso ela exista na lista
+        """
+        for x in self.cartelas:
+	        if x.cartela == comparar.cartela:
+	            del comparar
+	            print "Cartela FALSA"
+	            sys.exit()
+	            return(False)	            
+	            break	            
+        return(comparar)
+
+    def sorteaPedra(self):
+        """
+        Escolhe uma pedra entre as restantes no bingo.
+        """
+        return(random.choice(self.restantes))
+
+#iniciando o bingo
+b = Bingo()
+
+#Criando Cartelas
+for x in range(0,100):
+    b.adicionaCartela(x)
+    print "Cartela n%s" % (x+1)
+#    b.cartelas[x].exibeCartela()
+
+    
+# simulando um bingo
+while b.restantes:
+    pedrasorteada = b.sorteaPedra()
+    print pedrasorteada,
+    b.removeNumerodosrestantes(pedrasorteada)
+    for cartela in b.cartelas:
+        if cartela.pedrasmarcadas == 25:
+            print
+            print "BATEU"
+            print "Faltavam %d" % (len(b.restantes)) 
+            print b.restantes
+            cartela.exibeCartela()
+            sys.exit()
+}}}

@@ -1,0 +1,96 @@
+#pragma section-numbers off
+= Receita: CategorizarNadador =
+
+Simples codigo para resolver a questão:
+
+
+'''
+12. Elabore um algoritmo que dada a idade de um nadador classifica-o em uma das seguintes categorias: 
+  
+
+infantil A = 5 - 7 anos 
+
+infantil B = 8-10 anos 
+
+
+juvenil A = 11-13 anos 
+
+
+juvenil B = 14-17 anos 
+
+
+adulto = maiores de 18 anos
+'''
+
+Muito simples porém faz bom uso do if, elif e else.
+
+Abraços.
+
+== Código ==
+
+{{{
+#!python
+# Exercicio 12 da lista
+# Definir categoria do nadador
+
+#pega a idade do nadador
+idade_nadador = input('Entre com a idade do nadador: ')
+
+# Ifs para verificar entre qual faixa de idade se encontra o nadador
+if idade_nadador >= 5 and idade_nadador <= 7:
+    print 'infantil A'
+    
+elif idade_nadador >= 8 and idade_nadador <= 10:
+    print 'infantil B'
+    
+elif idade_nadador >= 11 and idade_nadador <= 13:
+    print 'Juvenil A'
+    
+elif idade_nadador >= 14 and idade_nadador <=17:
+    print 'juvenil B'
+    
+elif idade_nadador <= 4:
+    print 'indefinido.'
+
+else:
+    print 'adulto'
+    
+
+}}}
+== Exemplo de uso ==
+
+{{{
+#!python
+# Exercicio 12 da lista
+# Definir categoria do nadador
+
+#pega a idade do nadador
+# comentei a linha abaixo pra exemplificar o uso
+#idade_nadador = input('Entre com a idade do nadador: ')
+idade_nadador = 7 # defini a variavel idade_nadador..
+ 
+# Ifs para verificar entre qual faixa de idade se encontra o nadador
+if idade_nadador >= 5 and idade_nadador <= 7:
+    print 'infantil A'
+    
+elif idade_nadador >= 8 and idade_nadador <= 10:
+    print 'infantil B'
+    
+elif idade_nadador >= 11 and idade_nadador <= 13:
+    print 'Juvenil A'
+    
+elif idade_nadador >= 14 and idade_nadador <=17:
+    print 'juvenil B'
+    
+elif idade_nadador <= 4:
+    print 'indefinido.'
+
+else:
+    print 'adulto'
+    
+}}}
+
+Volta para CookBook.
+
+----
+Ruivaldo Neto

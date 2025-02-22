@@ -1,0 +1,17 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+
+== Sobre ==
+
+Olá! Me chamo Álvaro Justen, sou conhecido na rede como Turicas e apaixonado por software livre. :-)
+
+[[http://justen.eng.br/sobre|Saiba mais sobre mim]].
+
+== Contatos ==
+
+
+ * E-mail: <<MailTo(alvarojusten@gmail.com)>>
+ * GitHub: https://github.com/turicas
+ * Twitter: https://twitter.com/turicas
+ * Blog: http://blog.justen.eng.br/

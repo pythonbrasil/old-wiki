@@ -1,0 +1,814 @@
+= Receita: PyGtkBarraFerramenta =
+
+Criação de barra de ferramenta com teclas de atalho. Contém os botões: Novo, Grava, Apaga, Vai, Primeiro, Anterior, Próximo, Último. Também contém uma entrada de texto para digitar o número do registro.
+
+== Pasta do sistema ==
+ 1. Crie uma pasta com o nome modelo;
+ 1. Crie uma pasta com o nome biblioteca dentro da pasta modelo;
+ 1. Crie um arquivo em branco e salve com o nome {{{__init__.py}}} dentro da pasta modelo.
+
+== gtkbarracontrole.py ==
+Crie um arquivo com o nome gtkbarracontrole.py e salve dentro da pasta modelo/biblioteca.
+
+{{{
+#!python
+
+#-*- encoding: utf8 -*-
+
+# ====================================================================
+# Este programa é software livre; você pode redistribuí-lo e/ou
+# modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+# publicada pela Free Software Foundation; tanto a versão 2 da
+# Licença como (a seu critério) qualquer versão mais nova.
+# Este programa é distribuído na expectativa de ser útil, mas SEM
+# QUALQUER GARANTIA; sem mesmo a garantia implícita de
+# COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+# PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+# detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+# ====================================================================
+
+
+# ====================================================================
+# Agredecimentos
+#   Leonardo Rochael Almeida
+#   Henrique Romano
+# ====================================================================
+
+
+'''
+Nota:
+  Esse código está documentado em python, doxygen e humano.
+  A documentação doxygen exige dois sustenido "#". Para mais 
+  informações acesse o sítio: www.doxygen.org
+'''
+##
+# ====================================================================
+# PROJETO: ModeloPadrão
+# ====================================================================
+# Desenvolvido por: Guedes, Maurilio <billguedes>
+# Data criação: 18/08/2006, 10:28
+# Data atualização: 
+# Atualizado por: 
+# @author Guedes, Maurilio <billguedes>
+# @file gtkbarracontrole.py
+# @begin 08/18/2006
+# @update 08/18/2006
+# @copyright (C) 2006 by Guedes, Maurilio
+# @email billguedes@terra.com.br
+# ====================================================================
+
+
+# ====================================================================
+# Bibliotecas de terceiros
+# ====================================================================
+from gtk import Toolbar     # Barra de ferramenta
+from gtk import Button      # Botão
+from gtk import Image       # Imagem
+from gtk import ToolItem    # Item para barra de ferramenta
+from gtk import Entry       # Caixa de entrada
+from gtk import Tooltips    # Dicas para as bugigangas
+from gtk import STOCK_NEW   # Ícone no estoque 'novo'
+from gtk import STOCK_SAVE  # Ícone no estoque 'grava'
+from gtk import STOCK_DELETE  # Ícone no estoque 'apaga'
+from gtk import STOCK_JUMP_TO # Ícone no estoque 'salte para'
+from gtk import STOCK_FIND  # Ícone no estoque 'procura'
+from gtk import STOCK_GOTO_FIRST # Ícone no estoque 'vai ao primeiro'
+from gtk import STOCK_GO_DOWN # Ícone no estoque 'vai para baixo'
+from gtk import STOCK_GO_UP   # Ícone no estoque 'vai para cima'
+from gtk import STOCK_GOTO_LAST # Ícone no estoque 'vai para o último'
+from gtk import STOCK_PRINT # Ícone no estoque 'imprime'
+from gtk import STOCK_CLOSE # Ícone no estoque 'fecha'
+from gtk import ICON_SIZE_LARGE_TOOLBAR # Tamanho do ícone
+from gtk import RELIEF_NONE # Sem relevo
+from gtk import SeparatorToolItem   # Separador para barra
+
+
+# ====================================================================
+# Bibliotecas próprias
+# ====================================================================
+# Nada
+
+
+##
+# ====================================================================
+# Documentação da Classe: GtkBarraControle
+# ====================================================================
+# @short
+#   Classe responsável em criar a barra de controle padrão.
+#   O objetivo é criar uma barra de controle padrão para ser 
+#   chamada em todo cadastro. A barra de controle contém os 
+#   botões: novo, grava, apaga,vai, registro, pesquisa, primeiro,
+#   anterior, proximo, ultimo, imprime e fecha.
+# Assunto: gtkbarracontrole
+# Superclasse: gtk.Toolbar
+# @class GtkBarraControle
+# @author Guedes, Maurilio <billguedes>
+# @version 0.1.0
+# @since 0.1.0
+# @see gtk.Toolbar
+# ====================================================================
+class GtkBarraControle(Toolbar):
+    '''
+    Classe responsável em criar a barra de controle padrão.
+    O objetivo é criar uma barra de controle padrão para ser 
+    chamada em todo cadastro. A barra de controle contém os 
+    botões: novo, grava, apaga,vai, registro, pesquisa, primeiro,
+    anterior, proximo, ultimo, imprime e fecha.
+    '''
+    
+    ##
+    # @short
+    #   Construtor padrão.
+    # @fn __init__ Método padrão, chamada automatica na criação.
+    # @param self Ponteiro do objeto.
+    def __init__(self):
+        '''
+        Construtor padrão.
+        Método padrão, chamada automatica na criação.
+        '''
+        
+        Toolbar.__init__(self) # Inicialização da superclasse
+        
+        # -- Atributos públicos---------------------------------------
+        # Cria novos objetos Button
+        ## @var mNovoBotao Botão para novo registro
+        self.mNovoBotao= Button('')
+        
+        ## @var mNovoBotao Botão para atualizar o registro
+        self.mGravaBotao= Button('')
+        
+        ## @var mNovoBotao Botão para apagar o registro
+        self.mApagaBotao= Button('')
+        
+        ## @var mNovoBotao Botão para ir ao registro 'x'
+        self.mVaiBotao= Button('')
+        
+        ## @var mNovoBotao Botão para pesquisar os registros
+        self.mPesquisaBotao= Button('')
+        
+        ## @var mNovoBotao Botão para ir ao primeiro registro
+        self.mPrimeiroBotao= Button('')
+        
+        ## @var mNovoBotao Botão para ir ao registro anterior
+        self.mAnteriorBotao= Button('')
+        
+        ## @var mNovoBotao Botão para ir ao próximo registro
+        self.mProximoBotao= Button('')
+        
+        ## @var mNovoBotao Botão para ir ao último registro
+        self.mUltimoBotao= Button('')
+        
+        ## @var mNovoBotao Botão para imprimir o conteúdo do registro
+        self.mImprimeBotao= Button('')
+        
+        ## @var mNovoBotao Botão para fechar a janela
+        self.mFechaBotao= Button('')
+        
+        
+        ## @var mNovoBotao Botão para entrar com o número do registro
+        self.mRegistroEntrada= Entry() # Cria um novo objeto Entry
+        # -- Fim dos atributos públicos-------------------------------
+        
+        
+        # -- Atributos privados --------------------------------------
+        # Cria novas objetos Image
+        self.__mNovoImagem= Image()
+        self.__mGravaImagem= Image()
+        self.__mApagaImagem= Image()
+        self.__mVaiImagem= Image()
+        self.__mPesquisaImagem= Image()
+        self.__mPrimeiroImagem= Image()
+        self.__mAnteriorImagem= Image()
+        self.__mProximoImagem= Image()
+        self.__mAnteriorImagem= Image()
+        self.__mProximoImagem= Image()
+        self.__mUltimoImagem= Image()
+        self.__mImprimeImagem= Image()
+        self.__mFechaImagem= Image()
+        
+        # Cria novos objetos ToolItem
+        self.__mNovoItem= ToolItem()
+        self.__mGravaItem= ToolItem()
+        self.__mApagaItem= ToolItem()
+        self.__mVaiItem= ToolItem()
+        self.__mRegistroItem= ToolItem()
+        self.__mPesquisaItem= ToolItem()
+        self.__mPrimeiroItem= ToolItem()
+        self.__mAnteriorItem= ToolItem()
+        self.__mProximoItem= ToolItem()
+        self.__mUltimoItem= ToolItem()
+        self.__mImprimeItem= ToolItem()
+        self.__mFechaItem= ToolItem()
+        
+        self.__mDicas= Tooltips() # Cria um novo objeto Tooltips
+        # -- Fim dos atributos privados ------------------------------
+        
+        
+        # -- Configuração do objeto mNovoBotao -----------------------
+        self.__mNovoImagem.set_from_stock(STOCK_NEW, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mNovoBotao.set_image(self.__mNovoImagem)
+        self.mNovoBotao.set_relief(RELIEF_NONE)
+        self.mNovoBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mNovoBotao, "Cria um novo "\
+            "registro (F2)")
+        self.__mNovoItem.add(self.mNovoBotao)
+        # -- Fim da configuração do objeto mNovoBotao ----------------
+
+
+        # -- Configuração do objeto mGravaBotao ----------------------
+        self.__mGravaImagem.set_from_stock(STOCK_SAVE, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mGravaBotao.set_image(self.__mGravaImagem)
+        self.mGravaBotao.set_relief(RELIEF_NONE)
+        self.mGravaBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mGravaBotao, "Grava o registro "\
+            "atual (F3)")
+        self.__mGravaItem.add(self.mGravaBotao)
+        # -- Fim da configuração do objeto mGravaBotao ---------------
+        
+
+        # -- Configuração do objeto mApagaBotao ----------------------
+        self.__mApagaImagem.set_from_stock(STOCK_DELETE, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mApagaBotao.set_image(self.__mApagaImagem)
+        self.mApagaBotao.set_relief(RELIEF_NONE)
+        self.mApagaBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mApagaBotao, "Apaga o registro "\
+            "atual (F4)")
+        self.__mApagaItem.add(self.mApagaBotao)
+        # -- Fim da configuração do objeto mApagaBotao ---------------
+        
+
+        # -- Configuração do objeto mVaiBotao ------------------------
+        self.__mVaiImagem.set_from_stock(STOCK_JUMP_TO, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mVaiBotao.set_image(self.__mVaiImagem)
+        self.mVaiBotao.set_relief(RELIEF_NONE)
+        self.mVaiBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mVaiBotao, "Vai para o registro "\
+            "'x' (F5)")
+        self.__mVaiItem.add(self.mVaiBotao)
+        # -- Fim da configuração do objeto mVaiBotao -----------------
+
+        
+        # -- Configuração do objeto mRegistroEntrada -----------------
+        self.mRegistroEntrada.set_max_length(5)
+        self.mRegistroEntrada.set_width_chars(5)
+        self.__mDicas.set_tip(self.mRegistroEntrada, "Coloque aqui "\
+            "o número do registro que deseja ir (F6)")
+        self.__mRegistroItem.add(self.mRegistroEntrada)
+        # -- Fim da configuração do objeto mVaiBotao -----------------
+
+
+        # -- Configuração do objeto mPesquisaBotao -------------------
+        self.__mPesquisaImagem.set_from_stock(STOCK_FIND, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mPesquisaBotao.set_image(self.__mPesquisaImagem)
+        self.mPesquisaBotao.set_relief(RELIEF_NONE)
+        self.mPesquisaBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mPesquisaBotao, "Pesquisa o "\
+            "cadastro (F7)")
+        self.__mPesquisaItem.add(self.mPesquisaBotao)
+        # -- Fim da configuração do objeto mPesquisaBotao ------------
+
+        
+        # -- Configuração do objeto mPrimeiroBotao -------------------
+        self.__mPrimeiroImagem.set_from_stock(STOCK_GOTO_FIRST, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mPrimeiroBotao.set_image(self.__mPrimeiroImagem)
+        self.mPrimeiroBotao.set_relief(RELIEF_NONE)
+        self.mPrimeiroBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mPrimeiroBotao, "Vai para o "\
+            "primeiro registro (Ctrl + Esquerda)")
+        self.__mPrimeiroItem.add(self.mPrimeiroBotao)
+        # -- Fim da configuração do objeto mPrimeiroBotao ------------
+
+        
+        # -- Configuração do objeto mAnteriorBotao -------------------
+        self.__mAnteriorImagem.set_from_stock(STOCK_GO_DOWN, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mAnteriorBotao.set_image(self.__mAnteriorImagem)
+        self.mAnteriorBotao.set_relief(RELIEF_NONE)
+        self.mAnteriorBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mAnteriorBotao, "Vai para o "\
+            "registro anterior (Ctrl + Abaixo)")
+        self.__mAnteriorItem.add(self.mAnteriorBotao)
+        # -- Fim da configuração do objeto mAnteriorBotao ------------
+
+        
+        # -- Configuração do objeto mProximoBotao --------------------
+        self.__mProximoImagem.set_from_stock(STOCK_GO_UP, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mProximoBotao.set_image(self.__mProximoImagem)
+        self.mProximoBotao.set_relief(RELIEF_NONE)
+        self.mProximoBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mProximoBotao, "Vai para o "\
+            "próximo registro (Ctrl + Acima)")
+        self.__mProximoItem.add(self.mProximoBotao)
+        # -- Fim da configuração do objeto mProximoBotao -------------
+
+        
+        # -- Configuração do objeto mUltimoBotao ---------------------
+        self.__mUltimoImagem.set_from_stock(STOCK_GOTO_LAST, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mUltimoBotao.set_image(self.__mUltimoImagem)
+        self.mUltimoBotao.set_relief(RELIEF_NONE)
+        self.mUltimoBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mUltimoBotao, "Vai para o "\
+            "último registro (Ctrl + Direita)")
+        self.__mUltimoItem.add(self.mUltimoBotao)
+        # -- Fim da configuração do objeto mUltimoBotao --------------
+
+        
+        # -- Configuração do objeto mImprimeBotao --------------------
+        self.__mImprimeImagem.set_from_stock(STOCK_PRINT, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mImprimeBotao.set_image(self.__mImprimeImagem)
+        self.mImprimeBotao.set_relief(RELIEF_NONE)
+        self.mImprimeBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mImprimeBotao, "Imprime o "\
+            "cadastro (Ctrl + P")
+        self.__mImprimeItem.add(self.mImprimeBotao)
+        # -- Fim da configuração do objeto mImprimeBotao -------------
+
+        
+        # -- Configuração do objeto mFechaBotao ----------------------
+        self.__mFechaImagem.set_from_stock(STOCK_CLOSE, 
+            ICON_SIZE_LARGE_TOOLBAR)
+        self.mFechaBotao.set_image(self.__mFechaImagem)
+        self.mFechaBotao.set_relief(RELIEF_NONE)
+        self.mFechaBotao.set_focus_on_click(False)
+        self.__mDicas.set_tip(self.mFechaBotao, "Fecha a tela (Esc)")
+        self.__mFechaItem.add(self.mFechaBotao)
+        # -- Fim da configuração do objeto mFechaBotao ---------------
+
+        
+        # -- Configuração da barra de ferramenta padrão --------------
+        # Adiciona os itens na barra de ferramenta
+        self.insert(self.__mNovoItem, -1)
+        self.insert(self.__mGravaItem, -1)
+        self.insert(self.__mApagaItem, -1)
+        self.insert(SeparatorToolItem(), -1)
+        self.insert(self.__mVaiItem, -1)
+        self.insert(self.__mRegistroItem, -1)
+        self.insert(SeparatorToolItem(), -1)
+        self.insert(self.__mPesquisaItem, -1)
+        self.insert(SeparatorToolItem(), -1)
+        self.insert(self.__mPrimeiroItem, -1)
+        self.insert(self.__mAnteriorItem, -1)
+        self.insert(self.__mProximoItem, -1)
+        self.insert(self.__mUltimoItem, -1)
+        self.insert(SeparatorToolItem(), -1)
+        self.insert(self.__mImprimeItem, -1)
+        self.insert(SeparatorToolItem(), -1)
+        self.insert(self.__mFechaItem, -1)
+        # -- Fim da configuração da barra de ferramenta padrão -------
+        
+        
+        self.__mDicas.enable() # Ativa a exibição
+}}}
+
+
+== gtkjanela.py ==
+Crie um arquivo com o nome gtkjanela.py e salve dentro da pasta modelo/biblioteca.
+
+{{{
+#!python
+#-*- encoding: utf8 -*-
+
+# ====================================================================
+# Este programa é software livre; você pode redistribuí-lo e/ou
+# modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+# publicada pela Free Software Foundation; tanto a versão 2 da
+# Licença como (a seu critério) qualquer versão mais nova.
+# Este programa é distribuído na expectativa de ser útil, mas SEM
+# QUALQUER GARANTIA; sem mesmo a garantia implícita de
+# COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+# PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+# detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+# ====================================================================
+
+
+'''
+Nota:
+  Esse código está documentado em python, doxygen e humano.
+  A documentação doxygen exige dois sustenido "#". Para mais 
+  informações acesse o sítio: www.doxygen.org
+'''
+##
+# ====================================================================
+# PROJETO: ModeloPadrão
+# ====================================================================
+# Desenvolvido por: Guedes, Maurilio <billguedes>
+# Data criação: 18/08/2006, 18:48
+# Data atualização: 
+# Atualizado por: 
+# @author Guedes, Maurilio <billguedes>
+# @file gtkjanela.py
+# @begin 08/18/2006
+# @update 08/18/2006
+# @copyright (C) 2006 by Guedes, Maurilio
+# @email billguedes@terra.com.br
+# ====================================================================
+
+
+# ====================================================================
+# Bibliotecas de terceiros
+# ====================================================================
+from gtk import Window      # Janela
+from gtk import VBox        # Caixa vertical
+from gtk import WIN_POS_CENTER_ALWAYS # Posição centralizada
+from gtk.gdk import WINDOW_TYPE_HINT_DIALOG # Modo diálogo
+from gtk.gdk import LOCK_MASK # Tecla fechada, independe do caps-lock
+from gtk.gdk import CONTROL_MASK # Tecla com control
+from gtk import ACCEL_VISIBLE # Acesso visível
+from gtk import ACCEL_LOCKED # Acesso fechado
+from gtk import AccelGroup  # Grupo de teclas de aceleração
+from gtk.keysyms import F2  # Tecla F2 
+from gtk.keysyms import F3  # Tecla F3
+from gtk.keysyms import F4  # Tecla F4 
+from gtk.keysyms import F5  # Tecla F5 
+from gtk.keysyms import F6  # Tecla F6 
+from gtk.keysyms import F7  # Tecla F7 
+from gtk.keysyms import Left  # Tecla esquerda 
+from gtk.keysyms import Right  # Tecla direita 
+from gtk.keysyms import Up  # Tecla acima 
+from gtk.keysyms import Down  # Tecla abaixo 
+from gtk.keysyms import Escape  # Tecla 'Esc' 
+from gtk.keysyms import P   # Tecla 'P'
+from gtk import main_quit   # Saida do gtk
+
+
+# ====================================================================
+# Bibliotecas próprias
+# ====================================================================
+from biblioteca.gtkbarracontrole import GtkBarraControle
+
+
+##
+# ====================================================================
+# Documentação da Classe: GtkJanela
+# ====================================================================
+# @short
+#   Classe responsável em criar a janela.
+#   O objetivo é criar a janela e adicionar a barra de ferramenta.
+# Assunto: gtkjanela
+# Superclasse: gtk.Window
+# @class GtkJanela
+# @author Guedes, Maurilio <billguedes>
+# @version 0.1.0
+# @since 0.1.0
+# @see gtk.Window
+# @see GtkBarraControle
+# ====================================================================
+class GtkJanela(Window):
+    '''
+    Classe responsável em criar a janela.
+    O objetivo é criar a janela e adicionar a barra de ferramenta.
+    '''
+    
+    ##
+    # @fn __init__ Método padrão, chamada automatica na criação.
+    # @param self Ponteiro do objeto.
+    def __init__(self):
+        '''
+        Método padrão, chamada automatica na criação.
+        '''
+        
+        Window.__init__(self) # Inicialização da superclasse
+        
+        # -- Atributos privados --------------------------------------
+        self.__mBarra= GtkBarraControle()
+        self.__mVCaixa= VBox()
+        self.__mVCaixa.pack_start(self.__mBarra, False, False, 0)
+        self.__mGrupoTeclas= AccelGroup()
+        # -- Fim dos atributos privados ------------------------------
+
+        
+        # -- Conexões dos botões -------------------------------------
+        self.__mBarra.mNovoBotao.connect("clicked", 
+            self.onPrepararNovo)
+        self.__mBarra.mGravaBotao.connect("clicked", self.onGravar)
+        self.__mBarra.mApagaBotao.connect("clicked", self.onApagar)
+        self.__mBarra.mVaiBotao.connect("clicked", self.onIrPara)
+        self.__mBarra.mPesquisaBotao.connect("clicked", 
+            self.onPesquisar)
+        self.__mBarra.mPrimeiroBotao.connect("clicked", 
+            self.onIrPrimeiro)
+        self.__mBarra.mAnteriorBotao.connect("clicked", 
+            self.onIrAnterior)
+        self.__mBarra.mProximoBotao.connect("clicked", 
+            self.onIrProximo)
+        self.__mBarra.mUltimoBotao.connect("clicked", 
+            self.onIrUltimo)
+        self.__mBarra.mImprimeBotao.connect("clicked", 
+            self.onImprimir)
+        self.__mBarra.mFechaBotao.connect("clicked", self.onFechar)
+        self.connect("delete_event", self.onDestruir)
+        # -- Fim das conexões dos botões -----------------------------
+
+
+        # -- Configuração das teclas de atalho -----------------------
+        self.__mBarra.mNovoBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, F2, LOCK_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mGravaBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, F3, LOCK_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mApagaBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, F4, LOCK_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mVaiBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, F5, LOCK_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mRegistroEntrada.add_accelerator("grab_focus", 
+            self.__mGrupoTeclas, F6, LOCK_MASK, ACCEL_LOCKED)
+        self.__mBarra.mPesquisaBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, F7, LOCK_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mPrimeiroBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, Left, CONTROL_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mAnteriorBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, Down, CONTROL_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mProximoBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, Up, CONTROL_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mUltimoBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, Right, CONTROL_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mImprimeBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, P, CONTROL_MASK, ACCEL_VISIBLE)
+        self.__mBarra.mFechaBotao.add_accelerator("clicked", 
+            self.__mGrupoTeclas, Escape, LOCK_MASK, ACCEL_VISIBLE)
+        # -- Fim da configuração das teclas de atalho ----------------
+        
+        
+        # -- Configuração da janela padrão ---------------------------
+        self.set_title("Modelo para Teste")
+        self.set_border_width(5)
+        self.set_resizable(False)
+        self.set_position(WIN_POS_CENTER_ALWAYS)
+        self.set_type_hint(WINDOW_TYPE_HINT_DIALOG)
+        self.add_accel_group(self.__mGrupoTeclas)
+        self.set_size_request(600, 300)
+        self.add(self.__mVCaixa)
+        self.show_all()
+        # -- Fim da configuração da janela padrão --------------------
+
+
+    # -- Método onPrepararNovo ---------------------------------------
+    ##
+    # @fn onPreprarNovo Limpa as bugigangas para receber novos dados.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onPrepararNovo(self, bugiganga):
+        '''
+        Limpa as bugigangas para receber novos dados.
+        '''
+        
+        print "Cliquei em Novo."
+    # -- Fim do método onPrepararNovo --------------------------------
+
+        
+    # -- Método onGravar ---------------------------------------------
+    ##
+    # @fn onGravar Pega o conteúdo das bugigangas e grava no banco.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onGravar(self, bugiganga):
+        '''
+        Pega o conteúdo das bugigangas e grava no banco.
+        '''
+        
+        print "Cliquei no Grava."
+    # -- Fim do método onGravar --------------------------------------
+
+
+
+    # -- Método onApagar ---------------------------------------------
+    ##
+    # @fn onApagar Apaga o registro carregado. 
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onApagar(self, bugiganga):
+        '''
+        Apaga o registro carregado. 
+        '''
+        
+        print "Cliquei no Apaga."
+    # -- Fim do método onApagar --------------------------------------
+
+
+    # -- Método onIrPara ---------------------------------------------
+    ##
+    # @fn onIrPara Carrega o registro indicado.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onIrPara(self, bugiganga):
+        '''
+        Vai para o registro indicado.
+        '''
+        
+        print "Cliquei no VaiPara."
+        
+        registro= self.__mBarra.mRegistroEntrada.get_text()
+        
+        if (registro.isdigit()):
+            print "Você escolheu o registro %s" % \
+                self.__mBarra.mRegistroEntrada.get_text()
+        else:
+            print "Você tem que colocar o número do registro"
+    # -- Fim do método onIrPara --------------------------------------
+
+
+    # -- Método onPesquisar ------------------------------------------
+    ##
+    # @fn onPesquisar Abre uma tela para pesquisa no cadastro.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onPesquisar(self, bugiganga):
+        '''
+        Abre uma tela para pesquisa no cadastro.
+        '''
+        
+        print "Cliquei no Pesquisa."
+    # -- Fim do método onPesquisar -----------------------------------
+        
+        
+    # -- Método onIrPrimeiro -----------------------------------------
+    ##
+    # @fn onIrPrimeiro Carrega o primeiro registro do banco de dados.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onIrPrimeiro(self, bugiganga):
+        '''
+        Carrega o primeiro registro do banco de dados.
+        '''
+        
+        print "Cliquei no Primeiro."
+    # -- Fim do método onIrPrimeiro ----------------------------------
+
+
+    # -- Método onIrAnterior -----------------------------------------
+    ##
+    # @fn onIrAnterior Carrega o registro anterior do banco de dados.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onIrAnterior(self, bugiganga):
+        '''
+        Carrega o registro anterior do banco de dados.
+        '''
+        
+        print "Cliquei no Anterior."
+    # -- Fim do método onIrAnterior ----------------------------------
+
+
+    # -- Método onIrProximo ------------------------------------------
+    ##
+    # @fn onIrProximo Carrega o próximo registro do banco de dados.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onIrProximo(self, bugiganga):
+        '''
+        Carrega o próximo registro do banco de dados.
+        '''
+        
+        print "Cliquei no Próximo."
+    # -- Fim do método onIrProximo -----------------------------------
+
+
+    # -- Método onIrUltimo -------------------------------------------
+    ##
+    # @fn onIrUltimo Carrega o último registro do banco de dados.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onIrUltimo(self, bugiganga):
+        '''
+        Carrega o último registro do banco de dados.
+        '''
+        
+        print "Cliquei no Último."
+    # -- Fim do método onIrUltimo ------------------------------------
+
+
+    # -- Método onImprimir -------------------------------------------
+    ##
+    # @fn onImprimir Imprime o registro carregado.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onImprimir(self, bugiganga):
+        '''
+        Imprime o registro carregado.
+        '''
+        
+        print "Cliquei no Imprimir."
+    # -- Fim do método onImprimir ------------------------------------
+
+
+    # -- Método onFechar ---------------------------------------------
+    ##
+    # @fn onFechar Fecha a tela.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no botão.
+    def onFechar(self, bugiganga):
+        '''
+        Fecha a tela.
+        '''
+        
+        print "Cliquei no Fechar."
+    # -- Fim do método onFechar --------------------------------------
+
+
+    # -- Método onDestruir -------------------------------------------
+    ##
+    # @fn onDestruir Fecha a tela.
+    # @param self Ponteiro do objeto.
+    # @param bugiganga Bugiganga (widget) passado automáticamente ao
+    #   clicar no 'x' da janela.
+    # @param evento Evento passado automáticamente ao clicar no 'x'
+    #   da janela.
+    def onDestruir(self, bugiganga, evento):
+        '''
+        Fecha a tela.
+        '''
+        
+        print "Cliquei no 'X' da janela."
+        self.hide()
+        main_quit()       
+    # -- Fim do método onDestruir ------------------------------------
+
+}}}
+
+== Exemplo de uso ==
+Crie um arquivo com o nome abre.py e salve na pasta modelo.
+
+{{{
+#!python
+#-*- encoding: utf8 -*-
+
+# ====================================================================
+# Este programa é software livre; você pode redistribuí-lo e/ou
+# modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+# publicada pela Free Software Foundation; tanto a versão 2 da
+# Licença como (a seu critério) qualquer versão mais nova.
+# Este programa é distribuído na expectativa de ser útil, mas SEM
+# QUALQUER GARANTIA; sem mesmo a garantia implícita de
+# COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+# PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+# detalhes.
+# http://www.gnu.org/copyleft/gpl.html
+# ====================================================================
+
+
+'''
+Nota:
+  Esse código está documentado em python, doxygen e humano.
+  A documentação doxygen exige dois sustenido "#". Para mais 
+  informações acesse o sítio: www.doxygen.org
+'''
+##
+# ====================================================================
+# PROJETO: ModeloPadrão
+# ====================================================================
+# Desenvolvido por: Guedes, Maurilio <billguedes>
+# Data criação: 18/08/2006, 13:34
+# Data atualização: 
+# Atualizado por: 
+# @author Guedes, Maurilio <billguedes>
+# @file abre.py
+# @begin 08/18/2006
+# @update 08/18/2006
+# @copyright (C) 2006 by Guedes, Maurilio
+# @email billguedes@terra.com.br
+# ====================================================================
+
+
+# ====================================================================
+# Bibliotecas de terceiros
+# ====================================================================
+from gtk import main        # Principal
+
+
+# ====================================================================
+# Bibliotecas próprias
+# ====================================================================
+from biblioteca.gtkjanela import GtkJanela
+
+
+if __name__ == "__main__":
+    GtkJanela()
+    main()
+
+}}}
+
+Volta para CookBook.
+
+----
+Guedes, Maurilio <billguedes at terra.com.br>

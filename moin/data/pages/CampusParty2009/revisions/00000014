@@ -1,0 +1,75 @@
+==  Programação da Associação Python Brasil ==
+
+Organização das atividades relacionadas a Python na Campus Party 2009.
+
+Veja o calendário com nossas atividades no [[http://www.google.com/calendar/embed?src=1ck7iuecncmmrg3e7m46dur15c%40group.calendar.google.com&ctz=America/Sao_Paulo|Google Calendar]]
+
+<<HTML(<iframe src="http://www.google.com/calendar/embed?src=1ck7iuecncmmrg3e7m46dur15c%40group.calendar.google.com&ctz=America/Sao_Paulo" style="border: 0" width="650" height="400" frameborder="0" scrolling="no"></iframe>)>>
+
+A Associação Python Brasil, na "pessoa" do Grupy-SP, apresentou proposta para 1 palestra e 5 mini-cursos para constar da grade oficial da Campus Party. Além disso, vamos desenvolver diversas atividades na nossa bancada, independentemente da grade oficial (o que seria os nossos "Open Spaces").
+
+Ainda não recebemos a grade oficial da Campus Party, então não temos dias nem horários. Os tempos indicados abaixo são os que pedimos à organização.
+
+=== Palestras ===
+
+ * '''Python: a primeira mordida''' (palestra introdutória)
+   * Palestrante: LucianoRamalho
+   * Tempo: 1h
+
+ * '''Introdução ao Google App Engine'''
+   * Palestrantes: Marzia Niccolai e Alejandro Villanueva (Google)
+   * Tempo: 1h
+
+=== Minicursos ===
+
+ * '''Desenvolvimento de Jogos com Python'''
+   * Candidato a instrutor: JoaoBueno
+   * Tempo: 4h
+   * horário: sexta-feira (23/1), ás 14h00 -
+   * Conteúdo: 
+    O módulo pygame e suas capacidades de multimídia:
+Criando gráficos de tela inteira, módulo de desenho 2D, 
+uso de imagens,interração: eagindo a ações do teclado e do mouse.
+A estrutura de um jogo - o laço principal, coneceito, acabamento, gráficos, as classes "sprite"
+do Pygame.
+O módulo cocos2D e o que ele já trás pronto em relação ao pygame, 
+desenvolvimento de um exemplo básico - levando em conta inclusive o desenho das imagens no GIMP.
+Recomenda-se que os participantes tenham suas próprias máquinas - 
+devem ter pré-instalado o python 2.5 ou 2.6 e os módulos pygame e cocos2D correspondentes.
+
+ * '''Google App Engine para programadores Python'''
+   * Instrutor: Marzia Niccolai e Nilton Volpato
+   * Tempo: 4h
+
+ * '''Python em dispositivos móveis'''
+   * Instrutor: OsvaldoSantanaNeto
+   * Tempo: 8h (2x4h) (quinta-feira e sexta-feira das 13hs às 17hs)
+
+ * '''Django - Programação Web para Perfeccionistas com Prazos'''
+   * Candidatos a instrutor:  AdrianoPetrich
+   * Tempo: 2h
+
+ * '''Plone, ou Como Desenvolver Portais Web em 2 Horas'''
+   * Candidato a instrutor: EricoAndrei
+   * Tempo: 2h
+
+
+=== Open Spaces ===
+
+ '''Atenção''': Não se preocupem muito em pré-definir atividades para os Open Spaces. A idéia é que eles vão surgindo e se organizando ao longo do evento.
+
+ * '''Python e o mundo dos gráficos''': Python como linguagem de script para aplicativos gráficos, e bibliotecas de processamento de imagem que funcionam com python
+   * Instrutor: JoaoBueno
+
+ * '''Python com hardware livre -  Arduino e afins'''
+   * Participantes:  BrunoGola, PedroWerneck, OsvaldoSantana, [[rbp]]
+
+ * '''Blender Game Engine - Jogos com Python'''
+   * Participantes: JulioMonteiro
+
+ * '''Campus Python Bug Day'''
+   * Participantes: [[rbp]]
+
+=== Horários de palestras relâmpago ===
+
+ '''Atenção''': vamos definir palestras relâmpago na hora. Não faz sentido marcar com antecedência algo que dura 5 minutos.

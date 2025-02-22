@@ -1,0 +1,46 @@
+{{http://web2py.com/examples/static/web2py_logo.png}}
+
+
+= O que é web2py =
+[[http://www.web2py.com|web2py]] é um framework para desenvolvimento Web escrito em Python, software livre e gratuito, que tem como um de seus principais objetivos agilidade no desenvolvimento de aplicações Web seguras, baseadas em banco de dados.
+
+
+O framework segue o modelo MVC (Model-View-Controller), que permite melhor organização do código; ele também é autocontido: tudo o que você precisa para desenvolver alguma aplicação está nele: basta baixar e descompactar para começar - nada de configurações!
+
+
+Com o foco em deixar o desenvolvedor pensar apenas na aplicação em que está desenvolvendo, o web2py possui intregração com mais de 10 sistemas de banco de dados, e vários subssistemas, como: criação automática de formulários com validação automática, autenticação e autorização, gerador de códigos AJAX para melhor interação do usuário com a aplicação, upload seguro de arquivos, sistema de plugins, integração com vários padrões Web (XML, RSS etc.), dentre outros.
+
+= Princípios =
+
+O web2py leva em consideração todas as questões referentes a segurança da aplicação web, e isso significa que o framework se preocupa em tratar as vulnerabilidades aplicando práticas bem estabelecidas como por exemplo validando formulários prevenindo injeção de código malicioso, efetuando o correto escape da saida HTML para prevenir ameaças como o cross-site scripting, renomeia os arquivos de upload utilizando hash seguro. O web2py automaticamente toma conta de questões de segurança.
+Segurança do web2py www.pythonsecurity.org/wiki/web2py/
+O web2py possui uma camada de abstração de banco e dados (DAL) que gera dinâmicamente todo o código SQL. a classe DAL pode se conectar e lidar de forma transparente com diversos bancos de dados como MSSQL, MYSQL, POSTGRES, ORACLE, MONGODB, GOOGLE BIG TABLE.
+
+O web2py pode ser executado com CPython ( a implementação padrão da linguagem Python implementada em C ) ou com Jython ( a implementação do Python escrita em Java), Funciona com quase todos os seus recursos na plataforma gratuita de hospedagem de aplicações do Google; o GAE ( Google App Engine ).
+
+Uma outra caracteristíca do web2py, é o compromisso com a compatibilidade em versões futuras, e este compromisso tem sido mantido desde a primeira versão, isso significa que aplicações desenvolvidas em uma versão especifica do framework funcionarão em versões mais recentes sem que seja necessário nenhuma alteração de código.
+
+A linguagem Python tipicamente segue os seguintes princípios 
+
+ * Não se repita ( DRY )
+ * Deve existir apenas uma maneira óbvia de para fazer algo
+ * Explícito é melhor do que implícito
+ * O web2py procura seguir rigorosamente os dois primeiros princípios por forçar o desenvolvedor a utilizar boas práticas de engenharia de software, utilizando um bom padrão de projeto (MVC) e incentivando o reaproveitamento de código. O framework guia o desenvolvedor facilitando as tarefas mais comuns em desenvolvimento para web.
+
+
+Diferente de outros frameworks, o web2py aplica parcialmente o terceiro princípio, com a intenção de prover o desenvolvimento ágil o framework efetua configurações, importa módulos e instância objetos globais como session,request,cache,T e tudo isso é feito automaticamente, tentando ao máximo evitar que o desenvolvedor tenha importar os mesmos módulos e instanciar os mesmos objetos no inicio de cada model ou controller.
+
+
+Efetuando essas operações automaticamente o web2py evita problemas, e mantém o princípio de não se repetir e de que deve existir apenas uma maneira para se fazer algo.
+
+
+Porém, se for desejo do desenvolvedor este comportamento pode ser alterado, e em qualquer cenário é possível importar módulos como em qualquer outra aplicação ou framework 
+Python.
+
+= Comunidade =
+
+A comunidade web2py tem como maior canal a lista mundial em inglês "web2py" no google groups e também a lista em português "web2py-users-brazil", além disso o grupo no facebook [[http://on.fb.me/web2py]] e o web2pyslices.com
+
+= Quem usa? =
+
+No Brasil temos casos de uso na Petrobrás, Groupon Brasil, Prefeitura de São Paulo, Visie Padrões Web, Blouweb Consultoria, Bolsa de Valores de SP (BOVESPA), Governo da Paraíba e diversos outros sites e aplicações desenvolvidas com web2py ou que utilizam bibliotecas do web2py a lista completa está em [[http://www.web2py.com/poweredby]] 

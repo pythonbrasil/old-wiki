@@ -1,0 +1,101 @@
+#pragma section-numbers off
+= Documentação Python =
+
+Nas seções abaixo você certamente encontrará a documentação que você procura sobre Python. E se não encontrar, sinta-se à vontade para cadastrá-la.
+
+[[TableOfContents]]
+
+== Documentação Oficial Python ==
+
+A documentação oficial da linguagem Python, disponível [http://www.python.org/doc na página oficial Python] e inclusa muitas vezes nas ditribuições Linux em pacotes como python-doc, está atualmente sendo traduzida para o português pelo [http://codigolivre.org.br/projects/pythondoc Projeto de Documentação Python-BR], cuja página está hospedada aqui no PythonBrasil sob o nome de PythonDoc. Em alguns meses já deve ser lançada uma prévia do trabalho do time de tradutores, então fique antenado nas novidades!
+
+== Livros Python ==
+
+Livros Impressos e On-Line sobre Python.
+
+=== Impressos ===
+
+Livros e referências impressas sobre Python. Aqui você encontra resenhas e comentários de quem já leu os livros.
+
+   * PythonGuiaDeReferência (por) - Marco Catunda
+   * ZopeKitDeConstruçãoDeAplicaçõesWeb (por) - K. Kirchner, Martina Brockmann
+   * ExpressõesRegulares (por) - Aurelio Marinho Jargas
+   * ProgrammingPython (ing) - Mark Lutz
+   * PythonPocketReference (ing) - Mark Lutz
+   * LearningPython (ing) - Mark Lutz
+   * GameProgrammingWithPython (ing) - Sean Riley
+   * PythonHowToProgram (ing) - Deitel & Deitel
+   * TheCompletePythonTrainingCourse (ing) - Deitel & Deitel
+   * ZopeWebApplicattionDevelopmentAndContentManagement (ing) - Jerry Spicklemire, Kim Brand, Kevin Friedly,  Steve Spicklemire
+
+=== On-Line ===
+
+Livros e referências On-Line sobre Python.
+   * [http://www.ic.unicamp.br/~ra008849/downloads/aulas_python/ Python para quem já é Programador], [http://www.ic.unicamp.br/~ra008849/downloads/aulas_python/resumo.pdf Resumão] (por GustavoBarbieri)
+   * [attachment:aprendaAProgramar.pdf Aprenda a Programar] (por)
+   * [http://www.freenetpages.co.uk/hp/alan.gauld/port/ Aprenda a Programar com Python]
+   * [attachment:cursokov.pdf Curso de Python] (por)
+   * [http://guia-er.sourceforge.net/guia-er-52.html Expressões Regulares - Capítulo Python] (por)
+   * [attachment:material.pdf Introdução ao Python] (por)
+   * [attachment:intro-python.zip Introdução ao Python] (por)
+   * [attachment:mergulhando.pdf Mergulhando em Python] (por) - Tradução parcial
+   * [attachment:minicursoPython.pdf Mini Curso Python] (por)
+   * [attachment:mysqlcompython.pdf MySQL e Python] (por)
+   * [http://www.async.com.br/projects/python/pnp/ Python na Prática] (por)
+   * [http://www.gpr.com.br/cursos/python21.pdf Tutorial Python 2.1] (por)
+   * [http://www.diveintopython.org Dive Into Python] (ing)
+   * [http://www.pythonware.com/library/tkinter/introduction/index.htm An Introduction to Tkinter] (ing)
+   * [http://www.ibiblio.org/obp/thinkCSpy/ How to Think Like a Computer Scientist - Learning with Python] ([attachment:thinkcspy.pdf PDF]) (ing)
+   * [attachment:byte.pdf A Byte of Python] (ing)
+   * [http://www.moeraki.com/pygtktutorial/ PyGTK] (ing) - Tutorial sobre utilização de PyGTK.
+   * [http://sjbrown.ezide.com/writing-games.html PyGame e Twisted] (ing) - Tutorial sobre a programação de jogos em Python, e uso da framework [http://www.twistedmatrix.com Twisted] para comunicação.
+   * [http://www.pycs.net/lateral/stories/16.html PyQt e Eric3] (ing) - Tutorial rápido, sobre !PyQt e Eric3.
+   * [http://www.pycs.net/lateral/stories/27.html Custom widgets usando PyQt] (ing) - Esse tutorial ensina a criar uma widget personalizada usando PyQT
+
+== Artigos e Tutoriais ==
+
+Aqui você encontrará aquele artigo que você estava procurando e não estava encontrando. Essa área também está liberada para a publicação de novos artigos (VocêAindaNãoContribuiu?). Para outros tipos de documento consulte a página DocumentaçãoPython.
+   * [http://www.ic.unicamp.br/~ra008849/downloads/jogo/doc/ Introdução à Programação de Jogos] (por GustavoBarbieri. Texto que usa Python e PyGame para elaboração passo a passo de um Jogo 2D, porém os conceitos podem ser utilizados para qualquer linguagem e até mesmo jogos 3D.
+   * AlgoritmoBully - Artigo sobre a implementação de um algoritmo de eleição usado em sistemas distribuídos.
+   * AspectosFormaisDaLinguagemPython - Artigo que fala sobre a análise léxica da linguagem Python.
+   * BancosDeDadosSql - Descreve os aspectos basicos de acesso aos bancos de dados SQL: SQLite, PostgreSQL, Firebird e MySQL.
+   * BenchmarkAdHoc - Artigo com comparação de performance entre diversas linguagens (inclusive Python).
+   * ["ComparaçãoDeGUIs"] - Breve análise, vantagens, desvantagens e outros detalhes das principais bibliotecas para desenvolvimento de interfaces gráficas disponíveis para Python.
+   * ComunicaçãoComPipes - Artigo apresentando o uso de pipes em Python com o uso do módulo Popen2
+   * DocTest - Mantendo documentação e código em sincronia.
+   * GuiaDeEstilo - Tradução da PEP-8 - ''Python Style Guidelines'' para o português. Dicas e convenções usadas na edição e formatação de código em Python.
+   * InteragindoUsuário - Artigo que fala sobre como usar as funções de stdin (entrada de dados).
+   * InterpretadorCompiladorPython - Artigo sobre a arquitetura do interpretador Python.
+   * IntroduçãoJython - Uma introdução ao Jython: panorama, conceituações e prática. Artigo, apresentação e uma aplicação cliente/servidor (chat).
+   * IntroduçãoJythonDidática - Uma introdução bastante didática dessa ferramenta que permite usar o poderio de Python e de Java juntos.
+   * IntroduçãoPython - Mini-artigo que apresenta a linguagem Python.
+   * IntroduçãoPythonSimples - Uma Simples introdução à programação Python.
+   * PensandoEmTkinter - Tradução de "Thinking in Tkinter", de Steven Ferg. Ótimo tutorial para começar a entender como Tkinter funciona.
+   * ProgramasCompativeisV15 - Como fazer programas compatíveis com o Python versão 1.5, que ainda é bastante usado.
+   * PyGtk - Página sobre "PyGTK" no portal
+   * PythonApresentação - Mini-artigo usado para demonstrar Python para pessoas que ainda não a conhecem.
+   * PythonComAdo - Veja como utilizar o ADO no Python.
+   * PythonFuncional - Descreve os aspectos funcionais (lambda, map, filter e zip) de Python.
+   * PythonInstantâneo - Tutorial ultra-rápido para aprender Python.
+   * PythonParaWeb - Um pequeno ponto de vista sobre programação web utilizando Python.
+   * PythonUno - Descreve um exemplo de automatização de tarefas do OpenOffice usando o Python.
+   * RadComLinux - Mini-artigo sobre o desenvolvimento rápido de aplicações usando Python.
+   * ReferênciasCruzadas - Como evitar problemas com referências circulares usando os módulos weakref e gc.
+   * TabCompleta - Ensina como utilizar a tecla {{{<TAB>}}} para completar nomes de funções e métodos, no modo interativo do Python.
+   * TestDrivenDevelopment - Artigo sobre um dos aspectos de Extreme Programming e exemplos de como adotar {{{unittests}}} em seu código.
+   * TutorialPyQt - Tradução do ótimo tutorial de Jonathan Gardner.
+   * UnificandoTiposClasses- Tradução de artigo de GuidoVanRossum sobre as alterações radicais feitas na linguagem na versão 2.2.
+   * UsandoGenerators - Aprenda a utilizar geradores (''generators'') no Python.
+   * UsandoVariáveisParte1 - Mini-artigo sobre o funcionamento de variáveis e expressões em Python.
+   * UsandoVariáveisParte2 - Artigo ensinando a usar as "variáveis" no Python, e expressões.
+
+== Documentos diversos (sem classificação atualmente) ==
+
+   * PapoAdvancedPython - Um bate-papo (IRC) bem interessante que fala sobre algumas técnicas de programação funcional e list-compreension em Python.
+
+== Visite também ==
+
+   * SoftwarePython - Módulos, Editores e Ferramentas para desenvolvimento Python, bem como projetos desenvolvidos por brasileiros.
+   * DocumentaçãoPython - Mais documentos, livros, livros on-line, outros tutoriais mais completos.
+   * [http://www.vex.net/parnassus/ Vaults of Parnassus] (ing) - site lotado de trechos de código, bibliotecas, etc.
+   * [http://aspn.activestate.com/ASPN/Python/Cookbook/ Active State / O'Reilly Cookbook] (ing) - Maior coletânea de trechos de código em Python disponível na Internet.

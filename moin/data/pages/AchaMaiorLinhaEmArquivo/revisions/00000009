@@ -1,0 +1,40 @@
+#pragma section-numbers off
+
+== Receita: Acha maior linha em arquivo ==
+
+Eu precisava de uma função que retornasse, dentro de um arquivo .txt, a maior linha (linha de maior comprimento). Talvez seja útil para mais alguém.
+Esse código também pode ser facilmente adaptado para retornar qual a maior string dentro de uma lista (só tirar a parte relativa à abertura de arquivo).
+
+Sou capaz de jurar que as linhas 2-16 podem ser reduzidas a 1 linha, só não sei como ainda :)
+
+== Código ==
+
+{{{
+#!python
+def achaMaiorLinhaEmArquivo(nome_arquivo):
+    # extrai as linhas do arquivo em uma lista
+    arquivo = file(nome_arquivo)
+    linhas_arquivo = [ linha for linha in arquivo ]
+    arquivo.close()
+    
+    # cria uma lista com o comprimento de cada linha
+    compr_linhas = [ len(linha) for linha in linhas_arquivo ]
+    
+    # acha o maior numero dentro da lista de comprimentos,
+    # ou seja, qual é o comprimento da maior linha
+    compr_maior_linha = reduce(lambda x,y: max(x,y), compr_linhas)
+    
+    # retorna todas as linhas que tenham o comprimento da maior linha
+    maior_linha = [ linha for linha in linhas_arquivo if len(linha)==compr_maior_linha ]
+    return maior_linha
+    
+if __name__ == "__main__":
+    print "\n".join(achaMaiorLinhaEmArquivo("meu_arquivo.txt"))
+
+}}}
+
+Volta para CookBook.
+
+----
+
+RodrigoVieira

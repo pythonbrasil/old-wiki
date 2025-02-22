@@ -1,0 +1,172 @@
+#pragma section-numbers off
+= Receita: Gerador de CPF =
+
+Programa para gerar números de CPF aleatoriamente. Escrito por ralobao ( Kandalf ) e com alterações de FelipeLessa.
+
+== Código ==
+
+{{{
+#!python
+#!/usr/bin/env python
+import random
+import math
+
+# Mude para True para incluir debug
+DEBUG = False
+
+def debug(*string):
+    """ Imprime para stderr (simples). """
+
+    # Eu sei que imports dentro de funcoes eh feio, 
+    # mas eh para tirar a carga do import no caso de eu nao querer debug
+    import sys
+
+    print >> sys.stderr, string
+
+def gera_random():
+    """ Funcao para gerar um inteiro aleatório entre 0 e n """
+    return random.randint(0, 9)
+
+def mod(dividendo,divisor):
+    """ Funcao pra retornar o resto da divisao de dois numeros """
+    x = dividendo - (math.floor(dividendo/divisor)*divisor)
+    return round(x)
+
+
+
+def cpf():
+    """ Funcao pra gerar o bendito cpf """
+
+    # Gera os numeros randonomicos ;)
+    n1 = gera_random()
+    n2 = gera_random()
+    n3 = gera_random()
+    n4 = gera_random()
+    n5 = gera_random()
+    n6 = gera_random()
+    n7 = gera_random()
+    n8 = gera_random()
+    n9 = gera_random()
+
+    # debugger purposes ;)
+    DEBUG and debug(n1, n2, n3, n4, n5, n6, n7, n8, n9)
+
+    # Contas e mais contas, dividi pra fica mais bonitinho
+    a1 = n9 * 2
+    a2 = n8 * 3
+    a3 = n7 * 4
+    a4 = n6 * 5
+    a5 = n5 * 6
+    a6 = n4 * 7
+    a7 = n3 * 8
+    a8 = n2 * 9
+    a9 = n1 * 10
+
+    # Soma os resultados de todas as contas anteriores e faz 
+    # outra continha.. tudo regra do cpf, para ele ser valido :P
+    d1 = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9
+    d1 = 11 - (mod(d1,11))
+
+    # Caso d1 seja maior que 10, o que não pode, ele deve ser igualado a 0
+    if d1 >= 10:
+        d1 = 0
+
+    # debugger purposes
+    DEBUG and debug(a1, a2, a3, a4, a5, a6, a7, a8, a9, d1)
+
+    # Mesma coisa da de cima so que agora pra variavel d2
+    a1 = d1 * 2
+    a2 = n9 * 3
+    a3 = n8 * 4
+    a4 = n7 * 5
+    a5 = n6 * 6
+    a6 = n5 * 7
+    a7 = n4 * 8
+    a8 = n3 * 9
+    a9 = n2 * 10
+    a10 = n1 * 11
+
+    # ... rola a barra de rolagem pra cima que tu vai entender :P
+    d2 = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10
+    d2 = 11 - (mod(d2,11))
+
+    # chega de repeticao de codigo :)
+    if d2 >= 10:
+        d2 = 0
+
+    # debugger purposes
+    DEBUG and debug(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, d2)
+
+
+    # o esperado print final ... que maravilha
+    return "%d%d%d.%d%d%d.%d%d%d-%d%d" % (n1, n2, n3,  n4, n5, n6,  n7, n8, n9,  d1, d2)
+
+
+
+if __name__ == '__main__':
+    # Temos os holofotes em nós, somos a atração principal!
+
+    message = "Bem-vindo ao Gerador de CPFs"
+    print '\t%s\n' % message, '\t%s\n' % ('=' * len(message))
+
+    user_response = raw_input('Ativar debug (responda "sim", "yes", "1" ou "true" para ativar)? ')
+    if user_response.lower().strip() in ("sim", "yes", "1", "true"):
+        DEBUG = True
+
+    try:
+        for i in xrange(int(raw_input('Quantos CPFs aleatórios devem ser gerados? '))):
+            print cpf()
+            if DEBUG:
+                # Deixa o visual mais limpo
+                print
+    except ValueError, x:
+        print 'Valor inválido ("%s")' % x
+}}}
+
+''Legal! Achei um jeito de treinar o uso de programação funcional em Python :) O código abaixo faz o mesmo que o acima, só que é menos legível/entendível/didático que o feito pelo Ruivaldo e pelo Lessa. Eu fiz ele porque precisava de um exemplo prático de onde é útil usar programação as funções map/reduce/filter/zip. Pra quem tiver interesse nessas funções eu recomendo uma olhada no PythonFuncional. -- OsvaldoSantanaNeto''
+
+{{{
+#!python
+def cpf_funcional():
+                                                                                                    
+    n = []
+    for i in xrange(9):
+        n.append(random.randint(0, 9))
+                                                                                                    
+    # calcula digito 1 e acrescenta ao numero
+    s = reduce(lambda x, y: x + y, map(lambda x, y: x * y, n, range(10, 1, -1)))
+    d1 = 11 - s % 11
+    if d1 >= 10:
+        d1 = 0
+    n.append(d1)
+                                                                                                    
+    # calcula digito 2 e acrescenta ao numero
+    s = reduce(lambda x, y: x + y, map(lambda x, y: x * y, n, range(11, 1, -1)))
+    d2 = 11 - s % 11
+    if d2 >= 10:
+        d2 = 0
+    n.append(d2)
+                                                                                                    
+    return "%d%d%d.%d%d%d.%d%d%d-%d%d" % tuple(n)
+}}}
+
+== Exemplo de uso ==
+
+{{{
+#!python
+# Exemplo de como usar
+import geradorcpf
+print geradorcpf.cpf()
+
+}}}
+
+''Falta só alguém fazer um {{{unittest}}} entre este cookbook e o VerificadorDeCpf, esse aqui gerando um milhão de números e o outro checando. Hehehe. --FelipeLessa''
+
+'' Valeu Felipe !, Abraços meu camagada. Só pra consta tu testou o codigo após suas alterações ? Tipo reeditei pra ficar mais original e parecido com o codigo javascript que eu "parseei"-- ralobao ''
+
+Volta para CookBook.
+
+----
+
+Ruivaldo Neto,
+FelipeLessa (algumas alterações)

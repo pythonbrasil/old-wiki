@@ -1,0 +1,16 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== Rudá Porto Filgueiras ==
+
+Contatos:
+
+ * Email: <<MailTo(rudazz AT SPAMFREE gmail DOT com)>>
+ * Blog: http://python-blog.blogspot.com
+
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+
+Interesses: Python para Web, Zope, Plone, SQLAlchemy, Meta-programação, Componentes, Redes Sociais, Sistemas Distribuídos, Clusters.
+
+----
+CategoryHomepage

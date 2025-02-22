@@ -1,0 +1,39 @@
+## page was renamed from CacheDeFunções
+= Receita: Cache de Funções =
+Exemplo prático de uma função em Python que retorna uma outra função. Isto é possível porque funções em Python são elementos de primeira classe. Esta receita é uma função que recebe como parâmetro qualquer função (matemática) e retorna a mesma função do argumento com um cache associado para lembrar dos resultados calculados, o Cache é simplesmente um dicionário de argumentos da função com o valor calculado correspondende.
+
+== Código ==
+
+{{{
+#!python
+def cache_f(f):
+    """Retorna uma funcao igual a 'f' mas com um cache associado.
+    
+    Exemplo:
+    >>> f = cache_f(math.sin)
+    >>> f.cache
+    {}
+    >>> f(0)
+    0.0
+    >>> f(1)
+    0.8414709848078965
+    >>> f.cache
+    {(1,): 0.8414709848078965, (0,): 0.0}
+    """
+    def g(*args):
+        if args in g.cache:
+            return g.cache[args]
+        else:
+            g.cache[args] = f(*args)
+            return g.cache[args]
+    g.cache = {}
+    return g
+}}}
+
+A partir do Python 2.4 é possível aplicar esse cache através de um decorator, um exemplo pode ser encontrado em [http://wiki.python.org/moin/PythonDecoratorLibrary#head-11870a08b0fa59a8622201abfac735ea47ffade5 Python Decorator Library - Memoize].
+
+Volta para CookBook.
+
+----
+
+RudaMoura

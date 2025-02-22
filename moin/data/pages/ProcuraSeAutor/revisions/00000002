@@ -1,0 +1,18 @@
+#pragma section-numbers off
+= Procura-se autor =
+
+Procura-se os autores do(s) texto(s) abaixo:
+
+== Manifestação ==
+
+O Python é uma linguagem na qual podemos fazer as coisas mais incríveis que um programador poderia fazer. Porém, eu não posso de deixar meu protesto contra os preconceitos e a falta de conhecimento da existencia da linguagem que o pessoal tem. Em um fórum foram escritas perguntas sobre o Python que mostram que o pessoal trata o Python como uma linguagem que não é conhecida, portanto não deve ser uma linguagem boa. Devemos todos indiguinar-nos com pensamentos assim. Depois fica a pergunta: como o cidadão que escreveu tal pergunta achou o site daquele fórum? Resposta quase obvia: Google. O que o pessoal nem sonha, é que o motor de busca do Google, que é o buscador mais utilizado no mundo inteiro hoje em dia, é feito em Python. Se o Google colocasse ao menos um Powered By Python em seu site ajudaria muito.
+
+
+----
+
+OsvaldoSantanaNeto
+
+
+== Correção ao texto acima ==
+
+O motor do google certamente não é feito em python (por razões óbvias de desempenho). Os principais usos de python no google são na administração de máquinas, automação de tarefas, deployment de sistemas, e sistemas internos de bugtracking e atendimento a clientes (www.neotonic.com, recentemente adquirido pelo Google).

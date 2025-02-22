@@ -1,0 +1,13 @@
+##master-page:HomepageTemplate
+#format wiki
+#language pt-br
+== @Henrique Mayer@ ==
+
+Email: <<MailTo(hmayer AT SPAMFREE gmail DOT com)>>
+
+Pacato cidadão da civilização.
+
+Ando trabalhando com um pouco de pyS60, um pouco de django, um pouco de PyGTK e muito de Postgres e planilhas eletrônicas py-uno que sabe disso :)
+
+----
+CategoryHomepage

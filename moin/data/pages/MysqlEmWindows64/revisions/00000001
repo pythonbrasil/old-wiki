@@ -1,0 +1,46 @@
+= Compilando o módulo MySQLdb-python na arquitetura x64 =
+O módulo MySQLdb faz a interface de um script em python com um banco de dados MySQL.
+
+Porém, sua versão para Windows é fornecida apenas para a arquitetura de 32 bits. Para usar essa biblioteca numa máquina x64, é preciso compilá-la nessa arquitetura.
+
+== Pré-requisitos ==
+ * Windows x64;
+ * Visual Studio 2005 ou superior;
+ * [http://www.python.org/download/ Python 2.5] para x64;
+ * [http://dev.mysql.com/downloads/mysql/5.0.html#winx64 MySQL] versão 5 ou superior, para Windows x64.
+== Compilando a Biblioteca ==
+Siga os seguintes passos:
+
+ * Baixe o código fonte do modulo [https://sourceforge.net/project/showfiles.php?group_id=22307&package_id=15775 MySQLdb], e extraia o conteúdo do arquivo .tar.gz em um diretório.
+
+ * Abra o Editor de Registro do Windows, clicando Start, run, e digitando regedit. No Editor de Registro, digite ctlr+F e procure pela chave '''MySQL Server 5.0''', marcando a opção 'key'.
+ . Verifique o caminho da chave encontrada, como por exemplo:
+ . ''SOFTWARE\MySQL AB\MySQL Server 5.0''
+
+ * Abra o arquivo site.cfg, no diretório onde você extraiu os arquivos, e verifique a chave de registro registry_key, como no exemplo;
+ . ''registry_key = SOFTWARE\MySQL AB\MySQL Server 5.0''
+ . Coloque no valor dessa chave o caminho encontrado no item 2 e salve o arquivo.
+
+ * Configure as seguintes variáveis de ambiente:
+ . Dê um clique com o botão direito em 'Meu Computador', então entre na aba 'Advanced' e clique em 'Environment Variables'. Clique no botão 'New'.
+ . "DISTUTILS_USE_SDK = 1"
+ . "MSSdk = 1"
+
+ * Agora abra o Visual Studio x64 Command Prompt
+ . ''Start > All Programs > Microsoft Visual Studio 2005 > Visual Studio Tools > Visual Studio x64 Win64 Command Prompt''
+ . Precisamos desse prompt pois na instalação será chamado o compilardor do VS.
+
+ * Ainda no prompt, acesse o diretório onde você extraiu os arquivos. Então, entre com o seguinte comando:
+ > ''python setup.py install''
+ . Ele irá compilar a biblioteca, e exibir a seguinte mensagem:
+ . ''Installed c:\python25\lib\site-packages\mysql_python-1.2.2-py2.5-win32.egg''
+ . ''Processing dependencies for MySQL-python==1.2.2''
+ . (O diretório de instalação pode ser diferente no seu sistema)
+
+----
+
+ . Você pode testar o resultado fazendo importando o módulo no interpretador. No prompt digite:
+ > python
+ . E então importe a biblioteca (o comando é case-sensitive).
+ >>> ''import MySQLdb''
+ . Se nenhuma mensagem aparecer, o módulo foi importado corretamente.

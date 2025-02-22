@@ -1,0 +1,40 @@
+== Criando um arquivo ZIP ==
+Por JoaoSOBueno
+
+É necessário instanciar um objeto ZipFile de zipinfo,
+e passar o parametro "mode" = "w", para um arquivo novo
+
+Se você vai comprimir dados na memória, precisa de um objeto ziplib.ZipInfo
+para fornecer  pelo menos o nome do arquivo e o tipo de compressão,
+setando o atributo .compress_type = zipfile.ZIP_DEFLATED neste objeto,
+e em seguida chamar o método write_str passando esste objeto e os seus dados
+a serem comprimidos. Você pode querer configurar mais parâmetros na estrutura ZipInfo,
+como a permissão de arquivo (atributo .external_attr = (0644 << 16) para permissao
+"dono pode ler e escrever, todos os outros podem ler" como a do Unix, por exemplo,e 
+o atributo .date_time, para data de criação do arqivo.
+
+Para adicionar arquivos que já estão no filesystem, basta fazer a chamada
+.write (<caminho-do-arquivo>, compress_type=zipfile.ZIP_DEFLATED) no seu objeto 
+ZipFile, em vez de chamar o write_str. Os demais atributos serão copiados do arquivo.
+
+
+{{{
+# Exemplo que cria um arquivo bla.zip, 
+# contendo um arquivo "numbers.txt" compactado
+# com 10000 vezes a sequencia de caracteres "1234567890"
+
+import zipfile
+from datetime import datetime
+
+myfile = open("bla.zip", "wb")
+zip = zipfile.ZipFile(myfile, mode="w")
+info = zipfile.ZipInfo()
+info.filename="numbers.txt"
+info.compress_type = zipfile.ZIP_DEFLATED
+info.external_attr = (0644 << 16)
+info.date_time = datetime.now().timetuple()
+zip.writestr(info, "1234567890" * 10000)
+zip.close()
+myfile.close()
+
+}}}

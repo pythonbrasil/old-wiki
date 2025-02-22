@@ -1,0 +1,100 @@
+= Threading Básico =
+
+ * exemplo: join.py:
+  * {{{#!python
+#!/usr/bin/python
+import threading
+import time
+
+class ThreadOne(threading.Thread):
+
+   def run(self):
+
+      print 'Thread', self.getName(), 'started.'
+      time.sleep(5)
+      print 'Thread', self.getName(), 'ended.'
+
+class ThreadTwo(threading.Thread):
+
+   def run (self):
+
+      print 'Thread', self.getName(), 'started.'
+      thingOne.join()
+      print 'Thread', self.getName(), 'ended.'
+
+thingOne = ThreadOne()
+thingOne.start()
+thingTwo = ThreadTwo()
+thingTwo.start()
+}}}
+
+ * exemplo: live.py:
+  * {{{#!python
+#!/usr/bin/python
+import threading
+import time
+
+class TestThread(threading.Thread):
+    def run (self):
+        print 'Patient: Doctor, am I going to die?'
+
+class AnotherThread(TestThread):
+    def run(self):
+        TestThread.run(self)
+        time.sleep (10)
+
+dying = TestThread()
+dying.start()
+
+if dying.isAlive():
+    print 'Doctor: No.'
+else:
+    print 'Doctor: Next!'
+
+living = AnotherThread()
+living.start()
+
+if living.isAlive():
+    print 'Doctor: No.'
+else:
+    print 'Doctor: Next!'
+}}}
+
+ * exemplo: lowlevel.py:
+  * {{{#!python
+#!/usr/bin/python
+import sys
+import thread
+import time
+
+def hi(stuff):
+    print "I'm a real boy!"
+    print stuff
+
+thread.start_new_thread(hi, ('Argument',))
+
+sys.stdout.flush()
+
+time.sleep(3)
+}}}
+
+ * exemplo: named.py:
+  * {{{#!python
+#!/usr/bin/python
+import threading
+
+class TestThread(threading.Thread):
+
+    def run(self):
+        print 'Hello, my name is', self.getName()
+
+cazaril = TestThread()
+cazaril.setName('Cazaril')
+cazaril.start()
+
+ista = TestThread()
+ista.setName('Ista')
+ista.start()
+
+TestThread().start()
+}}}

@@ -1,0 +1,26 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== Artigos ==
+ * [[http://vivaolinux.com.br/dica/Programacao-funcional-em-Python/|ProgramaçãoFuncionalEmPython]]
+
+== Códigos e Dicas ==
+ * GameOfLife - Adaptação do clássico [[http://en.wikipedia.org/wiki/Conway's_Game_of_Life|Conway's Game of Life]] em Python, chamado PyOrganysm.
+ * ArvoreDeBuscaBinaria - Classe que implementa a funcionalidade de uma Árvore de Busca Binária.
+ * MergeSort - Duas funções que combinadas, fazem o [[http://pt.wikipedia.org/wiki/Merge_sort|MergeSort]].
+ * CacheDeMetodos - Classe demonstrando como fazer cache de métodos de forma simples.
+ * InterpretadorBrainFuck - Interpretador da linguagem [[http://pt.wikipedia.org/wiki/Brainfuck|BrainFuck]] escrito em Python.
+ * SenhasAleatorias - Função que gera senhas aleatórias.
+ * TicTacToe - pequeno jogo da velha para terminal.
+
+== Linkografia ==
+ * Tumblr: http://danillosouza.tumblr.com/
+ * Twitter: http://twitter.com/danltmz/
+
+== Contato ==
+ * Email: <<MailTo(danillo012 AT SPAMFREE gmail DOT com)>>
+
+...
+
+----
+CategoryHomepage

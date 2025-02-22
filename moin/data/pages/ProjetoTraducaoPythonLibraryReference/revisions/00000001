@@ -1,0 +1,39 @@
+Pessoal,
+
+Pelo que ando lendo na lista e vejo por ai o maior problema hoje é que muitas pessoas não sabem inglês e portanto perdem toda a documentação das bibliotecas e também os docstrings. O resto do python é muito fácil e muitas coisas podem vir de outras linguagens, como conceito de orientação a objetos e tal... mas é foda o cara conseguir usar as bibliotecas padrão sem entender os exemplos ou as descrições dos comandos, funções, classes e módulos.
+
+O que eu proponho é que analisemos quanto de texto (em palavras?) existe na:
+ * Python Library Reference
+ * Docstrings
+ * Python Language Reference
+
+E caso for viável, criarmos um mutirão de tradução nesta ordem.
+
+Acredito que vá ser um trabalho monstruoso, principalmente para traduzir a Python Library Reference... mas acho que é algo essencial para atingir os que não conseguem ler inglês. 
+
+Poderíamos iniciar o trabalho pelos módulos mais usados e mesmo que fique desatualizado durante um período, é um material que vai estar disponível. Olhando rapidamente eu sugiro começar a tradução de:
+
+|| '''Cap''' || '''Título''' || '''Tradutores Alocados''' ||
+||2 || Built-In Objects || ||
+||4.1 || string || ||
+||4.2 || re || ||
+||5.1 || pydoc || ||
+||5.3 || unittest || ||
+||5.7 || math || ||
+||5.9 || random || ||
+||5.14 || array || ||
+||5.16 || itertools ''(??? talvez nao agora)'' || ||
+||6.1 || os || ||
+||6.2 || os.path || ||
+||6.9 || popen2 || ||
+||6.10 || datetime || ||
+||6.11 || time ||  ||
+||6.20 || getopt ''(??? talvez nao agora)'' || ||
+||6.27 || locale ''(??? talvez nao agora)'' || ||
+||11.4 || urllib || ||
+||11.22 || xmlrpclib || ||
+||11.23 || SimpleXMLRPCServer || ||
+
+Acho que estes, se traduzidos bem, darão um ganho significativo para a comunidade.
+
+Quem quiser pegar algum módulo para traduzir, coloque o nome na frente do módulo.

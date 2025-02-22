@@ -1,0 +1,207 @@
+=== Verificação de Parâmetros de métodos com metaclasses ===
+
+Este exemplo, que acbaou ficnado menos simples do que eu gostaria,
+mostra uma forma de se verificar a compatibilidade de tipos de entrada
+de um método e dos tipos de saída, usando metaclasses, e eespernado
+a descrição desses tipos na docstring do método.
+
+
+Em linhas gerais:
+   * quando a classe é instanciada, o método __new__ de sua meta classe é chamado,
+    com os parâmetros nome (da classe), bases (as superclasses) e um dicionário contendo
+    os atributos de classe. Esses atributos são não só os atributos de dados,
+    mas todos os métodos definidos na classe (lembrando sempre que em python, 
+    um  método ou uma função é um objeto como qualquer outro)
+    
+   *  Esse método então percorre esses atributos da classe e para cada atributo
+    que for "chamável (callable)  - querendo dizer que é um método --  e tem uma
+    docstring defindida, faz uma leitura (parse) dessa docstring procurnado pelo
+    seguinte padrão:
+        """ <nome_do_método> (tipo_parm_1, tipo_parm_2)
+            -> tipo_retorno
+            ...
+        """
+    Sendo que múltiplas linhas começadas com o nome do método, ou com a sequencia "->" 
+    são possíveis para permitir o overloading de tipos de parâmetros, que python usa no
+    lugar de polimorfismo. 
+    Por exemplo:
+        def soma (self, a, b):
+            """soma(int, int)
+               soma(float, float)
+               -> int
+               -> float
+            """
+    Continuando: no caso de um atributo da classe ser um método comuma doc string definindo
+    os tipos de parâmetro ou de retorno, esse método  é substituido por um objeto do tipo
+    "StrongTypedMethod". Esse tipo de objeto é "chamável",q uerendo dizer que ele pode entrar 
+    diretamente no lugar do método - python não vê distinção entre objetos
+    chamáveis e métodos ou funções.
+    Eu crio um novo objeto em vez de uma simples função por que o objeto que entra no lugar do 
+    método tem que saber de forma persistente: quais são os tipos de parâmetros que ele aceita,
+    quais os tipos que ele pode retornar, e qual o objeto que é seu "dono" - por que o parâmetro 
+    que o python passa no "self" para o método, com  esse esquema não é mais passado automaticamente.
+    
+    Adicionalmente então, crio uma lista dos métodos que foram substituidos, e uma nova função 
+    "__new__" para a classe modificada. O objetivo desta função é registrar, em cada um dos 
+    métodos modificados, qual é seu "owner_object" - ou seja, o "self". Faço isso com uma 
+    instância da classe "NewMethodForStrongTyped".
+    
+    Pronto. O núcleo do funcionamento é que a cada chamada de um dos métodos verificados,
+    o método __call__ do objeto StrongTypedMethod correspondente é chamado, e ele
+    verifica os parâmetros de entrada contra a lista que tem armazenada, se estiver Ok,
+    chama o método original, verifica os argumentos de saída (o exemplo dá suporte a
+    retorno de múltiplos objetos numa tupla), e se estiver tudo ok, retorna esses valores.
+    Qualquer tipo de objeto fora da linha causa um TypeError.
+
+{{{
+#!/usr/bin/python
+# coding: utf-8
+
+# AUTHOR: João S. O. Bueno (2009)
+# Copyright: João S. O. Bueno
+# License: LGPL V 3.0
+
+
+""" the StrongTyped  class is designed to worka s a metaclass
+for cases where one could want to raise a type error when methods 
+are called with unexpected parameter types, or return
+unexpected typed results.
+
+It could provide some confort for testing during development for
+people coming from strong typed languages
+
+To use import this module: set StrongTyped as the metaclass for your desired 
+class, and fill in the doc string for method as lined in the "soma" 
+example bellow
+
+"""
+
+#TODO: implement support for keyword arguments or variable arugmetn lenght
+#TODO: Group expected parameter types and return types
+# cuyrrently, any match is good - 
+
+def parse_parms(name, doc):
+    lines = doc.split("\n")
+    parm_types = []
+    return_types = []
+    for line in lines:
+        line = line.strip()
+        if line.startswith(name):
+            #picks the parenthizesd argumetn type list, 
+            # allowing for "#" initiated comments
+            types_expr = line.split(name)[1].split("#")[0]
+            parm_types.append(eval(types_expr))
+        elif line.startswith("->"):
+            #return_types
+            types_expr = line.split("->")[1].split("#")[0]
+            return_types.append(eval(types_expr))
+        elif line and not line.startswith("#"):
+            # if not a blank or "comment" line, then it
+            # is the end of the parameter checking session
+            break
+    return parm_types, return_types
+    
+class StrongTypedMethod(object):
+    def __init__(self, method, parm_types, return_types):
+        self.method = method
+        self.parm_types = parm_types
+        self.return_types = return_types
+        self.owner_object = None
+    
+    
+    def verify_signatures(self, arguments, signatures):
+        # verifies if given parametes or result tuple equals one
+        # of the registered signatures for the method
+        if not isinstance(arguments, tuple):
+            arguments = (arguments,)
+        for signature in signatures:
+            if not isinstance(signature, tuple):
+                signature = (signature,)
+            if len(signature) != len(arguments):
+                continue
+            this_signature_ok = True
+            for result, expected_type in zip(arguments, signature):
+                if not isinstance(result, expected_type):
+                    this_signature_ok = False
+            if this_signature_ok:
+                return True
+        return False
+    
+    # TODO: implement support for keyword arguments
+    def __call__(self, *args):
+        if self.owner_object is None:
+            owner_object = args[0]
+            args = args[1:]
+        else:
+            owner_object = self.owner_object
+        if not self.verify_signatures(args, self.parm_types):
+            raise TypeError ("""Method %s called with incorrect parameters types.
+                                Expected one of:\n %s\n\ngot: \n%s\n""" %
+                             (self.method.__name__, str(self.parm_types), str(args))
+                            )
+        results = self.method(owner_object, *args)
+        if not self.verify_signatures(results, self.return_types):
+            raise TypeError ("""Method %s returned incorrect  types.
+                             Expected one of:\n %s\n\ngot: \n%s\n""" %
+                             (self.method.__name__, str(self.return_types), str(results))
+                            )
+        return results
+
+class NewMethodForStrongTyped(object):
+    def __init__(self, method_list, original__new__):
+        self.method_list = method_list
+        self.original__new__ = original__new__
+    def __call__(self, cls, *args, **kwargs):
+        if self.original__new__:
+            obj = self.original__new__(cls, *args, **kwargs)
+        else:
+            #warning: "super" didnṫ work here - possible bug could issue from this construct:
+            obj = cls.__bases__[0].__new__(cls, *args, **kwargs)
+        for method in self.method_list:
+            m = getattr(obj, method)
+            m.owner_object = obj
+        return obj
+    
+
+class StrongTyped(type):
+    def __new__(cls, name, bases, dct):
+        changed_methods = []
+        for attr, method in dct.items():
+            if not hasattr(method, "__call__"):
+                continue
+            if not method.__doc__:
+                continue
+            if attr == "__new__": 
+                continue
+            parm_types, return_types = parse_parms(attr, method.__doc__)
+            if not parm_types and not return_types:
+                continue
+            dct[attr] = StrongTypedMethod(method, parm_types, return_types)
+            changed_methods.append(attr)
+        if changed_methods:
+            dct["__new__"] = NewMethodForStrongTyped(changed_methods, dct.get("__new__", None))
+        return  type.__new__(cls, name, bases, dct)
+            
+            
+    
+class Testing(object):
+    __metaclass__ = StrongTyped
+    def soma(self, a, b):
+        """ soma(int, int)
+            soma(float, float)
+            -> int
+            -> float
+        """
+        return a + b
+if __name__ == "__main__":
+    t = Testing()
+    print t.soma(5, 10)
+    print t.soma(5.0 , 10.0)
+    try:
+        print t.soma("ban", "ana")
+    except TypeError, error:
+        print "Soma de strings falhou como esperado:\n %s" % error
+
+}}}
+
+CookBook

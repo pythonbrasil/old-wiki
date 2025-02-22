@@ -1,0 +1,128 @@
+Catálogos para traduzir o [http://www.pygtk.org/tutorial.html Tutorial PyGTK 2.x].
+
+Os arquivos estão hospedados no [http://pygtk-br.googlecode.com/svn/ servidor SVN] do [http://code.google.com/p/pygtk-br/ projeto de tradução], no Google Code.
+
+Para criar uma cópia local execute o seguinte comando:
+{{{
+svn checkout http://pygtk-br.googlecode.com/svn/trunk/ pygtk-br
+}}}
+
+Interessado em ajudar? Participe do nosso [http://groups.google.com.br/group/pygtk-br?hl=pt-BR grupo PyGTK-BR] e peça o seu registro no SVN.
+
+
+'''''Observação:''' Os arquivos usam codificação UTF-8.''
+
+== Catálogos ==
+[[TableOfContents]]
+
+=== Índice ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/pygtk2-tut.HEAD.pt_BR.po pygtk2-tut] || 100% || LuizArmesto || Concluído ||
+=== Capítulo 1 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/Introduction.HEAD.pt_BR.po Introduction] || 100% || MayronCachina || Concluído ||
+=== Capítulo 2 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/GettingStarted.HEAD.pt_BR.po GettingStarted] || 51% || EliezerRiani || Traduzindo ||
+=== Capítulo 3 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/MovingOn.HEAD.pt_BR.po MovingOn] || 44% || DanielCassiano || Traduzindo ||
+=== Capítulo 4 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/PackingWidgets.HEAD.pt_BR.po PackingWidgets] || 14% || IgorMontagner || Traduzindo ||
+=== Capítulo 5 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/WidgetOverview.HEAD.pt_BR.po WidgetOverview] || 0% || LeonardoAndrade || Traduzindo ||
+=== Capítulo 6 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/files/ButtonWidget.HEAD.pt_BR.po ButtonWidget] || 100% || MarceloAndrade || Concluído  ||
+=== Capítulo 7 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/Adjustments.HEAD.pt_BR.po Adjustments] || 0% ||   ||  ||
+=== Capítulo 8 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/RangeWidgets.HEAD.pt_BR.po RangeWidgets] || 0% ||  ||  ||
+=== Capítulo 9 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/MiscellaneousWidgets.HEAD.pt_BR.po MiscellaneousWidgets] || 0% || MarceloAndrade || Traduzindo ||
+=== Capítulo 10 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/ContainerWidgets.HEAD.pt_BR.po ContainerWidgets] || 0% ||  ||  ||
+=== Capítulo 11 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/MenuWidget.HEAD.pt_BR.po MenuWidget] || 0% ||  ||  ||
+=== Capítulo 12 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/DrawingArea.HEAD.pt_BR.po DrawingArea] || 0% ||  ||  ||
+=== Capítulo 13 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/TextViewWidget.HEAD.pt_BR.po TextViewWidget] || 0% ||  ||  ||
+=== Capítulo 14 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/TreeViewWidget.HEAD.pt_BR.po TreeViewWidget] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/TreeModel.HEAD.pt_BR.po TreeModel] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/GenericTreeModel.HEAD.pt_BR.po GenericTreeModel] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/GenericCellRenderer.HEAD.pt_BR.po GenericCellRenderer] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/CellRenderers.HEAD.pt_BR.po CellRenderers] || 0% ||  ||  ||
+=== Capítulo 15 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/NewWidgetsAndObjects.HEAD.pt_BR.po NewWidgetsAndObjects] || 0% ||  ||  ||
+=== Capítulo 16 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/NewInPyGTK24.HEAD.pt_BR.po NewInPyGTK24] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/UIManager.HEAD.pt_BR.po UIManager] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/FileChooser.HEAD.pt_BR.po FileChooser] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/ExpanderWidget.HEAD.pt_BR.po ExpanderWidget] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/EntryCompletion.HEAD.pt_BR.po EntryCompletion] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/ComboBoxAndComboBoxEntry.HEAD.pt_BR.po ComboBoxAndComboBoxEntry] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/ColorButtonAndFontButton.HEAD.pt_BR.po ColorButtonAndFontButton] || 0% ||  ||  ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/ActionsAndActionGroups.HEAD.pt_BR.po ActionsAndActionGroups] || 0% ||  ||  ||
+=== Capítulo 17 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/UndocumentedWidgets.HEAD.pt_BR.po UndocumentedWidgets] || 0% ||  ||  ||
+=== Capítulo 18 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/SettingWidgetAttributes.HEAD.pt_BR.po SettingWidgetAttributes] || 0% ||  ||  ||
+=== Capítulo 19 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/TimeoutsIOAndIdleFunctions.HEAD.pt_BR.po TimeoutsIOAndIdleFunctions] || 0% ||  ||  ||
+=== Capítulo 20 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/AdvancedEventAndSignalHandling.HEAD.pt_BR.po AdvancedEventAndSignalHandling] || 0% ||  ||  ||
+=== Capítulo 21 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/ManagingSelections.HEAD.pt_BR.po ManagingSelections] || 0% ||  ||  ||
+=== Capítulo 22 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/DragAndDrop.HEAD.pt_BR.po DragAndDrop] || 0% ||  ||  ||
+=== Capítulo 23 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/GtkRcFiles.HEAD.pt_BR.po GtkRcFiles] || 0% ||  ||  ||
+=== Capítulo 24 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/Scribble.HEAD.pt_BR.po Scribble] || 0% ||  ||  ||
+=== Capítulo 25 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/TipsForWritingPygtkApplications.HEAD.pt_BR.po TipsForWritingPygtkApplications] || 0% ||  ||  ||
+=== Capítulo 26 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/Contributing.HEAD.pt_BR.po Contributing] || 0% ||  ||  ||
+=== Capítulo 27 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/Credits.HEAD.pt_BR.po Credits] || 0% ||  ||  ||
+=== Capítulo 28 ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/Copyright.HEAD.pt_BR.po Copyright] || 0% ||  ||  ||
+=== Apêndice A ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/GtkSignals.HEAD.pt_BR.po GtkSignals] || 0% ||  ||  ||
+=== Apêndice B ===
+|| Catálogo || Traduzido || Tradutor || Estado ||
+|| [http://pygtk-br.googlecode.com/svn/trunk/po/CodeExamples.HEAD.pt_BR.po CodeExamples] || 0% ||  ||  ||
+
+
+== Legenda ==
+ * '''Concluído''': A tradução do catálogo está completa;
+ * '''Revisando''': Alguém pegou o catálogo para procurar por erros;
+ * '''Traduzindo''': Alguém já está trabalhando nesse catálogo, escolha outro ou entre em contato com o tradutor;
+ * '''Convertendo''': A tradução foi feita em outro formato e está sendo convertida para o catálogo.

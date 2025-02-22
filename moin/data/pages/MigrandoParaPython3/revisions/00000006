@@ -1,0 +1,62 @@
+#pragma section-numbers off
+[[TableOfContents]]
+
+= Migrando Para Python 3 =
+
+Está sendo desenvolvida a versão 3.0 de Python, que quebra a [http://en.wikipedia.org/wiki/Backwards_compatibility ''backward compatibility''] (ou [http://en.wikipedia.org/wiki/Backwards_compatibility ''compatibilidade reversa''], mas há termos que a tradução é horrivel...). 
+
+Esse artigo não tentará convencê-lo da necessidade nem da importância dessa manobra -- apenas como estar pronto para migrar para ela.
+
+== Antes de tudo ==
+
+Esteja preparado para o futuro. Muitas mudanças são para eliminar alternativas menos óbvias de se fazer algo; outras são remoção de detalhes cujo uso foi desestimulado devido à introdução de novas caracteristicas; outras são simplemente funcionalidades já acessiveis atravez de {{{from __future__ import ...}}} - apenas algumas mudanças serão na semântica da linguagem ou na sintaxe - logo, muito do que você escreve hoje não mudará, se você for '''Pythonico''' suficiênte.
+Veja mais na wiki do python.org: [http://wiki.python.org/moin/FutureProofPython FutureProofPython].
+
+== O plano ==
+
+Em seu [http://www.artima.com/weblogs/viewpost.jsp?thread=208549 "status update"] ([http://lambdaspace.wordpress.com/2007/06/20/atualizacao-da-situacao-do-python-3000-longo-python-3000-status-update-long/ tradução]), GuidoVanRossum delineou o seguinte plano:
+
+{{{
+0. Comece com excelentes testes de unidade (unit tests), o mais próximo possível de cobrir todas as possibilidades.
+1. Porte o projeto para o Python 2.6.
+2. Ative o modo de alertas do Py3k (Py3k warnings mode).
+3. Teste e modifique até que nenhum alerta permaneça.
+4. Use a ferramente 2to3 para converter o código-fonte para a sintaxe da versão 3.0 (Nâo edite manualmente a saída!!!).
+5. Teste o código convertido sob a versão 3.0.
+6. Se problemas forem achados, faça correções para a versão 2.6 do código-fonte e volte ao passo 3.
+7. Quando for lançar, lançe tarballs separados da versão para 2.6 e para 3.0 (ou qualquer outra forma de arquivar que você use para releases)
+}}}
+
+A intenção desse artigo é detalhar um pouco esse plano.
+
+=== Testes de Unidade (passo 0) ===
+
+Testes Automatizados (ou Testes de Unidade), são extremamente uteis, em qualquer refactoring (''reajuste'') do seu código. Pense nele como uma ''rede de segurança''. Testes também servem como um tipo de especificação '''realmente''' funcional.
+
+''Isso significa que não vou migrar se não escrever testes?'' -- Você pode tentar, mas será muito mais dificil saber se tudo continua funcionando depois. Lembre-se que isso o ajudará em ''qualquer'' adaptação do seu código.
+
+Python provê duas ferramentas para facilitar a escrita de testes: unittest e doctests. Há varias outras alternativas.
+
+Veja também: TddFaq, TestDrivenDevelopment
+
+=== Portando para 2.6 e os alertas de compatibilidade com 3.0 (passos 1, 2, 3) ===
+
+Portar um código de Python 2.5 para 2.6 deverá ser tão facil (ou tão dificil, [http://www.google.com.br/search?q=define:YMMV&hl=en&safe=off&oi=definel&defl=pt YMMV]) quanto portar, por exemplo, da versão 2.4 para 2.5. Entre essas versões não são esperadas mudanças retroativamente incompatíveis.
+
+A migração para 2.6 é um passo importante, pois a 2.6 -- e as futuras da série 2.x -- serão uma espécie de ponte para a versão 3.0. Algumas funcionalidades novas em 3.0 estarão lado a lado com as funcionalidades antigas em 2.6. Outras formas que serão retiradas na versão 3.0, quando usadas em Python 2.6 rodando com a opção correta, farão seu programa emitir [http://docs.python.org/lib/module-warnings.html Warnings], avisando quando algo terá que ser alterado para funcionar na proxima versão. Rode seus testes com esses Warnings, corrija o que ele informar e rode os testes novamente, até que não apareçam mais Warnings e de forma, é claro, que seus testes ainda rodem com sucesso.
+
+Pronto, seu programa funciona em Python 2.6, e o que você podia fazer para torna-lo mais proximo de funcionar em 3.0 foi feito. Mas não espere que ele rode em 3.0: mesmo na versão 2.6 ou posteriores, '''não há sequer um sub conjunto util''' de funcionalidades que funcionarão também em Python 3.0. 
+
+A proxima pedra da ponte entre as versões 2.x e 3 é a ferramenta de conversão '''2to3'''.
+
+=== Conversão automática com 2to3, testes e refatorações (passos 4, 5 e 6) ===
+
+=== Mantendo o projeto daqui pra frente (passo 7) ===
+
+== Saiba Mais ==
+
+[http://jessenoller.com/python-3000-resources/ Python 3000 resources page]
+
+[http://www.google.com/coop/cse?cx=016836574195312348315:7nmhekquzxm Site de busca sobre Python 3000]
+
+[http://www.python.org/dev/peps/ Propostas de melhoria (PEPs)] -- As sobre Python 3.0 são as numeradas >= 3000

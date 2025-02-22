@@ -1,0 +1,274 @@
+#pragma section-numbers off
+= wxGrid com PyGridTableBase =
+
+A wxGrid (da biblioteca [http://www.wxpython.org wxPython]) nos fornece um método chamado {{{SetTable()}}} que permite a indicação de um objeto que será responsável pela origem dos dados mostrados na grade. A idéia disso é que você mesmo possa criar seus próprios data sources, tomando como base uma classe e só substituindo determinados métodos. Adaptando esses métodos aos nossos dados podemos fazer com que listas, dicionários ou quaisquer outros objetos possam ser mostrados na grade. Aqui mostrarei como uma lista de objetos (estes criados a partir de uma classe genérica) e um {{{ADODB.Recordset}}} podem ser exibidos em uma {{{wxGrid}}}. No caso em questão devemos fazer uma subclasse de {{{PyGridTableBase}}} substituindo apenas os métodos:
+
+   * {{{GetNumberRows()}}} - quantidade de linhas
+   * {{{GetNumberCols()}}} - quantidade de colunas
+   * {{{GetValue(linha, coluna)}}} - retorna o valor de uma certa célula
+   * {{{SetValue(linha, coluna)}}} - define o valor de uma certa célula
+
+É importante notar que os métodos trabalham somente com coordenadas, daí decorre a necessidade de "adaptá-los" aos nossos dados. Imaginemos um classe genérica, chamada {{{Cliente}}}, com apenas dois atributos (codigo e nome). Se criarmos uma lista com 3 desses objetos já temos em mente que {{{GetNumberRows()}}} deverá justamente retornar 3 (ou seja, a quantidade de elementos de uma lista, que obtemos através da função {{{len()}}}). Em suma, cada elemento da lista será uma "linha" da grade. Isso é simples porque as listas já são indexadas por inteiros, exemplo:
+
+{{{
+#!python
+c1 = Cliente()
+c1.codigo = 1001
+c1.nome = 'Teste1'
+
+c2 = Cliente()
+c2.codigo = 1002
+c2.nome = 'Teste2'
+
+c3 = Cliente()
+c3.codigo = 1003
+c3.nome = 'Teste3'
+
+clientes = [c1, c2, c3]
+
+print clientes[0] #Primeiro cliente
+print clientes[1] #Segundo cliente
+print clientes[2] #Terceiro cliente
+}}}
+
+Pois bem, um método já está resolvido. Vamos pular o segundo da lista ({{{GetNumberCols()}}}) e dirigir nossa atenção ao método {{{GetValue()}}}. Esse método só recebe dois inteiros, um especificando a linha e outro especificando a coluna, e deve retornar o valor correspondente. No caso das listas, a linha corresponde a posição do elemento dentro da mesma (como no exemplo acima). Mas, e a "coluna"? A coluna 0 deverá ser o atributo 'codigo' e a coluna 1 o atributo 'nome'. Podemos então imaginar que...
+
+{{{
+#!python
+print clientes[0].codigo
+print clientes[0].nome
+
+print clientes[1].codigo
+print clientes[1].nome
+}}}
+
+... deverá ser equivalente a...
+
+{{{
+#!python
+print clientes[0][0]
+print clientes[0][1]
+
+print clientes[1][0]
+print clientes[1][1]
+}}}
+
+... para que ao chamar {{{GetValue(0, 1)}}}, por exemplo, o retorno seja 'Teste1'.
+
+Como fazer isso de uma forma simples e que não tenhamos de explicitar os valores respectivos a cada atributo? Todos sabem que podemos emular contêineres (iguais as listas) em classes, através de certos métodos de nomes especiais. No nosso caso, usaremos os métodos {{{__getitem__()}}} e {{{__setitem__()}}}, que respectivamente, retornam e definem um item do nosso contêiner. Portanto, ao fazermos...
+
+{{{
+#!python
+print c1[0]
+}}}
+
+... estaremos na verdade chamando o método {{{__getitem__()}}}, da seguinte maneira:
+
+{{{
+#!python
+print c1.__getitem__(0)
+}}}
+
+O mesmo vale para {{{__setitem__()}}}. É sabido também que os atributos de um objeto ficam contidos em um dicionário dentro do próprio. Se fizermos...
+
+{{{
+#!python
+print c1.__dict__
+}}}
+
+... obteremos o seguinte:
+
+{{{
+#!python
+{'codigo': 1001, 'nome': 'Teste1'}
+}}}
+
+Que nada mais é do que um dicionário. Através do método {{{keys()}}} de um dicionário, obtemos uma lista com suas chaves:
+
+{{{
+#!python
+print c1.__dict__.keys()
+}}}
+
+O que retornará: {{{['codigo', 'nome']}}}. Portanto, ao fazermos...
+
+{{{
+#!python
+print c1.__dict__[c1.__dict__.keys()[1]]
+}}}
+
+... estamos fazendo a mesma coisa que:
+
+{{{
+#!python
+print c1.nome
+}}}
+
+''Você está considerando que as chaves de um dicionário em Python não garantem ordem? Acho que pro seu exemplo isso funciona, mas no caso de outros nomes de atributos a tua idéia não irá funcionar corretamente... Estou correto? -- OsvaldoSantanaNeto''
+
+A diferença é que não foi necessário informar o nome do atributo, mas sim apenas o valor correspondente a posição dele dentro da lista de chaves do dicionário.
+
+A essa altura já temos a resposta de como obter {{{GetNumberCols()}}}: basta saber a quantidade de elementos existentes na lista retornada pelo método {{{keys()}}} do dicionário (que no nosso caso é 2). Como ficaria então a nossa classe para obedecer tanto a requisição de valores dos atributos por nome (c1.nome) ou por índice (c1[1])? Segue a implementação da classe {{{Cliente}}} (não me preocupei em detectar as exceções que podem vir a surgir nesses métodos, já que este é apenas um exemplo):
+
+{{{
+#!python
+class Cliente:
+  def __getitem__(self, chave):
+    nchave = self.__dict__.keys()[chave]
+    return self.__dict__[nchave]
+
+  def __setitem__(self, chave, valor):
+    nchave = self.__dict__.keys()[chave]
+    self.__dict__[nchave] = valor
+}}}
+
+Os objetos criados a partir dessa classe podem ter seus atributos obtidos de ambas as formas (pelo nome do atributo ou pelo índice do mesmo). Com isso já temos a possibilidade de implementar a subclasse de {{{PyGridTableBase}}}, já que agora temos uma forma de acessar nossos dados utilizando-se apenas de coordenadas (linhas e colunas). Segue a subclasse:
+
+{{{
+#!python
+import wx.grid
+
+class DataSource(wx.grid.PyGridTableBase):
+  def __init__(self, dados):
+    wx.grid.PyGridTableBase.__init__(self)
+    self._dados = dados
+  def GetNumberRows(self):
+    return len(self._dados)
+  def GetNumberCols(self):
+    if len(self._dados)>0:
+      return len(self._dados[0].__dict__.keys())
+    else:
+      return 0
+  def GetValue(self, linha, coluna):
+    return self._dados[linha][coluna]
+  def SetValue(self, linha, coluna, valor):
+    self._dados[linha][coluna] = valor
+}}}
+
+Repare que o atributo {{{_dados}}} refere-se a nossa lista original do lado de fora (que no nosso caso, é clientes). O número de linhas é obtido com {{{len()}}} da nossa lista (quantidade de elementos == quantidade de linhas na grade). O número de colunas é obtido com {{{len()}}} da lista de chaves do dicionário do primeiro elemento da nossa lista; se a lista estiver vazia, o retorno é 0). {{{GetValue()}}} e {{{SetValue()}}} simplesmente acessam o objeto utilizando-se das coordenadas. Um exemplo completo (incluindo as classes acima):
+ 
+{{{
+#!python
+import wx
+import wx.grid
+
+class Cliente:
+  def __getitem__(self, chave):
+    nchave = self.__dict__.keys()[chave]
+    return self.__dict__[nchave]
+
+  def __setitem__(self, chave, valor):
+    nchave = self.__dict__.keys()[chave]
+    self.__dict__[nchave] = valor
+
+class DataSource(wx.grid.PyGridTableBase):
+  def __init__(self, dados):
+    wx.grid.PyGridTableBase.__init__(self)
+    self._dados = dados
+  def GetNumberRows(self):
+    return len(self._dados)
+  def GetNumberCols(self):
+    if len(self._dados)>0:
+      return len(self._dados[0].__dict__.keys())
+    else:
+      return 0
+  def GetValue(self, linha, coluna):
+    return self._dados[linha][coluna]
+  def SetValue(self, linha, coluna, valor):
+    self._dados[linha][coluna] = valor
+
+c1 = Cliente()
+c1.codigo = 1001
+c1.nome = 'Teste1'
+
+c2 = Cliente()
+c2.codigo = 1002
+c2.nome = 'Teste2'
+
+c3 = Cliente()
+c3.codigo = 1003
+c3.nome = 'Teste3'
+
+clientes = [c1, c2, c3]
+
+class Aplicacao(wx.App):
+  def __init__(self):
+    wx.App.__init__(self)
+    janela = wx.Frame(parent=None, id=-1, title='Grid de uma lista de objetos')
+
+    dados = DataSource(clientes)
+
+    grade = wx.grid.Grid(parent=janela, id=-1)
+    grade.SetTable(dados)
+    janela.Show(True)
+    self.SetTopWindow(janela)
+
+  def OnInit(self): #Necessário para um objeto wx.App
+    return True
+
+app = Aplicacao()
+app.MainLoop()
+}}}
+
+Basta colocar o código acima em um módulo e executá-lo. É claro que o quê colocamos nos métodos {{{__getitem__()}}} e {{{__setitem__()}}} da classe {{{Cliente}}}, poderia muito bem estar diretamente nos métodos {{{GetValue()}}} e {{{SetValue()}}}. Poderíamos ainda simplesmente implementá-los em uma outra classe e apenas herdá-los na classe {{{Cliente}}}.
+
+Agora, vamos adaptar um {{{ADODB.Recordset}}} à classe {{{DataSource}}} do mesmo jeito que fizemos com uma lista de objetos. Um objeto {{{ADODB.Recordset}}} fica até mais fácil de ajustar à classe, já que ele fornece tudo de que precisamos. Através da propriedade {{{RecordCount}}} já sabemos quantos registros existem (ou seja, o nosso {{{GetNumberRows()}}}); pela propriedade {{{Count}}} do objetos {{{Fields}}} do {{{Recordset}}} já sabemos a quantidade de campos (o {{{GetNumberCols()}}}); pela propriedade {{{AbsolutePosition}}} temos como definir a posição do registro atualmente selecionado (a nossa "linha"); e, finalmente, não precisamos nos preocupar com o fato de que a nossa "coluna" é um inteiro, já que um {{{ADODB.Recordset}}} aceita tanto um inteiro quanto uma string com o nome do campo para representar uma coluna. Abaixo segue o exemplo completo:
+
+{{{
+#!python
+import wx.grid
+import wx
+import win32com.client
+
+class DataSource(wx.grid.PyGridTableBase):
+  def __init__(self, dados):
+    wx.grid.PyGridTableBase.__init__(self)
+    self._dados = dados
+  def GetNumberRows(self):
+    return self._dados.RecordCount
+  def GetNumberCols(self):
+    return self._dados.Fields.Count
+  def GetValue(self, linha, coluna):
+    self._dados.AbsolutePosition = linha+1
+    return self._dados.Fields[coluna].Value
+  def SetValue(self, linha, coluna, valor):
+    self._dados.AbsolutePosition = linha+1
+    self._dados.Fields[coluna].Value = valor
+
+cn = win32com.client.Dispatch('ADODB.Connection')
+rs = win32com.client.Dispatch('ADODB.Recordset')
+
+cn.Open('Provider=Microsoft.Jet.OLEDB.4.0;Data Source=bd1.mdb')
+rs.CursorLocation = 3 #adUseClient=3
+rs.Open('SELECT * FROM cadastro', cn, 2, 3) #adOpenDynamic=2, adLockOptimistic=3
+
+class Aplicacao(wx.App):
+  def __init__(self):
+    wx.App.__init__(self)
+    janela = wx.Frame(parent=None, id=-1, title='Grid de um ADODB.Recordset')
+
+    dados = DataSource(rs)
+
+    grade = wx.grid.Grid(parent=janela, id=-1)
+    grade.SetTable(dados)
+    janela.Show(True)
+    self.SetTopWindow(janela)
+
+  def OnInit(self):
+    return True
+
+app = Aplicacao()
+app.MainLoop()
+
+rs.Close()
+cn.Close()
+}}}
+
+A única observação a ser feita é em relação a posição do registro ({{{.AbsolutePosition = linha+1}}}) onde se deve somar 1 à linha informada pela função. Isso decorre do fato de que o ADO começa a contagem dos registros a partir de 1 e não de 0. Para os campos isso não é necessário ({{{.Fields[coluna].Value}}}) já que nesse caso a contagem realmente começa de 0.
+
+Bom, esse foi o tutorial explicando como usar um {{{PyGridTableBase}}} para definir os dados que serão exibidos em uma {{{wxGrid}}}. Creio que a partir dos exemplos aqui mostrados você seja capaz de criar seus próprios data sources para seus próprios dados. Aliás, essa é a principal vantagem desse modo de desenvolvimento: uma vez que você sabe que só precisa de umas poucas informações a respeito dos dados envolvidos, basta fornecê-los e a classe lida com o resto, permitindo que você utilize qualquer tipo de armazenamento.
+Espero que tenha sido proveitoso e útil para quem estava procurando por algo a respeito ou para quem já imaginava que deveria haver uma forma de fazer isso. Quaisquer dúvidas, comentários ou sugestões são mui bem apreciadas por parte do autor, que pode ser contatado através do endereço: washingtonj (at) openlink (ponto) com.br. Happy Pythonnin'!
+
+----
+
+Washington Coutinho Corrêa Junior

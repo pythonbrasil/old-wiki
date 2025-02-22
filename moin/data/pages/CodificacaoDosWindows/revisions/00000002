@@ -1,0 +1,63 @@
+A codificação padrão para impressão de texto no "Prompt de comando"
+do DOS das plataformas Microsoft Windows é "# coding: cp850" incluído
+no início do bloco de código.
+
+Por exemplo:
+
+{{{
+#!python
+# coding: cp850
+ar = raw_input('áéíóúäããù')
+# áéíóúäããù
+}}}
+
+Abaixo algumas saídas erradas com outras codificações:
+
+{{{
+#!python
+# coding: iso-8859-1
+ar = raw_input('áéíóúäããù')
+# ßÚÝ¾·õÒÒ¨
+}}}
+
+{{{
+#!python
+# coding: utf-8
+ar = raw_input('áéíóúäããù')
+# ├í├®├¡├│├║├ñ├ú├ú├╣ 
+}}}
+
+Para entrada por linha-de-comando, o DOS utiliza (sem nenhuma razão explicável) outro tipo de codificação, que é a windows-1252.
+
+Por exemplo:
+
+{{{
+#!python
+# coding: cp850 ou coding: utf-8
+import sys
+er = sys.argv[1]
+ar = er.decode('windows-1252')
+print ar
+
+# C:\Python24>python codif.py áéíóúäããù
+# áéíóúäããù
+}}}
+
+Abaixo a saída errada com a codificação padrão de texto do DOS:
+
+{{{
+#!python
+# coding: cp850 ou coding: utf-8
+import sys
+er = sys.argv[1]
+ar = er.decode('cp850')
+print ar
+
+# C:\Python24>python codif.py áéäãâ
+# ßÚõÒÔ
+}}}
+
+Obs.: A codificação é a mesma para o texto e para linha-de-comando em todas as plataformas em Linux.
+
+----
+LeonardoGregianin

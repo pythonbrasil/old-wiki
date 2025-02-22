@@ -1,0 +1,65 @@
+#pragma section-numbers off
+= Hospedagem Python =
+
+Compilação de empresas de hospedagem web que suportam Python.
+
+''Existe a necessidade das colunas: Indicado por; Última verificação; Contato ?''
+
+== Brasileiras ==
+
+||'''Link'''||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+||[[http://www.ativahost.com|AtivaHost]] || Python 2.3.x || Python CGI || Disponível nos planos de hospedagem Linux ||
+||[[http://www.tehospedo.com.br/hospedagem_de_sites_django|TeHospedo]]|| Python 2.4.x e 2.5.x || Django versões 0.96 e SVN com FastCGI || Hospedagem profissional com tecnologia especial para desenvolvedores ||
+||[[http://www.pytown.com|Pytown]]||  || Planos compartilhados, servidores virtuais e dedicados || Hospedagem especializada em sites Python, Zope, Plone e DJango ||
+||[[http://www.hostnet.com.br|hostnet]]|| || || Somente nos planos PERL e PHP+PERL ||
+||[[http://www.matrix.com.br/|matrix]]||  || || ||
+||[[http://www.nt10.com.br/hospedagem/index.html|nt10]]||  || || ||
+||[[http://www.locaweb.com.br|LocaWeb]] || 1.5, 2.2 em modo CGI || || Tem acesso SSH, mas, não tem acesso ao Shell do Python ||
+||[[http://hospedagem.hostmidia.com.br/members.php?page=planos|HostMídia]] || 1.5.2 || || ||
+||[[http://www.insite.com.br/planos/|Insite]] || || || Possui Zope e Plone ||
+||[[http://www.byhost.com.br/|Byhost]]|| 2.2.3-6 || || ||
+||[[http://www.sitehosting.com.br|Sitehosting]]|| 2.2.3 || || Nos planos de hospedagem Linux ||
+||[[http://www.kitbr.com/|Kitbr]] || 2.3 || mod_python || ||
+||[[http://www.virtuaserver.com.br/|VirtuaServer]] || customizavel || customizavel || Maquina dedicada, total controle, senha de root ||
+||[[http://www.maxihost.com.br/|MaxiHost]] || 2.3.4 || || Possui Zope e Plone ||
+||[[http://www.insidehost.com.br/|Inside Host]] ||  || || Todos os Planos Linux ||
+||[[http://www.regs.com.br/|REGs]] || 2.4  || mod_python || Todos os Planos Linux ||
+== Estrangeiras ==
+
+|| '''Link''' ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [[http://www.site5.com|Site5]] || 2.2.2 || || ||
+|| [[http://www.dreamhost.com/|DreamHost]] || 2.3 e 2.4 || MySQLdb, FastCGI || Aceita CheryPy, TurboGears em modo FastCGI ||
+|| [[http://www.webfaction.com|WebFaction]] || 2.3 e 2.4 || apache2, mod_python 3.2, plone, django, turbogears || barato, $7.50/month ||
+
+
+== Gratuitas ==
+
+|| '''Link''' ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [[http://www.objectis.org/|Objectis]] ||  ||Zope, Plone, Plone2 e uma grande variedade de produtos Zope || Exclusivo para sites não comerciais ||
+|| [[http://www.freezope.org/|Freezope]] ||  || Zope e alguns produtos || Exclusivo para sites não comerciais ||
+
+== Script de Teste ==
+
+Quem tiver acesso a estes provedores tente verificar a exata versão do python, e se possui modulos extras. Segue código de exemplo (convencionei chama-lo de {{{PythonInfo.py}}}) para verificar a versão e talvez as bibliotecas:
+
+{{{
+#!python
+#!/usr/bin/env python
+# Não esqueçam de colocar no diretório para cgi e dar
+# direito de execução
+
+import sys
+
+print 'Content-type: text/plain\n'
+print sys.version
+print '\nPath das bibliotecas:'
+print '\n'.join(sys.path)
+}}}
+
+----
+
+JuracyFilho
+
+RicardoNiederberger
+
+WashingtonCoutinhoCorrêaJr

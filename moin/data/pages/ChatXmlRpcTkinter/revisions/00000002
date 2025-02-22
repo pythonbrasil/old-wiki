@@ -1,0 +1,95 @@
+= Chat usando XmlRpc e Tkinter =
+
+Nesse cookbook, eu demonstro a implementação de um Chat bem simples utilizando XmlRpc e Tkinter como interface gráfica.
+
+Lembrando que esse é apenas um exemplo de uso do XmlRpc e que o XmlRpc não é o melhor protocolo para implementar-se um chat.
+
+== Servidor ==
+
+{{{
+#!python
+
+import SimpleXMLRPCServer
+
+msg = ''
+
+class Chat(object):
+
+    def send(self, m):
+        global msg
+        msg += m
+        
+    def get(self):
+        global msg
+        return msg
+        
+
+server = SimpleXMLRPCServer.SimpleXMLRPCServer(("localhost", 8888))
+server.register_instance(Chat())
+
+server.serve_forever()
+}}}
+
+== Cliente ==
+
+{{{
+#!python
+import xmlrpclib
+from Tkinter import *
+
+class App:
+    
+    def __init__(self, master):
+        
+        self.master = master
+        
+        self.server = xmlrpclib.ServerProxy("http://localhost:8888")
+        
+        frame = Frame(master)
+        frame.pack()
+        
+        self.nick_label = Label(frame, text="Nick: ")
+        self.nick_label.grid(row=0, sticky=W)
+        
+        self.nick = Entry(frame)
+        self.nick.grid(row=0, column=1, columnspan=2, sticky=W+E)
+        
+        self.text = Text(frame)
+        self.text.grid(row=1, columnspan=3, sticky=W)
+        
+        self.msg = Label(frame, text='Mensagem: ')
+        self.msg.grid(row=2, sticky=W)
+        
+        self.entry = Entry(frame)
+        self.entry.grid(row=2, column=1, sticky=W+E)
+        
+        self.enviar = Button(frame, text="Enviar", command=self.enviar_mensagem)
+        self.enviar.grid(row=2, column=2, sticky=E)
+        
+        self.master.after(500, self.oi)
+
+        
+    def enviar_mensagem(self):
+        print self.entry.get()
+        text = '>>%s: %s \n' % (self.nick.get(), self.entry.get())
+        self.server.send(text)
+
+        
+    def oi(self):
+        self.master.after(500, self.oi)
+        self.text.delete(1.0, END)
+        self.text.insert(END, self.server.get())        
+        
+
+
+root = Tk()
+
+app = App(root)
+
+root.mainloop()
+}}}
+
+Volta para CookBook
+
+----
+AndrewsMedina

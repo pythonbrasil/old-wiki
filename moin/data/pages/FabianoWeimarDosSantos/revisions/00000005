@@ -1,0 +1,18 @@
+#pragma section-numbers off
+= Fabiano Weimar dos Santos =
+
+Também conhecido como Xiru. Atualmente, está preocupado em acabar sua graduação, escrevendo um trabalho "nada ortodoxo" sobre gerenciamento de conteudo aplicado a publicidade digital e retorno de investimentos. É consultor nas tecnologias Python, Zope e Plone e, quem sabe um dia, após sua formatura, poderá implantar Plone nesse website ;-) Pode ser encontrado em seu [[http://www.xiru.org|weblog]].
+
+e... atendendo a pedidos... algums informacoes sobre o Zope e Plone
+
+= Zope =
+
+O [[http://www.zope.org|Zope]] é um servidor de aplicações web, escrito em Python e mantido por uma comunidade de desenvolvedores e pela [[http://www.zope.com|Zope Corporation]]. O Zope é uma plataforma completa para desenvolvimento de aplicações, que inclui im servidor web, banco de dados orientado a objetos e transacional, implementação de segurança e autenticação e cerca de 400 produtos que podem ser instalados no Zope para extender suas funcionalidades. O Zope é uma solução voltada a missão critica, tendo suporte nativo a criação de clusters (utilizando o ZEO), criando-se soluções escaláveis e tolerantes a falhas sem modificar as aplicações.
+
+= Plone =
+
+O [[http://www.plone.org|Plone]] é um sistema de gerenciamento de conteúdo que roda acima do Content Management Framework - CMF. O CMF por sua vez é um framework que foi escrito inicialmente pela Zope Corporation para facilitar o desenvolvimento de aplicações de gerenciamento de conteúdo. No entanto, desde sua criação, o CMF possui uma interface com usuário ruim e improdutiva. Esse foi o principal motivo para a criação do projeto Plone.
+
+O Plone hoje é um projeto grande, organizado pela Plone Foundation (fundação semelhante a Apache Foundation) e com grande cases de utilização no mundo inteiro. Associado a uma interface com usuário amigável, o Plone está traduzido para 35 idiomas, segue padrões de acessibilidade definidos pelo W3 consorciun, além de possuir o Archetypes, um framework escrito para facilitar o desenvolvimento de novos tipos de conteúdo para o Plone.
+
+Tanto o Plone quanto o Zope possui grupos de usuários específicos espalhados por todo o mundo. O grupo de usuários brasileiros (e algums portugueses também) pode ser contatado pela lista de discussão zope-pt do yahoo.

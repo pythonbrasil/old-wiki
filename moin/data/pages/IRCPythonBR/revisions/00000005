@@ -1,0 +1,42 @@
+= Canal #python-br =
+
+ * Servidor: irc.freenode.net 6667
+ * Canal: #python-br
+
+== Histórico ==
+
+O canal foi criado em maio de 2003 para suporte à linguagem python. Hoje este é um canal oficial de suporte à linguagem python, suportado pela Python Software Foundation
+
+== Objetivo ==
+
+O objetivo do canal é oferecer suporte gratuito voluntário à programação na linguagem Python, para o desenvolvimento de bons programas.
+
+A política de ajuda para quem quer contribuir com o canal gira em torno de descobrir qual é o verdadeiro problema por trás da pergunta feita e então resolvê-lo, ao invés de simplesmente responder pergunta
+
+Isto quer dizer que, quando você faz uma pergunta, pode esperar que nosso time de especialistas em python não vai simplesmente responder com detalhes triviais de sintaxe ou uso de bibliotecas que podem ser facilmente consultadas em um sistema de busca.
+
+Os voluntários especialistas do canal são instruídos a aprofundar-se mais nos detalhes de design que só podem ser endereçados sabendo o contexto completo da aplicação sendo desenvolvida.
+
+Usuários terão um atendimento personalizado e profundo quando estiverem tendo problemas para fazer seus códigos se comportarem como gostariam. Tempo não deve ser desperdiçado por "inventadores de moda" ou repetições triviais da documentação - apenas conselhos sólidos com o objetivo de fazer o código resultante ser correto, legível, descomplicado e útil.
+
+== Uso ==
+
+=== Registre seu nick ===
+
+Para utilizar este canal, registre seu nick. Instruções [[IRCRegistreSeuNick|aqui]].
+
+=== Regras ===
+
+ 1. Evitar desviar muito do assunto: "Python - Linguagem de Programação"
+ 1. É proibido colar mais de 3 linhas, pois causa flood no canal
+ 1. É necessário [[IRCRegistreSeuNick|registrar-se para falar]].
+ 1. Linguagem de baixo-calão, técnicas ofensivas, spam, etc, não são permitidas.
+ 1. Faça a sua pergunta direto, não peça pra perguntar nem pergunte "tem alguém aí que sabe X?".
+ 1. Não é permitido enganar ou direcionar de propósito os usuários para técnicas erradas, prejudiciais ou que possam fazê-los perder tempo e recursos, principalmente usuários novatos que estão aprendendo
+ 1. O Manel (Lucas Emanuel) é o mascote do canal
+
+Os operadores do canal são bastante tolerantes, mas casos crônicos de "trollagem" e desrespeito às regras/objetivos do canal serão banidos, por um prazo limitado ou indefinidamente, conforme julgamento do operador.
+
+=== Dicas ===
+
+ACRESCENTAR AQUI: Dicas úteis para o uso do canal, como fazer boas perguntas, etc

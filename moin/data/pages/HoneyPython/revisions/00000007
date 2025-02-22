@@ -1,0 +1,29 @@
+#pragma section-numbers off
+= HoneyPython =
+
+O HoneyPython é um framework para a criação de daemons falsos para um sistema de honeypot. Foi criado originalmente para o projeto Honeypot-BR (http://www.honeypot.com.br), mas foi descontinuado devido à pouca popularidade da linguagem Python entre os outros participantes.
+
+O uso do framework não se limita a honeypots, pode ser utilizado para a criação de qualquer servidor de rede. A idéia principal era ter um framework assíncrono para servidores, menor e mais simples, mas tão eficiente quanto o Twisted (http://www.twistedmatrix.com), e com uma API mais fácil de usar do que a do asynchat/asyncore, presentes na biblioteca padrão.
+
+O projeto ficou meio parado, mas estou colocando aqui pro caso de haver algum interesse. Caso tenha alguma utilidade para alguém, penso em retomá-lo.
+
+   * '''Prós:''' pequeno, pode ser facilmente integrado à aplicação
+   * '''Contras:''' uso restrito a servidores (não suporta clientes ainda)
+
+
+
+== Ficha técnica ==
+
+URL: attachment:HoneyPython-0.0.2.tar.bz2 [[BR]]
+Licença: GPL
+
+
+== 08/01/2006 ==
+
+Coincidências ? Nas últimas duas semanas estive trabalhando em um servidor e resolvi usar a HoneyPython. Ontem, decidi que não iria expandir o código como planejado inicialmente e estava complicado usar tudo espalhado em vários módulos como estava. Hoje, lendo os e-mail da lista Python-Dev, surgiu uma discussão justamente sobre um substituto para o asynchat/asyncore, falando que de tempos em tempos surge a idéia de colocar uma parte do Twisted na biblioteca padrão, mas nunca chega a acontecer. Resolvi colocar o código aqui (mudei o nome) e mandar um e-mail para a lista sugerindo que ele possa servir como base para esse substituto.
+
+attachment:asiel.tar.bz2 [[BR]]
+
+----
+
+PedroWerneck

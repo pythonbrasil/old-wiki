@@ -1,0 +1,98 @@
+Variaveis, express&otilde;es e declara&ccedil;&otilde;es
+<p>Hehe pronto segundo artigo ta ai esse &eacute; somente sobre variaveis e revis&atilde;o
+  do primeiro artigo.<br>
+  Ent&atilde;o vamos programar chega de perder tempo.<br>
+  E lembrem-se python &eacute; facil sim por&eacute;m como tudo tem horas que
+  fica dificil mais n&atilde;o se pode desistir.</p>
+<p>Variaveis s&atilde;o palavras que quardam valores, parece explica&ccedil;&atilde;o
+  pra crian&ccedil;a mas serve, esses valores podem ser de diversos tipos, tamanhos
+  ,etc. Por&eacute;m em Python n&atilde;o a tipagem ou seja voc&ecirc; declara
+  variaveis dinamicamente &eacute; s&oacute; atribuir um valor a uma palavra
+  atrav&eacute;s do operador = , que a variavel ser&aacute; criada.</p>
+<p>Sei sei muito teorico n&atilde;o ? vamos dar alguns exemplos:</p>
+<p>1)<br>
+  ### variaveis1.py ###<br>
+  a = &quot;variavel a tem conteudo string&quot; # obeserve foi atribuida uma
+  string como valor para a variavel a<br>
+  print a # se n&atilde;o lembra volte e releia o primeiro artigo</p>
+<p>2)<br>
+  ### variaveis2.py ###<br>
+  b = 2 # obeserve que a variavel 2 tem um numero como valor</p>
+<p># esse valor poderia ser decimal tambem:<br>
+  c = 3.5</p>
+<p>print b #lembra da ultima aula ?<br>
+  print c # lembra da ultima aula ?</p>
+<p>3)<br>
+  ### variaveis3.py ###<br>
+  a,b,c = 1,2,&quot;neto&quot; <br>
+  # hum n&atilde;o se assuste as variaveis podem ser declaradas em conjuntos<br>
+  # independente do valor</p>
+<p>4)<br>
+  ### variaveis4.py ###<br>
+  a = 1 #declara a variavel a<br>
+  b = &quot; neto &quot; #declara a variavel b<br>
+  c = 5.9 #declara a variavel c</p>
+<p>print a,b,c # imprime as 3 na tela</p>
+<p>5)<br>
+  ### variaveis5.py ###<br>
+  a = 1 # declara a variavel a<br>
+  b = 2 #declara a variavel b<br>
+  c = 3 #declara a variavel c</p>
+<p>a = b # a passa a ter o valor de b logo, agora a = 2</p>
+<p>print a,c,b #imprime na ordem: variavel a mais a variavel c mais a variavel
+  b</p>
+<p><br>
+  Dentro desse assunto tamb&eacute;m se encontram as listas, que s&atilde;o os
+  Arrays do Python, elas s&atilde;o faceis de se assimilar e s&oacute; voc&ecirc; prestar
+  aten&ccedil;&atilde;o no codigo abaixo.<br>
+  Observe os exemplos abaixo:</p>
+<p>1)<br>
+  # usandolista.py<br>
+  a = [1,&quot;neto&quot;,2,&quot;ruivaldo&quot;]<br>
+  print a[0] #escreve o numero 1 pois as listas comecam do zero e n&atilde;o
+  do um.<br>
+  print a[1]<br>
+  print a[2]<br>
+  print a[3] # entendeu agora? as listas tem como seu primeiro indice o valor
+  0</p>
+<p><br>
+  2)<br>
+  # stringtbelista.py<br>
+  a = &quot;letras&quot;<br>
+  print a<br>
+  print a[0] #observe: strings s&atilde;o listas de caracteres unitarios ? sacou
+  ?<br>
+  print a[1] #observe: o segundo caractere seria o nome da variavel string com
+  o indice 1<br>
+  print a[2] # sera que deu pra entender ?<br>
+  print a[3]<br>
+  print a[4]<br>
+  print a[5]</p>
+<p>3)<br>
+  # listareplace.py<br>
+  a = [&quot;primeiro&quot;,&quot;segundo&quot;,&quot;terceiro&quot;]<br>
+  print a[2]<br>
+  ## vamos mudar o mesmo a[2]<br>
+  a[2] = &quot;quarto&quot;<br>
+  print a[2]<br>
+  ## a lista agora &eacute; igual a: a = [&quot;primeiro&quot;,&quot;segundo&quot;,&quot;quarto&quot;]<br>
+  ## voc&ecirc; n&atilde;o pode utilizar esse comando em strings</p>
+<p></p>
+<p><br>
+  OBS: Ficou faltando no artigo passado essa tabela aqui oh:</p>
+<p>-&gt; S&atilde;o caracteres especiais para voc&ecirc; usar no comando print
+  ex: print &quot;oi<br>tchau&quot;<br>
+  <br> - Nova Linha. <br>
+  \t - Tab Horizontal <br>
+  \b - Insere um &quot;backslash&quot;, deleta o ultimo caractere escrito <br>
+  \a - Beep<br>
+  \\ - Escreve um &quot;\&quot; <br>
+  \r - Retorno de &quot;carruagem&quot;, carriage,. Use \n a menos que voc&ecirc; saiba
+  o que est&aacute; fazendo. </p>
+<p><br>
+  Pronto pessoal por hoje &eacute; s&oacute; espero que tenham entendi esse assuntos
+  qualquer coisa:<br>
+  ralobao@click21.com.br </p>
+<p>From a newbie to another ( De um novato para outro )</p>
+<p>Abra&ccedil;os e viva ao Open Source porque n&oacute;s amamos a liberdade.<br>
+</p>

@@ -1,0 +1,80 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+Este site foi idealizado para abrigar todo o material sobre [http://python.org Python] editado em nosso idioma (Português). Ele utiliza o software MoinMoin que é um [http://c2.com/cgi/wiki Wiki] inteiramente escrito em Python. Esse sistema foi escolhido por sua facilidade de uso e por ser uma ferramenta bastante democrática, permitindo que se desenvolva material rapidamente. Veja o ComoUsarWiki para aprender a usar esta ferramenta.
+
+= Destaques =
+
+== PyConDay no Serpro ==
+
+Quem perdeu a oportunidade de participar da nossa I PyConDayBrasil agora vai ter uma segunda chance. Entre os dias 17 e 21 de outubro irá ocorrer no Rio de Janeiro a III Semana de Software Livre do Rio de Janeiro. Neste período entre os dias 17/10 e 19/10 ocorrerão diversas apresentações em locais distintos do Rio de Janeiro. Mas é na Unidade Serpro-Rio de Janeiro é que "o bicho vai pegar" porque o tema principal do evento será: Python. E então acontecerá a "!PyConDay Serpro" no dia 18 de outubro. Neste dia diversas figuras do cenário Python brasileiro estarão lá apresentando coisas superlegais sobre Python (como aconteceu no I
+PyConDayBrasil).
+
+Informações adicionais sobre localização, horários e posteriormente a grade com a programação podem ser obtidas no site do Serpro em: http://www.serpro.gov.br
+
+Aí é só clicar no banner "III Semana de Software Livre do Rio de Janeiro / PYCon''''''Day Serpro". Espero vocês por lá.
+
+== Curso de Python na UFPR ==
+
+É isso aí. Você que é de Curitiba e estava querendo aprender Python mas não sabia como a resposta chegou. O pessoal da UFPR vai ministrar um curso de Python com carga horária de 12hs (acredite, é tempo suficiente para aprender Python). Mais informações podem ser obtidas nos endereços:
+
+ * http://wiki.c3sl.ufpr.br/cgi-bin/twiki/view/SeComp/CursoPython
+ * http://wiki.c3sl.ufpr.br/cgi-bin/twiki/view/SeComp/
+ * http://wiki.c3sl.ufpr.br/cgi-bin/twiki/view/SeComp/MiniCursos
+
+== Seção nova no site ==
+
+É isso aí! Foi criada uma seção LinksPython onde poderemos apontar para os melhores endereços que falam de Python na Internet. A página está aberta para contribuições no melhor estilo 'isso-é-um-wiki-então-mexa-em-tudo-que-quiser'.
+
+Já estão lá alguns links superlegais disponibilizados pelo pessoal da IBM e alguns outros que vou colocar agora mesmo :)
+
+
+= Iniciantes =
+
+Leitura recomendada para aqueles que têm interesse ou são iniciantes na linguagem Python ou em ["Jython"]:
+
+   * IntroPython - O Guia da comunidade Python Brasil para iniciantes da linguagem Python.
+   * IntroduçãoPythonSimples - Uma Simples introdução a programação Python (escrito por RaLobao)
+   * IntroduçãoPython e PythonApresentação - Artigos de OsvaldoSantanaNeto.
+   * PythonInstantaneo - Artigo Magnus Lie Hetland traduzido por WanderleiAntonioCavassin.
+   * IntroduçãoJythonDidática - Uma introdução bastante didática e relativamente completa dessa ferramenta que permite usar o poderio de Python e de Java juntos.
+
+= Seções =
+
+Aqui estão algumas das seções desse site. Se você gostaria de sugerir outras é só entrar em contato com o WikiMaster mais próximo.
+
+   * PerguntasFrequentes - Perguntas e Respostas frequentes.
+   * NotíciasPython - Notícias sobre Python.
+   * ProjetosPythonBrasil - Projetos apoiados pelo site.
+   * DocumentacaoPython - Documentação, Livros, Manuais, Tutoriais e afins.
+   * PythonNaEducação - Página mantida por professores e coordenadores de cursos de Python {NEW}
+   * CookBook - Trechos de códigos úteis.
+   * SoftwarePython - Módulos, Editores e Ferramentas para desenvolvimento Python, bem como projetos desenvolvidos por brasileiros.
+   * EmpresasPython - Empresas Brasileiras que já usam Python para aumentar seus lucros :)
+   * OportunidadesDeEmprego - Vamos fazer a nossa parte no 'espetáculo do crescimento'. Empregue-se e ofereça empregos. Alguns recadinhos profissionais também estão aqui.
+   * DiscussõesAleatórias - Se você não sabe em que página contribuir, use esta.
+
+= Como Participar =
+
+Você pode participar da comunidade PythonBrasil diretamente aqui no site, através da lista de discussão ou via IRC.
+
+=== Lista de Discussão ===
+
+A lista oficial do site é: python-brasil@yahoogrupos.com.br ([http://br.groups.yahoo.com/group/python-brasil/ página principal]). Para se cadastrar na python-brasil, envie email (com qualquer conteúdo/assunto) para python-brasil-subscribe@yahoogrupos.com.br. Feito isso você receberá um e-mail de confirmação. É só responder a esse e-mail e pronto.
+
+[[HTML(<p><form method="get" action="http://br.groups.yahoo.com/subscribe/python-brasil">Assine a Lista:&nbsp;<input type="text" name="user" value="endereço de e-mail" size="20" /> <input type="submit" value="Assinar" /></form></p>)]]
+
+'''Antes de enviar mensagens para a lista dê uma lida na página AntesDePerguntar.'''
+
+Existe ainda uma lista chamada python-br que está sendo desativada. Se você tem conta nesta lista, por favor migre para a lista python-brasil.
+Pedimos a todos pythonistas e curiosos que não remetam e-mails para a lista python-br! A lista python-br não tem como ser moderada ou gerenciada
+devido a um problema de autenticação.
+
+=== Canal de IRC ===
+
+O canal oficial do '''Python''' no Brasil é o #python-br do irc.freenode.org.
+
+=== Outros ===
+
+   * CaixaDeSugestões - Coloque aqui as suas sugestões para o presente e o futuro do PythonBrasil.
+   * PáginasPessoaisLivroDeVisitas - Livro de visitas do Site (entre aqui e deixe sua assinatura).
+   * OutrosGruposUsuários - Outros sites de grupos de usuários Python.

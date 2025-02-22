@@ -1,0 +1,323 @@
+O artigo abaixo é uma tradução [http://dewitters.koonsolo.com/gameloop.html deste aqui]. Os exemplos, originalmente em C, foram transcritos para Python. Revisões e sugestões são muito bem vindas!
+
+==Introdução==
+
+O "game loop" é o batimento cardíaco de todo jogo, nenhum jogo pode ser executado sem ele. Mas, infelizmente para novos programadores de jogo, não há bons artigos na Internet que fornecem a informação adequada sobre este tema. Mas não tema, porque você acabou de esbarrar no único artigo que dá ao "game loop" a atenção que merece.
+
+Graças ao meu trabalho como programador de jogos, entrei em
+contato com um monte de código de pequenos jogos para dispositivos móveis. E sempre me impressiona quantos implementações de "game loop" que existem por aí. Você pode estar se perguntando como algo simples assim pode ser escrito de formas diferentes. Pois bem, pode, e eu vou discutir os prós e os contras das mais populares
+implementações, e dar-lhe a (na minha opinião)
+melhor solução de implementação de um "game loop".
+
+
+==O "Game Loop"==
+
+Cada jogo consiste de uma seqüência de pegar a entrada do usuário, atualizar o estado do jogo, lidar com a IA, tocar música e efeitos sonoros, e mostrar o jogo. Esta seqüência é tratada através do "game loop". Assim como eu disse na introdução, o "game loop" é o batimento cardíaco de cada jogo. Neste artigo, não irei
+entrar em detalhes sobre qualquer uma das tarefas acima mencionadas,
+mas que irei me concentrar no "game loop" em si. Por isso também reduzi as tarefas a apenas duas funções:
+Atualizar o jogo e exibi-lo.
+
+Eis alguns exemplos código do "game loop" em sua
+forma mais simples:
+
+{{{
+#!python
+jogo_rodando = True
+
+while jogo_rodando:
+    atualizar_jogo()
+    desenhar_jogo()
+}}}
+
+O problema com este "loop" simples é que ele não controla o tempo, o jogo só é executado. Em um hardware mais lento o jogo vai rodar mais devagar e mais rápido com hardware mais rápido. De volta aos velhos tempos, quando a velocidade do hardware era conhecida, isso não era um problema, mas atualmente existem tantas plataformas de hardware por aí, que temos que implementar algum tipo de gerenciamento de tempo. Há muitas maneiras de fazer isso, e eu vou discuti-las nas seções seguintes.
+
+Em primeiro lugar, deixe-me explicar 2 termos que são usados em todo este artigo:
+
+===FPS===
+
+FPS é uma abreviatura de frames por segundo. No contexto da execução acima referido, é o número de vezes desenhar_jogo() é chamada por segundo.
+
+===Velocidade de Jogo===
+
+Velocidade de Jogo é o número de vezes que o estado do jogo é atualizado por segundo, ou, em outras palavras, o número de vezes que atualizar_jogo() é chamada por segundo.
+
+
+== FPS dependente de Velocidade de Jogo Constante ==
+=== Implementação ===
+
+Uma solução fácil para a questão do tempo é apenas deixar o jogo correr em uma velocidade fixa de 25 frames por segundo. O código então tem esta aparência:
+
+{{{
+#!python
+import time
+import pygame
+
+FRAMES_PER_SECOND = 25
+SKIP_TICKS = 1000 / FRAMES_PER_SECOND
+
+pygame.init()
+next_game_tick = pygame.time.get_ticks()
+# pygame.time.get_ticks() retorna o número atual de milisegundos
+# decorridos desde que o sistema foi iniciado
+
+sleep_time = 0
+game_is_running = True
+
+while game_is_running:
+    atualizar_jogo()
+    desenhar_jogo()
+
+    next_game_tick + = SKIP_TICKS
+    sleep_time = next_game_tick - pygame.time.get_ticks()
+    if sleep_time> = 0:
+        time.sleep(sleep_time)
+    senão:
+        # Droga, estamos ficando para trás!
+}}}
+
+Esta solução tem uma enorme vantagem: é simples! Uma vez que você sabe que atualizar_jogo() é chamada 25 vezes por segundo, escrever o código do seu jogo é bastante simples. Por exemplo, a implementação de uma função de "replay" neste tipo de "game loop" é fácil. Se valores aleatórios não forem utilizados no jogo, você pode apenas registrar a entrada do usuário e repicá-la posteriormente.
+
+No seu hardware de teste você pode adaptar FRAMES_PER_SECOND a um valor ideal, mas o que irá acontecer em um hardware que for mais rápido ou mais lento? Bem, vamos descobrir.
+
+
+=== Hardware Lento ===
+
+Se o hardware agüenta o FPS definido, não há problema. Mas os problemas vão começar quando o hardware não puder lidar com ele. O jogo vai rodar mais devagar. No pior dos casos o jogo tem algumas partes mais pesadas onde ele vai rodar muito lenta e outras onde ele vai rodar normal. O tempo se torna variável, o que pode fazer seu jogo ficar injogável.
+
+
+=== Hadware rápido ===
+
+O jogo não terá problemas com hardware rápido, mas você está desperdiçando muitos ciclos de "clock" preciosos. Rodar um jogo em 25 ou 30 FPS quando ele poderia facilmente rodar a 300 FPS... que vergonha! Você vai perder uma grande quantidade de apelo visual nessa situação, especialmente com objetos que se movimentam rapidamente.
+
+Por outro lado, com dispositivos móveis, isso pode ser visto como uma vantagem. Não deixando o jogo rodar constantemente em seu extremo poderia poupar algum tempo de bateria.
+
+
+=== Conclusão ===
+
+Tornar o FPS dependente de uma velocidade de jogo constante é uma solução que é implementada rapidamente e mantém o código do jogo simples. Mas existem alguns problemas: Definir um FPS alto vai causar problemas com hardware mais lento, e definição de um FPS baixo irá desperdiçar apelo visual em hardware rápido.
+
+
+== Velocidade de Jogo dependente de FPS Variável  ==
+=== Implementação ===
+
+Outra forma de implementar um "game loop" é deixá-lo correr o mais rápido possível, e deixar o FPS ditar a velocidade do jogo. O jogo é atualizado com a diferença de tempo do quadro anterior.
+
+{{{
+#!python
+# imports e incialização omitidos
+
+prev_frame_tick
+curr_frame_tick = pygame.time.get_ticks()
+
+game_is_running = True
+while game_is_running:
+    prev_frame_tick = curr_frame_tick
+    curr_frame_tick = pygame.time.get_ticks()
+
+    atualizar_jogo(curr_frame_tick - prev_frame_tick)
+    desenhar_jogo()
+}}}
+
+O código do jogo torna-se um pouco mais complicado, pois temos agora que considerar a diferença de tempo na função atualizar_jogo(). Mas ainda assim, não é tão difícil.
+
+À primeira vista, esta parece a solução ideal para o nosso problema. Eu tenho visto muitos programadores espertos implementar este tipo de "game loop". Alguns deles teriam provavelmente desejariam ter lido este artigo antes de implementar o seu "loop". Vou mostrar-lhe em um minuto que este "loop" pode ter sérios problemas em hardware lento e também em hardware rápido (sim, RÁPIDO!).
+
+
+=== Hardware Lento ===
+
+Hardware lento pode causar alguns atrasos, às vezes, em alguns pontos onde o jogo fica "pesado". Isto pode definitivamente acontecer com um jogo 3D onde, em um determinado período de tempo, polígonos demais são exibidos. Esta queda na taxa de frames irá afetar o tempo de resposta da entrada e, por conseguinte, o tempo de reação do jogador também. A atualização do jogo também irá sentir o atraso e o estado do jogo será atualizado em grandes fatias de tempo. Como resultado o tempo de reação do jogador, e também o da IA, vai ficar mais decagar e pode fazer uma simples manobra falhar, ou até mesmo ficar impossível. Por exemplo, um obstáculo que poderia ser evitado com um FPS normal, pode se tornar impossível de evitar com um FPS baixo. Um problema mais grave com o hardware lento é que quando se utiliza física, sua simulação pode até mesmo [http://www.gaffer.org/game-physics/fix-your-timestep explodir]!
+
+
+=== Hardware Rápido ===
+
+Você provavelmente está se perguntando como o "game loop" acima pode dar errado em hardware rápido. Infelizmente pode e para lhe mostrar como, deixe-me primeiro explicar algumas coisas sobre como funciona a matemática em computadores.
+
+O espaço de memória de um valor float ou double é limitado, então alguns valores não podem ser representados. Por exemplo, 0.1 não pode ser representado em binário e, por conseguinte, é arredondado quando armazenados em um double. Permita mostrar-lhe utilizando um shell interativo de python:
+{{{
+#!python
+>>> 0.1
+0.10000000000000001
+}}}
+
+Isso por si só não é dramático, mas as consequências são. Digamos que você tem um carro de corrida que tem uma velocidade de 0.001 unidades por milisegundo. Após 10 segundos o seu carro de corrida terá viajado uma distância de 10.0. Se você dividir este cálculo como um jogo iria fazer, você tem as seguintes funções utilizando frames por segundo como entrada:
+
+{{{
+#!python
+>>> def get_distance( fps ):
+...     skip_ticks = 1000 / fps
+...     total_ticks = 0
+...     distance = 0.0
+...     speed_per_tick = 0.001
+...     while total_ticks < 10000:
+...         distance += speed_per_tick * skip_ticks
+...         total_ticks += skip_ticks
+...     return distance
+}}}
+
+Agora podemos calcular a distância em 40 frames por segundo:
+
+{{{
+#!python
+>>> get_distance(40)
+10,000000000000075
+}}}
+
+Espere um pouco... não é 10.0??? O que aconteceu? Pois bem, porque dividimos o cálculo em 400 adições, o erro de arredondamento cresceu. Fico pensando o que irá acontecer a 100 quadros por segundo ...
+
+{{{
+#!python
+>>> get_distance(100)
+9,9999999999998312
+}}}
+
+O que??? O erro é ainda maior!! Pois bem, por termos mais adições em 100 fps, o erro de arredondamento tem mais chances de aumentar. Portanto, o jogo será diferente quando rodando em 40 ou 100 frames por segundo:
+
+{{{
+#!python
+>>> get_distance(40) - get_distance(100)
+2.4336088699783431e-13
+}}}
+
+Você pode pensar que essa diferença é pequena demais para ser vista no jogo em si. Mas o problema real vai começar quando você usar esse valor incorreto para fazer mais alguns cálculos. Dessa forma um pequeno erro pode tornar-se grande, e ferrar o seu jogo quando ele rodar em altas taxas de frame. As chances disso acontecer? Suficientemente grandes para considerá-lo! Eu vi um jogo que utilizou este tipo de "game loop", e que de fato deu problemas em taxas de frame altas. Quando o programador descobriu que o problema estava escondido no núcleo do jogo, apenas um monte de reescrita de código poderia corrigi-lo.
+
+
+=== Conclusão ===
+
+Este tipo de "game loop" pode parecer à primeira vista muito bom, mas não se deixe enganar. Tanto máquinas lentas quanto máquinas rápidas podem causar problemas sérios para o seu jogo. E, além disso, implementar a função de atualização do jogo mais difícil do que quando você usa um FPS fixo, então porque que usá-lo?
+
+
+== Velocidade de Jogo Constante com FPS Máximo ==
+ 
+=== Implementação ===
+  
+A nossa primeira solução, FPS dependente de Velocidade de Jogo Constante, tem um problema quando roda em hardware lento. Tanto a velocidade do jogo quanto o framerate irá cair nesse caso. Uma possível solução para esse problema poderia ser a de manter a atualização do jogo na mesma taxa, mas reduzir o framerate da renderização. Isto pode ser feito usando o seguinte "game loop":
+  
+{{{
+#!python
+# imports e incialização omitidos
+
+TICKS_PER_SECOND = 50
+SKIP_TICKS = 1000 / TICKS_PER_SECOND
+MAX_FRAMESKIP = 10
+
+next_game_tick = pygame.time.get_ticks()
+
+game_is_running = True
+while game_is_running:
+    loops = 0
+    while pygame.time.get_ticks() > next_game_tick \
+            and loops < MAX_FRAMESKIP:
+        atualizar_jogo()
+        
+        next_game_tick + = SKIP_TICKS
+        loops += 1
+    
+    desenhar_jogo ()
+}}}
+  
+O jogo vai ser actualizado exatas 50 vezes por segundo e a renderização é feita o mais rápido possível. Repare que, quando a renderização é feita mais de 50 vezes por segundo, alguns quadros subsequentes serão iguais, então frames visuais de verdade serão exibidos num máximo de 50 frames por segundo. Ao rodar em um hardware lento, o framerate pode cair até que o laço de atualização alcance MAX_FRAMESKIP. Na prática, isso significa que quando o nosso FPS cai abaixo de 5 (= FRAMES_PER_SECOND / MAX_FRAMESKIP), o jogo em si vai ficar mais lento.
+
+
+=== Hardware Lento ===
+  
+Em hardware lento o FPS irá cair, mas o jogo em si se espera que vá rodar na velocidade normal. Se ainda assim o hardware não conseguir lidar com isso, o jogo em si irá correr mais lento e o framerate não vai ser suave de maneira alguma.
+
+
+=== Hardware Rápido ===
+
+O jogo não terá problemas com hardware rápido, mas, tal como a primeira solução, você vai desperdiçar tantos ciclos de clock preciosos que poderiam ser usados para um framerate maior. Encontrar o equilíbrio entre uma taxa de atualização rápida e capaz de rodar em hardware lento é crucial.
+  
+ 
+=== Conclusão ===
+  
+Utilizando uma velocidade de jogo constante com FPS Máximo é uma solução que é fácil de implementar e mantém o código do jogo simples. Mas ainda existem alguns problemas: Definir um FPS alto ainda pode causar problemas com hardware lento (mas não tão graves como na primeira solução), e a definição de um FPS baixo irá desperdiçar apelo visual em hardware rápido.
+
+
+== Velocidade de Jogo Constante independente do FPS Variável ==
+
+=== Implementação ===
+
+Seria possível melhorar ainda mais a solução acima para rodar mais rápido em hardware lento, e ser visualmente mais atrativa em hardware mais rápido? Bom, felizmente para nós, isso é possível. O estado do jogo em si próprio não precisa ser atualizado 60 vezes por segundo. A entrada do jogador, a IA, e a atualização do estado do jogo têm o bastante com 25 quadros por segundo. Portanto, vamos tentar chamar  atualizar_jogo() 25 vezes por segundo, nem mais, nem menos. A renderização, por outro lado, precisa ser tão rápida quanto o hardware conseguir fazer. Mas um framerate baixo não deve interferir com a atualização do jogo. A maneira de conseguir isso é através da utilização do seguinte "game loop":
+
+{{{
+#!python
+# imports e incialização omitidos
+
+TICKS_PER_SECOND = 25
+SKIP_TICKS = 1000 / TICKS_PER_SECOND
+MAX_FRAMESKIP = 5
+
+next_game_tick = pygame.time.get_ticks()
+int loops
+float interpolação
+
+game_is_running = True
+while game_is_running:
+
+    loops = 0
+    while pygame.time.get_ticks() > next_game_tick and \
+            loops <MAX_FRAMESKIP:
+        atualizar_jogo ()
+
+        next_game_tick += SKIP_TICKS
+        loops += 1
+
+    interpolacao = float(pygame.time.get_ticks() + SKIP_TICKS - next_game_tick) / float (SKIP_TICKS)
+    
+    desenhar_jogo(interpolação)
+}}}
+
+Com este tipo de "game loop", a execução do atualizar_jogo() irá permanecer fácil. Mas, infelizmente, a função desenhar_jogo() ficará mais complexa. Você terá que executar uma função preditiva que recebe a interpolação como argumento. Mas não se preocupe, isso não é difícil, apenas exige um pouco mais de trabalho. Vou explicar abaixo como a interpolação e a predição funcionam, mas primeiro deixe-me mostrar por que elas são necessárias.
+
+=== A Necessidade de Interpolação ===
+
+O gamestate é atualizado 25 vezes por segundo, por isso, se você não usar interpolação em sua renderização, seus quadros também serão exibidos nesta velocidade. Observe que 25 fps não é tão lento quanto algumas pessoas pensam: filmes rodam a 24 quadros por segundo, por exemplo. Então, 25 fps devem ser suficientes para uma experiência visualmente agradável, mas para objetos que se movem rápido, podemos ainda ver uma melhoria ao fazer mais FPS. Então o que podemos fazer é tornar movimentos mais rápidos suaves entre os frames. E é aí que interpolação e uma função preditiva podem fornecer uma solução.
+
+
+=== Interpolação e Previsão ===
+
+Tal como eu já disse o código do jogo é roda na sua própria taxa de frames por segundo, de modo que quando você desenhar/renderizar seus frames, é possível que ele esteja no meio de 2 gameticks. Digamos que você acabou de atualizar o seu estado de jogo pela 10ª vez, e agora você está indo renderizar a cena. Esta renderização estará entre a 10ª e a 11ª atualização do jogo. Portanto, é possível que a renderização aconteça próxima do frame 10.3. O valor de "interpolacao" então é 0.3. Pegue esse exemplo: Eu tenho um carro que se move a cada ciclo do jogo desta forma:
+
+{{{
+#!python
+  posição posição + = velocidade;
+}}}
+
+Se, no 10º ciclo a posição é de 500 e a velocidade é de 100, então no 11º ciclo a posição será 600. Agora onde você irá colocar o seu carro quando você redenrizá-lo? Você só poderia apenas assumir a posição do último ciclo (neste caso, 500). Mas uma maneira melhor é predizer aonde o carro estaria em exatamente 10.3, e isso é feito desta forma:
+
+{{{
+#!python
+posicao_desenho = posicao + (velocidade * interpolacao)
+}}}
+
+O carro, então, será deenhado na posição 530.
+
+Assim, basicamente a variável interpolacao contém o valor que está entreentre o ciclo anterior e o próximo (anterior = 0,0, próximo = 1,0). O que você tem que fazer então, é criar uma função "preditiva" para prever onde o carro/câmera/etc seriam colocados na hora de renderizar. Você pode basear essa previsão na velocidade do objeto, direção ou velocidade de rotação. Ela não precisa ser complicada porque nós só usamos ela para suavizar as coisas entre frames. De fato, é possível que um objeto acabe sendo renderizado em cima de outro objeto logo antes de uma colisão ser detectada. Mas, como já vimos antes, o jogo é atualizado 25 frames por segundo, e assim, quando isso acontece, o erro é mostrado apenas por uma fração de segundo, dificilmente perceptível ao olho humano.
+  
+ 
+=== Hardware Lento ===
+
+Na maioria dos casos, atualizar_jogo() vai levar muito menos tempo do que desenhar_jogo(). Na verdade, podemos supor que, mesmo com a com hardware lento, a função atualizar_jogo() consegue rodar 25 vezes por segundo. Portanto, nosso jogo vai lidar com a entrada entrada do jogadore atualizar o estado do jogo sem grandes dificuldades, mesmo que o jogo vá ser exibido apenas 15 quadros por segundo.
+
+
+=== Hardware Rápido ===
+
+Em hardware rápido, o jogo ainda será executado em um ritmo constante de 25 vezes por segundo, mas a atualização da tela será bem mais rápida do que isso. O método da interpolação/predição vai criar um apelo visual como se o jogo realmente estivesse rodando a uma taxa de frame alta. O melhor é que você faz um tipo de "trapaça" com seu FPS. Como você não atualizar o seu estado de jogo a cada frame, apenas a visualização, o jogo irá ter um FPS maior do que com o segundo método que eu descrevi.
+
+
+=== Conclusão ===
+
+Fazer o estado do jogo ser independente do FPS parece ser a melhor implementação para um "game loop". No entanto, você terá que implementar uma função preditiva em desenhar_jogo(), mas isso não é difícil de fazer.
+
+
+ == Conclusão geral  ==
+ 
+Tem mais em um "game loop" do que você imagina. Comentamos 4 possíveis implementações, e parece que há uma delas que você deve definitivamente evitar e é o caso onde um FPS variável dita a velocidade do jogo.
+  
+Um framerate constante pode ser uma boa solução simples para dispositivos móveis, mas quando você quiser aproveitar tudo que o hardware pode oferecer, é melhor usar um game loop onde o FPS é completamente independente da velocidade do jogo, utilizando uma função preditiva para framerates altos.
+  
+Se você não quiser se preocupar com uma função preditiva, você pode trabalhar com um framerate máximo, mas encontrar a melhor taxa de atualização do jogo para hardware lento e rápido pode ser complicado.
+  
+Agora comece a programar aquele jogo fantástico em que você está pensando!
+
+Koen Witters

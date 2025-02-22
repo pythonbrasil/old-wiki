@@ -1,0 +1,29 @@
+## page was renamed from InteligênciaArtificial
+#pragma section-numbers off
+= Receita: InteligênciaArtificial =
+
+O código abaixo mostra um exemplo simples do uso do módulo PyAIML (http://sourceforge.net/projects/pyaiml/). Esse módulo é uma implementação de um interpretador para AIML (Artificial Intelligence Markup Language). Para mais informações sobre AIML você pode visitar o site oficial: http://www.alicebot.org/
+Na página de download do módulo PyAIML baixe também as definições padrões da AIML (se quiser, vá direto por aqui: http://sourceforge.net/project/showfiles.php?group_id=96635&package_id=103424&release_id=202496). Esse arquivo é que contém a "inteligência" do robô. Apenas descompacte-o para uma pasta qualquer (você deverá substituir a pasta do exemplo abaixo pela pasta na qual você descompactou esse arquivo).
+
+== Código ==
+
+{{{
+#!python
+import aiml
+import os
+
+os.chdir('c:/temp/aiml') #muda para o diretório que contém os arquivos da AIML standard
+ai = aiml.Kernel() #inicialização
+ai.learn('std-startup.xml') #abre o arquivo principal da AIML (que faz referências aos outros)
+ai.respond('load aiml b') #faz com que os outros arquivos da AIML sejam carregados
+
+frase = raw_input('Fale algo ao bot:')
+print "Resposta do bot: %s" % ai.respond(frase)
+}}}
+
+
+Volta para CookBook.
+
+----
+
+WashingtonCoutinhoCorrêaJr

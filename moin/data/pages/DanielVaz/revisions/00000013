@@ -1,0 +1,30 @@
+##master-page:HomepageTemplate
+#format wiki
+== Pessoal ==
+ * Bem, eu nome é Daniel Alves Barbosa de Oliveira Vaz. Atualmente estou cursando o sexto período de Engenharia Elétrica [[http://www.eletrica.ufu.br]] na Universidade Federal de Uberlândia [[http://www.ufu.br]], minha futura área de atuação será Engenharia de Eletrônica e de Telecomunicações.
+----
+
+== Porque Python? ==
+ * Me apaixonei pela facilidade e pela inexistência da famosa curva de aprendizado, como citado em SobrePython
+----
+
+== Interesses Atuais ==
+ * Python, Django, PyGTK, Redes de Computadores.
+----
+
+== Projetos em Django ==
+ * Site do PET Programa de Educação Tutorial
+   * http://www.pet.eletrica.ufu.br
+----
+
+== Blog Pessoal ==
+ * http://pyalchemist.blogspot.com
+----
+
+== Contatos ==
+
+Email: daniel AT gmail PONTO com
+
+Msn: danielalvesvaz AT hotmail PONTO com
+
+IRC: irc.brasnet.org - #C - #Python -> sniper_cool

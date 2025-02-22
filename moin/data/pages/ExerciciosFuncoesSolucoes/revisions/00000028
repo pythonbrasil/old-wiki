@@ -1,0 +1,269 @@
+== Exercícios com Funções: Proposta de Soluções ==
+
+Esta página contém algumas propostas de soluções para os exercícios da [[ExerciciosFuncoes|Lista 6: Funções]].
+
+ * Exercício 1
+ {{{#!python
+def exercicio_1(n):
+    for i in range(n):
+        i += 1
+        print str(i) * i
+
+ }}}
+
+ Proposta por ThiagoSeixas
+ * Exercício 1
+ {{{#!python
+ def exercicio1(n):
+     for i in range(1, n+1):
+         for j in range(i):
+             print i,         # print j times the number i in the same line 
+         print                # print a new line
+
+ }}}
+
+ Proposta por HenriqueBaggio
+
+
+ * Exercício 1
+ {{{#!python
+ def exercicio_1(n):
+     x=1
+     while x<=n:
+        y=0
+        while y<x:
+            print '%i' %x,
+            y+=1
+        x+=1
+        print 
+ }}}
+
+ Proposta por [[https://www.python.org.br/wiki/lhzefe|Lhzefe]]
+
+
+ * Exercício 1
+ {{{#!python
+ def ex1(n):
+     for i in range(1, n+1): 
+         print((str(i)+" ")*i)
+ }}}
+
+ Proposta por RogerioDuarte
+
+ * Exercício 2
+ {{{#!python
+ def exercicio2(n):
+     for i in range(1, n+1):
+         for j in range(i):
+             print j,          # print a line with 0 1 ... i 
+         print                 # print a new line
+
+ }}}
+
+ Proposta por HenriqueBaggio
+
+ * Exercício 3
+ {{{#!python
+ def exercicio3(a, b, c):
+     return a + b + c
+ }}}
+
+ Proposta por IuriSilvio
+
+ * Exercício 4
+ {{{#!python 
+ def pn(x):
+     if x<0:
+         return "N"
+     elif x>0:
+         return "P"
+     else:
+        return "ZERO"
+
+ }}}
+
+ by Jorge
+
+
+ * Exercício 5
+ {{{#!python 
+ def somaimposto(taxaimposto,custo):
+    return (0.01*taxaimposto)*custo + custo
+ 
+ }}}
+
+ by Jorge
+
+ * Exercício 6.
+{{{#!python
+def hora(h, m):
+    b = h / 12
+    if b <= 1:
+        hh = str(h)
+        print('Sua hora: '+ hh + ':', end='')
+    elif b > 1 and b < 2:
+        hhh = str(h - 12)
+        print('Sua hora: '+ hhh + ':', end='')
+    else:
+        print('Formato de hora invalido')
+    if b <= 1 and m <= 60:
+        print(m, 'a.m')
+    elif b > 1 and m <= 60:
+        print(m, 'p.m')
+    else:
+        print('Formato de minutos invalidos')
+
+while True:
+    print('digite 666 para sair')
+    h = int(input('Informe a hora:'))
+    if h == 666:
+        break
+    m = int(input('Informe os minutos: '))
+    hora(h, m)
+}}}
+
+Proposta por [[https://www.python.org.br/wiki/Leo Araujo|Leo Araujo]]
+
+ * Exercício 7
+{{{#!python
+qtPrest = []
+listaVc = []
+ct = 0
+def funcVP(VP, NumDias):
+    Vpm = VP * 1.03
+    valorC = round(Vpm *((1 + 0.001) ** NumDias), 2)
+    listaVc.append(valorC)
+    print('Valor corrigido:', valorC)
+    global ct
+    ct += 1
+    qtPrest.append(ct)
+
+while True:
+    VP = float(input('Digitr o valor da prestação: (0 para sair) '))
+    if VP == 0:
+        break
+    NumDias = int(input('Quantos dias que está em atraso: '))
+    funcVP(VP, NumDias)
+print('Quantidade de prestações pagas: ', ct)
+print('Valor total de prestações pagas no dia: R$', round(sum(listaVc)), 2)
+}}}
+
+Proposta por [[https://www.python.org.br/wiki/Leo Araujo|Leo Araujo]]
+
+ * Exercício 7. Faça um programa que use a função valorPagamento para determinar o valor a ser pago por uma  prestação de uma   conta. O programa deverá solicitar ao usuário o valor da prestação e o número de dias em atraso e passar estes valores para a função valorPagamento, que calculará o valor a ser pago e devolverá este valor ao programa que a chamou. O programa deverá então exibir o valor a ser pago na tela. Após a execução o programa deverá voltar a pedir outro valor de prestação e assim continuar até que seja informado um valor igual a zero para a prestação. Neste momento o programa deverá ser encerrado, exibindo o relatório do dia, que conterá a quantidade e o valor total de prestações pagas no dia. O cálculo do valor a ser pago é feito da seguinte forma. Para pagamentos sem  atraso, cobrar o valor da prestação. Quando houver atraso, cobrar 3% de multa, mais 0,1% de juros por dia de atraso.
+ {{{#!python
+ __author__ = 'JonasAlves'
+
+ def valorPagamento(vp, da):
+	if da < 1:
+		valor = vp
+		print(valor)
+		return valor
+	else:
+		valor = (vp + vp * 0.03 + 0.01 * da)
+		print(valor)
+		return valor
+
+ valor = []
+ vp = 0
+ da = 0
+ qp = 0
+ valortotal = 0
+
+ while True:
+	qp += 1
+	vp = float(input('Qual o valor da prestacao? '))
+	da = int(input('Quantos dias esta em atraso? '))
+	if vp == 0:
+		break
+	valor.append(valorPagamento(vp, da))
+
+ qp -= 1
+ for i in range(qp):
+    valortotal += valor[i]
+
+ print('Relatorio do dia, foram pagas %d prestacoes no valor: ' %qp, valor)
+ print('Valor total de prestacoes pagas: ', valortotal)
+
+ }}}
+
+ * Exercício 8
+ {{{#!python
+ def exercicio8(n):
+     s = str(n)
+     return len(s)
+ }}}
+ * Exercício 9:Faça uma função que retorne o reverso de um número inteiro informado. Por exemplo: 127 -> 721.
+ {{{#!python
+def exercicio_9(n):
+    inverte=str(n)
+    print inverte[::-1]
+ }}}
+ 
+ Proposta por ThiagoSeixas
+
+ * Exercício 9: A ideia nesse exercicio é que, para um dado digito numa posição i do número de entrada, ele terá o seu valor multiplicado por 10**i no número de saída.
+ {{{#!python
+ def reverso(n):
+     s = str(n)       # converte o numero para uma string
+     l = 0
+     for x in range(len(s)):
+         l += int(s[x]) * (10**x)
+     return l
+ }}}
+ 
+
+ * Exercício 12: Construa uma função que receba uma string como parâmetro e devolva outra string com os carateres embaralhados. Por exemplo: se função receber a palavra python, pode retornar npthyo, ophtyn ou qualquer outra combinação possível, de forma aleatória. Padronize em sua função que todos os caracteres serão devolvidos em caixa alta ou caixa baixa, independentemente de como foram digitados.
+ {{{#!python
+ import random
+
+ def exercicio_12(s):
+     embaralha = random.sample(s, len(s)) # String vira lista
+     a = ''.join(embaralha) # lista vira string
+     print (a)
+ }}}
+ 
+ Proposta por ThiagoSeixas
+
+
+ * Exercício 13
+ {{{#!python
+
+ def valor_por_omissao(valor):
+     if valor=='':
+         return int(1)
+     else:
+         return faixa_minima_maxima(int(valor))
+
+ def faixa_minima_maxima(valor):
+     if valor<1:
+         return 1
+     elif valor>20:
+         return 20
+     else:
+         return valor
+
+ def cria_linha(linha):
+     l='+'
+     for x in range(linha):
+         l+='-'
+     l+='+'
+     print l
+
+ def cria_coluna(linha, coluna):
+     for y in range(coluna):
+         c='|'
+         c+= ' '*linha
+         c+='|'
+         print c
+
+ def desenha_moldura(linha, coluna):
+     cria_linha(linha)
+     cria_coluna(linha, coluna)
+     cria_linha(linha)
+
+ linha=raw_input('Diga quantos +----+, entre 1 e 20: ')
+ coluna=raw_input('Diga quantos |    |, entre 1 e 20: ')
+ desenha_moldura(valor_por_omissao(linha), valor_por_omissao(coluna))
+ }}}
+ Proposta por [[https://www.python.org.br/wiki/lhzefe|Lhzefe]]

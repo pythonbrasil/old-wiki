@@ -1,0 +1,18 @@
+Para chamar uma função contida em uma DLL no windows eu utilizei o módulo {{{ctypes}}}, disponível em: http://starship.python.net/crew/theller/ctypes/
+
+A utilização é bem simples. Por exemplo, se você tem uma {{{DLL}}} chamada {{{biblioteca.dll}}}, e nesta biblioteca você tem uma função 
+chamada {{{funcaoTeste}}}, basta fazer o seguinte para utilizá-la:
+
+{{{
+#!python
+import ctypes
+
+dll = ctypes.windll.biblioteca
+funcaoTeste = dll.funcaoTeste
+
+res = funcaoTeste(parametro1, parametro2, parametroN)
+}}}
+
+Muito fácil, não?
+
+O módulo ctypes também tem outra forma de importar {{{dll}}}'s, que é o {{{ctypes.cdll.nomeDaDLL}}}. No entanto, esta outra forma não funcionou para mim, dava erro no tamanho ou número dos parâmetros quando eu chamava a função.

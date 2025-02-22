@@ -1,0 +1,118 @@
+=Enviando emails em Html e anexos=
+
+Embora não seja uma boa prática, visto que pode impedir ou dificultar algumas pessoas de lerem o seu email, às vezes é necessário enviar emails em html a partir de um programa python. A função com um exemplo de uso está abaixo, bem como um exemplo de template html referenciando as imagens corretamente.
+
+{{{
+#!python
+# -*- coding: utf-8 -*-
+
+def mail(serverURL=None, sender='', to='', subject='', text='', attachments = [], html_template = None):
+
+    import smtplib, MimeWriter, base64, cStringIO, mimetools
+
+    #
+    # buffer da mensagem
+    #
+    message = cStringIO.StringIO()
+
+    txtin  = cStringIO.StringIO(text)
+
+    if html_template:
+        htmlin = cStringIO.StringIO(open(html_template).read() % text)
+    
+    writer = MimeWriter.MimeWriter(message)
+    writer.addheader('Subject', subject)
+    writer.addheader('MIME-Version', '1.0')
+
+    writer.startmultipartbody("alternative")
+    writer.flushheaders()
+
+    #
+    # parte de texto plano
+    #
+    subpart = writer.nextpart()
+    subpart.addheader("Content-Transfer-Encoding", "quoted-printable")
+    pout = subpart.startbody("text/plain", [("charset", 'utf-8')])
+    mimetools.encode(txtin, pout, 'quoted-printable')
+    txtin.close()
+    
+    #
+    # parte do html
+    #
+    subpart = writer.nextpart()
+    subpart.addheader("Content-Transfer-Encoding", "quoted-printable")
+    pout = subpart.startbody("text/html", [("charset", 'utf-8')])
+    mimetools.encode(htmlin, pout, 'quoted-printable')
+    htmlin.close()
+
+    #
+    # adiciona os anexos
+    #
+    for attachment in attachments:
+        part = writer.nextpart()
+        part.addheader('Content-Transfer-Encoding', 'base64')
+        #necessário para referência em tags <img>
+        part.addheader('Content-Id', "<"+attachment['file']+">")
+        body = part.startbody('%s; name=%s' % (attachment['mime'], attachment['file']))
+        base64.encode(open(attachment['file'], 'rb'), body)
+    
+    #
+    # finaliza a mensagem
+    #
+    writer.lastpart()
+    
+    #
+    # envia o email
+    #
+    smtp = smtplib.SMTP(serverURL)
+    smtp.sendmail(sender, to, message.getvalue())
+    message.close()
+    smtp.quit()
+
+if __name__ == "__main__":
+    anexos = []
+    anexos.append({'mime' : 'image/jpg', 'file' : 'cabecalho.jpg'})
+    anexos.append({'mime' : 'image/jpg', 'file' : 'rodape.jpg'})
+    template = 'template.htm'
+    mail('smtp.server.com.br','joao@server.com.br','maria@cliente.com.br','Solicitação de visita', str_mail, anexos, template)
+
+}}}
+
+Template Html:
+{{{
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<STYLE>
+		body {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 12px;
+		}
+	</STYLE>
+</HEAD>
+<BODY>
+<img src="cid:cabecalho.jpg" width="743" height="132" align="texttop">
+<br>
+<br>
+<br>
+<pre>
+%s
+</pre>
+<br>
+<br>
+<br>
+<div style="background: url(cid:rodape.jpg); height: 113px; width: 741px;">
+	Atenciosamente,
+	<br>
+	<b>João da Silva</b>
+	<br>
+	<i>Gerente </i>
+ 	<br>
+</div>
+</BODY>
+</HTML>
+}}}
+
+Baseado no cookbook encontrado em http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/67083
+
+LuizCarlosGeron

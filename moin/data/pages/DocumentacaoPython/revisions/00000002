@@ -1,0 +1,45 @@
+#pragma section-numbers off
+= Documentação Python =
+
+Nas seções abaixo você certamente encontrará a documentação que você procura sobre Python. E se não encontrar, sinta-se à vontade para cadastrá-la:
+
+== Livros Python ==
+
+Livros e referências impressas sobre Python. Aqui você encontra resenhas e comentários de quem já leu os livros.
+
+   * ProgrammingPython (ing) - MarkLutz
+   * PythonPocketReference (ing) - MarkLutz
+   * LearningPython (ing) - MarkLutz
+   * PythonGuiaDeReferência (por) - MarcoCatunda
+   * ExpressõesRegulares - AurelioMarinhoJargas
+
+
+/!\ '''Atenção:''' Todos os links para compra nas páginas de resenha utilizam o site da Livraria Tempo Real. Lá eu tenho um plano de parceria que me dá descontos na aquisição de livros para mim. Espero que vocês não se importem com isso. Caso vocês estejam escrevendo uma resenha para essa parte do site fiquem à vontade para colocar o link de compra apontando para o site de sua preferência.
+
+/!\ '''Atenção:''' Existe um template para a criação de Resenhas de Livros. Dê preferência para usá-la. Se ela não estiver satisfatória converse com o WikiMaster mais próximo.
+
+== Livros On-Line ==
+
+Livros e referências On-Line sobre Python.
+
+   * [http://www.python.org/doc/ Documentação Oficial] (ing)
+   * [http://www.diveintopython.org Dive Into Python] (ing)
+   * [http://www.gpr.com.br/cursos/python21.pdf Tradução do Tutorial Python 2.1] (por) - Tradução de RodrigoSenra
+   * [http://www.async.com.br/projects/python/pnp/ Python na Prática] (por) - ChristianReis
+   * [http://www.pythonware.com/library/tkinter/introduction/index.htm An Introduction to Tkinter] (ing)
+
+== How-Tos ==
+
+Como-Fazer são documentos que explicam como implementar determinado tipo de solução de maneira objetiva.
+
+   * [http://www.cienciaaberta.org/modules.php?name=Content&pa=showpage&pid=7 Implementando Grafos em Python] (por) - GuidoVanRossum, traduzido por FlávioCodeçoCoelho.
+   * [http://www.amk.ca/python/howto/advocacy/ Python Advocacy] (eng) - A. M. Kuchling.
+   * [http://www.amk.ca/python/howto/curses/ Curses Programming] (eng) - A. M. Kuchling / Eric Raimmond.
+
+== Artigos e Tutoriais ==
+
+Devido à quantidade de artigos e tutoriais Python ser muito grande (e deve crescer), separei uma página só para esse assunto: ArtigosTutoriais.
+
+----
+
+OsvaldoSantanaNeto

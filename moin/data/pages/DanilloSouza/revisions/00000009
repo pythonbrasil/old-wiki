@@ -1,0 +1,23 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+== Artigos ==
+ * [[http://vivaolinux.com.br/dica/Programacao-funcional-em-Python/|ProgramaçãoFuncionalEmPython]]
+
+== Códigos e Dicas ==
+ * CacheDeMetodos - Classe demonstrando como fazer cache de métodos de forma simples.
+ * SenhasAleatorias - Função que gera senhas aleatórias.
+ * InterpretadorBrainFuck - Interpretador da linguagem [[http://pt.wikipedia.org/wiki/Brainfuck|BrainFuck]] escrito em Python.
+
+== Linkografia ==
+ * Blog: http://danltmz.blogspot.com/
+ * Twitter: http://twitter.com/danltmz
+ * VoL: http://www.vivaolinux.com.br/~danltmz
+
+== Contato ==
+ * Email: <<MailTo(danillo012 AT SPAMFREE gmail DOT com)>>
+
+...
+
+----
+CategoryHomepage

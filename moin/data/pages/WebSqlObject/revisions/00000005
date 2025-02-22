@@ -1,0 +1,103 @@
+#pragma section-numbers off
+
+= Receita: Web e SQLObject =
+
+Exemplo de armazenamento de dados em Banco de Dados a partir de formulários Web.
+
+== Considerações Iniciais ==
+
+Comecei a usar a linguagem Python, há mais ou menos um mês, influenciada pelo seu maior divulgador no Rio Grande do Norte, na minha opinião – João Paulo Fernandes Farias – vocês já devem ter visto esse nome associado à linguagem Python, C++, dentre outras. 
+
+Hoje, fiz meu primeiro programa recepcionando dados via Web com posterior armazenamento em um banco de dados. Confesso que, se não fosse João Paulo me tirando as dúvidas, teria tido bastante trabalho. Por este motivo, decidi compartilhar com os iniciantes em Python, como eu, a minha humilde experiência.
+
+== Ferramentas utilizadas (no Windows) ==
+
+Tradutor: Python 2.3
+
+Container Web: Apache HTTP Server 2.0.53
+
+Plugin do Apache para Python:  Mod_Python 3.1.3
+
+Banco de dados: MySQL Server 4.1
+
+Framework de mapeamento objeto-relacional: SQLObject 0.6.1
+
+Driver de conexão python-MySQL: MySQLdb
+
+== Exposição do Exemplo ==
+
+O exemplo em questão objetiva realizar um cadastramento muitíssimo simples em um banco de dados. Para a identificação dos dados será utilizado um formulário simples, contendo os campos: Nome, Endereço, Bairro e Telefone.  Tal exemplo foi implementado em quatro etapas:
+
+== Primeira Etapa ==
+
+Construção, utilizando MySQL, de uma tabela, nomeada Cliente, contendo os campos: id, Nome, Endereço, Bairro e Telefone. A referida tabela foi inserida no banco cadastro.
+
+== Segunda Etapa ==
+Implementação do módulo, nomeado cliente.py, que faz a comunicação com o banco de dados, conforme mostrado abaixo:
+
+{{{
+from sqlobject import *
+
+cn = connectionForURI('mysql://usuario:senha@localhost/banco')
+
+class cliente(SQLObject):
+    _connection = cn
+    Nome = StringCol(length=100)
+    Endereco = StringCol (length=200)
+    Bairro = StringCol (length=50)
+    Telefone = StringCol(length=15)
+}}}
+
+== Terceira Etapa ==
+
+Implementação do arquivo, nomeado clienteWeb.py, que captura os dados informados via Web e os insere no banco de dados. Observe a importação do arquivo cliente, reportado na etapa anterior. As duas primeiras linhas inserem o diretório do arquivo atual, __file__, no caminho de busca de módulos do Python. Isto é necessário, pois o mod_python não o faz automaticamente.
+
+{{{
+import os, sys
+sys.path.append(os.path.dirname(__file__))
+
+from cliente import *
+
+def Inicializa(req, nome, end, bairro, tel):
+	cliente(Nome = nome, Endereco = end, Bairro = bairro, Telefone = tel)
+	return "Cadastrado"
+}}}
+
+== Quarta Etapa ==
+
+Escrita do arquivo em HTML, cliente.html, para implementação do formulário em HTML. Vale dizer que este é o arquivo que será chamado no seu browser, através do endereço: http://localhost/python/cliente.html, caso você tenha armazenado seus quatro arquivos no diretório python. Em adição, o caminho real para a localização dos seus arquivos será: C:\Apache Group\Apache2\htdocs\python.
+
+{{{
+<html>
+<head>
+<title>Cadastro de Dados</title>
+</head>
+<body>
+
+<form action="clienteWeb.py/Inicializa">
+
+Informe o Nome do usuário: <input type="text" name="nome" size="20"><br>
+Informe o Endereço do usuário: <input type="text" name="end" size="20"><br>
+Informe o Bairro do usuário: <input type="text" name="bairro" size="10"><br>
+Informe o Telefone do usuário: <input type="text" name="tele" size="15"><br>
+
+<input type="submit" value="Enviar"><br>
+</form>
+
+</body>
+</html>
+}}}
+
+Observação: Sempre que houver alteração relativa a classes referentes ao mapeamento objeto-relacional, deve-se reiniciar o Apache, pois após a inicialização e a primeira chamada de um script, importando o módulo que as contém, o SQLObject irá registrar tais classes. Portanto, uma mudança nestas não será visível ao SQLObject, já que o Apache criará apenas um ambiente Python para responder às várias requisições.
+
+Pronto! Você acabou de implementar, em 5 minutos, um Cadastro de usuário usando mapeamento objeto-relacional em apenas algumas linhas de código....
+
+
+
+Volta para CookBook.
+
+----
+
+Idelmárcia Dantas de Oliveira
+
+Colaborador: João Paulo Fernandes Farias

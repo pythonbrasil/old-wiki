@@ -1,0 +1,17 @@
+#acl JuracyFilho:read,write,revert All:read
+#pragma section-numbers off
+= Juracy Filho =
+
+== Informações ==
+  || E-Mail || [[MailTo(juracy AT wsh DOT com DOT br)]] ||
+  || E-Mail pessoal || [[MailTo(juracy FORA DOT SPAM filho AT terra DOT com DOT br)]] ||
+  || MSN || [[MailTo(juracy _ filho NOSPAM AT ARROUBA hotmail DOT com)]] ||
+  || ICQ (UIN) || 37436396 ||
+  || Jabber || [[MailTo(juracy . filho NOSPAM AT ARROUBA jabber DOT org)]] ||
+  || Data de Nascimento || 04/06/1974 ||
+  || Cidade || Salvador - BA ||
+
+Estou começando a estudar Python, em breve espero colocar aqui algumas das minhas experiências e colaborar mais com a comunidade.
+
+== Experiências ==
+  1. Melhorias na acentuação no programa de conversão do bugzilla para o [http://projects.edgewall.com/trac Trac]. Trac é um Gerenciador de Projetos voltado para o desenvolvedor feito em Python, que inclui: Wiki, Ticket (a la bugzilla), Relatórios e um Front-End para o !SubVersion, tudo integrado.

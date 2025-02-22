@@ -1,0 +1,175 @@
+Nossa intenção com esta página é dar algumas dicas às pessoas que participam da lista de discussão do PythonBrasil. Seguindo estas dicas, você conseguirá esclarecer as suas dúvidas muito mais rapidamente.
+
+   * '''Procure no PythonBrasil''' - O sistema de buscas do PythonBrasil funciona muito bem. Antes de perguntar algo na lista de discussão, certifique-se de que não existe algum documento aqui que resolva o seu problema.
+   * '''Procure no [http://www.google.com Google]''' - É muito raro não encontrar algum esclarecimento de dúvidas no [http://www.google.com Google]. Lembre-se: o Google é seu amigo.
+   * '''Verifique o [http://news.gmane.org/gmane.comp.python.brasil histórico da lista]''' - O histórico da lista serve como uma base de conhecimento. É bastante comum que outras pessoas já tenham passado pelo mesmo problema que você está enfrentando e já tiveram suas dúvidas esclarecidas na lista. Verifique no histórico da lista se não é este o caso antes de postar a mesma dúvida. Existe também o [http://br.groups.yahoo.com/group/python-brasil/messages historico do YahooGroups] para ser consultado por membros do grupo.
+     Use a caixa abaixo para buscar no histórico da lista (a busca do Gmane costuma ser melhor):
+     [[HTML(<form action="http://search.gmane.org/search.php" method="get"><tr><td><input type="hidden" name="group" value="gmane.comp.python.brasil"><input type="hidden" name="sort" value="date"><input type="text" name="query" size="20">&nbsp;<input type="submit" value="Gmane"></td></tr></form>)]]
+     [[HTML(<form action="http://br.groups.yahoo.com/rsearch" method="get"><tr><td><input type="hidden" name="type" value="query"><input type="hidden" name="where" value="/group/python-brasil/messagesearch"><input type="text" name="query" size="20" value=""> <input type="submit" value="Yahoo!"></td></tr></form>)]]
+   * '''Existem "mil" maneiras de acessar a lista''' - Escolha a sua preferida na página AcessoListaDiscussao.
+   * '''Aprenda ComoFazerPerguntasInteligentes''' - Enviando uma mensagem com um ''subject'' adequado e formulando a questão adequadamente, você facilitará o trabalho de quem irá te ajudar e, no nosso caso, isso é muito importante. Coisas como enviar o trecho de código com problema e as mensagens de erro emitidas são de vital importância para que uma resposta possa ser dada.
+   * '''Somos uma comunidade de voluntários''' - Lembre-se sempre que o PythonBrasil é uma comunidade formada por programadores voluntários. Ninguém tem a obrigação de te ajudar, apesar de todos se esforçarem para fazê-lo.
+   * '''Se você souber inglês...''' - Se você conseguir ler documentação escrita em inglês, vale a pena consultar também o histórico da lista [http://mail.python.org/pipermail/python-list/ Python-Users]. O Google provê a indexação dessas páginas, portanto, basta usá-lo para fazer pesquisas nela. Vale a pena ainda verificar o site oficial de [http://www.python.org Python].
+
+== Algumas regras da lista ==
+
+Algumas regras da lista que devem ser seguidas para evitar problemas com a moderação:
+
+   * '''Não envie e-mails no formato HTML''' - Além de impossibilitar o uso de leitores de e-mail em modo texto (que é o caso da maioria das pessoas que usam GNU/Linux), você ainda possibilitará que o Yahoo! Groups adicione imagens de propaganda nos e-mails, fazendo com que pessoas que usem acesso discado tenham problemas para ler suas mensagens. Consulte a documentação do seu leitor de e-mail para desligar essa opção. A opção "''Rich Text''" muito comum em clientes de e-mail e webmails também deve ser desativada.
+   * '''Não fuja do tópico da lista''' - A lista foi criada para discussões sobre Python. Apesar de [http://zope.org/ Zope] e [http://plone.org/ Plone] serem duas aplicações desenvolvidas em Python, é importante lembrar que existem outras listas de discussão com mais profissionais qualificados na utilização dessas aplicações, como as que se encontram na comunidade brasileira [http://tchezope.org TcheZope] onde moram alguns dos melhores especialistas em Zope e Plone do mundo.
+   * '''Não envie anexos em mensagens''' - Imagine o volume de tráfego que um anexo de 200k gera quando é enviado para os mais de 1000 assinantes da lista. Imagine também o usuário da lista que acessa a Internet através de uma conexão discada/lenta. No lugar de anexar arquivos na lista, disponibilize-o em algum lugar na web e envie o endereço para acessá-lo junto com uma breve descrição do que se trata o arquivo, desta forma somente quem quer ou pode baixar o arquivo irá fazê-lo e nenhum aborrecimento será causado para quem não quer ou não pode baixá-lo.
+   * '''Desative mecanismos anti-spam para a lista''' - Aquela idéia irritante de proteção contra spams que o UOL usa, por exemplo, faz com que para cada e-mail postado na lista uma resposta seja gerada para o autor para que o mesmo entre em uma página para confirmar o e-mail. O membro da lista que esquecer de desativar esses mecanismos para a lista de discussão será sumariamente excluido (e não banido) da lista.
+
+== Dicas para uma lista mais agradável ==
+
+Algumas das dicas abaixo são genéricas o suficiente para serem usadas em quaisquer outras listas de discussão técnica que possamos assinar (na verdade grande parte das coisas escritas nessa página se aplicam a outras listas de discussão). Fica a seu critério usar as dicas dadas nesta seção. Diferentemente das regras da lista o não cumprimento das dicas abaixo não levarão as mensagens a serem moderadas:
+
+=== Melhore os campos "Assunto"/"Subject" das mensagens ===
+
+Esta dica surgiu à partir de um e-mail postado pelo RodrigoSenra em nossa lista de discussões:
+
+{{{
+From: Rodrigo Senra
+To: python-brasil
+Subject: Escrevendo bons títulos para Assunto(Subject)
+
+Às vezes acompanhando uma discussão algo nos inspira a fazer uma
+colocação que não está relacionada com a discussão
+em questão, nestas horas o melhor é mandar um e-mail para a lista
+com um Assunto(Subject) explicitando o tema do e-mail.
+
+A razão subjacente a este *purismo* e de natureza prática.
+Muitas vezes nós temos que caçar informação no histórico da lista
+python-brasil, ficará bem mais fácil se os conteúdos dos emails
+estiverem relacionados aos respectivos cabeçalhos Assunto (Subject).
+
+Outro comentário importante é escolher bem o título do Assunto,
+para que ele transmita o máximo de informação sobre o conteúdo
+da mensagem. Dessa forma o histórico da lista python-brasil se
+tornará cada vez mais uma importante ferramenta para nós desenvolvedores.
+}}}
+
+Existem outras questões também. Só pra exemplificar:
+
+'''Errado:'''
+{{{
+Subject: Socorro!!!
+
+Gostaria de saber como faço pra mudar um blablabla do loop do Tkinter,
+alguém sabe???
+}}}
+
+Com um pedido desesperado deste o ''Osvaldo'' vai abrir a mensagem no meio
+das 500 que recebe por dia para tentar ajudar. Mas o ''Osvaldo'' não vai
+conseguir porque o ''Osvaldo'' é um 'tapado completo' em Tkinter. Então ele
+perdeu o tempo dele pra tentar ajudar numa coisa em que ele não
+conseguiria ajudar.
+
+Em contrapartida uma versão melhorada seria:
+
+'''Certo:'''
+{{{
+Subject: Loop do Tkinter
+
+Gostaria de saber como faço pra mudar um blablabla do loop do Tkinter,
+alguém sabe???
+}}}
+
+Pronto. Eu já dou prioridade baixa para essa mensagem porque tem grandes
+probabilidades de eu não poder ajudar. Em contrapartida o PedroWerneck,
+nosso ''Tkinter-man'' vai abrí-la no primeiro instante pra responder.
+
+Se o assunto mudou no meio do caminho também pode-se (ou deve-se) mudar o Assunto/Subject da discussão. Isso não é crime :)
+
+=== Rodapés muito maiores que a mensagem ===
+
+Não sei se vocês notaram, mas no rodapé das mensagens que chegam na lista tem um
+volume de informações relativamente grande onde constam desde dicas do
+site à anúncios publicitários.
+
+A dica é: Quando responder uma mensagem da lista *remova* essas coisas
+da mensagem porque o Y! vai adicioná-las novamente na próxima mensagem,
+e na próxima, e na próxima, e...
+
+Quando estivermos lá pela 10a. resposta a gente vai precisar apelar para
+um "Search Engine" igual ao Google para poder encontrar o texto da
+mensagem original perdida no meio de uma avalanche de propagandas e
+rodapés do Y!.
+
+=== Reduza o tamanho das mensagens ===
+
+Sempre que você estiver respondendo a apenas um parágrafo de um e-mail,
+apague os outros parágrafos da mensagem original e coloque um aviso de
+que ali foi cortado algo com um:
+
+{{{
+[corta]
+[snip]
+[cut]
+[censurado]
+[flamewar]
+:
+:
+}}}
+
+Porque, desta forma, poderemos acompanhar a discussão muito mais
+rapidamente.
+
+=== Utilize parágrafos ===
+
+Vejam esta mensagem:
+
+'''Errado:'''
+{{{
+Subject: Meu Deus!
+
+Eu gostaria de saber porque Python é considerada uma linguagem muito boa
+e como eu poderia programar usando uma interface gráfica e como eu
+poderia acessar um banco de dados QuxFooBar???
+}}}
+
+Agora, vejam esta:
+
+'''Certo:'''
+{{{
+Subject: Conselhos iniciais sobre Python
+
+Pessoal,
+
+Sou novo aqui na lista e, após consultar o histórico da lista e o site
+da comunidade algumas dúvidas ainda persistem:
+
+ - Eu gostaria de saber porque Python é considerada uma linguagem muito boa?
+ - É possível programar usando uma interface gráfica?
+ - Como eu poderia acessar um banco de dados QuxFooBar?
+}}}
+
+Com uma mensagem bem organizada assim, nós poderemos responder aos
+tópicos onde somos mais proficientes e deixamos os outros para que
+outros respondam.
+
+=== Poupem o Joaquim ===
+
+É conhecido de todos que a língua portuguesa não é muito generosa com seus usuários. Também é sabido que "quem não se comunica se estrumbica" em dias de hoje.
+
+Portanto antes de enviar os seus e-mails tente lê-los para ver se eles estão conseguindo trasmitir a sua mensagem corretamente, caso contrário, você será ignorado ou será inquirido a se explicar melhor.
+
+'''Errado:'''
+{{{
+Subject: Tipow, vamu mi ajudá?
+
+Tipow, kra! Eu to tentanu faze um negossio de permissaum no Pháithon i num to conceguindo pq so muito burro rsrsrsrs kkkkk. Vcs ajuda?
+}}}
+
+'''Certo:'''
+{{{
+Subject: Permissão de arquivos
+
+Olá pessoal,
+
+Eu estou tentando manipular as permissões de arquivo em Python mas não sei porque o código abaixo está dando uma mensagem de erro Qux Foo Bar...
+
+<trecho de codigo com erro>
+
+Acho que esse negócio de Python é complicado demais pra mim :)
+}}}

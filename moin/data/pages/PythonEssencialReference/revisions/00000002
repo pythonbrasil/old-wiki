@@ -1,0 +1,13 @@
+   * '''Nome:''' Livro Python Essential Reference
+   * '''Autor:''' David Beazley
+   * '''Editora:''' New Riders
+   * '''Páginas:''' 416
+   * '''Idioma:''' Inglês
+
+||<tableborder="0"> {{attachment:book_python_essencial_reference.jpg}} || [[http://www.linuxmall.com.br/index.php?product_id=1243&fil=pythonbrasil.com.br|Compre]] ||
+
+== Resenhas e comentários ==
+
+The heart of this book is the 250-page reference section. The author concentrates on all current Python modules (eschewing deprecated or obsolete APIs). Starting with basic modules for Python services and operating system functions, and including handling strings and math functions, the author explains and illustrates each module with short sample code, along with a full listing of APIs. Sections on Python's impressive support for virtually all networking protocols (including sockets, HTTP, FTP, and e-mail) are a standout and will arguably justify the cost of this title for many Python developers. Later modules look at undocumented functions, plus there's an in-depth guide to integrating Python and C code. (This material can even help you build custom Python modules.) 
+
+/!\ Fazer uma resenha

@@ -1,0 +1,170 @@
+== Ensinando o Emacs a trabalhar com Python ==
+
+Com algunas instalações e configurações podemos ultilizar o emacs para
+programar em python.
+
+
+=== Softwares recomendados ===
+
+===== Pymacs =====
+
+Pymacs é uma ferramenta poderosa que, que permite uma comunicação entre o Lisp do Emacs e o Python.
+
+home: http://pymacs.progiciels-bpi.ca/index.html
+
+
+===== bicyclerepair =====
+
+O projeto Bicycle Repair Man é uma tentativa de criar um browser de refactoring para python,
+usando tecnicas de Extreme Programming.
+
+home: http://bicyclerepair.sourceforge.net/
+
+
+===== Ropemacs =====
+
+Plugin para usar Rope (ferramenta de refactoring alternativa ao Bycicle Repair Man) integrado no Emacs. Depende de Rope e Pymacs.
+
+home: http://rope.sourceforge.net/ropemacs.html
+
+===== python-mode =====
+
+É um modo do X/Emacs para editar o código de fonte Python.
+
+home: http://sourceforge.net/projects/python-mode/
+
+Alternativa: python-mode um pouco mais atualizado.
+{{{svn co http://svn.peadrop.com/emacs/site/python-mode
+}}}
+
+A versão 22 do emacs, já vem por padrão com o novo pacote python.el para substituir o python-mode).
+
+=== Instalando os softwares ===
+
+===== Pymacs =====
+{{{
+tar -zxvf Pymacs-0.22.tar.gz
+cd Pymacs-0.22
+su
+./setup
+Aqui minha escolha foi 1:
+/usr/share/emacs/21.3/site-lisp
+python setup.py install
+vi ~/.emacs
+Adicione as seguintes linhas em seu .emacs:
+;; Pymacs
+
+(autoload 'pymacs-load "pymacs" nil t)
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+}}}
+
+===== bicyclerepair =====
+Eu tinha baixado o arquivo tar.gz do bicyclerepair no [http://sf.net Sourceforge]
+mas este estava com um erro ai preferi baixar do repositorio CVS. Veja com fazer.
+{{{
+Baixando do cvs ----
+cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/bicyclerepair login
+cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/bicyclerepair co -P bicyclerepair
+----
+su
+python setup.py install
+vi ~/.emacs
+Adicione as seguintes linhas em seu .emacs:
+;; bicyclerepair
+
+(pymacs-load "bikeemacs" "brm-")
+(brm-init)
+}}}
+
+===== python-mode =====
+{{{
+tar -zxvf python-mode-1.0alpha.tar.gz
+Crie um diretorio para guardar os modulos do emacs.
+mkdir ~/.emacs-modulos/
+Copie a pasta do python-mode-1.0alpha para a pasta criada acima.
+cp python-mode-1.0alpha ~/.emacs-modulos/
+vi ~/.emacs
+Adicione as seguintes linhas em seu .emacs:
+;; Inicio da comfiguracao python-mode.
+
+;; Adiciona o python-mode no caminho de carregamento.
+(add-to-list 'load-path "~/.emacs.modulos/python-mode-1.0alpha/")
+
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (set (make-variable-buffer-local 'beginning-of-defun-function)
+                 'py-beginning-of-def-or-class)
+            (setq outline-regexp "def\\|class ")))
+
+(defun py-next-block ()
+  "go to the next block.  Cf. `forward-sexp' for lisp-mode"
+  (interactive)
+  (py-mark-block nil 't)
+  (back-to-indentation))
+
+(add-hook 'python-mode-hook (lambda ()
+  (define-key py-mode-map "\C-c3"
+    (lambda (beg end) (interactive "r")
+       (py-comment-region beg end '(4))))))
+
+;; Inicio syntax highlighting
+
+(custom-set-variables
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+ '(case-fold-search t)
+ '(current-language-environment "Latin-1")
+ '(default-input-method "latin-1-prefix")
+ '(global-font-lock-mode t nil (font-lock))
+ '(transient-mark-mode t)
+ '(uniquify-buffer-name-style nil nil (uniquify)))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+ '(default ((t (:stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 96 :width normal :family "adobe-courier")))))
+}}}
+
+Adicione as seguintes linhas em seu .emacs para ele se torne mais parecido com os outros editores não que isso seja bom, mas para quem esta começando ajuda muito na sua ultilização:
+
+{{{
+;; Seleções Visíveis
+(setq transient-mark-mode t)
+
+;; Seleção PC
+(require 'pc-select)
+(pc-selection-mode)
+
+;; Sobrescrevendo seleções automaticamente
+(require 'delsel)
+(delete-selection-mode 1)
+
+;; End vai para o fim da linha
+(define-key global-map [end] 'end-of-line)
+
+;; Home vai para o comeco da linha
+(define-key global-map [home] 'beginning-of-line)
+
+;; CTRL-End vai para o fim do documento
+(define-key global-map [C-end] 'end-of-buffer)
+
+;; CTRL-Home vai para o comeco do documento
+(define-key global-map [C-home] 'beginning-of-buffer)
+
+;; Backspace
+(define-key global-map [backspace]
+'delete-backward-char)
+
+;; Delete
+(define-key global-map [delete]
+'delete-char)
+}}}
+WiliamAlvesDeSouza -- (waa) -- wiliamsouza83(arroba)gmail(ponto)com
+ 
+
+JoaoRosa

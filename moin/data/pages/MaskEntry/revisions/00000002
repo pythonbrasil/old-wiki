@@ -1,0 +1,155 @@
+{{{
+#!python
+#!/usr/bin/env python
+
+# example maskentry.py
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+import re
+from gtk import *
+import gtk.gdk
+import gobject
+
+
+
+
+class EntryMask(gtk.Entry):
+    
+    def __init__(self):        
+        
+        self.gtkentry=gtk.Entry.__init__(self)
+        self.chars = re.compile(r'[\-\.\(\)/{_}|]')
+        self.set_text('')
+        hid = self.connect_after('insert-text', self.filter)
+        self.set_data('handlerid', hid)
+              
+                
+    def set(self, text, *args):
+        
+        hid = self.get_data('handlerid')
+        self.handler_block(hid)
+        self.set_text(text)
+        self.set_position(self.z)
+        self.handler_unblock(hid)
+            
+        
+    def filter(self, *args):
+        _text=self.get_text()
+        _text=self.unmask(_text)
+        _new=self.mask(_text)
+        gobject.timeout_add(1, self.set , _new)
+        
+    
+    def validate(self, text_char, mask_char):
+        
+        num = re.compile(r'[0-9]')
+        lettup = re.compile(r'[A-Z]')
+        lettdw = re.compile(r'[a-z]')
+                   
+        if mask_char == '9':
+            valid = num.match(text_char)
+        elif mask_char == 'a':
+            valid = lettdw.match(text_char)
+        elif mask_char == 'A':
+            valid = lettup.match(text_char)
+        elif mask_char == 'X':
+            valid =  (num.match(text_char) or
+                     lettdw.match(text_char) or
+                     lettup.match(text_char))
+        
+        return valid
+    
+    def mask(self, _text):
+        
+        len_mask=int(len(self._mask))
+        self._mask=list(self._mask)
+        _len=int(len(_text))
+        _text=list(_text)
+        z=0
+        m=0
+        new=''
+        for n in range(len_mask):
+            mask_char=self._mask[n]
+            if z<_len:
+                if self.chars.match(mask_char):
+                    new=new+mask_char
+                    m=m+1
+                
+                else:
+                    text_char=_text[z]
+                    if self.validate(text_char, mask_char):
+                        new=new+text_char
+                        z=z+1
+        self.z=z+m
+        return new
+        
+    def unmask(self, _text):
+        _text=self.chars.sub('',_text)
+        return _text
+        
+    def set_mask(self, _mask):
+        self._mask=_mask
+        self.set_max_length(len(self._mask))
+        
+    
+    
+
+class EntryExample:
+    
+    def entry_toggle_editable(self, checkbutton, entry):
+        entry.set_editable(checkbutton.get_active())
+
+    def entry_toggle_visibility(self, checkbutton, entry):
+        entry.set_visibility(checkbutton.get_active())
+
+    def __init__(self):
+        
+        window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        window.set_size_request(200, 100)
+        window.set_title("Teste de EntryMask")
+        window.connect("delete_event", lambda w,e: gtk.main_quit())
+
+        vbox = gtk.VBox(False, 0)
+        window.add(vbox)
+        vbox.show()
+
+        entry = EntryMask()
+        entry.set_mask('99.999.999/9999-XX')
+        vbox.pack_start(entry, True, True, 0)
+        entry.show()
+
+        hbox = gtk.HBox(False, 0)
+        vbox.add(hbox)
+        hbox.show()
+                                  
+        check = gtk.CheckButton("Editavel")
+        hbox.pack_start(check, True, True, 0)
+        check.connect("toggled", self.entry_toggle_editable, entry)
+        check.set_active(True)
+        check.show()
+    
+        check = gtk.CheckButton("Visivel")
+        hbox.pack_start(check, True, True, 0)
+        check.connect("toggled", self.entry_toggle_visibility, entry)
+        check.set_active(True)
+        check.show()
+                                   
+        button = gtk.Button(stock=gtk.STOCK_CLOSE)
+        button.connect("clicked", lambda w: gtk.main_quit())
+        vbox.pack_start(button, True, True, 0)
+        button.set_flags(gtk.CAN_DEFAULT)
+        button.grab_default()
+        button.show()
+        window.show()
+
+def main():
+    gtk.main()
+    return 0
+
+if __name__ == "__main__":
+    EntryExample()
+    main()
+
+}}}

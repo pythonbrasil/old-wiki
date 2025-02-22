@@ -1,0 +1,680 @@
+''(Esse texto é uma tradução de [[http://ivory.idyll.org/articles/advanced-swc/|Intermediate and Advanced Software Carpentry in Python]], de C Titus Brown. O original, segundo o autor, estão licenciados sob a Creative Commons, então a tradução também está.)''
+
+Os tópicos apresentados a partir de Pacotes úteis, subprocess, rpy, matplotlib, Python Idiomático 3: new-style classes, Atributos gerenciados, Descriptors, GUI Gossip, Python 3.0 já foram quase que completamente traduzidos por LeonardoAndrade; uma atualização da tradução será posta aqui nos próximos dias. Se você deseja ajudar na tradução desse artigo, escolha outros tópicos para evitar retrabalho.
+Também informe nessa páginas quais tópicos você já traduziu, para informar a outros colaboradores.
+
+= Carpintaria de Software Intermediária e Avançada em Python =
+
+Bem-vindo! Você acabou de cair nas apostilas de um curso que eu apresentei no ''Lawrence Livermore National Lab'', entre 12 e 14 de junho de 2007.
+
+Essas notas foram planejadas para acompanhar minha palestra, que era uma demostração de de várias características e pacotes "intermediários" de Python. Como a demonstração era interativa, essas notas não são notas completas do que foi apresentado no curso. (Perdoe-me por isso; eles atualizaram minhas apostilas para serem mais completas...)
+
+Entretanto, todas as 70 páginas são livres para ver e imprimir; então, aproveite.
+
+Todos os erros são, naturalmente, meus. Note que quase todos os exemplos começando com {{{>>>}}} são ''doctests'', então você pode pegar o fonte e rodar doctest sobre ela para garantir que eu fui honesto. Só faça-me um favor e rode os ''doctests'' com Python 2.5 ;)
+
+Note que o primeiro dia do curso foi até o final de "Testando seu ''software''"; o segundo dia foi até o final de "Recursos ''online'' sobre Python"; e o terceiro dia terminou o curso.
+
+Códigos de exemplo (a maior parte das seções sobre sobre extensões em C) estão disponíveis [[http://ivory.idyll.org/articles/advanced-swc/code.tar.gz|aqui]]; veja o [[http://ivory.idyll.org/articles/advanced-swc/code/README.txt|README]] para mais informações.
+
+<<TableOfContents>>
+
+= Python Idiomático =
+
+Trechos do Zen do Python por Tim Peters:
+
+ * Bonito é melhor do que feio.
+ * Explícito é melhor do que implícito.
+ * Simples é melhor do que complexo.
+ * Legibilidade conta
+
+(Vale a pena ler todo o Zen todo...)
+
+O primeiro passo em programação é colocar as coisas para funcionar.
+
+O próximo passo em programação é colocar as coisas para funcionar regularmente.
+
+Depois disso, é reutilização de código e projetar para reutilização.
+
+Por aí você começará a escrever Python idiomático.
+
+Python idiomático é o que você escreve quando a única coisa com a qual você está lutando é com a maneira certa de resolver seu problema, sem lutar com a linguagem de programação, algum erro estranho de biblioteca, algum problema de recuperação de dados ou qualquer outra coisa estranha à resolução do seu problema real. As construções que você prefere podem variar das que eu prefiro, mas com Python haverá uma quantidade razoável de sobreposição, porque geralmente há uma maneira óbvia de fazer cada tarefa. (Uma ressalva: "óbvio", em certa medida, depende do olho do observador.)
+
+Por exemplo, vamos considerar a maneira certa de acompanhar o número do item durante a iteração sobre uma lista. Então, dada uma lista z,
+
+{{{
+>>> z = [ 'a', 'b', 'c', 'd' ]
+}}}
+
+vamos tentar imprimir cada item junto com seu índice.
+
+Você poderia usar um laço while:
+
+{{{
+>>> i = 0
+>>> while i < len(z):
+...    print i, z[i]
+...    i += 1
+0 a
+1 b
+2 c
+3 d
+}}}
+
+ou um laço for:
+
+{{{
+>>> for i in range(0, len(z)):
+...    print i, z[i]
+0 a
+1 b
+2 c
+3 d
+}}}
+
+mas eu acho que a opção mais clara é usar enumerate:
+
+{{{
+>>> for i, item in enumerate(z):
+...    print i, item
+0 a
+1 b
+2 c
+3 d
+}}}
+
+Por que essa opção é a mais clara? Bem, olhe para o trecho do Zen do Python acima: é explícito (nós usamos enumerate); é simples; é legível; e eu poderia até argumentar que tem melhor aparência do que o laço while, se não for exatamente "bonito".
+
+Python oferece esse tipo de simplicidade em tantos lugares quanto possível. Considere os manipuladores de arquivo; você sabia que eles eram iteráveis?
+
+{{{
+>>> for line in file('data/listfile.txt'):
+...    print line.rstrip()
+a
+b
+c
+d
+}}}
+
+Onde Python realmente brilha é que esse tipo de construção simples -- nesse caso, iteráveis -- é muito fácil não somente de usar, mas de construir em seu próprio código. Isso fará seus códigos muito mais reutilizáveis, ao mesmo tempo que aumentará a legibilidade de código dramaticamente. E esse é o tipo de benefício que você obterá escrevendo Python idiomático.
+
+== Alguns tipos de dados básicos ==
+
+Estou certo que vocês estão familiarizados com tuplas, listas e dicionários, certo? Vamos fazer uma revisão rápida mesmo assim.
+
+'tuplas' estão em todo lugar. Por exemplo, esse código que troca dois números implicitamente usa tuplas:
+
+{{{
+>>> a = 5
+>>> b = 6
+>>> a, b = b, a
+>>> print a == 6, b == 5
+True True
+}}}
+
+Isso é tudo que tenho a dizer sobre tuplas.
+
+Eu uso listas e dicionários ''o tempo todo''. Eles são as duas maiores invenções da humanidade, pelo menos no que concerne ao Python. Com listas, é fácil manter o controle das coisas:
+
+{{{
+>>> x = []
+>>> x.append(5)
+>>> x.extend([6, 7, 8])
+>>> x
+[5, 6, 7, 8]
+>>> x.reverse()
+>>> x
+[8, 7, 6, 5]
+}}}
+
+Também é fácil de ordenar. Considere esse conjunto de dados:
+
+{{{
+>>> y = [ ('IBM', 5), ('Zil', 3), ('DEC', 18) ]
+}}}
+
+O método {{{sort}}} executará {{{cmp}}} em cada uma das tuplas, que ordena com base no primeiro elemento de cada tupla:
+
+{{{
+>>> y.sort()
+>>> y
+[('DEC', 18), ('IBM', 5), ('Zil', 3)]
+}}}
+
+Frequentemente é útil ordenar tuplas com base em um elemento diferente, e existem diversas maneiras de fazer isso. Eu prefiro fornecer meu próprio método de ordenação:
+
+{{{
+>>> def sort_on_second(a, b):
+...   return cmp(a[1], b[1])
+}}}
+{{{
+>>> y.sort(sort_on_second)
+>>> y
+[('Zil', 3), ('IBM', 5), ('DEC', 18)]
+}}}
+Observe que aqui eu estou usando o método builtin {{{cmp}}} (que é o que {{{sort}}} usa por padrão: {{{y.sort()}}} é equivalente a {{{y.sort(cmp)}}}) para fazer a comparação da segunda parte da tupla.
+
+Esse tipo de função é realmente útil para ordenar dicionários por valor, como mostrarei abaixo.
+
+(Para uma discussão mais aprofundada das opções de ordenação, visite o [[http://wiki.python.org/moin/HowTo/Sorting|Sorting HowTo]].)
+
+Agora para os dicionários!
+
+Seu dicionário é apenas uma hash table que recebe chaves e retorna valores:
+
+{{{
+>>> d = {}
+>>> d['a'] = 5
+>>> d['b'] = 4
+>>> d['c'] = 18
+>>> d
+{'a': 5, 'c': 18, 'b': 4}
+>>> d['a']
+5
+}}}
+
+Você também pode inicializar um dicionário usando o tipo {{{dict}}} para criar um objeto dict:
+
+{{{
+>>> e = dict(a=5, b=4, c=18)
+>>> e
+{'a': 5, 'c': 18, 'b': 4}
+}}}
+
+Os dicionários possuem algumas características realmente úteis que eu uso frequentemente. Por exemplo, vamos obter pares (chave, valor) onde nós podemos ter múltiplos valores para cada chave. Isso é, dado um arquivo contendo esses dados,
+
+{{{
+a 5
+b 6
+d 7
+a 2
+c 1
+}}}
+
+suponha que queremos manter todos os valores. Se simplesmente fizermos da maneira simples,
+
+{{{
+>>> d = {}
+>>> for line in file('data/keyvalue.txt'):
+...   key, value = line.split()
+...   d[key] = int(value)
+}}}
+
+nós perderíamos todos os valores para cada chave com exceção do último:
+
+{{{
+>>> d
+{'a': 2, 'c': 1, 'b': 6, 'd': 7}
+}}}
+
+Você pode obter ''todos'' os valores usando {{{get}}}:
+
+{{{
+>>> d = {}
+>>> for line in file('data/keyvalue.txt'):
+...   key, value = line.split()
+...   l = d.get(key, [])
+...   l.append(int(value))
+...   d[key] = l
+>>> d
+{'a': [5, 2], 'c': [1], 'b': [6], 'd': [7]}
+}}}
+
+O ponto chave aqui é que {{{d.get(k, default)}}} é equivalente a {{{d[k]}}} se {{{d[k]}}} existir; caso contrário, ele retorna {{{default}}}. Então, pela primeira vez que cada chave é usada, {{{l}}} é definida como uma lista vazia; o valor é acrescentado a essa lista, e então o valor é definido para aquela chave.
+
+(Existem toneladas de pequenos truques como esses acima, mas esses são os que eu uso com mais freqüência; veja o Python Cookbook para um suprimento infinito!)
+
+Agora, vamos tentar combinar alguns dos truques de ordenação acima com dicionários. Dessa vez, nosso problema exemplo é que nós gostaríamos de ordenar as chaves do dicionário {{{d}}} que acabamos de carregar, mas ao invés de ordenar pela chave, nós queremos ordenar pela soma dos valores de cada chave.
+
+Primeiro, vamos definir uma função de ordenação:
+
+{{{
+>>> def sort_by_sum_value(a, b):
+...    sum_a = sum(a[1])
+...    sum_b = sum(b[1])
+...    return cmp(sum_a, sum_b)
+}}}
+
+Agora aplique aos itens do dicionário:
+
+{{{
+>>> items = d.items()
+>>> items
+[('a', [5, 2]), ('c', [1]), ('b', [6]), ('d', [7])]
+>>> items.sort(sort_by_sum_value)
+>>> items
+[('c', [1]), ('b', [6]), ('a', [5, 2]), ('d', [7])]
+}}}
+
+e voila, você tem sua lista de chaves ordenada pelos valores das somas!
+
+Como eu disse, existem inúmeros pequenos truques que você pode fazer com dicionários. Eu acho que eles são incrivelmente poderosos.
+
+== List comprehentions ==
+
+== Criando seus próprios tipos ==
+
+== Iterators ==
+
+Iterators são outra característica de Python; diferente dos tipos lista e dicionário discutidos anteriormente, um iterator não é de fato um ''tipo'', mas um ''protocolo''. Isso significa que Python concorda em respeitar qualquer coisa que suporte um conjunto particular de métodos como se fosse um iterator. (Estes protocolos aparecem em todo lugar em Python; nós estivemos tirando vantagem do protocolo de mapeamento e de sequência anteriormente, quando definimos {{{__getitem__}}} e {{{__len__}}}, respectivamente.
+
+Iterators são versões mais gerais do protocolo de sequência; segue um exemplo:
+
+{{{
+>>> class SillyIter:
+...   i = 0
+...   n = 5
+...   def __iter__(self):
+...      return self
+...   def next(self):
+...      self.i += 1
+...      if self.i > self.n:
+...         raise StopIteration
+...      return self.i
+}}}
+{{{
+>>> si = SillyIter()
+>>> for i in si:
+...   print i
+1
+2
+3
+4
+5
+}}}
+
+Aqui, {{{__iter__}}} apenas retorna {{{self}}}, um objeto que possui a função {{{next()}}}, que (quando chamado) retorna um valor ou levanta uma excessão {{{StopIteration}}}.
+
+Na verdade, nós já vimos diversos iterators disfarçados; em particular, {{{enumerate}}} é um iterator. Para fixar o conceito, segue uma reimplementação simples de {{{enumerate}}}:
+
+{{{
+>>> class my_enumerate:
+...   def __init__(self, some_iter):
+...      self.some_iter = iter(some_iter)
+...      self.count = -1
+...
+...   def __iter__(self):
+...      return self
+...
+...   def next(self):
+...      val = self.some_iter.next()
+...      self.count += 1
+...      return self.count, val
+>>> for n, val in my_enumerate(['a', 'b', 'c']):
+...   print n, val
+0 a
+1 b
+2 c
+}}}
+
+Você também pode iterar sobre um iterator à "moda antiga":
+
+{{{
+>>> some_iter = iter(['a', 'b', 'c'])
+>>> while 1:
+...   try:
+...      print some_iter.next()
+...   except StopIteration:
+...      break
+a
+b
+c
+}}}
+
+mas isso seria tolice na maior parte das situações! Eu uso isso apenas se quero pegar os primeiros valores de um iterator.
+
+Com iterators, uma coisa para ficar atento é o retorno de {{{self}}} pela função {{{__iter__}}}. Você pode tão facilmente escrever um iterator que não é tão reutilizável quanto você pensa que é. Por exemplo, suponha que você tenha a seguinte classe:
+
+{{{
+>>> class MyTrickyIter:
+...   def __init__(self, thelist):
+...      self.thelist = thelist
+...      self.index = -1
+...
+...   def __iter__(self):
+...      return self
+...
+...   def next(self):
+...      self.index += 1
+...      if self.index < len(self.thelist):
+...         return self.thelist[self.index]
+...      raise StopIteration
+}}}
+
+Isso funciona como esperado contanto que você crie um novo objeto a cada vez:
+
+{{{
+>>> for i in MyTrickyIter(['a', 'b']):
+...   for j in MyTrickyIter(['a', 'b']):
+...      print i, j
+a a
+a b
+b a
+b b
+}}}
+
+mas vai quebrar se você criar o objeto apenas uma vez:
+
+{{{
+>>> mi = MyTrickyIter(['a', 'b'])
+>>> for i in mi:
+...   for j in mi:
+...      print i, j
+a b
+}}}
+
+porque {{{self.index}}} é incrementado em cada loop.
+
+
+== Generators ==
+
+Generators são uma implementação Python de [http://en.wikipedia.org/wiki/Coroutine corrotinas]. Essencialmente, elas são funções que permitem que você suspenda sua execução e retorne um valor: 
+
+{{{
+>>> def g():
+...   for i in range(0, 5):
+...      yield i**2
+>>> for i in g():
+...    print i
+0
+1
+4
+9
+16
+}}}
+
+Você poderia fazer isso com uma lista tão facilmente quanto:
+
+{{{
+>>> def h():
+...   return [ x ** 2 for x in range(0, 5) ]
+>>> for i in h():
+...    print i
+0
+1
+4
+9
+16
+}}}
+
+Mas você pode fazer coisas com generators que não poderia fazer com listas finitas. Considere duas implementações do Crivo de Eratóstenes para achar números primos abaixo.
+
+Primeiro, vamos definir algum código que pode ser usado por ambas as implementações:
+
+{{{
+>>> def divides(primes, n):
+...   for trial in primes:
+...      if n % trial == 0: return True
+...   return False
+}}}
+
+Agora, vamos escrever um crivo simples com um generator:
+
+{{{
+>>> def prime_sieve():
+...    p, current = [], 1
+...    while 1:
+...        current += 1
+...        if not divides(p, current): # if any previous primes divide, cancel
+...            p.append(current)           # this is prime! save & return
+...            yield current
+}}}
+
+Essa implementação encontrará (dentro das limitações das funções matemáticas de Python) todos os números primos; o programador tem a responsabilidade de pará-la.
+
+{{{
+>>> for i in prime_sieve():
+...    print i
+...    if i > 10:
+...        break
+2
+3
+5
+7
+11
+}}}
+
+Aqui nós estamos usando um generator para implementar a geração de uma série infinita com uma única definição de função. Fazer o equivalente com um iterator requereria uma classe, para que uma instância possa armazenar as variáveis:
+
+{{{
+>>> class iterator_sieve:
+...    def __init__(self):
+...       self.p, self.current = [], 1
+...    def __iter__(self):
+...       return self
+...    def next(self):
+...       while 1:
+...          self.current = self.current + 1
+...          if not divides(self.p, self.current):
+...             self.p.append(self.current)
+...             return self.current
+}}}
+{{{
+>>> for i in iterator_sieve():
+...    print i
+...    if i > 10:
+...        break
+2
+3
+5
+7
+11
+}}}
+
+Também é mais fácil escrever rotinas como {{{enumerate}}} como um generator do que como um iterator:
+
+{{{
+>>> def gen_enumerate(some_iter):
+...   count = 0
+...   for val in some_iter:
+...      yield count, val
+...      count += 1
+}}}
+{{{
+>>> for n, val in gen_enumerate(['a', 'b', 'c']):
+...   print n, val
+0 a
+1 b
+2 c
+}}}
+
+Nota abstrusa: nós nem mesmo temos que capturar {{{StopIteration}}} aqui, porque o loop for simplesmente termina quando se chega ao fim de {{{some_iter}}}.
+
+== assert ==
+
+== Conclusões ==
+
+= Estruturando, Testando e Mantendo Programas Python =
+
+== Programando para reusabilidade ==
+
+== Módulos e scripts ==
+
+== Pacotes ==
+
+== Uma pequena digressão: nomes e formatação ==
+
+== Outra pequena digressão: doctstrings ==
+
+== Compartilhando dados entre código ==
+
+== Escopo: uma digressão ==
+
+== De volta ao compartilhamento de dados ==
+
+== Como módulos são carregados (e quando código é executado) ==
+
+== PYTHONPATH, e encontrando pacotes e módulos duranto o desenvolvimento ==
+
+== setup.py e distutils: a maneira à antiga de instalar pacotes Python ==
+
+== setup.py, eggs e easy_install: a nova maneira da moda de instalar pacotes Python ==
+
+= Testando seu software =
+
+"Depurar é duas vezes mais difícil que escrever o código pela primeira vez. Portanto, se você escreve o código da forma mais inteligente possível, você não é, por definição, inteligente o suficiente para depurá-lo." -- Brian W. Kernighan.
+
+Todo mundo testa seu software em algum nível, ainda que apenas executando e experimentando (tecnicamente conhecido como "teste de fumaça" ["smoke testing"]). A maioria dos programadores faz uma certa quantidade de testes exploratórios, o qual envolve a execução através de vários caminhos funcionais em seu código e vendo se eles funcionam.
+
+Teste sistemático, no entanto, é um assunto diferente. Testes sistemáticos simplesmente não podem ser feitos de forma adequada sem uma certa (grande!) quantidade de automação, pois cada mudança no software significa que o mesmo precisa ser totalmente testado de novo.
+
+Abaixo, vou apresentar você a alguns conceitos de teste automatizado de nível mais baixo e mostrar como usar as estruturas embutidas no Python para começar a escrever testes.
+
+== Uma introdução a conceitos sobre teste ==
+
+Existem vários tipos de testes que são particularmente úteis para programadores de pesquisa. ''Testes unitários'' são testes para unidades de funcionalidade razoavelmente pequenas e específicas. ''Testes funcionais'' testam caminhos funcionais inteiros através do seu código. ''Testes de regressão'' asseguram que (dentro da resolução dos seus registros) a saída do seu programa não mudou.
+
+Todos os três tipos de teste são necessários de formas diferentes.
+
+Testes de regressão mostram quando ocorrem mudanças inesperadas de comportamento e podem confirmar que o processamento básico dos dados permanece funcionando. Para cientistas, isto é particularmente importante se você está tentando vincular resultados de pesquisas passadas a novos resultados: se você não consegue mais replicar seus resultados originais utilizando o código modificado, então vocês deve suspeitar do código, ''a menos que'' as mudanças sejam intencionais. 
+
+Em contraste, tanto testes unitários quanto funcionais tendem a ser baseados em ''expectativas''. Quero dizer com isso que você usa os testes para estabelecer qual comportamento você ''espera'' do seu código e escreve seus testes de forma que eles ''assumam'' que tais expectativas sejam atendidas.
+
+
+A diferença entre testes unitários e funcionais é nebulosa na maioria das implementações atuais. Testes unitários tendem a ser mais curtos e requerem menos preparação (setup) e encerramento (teardown), enquanto testes funcionais poderm ser bastante longos. Gosto da distinção de Kumar McMillan: testes funcionais mostram ''quando'' seu código está quebrado, enquanto que testes unitários mostram ''onde'' seu código está quebrado. Ou seja, por causa da granularidade mais fina dos testes unitários, um teste unitário quebrado pode identificar um trecho de código em particular como fonte de um erro, enquanto que os testes funcionais meramente mostram que uma funcionalidade está quebrada.
+
+== O módulo doctest ==
+
+== Tests unitários com unittest ==
+
+== Testes com nose ==
+
+== Análise de cobertura de código ==
+
+== Adicionando testes para um projeto existente ==
+
+== Pensamentos finais sobre testes automatizados ==
+
+
+= Uma Introdução Estendida ao Framework de Teste Unitiário nose =
+
+== O que são testes unitários? ==
+
+== Por que usar um framework? (e por que nose?) ==
+
+== Alguns poucos exemplos simples ==
+
+=== Suporte a testes ===
+
+=== Exemplos são incluídos! ===
+
+== Um guia um tanto mais completo para descoberta de testes e execução ==
+
+=== Rodando testes ===
+
+=== Depurando descoberta de testes ===
+
+
+== A linha de comando do nose ==
+
+=== -w: Especificando o diretório corrente ===
+
+=== -s: Não capturar stdout ===
+
+=== -v: Saída de informação e debug ===
+
+=== Especificando uma lista de testes para rodar ===
+
+== Rodando doctests no nose ===
+
+== O plugin 'attrib'  -- rodando seletivamente subconjuntos de testes ==
+
+== Rodando nose programaticamente ==
+
+== Escrevendo plugins -- um guia simples ==
+
+== Ressavlas ao nose  -- avise o comprador, ocasionamente ==
+
+== Créditos==
+
+
+= Python Idiomático revisitado =
+
+== sets ==
+
+== any e all ==
+
+== Exceções e hierarquia de exceções ==
+
+== Decorators de funções ==
+
+== try/finally ==
+
+== Argumentos de funções e wrapping functions ==
+
+= Mensurando e Aumentando Performance =
+
+== Que profiler devo usar? ==
+
+== Mensurando snippets de código com timeit ==
+
+= Acelerando Python =
+
+== psyco ==
+
+=== Instalando psyco ===
+
+=== Usando psyco ===
+
+== pyrex ==
+
+= Ferramentas para Ajudar Você a Trabalhar =
+
+== IPython ==
+
+== screen e VNC ==
+
+== Trac ==
+
+= Recursos Online sobre Python =
+
+= Embrulhando(?) C/C++ para Python =
+
+== Wrapping manual ==
+
+== Embrulhando código Python com SWIG ==
+
+== Embrulhando código C com pyrex ==
+
+== ctypes ==
+
+== SIP ==
+
+== Boost.Python==
+
+== Recomendações ==
+
+== Uma ou duas outras notas sobre wrapping ==
+
+= Pacotes para Multiprocessamento =
+
+== threading ==
+
+
+== Escrevendo (e indicando) extensões C threadsafe ==    
+
+== parallelpython ==
+
+== Rpyc ==
+
+== pyMPI ==
+
+== multitask ==
+
+= Pacotes úteis =
+
+== subprocess ==
+
+== rpy ==
+
+== matplotlib ==
+
+= Python Idiomático 3: new-style classes =
+
+== Atributos gerenciados ==
+
+== Descriptors ==
+
+= GUI Gossip =
+
+= Python 3.0 =

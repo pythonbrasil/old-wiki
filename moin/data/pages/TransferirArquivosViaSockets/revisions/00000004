@@ -1,0 +1,55 @@
+Depois de muito penar em sockets, tive uma luz, e vou postar um pequeno exemplo de como transferir arquivos por sockets.
+
+A idéia é não depender de serviços como FTP, SSH, samba para transferir um arquivo (por exemplo um backup remoto).
+
+no servidor que vai receber o arquivo "foo.tar.gz"
+
+{{{
+#serv_sock.py
+
+import socket
+
+HOST= PORT=57000 
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM) s.bind((HOST,PORT)) s.listen(1)
+
+conn,addr= s.accept() 
+arq = open('/home/backup/foo.tar.gz','w')
+
+while 1:
+
+    dados=conn.recv(1024) 
+    if not dados:
+    break
+    arq.write(dados)
+
+arq.close() 
+conn.close()
+
+no cliente, ele vai enviar um arquivo "financeiro.tar.gz" para o servidor que está escutando na porta 57000, onde quando for conectar pela função connect, tudo que for "enviado" para o servidor, será executado a baixo do accept() (pelo que eu li no docs do python.org)
+
+#client_sock.py 
+import socket
+
+HOST='localhost' #coloca o host do servidor 
+PORT=57000
+
+s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
+s.connect((HOST,PORT)) 
+arq=open('/home/departamentos/financeiro/financeiro.tar.gz','r')
+
+for i in arq.readlines():
+    socket.send(i)
+
+arq.close() 
+s.close()
+}}}
+
+#fim
+
+
+espero que ajude alguma coisa.
+
+Carlos Augusto Pacheco [MAILTO] c.augusto@paxeco.com.br 
+
+Volta para CookBook.

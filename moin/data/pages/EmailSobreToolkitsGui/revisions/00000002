@@ -1,0 +1,42 @@
+#pragma section-numbers off
+= Email Sobre Toolkits GUI =
+
+Uma reprodução do e-mail original segue abaixo (com uma pequena adição do Picogui):
+
+----
+
+'''De:''' Osvaldo Santana Neto[[BR]]
+'''Para:''' Vitor[[BR]]
+'''Assunto:''' Re: [python-br] Novo na lista
+
+Olá Vitor,
+Em primeiro lugar, seja bem vindo à lista e à comunidade Python :)
+
+Vamos às suas dúvidas:
+
+O que você precisa para programar em Python:
+
+   1 - Ambiente Python. Você vai encontrar o !ActivePython (Distribuição Python com as extensões para desenvolvimento Windows) no site da própria [http://www.activestate.com/Products/Download/Download.plex?id=ActivePython ActiveState]
+
+     Para instalar ele no Win98 será necessário baixar e instalar o Windows Installer 2.0+ (cujo link está disponível na página acima).
+
+     Você também pode instalar a distribuição Python "oficial" direto no site do [http://www.python.org/ftp/python/2.3.3/Python-2.3.3.exe Python] e depois baixar as extensões Python (é opcional) no site  [http://starship.python.net/crew/mhammond/downloads/win32all-163.exe Python Windows]. Ambos já vem com uma IDE Python para trabalhar. Na extensão win32 vem outra IDE bem fácil de usar também.
+
+   2 - Sim. É possível usar Python para desenvolver interface gráfica. Um dos 'pecados' de Python é exatamente oferecer várias opções para essa tarefa. Nativamente o Python vem com a biblioteca Tk para GUI (eu acho horrível, mas tem gente que ama. E gosto não se discute). Além dela é possível desenvolver nativamente para Windows com as extensões win32 (mas tem um porém, essa aplicação sua não irá funcionar em outro sistema operacional além do windows). Aí entram as variedades. Vou listar aqui algumas opções para você experimentar:
+
+   * '''wxPython''' - Acho que é um dos mais usados atualmente. (http://www.wxpython.org) Tem uma IDE para desenvolvimento de aplicações semelhante ao Delphi chamada Boa-Constructor (http://boa-constructor.sf.net). É multiplataforma.
+   * '''PyGTK''' - (http://www.daa.com.au/~james/software/pygtk/) Acho que é a que eu mais gosto, pode ser usada com o Glade (http://glade.gnome.org) para desenhar interfaces. Incoveniente: Até é possível usá-la no Windows, mas não é das tarefas mais simples.
+   * '''Fox''' (!FxPy) http://fxpy.sourceforge.net/ Ainda não usei. Os widgets parecem bem bonitos, só não sei se é estável o suficiente. E diz o site que é portável também. Então vale uma olhadinha.
+   * '''SWT''' - Essa aqui não existe pra Python ainda, mas vou listar aqui para 'cutucar' um outro membro aqui da lista :)
+   * '''Picogui''' - (http://www.picogui.org) Não usei também. No site parece ser um projeto bem completo (aparentemente eles vão além de um toolkit GUI). (Agradecimentos ao Fabiano Weimar Dos Santos pela dica, eu sequer tinha ouvido falar nesse projeto mas ele parece bem interessante)
+
+Acho que aqui já tem '''bastante''' coisa pra você pesquisar :)
+
+Boa sorte e em caso de dúvida não se acanhe de em enviar um e-mail aqui pra lista...
+
+Valeu,
+Osvaldo
+
+----
+
+Osvaldo Santana Neto

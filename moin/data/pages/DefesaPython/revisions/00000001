@@ -1,0 +1,74 @@
+#pragma section-numbers off
+= Defesa do Python =
+
+== Introdução ==
+Este artigo tem como objetivo esclarecer algumas dúvidas quanto à organização e processo decisório do python bem como suas principais características. Ele foi construido através da lista de discussão do grupo PythonBrasil. 
+
+== Qualidade da linguagem ==
+A linguagem é muito boa, fácil de ser usada e aprendida, tem uma sintaxe agradável, tem implementações livres, ágil e interativa. Em Python os tipos primitivos tem uma grande integração
+com os objetos e recentemente a distinção entre tipos primitivos e objetos praticamente desapareceu no uso cotidiano da linguagem. Opinião de Bruce Eckel sobre Python: http://www.artima.com/intv/aboutme.html
+
+A interatividade do interpretador é algo que não dá para descrever, só quem usou sabe. Ir criando o código e testando, com ajuda e __doc__ nos obriga a estudar bem o problema, pois a linguagem facilita o resto. Isso a tornou uma das chamadas “Agile Languages” próprias para Extreme Programming.
+Organização da linguagem: Python Software Foundation
+
+Python é uma marca mantida pela Python Software Foundation. A PSF é uma instituição sem fins lucrativos que é responsável por proteger a plataforma Python. É ela quem determina se uma implementação de linguagem pode ser chamada de Python ou não.
+
+A PSF é formada por vários desenvolvedores e é liderada por Guido van Rossum que é o criador da linguagem. No universo pythonista existe um ditador benevolente (BDFL - Benevolent Dictator for Life) que é o próprio GvR. Alguns podem dizer que isso é uma desvantagem do Python, mas na verdade isso é que protege o Python e O GvR está nessa posição por mérito. A democracia nem sempre é muito boa, principalmente quando envolve muito dinheiro pode ser corrompida e tomar rumos inesperados.
+
+O processo de proposição de mudanças na plataforma Python ocorre seguindo mais ou menos a seguinte seqüência:
+1.Alguma discussão surge na lista python-dev com alguma proposta.
+2.Se a proposta já apresenta alguns bons argumentos é sugerido então que se crie uma PEP (Python Enhancement Proposals) (http://python.org/peps/) que deve seguir algumas regras básicas. Neste documento a proposta é descrita em detalhes e algumas das sugestões já coletadas na lista são anotadas.
+3.A PEP então é colocada em Draft e é discutida na lista de discussões e modificações / melhorias são feitas.
+4.Terminada essa etapa pode-se pedir a implementação da funcionalidade proposta quando isso se aplica.
+5.Submete-se então essa PEP à uma votação informal (onde as pessoas votam com +1 / 0 / -1) na própria lista de discussões. Essa votação serve para fundamentar o próximo passo.
+6.Terminado tudo isso o BDFL (GvR) se pronuncia sobre a aprovação, a reprovação ou à aprovação com mudanças da PEP.
+
+A linguagem Python e a PSF oferecem uma implementação padrão da linguagem que é costumeiramente chamada de CPython (por ser implementada em C) que é conhecida como o padrão *de fato* da linguagem.
+
+== Estabilidade ==
+Python é muito estável e é usada em aplicações críticas em vários lugares do mundo e em empresas conhecidas como o Google, Nasa e em várias das melhores distribuições linux.
+
+== Continuidade da evolução ==
+A PSF garante a continuidade da evolução e a linguagem tem sempre implementações livres de seu padrão para garantir que, sob a aprovação da PSF, a linguagem possa evoluir.
+
+== Compatibilidade com versões prévias ==
+Teremos uma novidade que irá  aparecer em pouco tempo: Python 3.0. Até o momento atual sempre  existiu uma preocupação em manter compatibilidade retroativa de códigos Python. Mas com a versão 3.0 essa preocupação não existirá. Irão aproveitar essa oportunidade para consertar erros de desenho da linguagem e isso certamente irá quebrar compatibilidade com código legado. Mas mesmo após o lançamento da versão 3.0 ainda será mantida a série 2.X da linguagem para que desenvolvedores possam migrar tranquilamente com o passar do tempo.
+Mas como no Python você pode dizer qual a versão do interpretador seu módulo usa e você pode ter mais de uma versão do interpretador na máquina sem conflitos, isso será muito tranquilo mesmo.
+ 
+== Opção do mercado ==
+Basta pesquisar no Google para verificar a variedade de pessoas, empresas e governos que optaram pelo Python. Mas além disso há uma coisa interessante, nós somos os consumidores de tecnologia e também produtores. Se nós consumimos Python os fornecedores vão procurar nos oferecer Python. Portanto nós fazemos o mercado.
+
+== Suporte à linguagem ==
+Além de uma comunidade forte, da Python Software Foundation, empresas patrocinadoras o apoio de grandes empresas não é muito grande, a IBM tem um apoio modesto ao Python. A Nokia também está investindo no Python. 
+
+== Grandes usuários ==
+Os mais comentados são Nasa e Google, mas a Nokia está investindo em Python, além de diversas universidades que estão vendo o Python com alternativa para uma linguagem acadêmica. No governo é usado no Serpro e no Interlegis. Veja: http://www.pythonology.com/success
+
+== Comunidade de sw livre ==
+Python é muito bem vista e utilizada no ambiente de software livre. As suas implementações são livres e de alta produtividade. Quem usa a distribuição debian pode usar o comando “ apt-cache search python “ para ver a quantidade de software relacionado a python está disponível para instalação. 
+
+== PUGs ==
+Que tal criarmos os PUGs regionais?
+
+== Ferramentas, bibliotecas, componentes ==
+Além do python vir com uma API bem completa, possui uma gama muito grande de bibliotecas, componentes e ferramentas. Sem falar que dá para usar a API do Java através do Jython. De quebra ainda há o Ipython, para plataforma .NET.
+
+== Conhecimento da linguagem ==
+São poucos, e os poucos que existem costumam estar muito bem empregados.
+Atualmente exige uma demanda gigantesca de profissionais Python, como a oferta de profissionais é pequena existem grandes oportunidades com Python.
+
+== Qualidade dos profissionais ==
+Existem profissionais dos mais diversos perfis. E os que conheço são extremamente competentes. Se há certificação Python no Brasil desconheço. Se o programador sabe Python é uma garantia muito boa de que o cara é bom. Ler: http://www.paulgraham.com/pypar.html
+O Python fornede ao desenvolvedor uma garantia a mais, a garantia de produtividade. Isto gera uma economia de tempo e custo, mas gera um ganho maior, há mais tempo para preocupação com a qualidade. Menor tempo, menor custo e mais qualidade. Além desses fatores é muito fácil treinar bons profissionais em Python do que a maioria das outras linguagens.
+
+== Fornecedores de serviços locais ==
+Ver: http://www.pythonbrasil.com.br/moin.cgi/EmpresasPython
+Além desses é possível solicitar que empresas de tecnologia, treinamento e fornecedores ofereçam serviços pois a tecnologia é aberta e a mão pode ser treinada facilmente.
+Há uma carencia nas livrarias brasileiras, porém aí está uma oportunidade também. Quem escrever bons livros de Python com certeza terá sucesso. Há um esforço de tradução de livros internacionais.
+
+== Conclusão ==
+Este artigo demonstrou que a Plataforma Python é uma excelente escolha para o ambiente coorporativo assim como academico, basta agora as empresas e universidades aproveitarem as vantagens desta maravilhosa plataforma verdadeiramente livre.
+
+----
+
+[RamiroLuz Ramiro Batista da Luz]

@@ -1,0 +1,73 @@
+#pragma section-numbers off
+= Receita: ThreadingXMLRPCServer =
+
+Nesse cookbook, eu demonstro a implementação de multi-threading a classe SimpleXMLRPCServer.
+
+== Código ==
+
+{{{
+#!python
+
+from SimpleXMLRPCServer import SimpleXMLRPCDispatcher,SimpleXMLRPCRequestHandler
+import SocketServer
+
+class ThreadingXMLRPCServer(SocketServer.ThreadingTCPServer,SimpleXMLRPCDispatcher):
+  """This class implements multi-threading to the SimpleXMLRPCServer class."""
+  def __init__(self, addr, logRequests=1):
+    """Basic initialization."""
+    self.logRequests = logRequests
+    SimpleXMLRPCDispatcher.__init__(self)
+    SocketServer.TCPServer.__init__(self, addr, SimpleXMLRPCRequestHandler)
+
+
+}}}
+
+== Exemplo de uso ==
+== Server ==
+{{{
+#!python
+from ThreadingXMLRPCServer import ThreadingXMLRPCServer
+from time import sleep
+
+def soma(a,b):
+  sleep(3)
+  return a+b
+
+if __name__ == '__main__':
+  #Criando um servidor xmlrpc em localhost na porta 9980, para não conflitar com outros servidores.
+  txmlrpc_server = ThreadingXMLRPCServer( ('',9980) )
+  txmlrpc_server.register_function(soma)
+  txmlrpc_server.serve_forever()
+
+}}}
+
+== Client ==
+{{{
+#!python
+from thread import start_new_thread
+from time import sleep
+from xmlrpclib import ServerProxy
+
+if __name__ == '__main__':
+  def request(s,x,y):
+    print 'Request de %s+%s=%s' % (x,y,s.soma(x,y))
+
+  sp = ServerProxy('http://localhost:9980/')
+  for i in xrange(3):
+    print 'Disparando request %s' % i
+    start_new_thread(request,(sp,i,i*2) )
+  print 'Aguardando 10 segundos pelas respostas.'
+  sleep(10)        
+
+}}}
+
+
+  Veja que no server, eu forcei um delay de 3 segundos para processar o request, isto simula um processo demorado, no cliente, eu criei 3 threads que fazem request ao server e espero 10 segundos pelas respostas.
+
+  Como teste, você pode substituir o ThreadingXMLRPCServer pelo SimpleXMLRPCServer e observar como ele responde uma requisição atrás da outra.
+
+Volta para CookBook
+
+----
+
+Mauricio Souza Lima

@@ -1,0 +1,73 @@
+Metaclasse para definir automaticamente __slots__ e todos os argumentos passados que iniciem com o caracter '_'
+
+
+{{{
+#!python
+
+class AutoSlots(type):
+    def __new__(meta, name, bases, data):
+        if '__init__' in data:
+            slots = data.get('__slots__', [])
+            init = data['__init__']
+            varnames = init.func_code.co_varnames
+            
+            for var in varnames:
+                if var.startswith('_'):
+                    var = var[1:]
+                    if var not in slots:
+                        slots.append(var)
+
+            if slots:
+                data['__slots__'] = slots
+
+        cls = super(AutoSlots, meta).__new__(meta, name, bases, data)
+        super(AutoSlots, cls).__init__(cls, name, bases, data)
+
+        return cls
+
+
+class AutoAttrs(type):
+    def __call__(cls, *args, **kwds):
+        o = object.__new__(cls, *args, **kwds)
+        if hasattr(cls, '__init__'):
+            names = cls.__init__.func_code.co_varnames
+            attrs = zip(names[1:], args)
+            for k, v in attrs:
+                if k.startswith('_'):
+                    setattr(o, k[1:], v)
+
+        cls.__init__(o, *args, **kwds)
+
+        return o
+
+
+class AutoSlotsAttrs(AutoAttrs, AutoSlots):
+    pass
+
+
+#teste:
+
+import unittest
+
+class Sample(object):
+    __metaclass__ = AutoSlotsAttrs
+    def __init__(self, _a, _b, c, d=None):
+        assert self.a + self.b == c
+    
+
+class Test(unittest.TestCase):
+    def testAttributes(self):
+        o = Sample(1, 2, 3, d=4)
+
+        self.assertEqual(o.a, 1)
+        self.assertEqual(o.b, 2)
+
+        self.assert_(not hasattr(o, 'c'))
+
+        self.assert_(hasattr(o, '__slots__'))
+        self.assertRaises(AttributeError, setattr, o, 'e', 10)
+
+
+if __name__ == '__main__':
+    unittest.main()
+}}}

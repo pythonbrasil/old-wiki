@@ -1,0 +1,91 @@
+#format wiki
+#language pt_br
+
+== Sobre o processo de escolha ==
+
+Os membros organizadores, patrocinadores e alguns palestrantes das 
+PyConBrasil I e II estão convencidos de que uma eleição direta não
+seria necessariamente a melhor solução para a decisão sobre quem 
+deveria hospedar a próxima PyConBrasil. 
+
+Este ano temos múltiplos candidatos, o que é um sinal de vitalidade 
+e crescimento da nossa comunidade. A idéia é que um comitê (o mesmo
+que atuou no passado) será o responsável pela avaliação das propostas.
+
+Caso a comunidade ou algum membro em particular seja contra ou tenha 
+algo a dizer sobre este processo decisório, sua voz será certamente
+ouvida. O melhor canal para isso seria a próxima PyConBrasil, basta
+manifestar interesse e alocaremos um tempo para que manifeste sua
+opinião à todos presentes. Ainda que as listas  de discussão sejam
+um mecanismo possível, nem todos que participam das listas estiverem
+presentes nas PyConBrasil. Portanto, para este tema é importante que 
+a discussão seja "ao vivo e em cores". E dessa forma influenciar o
+processo de escolha da PyConBrasil2008. Para a PyConBrasil2007 vamos
+manter o time que está ganhando, ou seja usar o mesmo processo e o
+mesmo comitê formado desde 2004 (quando se decidiu a PyConBrasil2005).
+A composição do comitê de escolha começara a ser cadastrada no fim
+desta página.
+
+
+== Matriz de seleção do Anfitrião ==
+
+Estamos começando os preparativos para a seleção de quem hospedará
+a PyConBrasil2007. Uma das metas é tornar o processo de seleção mais
+transparente, democrático (mas não muito) e principalmente mais objetivo.
+
+Segue abaixo a matriz de critérios. Fiquem à vontade para adicionar
+critérios ou anfitriões. 
+
+
+|| Critérios    |||| SERPRO              |||| SOCIESC/IST          |||| USP/UFSCar ||
+|| Localização  |||| Rio de Janeiro-RJ   |||| Joinville-SC         |||| São Carlos ||
+|| Responsável  |||| Giuseppe Romagnoli  |||| Marco André Lopes Mendes |||| Sérgio Oliveira ||
+|| Auditório    ||||  100 pessoas        |||| 300 pessoas          |||| 700 ||
+|| Salas Treino |||| 1/20 (numero/pessoas)|||| até 10 laboratórios de ponta/40 a 46 pessoas em cada um |||| 4/40 ||
+|| Streaming    |||| não(*)           |||| sim |||| sim ||
+|| Gravação     |||| sim           |||| sim |||| sim ||
+|| Palestrante  ||||(paga/hospeda/transp)|||| a definir se conseguirmos patrocínio |||| pedende de patrocínio ||
+
+
+== Depoimentos dos Candidatos ==
+
+Este é um espaço para cada candidato (em dois ou três parágrafos.. só não escreva Os Lusíadas) justificar
+e "vender o seu peixe" explicando por que acha que sua proposta trará de benefício a comunidade PZP.
+
+
+=== SERPRO ===
+
+
+
+(*) Será feita uma transmissão em video para todos os auditórios das regionis do SERPRO, oferecendo a possibilidade de que membros da comunidade possam participar do evento sem a necessidade de se deslocar para o Rio de Janeiro.
+
+
+
+=== SOCIESC/IST ===
+Porque Joinville?
+ 1. A SOCIESC é exemplo com maior visibilidade da preparação de profissionais utilizando Python no Brasil atualmente, tendo formado aproximadamente 150 profissionais com treinamento em Python desde 2004.
+  2. Joinville é um pólo de software na região sul do país, somando-se ainda Blumemau, Florianópolis e Curitiba (cidades no raio de no máximo 160 Km de Joinville). Além disto a repercussão do evento na cidade será enorme, atraindo imprensa regional, desenvolvedores e empresas de software da região.
+  3. Esse mercado é praticamente inexplorado pela comunidade Python, apesar das iniciativas da própria SOCIESC.
+  4. Um evento médio na SOCIESC tem capacidade de atingir no mínimo 400 pessoas, contando apenas o público interno, sem contar os laboratórios disponíveis para mini-cursos. Este público tornaria esta a maior PyConBrasil até o momento.
+
+Um evento desse porte em Joinville, poderia alavancar negócios e facilitar a penetração de Python nas instituições de ensino e em empresas de software da região. 
+
+=== USP/UFSCar ===
+
+---
+
+== Comitê de Escolha ==
+
+ * DornelesTremea
+ * EricoAndrei
+ * GustavoBarbieri
+ * LucianoRamalho
+ * OsvaldoSantanaNeto
+ * RodrigoSenra
+
+
+(Por favor, mantenham a ordem alfabética. Cada membro do comitê sabe quem é e irá
+ cadastrar a si mesmo. Se você *tem dúvida se é* do comitê, então **não é** do comitê ;o)).
+
+---  
+Quaisquer dúvidas enviar e-mail para a lista python-brasil@.

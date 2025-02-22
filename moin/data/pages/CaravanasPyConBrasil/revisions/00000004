@@ -1,0 +1,10 @@
+#acl All:read,write AdminGroup:read,write,delete,revert,admin
+
+Esta página está livre para os interessados em organizar caravanas para a !PyConBrasil 3 que ocorrerá nos dias 30 e 31 de agosto e 1 de setembro em Joinville, SC.
+
+
+== Cidade ??? ==
+/!\ '''Modelo'''
+ * '''Saída:''' Aeroporto Internacional da Cidade ???
+ * '''Dados do vôo:''' Gol com saída no dia XX/XX às XX:XX (voo XXX) e retorno no dia XX/XX (voo XXXX)
+ * '''Custo:''' R$XXX,XX

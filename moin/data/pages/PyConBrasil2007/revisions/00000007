@@ -1,0 +1,23 @@
+#format wiki
+#language pt_br
+
+== Matriz de seleção do Anfitrião ==
+
+Estamos começando os preparativos para a seleção de quem hospedará
+a PyConBrasil2007. Uma das metas é tornar o processo de seleção mais
+transparente, democrático (mas não muito) e principalmente mais objetivo.
+
+Segue abaixo a matriz de critérios. Fiquem à vontade para adicionar
+critérios ou anfitriões. 
+
+
+|| Critérios    |||| SERPRO              |||| SOCIESC/IST          |||| USP/UFSCar ||
+|| Localização  |||| Rio de Janeiro-RJ   |||| Joinville-SC         |||| São Carlos ||
+|| Responsável  |||| Giuseppe Romagnoli  |||| Marco André Lopes Mendes    |||| Sérgio Oliveira ||
+|| Auditório    ||||  ? (pessoas)        |||| 300 pessoas          |||| 700 ||
+|| Salas Treino |||| ?/? (numero/pessoas)|||| até 10 laboratórios de ponta/40 a 46 pessoas em cada um |||| 4/40 || 
+|| Streaming    |||| (sim/não)           |||| sim            |||| sim ||
+|| Gravação     |||| (sim/não)           |||| sim            |||| sim ||
+|| Palestrante  ||||(paga/hospeda/transp)||||a definir se conseguirmos patrocínio |||| depende de patrocínio ||
+  
+Quaisquer dúvidas enviar e-mail para a lista python-brasil@.

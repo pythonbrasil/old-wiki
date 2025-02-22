@@ -1,0 +1,6 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+= Estatísticas =
+
+Os gráficos abaixo são baseados nos registros de eventos:
+ * /HitCounts
+ * /UserAgents

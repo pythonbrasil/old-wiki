@@ -1,0 +1,117 @@
+#pragma section-numbers off
+= Utilizando geradores (generators) =
+
+O Python 2.3 introduziu um novo conceito para a linguagem: o de geradores, como o abaixo:
+
+{{{
+#!python
+def deznumeros():
+    print "Parte A"
+    for i in range(10):
+        print "Parte B (num %d)" % i
+        yield i
+        print "Parte C (num %d)" % i 
+    print "Parte D"
+}}}
+
+
+Aparentemente, apenas mais uma função, porém com uma palavra-chave nova. Porém, como especificado na própria PEP 255, esta não é uma simples função, e sim uma função geradora. Para comprovar, apenas execute-a:
+
+{{{
+>>> deznumeros
+<function deznumeros at 0x40207a74>
+>>> variavel = deznumeros()
+>>> variavel
+<generator object at 0x40209cac>
+}}}
+
+Ops, à primera vista, uma simples função, mas o resultado dela é muito diferente do que o de uma função qualquer.
+
+== Por dentro de um objeto gerador ==
+
+Sim, mas para quê serve um objeto como o que obtivemos no exemplo anterior? Para isso, a função dir vem para ajudar:
+
+{{{
+>>> dir(variavel)
+['__class__', '__delattr__', '__doc__', '__getattribute__', '__hash__',
+'__init__', '__iter__', '__new__', '__reduce__', '__reduce_ex__',
+'__repr__', '__setattr__', '__str__', 'gi_frame', 'gi_running', 'next']
+}}}
+
+Como a única coisa significativa é o objeto next, o exploraremos mais:
+
+{{{
+>>> print variavel.next
+<method-wrapper object at 0x40209b8c>
+>>> print '"%s"' % variavel.next()
+Parte A
+Parte B (num 0)
+"0"
+>>> print '"%s"' % variavel.next()
+Parte C (num 0)
+Parte B (num 1)
+"1"
+}}}
+
+Algo familiar? Sim, na mosca, estamos recebendo cada um dos objetos que demos na função. Em outras palavras, em cada next() recebemos, em ordem, um dos números do range(10). Mais interessante ainda! É como se a função desse uma pausa e continuasse quando nós quisessemos! Perceba que a Parte A foi executada apenas uma vez e que a Parte C é executada no início da próxima, e não no fim da mesma em que está contida. Vamos então continuar até o final para ver no que dá:
+
+{{{
+>>> print '"%s"' % variavel.next()
+Parte C (num 8)
+Parte B (num 9)
+"9"
+}}}
+
+Ops, esse foi o último... E a Parte D? E a Parte C do 9?
+
+{{{
+>>> print '"%s"' % variavel.next()
+Parte C (num 9)
+Parte D
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+StopIteration
+>>> print '"%s"' % variavel.next()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+StopIteration
+}}}
+
+Nada foi perdido e, para avisar que a função terminou, a exceção StopIteration foi levantada. Essa é aquele tipo de exceção que não quer dizer que o seu programa está com algo de errado, apenas quer dizer que a iteração sobre o gerador terminou, ou seja, acabaram as palavras-chave {{{yield}}}.
+
+== Perguntas básicas que podem surgir na sua mente ==
+
+''Você tem um exemplo prático de aplicação para geradores? Se alguém mais souber mais de um exemplo pode colocar aqui também. -- OsvaldoSantanaNeto''
+
+Por favor, leitor, ajude a complementar essa seção.
+
+=== O que pode ser passado para um gerador? ===
+
+Tudo. Desde números até módulos e outros geradores, ou seja, qualquer objeto ou coisa que possa ser transformada em objeto. Você pode usar geradores para passar classes para um programa, passar funções, passar listas de vários números em uma determinada ordem, passar pontos em um gráfico ou até passar as letras do alfabeto! O que der na telha!
+
+=== Onde na função eu posso usar yield? ===
+
+Digamos que em qualquer lugar que você possar colocar um print :). Se é isso que você estava pensando, é possível sim:
+
+{{{
+#!python
+def teste (N1, N2, N3):
+    # É claro que esse é um exemplo infeliz que eu inventei...
+    yield N1
+    for i in range(N2, N3):
+        for j in range(N2, N3, N1):
+            yield i * j
+    if N1 > N2 > N3:
+        yield N1 * N2 * N3
+    if N1 + N2 + N3 < 10:
+        yield N1 + N2 + N3
+    print "Obrigado pela preferência"
+}}}
+
+== E agora? ==
+
+Bom, em duas palavras: use geradores :). Bom, na verdade foram duas palavras e um smile, mas isso faz diferença?
+
+----
+
+FelipeAlmeidaLessa

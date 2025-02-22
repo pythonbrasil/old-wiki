@@ -1,0 +1,35 @@
+#pragma section-numbers off
+= Rodrigo Cesar Herefeld =
+----
+<hso.suporte |at| ig.com.br>
+----
+= Projetos =
+[[BR]]''' JPA '''
+[[BR]] JPA é a união das palavras Java Python Administração
+[[BR]] Ele é um filho do ultimo projeto de uma consultoria que eu tive  com um amigo , o projeto chamava
+[[BR]] SEC(Sistema Empresarial Cathedral,sendo que Cathedral era a empresa).A  ultima  versão do SEC foi 
+[[BR]] feita em TCL( a unica que ficou pronta) mas nunca chegou ao mercado a primeira foi em Java e houve 
+[[BR]] uma intermediaria em C++.A idéia é criar um programa de  administração de empresas para pequenas e
+[[BR]] médias empresas, a versão que  eu  tenho  em TCL funciona mas o codigo é feio demais pra admistrar
+[[BR]] por isso quero criar um novo com  o Jython.Assim que tiver uma versão funcionando do programa e um
+[[BR]] lugar pra hospedar (eu não sei se hospedar no sourceforge ou no software livre)
+----
+= Material nesta pagina =
+[[BR]]'''Estou colocando alguns programinhas nesta pagina
+[[BR]]Para os proximos dias vou colocar uma introdução ao Jython
+[[BR]]Que estou terminando de escrever.'''
+
+----
+|||| '''Programas''' ||
+||||[[BR]]'''Programa para impressao de recibo:'''||||attachment:recibo.tar.bz2||
+[[BR]]Este programa imprime recibos, e um programinha , 
+[[BR]] bem simples, na verdade ele e um remendo para suprir
+[[BR]]a falta de um programa maior que estou escrevendo ,no jython,
+[[BR]](a impressao de recibos fica no controle de vendas)
+[[BR]]Ele demonstra bem a impressao de html do wxPython
+[[BR]]Eu fiz ele com o wxglade [http://wxglade.sourceforge.net/]
+[[BR]]Inclusive o wgl(arquivo do mesmo) ta junto pra quem quiser ver como funciona
+
+
+----
+CategoryHomepage

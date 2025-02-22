@@ -1,0 +1,54 @@
+Este é o ponto de entrada do NossoLivro, um esforço colaborativo de escrita
+de um livro de Python à N-mãos inteiramente em Português e totalmente brazuca.
+
+Para discutir sobre temas relacionados ao NossoLivro, encaminhe-se para NossoLivroDiscucao . 
+
+= 1.0 Basicão =
+
+== 1.1 Histórico ==
+== 1.2 Arquitetura ==
+== 1.3 Os Modos de Execução ==
+== 1.4 Passeando no Modo Interativo ==
+== 1.5 Sintaxe da Linguagem ==
+== 1.6 Estruturas de Dados Nativas ==
+=== 1.6.1 Tuplas ===
+=== 1.6.2 Listas ===
+=== 1.6.3 Dicionários ===
+== 1.7 Estruturas de Dados Adicionais ==
+=== 1.7.1 Vetores ===
+=== 1.7.2 Conjuntos ===
+
+= 2.0 Para Quem já está Cobra =
+
+== 2.1 Guia de Estilo(PEP-8) ==
+== 2.2 Programação Funcional ==
+== 2.3 List Comprehensions ==
+== 2.4 Generator Expressions ==
+== 2.5 Orientação a Objetos ==
+== 2.6 Descriptors e Properties ==
+== 2.7 Design Patterns e Python ==
+== 2.8 Sobrescrevendo Operadores ==
+== 2.9 UnitTests e DocTests ==
+== 2.10 Distutils ==
+
+= 3.0 Pajés, Gurus e Xamãs =
+
+== 3.1 Aspectos Formais da Linguagem ==
+== 3.2 Iterators ==
+== 3.3 Generators ==
+== 3.4 Decorators ==
+== 3.5 Metaclasses ==
+
+= 4.0 Uma Aplicação de Cabo a Rabo =
+
+== 4.1 Descrição da Aplicação ==
+== 4.2 Selecionando um Framework (Django, TurboGears, outro framework?) ==
+== 4.3 Modelo Relacional ==
+== 4.4 Mapeamento Objeto Relacional ==
+== 4.5 Camada de Controle ==
+== 4.6 Camada de Visão ==
+== 4.7 Adicionando Firulas ==
+=== 4.7.1 Web Services ===
+=== 4.7.2 Criando uma Interface para Desktop ===
+
+= Bibliografia, Referências e Links =

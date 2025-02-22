@@ -1,0 +1,41 @@
+= InVesalius =
+
+Programa de visualização e processamento de imagens médicas.
+
+   * '''Prós:''' Gratuito; voltado para cirurgiões brasileiros (em português).
+   * '''Contras:''' Não é software livre (por enquanto), só tem versão em windows (por enquanto), só tem versão em português (por enquanto).
+
+== Características ==
+
+Programa que faz reconstrução 3D de imagens médicas a partir de imagens 2D. De entrada utiliza-se imagens no protocolo DICOM obtidas através de exames de tomografia magnética ou ressonância magnética. Dentre as ferramentas do programa, tem-se:
+   * Visualização 2D e 3D, incluindo movimentação / zoom dos dados;
+   * Visualização de planos sagital, axial, coronal e transversal;
+   * Medidas de estruturas anatômicas e regiões do modelo;
+   * Cortes de regiões dos modelos;
+   * Segmentação de região de interesse (por exemplo, seleção apenas do tecido ósseo) utilizando diversos algoritmos;
+   * Geração de malha STL do modelo analisado (para confecção de protótipos, por meio de Prototipagem Rápida, ou mesmo para análise de elementos finitos).
+
+
+Uma nova versão do programa está por sair (previsão: fevereiro de 2007), sendo que nela o visual do programa estará completamente renovado e haverá novas ferramentas:
+   * Câmera Endoscópica;
+   * Edição de fatias do projeto (imagens bidimensionais);
+   * Ferramenta de auxílio para o médico fazer relatórios dos casos de seus pacientes;
+   * Ferramenta de espelhamento de regiões do modelo, para casos de reconstrução;
+   * Otimização na obtenção de medidas (linear e angular);
+   * Otimização da interface.
+
+== Ficha técnica ==
+
+Software integrante do projeto PROMED (Prototipagem Rápida na Medicina), desenvolvido pelo Centro de Pesquisas Renato Archer (CenPRA), um centro de pesquisas federal localizado em Campinas.
+
+A maior parte do programa foi escrita em Python, sendo que é utilizado um wrapper para a biblioteca VTK (Visualization Toolkit). A interface é feita em wxPython.
+
+URL: http://www.cenpra.gov.br/promed <<BR>>
+
+== Tela ==
+
+{{attachment:tela_invesalius.png}}
+
+----
+
+TatiAlChueyr

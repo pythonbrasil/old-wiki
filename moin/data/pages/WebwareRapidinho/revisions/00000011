@@ -1,0 +1,87 @@
+= Webware Rapidinho =
+
+[http://www.webwareforpython.org/ Webware + WebKit]
+
+= O Que É? =
+
+É uma suíte OO para desenvolvimento web, obviamente feito em Python.
+O Webware é constituido de componentes (chamados de ''kits''), entre eles o !WebKit é um servidor de aplicações para web.
+
+= Como Baixar O Fonte? =
+
+A última versão disponível (0.8.1) encontra-se em http://prdownloads.sourceforge.net/webware/Webware-0.8.1.tar.gz?download
+
+= Como Eu Instalo? =
+{{{
+$ cd /usr/local (/opt ou aonde for mais adequado)
+$ tar zxvf Webware-0.8.1.tar.gz
+$ cd Webware-0.8.1/
+$ python install.py
+}}}
+
+Isso vai instalar o framework, mas não é legal manter os dados do projeto (chamados de contextos) junto com o próprio Webware, por isso é melhor criar um lugar separado para o seu projeto. O Webware tem um script para isso.
+{{{
+$ cd /usr/local/Webware-0.8.1
+$ python bin/MakeAppWorkDir.py /home/ruda/MyWebKit
+}}}
+
+Substitua {{{/home/ruda/MyWebKit}}} para onde for mais ao seu gosto.
+
+= Servidor HTTP =
+Sim, precisa do Apache rodando, não esqueça. Outros servidores também são suportados, veja a documentação. O Webware inclui um servidor HTTP de brinquedo, para rodar é fácil
+{{{
+$ cd /usr/local/Webware-0.8.1/WebKit/Adapters
+$ ./HTTPAdapter --host=localhost --port=80 --daemon
+}}}
+
+= Adaptadores =
+
+O adaptador é o que liga a requisição do cliente via browser com o servidor de aplicações. O servidor de aplicações roda em uma porta diferente da 80 e por padrão é a porta 8086.
+{{{
+Cliente (via browser)
+ |
+Servidor HTTP (porta 80)
+ |
+Adaptador
+ |
+AppServ (porta 8086)
+}}}
+
+  * '''wkcgi''' é um CGI feito em C. É rápido e simples de usar.
+
+Para instalar:
+{{{
+$ cd /usr/local/Webware-0.8.1/WebKit/Adapters/wkcgi
+$ make
+$ cp wkcgi /var/www/cgi-bin/wkcgi.cgi
+}}}
+
+  * '''Webkit.cgi''' é um CGI feito em Python. Não use.
+
+  * '''!OneShot.cgi''' semelhante ao Webkit.cgi, muito útil durante a fase de desenvolvimento pois as páginas não ficam persistentes, elas são sempre relidas em cada leitura de página.
+
+  * '''mod_webkit''' é um módulo para plugar diretamente no Apache. É o método mais eficiente.
+
+= Iniciar O WebKit =
+
+  * Se escolher o modo wkcgi
+{{{
+$ cd /home/ruda/MyWebKit
+$ ./AppServ
+}}}
+
+Agora é só abrir um browser e apontar para a url http://localhost/cgi-bin/wkcgi.cgi
+
+  * Se escolher o modo !OneShot
+
+= Parar O WebKit =
+Basta matar o servidor !AppServ, {{{^C}}} no terminal que ele está rodando ou matar com {{{kill <processo do AppServ>}}}.
+
+= Tenho O Webware Instalado, E Agora? =
+  * Leia a documentação oficial que deve estar em {{{/usr/local/Webware-0.8.1/Docs/}}} (comece pelo index.html).
+  * Leia o Wiki do Webware http://wiki.w4py.org/
+  * Comece modificando o {{{/home/ruda/MyWebKit/MyContext/Main.py}}}
+
+----
+
+RudaMoura

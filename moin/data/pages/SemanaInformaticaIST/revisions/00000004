@@ -1,0 +1,227 @@
+Esta página reune informações sobre A Semana de Informática do IST, evento a ser realizado nos dias 11, 12 e 13 dew abril de 2005 no Anfiteatro da [http:www.sociesc.com.br SOCIESC].
+
+[[TableOfContents]]
+
+== Chamada para o evento ==
+
+'''Semana de Informática do IST'''[[BR]]
+'''11, 12 e 13 de Abril de 2005'''[[BR]]
+'''Anfiteatro da SOCIESC'''[[BR]]
+
+Temos o prazer de convidá-lo para a Semana de Informática do IST, um evento anual que faz parte do Calendário Acadêmico do Instituto Superior Tupy. O evento é dirigido aos acadêmicos de graduação, professores, e profissionais da área de Informática. 
+
+Os principais objetivos da Semana de Informática do IST são:
+  * possibilitar aos estudantes e profissionais de Informática o contato com tópicos de relevância na área, que estejam em evidência no país e exterior; e
+  * integrar a comunidade de Informática, além de proporcionar a divulgação das principais  atividades acadêmicas desenvolvidas dentro do Instituto Superior Tupy. 
+
+----
+
+== Programação ==
+
+||||'''Segunda-feira - 11/04/2005'''||||
+||	||Palestrante	||Atividade||
+||19:00	||Rodrigo Senra – Unicamp, Gpr Sistemas	||Palestra: Python pra valer!||
+||20:30	||Associação Lin-Ma de Kung Fu Wushu e Tai Chi Chuan - Jailson de Jesus	||Dança do Dragão – Kung Fu||
+||20:50	||Intervalo||||
+||21:10	||Marcus Silva: Marcus Silva Advogados	||Palestra: Políticas de Transação e Segurança da Informação em Redes de Computadores||
+||22:40	||Encerramento||||
+||||'''Terça-feira - 12/04/2005'''||||
+||	||Palestrante	||Atividade||
+||19:00	||Glauco Scheffel - Datasul	||Palestra: Java no desenvolvimento de sistemas para a Web||
+||20:30	||Silvana Momm - SOCIESC        ||Atividade: Ginástica laboral||
+||20:50	||Intervalo||||
+||21:10	||Sérgio Bruder - Haxent	||Case de um provedor de acesso de grande porte||
+||22:40	||Encerramento||||
+||||'''Quarta-feira - 13/04/2005'''||||
+||	||Palestrante	||Atividade||
+||19:00	||Edson de Souza – SOCIESC	||Apresentação de Trabalho Acadêmico: Implementação de um serviço de diretórios utilizando LDAP||
+||19:30	||Bianca Claudine Roos – Integral Informática	||Apresentação de Trabalho Acadêmico: Gerenciando Conflitos para o Sucesso de Projetos de TI||
+||20:00	||Carlos Eduardo Corrêa – Cingo	||Mini-palestra: Testes automatizados de software||
+||20:30	||Grupo de Teatro Bytes e Parafusos - Silvestre Ferreira - 	||Peça Teatral - Emcontos||
+||20:50	||Intervalo||||
+||21:10	||Augusto César Campos – Tribunal Regional Eleitoral de Santa Catarina	||Palestra: A TI dentro do TRE||
+||22:40	||Encerramento||||
+
+----
+
+== Mais informações sobre as atividades ==
+
+
+Saiba mais sobre as atividades que serão realizadas e as pessoas responsáveis por isto.
+
+----
+
+=== Python pra valer! ===
+
+  * Python no contexto de linguagens de programação
+  * Python no ensino de graduação 
+  * Python no mundo acadêmico (pesquisa acadêmica)
+  * Python no mundo corporativo (ênfase)
+      a. Gerência de elementos de rede SNMP
+      a. Gateway de comunicação Celular/Satélite (rastreamento de veículos)
+      a. Rastreamento de pornografia em Intranets
+      a. Proxy leve (diversas utilidades:  ponte de VPNs)
+      a. Troubleshooting de tráfego em rede
+      a. Gerência de firewall (Autenticação StarOne/Embratel)
+      a. Suporte a EDI
+      a. Gerência de quotas de disco
+  * Exemplos curtos de Python nos diversos cenários
+
+'''Rodrigo Dias Arruda Senra <rsenra@acm.org>'''
+
+  * Engenheiro de Computação e mestre em Ciência da Computação pelo IC - Unicamp.
+  * Atualmente doutorando na mesma instituição.
+  * Projetista e desenvolvedor de software na GPr Sistemas desde 1996.
+  * Participante ativo da comunidade de SL, palestrante em diversos eventos SL e evangelista de Python.
+  * Professor da  Faculdade de Engenharia de Computação da PUC-Campinas entre 2002 e 2004.
+  * Professor Substituto de cursos de Extensão na Unicamp em 2003
+
+----
+ 
+=== Políticas de Transação e Segurança da Informação em Redes de Computadores ===
+
+'''Marcus Alexandre da Silva <marcus@msilva.adv.br>'''
+
+  * Formado em Direito pela Univali
+  * Mestrando em Direito Empresarial pela Univali
+  * Sócio da Marcus Silva Advogados - Escritório voltado ao atendimento de demandas  relacionadas ao Direito de Tecnologia da Informação
+  * Assessor de empresas e associações de empresas ligadas à tecnologia de informações, como a Softville e a Assespro/SC.
+  * Conselheiro do Centro Brasileiro de Estudos Jurídicos pela Internet
+  * Membro da Associação Brasileira de Direito Informático
+
+----
+
+=== Atividade:  Qualidade de Vida ===
+
+  * Observações, colocações e sugestões sobre a postura de trabalho, bem como a sua relevância. 
+  * Mesa, cadeira, computador, cuidados e como dormir.
+  * Alongamentos com ênfase para pessoas que trabalham com o computador. 
+
+'''Silvana Momm <silvana@sociesc.com.br>'''
+
+  * Formada em Educação Física.
+  * Mestranda em Ciências da Educação.
+  * Professora da disciplina de Qualidade de Vida Laboral no IST.
+  * Iniciou  e trabalhou em projetos de ginástica laboral nas empresas: Forza, Gidion, Planner, Datasul e Embraco.
+
+
+----
+
+=== Gerenciando Conflitos para o Sucesso de Projetos de TI ===
+
+ 
+As organizações estão se adaptando às transformações exigidas pela era do conhecimento. Neste contexto, os projetos passaram a exercer um papel estratégico nas ações de mudança. Torna-se crescente portanto, a preocupação com a profissionalização da gerência de projetos, resultando no estímulo a adoção de metodologias que permitem o seu melhor planejamento. Ainda há alguns eventos, como conflitos, que ocorrem em todas as etapas do ciclo de vida de um projeto e precisam ser considerados e gerenciados.
+        Este trabalho trata do estudo sobre influência exercida pelos conflitos no resultado final de um projeto. O objetivo é expor como os conflitos podem ser tratados para que não pesem negativamente no andamento do projeto, fazendo com que ele desvie de seus objetivos, mas para que sirvam de ferramentas para que o projeto seja concluído com sucesso. Através deste estudo será possível identificar quais as causas dos conflitos destrutivos e a maneira de tratá-los e ainda, apontar quando os conflitos são benéficos e devem ser estimulados para contribuir positivamente com o projeto.
+ 
+'''Bianca Roos <bianca@integral.inf.br>'''
+
+  * Graduada em Sistemas da Informação pelo IST e aluna do curso de pós graduação de TI com ênfase em Gerenciamento de Projetos.
+  * É profissional certificada pela Microsoft (MCP - Microsoft Certified Professional).
+  * Atualmente exerce as atividades profissionais na Integral Informática onde adquiriu experiência em administração de redes baseadas em Windows 2000 e 2003, incluindo a realização de diversos projetos envolvendo soluções baseadas em produtos da Microsoft.
+  * Tem interesses na área de gerenciamento de projetos e na metodologia difundida pelo PMI.
+  * Teve participação na implantação do projeto de Bilhetagem Automática no sistema de transporte coletivo de Joinville.
+
+
+----
+
+=== Testes automatizados de software ===
+
+'''Carlos Eduardo Corrêa <carlos.correa@datasul.com.br>'''
+
+  * Acadêmico do Curso de tecnologia em Desenvlvimento de Sistemas para Internet
+  * Técnico em Processamento de Dados
+  * Especialista em Testes de Softwares Automáticos com apoio da ferramenta da Rational (IBM).
+  * Inicou em 2000 na Datasul Logística, na área de qualidade de software.
+  * Trabalha atualemente na Cingo (empresa criada pela Datasul) na área de Automatização de Testes.
+
+
+
+----
+ 
+=== Java no desenvolvimento de sistemas para a Web === 
+
+'''Glauco Scheffel <glauco.scheffel@datasul.com.br>'''
+
+  * Mestre em Ciência da Computação pela Univerisade Federal de Santa Catarina
+  * Arquiteto de software Datasul Tecnologia - Joinville – SC
+  * Professor da Programação na Faculdade Cenecista de Joinville
+
+ 
+----
+
+=== A TI dentro do TRE ===
+
+  * uso de Software Livre dentro do TRE, tanto nos servidores quanto em estações de trabalho;
+  * integração e convívio entre as aplicações e serviços baseados em Software Livre e comercial; 
+  * descrição da estrutura de servidores;
+  * desenvolvimento de soluções de gerenciamento de serviços e conteúdo através de scripts e aplicações voltadas à Web;
+ 
+'''Augusto César Campos <augusto@tre-sc.gov.br>'''
+
+  * Coordenador de TI do TRE;
+  * Editor do site [http://www.br-linux.org br-linux.org]
+
+----
+
+=== Case de um provedor de acesso de grande porte === 
+
+'''Sergio Bruder <sergio@bruder.net>'''
+
+Com mais de 15 anos de experiência na indústria de software, trabalhou na Access, M&B, Conectiva e GVT, acumulando experiências em Linux, AIX, HP-UX, SQL e WEB. É o mantenedor do site de notícias PontoBR, uma das referências na Comunidade Linux Brasileira. Cursou Bacharelado de Matemática Aplicada na Universidade Federal do Rio de Janeiro.
+
+----
+ 
+===  Dança do Leão === 
+
+A apresentação é a Dança do Leão: Ela simboliza a relação do ser humano com a natureza. O leão é um animal que representa sorte, prosperidade e que sempre é chamado para trazer bons fluidos para inaugurações, eventos e comemorações.
+
+A Dança do Leão é parte do folclore chinês.
+
+'''Associação Lin-Ma de Kung Fu Wushu e Tai Chi Chuan -  Jailson de Jesus <jesus@sociesc.com.br>'''
+
+----
+ 
+===  Apresentação teatral de um conto da peça Emcontos === 
+
+A Dionisos Teatro é uma companhia criada com o objetivo de atuar tanto na área da arte-educação quanto na área de produção cultural, construindo espetáculos de teatro que contribuam para a formação cultural de Joinville e Santa Catarina.
+
+A Dionisos Teatro faz direção do grupo de Teatro Bytes & Parafusos da Escola Técnica Tupy - SOCIESC, do Grupo de Teatro Embraco e do Grupo de Teatro Duas Rodas de Jaraguá do Sul.
+
+'''Silvestre Ferreira – Dionisos Teatro <dionisosteatro@netvision.com.br>'''
+  * Graduado em História e especialista em Prática Social da Arte pela USP e UNIVILLE. 
+  * Professor, ator, diretor, e palestrante.
+
+----
+
+== Informações e Inscrição == 
+
+  * Os alunos do IST têm vagas garantida e presença obrigatória. 
+  * Além disto, temos 30 vagas por dia de evento para o público externo, disponíveis através da Central de  Atendimentos: 0800-643-0133.
+  * Faça a sua reserva para evitar transtornos.
+
+
+----
+
+== Local ==
+
+Sociedade Educacional de Santa Catarina
+Rua Albano Schmidt, 3333 – Boa Vista 
+Joinville - Santa Catarina    
+
+----
+
+== Comissão Organizadora do Evento ==
+
+  * MarcoAndréLopesMendes - marco em sociesc ponto com ponto br
+  * Mehran Misaghi - mehran em sociesc ponto com ponto br
+  * Alessandra Anacleto - alessandra ponto anacleto em sociesc ponto com ponto br
+
+----
+
+== Comentários dos Visitantes ==
+
+Clique na opção "Editar" no topo desta página e deixe seu comentário ou sugestão.
+
+----
+
+Está página está sendo organizada por MarcoAndréLopesMendes

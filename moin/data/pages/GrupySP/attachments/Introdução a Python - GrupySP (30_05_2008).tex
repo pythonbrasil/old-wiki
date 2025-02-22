@@ -1,0 +1,339 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{multicol}
+
+\usetheme{Dresden}
+%\usecolortheme{beaver}
+
+\author{Gustavo Serra Scalet \texttt{gsscalet@gmail.com}}
+\title{Introdução a Python}
+\institute{Encontros GrupySP}
+\date{30 de Maio, 2008}
+
+\setbeamercolor{item}{fg=blue}
+\definecolor{DarkBlue}{rgb}{0.0, 0.35, 0.5}
+\setbeamercolor{structure}{fg=DarkBlue}
+\AtBeginSection[]{
+  \begin{frame}
+    \frametitle{Roadmap}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\begin{document}
+
+ % Para colorir o código Python peguei de:
+ % http://www.gustavobarbieri.com.br/python/aulas_python/resumo.tex
+  \lstset{
+    frame=single,
+    showstringspaces=false,  
+    extendedchars=true,
+    language=Python,
+    backgroundcolor=\color[rgb]{0.95,0.95,0.95},
+    rulecolor=\color[rgb]{0.3,0.3,0.3},
+    basicstyle=\scriptsize\ttfamily,
+    commentstyle=\color[rgb]{0.5,0.0,0.0}\rmfamily\itshape,
+    keywordstyle=\color[rgb]{0.7,0.0,0.8}\bfseries,
+    stringstyle=\color[rgb]{0.6,0.4,0.4},
+    identifierstyle=\color[rgb]{0.2,0.2,0.9}
+ }
+
+\begin{frame}[fragile]
+  \titlepage
+\end{frame}
+
+\section{Introdução}
+\begin{frame}
+\frametitle{Um pouco da história e futuro}
+\begin{itemize}
+  \item Criada por Guido van Rossum na Holanda para ser um sucessor de uma linguagem chamada ABC
+  \item O nome Python veio de "Monty Python's Flying Circus", que Guido van Rossum estava lendo durante a implementação. Ele precisava de um nome curto, único e levemente misterioso.
+  \item Surgiu em torno dos anos 90 e após 2001, já na sua versão 2.0, python tem sua própria licença compatível com a GPL com a criação da PSF (Python Software Foundation)
+  \item Python está na versão 2.6 e há desenvolvimento de uma versão 3.0 com diversas alterações
+  \item Última versão (08/05/2008): 2.6alpha3 e 3.0alpha5
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{E o que Python tem de tão especial?}
+\begin{itemize}
+  \item É livre!!
+  \item Multiplataforma (roda em Windows, Linux/Unix, OS/2, Mac, .Net e S60...)
+  \item Multiparadigma (Estrutural, orientada a objetos, funcional)
+  \item É interpretada
+  \item Linguagem limpa, com sintaxe legível e de fácil aprendizado
+  \item Gerenciamento automático de memória: Esqueça os frees!
+  \item Nível altíssimo de tipos de dados dinâmicos
+  \item Extensas bibliotecas por padrão e muitos módulos \textit{third party} para praticamente qualquer tarefa
+  \item Usada como linguagem de scripts por diversos sistemas (GIMP, Blender)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Algumas aplicações e bibliotecas externas}
+
+\begin{multicols}{2}{
+  \begin{itemize}
+    \item \scriptsize Web
+    \begin{itemize}
+      \item \scriptsize Frameworks (Django, TurboGears)
+      \item Servidor de aplicações (Zope)
+      \item Sistemas de gerenciamentos (Plone)
+      \item Suporte a diversos protocolos (CGI, http, ftp, smtp)
+    \end{itemize}
+    \item Graphic User Interface (GUI)
+    \begin{itemize}
+      \item \scriptsize Tk (comum em muitos portes do python)
+      \item wxWidgets
+      \item GTK+
+      \item Qt
+      \item Microsoft Foundation Classes
+      \item Delphi
+    \end{itemize}
+    \item Banco de Dados
+    \begin{itemize}
+      \item \scriptsize MySQL
+      \item Oracle
+      \item MS SQL Server
+      \item PostgreSQL
+      \item SybODBC
+      \item SQLite
+    \end{itemize}
+    \item Científico e numérico
+    \begin{itemize}
+      \item \scriptsize Processamento de imagens (VTK, PIL)
+      \item Cálculos e precisos (SciPy, NumPy, GmPy)
+    \end{itemize}
+    \item Jogos
+    \begin{itemize}
+      \item \scriptsize Pygame
+      \item PyOpenGL
+    \end{itemize}
+    \item Entre muitos outros...
+  \end{itemize}
+}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{O que dizem por aí...}
+  \begin{itemize}
+    \item "Python é nos permite produzir novas funcionalidades em tempo recorde com o mínimo de desenvolvedores" - Cuong Do, Arquiteto de software, YouTube.com.
+    \item "Python foi importante para o Google desde o seu início, permanecendo até hoje. Muitos de nossos engenheiros usam Python e nós estamos procurando mais pessoas com habilidades nessa linguagem." - Peter Norvig, Diretor de qualidade de busca, Google, Inc.
+    \item "Nós ensinamos Python para estudantes da graduação e da pós em nossos cursos de semânticas Web simplesmente porque não há nada tão flexível e com tantas bibliotecas web." - Prof. James A. Hendler, University of Maryland
+  \end{itemize}
+  \begin{footnotesize}
+    Tradução livre de \url{http://www.python.org/about/quotes/}
+  \end{footnotesize}
+\end{frame}
+
+\section{Tipos de dados}
+\begin{frame}
+\frametitle{Apresentando os tipos}
+Em python podemos separar os tipos de dados nativos em dois grandes grupos:
+\pause
+\begin{enumerate}
+ \item \textbf{Imutáveis} - Inteiros, inteiros longos, pontos flutuantes, complexos, strings e tuplas
+\pause
+ \item \textbf{Mutáveis} - Listas e dicionários
+\end{enumerate}
+\pause
+Fora eles tem o None, que seria um NULL. \\
+\pause
+Mas qual a diferença entre esses mutáveis e imutáveis?
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Mutáveis e imutáveis?!}
+Analisando um tipo imutável (no caso string) vemos que:
+ \begin{lstlisting}
+>>> str = "Gustavo"
+>>> str2 = str
+>>> str = str + " Serra"
+>>> str
+'Gustavo Serra'
+>>> str2
+'Gustavo'
+ \end{lstlisting}
+Isso acontece porque a ao incrementarmos a \texttt{str} com \texttt{" Serra"} um novo objeto foi criado, e apenas \texttt{str} apontava para ele, enquanto que \texttt{str2} apontava para o objeto antigo
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Mutáveis e imutáveis?!}
+Mas se fosse um tipo imutável (listas):
+ \begin{lstlisting}
+>>> lista = ['abacaxi',(0,0),2]
+>>> lista2 = lista
+>>> lista.append('Novo Elemento')
+>>> lista
+['abacaxi', (0, 0), 2, 'Novo Elemento']
+>>> lista2
+['abacaxi', (0, 0), 2, 'Novo Elemento']
+ \end{lstlisting}
+Como o tipo lista pode se modificar, ele foi alterado e não recriado como outro objeto, sendo assim a lista2 e lista apontam para o mesmo objeto mesmo após a sua alteração
+\end{frame}
+
+\section{O Interpretador}
+\begin{frame}[containsverbatim]
+\frametitle{Seu melhor amigo}
+Use como calculadora, peça ajuda, pergunte métodos de objetos, teste trechos de códigos, recrie ambientes... use e abuse!
+ \begin{lstlisting}
+[21:10:31] gut@quasar ~ $ python
+Python 2.4.4 (#1, Apr  6 2008, 07:48:32)
+[GCC 4.1.2 (Gentoo 4.1.2 p1.0.2)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+ \end{lstlisting}
+\end{frame}
+
+\section{Sintaxe}
+\begin{frame}[containsverbatim]
+\frametitle{Um erro incomum}
+Python é orientado a indentação, o que quer dizer que um código indentado não é só elegante mas também é necessário para o reconhecimento dos laços.
+ \begin{lstlisting}
+>>> if 1 == 2:
+...     print "Temos problemas..."
+...     print "...dos grandes!"
+...  else:
+  File "<stdin>", line 3
+    else:
+        ^
+IndentationError: unindent does not match any outer indentation level
+>>>
+ \end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Exemplo simples}
+Vendo quais elementos são iguais em duas listas
+ \begin{lstlisting}
+>>> l = [1,2,3,4,5]
+>>> p = [3,4,5,6,7]
+>>> for x in l:
+...  if x in p:
+...   print x,
+...
+3 4 5
+ \end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Melhorando...}
+Usando conjuntos!
+ \begin{lstlisting}
+>>> l = set([1,2,3,4,5])
+>>> p = set([3,4,5,6,7])
+>>> l & p  # '&' eh o operador logico AND
+set([3, 4, 5])
+ \end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Deixando mais pythônico}
+ \begin{lstlisting}
+>>> l = [1,2,3,4,5]
+>>> p = [3,4,5,6,7]
+>>> [x for x in l if x not in p]
+[1, 2]
+ \end{lstlisting}
+Por que os programadores tentam fazer tudo em uma linha?!
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Padronizações}
+É costume incluir nos cabeçalhos de seus programas as seguintes linhas:
+ \begin{lstlisting}
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+ \end{lstlisting}
+É também uma boa maneira não interpretar seu código diretamente:
+ \begin{lstlisting}
+def main():
+    # Agora sim! Programe aqui dentro
+    ...
+
+if __name__ == "__main__":
+    main()
+ \end{lstlisting}
+Deste jeito seu código fica muito mais modularizado
+\end{frame}
+
+\begin{frame}
+\frametitle{Palavras chaves}
+Explore-as! Há muitos poder nelas
+  \begin{center}
+  % use packages: array
+    \begin{tabular}{lllll}
+    and & del & from & not & while \\
+    as & elif & global & or & with \\
+    assert & else & if & pass & yield \\
+    break & except & import & print \\
+    class & exec & in & raise \\
+    continue & finally & is & return \\
+    def & for & lambda & try \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Python tem até easter egg!}
+  \begin{scriptsize}
+    Use o módulo \texttt{this}:
+  \end{scriptsize}
+  \begin{lstlisting}
+>>> import this
+  \end{lstlisting}
+  \begin{scriptsize}
+    The Zen of Python, by Tim Peters
+  \end{scriptsize}\\
+  \begin{tiny}
+    Beautiful is better than ugly.\\
+    Explicit is better than implicit.\\
+    Simple is better than complex.\\
+    Complex is better than complicated.\\
+    Flat is better than nested.\\
+    Sparse is better than dense.\\
+    Readability counts.\\
+    Special cases aren't special enough to break the rules.\\
+    Although practicality beats purity.\\
+    Errors should never pass silently.\\
+    Unless explicitly silenced.\\
+    In the face of ambiguity, refuse the temptation to guess.\\
+    There should be one-- and preferably only one --obvious way to do it.\\
+    Although that way may not be obvious at first unless you're Dutch.\\
+    Now is better than never.\\
+    Although never is often better than *right* now.\\
+    If the implementation is hard to explain, it's a bad idea.\\
+    If the implementation is easy to explain, it may be a good idea.\\
+    Namespaces are one honking great idea -- let's do more of those!\\
+  \end{tiny}
+\end{frame}
+
+\section{Referências}
+\begin{frame}
+  \frametitle{Referências}
+
+
+\begin{enumerate}
+  \begin{footnotesize}
+    \item \url{http://www.python.org/}
+    \item \url{http://www.gustavobarbieri.com.br/python/aulas_python/}
+    \item \url{http://www.dmat.furg.br/~python/aspectos.html}
+  \end{footnotesize}
+\end{enumerate}
+
+Aprenda Mais!
+\begin{itemize}
+  \begin{footnotesize}
+    \item \url{http://www.pythonbrasil.com.br/moin.cgi/DocumentacaoPython}
+    \item \url{http://www.pythonbrasil.com.br/moin.cgi/CookBook}
+    \item \url{http://docs.python.org/}
+  \end{footnotesize}
+\end{itemize}
+\end{frame}
+
+\end{document}

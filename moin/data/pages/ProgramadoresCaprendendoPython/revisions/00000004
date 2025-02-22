@@ -1,0 +1,358 @@
+= Python para programadores C e/ou C++ =
+
+== Introdução ==
+Algumas pessoas provavalmente vão querer me bater por estar fazendo isto. Há
+algum tempo atrás, antes de fazer este tutorial eu provavelmente estaria entre
+essas pessoas. Programadores que seguirem apenas este tutorial e não se
+dedicarem a realmente aprender uma linguagem nova, que geralmente incentiva
+formas de pensar diferente que as que o programador já sabia, provavelmente irão
+produzir programas feios e nada "pythonicos".
+
+Por que escrever um documento que pode originar programas ilegiveis, ou pelo
+menos "não-pythonicos"? Recentemente eu tive a experiência de trabalhar em um
+projeto feito em Python com vários programadores que não sabiam programar em
+Python. O tempo era curto e eles já sabiam C. Em uma tentativa desesperada de
+não ter que fazer o trabalho todo sozinho, fiz este tutorial, que de fato
+ajudou. E para minha surpresa o código não ficou muito ruim, houveram alguns
+módulos um pouco problemáticos, mas que puderam ser consertados depois que o
+software já estava pronto e funcionando. Além dessa experiência, que pode
+acontecer a outras pessoas, eu também acho que quem já sabe C pode achar este
+tutorial útil para começar a aprender Python, afinal, existem várias ideias que
+são comuns a essas linguagens e este guia pode poupar uma leitura massante para
+descobrir como definir uma função em Python, por exemplo.
+
+== Exemplos ==
+=== Condicional (if e switch) ===
+==== if em C ====
+{{{
+if (y < x || z == w) {        
+    /* codigo */              
+} else if (x == y && z > w) { 
+    /* mais codigo */         
+else {                        
+    /* mais mais codigo */    
+}                             
+}}}
+
+==== if em Python ====
+{{{#!python
+if y < x or z == w:
+    # codigo             
+    pass
+elif x == y and z > w:
+    # mais codigo
+    pass
+else:
+    # mais mais codigo
+    pass
+}}}
+Note que python é sensível a endentação, assim, a palavra-chave ''pass''
+se faz necessária quando não há nenhum comando. Nesse mesmo exemplo, se
+colocassemos código após os ''if''s não precisariamos colocar a palavra-chave
+''pass''. Por exemplo:
+{{{#!python
+if y < x or z == w:
+    # codigo             
+    x = 2
+elif x == y and z > w:
+    # mais codigo
+    y = 3
+else:
+    # mais mais codigo
+    z = 5
+}}}
+
+==== switch em C ====
+{{{
+switch (c) {
+    case 'a':
+    /* codigo */
+    break;
+    case 'b':
+    /* codigo */
+    break;
+    default:
+    /* codigo */
+    break;
+}}}
+
+==== switch em Python ====
+Python não possui o comando ''switch'', a maneira mais comum de fazer um código
+similar é usando ''if-else''.
+{{{#!python
+if c == 'a':
+    # codigo
+    pass
+elif c == 'b':
+    # codigo
+    pass
+else:
+    # codigo
+    pass
+}}}
+
+=== Loops (while e for) ===
+==== for em C ====
+{{{
+for (i = 0; i < N; i++)  
+    /* codigo */;
+for (i = N; i > 0; i--)  
+    /* codigo */;
+for (i = 0; i < N; i+=2) 
+    /* codigo */;
+}}}
+
+==== for em Python ====
+{{{#!python
+for i in xrange(N): 
+    # codigo
+    pass
+for i in xrange(N, 0, -1):
+    # codigo
+    pass
+for i in xrange(0, N, 2):
+    # codigo
+    pass
+}}}
+O ''for'' de python em feito em cima de um iterador e pode ser utilizado para
+iterar sobre uma lista, semelhante com o que acontece em C++.
+
+==== for com iterador em C++ ====
+{{{
+for (iter = lista.begin(); iter != lista.end(); iter++)
+    T x = *iter; /* um elemento de uma lista de tipo T */
+}}}
+
+==== iterando em um array em C ====
+{{{
+int arr[] = {1, 2, 3}, i, x;
+for (i = 0; i < 3; i++)
+    x = arr[i]; /* elemento do array */
+}}}
+
+==== for com iteradores em Python ====
+O uso de iteradores ocorre de forma natural em Python.
+{{{#!python
+for item in lista:
+    x = item #elemento da lista
+}}}
+A variável ''item'' será um item da lista a cada iteração. Enquanto em C++ usaria-se ''*iter'' para pegar um elemento, em Python o elemento é a própria variável ''item''.
+
+==== while em C ====
+{{{
+while (x > y)
+    /* codigo */;
+}}}
+
+==== while em Python ====
+{{{#!python
+while x > y:
+    # codigo
+    pass
+}}}
+
+=== Criando funções ===
+==== em C ====
+{{{
+int foo(int *i, char *s)
+{                       
+    return *i;          
+}                       
+}}}
+
+==== em Python ====
+{{{#!python
+def foo(i, s):
+    return i
+}}}
+
+=== Criando classes ===
+==== em C++ ====
+{{{
+class Foo {     
+    /* codigo */
+}
+}}}
+
+==== em Python ====
+{{{#!python
+class Foo(object):
+    # codigo
+}}}
+Não se preocupe com essa herança de object nas classes Python. Elas podem ser
+definidas apenas como class Foo: também, mas aí serão old-style class.
+
+=== Herança de classe ===
+==== em C++ ====
+{{{
+virtual class A : B {
+    /* codigo */
+}}}
+
+==== em Python ====
+{{{#!python
+class A(B):
+    #codigo
+    pass
+}}}
+Todas classes em python são virtuais.
+
+=== Método privado ===
+==== em C++ ====
+{{{
+class A {               
+    private:
+    void foo() {
+        /* codigo */    
+    }                   
+}                       
+}}}
+
+==== em Python ====
+{{{#!python
+class A(object):
+    def __foo(self):
+        # codigo
+        pass
+}}}
+
+=== Construtor de Classes ===
+==== em C++ ====
+{{{
+class A {            
+public:
+    A() {     
+        /* codigo */ 
+    }                
+}
+}}}
+
+==== em Python ====
+{{{#!python
+class A(object):
+    def __init__(self):
+        # codigo
+        pass
+}}}
+
+=== Acessando atributos do objeto ===
+==== em C++ ====
+{{{
+class A {
+    public:
+    int x;                     
+    void foo() {        
+        x = 2;                 
+        /* ou */               
+        this.x = 2;            
+    }                          
+}
+}}}
+
+==== em Python ====
+{{{#!python
+class A(object):
+    def __init__(self):
+        self.x = 0
+    def foo(self):
+        self.x = 2
+}}}
+O self em Python é passado explicitamente e funciona como o this de C++. A
+sintaxe sem o this que C++ permite não existe em Python.
+
+
+== Um pouco de teoria ==
+Em python só podemos mexer em referências, enquanto em C podemos escolher
+entre trabalhar com valor ou referência. Essas duas formas de acesso estão
+representadas no código:
+{{{
+int i = 30;                    
+/* ou */                       
+int *i = malloc(sizeof (int)); 
+*i = 30;                       
+}}}
+                               
+Em Python só temos o equivalente ao segundo caso:
+{{{#!python
+i = 30  # é o mesmo que o código com ponteiros em C
+}}}
+Nesse caso i é uma referência para o número 30. Apesar disso não há aritimetica
+de ponteiros em Python. Ao fazermos
+{{{#!python
+j = 20
+x = i + j
+}}}
+O valor de ''x'' será 50. Enquanto em C isso seria soma de dois ponteiros, em
+python sempre utilizamos o valor que é apontado. O código acima é equivalente a
+{{{
+int *i = malloc(sizeof (int)); 
+int *j = malloc(sizeof (int)); 
+int *x =  malloc(sizeof (int)); 
+*i = 30;                       
+*j = 20;
+*x = *i + *j;
+}}}
+
+Em Python as passagens para funções são por valor, mas só temos referencias.
+Então sempre passamos referências ao chamar uma função, apesar de que nem todo
+objeto é mutável em python. Assim, mesmo passando alguns objetos por referência
+não será possivel atualizar o valor dele.
+  * Exemplos de objetos não mutaveis: Tuplas, Strings e Números
+  * Exemplos de objetos mutáveis: Listas e Dicionários
+
+Considere o seguinte exemplo feito no interpretador interativo de Python
+(execute o interpretador python sem parâmetros para iniciá-lo):
+{{{
+>>> def foo(x):
+...    x += 5
+>>> y = 10
+>>> foo(y)
+>>> y
+10
+}}}
+y não é modificado, o que modificamos no código de foo foi uma referência que
+foi passada por valor para a função.
+
+{{{
+>>> def foo(x):
+...    x.append(2)
+>>> y = []
+>>> foo(y)
+>>> y
+[2]
+}}}
+Como o ponteiro para a lista foi passado, ao alterarmos a lista com ''append'',
+quem foi alterada foi a lista passada como um ponteiro por parâmetro. Não uma
+cópia dela.
+
+Dicionários em python:
+{{{
+>>> x = {'a':123, (1, 2):'foo', 5 : [1, 2, 3]}
+>>> x['a']
+123
+>>> x[(1, 2)]
+'foo'
+>>> x[5]
+[1, 2, 3]
+}}}
+Qualquer objeto imutável pode servir como uma chave de dicionário em python e
+qualquer objeto pode servir como um valor.
+
+Tuplas em Python
+{{{
+>>> ('af', 3)
+('af', 3)
+}}}
+
+Para informações sobre os métodos dos tipos padrão digite help no interpretador
+python:
+{{{
+>>> help('list')
+>>> help('dict')
+>>> help('str')
+>>> help('int')
+>>> help('tuple')
+}}}
+
+----
+Rafael C. Almeida (RafaelAlmeida)

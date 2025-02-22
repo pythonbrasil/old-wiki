@@ -1,0 +1,15 @@
+## page was renamed from CanalIRC
+A comunidade Python Brasil se reúne diversos canais de bate-papo on-line (no servidor irc.freenode.org), para troca de informações e discussões, são eles:
+
+ * Python Brasil: #python-br [[IRCPythonBR|(veja informacoes sobre o canal)]]
+ * Django Brasil: #django-br
+ * Pygtk Brasil: #pygtk-br
+ * Twisted Brasil: #twisted-br
+ * SqlAlchemy Brasil: #sqlalchemy-br
+ * Zope PT: #zope-pt
+ * APyB (Conselho e Diretoria): #apyb-condir
+
+Para ter acesso aos canais é preciso um cliente IRC, como Pidgin, XChat, etc. 
+Caso você não tenha um cliente instalado ou esteja acessando de um local que bloqueia o acesso ao IRC, disponibilizamos o cliente web abaixo. Escolha um apelido (nick) e participe!
+
+<<qwebirc(server="freenode",channels="#python-br,#django-br,#zope-pt,#twisted-br,#pygtk-br,#sqlalchemy-br")>> 

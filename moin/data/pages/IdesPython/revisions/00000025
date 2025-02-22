@@ -1,0 +1,72 @@
+#pragma section-numbers off
+= IDEs para Python =
+
+Essa pagina é uma lista de IDEs para desenvolvimento em Python com uma pequena descrição das mesmas para que as pessoas possam decidir qual delas se adapta melhor aos seus requisitos.
+Essa listagem surgiu a partir de uma discussão ocorrida na lista [http://br.groups.yahoo.com/group/python-brasil python-brasil].
+O autor de opiniões pessoais é colocado entre parentesis.
+
+== Livres ==
+
+'''Idle''' - http://www.python.org - O IDLE vem com o Python. É feito com Tkinter e se você se acostumar pode lhe ajudar bastante. É bem simples de ser usado também.
+
+'''SPE''' - http://spe.pycs.net/ - Desenvolvido com wxPython é livre e tem algumas funcionalidades interessantes. Tem wxGlade como plugin para desenho de telas gráficas.
+
+'''Pida''' - http://pida.berlios.de/ - É uma IDE desenvolvida com PyGTK e visa a integração com o Vim. Oferece recursos como project management, source code management, code browser, code refactor, profiler, debugger entre outros.   
+
+'''Boa-Constructor''' - http://boa-constructor.sf.net - Essa é a "única" IDE ao estilo RAD do Delphi/VB. Funciona com o wxPython na versão 2.4 e é acho que é a mais fácil de ser usada apesar de não promover boas práticas de desenvolvimento como a de separar lógica de negócios de apresentação (telas). As outras IDEs não possuem mecanismos para desenho de telas gráficas mas podem usar ferramentas como Glade e/ou wxGlade.
+
+'''Eclipse''' - http://www.eclipse.org - Diferente de todos os outros.
+Pesado, grande, monstruoso mas muito poderoso. É feito em Java e é
+'''ideal''' para desenvolvimento Java. Mas existem plugins para se desenvolver em Python com ele (e detalhe: atualmente é um brasileiro quem o mantém) que é o ppydev: http://pydev.sourceforge.net/
+
+'''EasyEclipse''' - http://www.easyeclipse.org/site/distributions/python.html
+
+'''!DrPython''' - http://drpython.sourceforge.net/ - usa wxPython. Criado para ser utilizado em escolas.
+
+'''IPython''' - http://ipython.scipy.org/ - Um shell com muitos recursos, através das comandos "magicos". Bastante util, modo texto apenas. Você pode usa-lo como um shell "acoplado" aos seus programas também.
+
+'''KDevelop''' - http://www.kdevelop.org/ - IDE livre para  GNU/Linux e outros *nixes-like.
+
+'''PythonWin''' - http://pywin32.sf.net/ - IDE que acompanha as extensões Win32 para Python (PyWin32). Oferece auto-completion e debugging, e tem recursos extras voltados à programação Windows (coletor de exceções para componentes COM criados, COM browser, geração de arquivos .py com informações sobre objetos COM (static dispatch), etc.).
+
+'''PythonCard''' - http://pythoncard.sourceforge.net - é uma GUI para construção de aplicações multiplataforma em Windows, Mac OS X e Linux, usando a linguagem de programação Python. O lema de PythonCard é "coisas simples devem ser simples de fazer e coisas complexas devem devem ser possiveis". É a ferramenta para quem deseja desenvolver aplicações gráficas de maneira rápida e fácil, com um mínimo de esforço e codificação; simples mas poderoso. Utiliza a biblioteca wxPython, mas separa a lógica do código da apresentação utilizando um tipo de arquivo de definição de recursos. (RômuloCampelo - 08/04/2005)
+
+'''!TruStudio''' - http://trustudio.unipro.ru e http://sourceforge.net/projects/trustudio - Esta IDE é um plugin para o Eclipse (mais informações sobre este acima), tornando o suporte a PHP e Python bem mais completo e poderoso. 
+
+'''!PyScripter''' - http://mmm-experts.com/Downloads.aspx?ProductId=3 - Acompanha o conjunto de componentes python para Delphi (embora não requira que o Delphi esteja instalado para funcionar). Suporta debugging, auto-completion, navegação no código entre outros recursos. Na versão atual (3.31) o instalador parece ter um problema pois abre a IDE durante a instalação, diz que não pôde localizá-la e não cria um atalho, porém você pode criar um a partir do pasta onde foi instalada (geralmente C:\Arquivos de Programas\PythonForDelphi).
+
+== Proprietários ==
+
+'''Wing''' - http://www.wingware.com - Das IDEs proprietárias essa é uma das que mais gosto ( OsvaldoSantanaNeto ).
+
+'''Komodo''' - http://www.activestate.com - Essa é outra IDE bem poderosa também. Trabalha com outras linguagens além de Python e roda em Linux e Windows. Existe uma licença gratuita que pode ser usada para aprendizado.
+
+'''!BlackAdder''' - http://www.thekompany.com/products/blackadder/ - Feita pelo pessoal que desenvolve o KDE.
+
+== Livres 'pero-no-mucho' ==
+
+'''Eric3''' - http://www.die-offenbachs.de/detlev/eric3.html - Dos IDEs esse é o que mais gosto. Não é exatamente o que eu uso (OsvaldoSantanaNeto) mas acho que é o mais completo de todos. É feito com a biblioteca QT e se integra às ferramentas da QT e com outros softwares como o Bicycle Repair Man (refactoring) e TabNanny (verificação de indentações)
+
+== Editores de texto ==
+
+'''vim''' - http://www.vim.org/ - Esse é o que eu uso ( OsvaldoSantanaNeto ). Tem em todo GNU/Linux e é altamente configurável.
+
+'''emacs''' - http://www.gnu.org/software/emacs/emacs.html - Esse editor é muito difícil de se usar (assim como o vim também), mas uma vez que se aprende a usá-lo ele pode se tornar uma IDE Python poderosíssima, principalmente em modo Python (http://sourceforge.net/projects/python-mode/). Mais "Emacs Goodies" em http://www.python.org/emacs/ ou na propria Wiki em PythonComEmacs ou no Wiki brasileiro sobre emacs http://www.emacs-br.org/ .
+
+'''SciTE''' - http://www.scintilla.org/SciTE.html - Excelente editor de textos voltado para programação. Suporta uma grande lista de linguagens, pode rodar e debugar os programas, é fácil de usar e é muito configurável. Disponível para Windows e X (ambiente gráfico dos UNIXes).
+
+'''jext''' - http://www.jext.org/ - Muito bom editor! Suporta muitas linguagens e possui plugins para Python (executar, por exemplo).
+
+Uma lista com outros (muitos) editores podem ser encontrados em http://www.python.org/moin/PythonEditors
+
+=== Mais informações ===
+ * http://wiki.python.org/moin/IntegratedDevelopmentEnvironments 
+
+=== Para serem incluídos ===
+
+ * Mais alternativas pra Windows
+ * Mais editores de textos e plugins para os mesmos
+
+----
+
+EduardoDeOliveiraPadoan

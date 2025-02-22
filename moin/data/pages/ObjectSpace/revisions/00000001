@@ -1,0 +1,87 @@
+= Receita: ObjectSpace em Python =
+
+Essa receita surgiu a partir de uma discussão na lista python-brasil, acerca de implementar uma função each_object(cls) que retorna todas as instâncias criadas de uma classe cls, semelhante ao módulo ObjectSpace em Ruby.
+
+É um exemplo interessante de uso real de metaclasses, e segue uma explicação mais detalhada para aqueles que querem começar a entender como elas funcionam.
+
+== Código ==
+
+A idéia pra solucionar o problema (uma função que retorna todos os objetos da classe) é a classe manter um cache (usando weakrefs, para não interferir com a coleta dos objetos), no atributo __cache__, definido quando ela (a classe) é criada. Quando a instância é inicializada, é inserida no cache da classe, e a função each_object(cls) consulta cls.__cache__ e retorna todas as instâncias.
+
+Primeiro, vamos à forma mais simples e direta de fazer isso:
+
+{{{
+#!python
+import weakref
+
+class A(object):
+    __cache__ = weakref.WeakValueDictionary()
+
+    def __init__(self):
+        self.__class__.__cache__[id(self)] = self
+
+a = A()
+b = A()
+c = A()
+d = A()
+print 'A: ', A.__cache__.values()
+del d
+print 'A: ', A.__cache__.values()
+}}}
+
+Nada de novo aí... a classe simplesmente implementa a solução do problema como foi descrito. A saída desse código é:
+{{{
+A:  [<__main__.A object at 0x402d408c>, <__main__.A object at 0x402d40ac>, <__main__.A object at 0x402d404c>, <__main__.A object at 0x402d40cc>]
+A:  [<__main__.A object at 0x402d408c>, <__main__.A object at 0x402d40ac>, <__main__.A object at 0x402d404c>]
+}}}
+
+A questão é: e se quisermos implementar esse comportamento em uma série de classes ? E se depois quisermos alterar esse comportamento, acrescentar algo a mais, como rastrear chamadas de métodos ou definir atributos automaticamente ? Tudo pode virar uma confusão muito facilmente. As metaclasses permitem que isolemos cada aspecto e possamos juntá-las todas cooperativamente. Obviamente não é a intenção dessa receita discutir isso a fundo, mas é algo que tem de ser mencionado para justificar o uso de um recurso tão avançado se o problema pode ser resolvido de forma mais simples, embora com potencial de gerar mais problemas a longo prazo.
+
+Vamos à metaclasse então:
+
+{{{
+#!python
+import weakref
+
+class AutoCache(type):
+    def __init__(cls, *args, **kwds):
+        cls.__cache__ = weakref.WeakValueDictionary()
+    
+    def __call__(cls, *args, **kwds):
+        obj = cls.__new__(cls, *args, **kwds)
+        cls.__cache__[id(obj)] = obj
+        cls.__init__(obj, *args, **kwds)
+        return obj
+
+
+class A(object):
+    __metaclass__ = AutoCache
+
+a = A()
+b = A()
+c = A()
+d = A()
+
+print 'A:', A.__cache__.values()
+del d
+print 'A:', A.__cache__.values()
+
+}}}
+
+Exceto por alguns detalhes, esse código faz exatamente a mesma coisa que o anterior, porém usando uma metaclasse, aqui definida como AutoCache. Vamos a uma explicação...
+
+As classes são objetos como quaisquer outros, portanto também têm uma classe definindo o seu comportamento. Essa classe da classe é a metaclasse. Em Python a metaclasse padrão para classes new-style é a classe type, e normalmente quando queremos implementar uma metaclasse, implementamos uma subclasse de type, como aqui, AutoCache(type). Na verdade, qualquer classe cujas instâncias sejam outras classes é uma metaclasse, e não somos obrigados a usar uma subclasse de type para obter esse comportamento.
+
+Note que a metaclasse AutoCache implementa dois métodos, __init__ e __call__. Assim como numa classe normal, o método __init__ é chamado automaticamente pelo interpretador para inicializar a instância, depois que ela é criada... como a instância da metaclasse é a classe, o método __init__ aqui está inicializando a classe (note que por convenção na metaclasse é usado cls ao invés de self para o primeiro argumento implícito dos métodos).  Aqui ele é usado para criar o dicionário usado como cache no atributo __cache__ da classe, depois que ela é criada.
+
+Com o método __call__ é um pouco mais complicado. Ele é usado em classes normais quando queremos tornar as instâncias executáveis, ou seja, poder chamá-las como se fossem uma função. Se a instância da metaclasse é a classe e nós temos de executá-la para gerar suas instâncias, isso significa que a metaclasse deve sempre implementar o método __call__. A metaclasse padrão type já tem essa implementação, e em geral só reimplementamos esse método quando queremos customizar algo na criação das instâncias das classes geradas por essa metaclasse, como é o caso aqui.
+
+Ou seja, ao fazermos as chamadas à classe A(), para criar as instâncias a, b, c e d, na verdade ocorre a chamada A.__call__() ou AutoCache.__call__(A). Nessa chamada o objeto é criado na primeira linha do método, inserido no cache na segunda, inicializado na terceira e retornado normalmente na última linha. Note que é a chamada a cls.__init__ na terceira linha que executa a chamada ao método __init__ que estamos acostumados a implementar o tempo todo.
+
+O comportamento definido por esse metaclasse pode ser facilmente integrado a outras simplesmente usando herança, como em classes normais. Para um exemplo de duas metaclasses mais sofisticadas bem como um exemplo dessa integração cooperativa, confira a receita AutomatizarAtributosSlots.
+
+Volta para CookBook.
+
+----
+
+PedroWerneck

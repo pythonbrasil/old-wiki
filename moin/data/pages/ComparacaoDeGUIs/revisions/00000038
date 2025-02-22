@@ -1,0 +1,387 @@
+[[TableOfContents]]
+
+== Tkinter ==
+
+Baseada em Tcl/Tk, a Tkinter acompanha a distribuição oficial do interpretador Python. Muitos consideram a melhor coisa do mundo, outros vão gargalhar e dizer que é horrível, principalmente pela performance e aparência, mas vai continuar sendo a biblioteca padrão da linguagem Python por um bom tempo.
+
+'''Licença:''' Python (permite escrever livremente softwares comerciais, GPL ou sob qualquer outra licença).[[BR]]
+'''Plataformas:''' Unix, Linux, Windows, MacOS/X [[BR]]
+'''Website:''' http://www.python.org/topics/tkinter/ [[BR]]
+'''Vantagens: '''
+
+ * Portabilidade - Programas escritos usando a Tkinter são portáveis livremente entre Linux, Unix, Windows e Mac, além da garantia de que qualquer um poderá executar o programa sem precisar instalar bibliotecas extras.
+ * Aprendizado - Tem uma API simples de se aprender e fácil de lembrar.
+ * Documentação - Muito bem documentada, com inúmeros tutoriais e referências de ótima qualidade disponíveis na Web.
+
+'''Desvantagens:'''
+
+ * Pobre - Faltam muitos componentes importantes, como ''notebooks'' e ''combo box'' (apesar de estes poderem ser feitos combinando outros componentes). Alguns elementos (''listbox'' por exemplo) são incompletos ou limitados. Em compensação o componente ''Text'' é muito poderoso.
+ * Aparência - A Tk usa uma função própria para acessar diretamente as funções do sistema operacional e desenhar seus próprios elementos na tela. Isso tem a vantagem de ser mais facilmente portável, mas a grande desvantagem de ter uma aparência diferente da nativa do sistema operacional. Pessoalmente, quando eu uso Tkinter me sinto 10 anos atrás, usando Windows 3.1 :). Existe um mecanismo que permite a personalização do visual dos componentes, mas as mudanças possíveis são poucas.
+ * Performance -  O desempenho é horrível tendo em vista o que a biblioteca oferece.
+
+'''Exemplo de código:'''
+
+{{{
+#!python
+from Tkinter import *
+
+class App:
+          
+    def __init__(self, master):
+
+        frame = Frame(master)
+        frame.pack()
+
+        self.button = Button(frame, text="QUIT", fg="red",
+                         command=frame.quit)
+        self.button.pack(side=LEFT)
+
+        self.hi_there = Button(frame, text="Hello",
+                           command=self.say_hi)
+        self.hi_there.pack(side=LEFT)
+
+    def say_hi(self):
+        print "hi there, everyone!"
+
+root = Tk()
+
+app = App(root)
+
+root.mainloop()
+}}}
+
+== PyGTK ==
+
+É um ''wrapper'' para o GIMP Toolkit (GTK), a biblioteca usada pelo GNOME e muitas outras aplicações para Linux. Tem ótimo desempenho, elementos ricos e visual agradável.
+
+'''Licença:''' LGPL[[BR]]
+'''Plataformas:''' Unix, Linux, Windows (Beta) [[BR]]
+'''Website:''' http://www.pygtk.org [[BR]]
+'''Na Wiki: ''' PyGtk [[BR]]
+'''Vantagens:'''
+
+ * Desempenho - PyGTK 0.X (para GTK 1.2) tem provavelmente o melhor desempenho entre todas as bibliotecas avaliadas aqui. A versão 2.0 (para gtk 2.X) não tem o mesmo desempenho, mas é bem satisfatória.
+ * Documentação - Bem documentada. Existem bons tutoriais para ambas as versões. Apesar de não haver uma referência completa para PyGTK 0.X, existe uma muito boa para a versão 1.9X, 2.X.
+ * API - PyGTK usa uma API eficiente, baseada em propagação de sinais e ''callbacks''. Um elemento qualquer emite um sinal, que é propagado "pra cima" até ser capturado e gerar a chamada de um ''callback''.
+ * IDE - Possui uma ferramenta para construção de interfaces, o Glade, que permite gerar uma referência em XML da interface, que pode ser usado diretamente pela biblioteca.
+
+'''Desvantagens:'''
+
+ * Portabilidade - Rodar aplicações usando PyGTK em Windows é uma tarefa complicada.
+
+    /!\ '''Aviso:''' Cuidado especial com aplicações que fazem uso de threads. A GTK+ para Windows possui problemas com esse sistema.
+    Uma alternativa ao sistema de threads é usar ''generators'' em Python conforme a idéia de
+    [http://www.gnome.org/~gjc/gtasklet/gtasklets.html gTasklets]. Esse sistema de ''tasklets'' já faz parte do framework
+    [http://www.async.com.br/kiwi/ Kiwi].
+ 
+ * Tamanho do código - Muito do código escrito em PyGTK chega a parecer redundante, mas é necessário. Por exemplo, para usar um elemento qualquer precisamos criá-lo, chamando a classe, configurá-lo através dos seus métodos de configuração, posicioná-lo e por fim mostrá-lo com o método {{{show()}}}. São no mínimo três chamadas de métodos pra cada objeto. Como resultado disso, temos arquivos de código fonte imensos. Linhas e mais linhas de código necessárias para se fazer qualquer coisa.
+
+'''Exemplo de Código:'''
+
+{{{
+#!python
+import gtk
+
+class HelloWorld:
+
+    def callback(self, widget, data):
+        print "Hello again - %s was pressed" % data
+
+    def delete_event(self, widget, event, data=None):
+        gtk.mainquit()
+        return gtk.FALSE
+
+    def __init__(self):
+        self.window = gtk.GtkWindow(gtk.WINDOW_TOPLEVEL)
+        self.window.set_title("Hello Buttons!")
+        self.window.connect("delete_event", self.delete_event)
+        self.window.set_border_width(10)
+
+        self.box1 = gtk.GtkHBox(gtk.FALSE, 0)
+        self.window.add(self.box1)
+
+        self.button1 = gtk.GtkButton("Button 1")
+        self.button1.connect("clicked", self.callback, "button 1")
+        self.box1.pack_start(self.button1, gtk.TRUE, gtk.TRUE, 0)
+        self.button1.show()
+
+        self.button2 = gtk.GtkButton("Button 2")
+        self.button2.connect("clicked", self.callback, "button 2")
+        self.box1.pack_start(self.button2, gtk.TRUE, gtk.TRUE, 0)
+        self.button2.show()
+
+        self.box1.show()
+        self.window.show()
+
+def main():
+    gtk.mainloop()
+
+if __name__ == "__main__":
+    hello = HelloWorld()
+    main()
+
+}}}
+
+
+== wxPython ==
+
+wxPython é um ''wrapper'' da biblioteca wxWindows. Assim como a Tkinter, as aplicações são facilmente portáveis. A diferença é que a wxWindows utiliza um wrapper sobre a interface gráfica padrão do sistema operacional (GTK em Linux, MFC em Windows), o que permite que as aplicações sejam mais facilmente portáveis e que tenham a aparência de uma aplicação nativa. Em compensação, o desempenho vai ladeira abaixo com o acréscimo de mais uma camada entre a aplicação e o sistema operacional.
+
+'''Licença:''' GPL [[BR]]
+'''Plataformas:''' Unix, Linux, Windows, MacOS/X [[BR]]
+'''Website:''' http://www.wxpython.org [[BR]]
+'''Vantagens:'''
+
+ * Portabilidade - Aplicações escritas em wxPython rodam praticamente sem problemas em várias plataformas. Esse é provavelmente o principal (senão o único) motivo pelo qual está se tornando bem popular.
+ * Componentes ricos - Nesse ponto a wxPython é imbatível. Há todo tipo de componentes, prontamente disponíveis, de telas a caixas de texto que interpretam HTML e até mesmo a Scintilla.
+ * Documentação - o wxPython vem com um demo da maioria dos seus ''widgets'' que serve como teste e exemplo de uso.
+ * Disponibilidade de Construtores de GUI - apesar dos melhores serem produtos comerciais, fiz alguns testes com o PythonCard e fiquei muito satisfeito. Embora o BoaConstructor seja mais popular, só consegui faze-lo funcionar utilizando versões antigas da wxWindows, enquanto o PythonCard funcionou perfeitamente com a versão 2.4.2. Além disso o PythonCard separa a parte visual do comportamento associado à interface (métodos e propriedades dos controles em arquivos diferentes).
+
+    Considero a disponibilidade dessas ferramentas muito importantes, por julgar construção das interfaces a parte mais tediosa e
+    desagradável da codificação. Sem citar nomes, as experiências de mercado demonstram que os usuários de programas valorizam muito
+    mais interfaces agradáveis esteticamente do que robustez, confiabilidade, algoritmos eficientes e elegantes ou outros aspectos
+    objetivos, até porque é o que eles observam. (RômuloCampelo)
+
+'''Desvantagens:'''
+
+ * Desempenho - A performance das aplicações em si não é ruim. O problema é o uso de memória e o tempo de inicialização.
+ * Instabilidade - Mesmo estando ativamente em desenvolvimento, ainda tem alguns problemas de estabilidade. No mínimo 10% das mensagens na lista wxPython são reportando ''bugs''.
+ * API complicada - wxWindows é uma biblioteca com quase 10 anos de idade, que foi sendo remendada precariamente com o passar dos anos. Apesar da wxPython ser um ''wrapper'' excelente, muito bem escrito, os problemas da wxWindows aparecem: API completamente diferente entre alguns componentes e outros, números de ID, macros, etc. Porém tem melhorado bastante a partir da versão 2.5 e o ''wrapper'' wxPython oculta bastante a complexidade e idiossincrasias do wxWindows.
+ * Aprendizado - Complicado de aprender graças à API mal planejada (50% ou mais das mensagens na lista wxPython são de iniciantes com problemas). Além disso, os nomes de classes encorajam o uso de "from wx import *" (aliás, mesmo problema da PyGTK 0.X, para GTK 1.2).
+
+   Aqui vou (RodrigoSenra) discordar um pouco, achei o aprendizado fácil, especialmente devido à abundância de exemplos. A versão 2.5
+   apresenta uma API mais consistente.
+
+ * Documentação - Apesar de alguns tutoriais razoáveis, há pouca documentação específica para wxPython. Para uma referência da biblioteca, tem de se recorrer à referência da wxWindows. Entretanto, muitas vezes basta seguir o código dos demos (em Python), sem ser necessário recorrer a documentação do wxWindows.
+ 
+ * IDEs Livres - O wxDesigner (http://www.roebling.de/) é um IDE bom, mas é comercial. Não há nenhum IDE RAD de qualidade e que seja disponível livremente, embora o BoaConstructor pareça muito promissor.
+
+
+'''Exemplo de Código:'''
+
+{{{
+#!python
+from wxPython.wx import *
+
+ID_ABOUT = 101
+ID_EXIT  = 102
+
+class MyFrame(wxFrame):
+    def __init__(self, parent, ID, title):
+        wxFrame.__init__(self, parent, ID, title,
+                         wxDefaultPosition, wxSize(200, 150))
+        self.CreateStatusBar()
+        self.SetStatusText("This is the statusbar")
+
+        menu = wxMenu()
+        menu.Append(ID_ABOUT, "&About",
+                    "More information about this program")
+        menu.AppendSeparator()
+        menu.Append(ID_EXIT, "E&xit", "Terminate the program")
+
+        menuBar = wxMenuBar()
+        menuBar.Append(menu, "&File");
+
+        self.SetMenuBar(menuBar)
+
+
+class MyApp(wxApp):
+    def OnInit(self):
+        frame = MyFrame(NULL, -1, "Hello from wxPython")
+        frame.Show(true)
+        self.SetTopWindow(frame)
+        return true
+
+app = MyApp(0)
+app.MainLoop()
+}}}
+
+
+== PyQT ==
+
+PyQT é um ''wrapper'' para a biblioteca QT, que é a base do KDE (ambiente ''desktop'' para Linux). Muitas das vantagens e desvantagens do PyQT coincidem com as do PyGTK, pelo fato do GNOME e KDE serem "concorrentes" e se equivalerem em muitos aspectos. Existe uma biblioteca complementar, PyKDE, que atua sobre elementos específicos do KDE, como por exemplo interação com o ''kicker'' e a barra de tarefas.
+
+'''Licença:''' GPL [[BR]]
+'''Plataformas:''' Unix, Linux, Windows, Mac OS/X [[BR]]
+'''Website:''' http://www.riverbankcomputing.co.uk/pyqt/ [[BR]]
+'''Vantagens:'''
+ * Desempenho: Como o Qt foi construído de forma a facilitar o desenvolvimento de ''wrappers'', o desempenho do PyQT é bem próximo do Qt quando usado com C++.
+ * Fácil de aprender: A biblioteca Qt é famosa por ser extremamente bem documentada, pois a própria Trolltech possui um time de escritores técnicos. Apesar da documentação ser para C++, é fácil "traduzir" os exemplos para Python. Existe também um ótimo livro online sobre PyQT no site [http://www.opendocs.org/pyqt opendocs.org]
+ * API: A API do PyQT utiliza um sistema de "slots" e "sinais", levemente similar ao sistema de sinais e ''callbacks'' utilizado por outras bibliotecas. A API é bastante rica e coerente.
+ * IDE: Possui uma IDE muito boa para criação de interfaces, chamada QT Designer. O programa {{{pyuic}}} transforma essas definições de interfaces em código Python, que pode então ser usado por outros programas.
+
+'''Desvantagens:'''
+
+ * Custo: Para o desenvolvimento de aplicações que não sigam a licença GPL as empresas interessadas em usar QT terão que desembolsar uma quantia razoável de dinheiro.
+
+'''Exemplo de código:'''
+
+{{{
+#!python
+import sys
+from qt import *
+
+class HelloButton(QPushButton):
+
+    def __init__(self, *args):
+        apply(QPushButton.__init__, (self,) + args)
+        self.setText("Hello World")
+
+class HelloWindow(QMainWindow):
+
+    def __init__(self, *args):
+        apply(QMainWindow.__init__, (self,) + args)
+        self.button=HelloButton(self)
+        self.setCentralWidget(self.button)
+
+def main(args):
+    app=QApplication(args)
+    win=HelloWindow()
+    win.show()
+    app.connect(app, SIGNAL("lastWindowClosed()"),
+                app, SLOT("quit()"))
+    app.exec_loop()
+
+if __name__=="__main__":
+    main(sys.argv)
+}}}
+
+
+== PyFLTK ==
+
+FLTK (pronuncia-se ''fulltick'') significa ''Fast Light Toolkit'' ou ''Toolkit'' rápido e leve. Ele cumpre exatamente o que promete, é rapido e não compromete a memória (você pode usar para programar para um 386 com 4Mb). A API utiliza chamadas ao sistema gráfico em uso para criar seus componentes, o que os mantem idênticos, indepente do sistema operacional (aliás, de uma maneira semelhante ao Tk, só que quando bem configurado, ficam bonitos) e isso aumenta a portabilidade. FLTK roda em mais plataformas que o próprio Python (existe inclusive uma versão para DOS 16 ''bits'').
+
+'''Licença:''' LGPL [[BR]]
+'''Plataformas:''' Linux, FreeBSD, Windows, Solaris, Amiga, Dos, MacOS, OpenBSD [[BR]]
+'''Website:''' http://pyfltk.sourceforge.net/ (http://www.fltk.org/) [[BR]]
+'''Vantagens:'''
+
+ * Rápido e portável, o aprendizado também é bem simples, tão fácil ou mais que o Tk, só que mais completo.
+
+'''Desvantagens:'''
+
+ * A principal desvantagem dele é no quesito posicionamento de ''widgets'', ele só trabalha na base do x,y, o que torna a programação impossível sem um construtor de interface (ou, pelo menos, muito chata). Em C++ tem o FLUID, que vem com ele, só que o pyconvert, que vem no PyFLTK, não consegue converter todo o código da saída do FLUID para Python (parece que ele não converte classes e alguns outros recursos), o que torna desagradável a programação (primeiro, desenha-se toda a janela, depois gera-se o código e transforma-se o mesmo em objeto, então, se quiser mudar a janela, tem que ser na mão).
+
+'''Programa de exemplo:'''
+
+{{{
+#!python
+from fltk import *
+import sys
+from string import *
+
+def theCancelButtonCallback(ptr, data):
+	print "type = ", type(ptr)
+	print "theCancelButtonCallback(%s)"%str(data)
+
+window = Fl_Window(100, 100, 200, 90)
+window.label(sys.argv[0])
+button = Fl_Button(9,20,180,50)
+button.label("Hello World")
+button.labeltype(FL_EMBOSSED_LABEL)
+button.callback(theCancelButtonCallback, "'some callback data'")
+
+window.end()
+window.show(len(sys.argv), sys.argv)
+Fl.run()
+}}}
+
+== FXPy ==
+
+'''Website:''' http://fxpy.sourceforge.net/ (http://www.fox-toolkit.org/)
+
+== Anygui ==
+
+Anygui é uma biblioteca que ainda se encontra em estágio muito inicial de desenvolvimento, mas é mencionada aqui a título de curiosidade. Se um dia chegar a ficar "pronta", será muito atraente e provavelmente vai tomar o lugar da Tkinter na biblioteca padrão. É escrita puramente em Python e funciona como um ''frontend'' para as outras bibliotecas disponíveis. Atualmente ela suporta !PythonWin, Tkinter, wxPython, Swing (Jython), PyGTK, Bethon (BeOS), PyQT e até mesmo Curses ou texto puro, quando nenhuma outra biblioteca está disponível. A idéia é escrever uma aplicação usando Anygui e depois poder usá-la em qualquer plataforma com qualquer biblioteca. 
+
+
+'''Licença:''' MIT License [[BR]]
+'''Plataformas:''' Python :) [[BR]]
+'''Website:''' http://anygui.sourceforge.net/[[BR]]
+'''Vantagens:'''
+
+ * Portabilidade - A Anygui permite executar uma aplicação em qualquer plataforma suportada pela Python sem alterações, usando qualquer biblioteca disponível no sistema. O que mais você pode querer ? :)
+
+'''Desvantagens:'''
+
+ * Pobre - Obviamente, os componentes têm de ser ''nivelados por baixo''. Não é possível ter acesso a um componente que existe em uma biblioteca mas não nas outras, por isso, ela se presta apenas para projetos simples.
+
+'''Exemplo de Código:'''
+
+{{{
+#!python
+import anygui
+
+
+class MyWindow(anygui.Window):
+    def __init__(self, app):
+        anygui.Window.__init__(self, title="Hello", width=220,
+                                     height = 45)
+        self.app = app
+        button = anygui.Button(text="New Window", size=(200,25),
+                                     x=10, y=10)
+        anygui.link(button, self.new_window)
+        self.add(button)
+        self.app.add(self)
+
+    def new_window(self, **kw):
+        win = MyWindow(self.app)
+        self.app.add(win)
+
+
+app = anygui.Application()
+win = MyWindow(app)
+app.run()
+
+}}}
+
+== PySWT ==
+
+SWT é um toolkit gráfico especialmente criado para o projeto [http://www.eclipse.org Eclipse]. Ele foi desenvolvido tendo em mente a plataforma Java. 
+
+O PySWT é um ''binding'' para que utilizar o SWT em Python. Ele foi criado utilizando uma solução baseada em GCJ (compilador Java do GNU Compiler Collection) e SIP.
+
+'''Plataformas:''' Windows, Linux [[BR]]
+'''Website:''' http://www.cs.nyu.edu/zilin/pyswt/pmwiki.php?n=PySWT.Introduction [[BR]]
+
+'''Vantagens:'''
+ * Portabilidade: aplicações utilizando PySWT roda tranquilamente em Linux e Windows, mas somente se o PySWT estiver instalado.
+ * Documentação: por ser muito utilizado em JAVA há muita documentação sobre o SWT.
+ * Muitos componentes: há bastante opção de componentes disponiveis bela biblioteca do SWT. 
+
+'''Exemplo de Código:'''
+
+{{{
+#!python
+from pyswt import * 
+
+display = Display()
+shell = Shell(display)
+shell.setText("hello")
+
+shell.open()
+while not shell.isDisposed():
+    if not display.readAndDispatch():
+        display.sleep()
+        
+display.dispose()
+}}}
+
+
+
+== Conclusão ==
+
+Se você não tiver algum bom motivo para não usá-la, a Tkinter é uma opção razoável. 
+
+Apesar de estar atualmente "em moda", existe um nicho muito pequeno de aplicações onde a wxPython é a melhor opção, que são justamente aplicações multiplataforma, que ''precisam'' funcionar com pouca ou nenhuma alteração em Windows e Linux e que a Tkinter não seja suficiente (ou desejável). Mesmo assim, wxPython tem muitos bugs sérios que tem de ser considerados dependendo da aplicação.
+
+No desenvolvimento de aplicações para Linux existe a alternativa de usar PyGtk ou, se sua aplicação for licenciada sob GPL, a PyQt.
+
+== Outras comparações ==
+
+ * http://www.awaretek.com/toolkits.html - Ferramenta que compara os diversos toolkits para desenvolvimento GUI em Python e informa qual o ideal para você, baseado nos critérios que você pontua. Além disto, existem informações sobre cada um dos toolkits e o link para a página. (dica passada por Marco André Lopes Mendes - marcoandre at gmail.com)
+ * EmailSobreToolkitsGui - e-mail enviado por OsvaldoSantanaNeto para a lista python-brasil no qual ele compara alguns toolkits gráficos.
+
+----
+
+''Os códigos de exemplo foram extraídos de tutoriais das respectivas bibliotecas. Eu pensei em escrever um exemplo em comum a todos, mas acredito que com isso eu iria inserir vícios adquiridos e não seria muito imparcial, já que os códigos das bibliotecas que eu gosto mais e tenho mais experiência ficariam melhores. -- PedroWerneck''

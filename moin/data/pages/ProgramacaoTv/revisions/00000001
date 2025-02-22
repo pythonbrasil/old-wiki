@@ -1,0 +1,3 @@
+Script para pegar a programação do dia da TV fechada (cabo) no site http://www.hagah.com.br
+
+O script faz uso do BeautifulSoup para fazer o parsing da página. 

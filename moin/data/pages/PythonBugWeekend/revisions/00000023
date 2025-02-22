@@ -1,0 +1,63 @@
+= Python Bug Weekend =
+'''Python Bug Weekend''' (antigamente conhecido como PythonBugDay) é um mutirão de solução de bugs no interpretador CPython e na biblioteca padrão. É coordenado via IRC e há core developers à disposição para ajudar e orientar. Além de solucionar bugs, o intuito é incentivar programadores a participarem ativamente do desenvolvimento da linguagem em si!
+
+== Python Bug Weekend para o Python 3.2: 20 e 21 de Novembro de 2010 ==
+
+O próximo Bug Weekend vai acontecer nos dias 20 e 21 de Novembro, em preparação para o lançamento do Python 3.2. Para saber mais, leia o [[http://mail.python.org/pipermail/python-dev/2010-October/104871.html|anúncio do Bug Weekend]].
+
+Temos algumas dicas de preparação (talvez um pouco desatualizadas) em PythonBugDay/ComoSePreparar . Leia também o [[http://docs.pythonsprints.com/core_development/beginners.html|Beginners Guide to Python Core Development]] e o FAQ de [[http://www.python.org/dev/faq/|desenvolvedores do Python]].
+
+=== Grupy-SP ===
+
+O GrupySP vai se reunir no escritório de São Paulo do Google, no sábado e no domingo, pra participar do Bug Weekend. Como temos espaço limitado, quem pretender participar *ambos os dias* por favor coloque seu nome abaixo.
+
+
+Local: Google Brasil, São Paulo
+
+Horário: 10h00 às 18h00 (sábado e domingo)
+
+'''Participantes confirmados''':
+
+ 1. Rodrigo Pimentel ([[rbp]])
+ 1. Rodolpho Eckhardt ([[RodolphoEckhardt]])
+ 1. Henrique Bastos
+ 1. Bruno Gola ([[BrunoGola]])
+ 1. Mauro Baraldi ([[Mauro Baraldi]])
+ 1. Luciano Pacheco ([[LucianoPacheco]])
+ 1. Érico Andrei ([[EricoAndrei]]) (Apenas domingo)
+ 1. Leonardo Santagada ([[LeonardoSantagada]]) (Apenas no IRC)
+ 1. Umgeher Taborda
+
+'''Não têm certeza se vão participar''':
+
+ 1. Matheus Mendes ([[bigodines]]) (provavelmente só no sábado)
+
+
+=== NSI - RJ ===
+
+O grupo de desenvolvedores do nsi vai se reunir no IFF em Campos dos Goytacazes - RJ, no sabado e no domingo, pra participar do Bug Weekend.
+
+Local: NSI - IFF, Campos dos Goytacazes
+
+Horário: 11:00 às 18:00 (sabado e domingo)
+
+'''Participantes Confirmados''':
+
+  1. Tarsis Azevedo ([[tarsis.azevedo]])
+  1. Mario Jorge Valle
+  1. Priscila Manhaes
+  1. Rebeca Motta
+  1. Rodrigo Manhães
+  1. Caio Rios ([[CaioRios]])
+  1. Douglas Camata ([[douglas.camata]])
+  1. Rafael Gonçalves
+  1. Sarah Marques
+
+=== Grupy-RN ===
+
+Local: Veezor
+Horário: 14:00 às 20:00 (sábado)
+
+ 1. Iuri Diniz
+ 1. Humberto Diógenes ([[HumbertoDiogenes]])
+ 1. Rodrigo Araújo

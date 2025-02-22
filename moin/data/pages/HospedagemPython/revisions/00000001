@@ -1,0 +1,22 @@
+#pragma section-numbers off
+= Hospedagem Python =
+
+Compilação de empresas de hospedagem web que suportam Python
+
+== Brasileiras ==
+
+|| '''Link'''                                ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [http://www.rantac.com.br/ rantac]           || Python 2.2 em modo CGI || || ||
+|| [http://www.matrix.com.br/ matrix]           ||  || || ||
+|| [http://www.nt10.com.br/hospedagem/index.html nt10]           ||  || || ||
+
+
+== Estrangeiras ==
+
+|| '''Link'''                                ||'''Versão'''||'''Módulos/serviços'''||'''Observações'''||
+|| [http://www.python-hosting.com/ python-hosting]           || 2.1.3, 2.2.2, 2.3.2 ||PIL, MySQLdb, PyGreSQL, PsycoPG, 4Suite, PyXML, mxBase, Cheetah, Twisted, Gnosis Utilities, python-svn, Mk4Py, PyBsdDb, PySQLite, KInterbasDB and more ...|| ||
+
+
+----
+
+RicardoNiederberger

@@ -1,0 +1,1142 @@
+#pragma section-number off
+= Unificando tipos e classes em Python 2.2 =
+
+por ''Guido van Rossum'' <guido@python.org>
+
+== Índice ==
+
+[[TableOfContents]]
+
+== Introdução ==
+
+Em sua versão 2.2, Python introduz a primeira fase da "unificação de tipos/classes", uma série de mudanças na linguagem, com o intuito de remover a maior parte das diferenças entre tipos "built-in" e classes definidas pelo usuário. Talvez a mais óbvia seja a restrição contra o uso de built-ins (list e dict, por exemplo) como classes base em uma definição de classe. O artigo "Python Warts" (http://www.amk.ca/python/writing/warts.htm) de Andrew Kuchling dedica uma das suas mais longas seções a essa deficiência da linguagem. Por um acaso, o outro artigo de Andrew, What's New in Python 2.2 (http://www.amk.ca/python/2.2/), também traz uma boa descrição de outras novidades na versão 2.2.
+
+Esta é uma das maiores mudanças já feitas à Python, e ainda assim pode ser feita gerando pouquíssimas incompatibilidades com código já existente. As mudanças são descritas em detalhes em uma série de PEPs (Python Enhancement Proposals), mas elas não são tutoriais e em particular as que descrevem a unificação de tipos e classes são de díficil compreensão, além de ainda não estarem finalizadas. Esta é finalidade deste artigo: ele introduz os elementos chave da unificação para o programador comum.
+
+Alguns termos usados: "Python clássica" refere-se à versão 2.1 (e seus patches, como 2.1.1) ou versões anteriores, enquanto "classes
+tradicionais" refere-se à classes definidas sem derivar de um built-in, seja porque não deriva de classe alguma ou porque todas suas classes base também são classes tradicionais, aplicando a definição recursivamente.
+
+Classes tradicionais ainda são uma categoria especial em Python 2.2. Com o tempo, elas serão totalmente unificadas com tipos, mas devido à incompatibilidades adicionais, isso ocorrerá depois da versão 2.2 (talvez não antes da versão 3.0). Eu tentarei usar "tipo" quando me referir a um tipo built-in e "classe" quando me referir a uma classe tradicional ou algo que pode ser qualquer um dos dois; em casos que não ficar claro pelo contexto, eu serei explícitio usando "classes tradicionais" ou "classe" ou "tipo".
+
+== Subclasses de "built-ins" ==
+
+Vamos começar com a melhor parte: você agora pode criar subclasses de built-ins, como dict e list. Tudo que você precisa é uma classe base
+que seja um tipo built-in e pronto.
+
+Agora que tipos têm um papel mais central, é apropriado ter nomes para os tipos que provavelmente serão usados, o nome dict para dicionários por exemplo. Mas há ainda duas outras maneiras de nomear esse tipo: {{{type({})}}} e (depois de importar o módulo types) {{{types.DictType}}} (ou {{{types.DictionaryType}}}).
+
+Segue um exemplo de uma subclasse de dict, que contém um "valor
+padrão", retornado quando uma chave inexistente é requisitada:
+
+{{{
+#!python
+class defaultdict(dict):
+
+    def __init__(self, default=None):
+        dict.__init__(self)
+        self.default = default
+
+    def __getitem__(self, key):
+        try:
+            return dict.__getitem__(self, key)
+        except KeyError:
+            return self.default
+}}}
+
+Este exemplo demonstra algumas coisas. O método {{{__init__()}}} extende o método {{{dict.__init__()}}}, e tem uma lista diferente de argumentos. De forma semelhante, o método {{{__getitem__()}}} extende o método {{{dict.__init__()}}}.
+
+O método {{{__getitem__()}}} poderia também ser escrito da seguinte forma, usando a nova condição "key in dict" introduzida na versão 2.2:
+
+{{{
+#!python
+    def __getitem__(self, key):
+        if key in self:
+            return dict.__getitem__(self, key)
+        else:
+            return self.default
+}}}
+
+Eu creio que esta forma é menos eficiente, porque ela verifica a chave duas vezes. A exceção seria quando nós esperamos que a chave quase nunca esteja no dicionário: então, falhar o try/except é muito mais dispendioso do que falhar o teste "key in self".
+
+O método {{{get()}}} provavelmente também deve ser extendido, para usar o mesmo padrão que {{{__getitem__()}}}:
+
+{{{
+#!python
+    def get(self, key, *args):
+        if not args:
+            args = (self.default,)
+        return dict.get(self, key, *args)
+}}}
+
+Apesar dessa função ser declarada com uma lista de argumentos de comprimento variável, ela deve ser chamada com apenas um ou dois argumentos. Se mais forem passados, a chamada do método da classe base irá levantar uma exceção {{{TypeError}}}.
+
+Nós não estamos restritos a extender métodos definidos na classe base. Aqui está um método útil que faz algo similar a {{{update()}}}, mas mantém os valores existentes ao invés de sobrescrevê-los com novos valores se uma chave existe em ambos os dicionários.
+
+{{{
+#!python
+    def merge(self, other):
+        for key in other:
+            if key not in self:
+                self[key] = other[key]
+}}}
+
+Esse método utiliza a nova condição "key not in dict", assim como "for key in dict" para iterar eficientemente (sem ter de fazer uma cópia da lista de chaves) por todas as chaves do dicionário. Ele não requer que o argumento "other" seja outro {{{defaultdict}}}, ou nem mesmo um outro dicionário: qualquer objeto que suporte "for key in other" e {{{other[key]}}} irá funcionar.
+
+Aqui está o novo tipo funcionando:
+
+{{{
+>>> print defaultdict               # mostra nosso tipo
+<class '__main__.defaultdict'>
+>>> print type(defaultdict)         # sua metaclasse
+<type 'type'>
+>>> a = defaultdict(default=0.0)    # cria uma instância
+>>> print a                         # mostra a instância
+{}
+>>> print type(a)                   # mostra seu tipo
+<class '__main__.defaultdict'>
+>>> print a.__class__               # mostra sua classe
+<class '__main__.defaultdict'>
+>>> print type(a) is a.__class__    # seu tipo é sua classe
+1
+>>> a[1] = 3.25                     # modifica a instância
+>>> print a                         # mostra o novo valor
+{1: 3.25}
+>>> print a[1]                      # mostra o novo item
+3.25
+>>> print a[0]                      # um item não existente
+0.0
+>>> a.merge({1:100, 2:200})         # usa um método
+>>> print a                         # mostra o resultado
+{1: 3.25, 2: 200}
+>>>
+}}}
+
+Nós podemos ainda usar o novo tipo em contextos onde tradicionalmente apenas dicionários "reais" seriam permitidos, como nos argumentos para locais/globais em um comando {{{exec}}} ou na função {{{eval()}}}:
+
+{{{
+>>> print a.keys()
+[1, 2]
+>>> exec "x = 3; print x" in a
+3
+>>> print a.keys()
+['__builtins__', 1, 2, 'x']
+>>> print a['x']
+3
+>>> 
+}}}
+
+No entanto, nosso método {{{__getitem__()}}} não é usado no acesso às variáveis pelo interpretador:
+
+{{{
+>>> exec "print foo" in a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+  File "<string>", line 1, in ?
+NameError: name 'foo' is not defined
+>>> 
+}}}
+
+Por que não foi mostrado 0.0? O interpretador usa uma função interna para acessar o dicionário, que passa por cima do nosso método {{{__getitem__()}}}. Eu admito que isso pode ser um problema, (apesar de ser um problema ''apenas'' nesse contexto, quando uma derivada de {{{dict}}} é usada como dicionário de locais/globais); ainda está em aberto se isso poderá ser corrigido sem comprometer a performance nos casos mais comuns.
+
+Agora nós vamos ver se instâncias de {{{defaultdict}}} têm váriáveis dinâmicas, assim como classes tradicionais:
+
+{{{
+>>> a.default = -1
+>>> print a["noway"]
+-1
+>>> a.default = -1000
+>>> print a["noway"]
+-1000
+>>> print a.__dict__.keys()
+['default']
+>>> a.x1 = 100
+>>> a.x2 = 200
+>>> print a.x1
+100
+>>> print a.__dict__.keys()
+['default', 'x2', 'x1']
+>>> print a.__dict__
+{'default': -1000, 'x2': 200, 'x1': 100}
+>>> 
+}}}
+
+Isso pode nem sempre ser o que você quer; além disso, usar um dicionário separado para conter uma única variável dobra a memória usada por uma instância de defaultdict comparada com um dict normal! Há uma forma de evitar isso:
+
+{{{
+#!python
+class defaultdict2(dict):
+
+    __slots__ = ['default']
+
+    def __init__(self, default=None):
+    ''...(like before)...''
+}}}
+
+A declaração {{{__slots__}}} pega uma lista de variáveis e reserva espaço na instância para elas. Quando {{{__slots__}}} é usada, outras variáveis não podem ser definidas:
+
+{{{
+>>> a = defaultdict2(default=0.0)
+>>> a[1]
+0.0
+>>> a.default = -1
+>>> a[1]
+-1
+>>> a.x1 = 1
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+AttributeError: 'defaultdict2' object has no attribute 'x1'
+>>>
+}}}
+
+Alguns avisos e detalhes sobre {{{__slots__}}}:
+
+ * Uma variável indefinida, mas que esteja em {{{__slots__}}} irá levantar a excessão {{{AttributeError}}} como esperado. (Note que em Python 2.2b2 e anteriores, slots tinham o valor {{{None}}} por padrão e deletá-los restaurava esse valor.
+ * Você não pode usar um atributo de classe para definir um valor padrão de uma variável definida em {{{__slots__}}} uma vez que esta cria um atributo de classe para cada variável, contendo um descritor e declarar um attributo na classe com um valor padrão irá sobrescrever esse descritor.
+ * Não há nenhuma verificação que previna você de sobrescrever uma variável já definida por uma classe base usando {{{__slots__}}}. Se você fizer isso, a variável definida pela classe base se tornará inacessível, (exceto se você recuperar o seu descritor diretamente da classe base e renomeá-la). Um teste para verificar isto pode ser adicionado no futuro.
+ * Instâncias de uma classe que utilizam {{{__slots__}}} não têm um {{{__dict__}}} (a menos que uma classe base defina {{{__dict__}}}); mas instâncias de classes derivadas terão, a menos que suas classes também usem {{{__slots__}}}.
+ * Você pode definir um objeto sem variáveis e sem {{{__dict__}}} usando {{{__slots__ = []}}}.
+ * Você não pode usar slots com subclasses de tipos built-in de "comprimento variável" como classe base. Tipos com comprimento variável são {{{long}}}, {{{str}}} e {{{tuple}}}. 
+ * Uma classe usando {{{__slots__}}} não suporta weakrefs para suas instâncias, a menos que uma das strings em {{{__slots__}}} seja "{{{__weakref__}}}".
+ * O attributo {{{__slots__}}} são precisa ser {{{list}}}; qualquer objeto que não seja uma string e que suporte iteração servirá, e os valores retornados pela iteração serão usados como os nomes dos slots. Dicionários podem ser usados, bem como uma única string para definir um único slot, no entanto, no futuro, um siginifcado adicional pode ser atribuído ao uso do dicionário. Seus valores podem ser usados para restringir o tipo de uma variávels por exemplo, ou talvez fornecer uma {{{docstring}}};
+
+Note que enquanto na maioria dos casos a sobrecarga de operadores funciona da mesma forma que para classes tradicionais, há algumas diferenças. (a maior delas é a ausência de suporte a {{{__coerce__}}}; classes novas devem sempre usar a nova API numérica, que passa os operandos diretamente para {{{__add__}}}, {{{__radd__}}}, etc.)
+
+Há uma nova forma de redefinir acesso a atributos. O gancho {{{__getattr__}}}, se definido, funciona exatamente como para classes tradicionais: só é chamado se as formas regulares de encontrar um atributo não funcionarem. Mas você pode agora redefinir {{{__getattribute__}}}, uma nova operação que é chamada para ''todas'' as buscas de atributos.
+
+Quando redefinir {{{__getattribute__}}}, tenha em mente que é fácil causar recursão infinita: sempre que {{{__getattribute__}}} referenciar um atributo de {{{self}}}, (mesmo {{{self.__dict__}}}), ele é chamado recursivamente. (Similar a {{{__setattr__}}}, que é chamada para todas as definições de atributos; {{{__getattr__}}} pode também sofrer disso quando é escrita sem cuidado e referencia um atributo inexistente de {{{self}}}.)
+
+A forma correta de acessar qualquer atributo de {{{self}}} em {{{__getattribute__}}} é chamar o {{{__getattribute__}}} da classe base, da mesma forma que qualquer método que sobrescreva um método de uma classe base pode chamar o método original: {{{Base.__getattribute__(self, nome)}}}. (veja tambéma discussão sobre {{{super()}}} logo abaixo se você quer ser o mais correto possível quando usar herança múltipla.)
+
+Aqui segue um exemplo de redefinição de {{{__getattribute__}}} (na verdade, extendendo ele, uma vez que o método redefinido chama o método da classe base).
+
+{{{
+#!python
+class C(object):
+    def __getattribute__(self, name):
+        print "accessing %r.%s" % (self, name)
+        return object.__getattribute__(self, name)
+}}}
+
+Uma nota sobre {{{__setattr__}}}: algumas vezes atributos não são armazenados em self.{{{__dict__}}} (por exemplo, usando {{{__slots__}}} ou propriedades, ou quando usando um tipo built_in como classe base). Se aplica o mesmo padrão usado em {{{__getattribute__}}}, onde você pode chamar o método {{{__setattr__}}} da classe base para fazer o trabalho. Um exemplo:
+
+{{{
+#!python
+class C(object):
+    def __setattr__(self, name, value):
+        if hasattr(self, name):
+            raise AttributeError, "attributes are write-once"
+        object.__setattr__(self, name, value)
+}}}
+
+Programadores de C++ podem achar útil que está forma de subtipos em Python é implementada de forma bem semelhante à herança-simples em C++, com {{{__class__}}} no papel de {{{vtable}}}.
+
+Há muito mais que pode ser explicado (como a declaração {{{__metaclass__}}} e o método {{{__new__}}}), mas a maior parte é bem esotérica. Veja sobre "{{{__new__}}}" logo abaixo se você estiver interessado.
+
+Vou terminar com uma lista de avisos:
+
+ * Você pode usar herança múltipla, mas não pode derivar de diferentes built-ins (por exemplo, você não pode criar uma subclasse de dict e list simultaneamente). Esta é uma restrição permanente; iria requerer muitas mudanças à implementação de objetos em Python para liberá-la. No entanto, você pode criar mix-ins derivando de "object". Este é um novo built-in, o tipo base de todos os tipos no novo sistema.
+ * Quando usar herança múltipla, você pode misturar classes tradicionais e built-ins (ou tipos derivados deles) na lista de classes base.
+ * Veja ainda a lista de bugs na versão 2.2
+
+== Built-ins como "factory-functions" ==
+
+A seção anterior mostrou como uma instância do subtipo {{{defaultdict}}} pode ser criada chamando {{{defaultdict()}}}.  Isso é esperado, porque também funciona para classes tradicionais. Mas aqui há uma nova função: built-ins podem gerar instâncias chamando o tipo diretamente.
+
+Para vários tipos built-in já haviam funções geradoras com o nome do tipo, {{{str()}}} e {{{int()}}} por exemplo. Eu alterei estes nomes de forma que agora eles nomeiam os tipos correspondentes. Apesar disso alterar esses objetos, de funções para tipos, eu não imagino que irá criar qualquer problema de compatibilidade: me assegurei de que os tipos podem ser chamados com exatamente as mesmas listas de argumentos que as funções antigas. (Também podem ser chamadas sem argumentos, produzindo um objeto com um valor padrão como zero, ou vazio.)
+
+Estes são os built-ins afetados:
+
+ * {{{int([número ou string[, base]])}}}
+ * {{{long([número ou string])}}}
+ * {{{float([número ou string])}}}
+ * {{{str([objeto])}}}
+ * {{{unicode([string[, código]])}}}
+ * {{{tuple([objeto iterável])}}}
+ * {{{list([objeto iterável])}}}
+ * {{{type(objeto) or type(nome, bases, métodos)}}}
+
+A assinatura de {{{type()}}} requer uma explicação: tradicionalmente, {{{type(x)}}} retornava o tipo do objeto x, e esta forma ainda funciona. No entanto, {{{type(nome, bases, métodos)}}} é uma nova forma que cria um novo tipo.
+
+Existem ainda outros built-ins que seguem o mesmo padrão. Estes serão descritos abaixo.
+
+ * {{{dict([mapeamento ou iterável])}}} - retorna um novo dicionário; o argumento deve ser ou um mapeamento cujos items são copiados, ou uma sequência de tuples de dois items contendo os pares (chave, valor) para serem inseridos no novo dicionário)
+ * {{{object([...])}}} - retorna um objeto vazio; argumentos são ignorados.
+ * {{{classmethod(função)}}}
+ * {{{staticmethod(função)}}}
+ * {{{super(classe ou tipo[, instância])}}}
+ * {{{property([fget[, fset[, fdel[, doc]]]])}}}
+
+Esta mudança tem dois propósitos. Primeiro, torna conveniente o use desses tipos como classes base em uma definição de classe. Segundo, torna mais fácil testar o tipo de um objeto: ao invés de escrever {{{type(x) is type(0)}}}, você pode agora escrever {{{isinstance(x, int)}}}.
+
+O que me lembra que o segundo argumento de {{{isinstance()}}} pode ser também um tuple de classes ou tipos. Por exemplo, {{{isinstance(x, (int, long))}}} retorna {{{True}}} quando {{{x}}} for um {{{int}}} ou um {{{long}}} (ou uma instância de uma subclasse de um desses tipos), e similarmente, {{{isinstance(x, (str, unicode))}}} testa para uma string de um dos dois tipos. O mesmo não ocorre com {{{isclass()}}}.
+
+== Instrospecção de instâncias de built-ins ==
+
+Para instâncias de tipos, {{{x.__class__}}} é o mesmo que {{{type(x)}}}:
+
+{{{
+>>> type([])
+<type 'list'>
+>>> [].__class__
+<type 'list'>
+>>> list
+<type 'list'>
+>>> isinstance([], list)
+1
+>>> isinstance([], dict)
+0
+>>> isinstance([], object)
+1
+>>> 
+}}}
+
+Em Python 2.1, os nomes de métodos de objetos estava disponíveis como o atributo {{{__methods__}}}, tendo o mesmo efeito da função {{{dir()}}}:
+
+{{{
+Python 2.1 (#30, Apr 18 2001, 00:47:18) 
+[GCC egcs-2.91.66 19990314/Linux (egcs-1.1.2 release)] on linux2
+Type "copyright", "credits" or "license" for more information.
+>>> [].__methods__
+['append', 'count', 'extend', 'index', 'insert', 'pop',
+'remove', 'reverse', 'sort']
+>>> 
+>>> dir([])
+['append', 'count', 'extend', 'index', 'insert', 'pop',
+'remove', 'reverse', 'sort']
+}}}
+
+Na nova proposta, o atributo {{{__methods__}}} não existe mais:
+
+{{{
+Python 2.2c1 (#803, Dec 13 2001, 23:06:05) 
+[GCC egcs-2.91.66 19990314/Linux (egcs-1.1.2 release)] on linux2
+Type "copyright", "credits" or "license" for more information.
+>>> [].__methods__
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+AttributeError: 'list' object has no attribute '__methods__'
+>>>
+}}}
+
+Ao invés disso, você pode usar a função {{{dir()}}}, que agora provê muito mais informação:
+
+{{{
+>>> dir([])
+['__add__', '__class__', '__contains__', '__delattr__',
+'__delitem__', '__eq__', '__ge__', '__getattribute__',
+'__getitem__', '__getslice__', '__gt__', '__hash__', '__iadd__',
+'__imul__', '__init__', '__le__', '__len__', '__lt__', '__mul__',
+'__ne__', '__new__', '__reduce__', '__repr__', '__rmul__',
+'__setattr__', '__setitem__', '__setslice__', '__str__', 'append',
+'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse',
+'sort']
+>>>
+}}}
+
+A nova {{{dir()}}} retorna mais informação que a antiga: além dos nomes de variáveis e métodos normais, ela também mostra os métodos que são normalmente chamados através de operadores como {{{__iadd__}}} (+=), {{{__len__}}} (len), {{{__ne__}}} (!=), etc.
+
+Mais sobre a função {{{dir()}}}:
+
+ * {{{dir()}}} em uma instância mostra as variáveis da instância, assim como os atributos da classe e de todas as classes base.
+ * {{{dir()}}} em uma classe mostra o conteúdo do {{{__dict__}}} da classe e de todas as classes base. Ele não mostra os atributos da classe que são definidos por uma metaclasse.
+ * {{{dir()}}} em um módulo mostra o conteúdo do {{{__dict__}}} do módulo. (inalterado.)
+ * {{{dir()}}} sem argumentos mostra as variáveis locais. (inalterado.)
+ * Há uma nova API C que implementa a função {{{dir()}}}: {{{PyObjectDir()}}}.
+ * Outros detalhes. Para objetos que redefinam {{{__dict__}}} or {{{__class__}}}, estes são mantidos, e por questões de compatibilidade, {{{__members__}}} e {{{__methods__}}} são mantidos se forem definidos.
+
+Você pode usar um método de um built-in como "''unbound method''":
+
+{{{
+>>> a = ['tic', 'tac']
+>>> list.__len__(a)          # mesmo que len(a)
+2
+>>> list.append(a, 'toe')    # mesmo que a.append('toe')
+>>> a
+['tic', 'tac', 'toe']
+>>>
+}}}
+
+Isto é exatamente o mesmo que usar um método de uma classe e similarmente, é mais útil dentro de um método de uma subclasse, para chamar o método correspondente na classe base.
+
+Diferentemente de classes definidas pelo usuário, você não pode alterar tipos built-in e o seu {{{__dict__}}} é um objeto somente leitura. A restrição na definição de atributos é liberada para classes novas definidas pelo usuário, incluindo sobclasses de tipos built-ins; no entanto, mesmo estes têm um {{{__dict__}}} somente leitura. Exemplo:
+
+{{{
+>>> list.append
+<method 'append' of 'list' objects>
+>>> list.append = list.append
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+TypeError: can't set attributes of built-in/extension type 'list'
+>>> list.answer = 42
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+TypeError: can't set attributes of built-in/extension type 'list'
+>>> list.__dict__['append']
+<method 'append' of 'list' objects>
+>>> list.__dict__['answer'] = 42
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+TypeError: object does not support item assignment
+>>> class L(list):
+...     pass
+... 
+>>> L.append = list.append
+>>> L.answer = 42
+>>> L.__dict__['answer']
+42
+>>> L.__dict__['answer'] = 42
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+TypeError: object does not support item assignment
+>>> 
+}}}
+
+Para os curiosos: há duas razões de porque alterar classes built-in não é permitido. Primeiro, seria muito fácil quebrar uma constante de um tipo que é usada em outro lugar, seja pela biblioteca padrão ou pelo código rodando. Segundo, quando Python é embutida em outra aplicação que cria múltiplos interpretadores, estes built-ins (sendo estruturas de dado alocadas estaticamente) são compartilhadas entre todos os interpretadores; então, código rodando em um interpretador pode quebrar o que esteja rodando em outro o que é inaceitável.
+
+== Métodos estáticos e métodos de classe ==
+
+A nova API torna possível adicionar métodos estáticos e métodos de classe. Métodos estáticos são fáceis de descrever: eles se comportam de maneira bem semelhante a métodos estáticos em C++ ou Java. Um exemplo:
+
+{{{
+#!python
+class C:
+    def foo(x, y):
+        print "staticmethod", x, y
+        foo = staticmethod(foo)
+
+C.foo(1, 2)
+c = C()
+c.foo(1, 2)
+}}}
+
+Ambas as chamadas {{{C.foo(1, 2)}}} e {{{c.foo(1, 2)}}} chamam {{{foo()}}} com os dois argumentos e mostram "staticmethod 1 2". Não há nenhuma declaração de "self" na definição de {{{foo()}}} e nenhuma instância é requerida para a execução. Se o método for chamado em uma instância, ela é usada apenar para encontrar a classe que define o método estático. Isso funciona para ambos os tipos de classes, tradicionais ou novas.
+
+A linha "{{{foo = staticmethod(foo)}}}" na definição da classe é o elemento crucial: ela torna {{{foo()}}} um método estático. O built-in {{{staticmethod()}}} envolve a função recebida como argumento em um tipo especial de descritor cujo {{{__get__()}}} retorna a função original inalterada.
+
+Mais sobre {{{__get__}}}: em Python 2.2, a mágica de ligar métodos a instâncias (mesmo para classes tradicionais!) é feita através do método {{{__get__}}} do objeto encontrado na classe. O método {{{__get__}}}  para funções regulares retorna um método ligado; {{{__get__}}} para objetos do tipo {{{staticmethod}}} retorna a funcão usada. Se um atributo da classe não tiver um método {{{__get__}}}, ele jamais é ligado a uma instância, ou em outras palavras, há uma operação {{{__get__}}} padrão que retorna o objeto inalterado; é assim que variáveis simples em uma classe são manipuladas (valores numéricos, por exemplo).
+
+Métodos de classe usam um padrão similar para declarar métodos que recebem um primeiro argumento implícito que é a ''classe'' para a qual eles são chamados. Não há nenhum equivalente em C++ ou Java para isso, e não é exatamente igual aos métodos de classe em Smalltalk, mas servem um propósito similar. (Python também tem metaclasses reais, e talvez métodos definidos em uma metaclasse tenham mais direito ao nome "método da classe", mas eu imagino que a maior parte dos programadores não irá utilizar metaclasses.) Segue um exemplo:
+
+{{{
+#!python
+class C:
+    def foo(cls, y):
+        print "classmethod", cls, y
+    foo = classmethod(foo)
+
+C.foo(1)
+c = C()
+c.foo(1)
+}}}
+
+Ambas as chamadas {{{C.foo(1)}}} e {{{c.foo(1)}}} acabam chamando {{{foo()}}} com ''dois'' argumentos, e mostram "{{{classmethod __main__.C 1}}}". O primeiro argumento de {{{foo()}}} é implícito e é a classe, mesmo que o método tenha sido chamado através de uma instância. Agora vamos continuar com o exemplo:
+
+{{{
+#!python
+class D(C):
+    pass
+
+D.foo(1)
+d = D()
+d.foo(1)
+}}}
+
+Isso mostra "{{{classmethod __main__.D 1}}}" nas duas vezes; em outras palavras, a classe passada como primeiro argumento de {{{foo()}}} é a classe envolvida na chamada, mas não a classe envolvida na definição de {{{foo()}}}.
+
+No entanto, note isto:
+
+{{{
+#!python
+class E(C):
+    def foo(cls, y): # redefine C.foo
+        print "E.foo() called"
+        C.foo(y)
+    foo = classmethod(foo)
+
+E.foo(1)
+e = E()
+e.foo(1)
+}}}
+
+Nesse exemplo, a chamada para {{{C.foo()}}} de {{{E.foo()}}} irá encontrar a classe {{{C}}} como seu primeiro argumento, não a classe {{{E}}}. Isso é o esperado, uma vez que a chamada especifica a classe {{{C}}}. Mas reforça a diferença entre estes métodos de classe e métodos definidos em metaclasses, onde uma chamada para um meta-método passaria explicitamente a classe alvo como primeiro argumento. (Se por acaso não entender isso, não se preocupe. Você não está sozinho.
+
+== Propriedades: atributos gerenciados por métodos get/set ==
+
+Propriedades são uma forma interessante de implementar atributos cujo ''uso'' lembra chamadas de métodos. Eles são as vezes chamados de "atributos gerenciados". Em versões anteriores, você poderia fazer isso apenas sobrescrevendo {{{__getattr__}}} e {{{__setattr__}}}; mas sobrescrever {{{__setattr__}}} reduz consideravelmente a performance de qualquer definição de atributo, e é sempre um pouco complicado sobrescrever {{{__getattr__}}} corretamente. Propriedades permitem que você faça isso impunemente, sem ter de sobrescrever {{{__getattr__}}} ou {{{__setattr__}}}.
+
+Primeiro mostrarei um exemplo. Vamos definir uma classe com um atributo x definido por dois métodos, {{{getx()}}} e {{{setx()}}}:
+
+{{{
+#!python
+class C(object):
+
+    def __init__(self):
+        self.__x = 0
+
+    def getx(self):
+        return self.__x
+
+    def setx(self, x):
+        if x &lt; 0:
+           x = 0
+        self.__x = x
+
+    x = property(getx, setx)
+}}}
+
+Uma pequena demonstração:
+
+{{{
+    >>> a = C()
+    >>> a.x = 10
+    >>> print a.x
+    10
+    >>> a.x = -10
+    >>> print a.x
+    0
+    >>> a.setx(12)
+    >>> print a.getx()
+    12
+    >>> 
+}}}
+
+A assinatura completa é {{{property(fget=None, fset=None, fdel=None, doc=None)}}}. Os argumentos {{{fget}}}, {{{fset}}} e {{{fdel}}} são os métodos chamados quando o atributo é chamado, redefinido ou deletado. Se quaisquer destes três não for especificado (ou forem {{{None}}}), a operação correspondente irá levantar a exceção {{{AttributeError}}}. O quarto argumento é uma {{{docstring}}} para o atributo; ela pode ser usada através da classe como o exemplo seguinte demonstra:
+
+{{{
+    >>> class C(object):
+    ...     def getx(self): return 42
+    ...     x = property(getx, doc="hello")
+    ... 
+    >>> C.x.__doc__
+    'hello'
+    >>> 
+}}}
+
+Detalhes sobre {{{property()}}} (todos são bastante avançados, exceto o primeiro):
+
+ * '''Propriedades não funcionam com classes tradicionais.''', mas você não tem um erro quando tenta isso. Seu método get será chamado, logo aparenta funcionar corretamente, mas quando for definir o atributo, uma instância de uma classe tradicional irá simplesmente definir o atributo no seu {{{__dict__}}}, sem chamar o método {{{set}}} da propriedade e invalidando futuras chamadas do método {{{get}}}.
+ * No que concerne a {{{property()}}}, seus argumentos {{{fget}}}, {{{fset}}} e {{{fdel}}} são funções, não métodos - elas recebem uma referência explícita ao objeto como seu primeiro argumento. Como {{{property()}}} é tipicamente usada em um definição de classe, isso está correto (os métodos realmente são funções no momento que em {{{property()}}} é chamada) mas você pode pensar neles como métodos, contanto que não esteja usando metaclasses que façam algo de diferente com os métodos.
+ * O método {{{get}}} não será chamado quando a propriedade for acessada como um atributo da classe ({{{C.x}}}) e não como um atributo da instância ({{{C().x}}}). Se você quiser redefinir a operação {{{__get__}}} para propriedades quando usadas como um atributo de classe, você pode criar uma classe derivada de property e extender seu método {{{__get__}}}, ou você pode criar um novo descritor do zero que defina os métodos {{{__get__}}}, {{{__set__}}} e {{{__delete__}}}.
+
+== Ordem de Resolução de Métodos ==
+
+Quando herança múltipla entra em jogo, surge a questão da ordem de resolução dos métodos: a ordem em que uma método é procurado em uma classe e suas bases.
+
+Em Python tradicional, a regra é dada pela seguinte função recursiva:
+
+{{{
+#!python
+def classic_lookup(cls, name):
+    "Verifica o nome em cls e classes base."
+    if cls.__dict__.has_key(name):
+        return cls.__dict__[name]
+    for base in cls.__bases__:
+        try:
+            return classic_lookup(base, name)
+        except AttributeError:
+            pass
+    raise AttributeError, name
+}}}
+
+Eu Python 2.2, decidi adotar uma regra diferente para classes novas (a regra para classes tradicionais continua inalterada por questão de compatibilidade; com o tempo, classes tradicionais desaparecerão e a distinção desaparecerão.) Tentarei explicar primeiro o que há de errado com a regra clássica:
+
+O problema fica aparente quando usamos uma hierarquia em "diamante":
+
+{{{
+              class A:
+                ^ ^  def save(self): ...
+               /   \
+              /     \
+             /       \
+            /         \
+        class B     class C:
+            ^         ^  def save(self): ...
+             \       /
+              \     /
+               \   /
+                \ /
+              class D
+}}}
+
+As setas apontam de um subtipo para seu tipo base. Este diagrama em particular mostra {{{B}}} e {{{C}}} derivando de {{{A}}} e {{{D}}} derivando de {{{B}}} e {{{C}}} (e indiretamente de {{{A}}}).
+
+Diagmos que {{{C}}} redefine o método {{{save()}}}, que é definido na classe base {{{A}}}. ({{{C.save()}}} provavelmente chama {{{A.save()}}} e salva parte de seu próprio estado.) {{{B}}} e {{{D}}} não redefinem {{{save()}}}. Quando nós chamamos {{{save()}}} em uma instância de {{{D}}}, qual método é chamado? De acordo com a regra clássica, {{{A.save()}}} é chamado, ignorando {{{C.save()}}}!
+
+Isso não é bom. Provavelmente quebrando {{{C}}} (seu estado não é salvo), rebatendo todo o propósito da hierarquia.
+
+Por que isso não era um problema com classes tradicionais? Diagramas desde tipo são raramente encontrado em hierarquias de classe em Python. A maior parte das hierarquias usam herança simples, e herança múltipla é normalmente limitada a classes mix-in. De fato, o problema demonstrado aqui é a razão porque herança múltipla não é muito popular em Python!
+
+Qual seria o problema com o novo sistema? O tipo 'object' no topo da hierarquia define uma série de métodos que podem ser extendidos por subtipos, por exemplo, {{{__getattribute__()}}} e {{{__setattr__()}}}.
+
+(Importante: o método {{{__getattr__()}}} não é a implementação real para a operação de pegar um atributo; ele só é usado quano um atributo não pode ser encontrado por meios normais. Isso é frequentemente citado como um problema - algumas classes realmente têm uma necessidade legítima de um método que seja chamado para ''todas'' as referências a atributos, e este problema é agora resolvido tornando {{{__getattribute__()}}} disponível. Mas este método tem de estar apto a chamar a implementação padrão de alguma forma. A forma mais natural é tornar a implementação padrão disponível como {{{object.__getattribute__(self, name)}}}.)
+
+Logo, uma hierarquia de classes tradicionais como essa:
+
+{{{
+        class B     class C:
+            ^         ^  __setattr__()
+             \       /
+              \     /
+               \   /
+                \ /
+              class D
+}}}
+
+se tornaria um esquema em diamante dentro do novo sistema:
+
+{{{
+              object:
+                ^ ^  __setattr__()
+               /   \
+              /     \
+             /       \
+            /         \
+        class B     class C:
+            ^         ^  __setattr__()
+             \       /
+              \     /
+               \   /
+                \ /
+              class D
+}}}
+
+E enquanto no original {{{C.__setattr__()}}} seria chamado, no novo sistema, {{{object.__setattr__()}}} seria chamado!
+
+Felizmente, há uma regra de procura melhor. É um pouco complicado de explicar, mas ela faz a coisa certa na hierarquia de diamante, e é o mesmo que a regra clássica quando não há diamantes no gráfico da hierarquia (quando é uma árvore).
+
+A nova regra constrói uma lista de todas as classes na ordem em que serão procuradas. Esta lista é feita quando a classe é definida, para economizar tempo. Para explicar a nova regra, vamos primeiro considerar como essa lista seria para a regra clássica. Note que na presença de diamantes, a regra clássica passa por algumas classes várias vezes. Por exemplo, no diagrama ABCD acima, a regra clássica passaria pelas classes nesta ordem:
+
+{{{
+D, B, A, C, A
+}}}
+
+Note como que A aparece duas vezes na lista. A segunda ocorrência é redundante, uma vez que qualquer coisa que poderia ser encontrada já teria sido encontrada na primeira ocorrência. Mas ela é repassada mesmo assim (a implementação original não registra por quais classes já passou).
+
+Nós usamos esta observação para explicar a nova regra. Usando a regra clássica, construímos a lista de onde procuraríamos, sem se preocupar com duplicatas. Depois, para cada classe que aparece mais de uma vez na lista, removemos todas as ocorrências, exceto a última. A lista resultante contain cada classe base apenas uma vez: D, B, C, A
+
+Procurar por métodos nesta forma funciona com esquemas em diamante. Por causa da forma que a lista é construída, ela nunca altera a ordem em outras situações.
+
+Isso é compatível com versões anteriores ? Não irá invalidar código existente ? Iria, se nós tivessemos alterado a ordem de resolução de métodos para topdas as classes, mas em Python 2.2 a nova regra só será aplicada a tipos, classes tradicionais continuam funcionando com a regra clássica.
+
+=== Discordâncias de ordem ===
+
+Esta seção é somente para leitores mais avançados. A implementação atual usa um algoritmo ligeiramente diferente, que pode retornar uma ordem diferente em alguns casos raros. A diferença apenas surge quando duas classes base aparecem em uma ordem diferente na lista de classes base para duas classes derivadas distintas, e essas duas classes são por suas vez classes base de uma outra. Aqui segue o menor exemplo capaz de demonstrar isso:
+
+{{{
+#!python
+class A(object):
+    def meth(self): return "A"
+class B(object):
+    def meth(self): return "B"
+
+class X(A, B): pass
+class Y(B, A): pass
+
+class Z(X, Y): pass
+}}}
+
+De acordo com o algoritmo acima, a ordem de resolução de métodos de {{{Z}}} deveria ser {{{[Z, X, Y, B, A, object]}}}, mas se você verificar isso em Python 2.2, usando {{{Z.__mro__}}}, você terá {{{[Z, X, Y, A, B, object]}}}! Numa versão futura duas coisas podem acontecer: a ordem de resolução de {{{Z}}} pode mudar para {{{[Z, X, Y, B, A, object]}}}; ou a declaração da classe {{{Z}}} pode se tornar ilegal, porque cria uma discordância de ordem; A classe {{{A}}} precede a classe {{{B}}} na lista de bases de {{{X}}}, mas sucede {{{B}}} na lista de bases de {{{Y}}}.
+
+O livro "Putting Metaclasses to Work (não editado em português)", que me inspirou a alterar a MRO, define o algoritmo que está sendo usado atualmente, mas sua descrição é bem complicada de entender - eu nem percebi que o algoritmo não computava sempre a mesma ordem até que Tim Peters (http://www.python.org/tim_one/) encontrou um exemplo contrário. Felizmente, eles apenas ocorrem quando há outras discordâncias na hierarquia. O livro discrimina classes contendo tais discordâncias, se forem "sérias". Uma discordância de ordem entre duas classes é séria quando elas definem pelo menos um método com o mesmo nome, como no exemplo acima. Em Python 2.2, eu optei por não verificar esse tipo de discordância séria, mas o resultado de um programa fica indefinido, e isso pode mudar no futuro.
+
+
+== Métodos cooperativos e "super" ==
+
+Uma das coisas mais legais, mas ao mesmo tempo  mais estranhas em classes novas é a possibilidade de escrever classes "cooperativas". Essas classes são escritas pensando em herança múltipla, usando um padrão que eu chamo de "super chamada cooperativa". Isto é conhecido em outras linguagens e é mais poderoso que o tipo de super-chamada encontrada em linguagens com herança simples, como Java e Smalltalk. C++ não tem qualquer forma de super-chamada, utilizando um mecanismo explícito semelhante ao usado em classes tradicionais.
+
+Para relembrar, vamos revisar as super-chamadas tradicionais, não cooperativas. Quando uma classe {{{C}}} deriva de uma classe {{{B}}}, {{{C}}} pode querer redefinir um método {{{m}}} definido em {{{B}}}. Uma "super-chamada" ocorre quando {{{C.m}}} chama {{{B.m}}} para realizar uma parte de seu trabalho. Em Java, {{{C.m}}} pode usar {{{super(a, b, c)}}} para chamar {{{B.m}}} com os argumentos {{{(a, b, c)}}}. Em Python, {{{C.m}}} usa {{{B.m(self, a, b, c)}}} para atingir o mesmo objetivo. Por exemplo:
+
+{{{
+#!python
+class B:
+    def m(self):
+        print "sou B"
+
+class C(B):
+    def m(self):
+        print "sou C"
+        B.m(self)
+}}}
+
+Nós dizemos que o método {{{C.m}}} "extende" o método {{{B.m}}}. O padrão aqui mostrado funciona muito bem enquanto estivermos usando herança simples, mas não funciona com herança múltipla. Vamos olhar em quatro classes com uma hierarquia em forma de diamante, o mesmo da seção anterior:
+
+{{{
+#!python
+class A(object): ..
+class B(A): ...
+class C(A): ...
+class D(B, C): ...
+}}}
+
+Suponha que {{{A}}} define um método {{{m}}}, que é extendido por ambas as classes {{{B}}} e {{{C}}}. Agora, como fica {{{D}}}? Tradicionalmente, Python simplesmente pega o primeiro atributo encontrado, neste caso, a definição de {{{B}}}. Isto não é bom pois ignora completamente {{{C}}}. Para entender o que está errado em ignorar {{{C.m}}}, imagine que estas classes representam alguma estrutura de dados persistente, e considerer que {{{m}}} é um método que implementa a operação "salve seus dados". Teoricamente, uma instância de {{{D}}} tem os dados de {{{B}}} e {{{C}}}, assim como {{{A}}}. Ignorar a definição de {{{C}}} do método "salvar" significa que uma instância de {{{D}}}, quando estiver salvando seus dados, salva apenas as partes {{{A}}} e {{{B}}}, mas não a parte definida por {{{C}}}!
+
+Em C++, o compilador emite uma mensagem de erro avisando {{{D}}} herda duas verões conlitantes do método {{{m}}}. O autor de {{{D}}} então deve redefinir {{{m}}} para resolver o conflito. Mas o que a definição de {{{m}}} em {{{D}}} deve fazer? Ela pode chamar {{{C.m}}} e em seguida {{{B.m}}}, mas porque ambas chamam a definição de {{{m}}} herdada de {{{A}}}, {{{A.m}}} acaba sendo chamada duas vezes! Dependendo dos detalhes da operação, isto é no melhor dos casos uma ineficiência, no pior caso um erro. Tradicionalmente, Python tem o mesmo problema, exceto que nem considera um erro em pegar as duas versões conflitantes do método: simplesmente pega a primeira.
+
+A solução tradicional para este dilema é dividir cada definição de {{{m}}} em duas partes: uma implementação parcial, {{{_m}}}, que apenas salva os dados que são únicos de cada classe, e uma implementação completa, {{{m}}}, que chama seu próprio {{{_m}}} e os das classes base. Por exemplo:
+
+{{{
+#!python
+class A(object):
+    def m(self): "salva A"
+class B(A):
+    def _m(self): "salva B"
+    def m(self):  self._m(); A.m(self)
+class C(A):
+    def _m(self): "salva C"
+    def m(self):  self._m(); A.m(self)
+class D(B, C):
+    def _m(self): "salva D"
+    def m(self):  self._m(); B._m(self); C._m(self); A.m(self)
+}}}
+
+Há diversos problemas com esse padrão. Primeiro, há a proliferação de métodos e chamadas extras. Talvez, mais importante que isso, ele cria uma dependência indesejável dos detalhes das classes base nas classes derivadas: a existência de {{{A}}} não pode mais ser considerada um detalhe de {{{B}}} e {{{C}}}, pois {{{D}}} precisa saber dela. Se numa futura versão do programa nós quisermos remover a dependência sobre {{{A}}} de {{{B}}} e {{{C}}}, isso afetará classes derivadas, como {{{D}}}; de forma semelhante, se nós quisermos adicionar outra classe base {{{AA}}} a {{{B}}} e {{{C}}}, todas suas classes derivadas terão de ser atualizadas.
+
+O padrão "chame-o-método-seguinte" resolve este problema adequadamente, em combinação com a nova ordem de resolução de métodos. Aqui está:
+
+{{{
+#!python
+class A(object):
+    def m(self): "salva A"
+class B(A):
+    def m(self): "salva B"; super(B, self).m()
+class C(A):
+    def m(self): "salva C"; super(C, self).m()
+class D(B, C):
+    def m(self): "salva D"; super(D, self).m()
+}}}
+
+Note que o primeiro argumento para {{{super()}}} é sempre a classe onde ele ocorre; o segundo argumento é sempre {{{self}}}. Note ainda que {{{self}}} não é repetida na lista de argumentos para {{{m}}}.
+
+Agora, para poder explicar como super funciona, considere a MRO para cada uma das classes. A MRO é dada pelo atributo {{{__mro__}}} da classe.
+
+{{{
+#!python
+A.__mro__ == (A, object)
+B.__mro__ == (B, A, object)
+C.__mro__ == (C, A, object)
+D.__mro__ == (D, B, C, A, object)
+}}}
+
+A expressão {{{super(C, self).m}}} deve ser usada apenas dentro da implementação do método {{{m}}} na classe {{{C}}}. Tenha em mente que enquanto {{{self}}} é uma instância de {{{C}}}, {{{self.__class__}}} pode não ser {{{C}}}: pode ser uma classe derivada de {{{C}}} ({{{D}}}, por exemplo). A expressão {{{super(C, self).m}}}, busca em {{{self.__class__.__mro__}}} pela ocorrência de {{{C}}}, e então começa a procurar por uma implementação do método {{{m}}} a partir daquele ponto.
+
+Por exemplo, se {{{self}}} é uma instância de {{{C}}}, {{{super(C, self).m}}} irá encontra a implementação de {{{m}}} em {{{A}}}, assim como {{{super(B, self).m}}} se {{{self}}} for uma instância de {{{B}}}. Mas agora considere uma instância de {{{D}}}. Em {{{D.m}}}, {{{super(D, self).m()}}} irá encontrar e chamar {{{B.m(self)}}}, já que {{{B}}} é a primeira classe base depois de {{{D}}} em {{{D.__mro__}}} que define um método {{{m}}}. Agora em {{{B.m}}}, {{{super(B, self).m()}}} é chamado. Como {{{self}}} é uma instância de {{{D}}}, a MRO é {{{[D, B, C, A, object]}}} e a classe seguindo {{{B}}} é {{{C}}}. É aqui que a busca por uma definição de {{{m}}} continua. Então encontramos {{{C.m}}}, que é chamado e por sua vez chama {{{super(C, self).m()}}}. Ainda usando a mesma MRO, nós vemos que a classe seguindo C é A e então A.m é chamado. Como esta é a definição original de m, nenhuma super chamada é feita neste ponto.
+
+Note como a mesma expressão encontra uma classe diferente implementando o método! Essa é a essência do mecanismo coopoerativo.
+
+No entanto, a super chamada mostrada acima está sujeita a erros: é fácil copiar e colar código de uma classe para outra e esquecer de mudar o nome da classe, e este erro não será detectado. (Você pode até mesmo causar recursão infinita passando por engano o nome de uma classe derivada da classe contendo a super chamada.) Seria bom se não tivéssemos de nomear explicitamente a classe, mas isso iria requerer mais ajuda do parser do que podemos obter atualmente. Eu espero poder corrigir isso no futuro, tornando o parser capaz reconhecer {{{super()}}}.
+
+Neste meio tempo, aqui está um truque que você pode aplicar. Nós podemos criar uma variável da classe nomeada {{{__super}}} que tem efeito de "ligação". (Este é um novo conceito em Python 2.2, mas formaliza um conceito bem conhecido em versões anteriores: a transformação de um método desligado para um método ligado quando ele é acessado através de getattr em uma instância. É implementado pelo método {{{__get__}}} discutido acima. Aqui está um exemplo simples:
+
+{{{
+#!python
+class A:
+    def m(self): "salva A"
+class B(A):
+    def m(self): "salva B"; self.__super.m()
+B._B__super = super(B)
+class C(A):
+    def m(self): "salva C"; self.__super.m()
+C._C__super = super(C)
+class D(B, C):
+    def m(self): "salva D"; self.__super.m()
+D._D__super = super(D)
+}}}
+
+Parte do truque está no uso do nome {{{__super}}}, que (através da transformação do nome) passa a conter o nome da classe. Isso assegura que {{{self.__super}}} tem um significado diferente em cada classe (enquanto os nomes das classes foram diferentes; infelizmente, é possível em Python reusar o nome de uma classe base para uma classe derivada). Outra parte do truque está no fato de que super pode ser chamada com um único argumento, e criar uma versão desligada que pode ser ligada depois através da operação getattr de uma instância.
+
+Infelizmente, este exemplo ainda não é o ideal, por uma série de razões: {{{super}}} requer que a classe seja passada, mas a classe ainda não está disponivel até que a execução da definição da classe seja concluída, então, o atributo {{{__super}}} tem de ser criado fora da classe. Fora da classe, a tranformação do nome não ocorre, então a definição tem de usar o nome já transformado. Felizmente, é possível escrever uma metaclasse que automaticamente adiciona um atributo {{{__super}}} a suas classes; veja o exemplo da metaclasse autosuper logo abaixo.
+
+Note que {{{super(classe, subclasse)}}} também funciona; isso é necessário para {{{__new__}}} e outros métodos estáticos.
+
+=== Exemplo: escrevendo super() em Python ===
+
+Para ilustrar o poder do novo sistema, aqui está uma implementação completa da classe {{{super()}}} em Python pura. Isso pode ajudar a compreender melhor a semântica de {{{super()}}}, mostrando a busca em detalhes. O print no final do código mostra "DCBA".
+
+{{{
+#!python
+class Super(object):
+    def __init__(self, type, obj=None):
+        self.__type__ = type
+        self.__obj__ = obj
+    def __get__(self, obj, type=None):
+        if self.__obj__ is None and obj is not None:
+            return Super(self.__type__, obj)
+        else:
+            return self
+    def __getattr__(self, attr):
+        if isinstance(self.__obj__, self.__type__):
+            starttype = self.__obj__.__class__
+        else:
+            starttype = self.__obj__
+        mro = iter(starttype.__mro__)
+        for cls in mro:
+            if cls is self.__type__:
+                break
+        # Nota: mro é um iterador, então o segundo loop
+        # continua onde o primeiro parou
+        for cls in mro:
+            if attr in cls.__dict__:
+                x = cls.__dict__[attr]
+                if hasattr(x, "__get__"):
+                    x = x.__get__(self.__obj__)
+                return x
+        raise AttributeError, attr
+
+class A(object):
+    def m(self):
+        return "A"
+
+class B(A):
+    def m(self):
+        return "B" + Super(B, self).m()
+
+class C(A):
+    def m(self):
+        return "C" + Super(C, self).m()
+
+class D(C, B):
+    def m(self):
+        return "D" + Super(D, self).m()
+
+print D().m() # "DCBA"
+}}}
+
+
+== Redefinindo o método __new__ ==
+
+Quando derivamos de tipos imutáveis, como números e strings, e ocasionalmente em outras situações, o método estático {{{__new__}}} pode ser bem útil. {{{__new__}}} é o primeiro passo da construção de instâncias, chamado ''antes'' de {{{__init__}}}. O método {{{__new__}}} é chamado com a classe como primeiro argumento; sua responsabilidade é retornar uma nova instância daquela classe. Compare isso com {{{__init__}}}: {{{__init__}}} é chamado com uma instância como primeiro argumento, e não returna nada; sua responsabilidade é inicializar a instância. Há situações onde uma instância é criada sem chamar {{{__init__}}} (por exemplo, quando é carregada com pickle). Não há maneira de criar uma nova instância sem chamar {{{__new__}}} (apesar de em alguns casos você poder chamar o {{{__new__}}} de uma classe base).
+
+Lembre-se que criamos instâncias chamando a classe. Quando a classe é uma classe "new-style", ocorre o seguinte durante essa chamada. Primeiro, o método {{{__new__}}} da classe é chamado, passando a classe como primeiro argumento, seguido de quaisquer argumentos recebidos pela chamada original. Isto retorna uma nova instância. Então o método {{{__init__}}} da instância é chamado para inicializá-la. (Tudo isso é controlado pelo método {{{__call__}}} da metaclasse.)
+
+Segue aqui um exemplo de uma subclasse que redefine {{{__new__}}} - é assim que você irá normalmente usá-lo.
+
+{{{
+>>> class inch(float):
+...     "Converte de polegadas para metros"
+...     def __new__(cls, arg=0.0):
+...         return float.__new__(cls, arg*0.0254)
+...
+>>> print inch(12)
+0.3048
+>>> 
+}}}
+
+Essa classe não é muito útil (nem é a maneira correta de converter unidades) mas mostra como extender o método construtor de um tipo imutável. Se ao invés de {{{__new__}}} nós tentarmos redefinir {{{__init__}}}, não funcionaria.
+
+{{{
+>>> class inch(float):
+...     "NÃO FUNCIONA!!!"
+...     def __init__(self, arg=0.0):
+...         float.__init__(self, arg*0.0254)
+...
+>>> print inch(12)
+12.0
+>>> 
+}}}
+   
+A versão redefinido {{{__init__}}} não funciona porque o método {{{__init__}}} do tipo flolat é um no-op: ele retorna imediatamente, ignorando seus argumentos.
+
+Isso existe para que tipos imutáveis possam preservar sua imutabilidade, mas permitindo a criação de subclasses. Se o valor de um objeto float fosse inicializado por {{{__init__}}}, você poderia mudar o valor de um objeto existente! Por exemplo, isto funcionaria:
+
+{{{
+>>> # NÃO FUNCIONA!
+>>> import math
+>>> math.pi.__init__(3.0)
+>>> print math.pi
+3.0
+>>>
+}}}
+
+Esse problema poderia ser solucionado de outras formas, por exemplo, adicionando um marcador "inicializado" ou apenas permitindo que {{{__init__}}} fosse chamado em instâncias de subclasses, mas estas soluções são inelegantes. Ao invés disso, adicionei {{{__new__}}}, que é um mecanismo perfeitamente genérico e pode ser usado por built-ins e classes definidas pelo usuário, por objetos mutáveis e imutáveis.
+
+Algumas regras para {{{__new__}}}:
+
+ * {{{__new__}}} é um método estático. Você não precisa (mas pode!) usar "__new__ = staticmethod(__new__)", porque já é implícito pelo nome (é um caso especial).
+ * O primeiro argumento para {{{__new__}}} tem de ser uma classe; os argumentos restantas são os passados pela chamada à classe.
+ * Um método {{{__new__}}} que redefine o {{{__new__}}} de uma classe base, tem de chamá-lo. O primeiro argumento ao método da classe base deve ser a classe passada ao método redefinido, não a classe base; se você passar a classe base, terá uma instância da classe base.
+ * A menos que você queria fazer o tipo de brincadeira descrita nos próximos itens um método {{{__new__}}} ''obrigatoriamente'' tem de chamar o método {{{__new__}}} de sua classe base; é a única forma de criar uma instância de seu objeto. O {{{__new__}}} da subclasse pode fazer duas coisas que afetam o objeto resultante: passar diferentes argumentos para o método {{{__new__}}} da classe base e modificar o objeto resultante depois de tê-lo criado (por exemplo, para inicializar variáveis).
+ * {{{__new__}}} tem de retornar um objeto. Não há nada que requer que retorne um objeto novo que seja uma instância da classe passada como argumento; apesar de ser a convenção. Se você retornar um objeto já existente, a chamada ao construtor ainda irá chamar o método {{{__init__}}}. Se você retornar um objeto de outra classe, o seu {{{__init__}}} será chamado. Se você esquecer de retornar algo, Pytho irá retornar {{{None}}}, o que provavelmente irá gerar uma certa confusão.
+ * Para classes imutáveis, seu {{{__new__}}} pode retornar uma referência em cache para um objeto existente com o mesmo valor; é isso que {{{int}}}, {{{str}}} e {{{tuple}}} fazem para valores pequena. É uma das razões de seu {{{__init__}}} não fazer nada; objetos em cache seria reinicializados a cada chamada. (A outra razão é que não há nada para fazer: {{{__new__}}} retorna um objeto completamente inicializado.)
+ * Se você derivar de um built-in imutável e quiser adicionar algum estado mutável (talvez uma conversão padrão para string) é melhor inicializar o atributo mutável em {{{__init__}}} e deixar {{{__new__}}} de lado.
+ * Se você quiser mudar a assinatura do construtor, você terá de redefinir ambos {{{__new__}}} e {{{__init__}}} para aceitar a nova assinatura. No entanto, muitos tipos ignoram os argumentos para os métodos que não usam, em particular os tipos imutáveis ({{{int}}}, {{{long}}}, {{{float}}}, {{{complex}}}, {{{str}}}, {{{unicode}}} e {{{tuple}}}) têm um {{{__init__}}} não utilizado, enquanto os tipos mutáveis ({{{dict}}}, {{{list}}}, {{{file}}} e também {{{super}}}, {{{classmethod}}}, {{{staticmethod}}} e {{{property}}}) têm um {{{__new__}}} não utilizado. O built-in 'object' tem ambos os métodos não utilizados (que outros vão herdar). O built-in 'type' é especial em muitos aspectos; veja a seção em metaclasses.
+ * Isso não tem nada a ver com {{{__new__}}}, mas é útil saber. Se você derivar de um built-in, espaço extra é automaticamente adicionado às instâncias para acomodar {{{__dict__}}} e {{{__weakrefs__}}}. ({{{__dict__}}} não é inicializado até você usá-lo, então você não deve se preocupar com o espaço ocupado por um {{{dict}}} vazio para cada instância criada.) Se você não precisa desse espaço extra, pode adicionar "{{{__slots__ = []}}}" à sua classe.
+ * {{{__new__}}} é um método estático, não um método de classe. Inicialmente eu achei que deveria ser um método de classe e é esse o motivo de ter adicionado classmethod. Infelizmente, com métodos de classe, algumas chamadas não funcionam corretamente neste caso, então tive de fazê-lo um método estático tendo uma classe passada explícitamente como primeiro argumento.
+
+Como outro exemplo de {{{__new__}}}, aqui está uma forma de implementar o padrão singleton.
+
+{{{
+#!python
+class Singleton(object):
+    def __new__(cls, *args, **kwds):
+        it = cls.__dict__.get("__it__")
+        if it is not None:
+            return it
+        cls.__it__ = it = object.__new__(cls)
+        it.init(*args, **kwds)
+        return it
+    def init(self, *args, **kwds):
+        pass
+}}}
+
+Para criar uma classe singleton, você deriva de Singleton; cada subclasse terá uma única instância, não importa quantas vezes o construtor é chamado. Para inicializar a instância, subclasses devem redefinir {{{init}}} ao invés de {{{__init__}}} - o método {{{__init__}}} é chamada cada vez que o construtor é chamado. Por exemplo:
+
+{{{
+>>> class MySingleton(Singleton):
+...     def init(self):
+...         print "chamando init"
+...     def __init__(self):
+...         print "chamando __init__"
+... 
+>>> x = MySingleton()
+chamando init
+chamando __init__
+>>> assert x.__class__ is MySingleton
+>>> y = MySingleton()
+chamando __init__
+>>> assert x is y
+>>> 
+}}}
+
+== Metaclasses ==
+
+No passado, discussões sobre metaclasses em Python faziam cabelos se arrepiar e até mesmo cérebros explodirem (veja, por exemplo "Metaclasses in Python 1.5"). Felizmente, em Python 2.2, metaclasses são mais acessíveis e menos perigosas.
+
+Terminologicamente falando, uma metaclasse é simplesmente "a classe de uma classe". Qualquer classe cujas instâncias sejam outras classes, é uma metaclasse. Quando falamos de instâncias que não sejam classes, a metaclasse da instância é a classe de sua classe: por definição a metaclasse de {{{x}}} é {{{x.__class__.__class__}}}. Mas quando falamos de uma classe {{{C}}}, nós frequentemente nos referimos a sua metaclasse quando falamos {{{C.__class__}}} (não {{{C.__class__.__class__}}} que seria uma meta-metaclasse).
+
+O built-in 'type' é a a metaclasse mais comum; é a metaclasse de todos os built-ins. Classes tradicionais usam uma metaclasse diferente; {{{types.ClassType}}}, que é relativamente desinteressante; é um artefato histórico necessário para que classes tradicionais tenham seu comportamente. Você não pode chegar a metaclasse de uma instância de uma classe tradicional usando {{{x.__class__.__class__}}}; você tem de usar {{{type(x.__class__)}}}, porque classes tradicionais não suportam o atributo {{{__class__}}} em classes (apenas em instâncias).
+
+Quando uma definição de classe é executada, o interpretador primeiro determina a metaclasse apropriada, que chamaremos de {{{M}}}, e então chama {{{M(nome, bases, dict)}}}. Tudo isso ocorre no ''fim'' da definição de classe, depois do corpo da classe (onde métodos e variáveis de classe são definidos) ter sido executado. Os argumentos para {{{M}}} são o nome da classe (uma string retirada da definição da classe), um tuple de classes base (expressões executadas no início da definição de classe), e um dicionário contendo os métodos e variáveis de classe. Qualquer coisa que essa chamada {{{M(nome, bases, dict)}}} retorne é então referenciado pela variável correspondente ao nome da classe.
+
+Como {{{M}}} é determinada?
+
+ * Se {{{__dict__['__metaclass__']}}} existir, é usada.
+ * Ou, se houver ao menos uma classe base, sua metaclasse é usada (procura primeiro por um atributo {{{__class__}}} e se não existir, usa o seu tipo)
+ * Ou, se houver uma variável global chamada {{{__metaclass__}}}, ela é usada.
+ * Em outro caso, a metaclasse tradicional ({{{types.ClassType)}}} é usada.
+
+O mais comum é que {{{M}}} seja ou {{{types.ClassType}}} (criando uma classe tradicional) ou 'type' (criando uma classe "new-style", ou tipo). Outros possíveis são um tipo de uma extensão personalizada (como a Extension''''''Class de Jim Fulton), ou um subtipo de 'type' (quando nós usamos metaclasses "new-style"). Mas é possível ter algo completamente diferente aqu: se espeficicarmos uma classe base com um atributo {{{__class__}}} modificado, podemos usar qualquer coisa como uma metaclasse. Este era o tópico que explodia cérebros no meu artigo original, e não irei repeti-lo aqui.
+
+Há sempre algum detalhe adicional. Quando você mistura classes tradicionais e "new-style" na lista de classes base, a metaclasse da primeira classe "new-style" é usada ao invés de {{{types.ClassType}}} (assumindo que {{{dict['__metaclass__']}}} está indefinida). O efeito é que quando você cruza uma classe tradicional e uma "new-style" o resultado é uma classe "new-style".
+
+Um outro detalhe. Para metaclasses, há uma restrição que a metaclasse escolhida seja igual ou uma subclasse de cada uma das metaclasses das suas classes base. Considere uma classe {{{C}}} com duas classes base, {{{B1}}} e {{{B2}}}. Digamos que {{{M = C.__class__}}}, {{{M1 = B1.__class__}}}, {{{M2 = B2.__class__}}}. Então é necessário que {{{issubclass(M, M1)}}} e {{{issubclass(M, M2)}}}. (Isso ocorre porque um método de {{{B1}}} deve ser capaz de chamar um meta-método definido em {{{M1}}} em {{{self.__class__}}}, mesmo que self seja uma instância de uma subclasse de {{{B1}}}).
+
+(''nota do tradutor: esse parágrafo foi bem complicado de entender no original, então escrevi o código para facilitar a compreensão do problema:''
+
+{{{    
+>>> class M(type): pass    
+... 
+>>> class M1(type): pass
+... 
+>>> class M2(type): pass
+... 
+>>> class B1:     
+...     __metaclass__ = M1
+... 
+>>> class B2:
+...     __metaclass__ = M2
+... 
+>>> class C(B1, B2):
+...     __metaclass__ = M
+... 
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+TypeError: metaclass conflict: the metaclass of a derived cl           
+ass must be a (non-strict) subclass of the metaclasses of al           
+l its bases
+>>> 
+}}}
+
+''Em outras palavras, se você uma classe C, que tem por metaclasse M e é subclasse de B1 e B2, que têm por metaclasses M1 e M2 respectivamente, é necessário que M seja uma subclasse de todas as metaclasses das classes base. Complicado ?'')
+
+O livro "Putting Metaclasses to Work" descreve um mecanismo em que uma submetaclasse de {{{M1}}} e {{{M2}}} é automaticamente gerada quando necessário. Em Python 2.2 eu optei por uma solução mais simples que simplesmente gera um erro se a restrição da submetaclasse não for satisfeita; é responsabilidade do programador prover uma metaclasse adequada através da variável {{{__metaclass__}}} da classe. No entanto, se uma das metaclasses base satisfaz a restrição (incluindo a {{{__metaclass__}}} passada explicitamente, se for o caso), a primeira metaclasse base que satisfizer a restrição será usada como metaclasse.
+
+Na prática, isso significa que se você tiver uma hierarquia degenerada de metaclasses que tenha o formato de uma torre (para cada duas metaclasses {{{M1}}} e {{{M2}}}, pelo menos um entre {{{issubclass(M1, M2)}}} ou {{{issubclass(M2, M1)}}} é sempre verdadeiro), você não tem de se preocupar com essa restrição. Por exemplo:
+
+{{{
+#!python
+# Metaclasses
+class M1(type): ...
+class M2(M1): ...
+class M3(M2): ...
+class M4(type): ...
+
+# Classes
+class C1:
+    __metaclass__ = M1
+class C2(C1):
+    __metaclass__ = M2
+class C3(C1, C2):
+    __metaclass__ = M3
+class D(C2, C3):
+    __metaclass__ = M1
+class C4:
+    __metaclass__ = M4
+class E(C3, C4):
+    pass
+}}}
+
+Para a classe {{{C2}}}, a restrição é satisfeita porque {{{M2}}} é uma subclasse de {{{M1}}}. Para a classe {{{C3}}}, é satisfeita porque {{{M3}}} é uma subclasse de ambas {{{M1}}} e {{{M2}}}. Para a classe {{{D}}}, a metaclasse explícita {{{M1}}} não é uma subclasse de ambas {{{M1}}} e {{{M2}}}, mas {{{M3}}} satisfaz a restrição, então {{{D.__class__}}} é {{{M3}}}. No entanto, a classe {{{E}}} é um erro: as duas metaclasses envolvidas são {{{M3}}} e {{{M4}}}, e nenhuma deles é uma subclasse da outra. Nós podemos corrigir isso da seguinte forma.
+
+{{{
+#!python
+# Uma nova metaclasse
+class M5(M3, M4): pass
+
+# Classe E corrigida
+class E(C3, C4):
+    __metaclass__ = M5
+}}}
+
+=== Exemplos de Metaclasses ===
+
+Vamos relembrar um pouco de teoria primeiro. Lembre-se que uma definição de classe gera uma chamada para {{{M(name, bases, dict)}}}, onde {{{M}}} é a metaclasse. Agora, uma metaclasse é uma classe e nós já definimos que quando uma classe é executada, seus métodos {{{__new__}}} e {{{__init__}}} são chamados em sequência. Então, algo como isso ocorre:
+
+{{{
+#!python
+cls = M.__new__(M, name, bases, dict)
+assert cls.__class__ is M
+M.__init__(cls, name, bases, dict)
+}}}
+
+Eu estou escrevendo a chamada a {{{__init__}}} aqui como um método "unbound". Isso deixa claro que estamos chamando o {{{__init__}}} da metaclasse {{{M}}}, não o da classe {{{cls}}} (que seria a inicialização das instâncias de {{{cls}}}). É claro que no fundo, ele realmente chama o {{{__init__}}} de {{{cls}}}, que por um acaso é a classe.
+
+Nosso primeiro exemplo é uma metaclasse que procura entre os atributos de uma classe por métodos chamados {{{_get_algumas_coisa}}} e {{{_set_alguma_coisa}}} e automaticamente adiciona propriedades nomeados "alguma_coisa" para eles. É suficiente sobrescrever apenas {{{__init__}}} para fazer o que queremos. Também chamamos o {{{__init__}}} da classe base de forma cooperativa, usando {{{super()}}}.
+
+{{{
+#!python
+class autoprop(type):
+    def __init__(cls, name, bases, dict):
+        super(autoprop, cls).__init__(name, bases, dict)
+        props = {}
+        for name in dict.keys():
+            if name.startswith("_get_") or name.startswith("_set_"):
+                props[name[5:]] = 1
+        for name in props.keys():
+            fget = getattr(cls, "_get_%s" % name, None)
+            fset = getattr(cls, "_set_%s" % name, None)
+            setattr(cls, name, property(fget, fset))
+}}}
+
+Aqui testamos autoprop com um exemblo bobo :). Uma classe que armazena um atributo x e seu valor invertido em {{{self.__x}}}:
+
+{{{
+#!python
+class InvertedX:
+    __metaclass__ = autoprop
+    def _get_x(self):
+        return -self.__x
+    def _set_x(self, x):
+        self.__x = -x
+
+a = InvertedX()
+assert not hasattr(a, "x")
+a.x = 12
+assert a.x == 12
+assert a._InvertedX__x == -12
+}}}
+
+Nosso segundo exemplo é uma classe 'autosuper', que irá adicionar variáveis privadas com o nome de {{{__super}}}, apontando para {{{super(cls)}}}. (lembra-se da discussão sobre {{{self.__super}}} logo acima?). Lembre-se que {{{__super}}} é uma variável privada (começa com {{{__}}}), mas nós queremos que seja uma variável privada da classe a ser criada, não de autosuper. Então nós temos de converter o nome da variável nós mesmos, e usar {{{setattr()}}} para definí-lo na classe. Apenas para este exemplo, eu estou simplificando a conversão de nomes para simplesmente "adicionar um underscore ao nome da classe". Novamente, apenas {{{__init__}}} é suficiente para fazer o que queremos, e fazemos a chamada ao {{{__init__}}} da classe base cooperativamente, usando {{{super()}}}.
+
+{{{
+#!python
+class autosuper(type):
+    def __init__(cls, name, bases, dict):
+        super(autosuper, cls).__init__(name, bases, dict)
+        setattr(cls, "_%s__super" % name, super(cls))
+}}}
+
+Agora, testando autosuper com o clássico diagrama em forma de diamante:
+
+{{{
+#!python
+class A:
+    __metaclass__ = autosuper
+    def meth(self):
+        return "A"
+class B(A):
+    def meth(self):
+        return "B" + self.__super.meth()
+class C(A):
+    def meth(self):
+        return "C" + self.__super.meth()
+class D(C, B):
+    def meth(self):
+        return "D" + self.__super.meth()
+
+assert D().meth() == "DCBA"
+}}}
+
+
+(Nossa metaclasse autosuper é facilmente enganada se você definir uma subclasse com o mesmo nome de uma classe base; ela deveria verificar essa condição e gerar um erro se isso ocorrer. No entanto, isso seria muito mais código do que eu acho certo para um exemplo, então vou deixar como exercício para o leitor.)
+
+Agora que nós temos duas metaclasses desenvolvidas independentemente, podemos combiná-las em uma terceira submetaclasse de ambas.
+
+{{{
+#!python
+class autosuprop(autosuper, autoprop):
+    pass
+}}}
+
+Simples, não? Como nós criamos ambas as metaclasses cooperativamente (usando {{{super()}}} para chamar os métodos da classe base), isso é tudo que precisamos. Agora vamos testá-la.
+
+
+{{{
+#!python
+class A:
+    __metaclass__ = autosuprop
+    def _get_x(self):
+        return "A"
+class B(A):
+    def _get_x(self):
+        return "B" + self.__super._get_x()
+class C(A):
+    def _get_x(self):
+        return "C" + self.__super._get_x()
+class D(C, B):
+    def _get_x(self):
+        return "D" + self.__super._get_x()
+
+assert D().x == "DCBA"
+}}}
+
+Isso é tudo por hoje. Espero que sua cabeça não esteja doendo muito !
+
+== Incompatibilidades ==
+
+'''Relaxe!''' A maior parte do que foi descrito aqui só é usado
+quando você define uma classe com um built-in como classe base (ou
+quando usando explicitamente o argumento {{{__metaclass__}}}).
+
+Algumas coisas que podem afetar código existente. Veja também a lista de bugs na versão 2.2.
+
+ * Introspecção funciona de forma diferente. A maioria dos objetos agora têm um atributo {{{__class__}}}, e os atributos {{{__methods__}}} e {{{__members__}}} não mais funcionam. A função {{{dir()}}} também funciona de forma diferente.
+ * Muitos built-ins que antes podiam ser vistos como construtores ou funções coercitivas agora são tipos ao invés de funções; os tipos têm o mesmo comportamento das antigas "factory functions". Objetos afetados são: {{{complex}}}, {{{float}}}, {{{long}}}, {{{int}}}, {{{str}}}, {{{tuple}}}, {{{list}}}, {{{unicode}}}, e {{{type}}}. (Há ainda alguns novos: {{{dict}}}, {{{object}}}, {{{classmethod}}}, {{{staticmethod}}}, mas não vejo como eles possam causar problemas em código existente, já que são novos.)
+ * Há um bug muito específico (e felizmente incomum) que costumava passar despercebido, mas que agora é reportado como erro.
+
+{{{
+#!python
+class A:
+    def foo(self): pass
+
+class B(A): pass
+
+class C(A):
+    def foo(self):
+        B.foo(self)
+}}}
+
+    Aqui, {{{C.foo}}} quer chamar {{{A.foo}}}, mas por engano chama {{{B.foo}}}. No sistema antigo, como {{{B}}} não define {{{foo}}}, {{{B.foo}}} é idêntico a {{{A.foo}}}, então a chamada funcionaria. No novo sistema, {{{B.foo}}} é marcado como um método que requer uma instância de {{{B}}}, o que uma instância de {{{C}}} obviamente não é ({{{C}}} deriva apenas de {{{A}}}), então a chamada falha.
+
+ * Compatibilidade com binários de extensões antigas não é garantida. Nós nos preocupamos com isso mais durante os releases alpha e beta de Python 2.2. Em Python 2.2b1, a Extension''''''Class de Jim Fulton funciona (como demonstrado por um teste do Zope 2.4), e eu espero que outras extensões baseadas no hook de Don Beaudry funcionem também.
+
+
+== Referências ==
+
+ * [http://www.python.org/peps/pep-0252.html PEP 252 - Making Types Look More Like Classes]
+ * [http://www.python.org/peps/pep-0253.html PEP 253 - Subtyping Built-in Types]
+ * [http://www.python.org/doc/essays/metaclasses/ Metaclasses in Python 1.5 - A.k.a. The Killer Joke]
+ * '''Putting Metaclasses to Work: A New Dimension in Object-Oriented Programming''', por Ira R. Forman and Scott H. Danforth. Addison-Wesley, 1999, ISBN 0-201-43305-2.  (http://cseng.aw.com/book/0,3828,0201433052,00.html)
+
+----
+
+Traduzido por PedroWerneck

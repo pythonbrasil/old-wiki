@@ -1,0 +1,89 @@
+== Informações ==
+Para começar a traduzir é fácil, simplesmente escolha algum módulo disponível, edite o wiki preenchendo a tabela e a previsão de entrega do material traduzido.
+
+Use o material disponibilizado abaixo, em inglês e espanhol, para gerar suas traduções, depois, coloque o material traduzido logo abaixo da tabela que preencheu como descrito acima.
+
+Envie uma cópia do material traduzido para python@eliezer.eti.br , para que o mesmo seja formatado conforme o modelo original, em HTML.
+
+As páginas formatadas em HTML estão disponíveis em: http://www.eliezer.eti.br/pygtk2tutorial. Após o término da tradução, as páginas formatadas serão compactadas em um arquivo e disponibilizadas aqui na wiki.
+
+Qualquer dúvida entre em contato com Airton Arantes  Gtalk/Messenger: airton.arantes[at]gmail.com
+
+== Material ==
+ * Inglês:[http://www.moeraki.com/pygtktutorial/pygtk2tutorial/index.html PyGTK-en]
+ * Espanhol:[ http://pygtk.org/pygtk2tutorial-es/index.html PyGTK-es ]
+[[TableOfContents]]
+
+== Capítulo 1 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsao ||
+||1.1 Explorando o PyGTK ||MayronCachina ||20/01/08 ||
+== Capítulo 2 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+||2. Getting Started ||EliezerRiani ||-- ||
+== Capítulo 3 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+||3.1 Mais sobre Signal Handlers (Manipuladores de Sinais) ||DanielCassiano ||28/12/07 ||
+Vamos ter uma outra visão sobre a chamada connect().
+
+----
+ . object.connect(name, func, func_data)
+----
+ O valor retornado de connect() é uma tag inteira que identifica a sua chamada. Como já foi referido, você pode ter tantas chamadas por sinal e por objeto como você precisará, e cada um será executado em sua vez, na ordem em que foram anexados. Essa tag permite-lhe remover esta chamada da lista utilizando:
+
+----
+ . object.disconnect(id)
+----
+ Assim, através da transmissão da tag retornada por um dos métodos de conexão do sinal, você pode desconectar um manipulador de sinal. Você também pode desabilitar temporariamente manipuladores de sinais com o par de métodos 'signal_handler_block()' e 'signal_handler_unblock()'.
+
+----
+ . object.signal_handler_block(handler_id)
+ . object.signal_handler_unblock(handler_id)
+----
+
+||3.2 Um Hello World atualizado ||DanielCassiano ||28/12/07 ||
+
+
+== Capítulo 4 ==
+||<tablewidth="255px" tableheight="58px">Seção ||Tradutor ||Previsão ||
+||<style="vertical-align: top;">4.1 ||<style="vertical-align: top;">AirtonArantes ||<style="vertical-align: top;">28/12/07 ||
+||<style="vertical-align: top;">4.2 ||<style="vertical-align: top;">AirtonArantes ||<style="vertical-align: top;">28/12/07 ||
+||<style="vertical-align: top;">4.3 ||<style="vertical-align: top;">IgorMontagner ||<style="vertical-align: top;">20/01/08 ||
+== Capítulo 5 ==
+||<tablewidth="222px" tableheight="32px"> Seção ||Tradutor ||Previsão
+||
+||<^>5.1||<^>LeonardoAndrade||<^>21/01/08||
+||<^>5.2||<^>LeonardoAndrade||<^>21/01/08||
+== Capítulo 6 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+== Capítulo 7 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 8 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 9 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 10 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 11 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 12 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 13 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||
+== Capítulo 14 ==
+||<tablewidth="200px">Seção ||Tradutor ||Previsão ||
+|| || || ||
+|| || || ||

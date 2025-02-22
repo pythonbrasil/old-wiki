@@ -1,0 +1,13 @@
+#pragma section-numbers off
+= Cookbook =
+
+Cookbook vem do inglês e siginifica Livro de Receitas. Esta seção é destinada exatamente para conter trechos úteis de código Python. Aquele mini-aplicativo, método, classe, função, ou simplesmente uma dica de uso de Python deve ser colocada aqui.
+
+== Receitas ==
+
+   * ReceitaBarraDeProgresso - Função que implementa uma barra de progresso em tela texto (terminal).
+   * ContarOcorrenciasEmLista - Conta as Ocorrências de um texto em uma lista. Coloca o resultado num dict.
+
+----
+
+Osvaldo Santana Neto

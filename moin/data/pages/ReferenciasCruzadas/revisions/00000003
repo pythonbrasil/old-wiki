@@ -1,0 +1,321 @@
+#pragma section-numbers off
+
+= Introdução =
+
+Gerenciar memória "na unha" é uma tarefa chata, tediosa e propensa a erros.Considerando o nível de complexidade que algumas aplicações atingem atualmente, liberar o programador do maior número possível de responsabilidades é uma necessidade. No entanto, é importante ter pelo menos o conhecimento básico de como o gerenciamento automático de memória funciona, para evitar cair em problemas como o explicado por este artigo. 
+
+Este assunto não é de forma alguma obrigatório já que o problema descrito aqui só ocorre se seus programas usarem objetos muito fora do trivial. Mas de qualquer forma, é uma leitura recomendada. Não é complicado e pode te poupar muitas dores de cabeça algum dia. :)
+
+
+= ''Garbage Collector'' =
+
+Até a versão 2.0, o "garbage collector" (coletor de lixo) existente em python utilizava apenas o conceito mais simples possível: contagem de referências. Isso significa que para cada objeto é mantido um registro do número de referências existentes para ele. Quando esse número chegar a zero, ou seja, quando o objeto não estiver mais sendo usado, ele é destruído.
+
+{{{
+>>> class X:
+...     def __init__(self, nome):
+...             self.nome = nome
+...     def __del__(self):
+...             print self.nome, "foi destruído"
+... 
+>>> a = X('a')
+>>> del a
+a foi destruído
+>>> a = A = X('a')
+>>> del a
+>>> del A
+a foi destruído
+>>> a = A = X('a')
+>>> l = [a, A]
+>>> del a, A
+>>> del l
+a foi destruído
+>>> 
+}}}
+
+No exemplo, foi criada uma classe X. O método {{{__del__}}} é executado antes do objeto ser destruído, aqui nos avisando do momento em que os objetos da classe são coletados. No primeiro caso, criamos apenas uma referência "a" para o objeto da classe X. Ele é coletado assim que essa referência é removida com {{{del()}}}. (lembre-se, del() não destrói objetos e sim suas referências).
+
+O segundo caso já ilustra a contagem de referências. Criamos duas referências, "a" e "A" para o objeto da classe X. O objeto só é destruído quando as duas referências são destruídas. O terceiro caso apenas ilustra que qualquer tipo de coleção também mantém referências para objetos. Nele, uma lista mantém duas referências para o objeto. Mesmo depois de destruírmos as referências "a" e "A", o objeto só é coletado quando as outras contidas na lista também forem destruídas. Note que eu removi com {{{del()}}} a referência "l". A contagem de referências da lista chega a zero e ela é destruída, levando consigo as duas referências ao objeto da classe X.
+
+Infelizmente, como eu disse, esse tipo de coleta é a mais simples possível, e tem vários problemas. O principal é a incapacidade em lidar com referências cruzadas ou circulares, ou seja, quando dois ou mais objetos têm referências para os outros.
+
+{{{
+>>> class X:
+...     def __init__(self, nome):
+...             self.nome = nome
+...     def __del__(self):
+...             print self.nome, "foi destruído"
+... 
+>>> while 1:
+... 
+KeyboardInterrupt
+>>> a = X("a")
+>>> b = X("b")
+>>> a.b = b
+>>> b.a = a
+>>> del a
+>>> del b
+>>> ????
+}}}
+
+Aqui, "a" contém uma referência para "b", e "b" contém uma referência para "a". Usando apenas o coletor por contagem de referências, os objetos jamais serão destruídos, ocupando memória até o fim da execução do programa. Veja o exemplo abaixo:
+
+{{{ 
+#!python
+class X:
+    def __init__(self, nome):
+        self.nome = nome
+
+while 1:
+    a = X("a")
+    b = X("b")
+    
+    a.b = b
+    b.a = a
+    
+    del a
+    del b
+}}}
+
+Esse programa rodando em Python 1.5 consumiu 164 mb de memória em menos de 30 segundos de execução. (pouco antes de ser encerrado pelo sistema operacional).
+
+{{{
+  PID USER     PRI  NI  SIZE  RSS SHARE STAT %CPU %MEM   TIME COMMAND
+  470 pedro.we  19   0  164M  89M   756 R    65.5 71.7   0:26 python
+}}}    
+
+É claro que esse exemplo é apenas uma demonstração do problema. Dificilmente uma aplicação de uso real teria um resultado como esse em período tão curto de tempo, e é justamente isso que torna esse tipo de leak de memória difícil de identificar. O problema só se apresenta depois de um longo tempo de execução, em  daemons e servidores de rede por exemplo. Num sistema operacional robusto, ele pode até ser controlável e passar despercebido por longos períodos, mas em outros ele pode trazer todo o sistema abaixo.
+
+Para resolver isso, em Python 2.0 foi incluído um coletor adicional, capaz de lidar com essas referências cruzadas. Ele era de uso opcional até Python 2.2 (era uma opção no momento da compilação).
+
+O princípio de funcionamento desse coletor é um pouco diferente. A cada ciclo de coleta, ele verifica o número de objetos criados e o número de objetos destruídos. Se o número de objetos criados menos o número de objetos destruídos for maior do que um valor limite pré-estabelecido ({{{gc.get_threshold()}}} retorna esse valor), a coleta inicia. 
+
+O coletor constrói uma árvore de objetos, seguindo as referências recursivamente até encontrar todos os objetos ativos no programa. Os objetos que sobrarem, ou seja, aqueles para os quais não há referências e o coletor por contagem de referências não foi capaz de coletar, são então marcados e posteriormente coletados. Esse tipo de coletor é encontrado também em outras linguagens como Java, Ruby, Smalltalk, etc.
+
+No entanto, esse princípio de funcionamento básico tem dois problemas: o primeiro, e que não tem muita importância prática, é que a destruição dos objetos passa a ocorrer em momentos aleatórios. O outro, um pouco mais sério, é que o sistema exige processamento extra. Não chega a comprometer a performance, mas pode incomodar um pouco em casos críticos. Aplicações que geram e destroem muitos objetos continuamente são um bom exemplo.
+
+Para diminuir o tempo de processamento necessário a essa tarefa, o coletor classifica os objetos em gerações. Quanto mais velho um objeto for, maior é a probabilidade de que ele vá continuar existindo. Assim, depois do primeiro ciclo de coleta, os objetos que sobrevivem (a geração 0) são classificados como objetos da geração 1. No segundo ciclo de coleta, os sobreviventes da geração 1 passam para a geração 2, a última, e os sobreviventes da geração 0 passam para a geração 1. Controlando a frequência com que a coleta é feita nos objetos de cada geração e realizando a coleta menos vezes em objetos de maior geração, o coletor diminui o número de ciclos executados, reduzindo assim o tempo de processamento gasto nessa tarefa. O valor limite [objetos criados] - [objetos destruídos] que determina o momento da coleta é menor quanto maior for a geração.
+
+Aquele exemplo perigoso, quando executado em Python 2.3 (com o coletor adicional ativado), não começa a devorar memória da mesma maneira insana que ocorre em Python 1.5:
+
+{{{
+  PID USER     PRI  NI  SIZE  RSS SHARE STAT %CPU %MEM   TIME COMMAND
+30219 pedro.we  15   0  2204 2204  1196 R    78.3  1.7   0:38 python
+}}}
+
+Se você tiver certeza absoluta que o seu programa não cria referências cruzadas, você pode desabilitar o coletor adicional e ganhar um pouquinho de performance a mais em alguns casos, embora isso não seja muito recomendável.
+
+Mesmo esse sofisticado sistema de coleta tem um problema. Bastante incomum, é verdade, mas pode pegar o programador desatento.
+
+{{{
+#!python
+class X:
+    def __init__(self, nome):
+        self.nome = nome
+
+    def __del__(self):
+         print self.nome, "foi destruído"
+
+while 1:
+    a = X("a")
+    b = X("b")
+    
+    a.b = b
+    b.a = a
+    
+    del a
+    del b
+}}}
+
+Essa versão diferente do exemplo (idêntica à usada diretamente no interpretador no primeiro exemplo do texto) consome mais de 80 mb de memória em menos de 40 segundos.
+
+{{{
+  PID USER     PRI  NI  SIZE  RSS SHARE STAT %CPU %MEM   TIME COMMAND
+18430 pedro.we  16   0 84900  82M  1196 R    88.8 66.0   0:38 python
+
+}}}
+
+A única diferença desse para o outro exemplo que funciona perfeitamente é o método {{{__del__()}}}. Como eu mencionei anteriormente, esse método é executado logo antes de um objeto ser destruído, mas qual é a importância disso para o coletor?
+
+Sempre que o coletor encontra mais de um objeto contendo um método {{{__del__}}} dentro de um ciclo de referências, esses objetos impedem a coleta de todos os objetos que façam parte do ciclo (incluindo aí objetos que ainda estejam vivos, mas que tenham referências dentro do ciclo). O interpretador é incapaz de avaliar uma ordem correta para executar os métodos {{{__del__()}}} dos objetos. Não há como saber se esses métodos podem afetar outros objetos e caso isso ocorra, não há como saber qual deve ser executado primeiro.
+
+A solução para esse problema é simples: não use métodos {{{__del__}}} em objetos que criem referências cruzadas. Infelizmente, isso nem sempre é possível. 
+
+= O Módulo weakref =
+
+Na versão 2.1, um novo módulo passou a fazer parte da biblioteca padrão da Python depois de várias propostas e discussões. É o módulo weakref, abreviatura para "weak references" (referências fracas, em tradução literal). Entre outras coisas, esse módulo permite que você crie referências que não aumentam a contagem de referências de um objeto, evitando assim o problema anterior e permitindo o uso de {{{__del__}}} com referências cruzadas, sem qualquer problema. 
+
+Essa solução é bem interessante quando um dos objetos do ciclo de referências irá sempre sobreviver mais do que os outros, como por exemplo, em servidores de rede. O objeto Servidor contém referências para cada um de seus objetos Cliente. O Cliente pode usar o método {{{__del__()}}} para fazer operações de limpeza automaticamente (encerrar a conexão, fechar sockets, liberar endereços, etc), e manter uma weakref para o servidor. Como o servidor irá sempre durar mais que o cliente, esta é a solução perfeita, pois não há o risco do cliente consultar a referência e receber um None como resposta. :)
+
+{{{
+#!python
+#!/usr/bin/env python
+
+import weakref
+
+class Servidor:
+    def __init__(self, ):
+        self.clientes = []
+    def novo_cliente(self):
+        c = Cliente(self)
+        self.clientes.append(c)
+        return c
+
+class Cliente:
+    def __init__(self, servidor):
+        self.servidor = weakref.ref(servidor)
+    def __del__(self):
+        print "Cliente desconectado... "
+
+
+if __name__ == "__main__":
+
+    servidor = Servidor()
+
+    cliente = servidor.novo_cliente()
+
+    print cliente.servidor
+    print cliente.servidor()
+    del cliente
+
+
+}}}
+
+E a saída da execução desse exemplo:
+
+{{{
+<weakref at 0x401caa54; to 'instance' at 0x401cb3cc>
+<__main__.Servidor instance at 0x401cb3cc>
+"Cliente desconectado..."
+
+}}}
+
+
+A primeira linha é o objeto weakref que contém a referência para o servidor. Executando esse objeto, ele retorna o objeto a que refere e por fim, temos o cliente sendo destruído normalmente, mesmo com a referência cruzada que aqui é formada pela weakref. Como ela não acrescenta nada à contagem de referências do objeto Servidor, para o coletor essa referência não existe.
+
+O módulo weakref tem muitas outras utilidades além dessa. Criar caches de objetos sem alterar sua contagem de referências por exemplo. Leia a documentação do módulo e a PEP referente à sua implementação para mais detalhes.
+
+= Usando weakref e property() =
+
+Como vimos no último exemplo, precisamos chamar o objeto weakref para reaver o objeto referente. Não há problema algum nisso, mas é um incômodo ter de relembrar sempre quais referências são weakrefs e quais não são. O ideal seria se ela retornasse o objeto normalmente, sem precisar ser chamada com (), mantendo a utilização da classe uniforme, principalmente para usuários que não a conhecem.
+
+Em Python 2.2 surgiu a solução para isso: o tipo {{{property()}}} (leia o artigo UnificandoTiposClasses para uma análise mais profunda de {{{property()}}} e de outras mudanças em Python 2.2).  
+
+Property é uma classe especial, e não é a intenção desse artigo entrar em detalhes da sua implementação ou utilização. O que você precisa saber é que através de um objeto dessa classe você pode prover acesso uniforme a métodos de uma classe. Você define quais métodos serão executados quando o valor do atributo for consultado, reconfigurado ou deletado. Usando property() nossa classe Cliente ficaria assim:
+
+{{{
+#!python
+#!/usr/bin/env python
+
+import weakref
+
+
+class Servidor:
+    def __init__(self, ):
+        self.clientes = []
+    def novo_cliente(self):
+        c = Cliente(self)
+        self.clientes.append(c)
+        return c
+
+class Cliente:
+    def __init__(self, servidor):
+        self._servidor = weakref.ref(servidor)
+
+    servidor = property(lambda self: self._servidor())
+
+    def __del__(self):
+        print "Cliente desconectado... "
+
+
+if __name__ == "__main__":
+
+    servidor = Servidor()
+
+    cliente = servidor.novo_cliente()
+
+    print cliente.servidor
+    assert cliente.servidor is servidor
+    del cliente
+
+}}}
+
+E a saída da execução desse exemplo é:
+
+{{{
+<__main__.Servidor instance at 0x401cb2cc>
+Cliente desconectado...
+
+}}}
+
+Quando consultamos o atributo {{{Cliente.servidor}}} (que é na verdade um objeto {{{property}}}) o método {{{weakref.__call__()}}} (ou simplesmente {{{weakref()}}}) é executado e seu resultado é retornado, como se fosse o atributo servidor. O uso de lambda em {{{servidor = property(lambda self: self._servidor()}}} é necessário porque servidor é um atributo da classe, então precisamos prover uma maneira de saber qual é a instância onde será usado. Poderíamos escrever um método, mas {{{lambda}}} resolve o problema de forma simples e elegante.
+
+= O Módulo gc =
+
+O módulo gc tem algumas ferramentes úteis para resolver problemas de referências cruzada ou com o garbage collector. Para depurar um programa com problemas, basta adicionar as linhas a seguir logo no início do código fonte:
+
+{{{
+#!python
+
+import gc
+gc.set_debug(gc.DEBUG_STATS | gc.DEBUG_UNCOLLECTABLE | gc.DEBUG_OBJECTS)
+
+}}}
+
+O seu programa irá exibir informações do coletor enquando é executado.
+
+{{{
+gc: collecting generation 0...
+gc: objects in each generation: 769 1321 0
+gc: done.
+gc: collecting generation 0...
+gc: objects in each generation: 713 2061 0
+gc: done.
+gc: collecting generation 2...
+gc: objects in each generation: 7 2758 0
+gc: done, 4 unreachable, 0 uncollectable.
+gc: collecting generation 2...
+gc: objects in each generation: 0 0 1595
+gc: done, 205 unreachable, 0 uncollectable.
+}}}
+
+Se houver objetos incoletáveis (!), você pode usar {{{gc.set_debug(gc.DEBUG_LEAK)}}} para guardar todos os objetos ao invés de destruilos e exibir uma lista de objetos coletáveis e incoletáveis no fim da execução do programa.
+
+{{{
+gc: collectable <tuple 0x401e358c>
+gc: collectable <type 0x81af39c>
+gc: collectable <dict 0x401e702c>
+gc: collectable <tuple 0x401c3e64>
+gc: collectable <dict 0x401cf02c>
+gc: collectable <dict 0x401cf24c>
+gc: collectable <type 0x815858c>
+gc: collectable <type 0x81a77ec>
+gc: collectable <dict 0x401cf1c4>
+gc: collectable <tuple 0x401cc2ac>
+gc: collectable <tuple 0x401ce02c>
+gc: collectable <dict 0x401cfa44>
+gc: collectable <tuple 0x401d6b2c>
+gc: collectable <tuple 0x401d6b0c>
+gc: collectable <function 0x401c8d4c>
+gc: collectable <function 0x401c8e2c>
+gc: collectable <function 0x401c8d84>
+gc: collectable <function 0x401c8df4>
+gc: collectable <function 0x401c8dbc>
+gc: collectable <function 0x401c8d14>
+gc: collectable <function 0x401c8e64>
+gc: collectable <function 0x401d18ec>
+gc: collectable <list 0x401d6acc>
+}}}
+
+Neste programa não estão sendo gerados ciclos de referências nem objetos incoletáveis. Eu poderia usar {{{gc.disable()}}} para manter apenas o coletor por contagem de referências e com isso ganhar um pouco na performance do programa. Lembre-se que mesmo que o coletor automático esteja desativado, você sempre pode usar {{{gc.collect()}}} para executá-lo manualmente.
+
+= Referências =
+
+ * gc - http://www.python.org/doc/2.3.2/lib/module-gc.html
+ * weakref - http://www.python.org/doc/2.3.2/lib/module-weakref.html
+ * PEP 205 - Weak References - http://www.python.org/peps/pep-0205.html
+
+----
+
+PedroWerneck [[BR]]
+Formatado e revisado por OsvaldoSantanaNeto

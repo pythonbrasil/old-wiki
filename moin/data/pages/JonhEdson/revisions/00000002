@@ -1,0 +1,27 @@
+##master-page:HomepageTemplate
+#format wiki
+== Jonh Edson ==
+
+Email: <<MailTo(visual AT visual DOT pro DOT br)>>
+
+Professor Universitário
+
+Graduado em Física, Mestrado em Computação ênfase em Computação Visual e Interfaces.
+
+Leciono:
+ 1. Web Standards
+ 1. IHC - Interação Homem-Computador
+ 1. Computação Gráfica - Uso de Python e PyOpenGL
+ 1. Games - Física para Jogos - ODE e PyODE
+
+Área de Interesse de Pesquisas:
+
+ 1. Computação Gráfica - Physics Engine
+ 1. Análise de Imagens
+ 1. Semiótica
+ 1. Design de Interação
+ 1. Processamento de Imagens
+ 1. Reconhecimento de Padrões
+----
+CategoryHomepage
+www.visual.pro.br

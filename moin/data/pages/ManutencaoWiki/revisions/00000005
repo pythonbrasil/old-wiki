@@ -1,0 +1,26 @@
+= Página de manutenção da Wiki =
+
+Favor adicionar as páginas que precisão de manutenção.
+Comentar no segunte formato:
+
+URL - problema - data - pessoa que reporta o problema
+
+
+Ex.: 
+
+[[PaginaComProblema]] Erro 404 - 2015-08-18 - NiloMenezes
+
+
+== Links quebrados removidos ==
+
+
+== Páginas com conteúdo muito antigo ==
+
+[[http://wiki.python.org.br/AntesDePerguntar#preview]] - Não existe nem TcheZope mais - 2015-08-28 - TaniaAndrea
+
+[[http://wiki.python.org.br/PerguntasFrequentes/SobrePython]] - Python não está na "sexta posição no ranking", "a partir desse ano" (qual?), link quebrado neste texto "No site oficial do Python" - 2015-08-28 - TaniaAndrea
+
+
+== Páginas com conteúdo a revisar ==
+
+[[http://wiki.python.org.br/AprendaMais]] - Adicionar o livro do Ramalho e outros - 2015-08-28 - TaniaAndrea

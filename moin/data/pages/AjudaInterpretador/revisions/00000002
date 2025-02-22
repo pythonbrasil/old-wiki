@@ -1,0 +1,54 @@
+Usar o interpretador Python para xeretar a linguagem é algo bem legal, mas também
+é possível fazer o mesmo com um módulo que não estamos habituado a usar.
+Vou deixar algumas dicas de que eu faço quando estou bisbilhotando algum módulo
+novo.
+
+= O print é seu amigo =
+Use e abuse, se não sabe o que é ''coisa'' então ''print coisa''.
+
+{{{#!python
+>>> x = dir
+>>> print x
+<built-in function dir>
+}}}
+
+x é um alias para a função dir.
+
+= O dir é seu amigo =
+O dir lista os símbolos públicos de um módulo.
+Contém classes, funções, variáveis, etc.
+
+{{{#!python
+>>> import shutil
+>>> dir(shutil)
+['Error', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '_build_cmdtuple', 'copy', 'copy2', 'copyfile', 'copyfileobj', 'copymode', 'copystat', 'copytree', 'exceptions', 'move', 'os', 'rmtree', 'stat', 'sys']
+}}}
+
+Tirando os símbolos "privados" (os __símbolos__), é o que eu tenho disponível para mexer com o módulo shutil.
+
+= coisa.__doc__ é seu amigo =
+
+Todo software bem escrito em Python deve ser ter documentação decente. Pra que serve mesmo o módulo shutil?
+
+{{{#!python
+>>> print shutil.__doc__
+Utility functions for copying files and directory trees.
+ 
+XXX The functions here don't copy the resource fork or other metadata on Mac.
+}}}
+
+Ok, funções para manipular arquivos (copiar). Tem um comentário em especial para
+usuários de Mac, bom, não sou mais usuário de Mac :)
+
+O que o símbolo ''move'' dentro desse módulo?
+
+{{{#!python
+>>> print shutil.move
+<function move at 0xf7012b8c>
+}}}
+
+Hum, função, que faz o que? como usa?
+
+{{{#!python
+
+}}}

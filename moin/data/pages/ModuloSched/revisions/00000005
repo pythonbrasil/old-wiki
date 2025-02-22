@@ -1,0 +1,458 @@
+[[TableOfContents]]
+
+Por vezes, queremos executar uma determinada ação daqui a um determinado número de segundos, ou em algum momento específico. A biblioteca padrão de Python provê uma maneira de fazermos isso através do módulo '''sched'''.
+
+== A classe scheduler ==
+Praticamente todas as funcionalidades do módulo '''sched '''são providas pela classe '''scheduler'''. As instâncias dessa classe armazenam eventos que devem ser executados no futuro. Uma vez que se solicite que a instância de '''scheduler''' execute os eventos, ela tomará o controle da execução do programa e esperará pelo momento adequado para executar os eventos.
+
+A classe '''scheduler''' exige dois parâmetros para seu inicializador: uma função que, ao ser invocada sem parâmetros, retorne o ''timestamp'' corrente e uma função que, ao ser invocada com um parâmetro numérico '''n''', pause a execução do programa (ou da ''thread'') '''n''' segundos. O nome dos parâmetros é, respectivamente, '''timefunc''' e '''delayfunc'''. Na maior parte dos casos, basta passar como parâmetro, respectivamente, as funções '''time''' e '''sleep''' do módulo '''time'''.
+
+{{{
+#!python
+>>> from time import time, sleep
+>>> from sched import scheduler
+>>> sch = scheduler(timefunc=time, delayfunc=sleep)
+>>> 
+}}}
+
+=== Agendamento de eventos a partir do momento corrente ===
+
+Um ''evento'', para o módulo '''sched''', é uma ação que deve ser executada em um momento futuro. Para agendar um evento para '''n''' segundos no futuro, utilizamos o método '''enter'''. Esse método espera quatro parãmetros: 
+
+*'''delay''' Número de segundos a se esperar para executar o evento; pode ser um número de ponto flutuante, de modo que se pode agendar eventos para subunidades de segundos.
+*'''priority''' A prioridade do evento; caso haja mais de um evento agendado para o mesmo momento, a prioridade determina a ordem de execução. Como em Unix, quanto menor o valor numérico da prioridade, maior a prioridade (isto é, um evento com prioridade 0 tem mais prioriade que um evento com prioridade 1).
+*'''action''' Função a ser executada após a espera especificada.
+*'''argument'''  Tupla com parâmetros para a função '''action'''. Se a função não requerir nenhum parâmetro, deve-se passar uma tupla vazia.
+
+O método '''enter''' retorna uma tupla representando o evento. Essa tupla possui quatro valores: o primeiro é o ''timestamp'' absoluto da execução do evento, um número de ponto flutuante correspondendo ao momento, em absoluto, da execução do evento; o segundo é a prioridade do evento; o terceiro é a função a ser executada e o quarto é a tupla de argumentos para a função a ser executada.
+
+Para ver um exemplo, vamos definir a função '''print_time'''. Esta função imprimirá o tempo corrente:
+
+{{{
+#!python
+>>> from time import strftime
+>>> def print_time():
+...     print 'Time: %s' % strftime("%Hh%Mmin%Ss")
+... 
+>>> 
+}}}
+
+Para solicitar ao '''scheduler''' criado acima que imprima o tempo corrente daqui a, digamos, cinco segundos, basta agendar o evento assim:
+
+{{{
+#!python
+>>> event = sch.enter(5, 0, print_time, ())
+>>> event
+(1191845022.8951671, 0, <function print_time at 0xb7d1be64>, ())
+>>>
+}}}
+
+A prioridade é 0 arbitrariamente; qualquer valor poderia ter sido passado. Note que, como nenhum argumento é requerido pela função, passamos uma tupla vazia como quarto argumento para  '''enter'''. Note também que '''enter''' retorna uma tupla, que referenciamos com a variável '''event'''. Essa tupla também pode ser muito útil, conforme veremos à frente.
+
+=== Execução dos eventos agendados ===
+
+Agendar um evento não é o suficiente para que ele seja executado; uma vez que tenhamos agendado eventos, temos de solicitar que o objeto '''scheduler''' entre em "modo de execução". Para fazer isto, basta invocar o método '''run''', que não exige nenhum argumento. Esse método "toma" para si o fluxo de execução do programa; em outras palavras, a não ser que você esteja usando algum paralelismo (''threads'', processos etc.), seu programa não executará nada até o fim da execução do método '''run''', exceto pelos próprios eventos agendados. Por sinal, o método '''run''' só vai se encerrar ao executar o último evento agendado. Por exemplo, eis o código e a saída da execução que fiz em minha máquina. Definimos uma função para que não houvesse perda de tempo entre o agendamento e a execução por causa de digitação. Note como o evento foi efetivamente executado cinco segundos depois:
+
+{{{
+#!python
+>>> def print_and_schedule():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     print_time()
+...     sch.enter(5, 0, print_time, ())
+...     sch.run()
+... 
+>>> print_and_schedule()
+Time: 09h05min11s
+Time: 09h05min16s
+>>>
+}}}
+
+É válido notar também que a ''contagem do tempo para a execução de eventos começa a partir do momento em que foram agendados'', e não a partir do momento em que o método '''run''' foi executado. Deste modo, se agendamos um evento às 14h30min05s para daqui a dez segundos mas só invocamos o método '''run''' às 14h30min10s, o evento, ainda assim, será executado às 14h30min15s. 
+
+A função '''add_delay''' definida abaixo ajudará a demonstrar isso. Essa função primeiro imprime a hora corrente e depois agenda um evento para '''event_delay''' segundos depois. Após agendá-lo, a função esperará '''previous_delay''' segundos antes de invocar o método '''run''' do '''scheduler'''.
+
+{{{
+#!python
+>>> def add_delay(previous_delay, event_delay):
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     print_time()
+...     sch.enter(event_delay, 0, print_time, ())
+...     sleep(previous_delay)
+...     sch.run()
+...
+>>>
+}}}
+
+Vamos confirmar, então, que a contagem do tempo começa a partir do momento de agendamento, e não a partir do momento de invocação do método '''run''':
+
+{{{
+#!python
+>>> add_delay(5, 10)
+Time: 09h09min22s
+Time: 09h09min32s
+>>>
+}}}
+
+A função foi invocada para agendar o evento de informar as horas para dez segundos no futuro, mas esperaria cinco segundos antes de invocar o método '''run'''. Apesar disso, pode-se notar que o evento foi executado exatamente dez segundos após seu agendamento.
+
+=== Eventos atrasados e múltiplos eventos ===
+
+O que ocorreria se invocássemos o método '''run''' ''depois'' de passado o tempo para a execução do evento? Nesse caso, o evento atrasado seria executado imediatamente após a invocação do método. No exemplo abaixo, a função '''add_delay''' agenda um evento para dez segundos no futuro, mas aguarda quinze segundos antes de invocar o método '''run'''. Quando o método é invocado, vê-se que o evento foi executado imediatamente, isto é, quinze segundos após seu agendamento, embora tivesse sido agendado para cinco segundos antes.
+
+{{{
+#!python
+>>> add_delay(15, 10)
+Time: 09h10min52s
+Time: 09h11min07s
+>>> 
+}}}
+
+Também é válido notar que é possível agendar vários eventos para um mesmo '''scheduler'''. Note que após a execução dos eventos únicos que fizemos acima, o método '''run''' sempre retornava; se vários eventos forem agendados, o método só retornará após a execução do último. Abaixo, definimos a função '''execute_three_times''', que agenda três eventos, cada um separado do outro por dez segundos, e depois executa o método '''run'''. Note como a o método '''run''' (e, portanto, a função '''execute_three_times''') não retorna até a execução do último evento.
+
+{{{
+#!python
+>>> def execute_three_times():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     sch.enter(20, 0, print_time, ())
+...     sch.enter(30, 0, print_time, ())
+...     sch.enter(40, 0, print_time, ())
+...     sch.run()
+... 
+>>> execute_three_times()
+Time: 09h15min01s
+Time: 09h15min11s
+Time: 09h15min21s
+>>> 
+}}}
+
+=== Agendamento de eventos para momento absoluto ===
+
+Além de ser possível agendar eventos para serem executados após um período de tempo, também é possível agendar eventos para um momento absoluto. Por exemplo, é possível agendar um evento para ocorrer exatamente às 16h15min12s, independentemente do momento do agendamento e sem a necessidade de se calcular manualmente o intervalo de espera. Para fazermos isso, utilizamos o método '''enderabs'''. Esse método espera também quatro argumentos, com uma única diferença: o argumento que no método '''enter''' seria o intervalo a se esperar, no método '''enterabs''' é o ''timestamp'' do momento em que  o evento será executado, contando-se os segundos a partir do ''Epoch time''. Para uma explicação de como obter esse ''timestamp'' a partir do dia, da hora, do minuto e do segundo, consulte a documentação sobre o [[módulo time]]. Veja o exemplo abaixo:
+
+{{{
+#!python
+>>> from time import mktime
+>>> print_time()
+Time: 09h17min25s
+>>> timetuple = (2007, 10, 8, 9, 19, 0, 0, 0, 0)
+>>> timestamp = mktime(timetuple)
+>>> sch = scheduler(timefunc=time, delayfunc=sleep)>>> sch.enterabs(timestamp, 0, print_time, ())
+(1191845940.0, 0, <function print_time at 0xb7d1be64>, ())
+>>> print_time()
+Time: 09h18min29s
+>>> sch.run()
+Time: 09h19min00s
+>>>
+}}}
+
+Assim como no caso do agendamento para depois de um período, se um evento for agendado para antes de a execução do método '''run''' ocorrer, o evento será executado assim que o método '''run''' for invocado:
+
+{{{
+#!python
+>>> print_time()
+Time: 09h19min52s
+>>> timetuple = (2007, 10, 8, 9, 18, 0, 0, 0, 0)
+>>> timestamp = mktime(timetuple)
+>>> sch.enterabs(timestamp, 0, print_time, ())
+(1191845880.0, 0, <function print_time at 0xb7d1be64>, ())
+>>> print_time()
+Time: 09h20min29s
+>>> sch.run()
+Time: 09h20min31s
+>>> 
+}}}
+
+=== Múltiplos eventos agendados para um mesmo momento ===
+
+Se vários eventos estiverem agendados para um mesmo momento, a ordem de execução é definida pela prioridade. Eventos com número de prioridade menor são executados antes. Por exemplo, abaixo definimos três funções, '''high_priority''', medium'''_priority''' e '''low_priority.''' Essas funções serão agendadas no mesmo '''scheduler''' para um mesmo momento com prioridades diferentes:  '''high_priority''' será agendada com prioridade 0;  '''medium_priority''' será agendada com prioridade 1 e  '''low_priority''' será agendada com prioridade 2. Note como '''high_priority '''é executada antes das demais por ter menor número de prioridade, e '''low_priority''' é executada depois por ter o maior número de prioridade.
+
+{{{
+#!python
+>>> def hight_priority():
+...     print 'Hight priority'
+... 
+>>> def medium_priority():
+...     print 'Medium priority'
+... 
+>>> def low_priority():
+...     print 'Low priority'
+... 
+>>> def schedule_with_properties():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     # Agendar para daqui a quinze segundos
+...     timestamp = time() + 15 
+...     sch.enterabs(timestamp, 0, hight_priority, ())
+...     sch.enterabs(timestamp, 1, medium_priority, ())
+...     sch.enterabs(timestamp, 2, low_priority, ())
+...     sch.run()
+... 
+>>> schedule_with_properties()
+Hight priority
+Medium priority
+Low priority
+>>> 
+}}}
+
+Para garantir que a ordem de execução foi garantida pelos números de prioridade e não pela ordem de agendamento, definimos outra função, '''randomly_schedule_with_priorities''', onde os agendamentos são feitos em ordem divergente da ordem das prioridades. O resultado confirma que quem define a ordem de execução de eventos agendados para o mesmo momento é definida pelas prioridades:
+
+{{{
+#!python
+>>> def randomly_schedule_with_properties():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     timestamp = time() + 15
+...     sch.enterabs(timestamp, 2, low_priority, ())
+...     sch.enterabs(timestamp, 1, medium_priority, ())
+...     sch.enterabs(timestamp, 0, hight_priority, ())
+...     sch.run()
+... 
+>>> randomly_schedule_with_properties()
+Hight priority
+Medium priority
+Low priority
+>>> 
+}}}
+
+Caso vários eventos estejam agendados para um mesmo momento com uma mesma prioridade, a ordem de execução é, aparentemente, aleatória:
+
+{{{
+#!python
+>>> def schedule_without_properties():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     timestamp = time() + 15
+...     sch.enterabs(timestamp, 0, hight_priority, ())
+...     sch.enterabs(timestamp, 0, medium_priority, ())
+...     sch.enterabs(timestamp, 0, low_priority, ())
+...     sch.run()
+... 
+>>> schedule_without_properties()
+Medium priority
+Hight priority
+Low priority
+>>> 
+}}}
+
+=== Cancelamento de eventos ===
+
+É possível cancelar um evento. Para fazer isso, utilizamos o método '''cancel'''.  Esse método espera como argumento a tupla retornada pela criação do evento. No exemplo abaixo, definimos uma função '''schedule_and_cancel''' que agenda três eventos, cada um separado do outro por cinco segundos, mas cancela o segundo agendado. É fácil perceber que apenas o segundo evento não é executado: existe um salto de dez segundos entre o primeiro e o último, e o evento cuja função é '''second_event''' não é executado.
+
+{{{
+#!python
+>>> def first_event():
+...     print '[%s] First event' % strftime('%Hh%Mmin%Ss')
+... 
+>>> def second_event():
+...     print '[%s] Second event' % strftime('%Hh%Mmin%Ss')
+... 
+>>> def third_event():
+...     print '[%s] Third event' % strftime('%Hh%Mmin%Ss')
+... 
+>>> def schedule_and_cancel():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     sch.enter(5, 0, first_event, ())
+...     event = sch.enter(10, 0, second_event, ())
+...     sch.enter(15, 0, third_event, ())
+...     sch.cancel(event)
+...     sch.run()
+... 
+>>> schedule_and_cancel()
+[11h15min22s] First event
+[11h15min32s] Third event
+>>>
+}}}
+
+É importante ressaltar que tentar cancelar um evento que não exista, ou que já tenha sido executado, resulta em uma exceção:
+
+{{{
+#!python
+>>> event = sch.enter(5, 0, print_time, ())
+>>> sch.run()
+Time: 11h16min37s
+>>> sch.cancel(event)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+  File "/usr/lib/python2.4/sched.py", line 70, in cancel
+    self.queue.remove(event)
+ValueError: list.remove(x): x not in list
+>>>
+}}}
+
+== Argumentos para eventos ==
+
+Conforme afirmamos acima, o quarto argumento dos métodos '''enter''' e '''enterabs''' é um argumento a ser passado para a função que será executada pelo evento. Para ver como isso funciona, considere o código abaixo. Nós definimos uma função '''print_string''' que recebe como parâmetro uma ''string'' que será impressa. Agendamos um evento que recebe como argumento a ''string'' a ser executada. De modo análogo, definimos a função '''print_concat''' que recebe duas ''strings'' e imprime a concatenação das duas. Note como, no primeiro caso, tivemos de passar uma tupla unitária, não uma ''string'' única.
+
+{{{
+#!python
+>>> def print_string(s):
+...     print '[%s] %s' % (strftime('%Hh%Mmin%Ss'), s)
+... 
+>>> def print_concat(s1, s2):
+...     print '[%s] %s %s' % (strftime('%Hh%Mmin%Ss'), s1, s2)
+... 
+>>> def schedule_with_arguments():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     sch.enter(10, 0, print_string, ('First event',))
+...     sch.enter(15, 0, print_concat, ('Second', 'event'))
+...     sch.run()
+... 
+>>> schedule_with_arguments()
+[11h25min49s] First event
+[11h25min54s] Second event
+>>> 
+}}}
+
+== Eventos que alteram o agendador ==
+
+Uma funcionalidade do módulo '''sched''' que abre muitas possibilidades é a habilidade de se registrar eventos que alterem, eles mesmos, o agendador. Em outras palavras, é possível agendar eventos que agendem ou cancelem outros eventos.
+No exemplo abaixo, definimos quatro funções. A primeira função informa as horas e agenda a execução da quarta função para vinte segundos; a segunda, apenas imprime as horas; a terceira, informa as horas e cancela o evento que receberá como argumento; e  a quarta função, assim como a segunda, apenas informa as horas.
+
+{{{
+#!python
+>>> def first_event(sch):
+...     print '[%s] First event' % strftime('%Hh%Mmin%Ss')
+...     sch.enter(20, 0, fourth_event, ())
+... 
+>>> def second_event():
+...     print '[%s] Second event' % strftime('%Hh%Mmin%Ss')... 
+>>> def third_event(sch, event):
+...     print '[%s] Third event' % strftime('%Hh%Mmin%Ss')
+...     sch.cancel(event)
+... 
+>>> def fourth_event():
+...     print '[%s] Fourth event' % strftime('%Hh%Mmin%Ss')
+... 
+>>> 
+}}}
+
+Definidas as funções, definimos a '''função''' '''schedule_update_events''' abaixo. Nessa função, agendamos um evento com a função '''first_event''' para cinco segundos a partir da invocação da função; agendamos um evento com a função '''second_even'''t para quinze segundos depois, mas passamos o resultado desse agendamento como argumento para um evento com a função '''third_event''', que será executada em dez segundos (isto é, antes de '''second_event'''). O que se espera é que o primeiro evento seja executado, de fato, em cinco segundos; o segundo, porém, não deve ser executado, pois o terceiro evento será executado em dez segundos e cancelará o segundo; já a quarta função será executada vinte e cinco segundos depois da invocação de '''schedule_update_events'''. Note como o agendador passado como argumento para o primeiro e terceiro eventos é o mesmo que executará as funções.
+
+{{{
+#!python
+>>> def schedule_update_events():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     sch.enter(5, 0, first_event, (sch,))
+...     event = sch.enter(15, 0, second_event, ())
+...     sch.enter(10, 0, third_event, (sch, event))
+...     sch.run()
+... 
+>>> schedule_update_events()
+[11h33min43s] First event
+[11h33min48s] Third event
+[11h34min03s] Fourth event
+>>>
+}}}
+
+Algo interessate de se fazer com essa funcionalidade são funções que se agendam após sua execução. Isso é especialmente interessante para executar certas tarefas periodicamente, seja período fixo ou variável. Por exemplo, a função '''schedule_itself''' abaixo imprime as horas e agenda um novo evento para cinco segundos após sua execução. Como se pode ver pela saída, a execução da cadeia recursiva de eventos só foi interrompida quando enviamos um sinal de interrupção via teclado (isto é, o famigerado ''Control-C'').
+
+{{{
+#!python
+>>> def schedule_itself():
+...     print '[%s] Recursive event' % strftime('%Hh%Mmin%Ss')
+...     sch.enter(5, 0, schedule_itself, ())
+... 
+>>> sch.enter(5, 0, schedule_itself, ())
+(1191854542.6855791, 0, <function schedule_itself at 0xb7d255dc>, ())
+>>> sch.run()
+[11h42min22s] Recursive event
+[11h42min27s] Recursive event
+[11h42min32s] Recursive event
+[11h42min37s] Recursive event
+[11h42min42s] Recursive event
+[11h42min47s] Recursive event
+[11h42min52s] Recursive event
+[11h42min57s] Recursive event
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+  File "/usr/lib/python2.4/sched.py", line 102, in run
+    self.delayfunc(time - now)
+KeyboardInterrupt
+>>> 
+}}}
+
+== Limitações e erros comuns ==
+
+'''sched''' é um módulo prático, simples e divertido. Provê uma funcionalidade ao mesmo tempo simples e poderosa, que, se fosse ser implementada cada vez que fosse necessária, demadaria um esforço imenso. Sua implementação e sua interface é simples e surpreendentemente poderosa, suportando dois modos de agendamento e prioridades. Entretanto, há certas limitações importantes em '''sched'''.
+
+=== Falta de paralelismo ===
+
+A mais evidente limitação é que o módulo '''sched''' não é naturalmente paralelizado. Ao rodar o método '''run''' da classe '''scheduler''', o interpretador "trava", não executando mais nada após o comando. Se você deseja que o agendador rode paralelamente, sem tomar o controle do programa indefinidamente, terá de inserir você mesmo algum tipo de paralelismo (''threads'', processos, sinais etc.) no código. Ao mesmo tempo em que isso dá bastante flexibilidade na ferramenta que seria usada no paralelismo, simplifica a implementação e torna o código mais otimizado, também obriga o programador a implementar algo consideravelmente sofisticado de se codificar.
+
+De modo análogo, os eventos não são executados paralelamente. Quando o objeto '''scheduler''' executa um evento, esse evento toma o controle do fluxo do programa indefinidamente. Se temos dois eventos agendados e um termina sua execução antes do momento de executar o outro, o segundo evento será adequadamente executado no momento esperado; entretanto, se o primeiro evento toma o tempo de execução até depois do momento de execução do segundo evento, o segundo evento será postergado. 
+
+O código abaixo demonstra isso. A função '''with_delay''' toma dez segundos do tempo de execução do programa. Agendamos '''with_delay''' para ser executada aos 5 segundos após a chamada do método '''run''', e a função '''without_delay''' para ser executada após dez segundos de execuçaõ do método '''run'''. Entretanto, '''with_delay''' demorará dez segundos para devolver o controle do fluxo de programa ao método, de modo que '''without_delay''' só será executada após cinco segundos depois do momento planejado.
+
+{{{
+#!python
+>>> def with_delay():
+...     print '[%s] Delayed event (before)' % strftime('%Hh%Mmin%Ss')
+...     sleep(10)
+...     print '[%s] Delayed event (after)' % strftime('%Hh%Mmin%Ss')
+... 
+>>> def without_delay():
+...     print '[%s] Event without delay' % strftime('%Hh%Mmin%Ss')
+... 
+>>> def scheduled_delayed_event():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     sch.enter(5, 0, with_delay, ())
+...     sch.enter(10, 0, without_delay, ())
+...     sch.run()
+... 
+>>> scheduled_delayed_event()
+[11h46min39s] Delayed event (before)
+[11h46min49s] Delayed event (after)
+[11h46min49s] Event without delay
+>>>
+}}}
+
+=== Pitfall sobre agendamento em seqüência ===
+
+Um detalhe mais importante é o fato de que agendar vários eventos com o método '''enter''' não vai usar o mesmo ''timestamp'' inicial como base. Explicando melhor: quando você agenda um evento para, digamos, daqui a cinco segundos, e logo abaixo agenda outro para cinco segundos também, e abaixo agenda outro, entre a primeira chamada do método '''enter''' e a segunda chamada, assim como entre a segunda chamada e a terceira chamada, passaram-se algumas frações de segundos que tornam os momentos de início da contagem de tempo diferentes. 
+
+O exemplo abaixo deixará a situação mais clara. A exemplo do código da seção "''Múltiplos eventos agendados para um mesmo momento''", criamos uma função '''schedule_with_priorities_and_enter''' '''que''' agenda eventos que executam as funções '''low_priority''', '''medium_priority''' e '''high_priority'''. Note como, na execução, as prioridades ''não alteram a ordem de execução definida pela ordem de agendamento''.
+
+{{{
+#!python
+>>> def schedule_with_priorities_and_enter():
+...     sch = scheduler(timefunc=time, delayfunc=sleep)
+...     sch.enter(5, 2, low_priority, ())
+...     sch.enter(5, 1, medium_priority, ())
+...     sch.enter(5, 0, hight_priority, ())
+...     sch.run()
+... 
+>>> schedule_with_priorities_and_enter()
+Low priority
+Medium priority
+Hight priority
+>>> 
+}}}
+
+Uma solução para isso é fazer exatamente o que fizemos na seção sobre prioridades: "pegamos" o ''timestamp'' atual, somamos o período, em segundos, que queremos que se espere e agendamos com o método '''enterabs'''. Seria interessante, porém, um método que agendasse toda uma lista de eventos a partir de um ''timestamp'' único.
+
+Essas limitações são características, porém, de uma implementação simples, ''pythônica''. No geral, o paralelismo é algo que certamente não "cairia bem" no módulo '''sched''', porque é complicado e ineficiente, enquanto '''scheduler''' é uma classe claramente planejada para possuir interface e semântia simples. Alguns métodos a mais não fariam mal à classe, porém.
+
+=== Interface pouco sofisticada ===
+Uma desvantagem menor - mais uma chatice que um ''bug'' em si - é a falta de um método que cancele ''todos'' os eventos de uma vez só, algo como um método '''cancel_all'''. Uma forma não documentada de se fazer isso é atribuir uma lista vazia ao campo '''queue''' do objeto '''scheduler'''; um método documentado, porém, seria uma maneira melhor de fazer isso.
+
+{{{
+#!python
+>>> sch.enter(10, 0, print_time, ())
+(1191854985.3028569, 0, <function print_time at 0xb7d1be64>, ())
+>>> sch.enter(15, 0, print_time, ())
+(1191854993.495039, 0, <function print_time at 0xb7d1be64>, ())
+>>> sch.enter(20, 0, print_time, ())
+(1191855000.425101, 0, <function print_time at 0xb7d1be64>, ())
+>>> sch.queue = []
+>>> sch.run()
+>>> 
+}}}
+
+Em verdade, há vários detalhes que poderiam facilitar o desenvolvimento e evitar ''pitfalls'' no uso do módulo '''sched'''. Por exemplo, dado que na maioria das vezes as funções '''timefunc''' e '''delayfunc''' são as funções '''time''' e '''sleep''' do módulo '''time''', elas poderiam ser o valor padrão dos argumentos do inicializador da classe '''sched'''. Outra idéia interessante seria transformar os argumentos '''priority''' e '''arguments''' dos métodos '''enter''' e '''enterabs''' em argumentos opcionais: é bastante comum que não sejam necessários. De modo análogo, seria interessante que, se a função agendada só espera um parâmetro, o argumento '''arguments''' dos métodos '''enter''' pudesse ser um único valor, e não obrigatoriamente uma tupla, assim como ocorre com o operador de formatação de strings '''%'''.
+
+== Alternativas ao módulo sched ==
+
+Existem algumas alternativas ao módulo '''sched'''. Se, por exemplo, você quiser apenas interromper a execução de um programa por algum tempo, é mais conveniente utilizar a função '''sleep''' do módulo '''time''', por exemplo.
+
+Uma ótima alternativa ao módulo '''sched''' é a função '''timeout_add''' do módulo '''gobject'''. Os eventos agendados por '''timeout_add''' são executados paralelamente ao fluxo de execução do programa, e exceções lançadas por esses eventos não interrompem o programa. A desvantagem evidente na função '''timeout_add''' é que ela depende de ''todo'' o ''framework '''''GObject'''. Se você já usa GObject na sua aplicação, '''timeout_add''' é uma alternativa; se não usa nem pretende usar, dificilmente compensaria. Ademais, '''timeout_add''' não provê nenhuma interface para agendar eventos para um momento absoluto, como faz o método '''enterabs''' de '''scheduler'''.
+
+== Conclusão ==
+
+O módulo '''sched''' é simples e poderoso. Utilizá-lo, porém, exige que se tenha consciência de suas limitações e mesmo de seu propósito, que é ser um módulo simples. A despeito de algumas pequenas desvantagens facilmente remediáveis, porém, é um módulo extremamente ''pythônico'' em sua simplicidade e poder.

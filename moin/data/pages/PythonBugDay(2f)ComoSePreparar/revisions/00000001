@@ -1,0 +1,49 @@
+== Mac ==
+
+ Normalmente o Mac já vem com as ferramentas necessárias para trabalhar com códigos (svn, gcc, vim, etc...)
+
+ Caso não esteja instalado tem no CD ou DVD do SO tem e é só instalar.
+
+=== Verificando as ferramentas básicas. ===
+
+ Para verificar se or programas estão instalados:
+{{{
+svn --version
+gcc --version
+make --version
+}}}
+ 
+ Se aparecer alguma mensagem como a abaixo, quer dizer que você não tem o programa instalado e será necessário instalá-lo:
+{{{
+gcc: command not found
+}}}
+ Não irei cobrir a instalação desses programas.
+
+
+=== Baixando os fontes ===
+ Para baixar a versão '''2.6''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/projects/python/trunk
+}}}
+ Isso irá criar o diretório '''trunk''' no diretório onde foi executado o comando.
+
+ Para baixar a versão '''3k''' do Python utilize o seguinte comando:
+{{{
+svn co http://svn.python.org/python/branches/py3k
+}}}
+ Isso irá gerar o diretório '''py3k''' no diretório onde foi executado o comando.
+
+=== Configurando e Compilando ===
+
+ Bom agora já tá fácil! Basta entrar no diretório ''''trunk''' ou '''py3k''' e executar:
+{{{
+./configure
+make
+}}}
+
+ Isso irá compilar o Python na respectiva versão.
+
+ Para rodar o seu novo interpretador bastas:
+{{{
+./python.exe
+}}}

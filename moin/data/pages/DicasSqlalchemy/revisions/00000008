@@ -1,0 +1,63 @@
+<<TableOfContents>>
+
+= Usando sqlalchemy =
+== Usando somente a query expression language ==
+
+db.py
+{{{#!python
+from sqlalchemy import create_engine, Table, Column, MetaData
+from sqlalchemy import Boolean, Integer, Unicode, String
+from sqlalchemy.engine.url import URL
+
+### para conexao no sqlite:
+_url = 'sqlite://'
+### para conexao no firebird
+# _url = URL('firebird', 'SYSDBA', 'masterkey', '192.168.1.11', '3052', 'bdband')
+### para conexao no mysql
+# _url = 'mysql://usuario:senha@servidor/banco'
+
+# cria o engine e metadata
+engine = create_engine(_url)
+metadata = MetaData(bind=engine)
+
+#cria as tabelas
+tb_usuarios = Table('usuarios', metadata,
+                 Column('id', Integer, primary_key=True),
+                 Column('nome', Unicode(20), nullable=False),
+                 Column('senha', String(10), nullable=False),
+                 Column('ativo', Boolean, nullable=False)
+        )
+
+#cria as tabelas no banco (caso nao existam)
+metadata.create_all()
+}}}
+
+Exemplo de uso do arquivo acima
+
+{{{#!python
+import db
+
+# na hora de usar pega uma conexao
+con = db.engine.connect()
+ins = db.tb_usuarios.insert()
+con.execute(ins, [
+                dict(nome=u'jack', senha='senha', ativo=True),
+                dict(nome=u'jonh', senha='ahnes', ativo=False), 
+            ])
+con.close()
+}}}
+
+
+Um outro exemplo de uso, desta vez para consulta, e usando o contextlib.closing para fechar a conexão:
+
+{{{#!python
+import db
+from contextlib import closing
+
+with closing(db.engine.connect()) as con:
+    sel_usuarios = db.tb_usuarios.select(db.tb_usuarios.c.ativo) 
+    resultado = con.execute(sel_usuarios)
+    for registro in resultado:
+        print registro.nome, registro.id, registro.senha, registro.ativo
+# conexao fechada automaticamente, mesmo se der algum erro
+}}}

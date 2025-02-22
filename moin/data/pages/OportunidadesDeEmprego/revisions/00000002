@@ -1,0 +1,68 @@
+#pragma section-numbers off
+= Oportunidades de emprego =
+
+Atendendo à solicitação que o Arkanjuca me fez via MSN estou criando essa seção para que você empressário ofereça uma vaga para aquele programador inteligente (afinal ele programa em Python) e para você programador Python que está cansado daquela vida no sofá 'coçando' e quer garantir o leite das crianças...
+
+== Precisa-se ==
+
+   * '''[[DateTime(1980-01-01T00:00:00)]] Programador Python''' - Empresa NASA oferece 1 dúzia de vagas para programadores Python com experiência mínima de 50 anos em programação Python. Interessados devem enviar seu curriculum vitae com pretensão salarial para: rh@nasa.gov com "Vaga Python" no assunto.
+
+== Oferece-se ==
+
+   * OsvaldoSantanaNeto - Programador muito bom, produz código de altíssima qualidade é um dos WikiMaster (ainda o único) do PythonBrasil procura emprego em empresa que pague muito bem, tenha pouco trabalho pra ser feito (de preferência em Python), e que ofereça chances de viagens pelo mundo afora por conta da compania. Interessados num programador perfeito como eu devem ligar para o 0300 31 1234 (R$0,27 por ligação + impostos).
+
+
+/!\ Atenção: A vaga para programador Python na NASA é fictícia. O CV do OsvaldoSantanaNeto... também... mas se você realmente quiser que eu trabalhe com você e oferecer o que está ali... eu te garanto que aceito o emprego :)
+
+== Dicas e Recados para Profissionais ==
+
+=== Python para profissionais iniciantes ===
+
+{{{
+From:    Luciano Ramalho
+To:      Adonair
+Subject: [python-br] Interesse pelo mercado de trabalho
+}}}
+
+Caro Adonair, (este foi o nome que eu deduzi do seu e-mail, acertei?)
+
+Eu também comecei a programar com 15 anos!
+
+Como você está começando, creio que a sua preocupação maior tem que ser  com a sua formação enquanto profissional no sentido mais amplo, e neste  aspecto é IMPORTANTÍSSIMO conhecer mais de uma linguagem. Eu nunca  conheci um bom programador que só soubesse uma linguagem de programação.
+
+Agora, é evidente que para começar, vale a pena se concentrar em uma  linguagem e adqurir proficiência nela, antes de partir para outras. E  para começar, o Python me parece uma opção muito melhor que o VB e o  Delphi, pelos seguintes motivos:
+
+   * Python é multi-plataforma: você pode programar para Linux, Windows,  MacOS, Unix etc.
+
+     Até mesmo games, que costumam ser fortemente dependentes de plataforma,  podem ser multiplataforma quando feitos em Python (através da  fantástica biblioteca PyGame).
+     Quem acha que o fato de ser multi-plataforma não é importante, deve  observar o que está acontecendo neste momento no Governo Federal, que  está tentando se livrar da dependência em relação à plataforma  Microsoft mas está encontrando grandes dificuldades porque as soluções  implementadas sobre Windows com ferrmentas MS não rodam em outras  plataforma e estão tendo que ser reescritas, gerando gastos  desnecessários. Como profissional, é muito melhor ter uma formação  multi-plataforma, porque a plataforma que domina hoje pode não ser tão  importante amanhã. (Certamente não será, porque a mudança é a única  certeza).
+     Por outro lado, se você precisar fazer um programa que integre com um  sistema .Net, saiba que o Python fala perfeitamente com componentes COM.
+
+   * Python é uma linguagem moderna, com suporte nativo a orientação a  objetos e programação funcional;
+
+     A programação orientada a objetos chegou ao mercado, e chegou para  ficar. O Python estimula e facilita este estilo de programação, e suas  bibliotecas de código trazem exemplos excelentes de POO. A progrmação  funcional é outro paradigma, tão importante que no famoso MIT é o  estilo de programação mais enfatizado. Com Python você pode aprender e  aplicar os dois estilos.
+
+   * Python é mais fácil de aprender do que Java, mas não há nada que  possa ser feito em Java que não possa ser feito em Python; e através do Jython dá para aprender e usar toda a vasta API do Java;
+
+     Existe uma grande demanda não atendida para programadores Java, o que  significa bons salários (bem melhores que os oferecidos para quem só  sabe VB ou Delphi). Python é mais parecido com Java do que VB e Delphi,  e se integra perfeitamente à plataforma Java através do Jython.
+
+   * Python é muito mais usada que VB ou Delphi em projetos de software livre.
+
+     Acredito muito no futuro do software livre como a melhor forma de  resolver os problemas decorrentes do monopólio do Windows. Participar  de um projeto de software livre também é uma excelente forma de você se  aperfeiçoar, estudando o código de feras e recebendo dicas deles. Se  você também acredita nisto, é bom saber que no Sourceforge existem 2802  projetos em Python, 1638 em VB e 1317 em Delphi/Kylix. As únicas  linguagens mais populares que o Python no sourceforge são (na ordem): C, C++, Java , PHP e Perl.
+
+   * Vários gurus recomendam
+
+     O Eric Raymond em seu HOW-TO "Como se tornar um Hacker"  (http://www.catb.org/~esr/faqs/hacker-howto.html) recomenda ao  aspirante aprender Python primeiro. O Bruce Eckel, autor dos livros  clássicos Thinking in C++ e Thinking in Java prefere Python para seus  próprios projetos.
+
+Emfim, acho que você está em fase de formação, e precisa manter a mente  aberta. Acho que vai descobrir que a comunidade Python tem uma mente muito aberta.
+
+Boa sorte na sua jornada! E conte com a gente se escolher se aprofundar  em Python!
+
+[ ]s[[BR]]
+Luciano
+
+''Esse e-mail partiu do LucianoRamalho em resposta à pergunta do Adonair sobre o interesse do mercado de trabalho por programadores Python em relação à programadores das linguagens Delphi e Visual Basic. Como achei que a resposta poderia interessar a pessoas que não assinam a lista (você ainda não assina? :))) coloquei-a aqui. -- OsvaldoSantanaNeto''
+
+----
+
+OsvaldoSantanaNeto

@@ -1,0 +1,9 @@
+= Como utilizar o módulo PythonLDAP =
+
+Autor: ChristianoAnderson
+
+== Introdução ==
+
+Atualmente muitos desenvolvedores estão fazendo o gerenciamento de usuários através de LDAP. Com ele, é possível trabalhar com uma árvore enorme e modular.
+
+

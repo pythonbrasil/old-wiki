@@ -1,0 +1,141 @@
+## page was renamed from InstalaçãoPythonQt4
+Todo: Arrumar erros de portugues, arrumar formatação.
+
+= Instalando Qt4, boost-Jam, boost.python, python-qt4 =
+
+== Baixando tudo: ==
+
+=== Qt4: ===
+Esta é a página de download do Qt4:
+http://www.trolltech.com/download/qt/x11.html
+
+Escolha o método de download e o servidor/mirror.
+
+=== Boost-Jam: ===
+Esta é a página de download do Boost-Jam:
+http://sourceforge.net/project/showfiles.php?group_id=7586&package_id=72941&release_id=344791
+
+No meu caso eu peguei este arquivo "boost-jam-3.1.11.tgz", mas não se engane com a extensão, ele não é um
+arquivo de instalação do slackware mas sim o código fonte.
+
+=== Boost.Python: ===
+Esta é a página de download do Boost.Python:
+http://sourceforge.net/project/showfiles.php?group_id=7586&package_id=8041&release_id=348655
+
+Eu optei pelo arquivo "boost_1_32_0.zip".
+
+=== python-qt4: ===
+
+Estas é a página oficial do Python-Qt4:
+http://developer.berlios.de/projects/python-qt4/
+No wiki do PythonBrasil é:
+http://www.pythonbrasil.com.br/moin.cgi/Qt4
+
+Esta é a página de download do Python-Qt4:
+http://developer.berlios.de/project/showfiles.php?group_id=4399&release_id=6829
+
+== Instalando tudo: ==
+
+=== Qt4: ===
+
+Referência de instalação do Qt4 para X11:
+http://doc.trolltech.com/4.0/install-x11.html
+
+{{{
+$: tar zxvf qt-x11-opensource-desktop-4.0.0.tar.gz
+$: cd qt-x11-opensource-desktop-4.0.0
+$: ./configure
+}}}
+Agora vem a parte mais demorada:)
+{{{
+$: make
+}}}
+Enquanto o comando make não termina vamos instalar as demais ferramentas:)
+{{{
+#: make install
+}}}
+Adicione esta linha em seu .profile ou .bash_profile.
+{{{
+export PATH=/usr/local/Trolltech/Qt-4.0.0/bin:$PATH
+}}}
+Agora o Qt4 já esta instalado para testar. Reinicie seu terminal para que ele leia as novas configurações do arquivo .profile ou .bash_profile e execute o comando abaixo:
+{{{
+$: qtdemo
+}}}
+
+=== Boost-Jam: ===
+
+Referência de instalação do Boost-jam:
+http://www.boost.org/tools/build/jam_src/index.html
+{{{
+$: tar zxvf boost-jam-3.1.11.tgz
+$: cd boost-jam-3.1.11
+$: ./build.sh
+#: cp bin.linuxx86/bjam /usr/local/bin/bjam
+}}}
+
+=== Boost.Python: ===
+
+Referência de instalação do Boost.Python:
+http://www.boost.org/more/getting_started.html
+{{{
+$: export PYTHON_VERSION=2.4
+$: bjam --with-python-root=/usr "-sGCC_ROOT_DIRECTORY=/usr"
+#: bjam --with-python-root=/usr "-sTOOLS=gcc" install
+#: ln -s /usr/local/lib/libboost_python-gcc-mt-d.so /usr/local/lib/libboost_python.so
+}}}
+Atenção:
+Para definir o python-root da minha máquina, eu levei em consideração que o caminho para o python é "/usr/lib/python2.4/",
+e para o GCC-ROOT levei em consideração a saída do seguinte comando "which gcc" que retornou "/usr/bin/gcc"
+na compilação ele vai usar os arquivos de "/usr/include" acho.
+
+=== python-qt4: ===
+
+Referência de instalação do Python-Qt4:
+Acho que esta é a primeira, para informações futuras fique ligado em:
+http://developer.berlios.de/projects/python-qt4/
+E no wiki do PythonBrasil:
+http://www.pythonbrasil.com.br/moin.cgi/Qt4
+{{{
+$: tar zxvf python-qt4-0.0.2.tar.gz
+$: cd python-qt4-0.0.2
+}}}
+Edite o arquivo setup.pri e mude as variáveis PYTHONDIR, PYTHONVER e BOOSTDIR, o meu ficou desta maneira:
+{{{
+wiliam@wiliam:~$ vi setup.pri
+PYTHONDIR=/usr
+PYTHONVER=2.4
+BOOSTDIR=/usr/local
+}}}
+Para descobrir seu python dir o qmake vai pegar o conteúdo da variável PYTHONDIR neste caso "/usr" e concatenar(juntar) com  "/include/python" e concatenar com PYTHONVER que é "2.4" no meu caso.
+
+Atenção em seu sistema pode ser difirente dependendo da distro que estiver usando. Um dos jeitos para localizar este caminho em sua distro é fazendo:
+{{{
+$: locate include/python | less
+}}}
+A primeira linha que o comando locale retornou foi "/usr/include/python2.4". A partir daí conseguimos retirar duas informações "PYTHONDIR=/usr" e PYTHONVER=2.4.
+
+Agora para localizar o BOOSTDIR faça:
+{{{
+$: locate boost/python/module.hpp | less
+}}}
+A primeira linha que o comando locale retornou foi:
+"/usr/local/include/boost-1_32/boost/python/module.hpp"
+daqui conseguimos retirar o BOOSTDIR como sendo em "/usr/local".
+
+agora vamos lá, execute:
+{{{
+$: qmake
+$: make
+}}}
+Adicione o diretório no PYTHONPATH. No meu caso fiz assim:
+{{{
+$: export PYTHONPATH=`pwd`:$PYTHONPATH
+}}}
+Agora vem a parte mais divertida. Vá ate a pasta "examples" e execute um dos exemplos.
+
+Obrigado ao Eric Jardim pela sua grande ajuda, Valeu!!!
+
+Volta para [http://www.pythonbrasil.com.br/moin.cgi/Qt4 Qt4].
+
+WiliamAlvesDeSouza -- (waa) -- wiliamsouza83(arroba)gmail(ponto)com

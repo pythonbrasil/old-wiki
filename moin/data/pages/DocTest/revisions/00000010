@@ -1,0 +1,96 @@
+= doctest: Teste Automatizado Utilizando DocStrings =
+
+Um bom programador procura documentar direito o código que escreve.
+A linguagem Python é amiga do programador nesse aspecto
+com utilização de DocStrings.
+
+Por exemplo:
+{{{#!python
+def fat(n):
+  """Calcula o fatorial de n.
+
+  >>> fat(0)
+  1
+  >>> fat(5)
+  120
+  """
+  if x == 0:
+    return 1
+  else:
+    return x * fat(x-1)
+}}}
+
+é uma implementação bem documentada da função fatorial dentro de um
+possível módulo {{{minhasfuncoes.py}}}.
+
+Uma preocupação maior seria sempre assegurar que o que escrevemos
+está correto, mesmo quando procuramos melhorar ou até mesmo reescrever
+o que fizemos. Mas como certificar que não quebramos nada enquanto mudamos?
+
+A resposta está nos testes automatizados, que vai garantir 
+que (se bem escolhidos) a nossa nova implemenmtação funcione como a anterior.
+
+Repare nos exemplos apresentados para descrever a função fatorial,
+que tal usá-los como teste? Isto é possível através do
+módulo {{{doctest}}} do Python. vejamos como
+{{{#!python
+def fat(n):
+  """Calcula o fatorial de n.
+
+  >>> fat(0)
+  1
+  >>> fat(5)
+  120
+  """
+  if n == 0:
+    return 1
+  else:
+    return n * fat(n-1)
+
+def _test():
+  import doctest, minhasfuncoes
+  return doctest.testmod(minhasfuncoes)
+
+if __name__ == '__main__':
+  _test()
+}}}
+
+O que se quer executar e testar formata-se igual
+ao que se usaria no modo interativo do Python (repare nos >>> antes).
+a saída esperada é indicada na linha logo a baixo,
+conforme deveria ser numa seção interativa.
+
+Para rodar o teste é simples, {{{$ python minhasfuncoes.py}}}. Se nenhum
+erro acontecer a saída é muda, nada aparece na tela.
+
+Digamos que eu mude o {{{if x == 0: return 1}}} para
+{{{if x == 0: return 0}}},
+A execução do teste me dirá que
+{{{
+$ python minhasfuncoes.py
+*****************************************************************
+Failure in example: fat(0)
+from line #1 of minhasfuncoes.fat
+Expected: 1
+Got: 0
+*****************************************************************
+Failure in example: fat(5)
+from line #3 of minhasfuncoes.fat
+Expected: 120
+Got: 0
+*****************************************************************
+1 items had failures:
+   2 of   2 in minhasfuncoes.fat
+***Test Failed*** 2 failures.
+}}}
+
+ou seja, para {{{fat(0)}}} era esperado o valor 1, veio 0.
+Para {{{fat(5)}}} era esperado 120, veio 0 também.
+Dois erros foram indicados através da própria documentação da função.
+
+== Para saber mais ==
+  * Procure a documentação do doctest ({{{>>> help(doctest)}}}).
+  * Um exemplo de uso em VerificadorDeCpf.
+
+--
+RudaMoura

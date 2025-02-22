@@ -1,0 +1,12 @@
+Existem várias formas de acessar as mensagens da lista de discussões da PythonBrasil. Abaixo seguem algumas delas:
+
+ 1. '''Cliente de email ou webmail:''' é a forma mais comum; você recebe na sua própria caixa postal e lê com um cliente de email ou navegador no caso do webmail. Uma boa dica é criar uma pasta e um filtro para organizar as mensagens. O [http://www.gmail.com gmail] possui a vantagem adicional de organizar as mensagens por assunto, facilitando a leitura e a organização das mensagens. Para assinar a lista basta enviar um e-mail para o endereço python-brasil-subscribe@yahoogrupos.com.br e responder ao e-mail de confirmação que será enviado para você.
+ 1. '''Web, com interface estilo fórum:''' [http://www.nabble.com/Python---Brasil-f13844.html]. Não é necessário ser membro do grupo.
+ 1. '''Web, com interface blog do gmane:''' [http://blog.gmane.org/gmane.comp.python.brasil]. Não é necessário ser membro do grupo.
+ 1. '''Web, com a interface clássica do gmane:''' [http://news.gmane.org/gmane.comp.python.brasil]. Não é necessário ser membro do grupo.
+ 1. '''Leitor de newsgroup (nntp):''' através do [http://www.gmane.org/ gmane]. Cadastre o servidor [nntp://news.gmane.org news.gmane.org] em seu leitor de e-mail e assine o grupo {{{gmane.comp.python.brasil}}}.
+ 1. '''Web, na página da lista no Yahoo! Groups:''' [http://br.groups.yahoo.com/group/python-brasil/]. É necessário ser membro do grupo para poder consultar o histórico de mensagens e para enviar mensagens.
+ 1. '''Web, com busca via Firefox:''' veja BuscaFirefox para instruções de como adicionar a lista PythonBrasil às opções de busca do seu Firefox.
+
+
+Independente de qual forma você preferir, não esqueça de ler a página AntesDePerguntar para participar da lista.

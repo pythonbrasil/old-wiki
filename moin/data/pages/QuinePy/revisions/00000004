@@ -1,0 +1,21 @@
+= QuinePy =
+Este script imprime seu próprio código e gera um arquivo idêntico como saída. Para este tipo de programa é dado o nome de "quine", bem conhecido dentro dos problemas da computação.
+
+== Código ==
+{{{
+#!python
+d = ['d = ', 'f = open("saida.py","w+")', 'd[0] = d[0] + repr(d)', 'for i in d:', ' print i', ' f.write(i+"\\n")', 'f.close()']
+f = open("saida.py","w+")
+d[0] = d[0] + repr(d)
+for i in d:
+ print i
+ f.write(i+"\n")
+f.close()
+}}}
+
+Como era de se esperar o problema feito em python ficou bem mais fácil não?
+
+Volta para CookBook.
+
+----
+RodrigoHübner

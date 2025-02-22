@@ -1,0 +1,25 @@
+||<rowstyle="background-color: #FFFFE0;">'''Artigo incompleto.''' Fique à vontade para completar o conteúdo ou corrigir informações imprecisas. ||
+
+[http://pylonshq.com/ Pylons] é um framework para desenvolvimento de aplicações web focado em rapidez e flexibilidade. Sua principal característica é o suporte ao padrão [http://www.python.org/dev/peps/pep-0333/ WSGI (Web Server Gateway Interface)], possibilitando escrever aplicações portáveis entre diversos servidores web. O suporte a WSGI é provido pela integração entre o Pylons e o [http://pythonpaste.org/ Paste].
+
+[[TableOfContents]]
+
+== Componentes ==
+
+Reuso é a principal motivação da equipe de desenvolvedores do Pylons. Dessa forma, a abordagem escolhida para seu desenvolvimento baseia-se em integrar diversos componentes prontos.
+
+|| '''Funcionalidade / Camada''' || '''Componentes''' ||
+|| Mapeamento Objeto-Relacional (model) || SQLObject, SQLAlchemy, Python DB API ||
+|| Mecanismo de templates (view) || Myghty, Kid, Cheetah ||
+|| Controle de requisições (controller) || Routes ||
+|| AJAX || Prototypes, Mochikit, Dojo, Scriptaculous ||
+|| WSGI || Paste ||
+
+== Exemplos de Código ==
+
+== Sites Relacionados ==
+
+ * [http://pylonshq.com/ Site Oficial]
+ * [http://pylonshq.com/project Wiki]
+ * [http://groups.google.com/group/pylons-discuss Lista de Discussão]
+ * Canal IRC '''#pylons''' em irc.freenode.net

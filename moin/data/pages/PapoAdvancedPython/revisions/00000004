@@ -1,0 +1,193 @@
+#pragma section-numbers off
+= Papo Advanced em Python =
+
+O trecho abaixo é parte de um bate-papo que rolou no canal dos [http://www.d00dz.org d00dz] enquanto discutia-se a criação de um jogo de tabuleiro em Python (o jogo se chama Quadro e acho que logo logo estará aqui no site para todo mundo ver).
+
+O jogo está sendo desenvolvido em Python. Só para esclarecimentos:
+
+   * bruder - Sérgio Devojno Bruder - Sócio da [http://www.haxent.com.br Haxent] e dono do site [http://www.pontobr.org PontoBR]
+   * gwm - Guilherme Wünsch Manika - Sócio da [http://www.haxent.com.br Haxent]
+   * ruda - Ruda Sumé Tente de Moura - Sócio da [http://www.haxent.com.br Haxent]
+   * mrbrocoli - Alfredo Kenji Kojima - Sócio da [http://www.haxent.com.br Haxent] e autor do [http://www.windowmaker.org WindowMaker]
+   * niemeyer - GustavoNiemeyer - Desenvolvedor da [http://www.conectiva.com.br Conectiva] e um dos maiores 'ativistas' Python do Brasil.
+
+Quem estiver afim de entender algumas funcionalidades interessantes de Python é só acompanhar o 'chat' abaixo:
+
+''A explicação do problema está no fim da conversa abaixo. Deixa eu explicar aqui para ser mais fácil de acompanhar. O problema é detectar a condição de vitória de um jogo que é jogado em um tabuleiro 4x4 com 16 peças, cada uma com quatro propriedades (alta/baixa, azul/amarela, furada/normal, redonda/triangular) [http://www.zorked.net/woodbox-bruder-rad.jpg [peças]] [http://www.zorked.net/quadro-working.jpg [tabuleiro]]. O jogo acaba quando um jogador monta uma quadra com pelo menos uma característica igual: todas altas, todas baixas, todas azuis, etc. As peças são representadas por tuplas com quatro valores 0/1: (0, 0, 0, 0), (0, 0, 0, 1), etc. A idéia é detectar se uma linha do jogo (portanto, uma tupla de peças) preencheu a condição de fim de jogo. Isso deve ser feito em uma unica expressão com estilo funcional, e de forma genérica - ou seja, que valesse para um jogo com NxN casas e peças com N propriedades. -- Guilherme''
+
+{{{
+<bruder> for i in range(4): self.img[i].move(coords)
+<bruder> ?
+<gwm_> map(lambda x: x.move(coords), self.img) ;)
+<gwm_> for i in self.img: i.move(coords)
+<gwm_> ruda: pegar a coluna col: map(lambda x: x[col], board)
+<ruda> gwm_: e a diagonal? :D
+<ruda> as
+<gwm_> (board[0][0], board[1][1], board[2][2], board[3][3])
+<gwm_> (board[0][3], board[1][2], board[2][1], board[3][0])
+<ruda> >>> map(lambda x,i,j: x[i][j] and i == j, b.board)
+<ruda> algo assim, nao é isso
+<gwm_> ruda: map(lambda x: 2*x, lista) duplica todos os elementos de uma lista por exemplo
+<gwm_> pra cada elemento da lista rodar lambda(elemento)
+<gwm_> e monta outra lista como resultado
+<mrbrocoli> map(lambda board=board,i: board[i][i],range(4))
+<gwm_> nossa
+<gwm_> existe isso?
+<mrbrocoli> er.. map(lambda i,board=board: board[i][i],range(4))
+<mrbrocoli> >>> board=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+<mrbrocoli> >>> map(lambda i,board=board: board[i][i],range(4))
+<mrbrocoli> [1, 6, 11, 16]
+<gwm_> ah, legal
+<gwm_> lambda x, foo=foo é feio pra caramba
+<gwm_> mas legal
+<mrbrocoli> [board[i][i] for i in range(4)]
+<mrbrocoli> é menos feim
+<gwm_> muito melhor
+<ruda> esse é melhor
+<ruda> e a diagonal secundária?
+* ruda lembra de fórmula
+<mrbrocoli> [board[i][0] for i in range(4)]
+<mrbrocoli> colunas
+<mrbrocoli> [board[0][i] for i in range(4)]
+<mrbrocoli> linhas
+<mrbrocoli> deve dar pra fazer um [foo [bla]] pra gerar todas combinacoes
+<mrbrocoli> board[i][3-i]
+<ruda> thanks
+<bruder> como é feio esse map
+<ruda> aka não entendo
+<bruder> sim
+<bruder> :)
+<gwm_> o lambda i,board=board precisa mesmo bdo board=board?
+<gwm_> map(lambda i: board[i][i],range(4))
+<mrbrocoli> se funciona sem, nao precisa
+<gwm_> parece que funciona
+<mrbrocoli> sempre me confundo de qdo precisa
+<gwm_> por que será que ele aceita passar board=board se não precisa?
+<bruder> for i in range(4): blah.append(board[i][i])
+<gwm_> pra mudar nome?
+<gwm_> bruder: declara o blah
+<gwm_> numa linha!
+<mrbrocoli> board=[1,2,3]
+<mrbrocoli> valores default
+<mrbrocoli> etc
+<gwm_> hm
+<bruder> http://www.zorked.net/quadro-working.jpg
+<mrbrocoli> ta usando pygame?
+<bruder> sim
+<bruder> o que falta agora:
+<bruder> jogo em rede
+<bruder> firulas (menu, perguntar quem sao os jogadores, etc)
+<bruder> tempo de carga das imgs iniciais (está lentaum)
+<gwm_> é só cortar aqueles arquivões
+<gwm_> tou te falando
+<gwm_> o bruder carrega 50 imagens 1024x768 24 bits com canal alfa
+<bruder> 68
+<gwm_> e corta os 16x16 que ele usa
+<mrbrocoli> heh
+<mrbrocoli> pelo menos nao é um system("povray")
+<bruder> putz :)
+<bruder> tá funfando kra, já dá p/ jogar
+<bruder> no esquema os-dois-no-mesmo-micro-trocando-teclado
+<gwm_> faça usar mouse e teclado
+<gwm_> de forma que não dê pro cara escolher peça pro outro por engano
+<gwm_> o bruder pegou o exemplo canônico de uso do mouse, arrastar peças numa mesa, para fazer um jogo teclado-only
+<bruder> ficou massa com teclado, besta. setas e enter, mais nada.
+<ruda> lambada x,y: x+y
+<gwm_> eu vou boicotar esse jogo sem mouse
+<ruda> meu typo favorito agora
+<gwm_> já sabemos o que o ruda fazia na juventude
+<gwm_> ia na lambateria
+<gwm_> porca = reduce(lambda x,y: (x[0]+y[0], x[1]+y[1], x[2]+y[2], x[3]+y[3], line)
+<gwm_> if 4 in porca:
+<gwm_>   return vitoria
+<gwm_> faltou um )
+<gwm_> tem que ter uma maneira mais legal de fazer isso, claro
+<gwm_> mas essa usa reduce kra!#!#!
+<mrbrocoli> usa map dentro do reduce
+<gwm_> é o que deu nó no cérebro
+* bruder escreveu board2screen() e screen2board(), agora o codigo ficou 30% melhor
+<gwm_> bruder: quantos reduce, map, filter ou lambda você usou?
+<gwm_> nenhum? palha!
+<bruder> nenhum, nenhum, nenhum e nenhum
+<mrbrocoli> o bruder deve ter escrito em phpython
+<mrbrocoli> for i in range(4): lista[i] <-- tipo isso
+<ruda> > reduce(lambda x,y: x & y, map(lambda x: x[0],l))
+<ruda> eu queria tirar o x[0] pra fazer um range disso
+<ruda> [(1, 0, 0, 0), (1, 0, 1, 0), (1, 1, 0, 0), (1, 0, 1, 1)]
+<ruda> >>> reduce(lambda x,y: x & y, map(lambda x: x[0],l))
+<ruda> 1
+<ruda> é mais ou menos o que quero
+<ruda> blah, vou usar assim com for mesmo 
+<gwm_> reduce(lambda x,y: map(lambda z: x[z] + y[z], range(len(x))), line)
+<gwm_> bah, trivial
+<gwm_> se você faz código críptico em perl você é um script kiddie mané
+<gwm_> se você gera código críptico em python você é um programador com tendências funcionais elevadas
+<gwm_> código ilegível perl = mané
+<gwm_> código ilegível python = acadêmico
+<gwm_> reduce(lambda x,y: [x[z]+y[z] for z in range(len(x))], line)
+<gwm_> agora eu uso filter para achar os 0 e 4
+<gwm_> filter(lambda x: x == 4 or x == 0, reduce(lambda x,y: [x[z]+y[z] for z in range(len(x))], line)) and game_over()
+<gwm_> elegantérrimo
+<gwm_> é só juntar isso agora com os maps e reduces acima que acham linhas e colunas e diagonais...
+<gwm_> filter(lambda x: x in (0, 4), reduce(lambda x,y: [x[z]+y[z] for z in range(len(x))], line)) and game_over()
+<mrbrocoli> 1337
+<mrbrocoli> daqui a 1 semana ninguem mais sabe o que isso faz :P
+<bruder> isso
+<gwm_> troquei dez linhas de código sem comentário por 9 linhas de comentário para explicar uma linha de código
+<gwm_> ou, na visão bruderiana...
+<gwm_> performance(1 linha) > performance(10 linhas)
+<gwm_> filter(lambda x: x in (0, len(line)), reduce(lambda x,y: [x[z]+y[z] for z in range(len(x))], line)) and game_over()
+<gwm_> assim fica mais genérico
+<gwm_> greetz to ruda que achou o bug
+<niemeyer> gwm_: Use list comprehensions e remova os comentários e as 10 linhas de código. :)
+<niemeyer> Ou pelo menos reduza os comentários.. já que a linha parece realmente complexa.
+<gwm_> [vai, reescreve aquilo ;)
+* niemeyer tenta..
+<niemeyer> [ ... if 0 <= x <= line], isso remove o filter..
+<niemeyer> Deixa eu ver o resto..
+<niemeyer> Obrigado.. vai ser mais fácil.. :)
+<gwm_> a partir de uma lista como [[0,1,0,0],[1,1,1,1],[0,1,0,0],[0,1,1,0]] você tem que achar se os valores correspondentes são iguais
+<niemeyer> Humm..
+<gwm_> vamos chamar isso de ll
+<gwm_> se ll[0][0] == ll[1][0] == ll[2][0]...
+<gwm_> ou se ll[0][1] == ll[1][1] == ll[2][1]...
+<niemeyer> Ok..
+* niemeyer tenta.
+<gwm_> na lista que eu botei o segundo valor das listas (1) faria a linha ser vencedora no jogo
+<niemeyer> Ah.. ok. Qualquer um pode determinar verdadeiro então..
+<gwm_> sim
+<gwm_> são quatro atributos de uma peça, se tiver uma linha com algum atributo igual em todas as peças, o jogo acabou
+<gwm_> seja 1 ou 0 esse atributo
+<mrbrocoli> seria mais facil se os atributos fossem representados por um bitmap
+<gwm_> o ponto não é ser mais fácil ;)
+<gwm_> mas sim
+<gwm_> reduce de &
+<gwm_> (ou não?)
+<gwm_> não, por causa do caso 0 0 0 0
+<niemeyer> [x[0] for x in zip(l) if sum(x[0]) == len(x[0])]
+<niemeyer> Tadá! :)
+<mrbrocoli> nossa
+<mrbrocoli> que é zip?
+<gwm_> zip?
+<niemeyer> >>> zip([1,2,3], [4,5,6])
+<niemeyer> [(1, 4), (2, 5), (3, 6)]
+<gwm_> AHHHHH
+<niemeyer> ;)
+<gwm_> bah :)
+<mrbrocoli> map(None, [1,2,3],[4,5,6])
+<niemeyer> Opa.. melhor:
+<niemeyer> [x for x in zip(*l) if sum(x) == len(x)]
+<gwm_> nossa, None
+<mrbrocoli> o que é esse pointer l? :P
+<niemeyer> zip(*l) == apply(zip, l) em pythons > 2, iirc.
+<gwm_> :)
+* mrbrocoli tem que reaprender python
+* gwm_ tem que aprender python
+}}}
+
+Pena eu ter perdido esse bate-papo :) Certamente eu iria palpitar (errado, mas iria) :)
+
+''Faltou apenas verificar o caso dos atributos serem todos zero: [x for x in zip(*line) if sum(x) == len(x) or sum(x) == 0]. Problema menor, certamente porque eu não expliquei com clareza -- Guilherme''
+----
+
+OsvaldoSantanaNeto

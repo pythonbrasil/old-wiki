@@ -1,0 +1,39 @@
+Autor: MarcoAndreLopesMendes
+
+O ojetivo deste artigo é auxiliar os usuários do Windows (principalmente do Windows XP) a configurarem um ambiente para o desenvolvimento de programas em [http://pt.wikipedia.org/wiki/Python Python] em conjunto com as mais diversas bibliotecas, como [http://pt.wikipedia.org/wiki/PyGTK PyGTK], [http://pt.wikipedia.org/wiki/WxPython wWPython], [http://www.gustavobarbieri.com.br/eagle/ Eagle], etc. e [http://pt.wikipedia.org/wiki/Ambiente_de_Desenvolvimento_Integrado IDEs], como o [http://www.stani.be/python/spe SPE] e o [http://pt.wikipedia.org/wiki/Eclipse_%28IDE%29 Eclipse]. Para uma análise das alternativas para o densevolvimento de aplicações com interface gráfica, leia o artigo [http://www.pythonbrasil.com.br/moin.cgi/ComparacaoDeGUIs Comparação de GUIs]. Se você pretende escolher um [http://pt.wikipedia.org/wiki/Ambiente_de_Desenvolvimento_Integrado IDE] para desenvolver em Python, acesse o artigo [http://www.pythonbrasil.com.br/moin.cgi/IdesPython IDEs Python].
+
+A maioria das distribuições Linux traz Python na instalação padrão. Além disto, distribuições que possuem um gerenciador de pacotes, quer seja baseado em arquivos RPM, DEB ou semelhantes, tornam muito simples a instalação de pacotes adicionais, gerenciando as dependências e instalando todos os pacotes nedessários ao funcionamento de uma determinada aplicação.
+
+Para os usuários de Windows, o processo de instalação exige que ele saiba quais pacotes são necessários, bem como as versões, e em que ordem eles devem ser instalados. Esta documentação tem o objetivo de auxiliar neste processo.
+
+Serão descritos os pacotes necessários para o funcionamento de cada apliacação, bem como  a ordem correta de instalação. A maioria dos links aponta para o site [http://www.superdownloads.com.br superdownloads.com.br]. Ele foi escolhido por ser um site em português, ser bastante conhecido pelos usuários de Windows, por manter atualizados os links para a última versão de cada aplicativo e por possuir uma explicação do que faz cada aplicação. No caso de aplicações que não estão disponíveis neste site, outros endereços serão fornecidos.
+
+[[TableOfContents]]
+
+= Python =
+
+Para a instalação básica do Python, contendo o interpretrador, as bibliotecas padrão e um ambiente simples de desenvolvimento, siga os passos abaixo:
+
+ 1. Instale o [http://superdownloads.uol.com.br/download/i3176.html interpretador Python].
+
+= wxPython =
+
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o [http://superdownloads.uol.com.br/download/i29158.html wxpython].
+
+= SPE =
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o wxpython, conforme as instruções da seção específica.
+ 1. Instale o [http://superdownloads.uol.com.br/download/i38598.html SPE].
+
+= PyGTK = 
+
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o [http://superdownloads.uol.com.br/download/i37838.html GTK].
+ 1. Instale o [http://www.mapr.ucl.ac.be/~gustin/win32_ports/pygtk.html Pygtk e PyCairo].
+
+= Eagle: = 
+
+ 1. Instale o Python, conforme as instruções da seção específica.
+ 1. Instale o PyGTK, conforme as instruções da seção específica.
+ 1. Instale o [http://www.gustavobarbieri.com.br/eagle/packages/ Eagle], procurando pelo arquivo com "win32" no nome e a extensão ".exe" .

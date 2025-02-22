@@ -1,0 +1,28 @@
+#pragma section-numbers off
+= Nome do Software =
+
+Comentário sobre o software...
+
+   * '''Prós:''' ...
+   * '''Contras:''' ...
+
+== Ficha técnica ==
+
+URL: http://python.org/ [[BR]]
+Licença: GPL
+
+== Tela ==
+
+# v- remover isso
+{{{
+Adicione um screenshot através da opção attach (com no máximo 640x480px)
+em formato .png e referencie ele na página com o comando:
+
+attachment:spe.png
+
+}}}
+# ^- remover isso
+
+----
+
+Autor da página

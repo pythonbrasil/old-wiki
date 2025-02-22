@@ -1,0 +1,31 @@
+Começar a usar Python é super-simples. Basta baixar e instalar.
+
+[[TableOfContents]]
+
+== Baixe ==
+
+=== Linux & Mac ===
+
+A grande maioria das distribuições Linux existentes hoje já disponibilizam o interpretador Python pré-instalado ou pacotes binários que podem ser facilmente instalados.
+
+Os computadores da Apple com o Mac OSX também já acompanham um interpretador Python pré-instalado que pode ser atualizado com a última versão disponibilizada no [http://www.python.org/ftp/python/2.5/python-2.5-macosx.dmg site oficial] da linguagem Python.
+
+=== Windows ===
+
+Existem duas distribuições disponíveis para Windows atualmente. Uma delas está disponível no próprio [http://www.python.org/ftp/python/2.5/python-2.5.msi site oficial] da linguagem.
+
+A outra versão é disponibilizada pela [http://www.activestate.com/Products/ActivePython/?mp=1 ActiveState] e possui os mesmos componentes da versão citada acima mais a adição de módulos específicos para Win32 e a documentação oficial da linguagem.
+
+== Instale ==
+
+=== Windows ===
+
+ * TODO: colocar screenshots dos processos de instalação
+
+=== Linux & Mac ===
+
+O interpretador Python já vem pré-instalado nesses sistemas operacionais, portanto, não é necessário detalhar o processo de instalação aqui. Para maiores informações visite o site oficial da linguagem [http://www.python.org Python].
+
+== Use ==
+
+ * IDEs e editores de texto em IdesPython

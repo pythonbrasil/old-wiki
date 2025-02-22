@@ -1,0 +1,36 @@
+[[TableOfContents]]
+
+= Decorators =
+
+== História ==
+
+Decorators foram introduzidos na versão 2.4 de python, e são definidos na PEP 318. Segundo a própria PEP, esse nome pode não ser definitivo, já que existe um design pattern com o mesmo nome e além disso, o nome decorator tem um significado diferente na área de compiladores. Mas como ele já está aí há um bom tempo com esse nome, não creio que vá haver mudanças.
+
+== Motivação ==
+
+Imagine o seguinte exemplo:
+
+{{{
+class AlgumaCoisa:
+    classattribute = None
+    
+    def set_some(cls, argument):
+        cls.classattribute = argument
+    set_some = classmethod(set_some)
+}}}
+
+
+Com esse trecho, a função set_some se torna um método de classe, permitindo construções como: AlgumaCoisa.set_some(29), que irá alterar o atributo de classe classattribute.
+
+Mas imagine que a função set_some ficasse grande - algumas centenas de linhas de código. Nessa caso, ficaria fácil esquecer de definir o classmethod no final.
+
+Usando a nova sintaxe dos decorators, podemos fazer:
+
+{{{
+class AlgumaCoisa:
+    classattribute = None
+    
+    @classmethod
+    def set_some(cls, argument):
+        cls.classattribute = argument
+}}}

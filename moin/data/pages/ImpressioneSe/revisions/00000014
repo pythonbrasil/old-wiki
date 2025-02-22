@@ -1,0 +1,66 @@
+#acl All:read AdminGroup:read,write,delete,revert,admin
+
+[[HTML(<div id="special_page">)]]
+== Python para Web ==
+
+[[HTML(<a href="http://video.google.com/videoplay?docid=6297126166376226181"><img class="image" src="http://www.pythonbrasil.com.br/moin.cgi/ImpressioneSe?action=AttachFile&do=get&target=better-web.png" alt="Better Web App Development" /></a>)]]
+
+O futuro das aplicações está na Web e Python não poderia ficar de fora dessa tendência. Existe pelo menos uma dúzia de ''frameworks'' para desenvolvimento de aplicações Web e certamente um deles atenderá às suas demandas. O vídeo apresentado (em inglês) apresenta um comparativo feito entre diversos ''frameworks'' para desenvolvimento Web de diversas linguagens. Entre esses ''frameworks'' foram avaliados o [http://www.zope.org Zope]/[http://www.plone.org Plone] (em inglês ou em [http://www.tchezope.org português]) e o [http://www.turbogears.org Turbogears] (em inglês ou em [http://www.oturbogears.org português]).
+
+[[BR]]
+
+'''E ainda...'''
+
+... [http://www.djangoproject.com Django] (em inglês), [http://www.pylonshq.com Pylons] (em inglês) e mais alguns que são comentados na página PythonParaWeb.
+
+== Python para gestão empresarial ==
+
+XXX Stoq, Kiwi, Gazpacho, ERP5, ...
+
+== Python para dispositivos móveis ==
+
+[[HTML(<a href="http://video.google.com/videoplay?docid=7001395822721532640"><img class="image" src="http://www.pythonbrasil.com.br/moin.cgi/ImpressioneSe?action=AttachFile&do=get&target=pys60.png" alt="Python for Serie 60" /></a>)]]
+
+A linguagem Python é tão versátil que permite o desenvolvimento de aplicações para os mais diversos tipos de arquiteturas. Atualmente Python pode ser usada desde os grandes ''mainframes'' até os menores celulares. No vídeo você pode acompanhar o funcionamento do [http://pys60.sourceforge.net Python] em um ''smartphone'' [http://www.s60.com/life Série 60] (S60) da [http://www.nokia.com Nokia].
+
+[[BR]]
+
+'''E ainda...'''
+
+... [http://python-psp.net/trac Python para PSP] (em inglês), [http://pythonce.sourceforge.net/Wikka/HomePage Python para PocketPC] (em inglês), [http://pymaemo.garage.maemo.org Python para Maemo] (em inglês), ...
+
+== Python para Multimídia e Entretenimento ==
+
+O mercado de aplicações multimídia e entretenimento (entre eles o de desenvolvimento de jogos) também já descobriu a linguagem Python e atualmente ela é usada para realizar desde as tarefas mais simples como ''scripting'' de alguns jogos até na criação de ''players'' multimídia.
+
+[[BR]]
+
+'''E ainda...'''
+
+... [http://www.pygame.org PyGame], PyMedia, PyOpenGL, Python GStreamer...
+
+== Python para Ciência ==
+
+[[HTML(<a href="http://www.scipy.org"><img class="image" src="http://www.pythonbrasil.com.br/moin.cgi/ImpressioneSe?action=AttachFile&do=get&target=scipy.png" alt="SciPy Website" /></a>)]]
+
+A versatilidade da linguagem Python e seu uso em conjunto com algumas bibliotecas específicas para o uso científico permite que ela seja usada nos mais variados ramos da ciência tais como a biologia, química e matemática. Alguns cientistas e engenheiros também estão substituindo ferramentas caras por Python mais algumas bibliotecas disponibilizadas em [http://www.scipy.org SciPy].
+
+[[BR]]
+
+'''E ainda...'''
+
+... [http://www.pythonware.com/products/pil/ PIL] (em inglês), [http://biopython.org/wiki/Main_Page BioPython] (em inglês), [http://www.astro.washington.edu/owen/AstroPy.html AstroPy] (em inglês), ...
+
+== Python para educação ==
+
+[[HTML(<a href="http://www.laptop.org"><img class="image" src="http://www.pythonbrasil.com.br/moin.cgi/ImpressioneSe?action=AttachFile&do=get&target=olpc.png" alt="One Laptop per Child" /></a>)]]
+
+Por ser simples e fácil de ser aprendida Python é indicada para professores que pretendem usar os computadores como ferramentas de apoio à educação. Python pode ser usada não somente para o ensino de programação mas também no ensino de outras atividades. Essa foi uma das razões para que a linguagem Python também fizesse parte do desenvolvimento do projeto [http://www.laptop.org OLPC]. Uma parte considerável do ambiente [http://wiki.laptop.org/go/Sugar Sugar] dessa plataforma foi desenvolvida em Python.
+
+[[BR]]
+
+'''E ainda...'''
+
+... [http://gcompris.net/ gCompris] (em vários idiomas), [http://gvr.sourceforge.net/index.php Guido van Robot] (em inglês), [http://kineticskit.sourceforge.net/ KineticsKit] (em inglês), [http://pw1.netcom.com/~ajs/index.html PyGeo] (em inglês), [http://pyrorobotics.org/ Python Robotics] (em inglês), ...
+
+[[HTML(</div>)]]

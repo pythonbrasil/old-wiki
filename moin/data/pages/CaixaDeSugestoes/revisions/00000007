@@ -1,0 +1,119 @@
+Pessoal, aproveitem esta página para exercitar a sua criatividade e sugerir projetos ou para sugerir algo em projetos já relacionados aqui. Lembrem-se que o espírito aqui é o de total abertura, portanto, escrevam o que quiserem.
+
+== Algumas regras ==
+
+  Tudo bem, eu não sou o dono do site, mas alguém tem que tomar essa iniciativa. Precisamos organizar um pouco melhor esse conteúdo, e para isso algumas regrinhas servem muito bem:
+
+1- Sempre que necessário, coloque a data e assine suas contribuições! Aqui nessa seção iria muito bem!
+
+2- Em seções como essa, o conteúdo deve ficar tipo blog, com mensagens novas no começo da página. Uma ótima sugestão é que você sempre poste as coisas depois DESTA seção.
+
+3- Sempre leia bem as páginas, e evite enviar coisas repetidas.
+
+4- Use do bom senso, e imagine que esse site também é seu - senão não seria um wiki!!!
+
+   Cléber Zavadniak - 31 Jul 2004
+
+== Site PythonBrasil ==
+
+Sugestões para o site. Aqui vocês podem sugerir algum artigo, tipo de conteúdo, recurso novo, visual novo, mudanças no sistema wiki, mais interatividade, ... Eu tenho notado que nossa visitação está 'constante' mas ainda tem poucas pessoas passeando por lá. Seria falta de conteúdo? Falta de divulgação (eu acho que é isso, mas o que podemos fazer pra melhorar o trabalho de divulgação)?. Para as estatísticas de acesso: http://www.pythonbrasil.com.br/stats/
+
+   * Seção no site PythonBrasil para anúncios de vagas para profissionais Python, Ex.: http://python.org/community/jobs/, porém direcionado apenas ao mercado de trabalho do Brasil.
+      ''http://www.pythonbrasil.com.br/moin.cgi/OportunidadesDeEmprego''
+
+   * Python class: Área do site destinada a classes em python... (similar ao http://www.phpclasses.org)
+
+      ''Não seria algo equivalente ao CookBook? A idéia do CookBook é exatamente ser um repositório de classes/aplicações/programas escritas em Python. -- OsvaldoSantanaNeto''
+
+   * Expandir a seção de empresas, documentando que projetos estão sendo desenvolvidos em Python. (sugestão RodrigoSenra)
+   * Quantas pessoas no grupo trabalham com Software Livre? Poderiamos criar um repositorio de programas (pequenos e grandes) feitos em Python (Uma boa maneira de aumentar o conhecimento sobre o Python e também de transmitir conhecimento) RodrigoCesarHerefeld
+
+      ''Rodrigo, eu comentei logo acima sobre o CookBook. A idéia do CookBook é exatamente a de ser um repositório de códigos (pequenos e grandes) em Python. O que precisa agora é que os participantes do site contribuam :) -- OsvaldoSantanaNeto''
+
+== Encontro Python ==
+
+Sugestões para podermos organizar o primeiro encontro de usuários Python:
+
+   * Formato: Pago? Grátis? Workshop? Palestras? Mini-cursos?
+   * Local: Local? Cidade? Estado? (os mais 'votados' serão escolhidos)
+   * Data: Quando? (penso que devemos pensar nisso com pelo menos uns 8 meses de antecedência)
+
+         Minha sugestão é vincular os encontros Python junto aos Congressos de Informática Nacionais
+         (vide site da SBC). Este modelo já foi bem sucedido em 2003, quando ocorreu um Simpósio de
+         Software Livre na Unicamp. (sugestão RodrigoSenra)
+
+         ''Rodrigo, eu acho essa idéia bastante interessante. Se você conhecer algum dos organizadores desse tipo de evento tente contactá-los. Da minha parte eu tentarei fazer isso por aqui em Curitiba. -- RodrigoSenra''
+
+         Eu acho a idéia de palestras e minicursos interessantes, mas não sei se isso cabe no escopo do grupo, quero dizer geograficamente estamos bem espalhados seria mais facíl organizar regionalmente (RodrigoCesarHerefeld)
+
+         ''Tem medo de andar de ônibus? :) A idéia desse tipo de encontro é a de ser realizada anualmente ou bienalmente e não toda semana :) Nada impede que os encontros sejam organizados regionalmente, mas acho que um *big* encontro nacional seria útil na divulgação da linguagem Python entre os desenvolvedores. Nesse sentido (de promoção) eu também prefiro a idéia de um evento independente que poderia ser divulgado na mídia e despertar a curiosidade dos desenvolvedores brasileiros. -- OsvaldoSantanaNeto''
+
+         ''Também sou a favor de um encontro independente. Alias, acho que o primeiro seria bom ser gratis para atrair mais pessoas (ou cobrar um valor baixo). E, se o objetivo é divulgar, a melhor cidade seria São Paulo (eu sou de BH). Acho que o ideal são palestras, mas elas devem ser feitas com cuidado para serem interessantes e não coisas massantes e sem graça. -- RafaelAlmeida''
+
+   * Patrocinadores: Algum interessado? Como organizar?
+   * Responsáveis: Quem? Só eu? 8|
+   * Quem faria palestras? Convidar alguma 'personalidade'? Quem?
+
+         Anunciar nas listas python-br/python-brasil um "Call For Speakers"
+         quando algum encontro for ocorrer (sugestão RodrigoSenra).
+
+         ''Certo, quando a gente definir algumas coisas sobre esse evento eu lanço o Call For Speakers nas listas brasileiras e em algumas estrangeiras também...''
+
+   * Mais algum detalhe?
+
+== Clube Python ==
+
+Para o clube Python eu gostaria de sugestões sobre:
+
+   * Direitos: O que o associado ganha?
+   * Deveres: O que o associado deverá fazer?
+
+Idéias:
+   * Direitos: Desconto em parceiros? (livrarias, supermercados :), farmácias :)), entrada livre nos encontros Python? Camisetas? Carteirinhas numeradas para usar assim: "Olha! Eu sou o sócio numero 1 do Clube do Python!" :)?, direito a um e-mail @pythonbrasil.com.br? adesivos para carro?
+   * Deveres: Pagar uma suave anualidade/semestralidade/mensalidade que seria usada para confeccionar adesivos/camisetas/brindes, patrocinar os encontros Python, ou até mesmo ajudar na divulgação do Python em mídias pagas?
+   * Controle: Criação de um estatuto para o clube de forma a organizar as decisões e controlar o dinheiro do clube.
+
+
+== Sugira aqui outro Projeto interessante ==
+
+Aqui você poderá sugerir algum outro projeto para podermos discutir. Ex:
+
+   * Revista Python: Eletronica? Impressa? Se impressa, quem financia a revista?
+
+       Acho que seria muito interessante este tipo de esforço, mas a viabilidade depende
+       de contatos com o mercado editorial. Acho que quando este site ganhar momentum
+       suficiente a transição para uma mídia impressa seria mais fácil. Por isso, acho
+       que devemos nos concentrar em crescer e promover este site (sugestão RodrigoSenra).
+
+       ''A revista poderia começar no formato eletrônico (pdf/html) e depois evoluir. O problema aqui nem é tanto o formato e sim as contribuições. Tenho ficado *muito* impressionado com a qualidade das contribuições para o PythonBrasil mas um *pouco* decepcionado com a quantidade dessas contribuições. E manter uma revista, até mesmo bimestral, com esse fluxo de artigos seria muito mais complicado do que achar um jeito de criá-la. -- OsvaldoSantanaNeto''
+
+   * Newsletter Python: novidades pythonistas semanais/diárias, artigos novos no site do www.pythonbrasil.com.br, versões novas do Python/Zope/wxPython/pySDL e outros módulos, dicas CookBook, avisos sobre encontros, usuários novos :-? ... --FelipeLessa
+
+
+   
+   * Tradução de documentação Python ou elaboração de um tutorial: Porquê a comunidade não faz uma força conjunta para melhorar a documentação da linguagem ?, Seria algo que garantiria em parte a divulgação e facilitaria a entrada de iniciantes num mundo novo onde os softwares são faceis de se manter e atualizar ;) - ralobao
+
+      ''Taí... essa eu achei legal. ralobao, porque você não lança o projeto de tradução da documentação oficial do Python para português? O tutorial já foi traduzido pelo RodrigoSenra, talvez seja o caso apenas de 'atualizar' ele para uma versão mais recente do Python. Crie um mecanismo onde alguns traduzem e outros revisem. Crie um projeto no http://www.sourceforge.net e coloque os trabalhos lá. -- OsvaldoSantanaNeto''
+
+      ''!SourceForge?! Somos brasileiros fazendo no Brasil em português brasileiro algo desejado pelos brasileiros! Por que não utilizar o !CodigoLivre (http://codigolivre.org.br/), da UNICAMP? Se existe algo que possa ser feito no !SourceForge que nos interesse que não possa ser feito no !CodigoLivre, por favor me avise. -- FelipeLessa''
+
+      ''Porque eu uso Sourceforge. Mas quem quiser fazer a tradução que escolha o que melhor lhe convier. Isso realmente é o que menos importa pra quem quer ler a documentação do Python em Português. E já que o FelipeLessa se empolgou tanto com a idéia proponho a ele fazer esse trabalho de tradução, e que o faça no codigolivre.org.br :). -- OsvaldoSantanaNeto''
+
+      ''Eu não sei como coordenar tal projeto, mas me ofereço a trabalhar na tradução. É só termos um coordenador. Sugiro colocar um aviso chamando alguém para tal cargo na página principal. -- FelipeLessa''
+
+      ''Eu me coloco a disposição para coordenar esses esforços de tradução. Acho que termos [b]toda[/b] a documentação oficial traduzida para o português, inclusive os manuais de módulos da biblioteca padrão, é um passo importantíssimo. -- PedroWerneck''
+
+      ''Manda bala então Werneck! :) Vai ser uma ótima coisa a ser feita. Qualquer coisa que precisar é só falar... -- OsvaldoSantanaNeto''
+
+      ''Opa, temos que arranjar um lugar para nos mantermos atualizados! Algo como uma lista de discussão por e-mail. Vamos seguir em frente! -- FelipeLessa''
+
+      ''Também posso contribuir com a tradução da documentação oficial. Em que pé está? Como posso ajudar? (atualização: opa! acabei de encontrar as informações que procurava na página PythonDoc :-))-- RodrigoMoraes''
+
+== Conclusão ==
+
+Vamos lá pessoal, quero ver essa página aqui repleta de sugestões de todos os participantes do site. Vamos fazer de 2004 o ano que vai aumentar exponencialmente a comunidade Python brasileira.
+
+
+"Antes de sugerir algo, quero agradecer ao Python Brasil pelo excelente site, possui muito conteúdo e informação. É uma excelente referência para quem quer aprender essa excelente linguagem chamada Python, eu, lendo os tutorias, aprendi já alguma coisa, com certeza é uma linguagem excelente. :)
+Quanto a minha sugestão é a seguinte. Vcs devem conhecer o site http://pygame.org que é um site dedicado à jogos feitos em Python, lá existem muitos jogos de qualidade.
+Pois bem como esse site é uma ótima referência para a linguagem, alguém poderia traduzir o principal tutorial do Pygame e colocar no site o tutorial totalmente traduzido. Eu sei que não é fácil, é longo o tutorial, exige tempo, existem muitas coisas a serem traduzidas e colocadas no mesmo sentido no português, mas facilitaria quem não domina a lingua inglesa, inclusive eu. Se eu tivesse um ótimo inglês eu me encarregaria de traduzir mas não posso, pois meu inglês é péssimo. Enquanto não faço um curso de inglês fico dependendo, em grande parte, da colaboração de volutários como os vários que traduziram os tutorias que aqui estão disponibilizados para leitura. Tenho vontade de construir jogos em Python, mas não quero fazer curso superior na ínformática pra isso (creio eu que não é necessário) mas a documentação em português de tutoriais de tais assuntos ainda é escasso, ao contrário da documentação da linguagem que já temos várias em português, um excelente trabalho feito por quem traduziu. Essa é minha sugestão. Sucesso ao site e a linguagem Python. :)" Samuel C.S.J

@@ -1,0 +1,98 @@
+Python é uma linguagem dinâmica e interpretada, e não tem um pré-processador (como existe em C). A ordem em que os comandos de um programa Python são executados obedece a algumas regras simples. 
+
+Para testar seu conhecimento sobre estas regras, faça os exercícios abaixo.
+
+== Exercício 1 ==
+
+Observe que a listagem abaixo possui vários comantos print (e um sys.stdout.write) com marcadores numerados assim: "-> N". 
+
+Quais são os dois primeiros marcadores que aparecem na saída quando o programa é executado?
+
+Dica: o segundo não é o '-> 2'
+
+Rode o programa somente depois de responder a pergunta, para saber se acertou!
+
+{{{
+#!python
+import sys
+import atexit
+
+print '-> 1 inicio'
+
+def funcaoA():
+    print '-> 2 funcao A'
+    return 'resultado A'
+
+def funcaoB():
+    print '-> 3 funcao B'
+
+    def funcaoC():
+        print '-> 4 funcao C'
+        
+    return funcaoC
+    
+funcaoD = lambda:sys.stdout.write('-> 5 funcao D\n')
+
+def funcaoE():
+    print '-> 6 funcao E'
+        
+class Classe(object):
+    print '-> 7 bloco de declaracoes da Classe'
+    
+    def __init__(self):
+        print '-> 8 inicializacao da instancia da Classe'
+        
+    def metodo(self):
+        print '-> 9 metodo da instancia da Classe'
+        return 'resultado metodo'
+        
+if True:
+    print '-> 10 condicional True'
+    
+if False:
+    assert False, 'Isso nunca devia acontecer'
+
+atexit.register(funcaoE)
+
+print '-> 11 logo antes do if __main__'
+
+if __name__=='__main__':
+    print '-> 12 __main__'
+    print funcaoA
+    print funcaoA()
+    print '-> 13 __main__ (cont.)'
+    print funcaoB
+    resultadoB = funcaoB()
+    print resultadoB
+    objeto = Classe()
+    objeto.metodo()
+    resultadoB()
+    print funcaoD
+    funcaoD()
+    print '-> 14 __main__ (final)'
+print '-> 15 FIM'    
+}}}
+
+
+== Exercício 2 ==
+
+Quais é o último marcador que aparece na saída quando o programa acima é executado?
+
+
+== Exercício 3 ==
+
+Anote em um pedaço de papel em que ordem todos os marcadores do programa acima aparecerão na saída.
+
+
+== Exercício 4 ==
+
+O programa abaixo importa o modulo acima. Anote em um pedaço de papel em que ordem os marcadores "-> N" e os pontos I e II aparecerão na saída do programa. Depois rode o programa para saber se acertou.
+
+{{{
+#!python
+print '=> ponto I'
+
+import execucao_pergunta
+
+print '=> ponto II'
+}}}

@@ -1,0 +1,32 @@
+== Python v3.x documentação ==
+----
+Bem vindo! Esta é a documentação da linguagem Python 3.0.1, atualizada em 07/Jun/2009.
+
+'''Partes desta Documentação:'''
+
+ * [[py3k/whatsnew|O que há de Novo em Python 3.0?]]'' ou todos os documentos'' [[py3k/whatsnew/index|O que há de novo]] ''desde a versão 2.0''
+ * [[py3k/tutorial|Tutorial]] ''comece aqui''
+ * [[py3k/using|Usando Python]]  ''como usar Python em diferentes plataformas''
+ * [[py3k/library|Referência da Biblioteca]] ''mantenha isso bem perto de você''
+ * [[py3k/reference|Refrência da Linguagem]] ''descreve a sintaxe e os elementos da linguagem''
+ * [[py3k/howto|Python HOWTOs]] ''documentos aprofundados em tópicos específicos''
+ * [[py3k/extending|Extendendo e Embutindo]] ''tutorial para programadores C/C++''
+ * [[py3k/c-api|Python/C API]] ''referência para programadores C/C++''
+ * [[py3k/install|Instalando Módulos Python]] ''informações para instaladores e & sys-admins''
+ * [[py3k/distutils|Distribuindo Módulos Python]] ''dividindo módulos com outros''
+ * [[py3k/documenting|Documentando Python]] ''guia para autores de documentação''
+
+'''Índices e tabelas:'''
+
+ * [[py3k/modindex|Índice Global de Módulos]] ''acesso rápido a todos os módulos''
+ * [[py3k/genindex|Índice Geral]] ''todas as funções, classes e termos''
+ * [[py3k/glossary|Glossário]] ''os mais importantes termos explicados''
+ * [[py3k/search|Página de Busca]] ''busque nesta documentação''
+ * [[py3k/contents|Tabela Completa do Conteúdo]] ''lista de todas seções e subseções''
+
+'''Meta informação:'''
+
+ * [[py3k/bugs|Reportando Erros]]
+ * [[py3k/about|Sobre esta documentação]]
+ * [[py3k/license|História e Licença de Python]]
+ * [[py3k/copyrigth|Copyright]]

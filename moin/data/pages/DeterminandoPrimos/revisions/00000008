@@ -1,0 +1,192 @@
+#pragma section-numbers off
+
+= Determinando se um número é primo =
+
+Os números primos  me fascinam há muito tempo. Ter estudado Criptografia, só aumentou este interesse. É comum eu passar aos meus alunos que façam um programa para determinar se um numero é primo. Os primos são úteis em várias áreas da Computação, como é o caso do algoritmo [http://www.rsasecurity.com/rsalabs/node.asp?id=2214 RSA], utilizado no [http://www.rsasecurity.com/rsalabs/node.asp?id=2293 SSL]. A [http://www.matematica.br/historia/nprimos.html explicação histórica] sobre os primos é também bem interessante. Por fim, a lógica do programa é boa para desenvolver algumas habilidades para quem está aprendendo a programar.  
+
+Geralmente lanço como desafio que os alunos encontrem os primos menores que 1000,  informando quantos são e quantas vezes o ''if'' mais interno do programa foi executado. É uma forma
+de ensiná-los a pensar em termos de otimização de código e desempenho.
+
+Eu já havia implementado versões pouco otimizadas em C, mas resolvi ir mais além em Python, uma vez que a linguagem realmente estimula a seguir em frente. Em C, chegaria num ponto que eu teria que utilizar uma lista encadeada, e só pensar nisto já desanima...
+
+Lendo o [http://www.oreilly.com/catalog/lpython/ Learning Python], encontrei um exemplo de implementação do algoritmo, que é o pior que poderia existir:
+
+{{{
+#!python
+limite = 1000
+numero = 2
+c = 1
+p = 0
+print "Primos: ",
+while numero < 1000:
+    i = numero -1
+    while i > 1:
+        if numero % i == 0: break
+        i -= 1
+        c += 1
+    else:
+        print numero,
+        p += 1
+    numero += 1
+
+print "\n\nForam encontrados %d números primos." %p
+print "Foram necessárias %d comparações." %c
+}}}
+
+O resultado obtido é:
+{{{
+Foram encontrados 168 números primos.
+Foram necessárias 333723 comparações.
+}}}
+
+Esta versão verifica todos os números, de cima pra baixo até encontrar uma divisão exata.
+Por exemplo, pra determinar se 100 é primo o programa verifica todos os numeros até 50, para então descobrir que 100 não é primo. Seria muito mais eficiente verificar de baixo pra cima e saber que 100/2 dá divisão exata, parando imediatamente o teste.
+
+Fazendo esta alteração,  o programa fica assim:
+
+{{{
+#!python
+limite = 1000
+c = 1
+p = 0
+print "Primos: ",
+for numero in xrange(2, limite+1):
+    for i in xrange(2,numero):
+        if numero % i == 0: break
+        c += 1
+    else:
+        print numero,
+        p += 1
+
+print "\n\nForam encontrados %d números primos." %p
+print "Foram necessárias %d comparações." %c
+}}}
+
+E o resultado, como era esperado,  melhora bastante:
+{{{
+Foram encontrados 168 números primos.
+Foram necessárias 77192 comparações.
+}}}
+
+Mas ainda São necessária smuitas comparações. A próxima idéia que surge e não verificar todos, mas apenas a metade dos números. Alterando o ''for'' interno obtemos:
+
+{{{
+for i in xrange(2,(numero/2)+1):
+}}}
+
+E com esta alteração chega-se a:
+{{{
+Foram necessárias 39213 comparações.
+}}}
+
+Daria para tentar melhorar um pouco mais usando seguindo esta abordagem, mas não se iria muito mais longe. Uma abordagem diferente seria armazenar os primos já encontrados e utilizá-los para determinar os demais, uma vez que não é necessário testar todos os números, mas apenas os primos menores que o número. Pela definição, todos os números não primos (compostos) são formados por primos, então o teste se torna bem menor. 
+
+Como não se sabe quantos números encontraremos, devemos deixar o programa o mais flexível possível. Em C, teriamos que criar um array grande (simples, porém deselegante e pouco flexível) ou uma lista encadeada, (elegante e flexível, porém complexo). De qualquer forma, qualquer uma das abordagens exigiria várias linhas de código para ser implementada. Em Python, podemos utilizar uma lista, assim:
+
+{{{
+#!python
+limite = 1000
+
+print "Primos: 2",
+c = 1
+p = 1
+primos = [2,]
+for numero in xrange(3,limite+1):
+    for i in primos:
+        if numero % i == 0: break
+        c += 1
+    else:
+        primos.append(numero)
+        print numero,
+        p += 1
+
+print "\n\nForam encontrados %d números primos." %p
+print "Foram necessárias %d comparações." %c
+}}}
+
+O resultado é este:
+{{{
+Foram necessárias 14790 comparações.
+}}}
+
+Como última melhoria, podemos passar a não verificar todos os primos menores que o número, mas apenas os números menores que a raiz quadrada do número:
+
+{{{
+#!python
+
+from math import sqrt
+
+limite = 1000
+
+print "Primos: 2",
+c = 1
+p = 1
+primos = [2,]
+for numero in xrange(3,limite+1):
+    ehprimo = 1
+    for i in primos:
+        if numero % i == 0:
+            ehprimo = 0
+            break
+        if i > sqrt(numero):
+            break
+        c += 1
+    if (ehprimo):
+        primos.append(numero)
+        print numero,
+        p += 1
+
+print "\n\nForam encontrados %d números primos." %p
+print "Foram necessárias %d comparações." %c
+}}}
+
+O resultado é muito melhor ainda:
+{{{
+Foram necessárias 1971 comparações.
+}}}
+
+Resumindo: isto significa que é possível determinar todos os primos menores que 1000 fazendo apenas 1971 comparações, contra as 333723 que seriam necessárias utilizando o pior algoritmo, encontrado no livro (encontrei mais tarde um algoritmo ainda pior, onde o laço não saia no momento em que a primeira divisão exata ocorria, mas fazia todas as divisões entre 1 e o número).
+
+Deste ponto em diante eu não sei mais pra onde ir. Se você souber de uma forma ainda mais eficiente de resolver este problema, seguindo a mesma linha de raciocício, entre emcontato comigo. Se tiver alguma coisa que está pouco "Pythonica" e pode ser melhorada, me avise também.
+
+Uma possibilidade diferente é a utilizaçao de [http://www.google.com/search?q=teste+de+primalidade testes de primalidade]. 
+
+Minha conclusão é de que em Python eu pude implementar uma idéia que eu já tinha na cabeça há muito tempo, mas não implementava por que as linguages que eu conhecia  não me animavam a fazê-lo. Com Python, não tive problemas com a linguagem em nenhum momento. A implementação foi tranquila e o código ficou extremamente legivel, não sendo difícil mesmo um iniciante de compreendê-lo. A linguagem realmente "não fica na frente". Para mim foi mais uma confirmação de que a escolha da linguagem foi correta.
+
+MarcoAndréLopesMendes
+
+Volta para DocumentaçãoPython.
+
+----
+''Acho que o teste de comparações não está exatamente correto, porque a comparação não é contada quando um primo divide o número testado, enquanto que, para fins de teste de otimização, essa contagem devia ser realizada. Eu colocaria, então, o {{{c += 1}}} no começo do laço e não no final. Há uma outra otimização faltando que diminui o número de testes, que é fazer o laço externo contando apenas os números ímpares (ou seja, começando de um número ímpar, contando de dois em dois). O código com todas as mudanças que mencionei ficaria assim portanto:
+
+{{{
+#!python
+
+from math import sqrt
+
+print "Primos: 2",
+c = 1
+p = 1
+primos = [2,]
+limite = 1000
+
+for numero in xrange(3,limite+1,2): # de dois em dois
+    ehprimo = 1
+    for i in primos:
+        c += 1 # mudei de lugar
+        if numero % i == 0:
+            ehprimo = 0
+            break
+        if i > sqrt(numero):
+            break
+    if (ehprimo):
+        primos.append(numero)
+        print numero,
+        p += 1
+
+print "\n\nForam encontrados %d números primos." %p
+print "Foram necessárias %d comparações." %c
+}}}
+
+-- PedroDeMedeiros.''

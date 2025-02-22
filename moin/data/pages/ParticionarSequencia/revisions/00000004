@@ -1,0 +1,69 @@
+## page was renamed from ParticionarSeqüência
+#pragma section-numbers off
+= Receita: Particionar uma Seqüência =
+
+Apresento nesta receita duas formas diferentes, em Python, de particionar uma seqüência (lista, tupla, string) em uma lista, os elementos dessa lista são os valores originais da seqüência divididos em um tamanho máximo dado. Por exemplo, {{{'abcdefg'}}} retornaria {{{['abc', 'def', 'g']}}} para o tamanho máximo 3.
+
+Esta receita teve uma motivação simples: um usuário do #python-br (irc.freenode.net) desejava imprimir em uma impressora fiscal, cujo o tamanho máximo de impressão é de, digamos, 30 caracteres. Então, para uma string de tamanho arbitrário, deve-se quebrar a string em pedaços com no máximo 30 caracteres para sair corretamente na impressora fiscal. O resultado está em parte aqui, pois deseja-se no final uma única string com quebra de linhas entre elas.
+
+== Código ==
+
+{{{
+#!python
+# part.py
+def part(seq, max):
+    """Particiona uma sequencia 'seq' em uma lista de 'max' elementos de seq.
+        
+    Exemplo:   
+    >>> print part.part('abcdefgh', 3)
+    ['abc', 'def', 'gh']
+    """
+    i, l = 0, []
+    while seq[i:i+max]:
+        l.append(seq[i:i+max])
+        i += max
+    return l
+
+# Versao mais rapida
+def part2(seq, max):
+    return [seq[x:x+max] for x in range(0, len(seq), max)]
+
+def test():
+    assert part('abcdefgh', 3) == ['abc', 'def', 'gh']
+    assert part2('abcdefgh', 3) == ['abc', 'def', 'gh']
+
+def benchmark():
+    import time
+    s = 'abcdefgh' * 500000
+    x = time.time()
+    part(s, 5)
+    print time.time() - x
+    x = time.time()
+    part2(s, 5)
+    print time.time() - x
+
+if __name__ == '__main__':
+    test()
+    benchmark()
+}}}
+
+== Exemplo de uso ==
+
+Este exemplo, além de mostrar como usar a função {{{part()}}}, também exibe como inserir as quebras de linhas necessárias para a impressão em papel.
+
+{{{
+#!python
+import part
+s = 'python eh legal' * 100  # repete 100x a mesma mensagem
+l = part.part2(s, 30) # quebra em 30
+l2 = [x+'\n' for x in l] # insere quebra de linha
+print ''.join(l2) # transforma em uma única string, com quebra de linhas
+}}}
+
+Em meus testes, a versão {{{part2()}}} chega a ser duas vezes mais rápida que a {{{part()}}}.
+
+Volta para CookBook.
+
+----
+
+RudaMoura

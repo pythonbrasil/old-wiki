@@ -1,0 +1,5 @@
+#acl ProfessoresPythonGroup:read,write,revert,admin,delete -All:read,write
+#pragma section-numbers off
+= Respostas da Lista De Exercícios =
+
+Nesta página estarão todas as respostas dos exercícios propostos na página ListaDeExercícios. Apenas os membros do ProfessoresPythonGroup é que possuem acesso à esta página.

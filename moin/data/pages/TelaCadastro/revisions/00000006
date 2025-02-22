@@ -1,0 +1,8 @@
+Tela de cadastro de clientes e produtos feita com o Glade e executada com o PyGtk.
+
+{{attachment:frm_cliente.png}}
+{{attachment:frm_produto.png}}
+
+O programa em Python somente executa a exibição das telas.
+
+[[attachment:fonte.zip]]

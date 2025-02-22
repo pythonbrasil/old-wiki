@@ -1,0 +1,335 @@
+   * [http://sf.net/projects/py2blog] - py2blog takes stories from any configured source and renders them according to configured templates to any configured publish engine. The main goal is to facilitate blogging by giving people an easy way to create stories in their favorite environment
+   * [http://sf.net/projects/py2caml] - Objective caml to Python binding
+   * [http://sf.net/projects/py2cmod] - Designed to aid in the conversion of Python modules to C extension modules while keeping the same interface into the module.  This will make it easier to convert existing Python code into C code to give it a speed boost without changing to existing code
+   * [http://sf.net/projects/py2cpp] - py2cpp, a Python to C++ converter. This is a tool to generate C++ source code from Python scripts and build a standalone executable program.
+   * [http://sf.net/projects/py2drpg] - A Common Framework in Python for Win32 and Linux Users to create 2D Role Playing Games which will support Network and MUD properties and many more!
+   * [http://sf.net/projects/py2exe] - A distutils extension to create standalone windows programs from python scripts.
+   * [http://sf.net/projects/py2java] - Py2Java provides practical--not perfect--source code translation from Python to Java, allowing developers to work out their ideas in Python then convert their Python source to Java source with minimal effort.
+   * [http://sf.net/projects/py44] - The project '1944' is a turn based, World War II strategy game written entirely in python. Requires pygame, and SDL.
+   * [http://sf.net/projects/pyaccessdbi] - AccessDBI aims to be an implemention of the DBI2 interface for Microsoft Access databases. Using ADO as access method it will hopefully be faster than access via ODBC.
+   * [http://sf.net/projects/pyactuarial] - pyactuarial is a library for actuarial calculations written in Python.
+   * [http://sf.net/projects/pyad] - Extensible Python framework for implementation of Automatic/Algorithmic Differentiation.
+   * [http://sf.net/projects/pyada] - Provides a Python interpreter binding for Ada 95 programs.
+   * [http://sf.net/projects/pyaddy] - PyAddy is a powerful and flexible address book and contact manager. Being far more useful than your typical address book, it utilizes a client/server architecture to make remote management easy.  It is developed in Python and will have clients available f
+   * [http://sf.net/projects/pyado] - PyADO is a Python DB-API 2.0 compliant interface to Microsoft's ADO (ActiveX Data Objects). This allows a connection to any OLE DB driver/database using standard DB-API code. Written in Python
+   * [http://sf.net/projects/pyaes] - A tight python crypto module implementing only the latest and greatest: Rijndael (AES) symmetric cipher in 128, 192 and 256 bits supporting password encryption, SHA 256 and several CSPRNG schemes in pure python.
+   * [http://sf.net/projects/pyagent] - Infrastructure for autonomous agents, written in Python.
+   * [http://sf.net/projects/pyai] - Python Module for Artificial Intelligence
+   * [http://sf.net/projects/pyalbum] - PyAlbum is a program that generates static files (HTML pages, text, XML) based on templates from digital camera images or other pictures. Written in Python. Runs at least on Windows/32, Linux, Unix, Mac OS. Uses PIL and the EmPy templating system.
+   * [http://sf.net/projects/pyallegro] - Python-bindings to Allegro Game Programming Library
+   * [http://sf.net/projects/pyalog] - Pyalog aims to be a complete object-oriented implementation of dialog and provide enhanced functionality for rapidly creating command-line applications.
+   * [http://sf.net/projects/pyalsaseq] - Simple Python interface to ALSA Sequencer API
+   * [http://sf.net/projects/pyana] - Pyana is a extension module that allows Python programs to interface with the Apache Software Foundation's Xalan XSLT transformation engine.
+   * [http://sf.net/projects/pyandy] - PyAndy is a language for easily doing parallel computation using the Python programming language.
+   * [http://sf.net/projects/pyapache] - This module embeds the Python interpreter directly in the Apache server.
+   * [http://sf.net/projects/pyappbar] - This project aims to create Application Toolbars (a class of dockable window under Win32) in Python.  Examples of AppBars include the Win32 taskbar, Norton System Doctor's docking window, and Mirabilis's ICQ client.  An proof-of-concept has been created.
+   * [http://sf.net/projects/pyaros] - PyAROS is a port of Python to the Amiga® Research Operating System.
+   * [http://sf.net/projects/pyasn1] - An ASN.1 (X.208) language processing framework written in Python programming language. Its primary goal is to generate Python classes from an ASN.1 specification.
+   * [http://sf.net/projects/pyastra] - PYthon to ASsembler TRAnslator. At this moment supports Microchip PIC16 instruction set only. Its main goals are: to support a wide range of microcontrollers and processors, to generate compact and effective code.
+   * [http://sf.net/projects/pyawk] - A pure Python module for Awk style processing.
+   * [http://sf.net/projects/pyaxcess] - pyAxcess is a compiler, written in Python, for the AMX Corp. AXCESS control system language.
+   * [http://sf.net/projects/pyaxis] - PyAxis is a Python program for creating and deploying web services written in Python to Apache Axis, the Java SOAP server.
+   * [http://sf.net/projects/pybackend] - An RDBMS backed object development framework in Python.
+   * [http://sf.net/projects/pybackup] - pybackup is a menu driven interface to the console tools 'tar' and 'ssh'. It backs up user selected files and folders to another machine via ssh.
+   * [http://sf.net/projects/pybag] - This project aims to offer an environment developpement for GUI business application. 
+   * [http://sf.net/projects/pyballot] - pyBallot is a web based voting tool.  It's first intended use is in a high school to permit students to vote for the &quot;student of the week&quot;.  pyBallot is written in Python.
+   * [http://sf.net/projects/pybam] - A Python-based GUI and management interface to blog-based APIs.
+   * [http://sf.net/projects/pybase] - Web based knowledge base system written in python with a MySQL backend. Allows search/edit/delete/update of articles,plus a directory and faq style layout of articles.
+   * [http://sf.net/projects/pybaseball] - PyBaseball is a simulation of baseball written in Python.  It uses the latest season-to-date statistics from the USAToday baseball site and, using random numbers, simulates a game batter-by-batter. 
+   * [http://sf.net/projects/pybay] - Python Implementation of Bidwatcher. Auction tracking and bidding tool for eBay users.
+   * [http://sf.net/projects/pybaytools] - Ebay pyton utilities : set of modules/classes for sellers to retrieve information from Ebay.
+   * [http://sf.net/projects/pybb] - An easy to use but customisable and powerful forum system for use on internet and intranet sites built in Python.
+   * [http://sf.net/projects/pybber] - Small Jabber (see http://jabber.org) client written in Python, PyGnome and friends.
+   * [http://sf.net/projects/pyac] - PyAC -- Python Album Creator -- is is an extremely easy-to-use, command-line based, template driven, lightweight Python script to create an image album.
+   * [http://sf.net/projects/pyacad] - PyAcad makes Python available as a scripting language to AutoCAD/IntelliCAD.
+
+A builtin module &quot;ads&quot; allows to access and control most aspects of AutoCAD/IntelliCAD from Python programs.
+   * [http://sf.net/projects/pyace] - A multi-player card game which is a lot of fun when played among a group of people. The objective of a player is to get rid of all the cards they are dealt with ...
+   * [http://sf.net/projects/pyaiml] - PyAIML is a Python package which implements an interpreter for AIML, the Artificial Intelligence Markup Language.
+   * [http://sf.net/projects/pyalarm] - pyAlarm is a wxPython-based alarm clock for those of us with insomnia problems.  It supports multiple alarms, snooze, mp3 playback, and so forth.  Logs when you go to bed and when you wake up, operates through plugins, and runs on Windows and Linux both.
+   * [http://sf.net/projects/pyalsaaudio] - ALSA wrapper for Python. The goal is to provide a functionality complete Python wrapper for ALSA. 
+Currently PCM playback and capture, as well as the Mixer API is supported.
+
+   * [http://sf.net/projects/pyamazon4] - Python wrapper for the Amazon Web Services 4.0 API. 
+Developed with easy of use in mind. It suports all the countries and almost all AWS 4.0 API functions. All responses are represented as Python Objects.
+   * [http://sf.net/projects/pyamp] - Pyamp: yet another music player (Pyamp) is a music player for KDE, currently supports mp3, ogg, and wav playback.
+It integrates with Konqueror, and have a very nice system tray and a playlist.
+   * [http://sf.net/projects/pyant] - This project intended to help people that likes Jakarta's ANT and dotNET NAnt. 
+PyANT helps to implement project building using tasks defined in python scripts. The far goal is implementing all ANT tasks in Python
+   * [http://sf.net/projects/pyarie] - A collection of modules and enduser tools designed to help design, test and use system models. While my research (hence, the examples) is focused on hydro-ecological systems, the program can be used on any system characterized by ODEs (and soon PDEs?)
+   * [http://sf.net/projects/pyavl] - This small C package is made of an independent AVL tree library, and of an
+extension module for Python that builds upon it to provide objects of type 'avl_tree' in Python, which can behave as sorted containers or sequential lists.
+   * [http://sf.net/projects/pyb] - Ant-like build tool written in Python.  Uses Python for build scripts, not XML.  Includes common core tasks as well as Java and Python specific tasks.
+   * [http://sf.net/projects/pybeep] - An implementation of the BEEP spec in Python. Initially this will be a porting effort from the Java-beepcore (from Invisible Worlds) library. Eventually, we will refactor and make it more pythonic. 
+   * [http://sf.net/projects/pybem] - PyBEM is a simple project: Python. Play by Email. That's it :)
+We're providing tools to help people create and run their own turn-based strategy games via email, in a language that's simple to learn, and using a system that's easy to modify.
+   * [http://sf.net/projects/pybio] - This application counts... biorythms (hard to guess, isn't it? :) and possibly other bio-related stuff if you teach me how to count it ;)
+   * [http://sf.net/projects/pybiomail] - pybiomail is a web-based application for medical researchers 
+and biologists.
+
+This project is attempt to rewrite original BioMail (http://www.biomail.org) perl project in python from scratch.
+   * [http://sf.net/projects/pybliographer] - A tool for managing bibliographic databases (BibTeX, Refer,...)
+   * [http://sf.net/projects/pyblish] - Pyblish is a web server and application framework written in Python.  The main goal for Pyblish is power through simplicity, clear separation of developer roles and easy extensibility.
+   * [http://sf.net/projects/pyblog] - pyBlog is yet another blogging software written in python for creating custom blogs. It works in offline mode containing an ftp client for up- and downloading files to any web server. It supports multiple users (bloggers) and blogging via mail (optional)
+   * [http://sf.net/projects/pyblogger] - Python wrapper for Blogger XML-RPC API
+   * [http://sf.net/projects/pybloom] - A Bloom Filter implementation in pure python, using only the standard library.
+   * [http://sf.net/projects/pyblosxom] - Pyblosxom is a weblog engine that uses standard text files located on  your filesystem as a database of weblog entries. The concept is simple, managing content is as easy as editing a text file with your favourite text editor.
+   * [http://sf.net/projects/pybnc] - It is a IRC bouncer and bot together with many functions...
+   * [http://sf.net/projects/pyboids] - pyBoids is a free/open-source project that  implements (in Python/TKinter) Craig Reynold's famous boids   algorithm. This algorithm intelligently simulates flocking, herding, swarming, and schooling behavior as found in nature.
+   * [http://sf.net/projects/pybookorganise] - Its a simple python script by which you can organise your home libary. It sorts the books by Authors, Titles and Groups(sci-fi, technology, etc.) This Project is in very early stages.(Yet)
+   * [http://sf.net/projects/pybookreader] - PyBookReader: Book Reader for Linux/FreeBSD/other operation systems
+   * [http://sf.net/projects/pyborg] - Pyborg is yet another wiki.  The primary goal is simplicity, content is stored in plain flat files.  All formatting and markup will be extensible this will include even the most basic markup functionality (bold, h1, h2, etc...).
+   * [http://sf.net/projects/pyboss] - Job submission system for large scale computing
+   * [http://sf.net/projects/pybot] - Pybot is a full featured IRC bot written in Python. It was originally
+developed to integrate many sources of information into IRC channels,
+and has since then evolved into a full featured bot.
+
+   * [http://sf.net/projects/pybrian] - Brian is an unfinished jump-and-run platform game written with Python and
+Pygame. Please download through CVS, visit the homepage, subscribe to all mailing lists and notify me if you're interested. Please note that Brian is NOT FINISHED!
+
+   * [http://sf.net/projects/pybridge] - Online bridge made easy.
+
+PyBridge is a suite of programs that allow you to play contract bridge, with other human players or artificial computer players (&quot;bots&quot;), over a local network or the Internet.
+   * [http://sf.net/projects/pybsddb] - PyBSDDB is an extension module for Python that wraps the BerkeleyDB from Sleepycat Software.  This project will be used to help unify the various implementations and to continue enhancing the module as new features are released from Sleepycat.
+   * [http://sf.net/projects/pybubble] - pyBubble is a SOAP-based Grid Middleware.
+   * [http://sf.net/projects/pybuild] - A fast, flexible, correct build system.
+Meant to address deficiencies in the 'make' tool.
+
+   * [http://sf.net/projects/pybuilder] - A python version of Powerbuilder. Run in Linux/Windows platform.
+   * [http://sf.net/projects/pybuzz] - PyBuzz is a machine plugin for the Buzz Modular Tracker that acts as a host for python scripts using the python interpreter engine developed by http://www.python.org. 
+   * [http://sf.net/projects/pybzedit] - pyBzEdit is a wxPython program designed to edit the world files used by the bzflag game.  You will need Python, wxPython, pyOpenGL and Numeric to run it.
+   * [http://sf.net/projects/pyc4] - Py Connect Four is the Connect Four game you've always wanted!   (some exceptions apply :-p).  This is the classic 2 player game, where each player puts his/her piece in, and the first to get four in a row wins the round.  This game keeps track of the s
+   * [http://sf.net/projects/pycal] - A python module to parse and emit data in the iCalendar (RFC 2445) format.  This is the standard calendaring format used by programs like Apple's iCal, IBM's Notes/Domino, etc.
+   * [http://sf.net/projects/pycalendar] - A set of Python modules and classes with calendar-functions, mostly notable handling of holidays. This is not another date/time-manipulation module but uses mxDateTime.
+   * [http://sf.net/projects/pycalendargen] - PyCalendarGen generates customizable calendar pages in PDF format for use in, for example, photo calendars etc. Supports custom holidays, birthdays and other special days, with decent internationalization. PyCalendarGen uses ReportLab and mxDateTime.
+   * [http://sf.net/projects/pycaml] - A library which provides the same functionality as the Python/C API detailed at python.org, thus allowing objective caml programmers to provide python modules as native ocaml code, as well as allowing ocaml code to use python extensions.
+   * [http://sf.net/projects/pycap] - Pycap provides the ability to capture packets from, and inject packets onto, network interfaces.  It dissects commonly found structures in network packets such as Ethernet, IP, ARP, TCP, UDP, and ICMP headers.
+
+   * [http://sf.net/projects/pycaptcha] - A Python package for writing CAPTCHAs, automated tests that humans should pass but most computer programs fail. This includes visual word recognition tests similar to those used by Yahoo, eBay, and Paypal.
+   * [http://sf.net/projects/pycarge] - PyCarge is a cross-platform opensource console style RPG engine written in Python. It has a built-in character and map editor. RPGMaker-like macros ~and~ full scripting cabilities are included. Allows custom character and tileset sizes.
+   * [http://sf.net/projects/pycasso] - XML-driven GUI-Framework written in Python/wxPython. Data-aware widgets communicate with a database/application-server via XMLRPC.
+   * [http://sf.net/projects/pycast] - Pycast is a streaming backend application developed in Python.
+   * [http://sf.net/projects/pycatalog] - pyCatalog is a Python, MySQL, wxPython, Reportlab application specifically usable in library and information centers. It simply produces book catalog and card catalog in pdf format rendered using reportlab. The program takes MARC file as its source data.
+   * [http://sf.net/projects/pyccmath] - pyccmath provides python bindings for the ccmath library.
+   * [http://sf.net/projects/pycdac] - PyCDAC is a program to help users organize CDs. Users can add and remove media, search for files in its database, and back up the database.
+   * [http://sf.net/projects/pycddb] - Python-CDDB (PyCDDB) is a module written in Python to access a CDDB-server and get information about discs like: artist, disc-title, track titles and more.
+   * [http://sf.net/projects/pycdk] - pyCDK - A python wrapper around the Curses Development Kit. The CDK provides a set of high level widgets for curses applications.
+   * [http://sf.net/projects/pycfl] - pyCFL is a fork of the Compressed File Library project that adds python bindings and LZMA compression.
+   * [http://sf.net/projects/pycg] - A fully-featured program written completely in Python which allows the play of card games over the internet.
+   * [http://sf.net/projects/pycgx] - A collection of Python modules and applications for computer graphics related tasks.
+   * [http://sf.net/projects/pychains] - A Python module providing chained dictionaries and objects.
+   * [http://sf.net/projects/pychangelog] - This project aims to be a complete ChangeLog solution. The ChangeLog file style can be manipulated by a macro-type languange and it has full integration with SCM tools, such as CVS. Log deployment is made easy and fast.
+   * [http://sf.net/projects/pychat] - A rewrite of the popular xchat IRC client in python.  Written as a base framework and allowing almost all aspects of the client to be changed on-the-fly through plugins.
+   * [http://sf.net/projects/pycheckbook] - The Python Checkbook Manager (aka PyCheckbook) is a personal finance manager that focuses on simplicity and portability. It will run on any platform that can run Python and Tkinter. It handles very simple checkbook register features.
+   * [http://sf.net/projects/pychecker] - PyChecker is a static analysis tool for finding bugs in Python source code.  It finds problems that are typically caught by a compiler for less dynamic languages, like C and C++.  It is similar to lint.
+
+   * [http://sf.net/projects/pychelsea] - pyChelsea is a python based, personal, visited, web page indexer, seach engine and interface for the browser/platform of your choice.  If you remember a page based on a phrase, pyChelsea is for you.
+   * [http://sf.net/projects/pyching] - pyChing is a program that allows you to 'consult' the I Ching, an ancient Chinese book of wisdom, using the coin oracle, and then to look up a brief interpretation. pyChing is written in the Python programming language, using the Tk GUI toolkit.
+   * [http://sf.net/projects/pyciv] - PyCiv is a tool for geotechincal engineers.The current version contains a on-screen geometry-editor and calculates settlement and stability problems.
+   * [http://sf.net/projects/pyck] - Pyck is a simple packaging tool for creating binary distributions of Python programs. Numerous Python source files can be compiled and assembled into one self-contained binary program file.
+   * [http://sf.net/projects/pyckett] - This is a slide rule emulator based on the classic Pickett slide rule design.  It is written in Python, so the name &quot;pyckett&quot; is appropriate.  It is suitable as an example of object-oriented Python software construction, including multiple inheritance.
+   * [http://sf.net/projects/pycki] - Pycki - a set of tools in python oriented toward game programming
+   * [http://sf.net/projects/pyclashie] - pyclashie is a software developed in python to show graphic view of code dependencies in, virtually, any programming language. The idea is to analize directories of source code, and search for class hierarchy and dependencies, writing them to .dot files.
+   * [http://sf.net/projects/pyclips] - Python module to interface the CLIPS expert system shell library.
+   * [http://sf.net/projects/pycms] - Content mangement system written purely in Python. An unusual attribute of this project is its implementation of the Template Attribute Language used in Zope. This seperation of presentation from logic should make it more adaptable than many other CMS.
+   * [http://sf.net/projects/pycomm] - A file manager written in Python/pygtk. Ease to expand by plugis and configure.
+   * [http://sf.net/projects/pycommander] - pyCommander is a nifty customizable commandline server written in Python, for Python developers. Create your own commands by sub-classing and customizing a Python class tamplate.
+   * [http://sf.net/projects/pyconcepts] - Package to make Generic Programming concepts available to Python programmers
+   * [http://sf.net/projects/pyconquest] - A network enabled game which follows all the Risk(tm) board game rules. Two maps are included, original Risk(tm) map and 'middle earth', with the possibility of users to develop their own maps. pyConQuest comes with support of 2 to 6 players. 
+   * [http://sf.net/projects/pycontainer] - Inversion of Control container for Python. Application framework that helps building highly modular, component based applications in Python, using Dependency Injection design pattern.
+   * [http://sf.net/projects/pycontrol] - Control Engineering software. A modular system that allows control of
+different modules using linear or non-linear methods (user can define method).
+Currently uses fuzzy zogic to control an inverted pendulum. GUI displays
+settings and results
+   * [http://sf.net/projects/pyconv] - PyConvert converts between a lot of Standard and Mectric formats. It will convert between 47 differnt units and back.
+   * [http://sf.net/projects/pycorpus] - PyCorpus is a Python program that manages the preprocessing of text corpora, which play a central role in many &quot;natural language understanding&quot; researchs and applications. It unifies many common tools (such as RE filters) in a graphical and simple way.
+   * [http://sf.net/projects/pycq] - Pycq is a 100% Python module implementing the client side of the Mirabilis ICQ protocol v5. Stable and platform-independent, it allows you to write ICQ clients or bots in a few lines of code.
+   * [http://sf.net/projects/pycraft] - PyCraft is a space-impact (starwars) kind of arcade game in Python and Pygame using SDL, it features rich multimedia content and networking capabilities
+   * [http://sf.net/projects/pycrash] - PyCrash is a Run-Time Exception Dumper that handles uncaught exceptions during program execution and collects information about the program context of Python written applications.
+   * [http://sf.net/projects/pycrawl] - PyCrawl - the little crawler that could
+   * [http://sf.net/projects/pycron] - This is a clone of the well-known cron job scheduler for the unix flavored operating systems. The implementation is platform-independant, robust and simple. It includes a stand alone package for Windows that doesn't require Python.
+   * [http://sf.net/projects/pycron32] - Python Cron for Windows/NT is a NT service written in Python that clones the well-known UNIX cron demon, and is based on the Python &quot;win32all&quot; extension.
+   * [http://sf.net/projects/pycrossdb] - PyCrossDB is a python module that facilitates cross database system queries with a DB-API V2 interface.
+   * [http://sf.net/projects/pycrust] - PyCrust is an interactive Python shell written in Python using wxPython. PyCrust is now part of wxPython (www.wxpython.org), so packaged files are no longer available here, and the latest development version has moved to the wxWindows CVS repository.
+   * [http://sf.net/projects/pycrypto] - We're working on developing a standard encryption API for the Python language,
+and building a set of standard cryptography modules.  The CVS tree is open 
+to anyone who needs it for a Python/crypto related package.
+
+   * [http://sf.net/projects/pycs] - A free replacement (in Python) for Radio Community Server and a miniature application server, with an embedded almost-OO database and a very quick script handler.
+   * [http://sf.net/projects/pycsb] - Programas para generar ficheros en el formato del Consejo Superior Bancario del tipo CSB19 (recibos a la vista y devoluciones), CSB34 (nominas y transferencias) y CSB58 (anticipos de credito). Está desarrollado en Python, pyGTK2, libglade y pysqlite.
+   * [http://sf.net/projects/pycurl] - Python module interface to the cURL library (cURL is available at http://curl.haxx.se/).
+   * [http://sf.net/projects/pycuserver] - An HTTP Server written in Python.
+   * [http://sf.net/projects/pycvs] - An A/Synchronous python library for the CVS (Concurrent Versions System) protocol.
+   * [http://sf.net/projects/pyd20mapper] - A D20 compatible Interactive Dungeon Mapper for Dungeon Masters written in Python
+   * [http://sf.net/projects/pydadl] - Python Distributed Applications Developement Library :  A framework for developping distributed applications using Python and QT Toolkit.
+   * [http://sf.net/projects/pydal] - PyDal is a pure Python database abstraction layer.  It provides a DBAPI 2.0 wrapper for DBAPI 2.0 drivers.  Sounds strange, but even drivers that fully conform to the API can differ enough to make building database independent applications difficult.
+   * [http://sf.net/projects/pydam] - This project will create python plugins for the common corporate directory services, NDS, ActiveDirectory and LDAP.  These modules are targeted at system administration staff and python developers.
+   * [http://sf.net/projects/pydao] - The JDO/J2EE pattern implementation in J/Python. It would make the database connectivity very easy and clean. This implementation would be available for all the databases that have a python driver.
+   * [http://sf.net/projects/pydatamig] - Fully featured data migration tool/framework written in Python - supports table-to-table  migration, batch jobs, initial loads, extensive logging, various sources (databases with DB API 2.0, XML, CSV) and targets (like sources) etc.
+   * [http://sf.net/projects/pydaylight] - PyDaylight turns the Daylight toolkit into a rapid application development
+system for chemical information by providing a full Python interface,
+including a true object layer, iterators, exceptions and useful libraries.
+   * [http://sf.net/projects/pydb2] - The PyDB2 package provides a Python DB API 2.0 interface to IBM's DB2 database management system. The package also includes various tools for working with DB2.
+   * [http://sf.net/projects/pydball] - The pydball (dball) module wraps DB-API V2 modules and adds functionality to them. The new functionality includes Kevin Jacob's db_row module giving a developer access to fields by name or index.
+   * [http://sf.net/projects/py-dbase] - Python source modules for accessing dBASE/xBase (&amp;quot;DBF&amp;quot;) files.
+   * [http://sf.net/projects/pydbc] - We wanted Design By Contract for Python. We couldn't find it,
+so we built it. Hope someone else uses it.
+   * [http://sf.net/projects/pydbcase] - A front-end tool aimed to desing, administration and consult 
+databases from populars DBMS: PostgreSQL, MySQL, DB2, Oracle,
+Informix, Interbase, ...
+   * [http://sf.net/projects/pydbdesigner] - Entity-relation (ERW) database modeling tool for both windows and *nix/*nux. PyDBDesigner intends to be similar to Power Designer or Erwin. Both physical and logical models are supported. Main features are database modeling, SQL generation, documentation
+   * [http://sf.net/projects/pydbf] - Python classes for using DBF files
+   * [http://sf.net/projects/pydbmanager] - A tool for executing SQL statemtents with  a history function. (Tkinter and Python)
+   * [http://sf.net/projects/pydbmgr] - A database library to get/store objects to/from the database. The idea behind this tool was to be able to start directly from the UML model of the various objects that would be stored by a database application and be able to
+   * [http://sf.net/projects/pydboxml] - A Python library to access Postgresql and others relational databases via simple objects generated from a xml description
+   * [http://sf.net/projects/pydbs] - pydbs
+
+python relational database system with sql2 and dbapi2 conformance
+   * [http://sf.net/projects/pydbserver] - PyDBServer is a multi server (XML-RPC, SOAP, WEB and more) built with Python and TwistedMatrix (http://www.twistedmatrix.com) that supports quite every database on the planet. It allows the clients to send queries and it dispatches them to the chosen DBMS
+   * [http://sf.net/projects/pydc] - This project aims at producing a Python version of Neo-Modus Direct Connect client, fully cross-platform and easily extendable by users.
+   * [http://sf.net/projects/py-dchub] - Easily extensible, cross-platform Direct Connect hub, written in Python
+   * [http://sf.net/projects/pydcn] - pyDCN - The python distributed chat network!
+
+pyDCN is a secure chatting experience for those whom are used to 'Virtual Places' and 'Hal-soft Chat'. 
+
+You are represented by your own unique username and a graphical avatar of your own choice. 
+
+I
+   * [http://sf.net/projects/pyde] - A PyGTK/GNOME based Python Development Environment
+   * [http://sf.net/projects/pydemeter] - PyDemeter is a Python wrapper for the Demeter terrain engine, a cross-platform terrain rendering engine that uses advanced techniques such as dynamic tessellation to render complex landscapes at high frame rates. It can be used in conjunction with PyOSG, 
+   * [http://sf.net/projects/pydes] - A pure python module which implements the DES and Triple-DES encryption algorithms. Triple DES is either DES-EDE3 with a 24 byte key, or DES-EDE2 with a 16 byte key.
+   * [http://sf.net/projects/pydev] - Complete Python development environment for Eclipse (editor, code completion, refactoring, outline view, debugger, and other goodies - check our home page!!)
+   * [http://sf.net/projects/pydf] - Fully OO python PDF generation library.
+   * [http://sf.net/projects/pydhcpd] - Pure Python DHCP Server
+   * [http://sf.net/projects/pydict] -  This is an English/Chinese Dictionary written by Daniel Gau with python/gtk.
+ The word base was originally from xdict, and was converted and modified by
+ Daniel Gau and bv1al.  This program can be run in both console mode and
+ X Window GUI mode.
+   * [http://sf.net/projects/py-dict-client] - Python module for accessing RFC 2229 compliant dictionary servers. Includes classes and runs as a standalone client (a la dict) as well as a CGI script.
+   * [http://sf.net/projects/pydiffutil] - Using python 's diffutils , this projects creates unix diff / patch compatible output.
+   * [http://sf.net/projects/pydirectfb] - PyDirectFB is an interface to directfb for the Python programming language
+   * [http://sf.net/projects/pydirectory] - PyDirectory is a simple web-framework to build directories as http://www.fossdirectory.ch
+   * [http://sf.net/projects/pydirectsound] - A Python interface to Microsoft's DirectSound8 SDK
+   * [http://sf.net/projects/pydispatcher] - The dispatcher provides loosely-coupled message passing between Python objects (signal senders and receivers).  It began as one of the highest-rated recipes on the Python Cookbook website
+   * [http://sf.net/projects/pydistlib] - Welcome to python distributed computing library. This module is written completly in C and supports unix/linux and windows platforms.
+   * [http://sf.net/projects/pydm] - Pyd20 is an engine written in python to handle the d20 rpg system.
+   * [http://sf.net/projects/pydnd3e] - Python Based D20 combat assistant.
+   * [http://sf.net/projects/pydns] - This project is to enhance the python DNS library 
+initially written by Guido van Rossum, then extended by Anthony Baxter, Michael Ströder and others.
+   * [http://sf.net/projects/pydnslib] - Python Dynamic DNS Module.
+   * [http://sf.net/projects/pydo] - PyDO is a python library that provide an higher-level access to databases than DB-API and a set a data-aware controls to easly build GUI front-end to databases.
+   * [http://sf.net/projects/pydocrawl] - pydocrawl automatically downloads pdf-, ps- and doc- files from web sites. An initial URL and a wordlist must be given. Multithreaded information mining (harvesting) tool written entirely  in Python. Version 0.1 successfully runs on Linux and Cygwin.
+   * [http://sf.net/projects/pydomoalert] - pyDomoAlert is a GTK aplication, made in phyton, that alerts you when your washing machine or dryer finish. It plays an audio file alarm. You need python, pyGTK, libglade and mpg321 to run the program correctly.
+   * [http://sf.net/projects/pydp500] - PyDP500, open source server program for the Kiss DP500 media player, written in Python. Should run on *any* platform supporting Python.
+   * [http://sf.net/projects/pydswininstall] - Windows Installer for Python Desktop Server and User Guide
+   * [http://sf.net/projects/pydtddoc] - dtddoc is a DTD documentation generator which can read a DTD and associated documentation written in XML and generate nicely formatted HTML documentation or, experimentally, DocBook RefEntry documentation.
+   * [http://sf.net/projects/pydune] - A clone of the real time stratergy game Dune 2.
+   * [http://sf.net/projects/pydvt] - PyDVT is a Python toolkit for data displaying developed at the ESRF by Alexandre Gobbo. PyDVT is multi-platform (Windows, Solaris, Linux and Hp) and GUI toolkit independent (is has already
+bindings to PyQt and Tkinter). It defines a framework for interco
+   * [http://sf.net/projects/pyeagle] - Python classes to communicate with Eagle/Lowrance GPS units.  Works on Linux and Windows 95/98/2000
+   * [http://sf.net/projects/pyeasycms] - The Python Easy Content Management System, or pyEasyCMS, is an extremely simple CMS. It does not require a database, and can be set up very quickly.
+   * [http://sf.net/projects/pyec] - Email collector written in python for serveral POP3 accounts to a single Mailbox. Integrated POP3. Multi-user-able.
+   * [http://sf.net/projects/pyeclipse] - PyEclipse is a Python plugin for the Eclipse platform.
+   * [http://sf.net/projects/pyecole] - PyÉcole est un logiciel destiné a remplacer GEP sur les écoles françaises en déhors du territoire Français. Une de ses qualitées est sourtout qu'il ne faut pas retaper les élèves a chaque changement d'année scolaire.
+   * [http://sf.net/projects/pyed] - The first Python Text Editor for mobile phone Symbian Nokia series 60(6610, 7610 etc. ) Now you can easy and directly edit your python file on your phone !
+   * [http://sf.net/projects/pyedlin] - A Python implementation of the 'edlin' line editor, primarily intended to be used within an interactive console.
+
+The 0.1 release core code is at a pretty good working stage, so feel free to try it out.
+   * [http://sf.net/projects/pyegs] - PyEgs is an easy-to-use interface to the EGSnrc radiation transport simulation package. It simplifies the creation of custom Monte Carlo simulations for medical physics or high-energy physics research.
+   * [http://sf.net/projects/pyemur] - Pyemur is a pseudo-POP3 server between you and your favorite MU*'s @mailbox/+maibox allowing you to check your @mails/+mails from your favorite mail client without the need to log in personally.
+   * [http://sf.net/projects/pyenchant] - PyEnchant provides language bindings and wrapper classes to make the excellent Enchant spellchecker available as a Python module. It includes all the functionality of Enchant with the flexibility of Python and a nice 'Pythonic' object-oriented interface.
+   * [http://sf.net/projects/pyengine] - A 3D engine written in python/pyrex/c and opengl:
+It is a just for fun project, to learn how make good
+3D graphics in Python while keeping the performance up.
+It currently loads Quake3's MD3 Models, and soon BSP maps.
+It includes a ingame console.
+   * [http://sf.net/projects/pyenterprise] - Python-based toolkit for building rich-client business applications 
+with a 3-tier architecture suitable for deployment on WANs..
+   * [http://sf.net/projects/pyerb] - ERP system with POS frontend. 
+Python with wxwindows is used.
+Database api to use every database you want
+   * [http://sf.net/projects/pyerlbridge] - pyBridge provides a runtime bridge from Erlang to Python. It allows the Erlang world to tranfer and execute python source code to a python process.
+
+Why? Initially, to enable usage of wxPython as a GUI for Erlang built systems. 
+
+Later - who knows?
+   * [http://sf.net/projects/pyerp] - pyERP is an ERP (Enterprise Resource Planning) tool written in Python intended to handle the administration of Small/Medium and Large Companies using web standards. This product runs on Zope (App Server/CMS), uses MySQL (RDBMS) and also ZODB (Object DB).
+   * [http://sf.net/projects/pyexcel] - pyExcel is written in Python to write a binary file in BIFF-Format to work with MS Excel.
+   * [http://sf.net/projects/pyexif] - A lib of Python scripts to extract exif info from digital camera-generated jpegs and provide them in a human-readable format suitable for use in some kind of html photo album generator, or somesuch.
+   * [http://sf.net/projects/pyeximon] - PyEximon is a GNOME monitor/manager for the popular MTA, Exim.  It includes real-time status graphs and log updates, colored log browsing, hierarchial message lists, as well as a graphical interface to common message functions.
+   * [http://sf.net/projects/pyexp] - PyExp is a Python framework to develop programs driving physical experiments, dealing with Physical Elements in the high layer and translating this into actions on devices or groups of devices on the low layer.
+   * [http://sf.net/projects/pyextractor] - pyExtract is a keyword extractor for webpages to be used while search engine optimizing a webpage.
+   * [http://sf.net/projects/pyfabulator] - Python Desktop Widgets
+   * [http://sf.net/projects/pyfai] - pyFAI is an installation tool for Linux systems based on the concepts of &lt;a href=&quot;http://www.informatik.uni-koeln.de/fai&quot;&gt;FAI&lt;/a&gt;. It provides disk/floppy/cdrom/network installation with a GUI or without (fully automatic). It is distri independent
+   * [http://sf.net/projects/pyfavconv] - A small script to convert favorites from Internet Explorer 5.x and 6.x into a Konqueror compatible bookmarks file.  (xbel compliant)
+   * [http://sf.net/projects/pyfd] - Cross platform Font downloader for Xerox/Tektronix/HP printers.PyFD allows the user to send PCL and Postscript Fonts on multiple printers.It is based on multiple socket connnection using TCP ports 9100, 2501 and 2000.Its GUI was created using WxPython.
+   * [http://sf.net/projects/pyfdupes] - PyFdupes is a tool for finding file with a similar name or same contents.
+   * [http://sf.net/projects/pyfian] - PyFian is a software written in Python intended to allow users to plot stock market price charts and technical indicators for market technical analysis. The project is currently in early stages of development.
+   * [http://sf.net/projects/pyficl] - Integrate the Ficl Forth environment (ficl.sourceforge.net) with
+the Python programming language.
+   * [http://sf.net/projects/pyfig] - Python interface to create FIG 3.2 vectorial format compliant files.
+   * [http://sf.net/projects/pyfight] - pyfight is a fighting game engine written in Python and using PyGame.
+   * [http://sf.net/projects/pyfile] - PyFile is a Pygame (Python+SDL) based file manager/browser which provides the usual functions expected by such a tool in a graphically intensive way instead of a usual boring and simple GUI. PyFile is also highly customizable!
+   * [http://sf.net/projects/pyfilemkaer] - Filemaker database driver for Python.
+   * [http://sf.net/projects/pyfinancials] - pyFinancials is a collection of financial algorithms, written in python.
+   * [http://sf.net/projects/pyfinder] - Pyfinder - a search engine written in Python
+   * [http://sf.net/projects/pyfireshop] - Ready to use Online Book Store written in Python,Firebird which can be easily incorporated in your E Commerce site.
+   * [http://sf.net/projects/pyflag] - FLAG was designed to simplify the process of log file analysis and forensic investigations. FLAG facilitates efficient analysis of large quantities of data within an interactive environment. PyFlag is the reimplementation of FLAG in Python.
+   * [http://sf.net/projects/pyflashcard] - Generic FlashCard program meant to handle a large number of flash cards and organize them in categories. Scoring, managing, and creating of flash cards will be relatively easy.
+   * [http://sf.net/projects/pyfltk] - A Python wrapper library for the cross-platform FLTK GUI library.
+   * [http://sf.net/projects/pyfmf] - Framework in Python for platform-independent file management with a console based toolkit (zigo) and a GUI platform (zago).  Use existing handlers and your own handlers together to walk through directory trees, select files, and process them.
+   * [http://sf.net/projects/pyfortran] - Pyfort is a tool for creating extensions to the Python language with Fortran routines. It supports F77-interfaced routines now, with plans for supporting more of F90 later.
+   * [http://sf.net/projects/pyfreedbtag] - PyFreeDBTag is a console program which uses information from the FreeDB database to (re)write metadata on digital audio files (MP3 and Vorbis, for now).  It supports information editing, database searching, file renaming, and other bundles of niftiness.
+   * [http://sf.net/projects/pyfreenet] - A python API for freenet and fcp
+   * [http://sf.net/projects/pyfretcalc] - pyFretCalc is a Python/PyQt program used to calculate the positions of the frets on fretted instruments (guitars, basses, etc..).
+   * [http://sf.net/projects/py-fs-caretaker] - A Python application providing utilities to make shared filing systems easier to manage though the monitoring, enforcing and reporting on characteristics of the file system utilising XML parameter and output files.
+
+The utilities include file validation
+   * [http://sf.net/projects/pyftp] - A user-friendly, menu-driven FTP client written in Python.
+   * [http://sf.net/projects/pyftpc] - PyFTPc is a graphical ftp client. Its is written in Python and is cross-platform using the wxPython library. The purpose is to provide a user-friendly graphical ftp client.
+   * [http://sf.net/projects/pyftpd] - FTP server/bridge.
+   * [http://sf.net/projects/pyfuzzy] - pyfuzzy is a framework to work with fuzzy sets and process them with operations of fuzzy logic.
+   * [http://sf.net/projects/pyg8] - An easy-to-use client to search the internet using the G8 Universal Search Protocol. Intended to be a 'Napster-Like' program that the average person can use while still utilizing the extensibility provided by the G8 protocol
+   * [http://sf.net/projects/pygaim] - Gaim Python plug-in. The product provides developers with the capability to develop python plugins for Gaim.
+   * [http://sf.net/projects/pygal] - A Python Graph Algorithm Library.  PyGAL provides a graph class, and implimentations of common algorithms and operations performed on graphs.
+   * [http://sf.net/projects/pygallery] - PyGallery generates static html-based photo-galleries with optional captions.  It is written in Python.
+   * [http://sf.net/projects/pygamedev] - Here you can access code to our games or gaming utilities, as well as download the binaries. Please feel free to send us feedback, including praise, complaints or *gasp* bugs.
+   * [http://sf.net/projects/pygames] - PySolitaire is a fork of PySol Solitaire that runs correctly on Windows and has a nice clean installer. PySolitaire (Python Solitaire) is a collection of more than 300 solitaire and Mahjongg games like Klondike and Spider.
+   * [http://sf.net/projects/py-games] - A lightweight game suite to run on default python distribution with no additional libraries required.
+   * [http://sf.net/projects/pygameui] - Pygame.UI is a pure Python GUI implemented using Python and Pygame library. The goal of this project is to implement a GUI which can be easily plugged into your existing game project.
+   * [http://sf.net/projects/pygammon] - We are trying to create a Backgammon game with the help of Python.
+In a later stage of development we want to include sound via pygame and try to create a GUI with PyOpenGL.
+   * [http://sf.net/projects/pygarmin] - PyGarmin is a set of Python classes which allow communication with the Garmin GPS receivers using the Garmin protocol.
+   * [http://sf.net/projects/pygasm] - (Retired) A RAD GUI building IDE for wxPython, the project has been renamed to Boa Constructor and now lives at http://boa-constructor.sourceforge.net
+Please download and keep track of progress over there. The Pygasm homepage now points to Boa.
+   * [http://sf.net/projects/pygate] - Fidonet-Internet echo messages gateway. 
+   * [http://sf.net/projects/pygavel] - PyGavel is a trainer for learning parliamentary procedure, and Robert`s Rules of 
+Order in specific. Users can make and import modules for their own bylaws, 
+variations, etc.
+   * [http://sf.net/projects/pygccxml] - &quot;...The purpose of the GCC-XML extension is to generate an XML description of a C++ program from GCC's internal representation. Since XML is easy to parse, other development tools will be able to work with C++ programs without the burden of a complicat
+   * [http://sf.net/projects/pygcnsock] - Open source development of a tool for the astronomy community to interact with the GRB Coordinates Network (GCN) broadcast of real-time gamma-ray burst (GRB) and X-ray Flash (XRF) information. Support for satellite packets: HETE-2, Integral, Swift
+   * [http://sf.net/projects/pygconf] - PyGConf is a set of python bindings for the GConf configuration database system.
+   * [http://sf.net/projects/pygcs] - PyGCS is a very stripped down MUD-like chat-server written entirely in Python. It has a single &quot;room&quot; and
+no large database to keep in memory and on disk. PyGCS has no embedded programming language.
+
+   * [http://sf.net/projects/pyge] - The PyGE (Python Gutenberg E-text) project is a suite of
+GUI desktop utilities written in Python to promote and
+facilitate awareness and enjoyment of works of literature
+that are available from the archives of Project Gutenberg.
+   * [http://sf.net/projects/pygecko] - **** No longer active ****
+
+Embed Mozill Gecko in Python / wxPython applications. Using PyXPCOM.
+
+Originally for use with touch screen kiosks.
+
+Other GUI libs to be supported in the future.
+   * [http://sf.net/projects/pyged] - Python-based software for storing, searching, and displaying genealogy data in GEDCOM 5.5. format.  Provides a web interface (CGI/Python) for examining the geneaology data and displaying it as graphical trees using GraphViz (dot).
+   * [http://sf.net/projects/pygencode] - pyGenCode. A generic code generator. 
+Simpler than SWIG. 
+Easy to extend.
+Written in Python.
+Uses a generation language similar to DHTML.
+Input syntax is similar to C++.
+New keywords can easyly be added to the interface description language.
+   * [http://sf.net/projects/pygeo] - PyGeo is a dynamic 3d geometry framework written in Python,
+rendered with VPython.

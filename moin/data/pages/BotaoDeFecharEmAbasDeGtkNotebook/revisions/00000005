@@ -1,0 +1,472 @@
+= Botão de Fechar em abas de gtk.Notebook =
+O ''widget'' de PyGTK '''[http://www.pygtk.org/docs/pygtk/class-gtknotebook.html gtk.Notebook]''' é bastante útil para organizar telas que venham a conter vários dados. Para fazer, digamos, telas de configuração, é bastante simples. O código abaixo, por exemplo, cria um ''stub'' de tela de configuração com duas abas.
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import gtk
+window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+# Creating notebook
+notebook = gtk.Notebook()
+# Creating pages
+# First tab label
+this_label = gtk.Label("Isso")
+# First page content
+this_content = gtk.Label('Configura\nIsso')
+that_label = gtk.Label("Aquilo")
+# First page content
+that_content = gtk.Label('Configura\nAquilo')
+# Add to notebook
+notebook.append_page(this_content, this_label)
+notebook.append_page(that_content, that_label)
+# Finishing
+window.add(notebook)
+window.show_all()
+gtk.main()
+}}}
+O resultado é...
+
+attachment:tela-notebook1.png
+
+Às vezes, porém, queremos criar abas dinâmicamente, e queremos poder fechá-las após criá-las. Uma maneira de fechar bastante elegante é adicionar um botão de fechar em cada aba. '''gtk.Notebook''' não faz isso automaticamente, mas a tarefa é simples. Vamos executá-la passo a passo aqui.
+
+== Acrescentando botão à aba ==
+
+No código acima, o rótulo da aba é o segundo argumento do método '''[http://www.pygtk.org/docs/pygtk/class-gtknotebook.html gtk.Notebook.append_page()]'''. Para adicionar um botão ao rótulo, poderíamos trocar o objeto '''[http://www.pygtk.org/docs/pygtk/class-gtklabel.html gtk.Label]''' por um '''[http://www.pygtk.org/docs/pygtk/class-gtkhbox.html gtk.HBox]''' que contivesse tanto o rótulo quanto o botão, como na função abaixo:
+
+{{{
+#!python
+def get_tab_label(label_text):
+    box = gtk.HBox()
+    # Creating button
+    button = gtk.Button()
+    # Retrieving "close" icon
+    image = gtk.image_new_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+    button.add(image)
+    # Creating label
+    label = gtk.Label(label_text)
+    # Putting in the gtk.HBox
+    box.pack_start(label)
+    box.pack_start(button)
+    box.show_all()
+    return box
+}}}
+Substituímos os '''gtk.Label'''s utilizados como rótulos de abas por uma chamada de '''get_tab_label''':
+
+{{{
+#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import gtk
+def get_tab_label(label_text):
+    box = gtk.HBox()
+    button = gtk.Button()
+    image = gtk.image_new_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+    button.add(image)
+    label = gtk.Label(label_text)
+    box.pack_start(label)
+    box.pack_start(button)
+    box.show_all()
+    return box
+window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+notebook = gtk.Notebook()
+# Note the difference:
+this_label = get_tab_label("Isso")
+this_content = gtk.Label('Configura\nIsso')
+# Note the difference:
+that_label = get_tab_label("Aquilo")
+that_content = gtk.Label('Configura\nAquilo')
+# Add to notebook
+notebook.append_page(this_content, this_label)
+notebook.append_page(that_content, that_label)
+# Finishing
+window.add(notebook)
+window.show_all()
+gtk.main()
+}}}
+
+E o resultado é
+
+attachment:tela-notebook2.png
+
+== A classe TabLabel ==
+
+Nós escrevemos uma função para gerar nosso rótulo, mas vamos aperfeiçoar nosso código. Em vez de uma função, faremos uma classe descendente de '''gtk.HBox''', que será nosso rótulo. Chamaremos essa classe de '''TabLabel''', e sua função de inicialização é, basicamente, o mesmo que a função get_tab_label() acima. Para efeitos de teste, vamos salvá-la no arquivo '''tablabel.py'''.
+
+{{{#!python
+import gtk
+
+class TabLabel(gtk.HBox):
+    def __init__(self, label_text):
+        gtk.HBox.__init__(self)
+        self.button = gtk.Button()
+        image = gtk.image_new_from_stock(gtk.STOCK_CLOSE,
+                gtk.ICON_SIZE_MENU)
+        self.button.add(image)
+        self.label = gtk.Label(label_text)
+        self.pack_start(self.label)
+        self.pack_start(self.button)
+        # Don't forget: you should show all
+        self.show_all()
+}}}
+
+Nosso programa ficará assim:
+
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import gtk
+import tablabel
+
+window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+notebook = gtk.Notebook()
+this_label = tablabel.TabLabel("Isso")
+this_content = gtk.Label('Configura\nIsso')
+that_label = tablabel.TabLabel("Aquilo")
+that_content = gtk.Label('Configura\nAquilo')
+notebook.append_page(this_content, this_label)
+notebook.append_page(that_content, that_label)
+window.add(notebook)
+window.show_all()
+gtk.main()
+}}}
+
+Usarmos uma classe, e não mais só uma função, será muito útil quando formos tornar os botões funcionais.
+
+== Removendo páginas ==
+
+Para remover uma página de um gtk.Notebook, usamos o método '''[http://www.pygtk.org/docs/pygtk/class-gtknotebook.html#method-gtknotebook--remove-page gtk.Notebook.remove_page()]'''. Esse método espera como argumento um número inteiro que indicará que aba será removida: 0 para a primeira aba, 1 para a segunda etc., sendo que -1 remove a última, seja qual for.
+
+Temos de usar esse método para remover as abas quando clicarmos nos botões, mas precisamos saber qual é o número da aba. Os métodos de inserção de página ('''gtk.Notebook.append_page()''', '''[http://www.pygtk.org/docs/pygtk/class-gtknotebook.html#method-gtknotebook--prepend-page prepend_page()]''', '''[http://www.pygtk.org/docs/pygtk/class-gtknotebook.html#method-gtknotebook--insert-page insert_page()]''') retornam o índice da página criada, mas esse índice pode mudar, por exemplo, se alguém fechar uma página anterior.
+
+Uma maneira de recuperar o índice de uma página é através do método '''[http://www.pygtk.org/docs/pygtk/class-gtknotebook.html#method-gtknotebook--page-num gtk.Notebook.page_num()]'''. Esse método recebe como argumento um ''widget''. Se alguma página possuir esse ''widget'', o índice dessa aba é retornado. Desse modo, na classe '''TabLabel''', podemos criar um método para ser conectado ao evento '''clicked''' do botão da aba que, usando '''gtk.Notebook.remove_page()''', encontre a página correspondente e a remova:
+
+{{{#!python
+def on_button_clicked(self, button):
+    position = self.notebook.page_num(self.widget)
+    self.notebook.remove_page(position)
+}}}
+
+Note que estamos usando campos que não criamos: '''TabLabel.notebook''' e '''TabLabel.widget'''. A solução é atualizar o método '''TabLabel.__init__()''', para que receba também, como argumento, o '''gtk.Notebook''' cuja aba será usada e o ''widget'' que a página armazenará:
+
+{{{#!python
+import gtk
+
+class TabLabel(gtk.HBox):
+    def __init__(self, label_text, notebook, widget):
+        gtk.HBox.__init__(self)
+        # Values
+        self.notebook = notebook
+        self.widget = widget
+        # Widgets
+        self.button = gtk.Button()
+        image = gtk.image_new_from_stock(gtk.STOCK_CLOSE,
+                gtk.ICON_SIZE_MENU)
+        self.button.add(image)
+        self.label = gtk.Label(label_text)
+        # Packing
+        self.pack_start(self.label)
+        self.pack_start(self.button)
+        # Connecting 'on_button_clicked':
+        self.button.connect('clicked', self.on_button_clicked)	
+        # Don't forget: you should show all
+        self.show_all()
+
+    def on_button_clicked(self, button):
+        position = self.notebook.page_num(self.widget)
+        self.notebook.remove_page(position)
+}}}
+
+Agora, atualizamos o programa...
+
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import gtk
+import tablabel
+
+window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+notebook = gtk.Notebook()
+# Precisa criar conteúdo antes
+this_content = gtk.Label('Configura\nIsso')
+this_label = tablabel.TabLabel("Isso", notebook, this_content)
+that_content = gtk.Label('Configura\nAquilo')
+that_label = tablabel.TabLabel("Aquilo", notebook, that_content)
+notebook.append_page(this_content, this_label)
+notebook.append_page(that_content, that_label)
+window.add(notebook)
+window.show_all()
+gtk.main()
+}}}
+
+...e ''voila''! Nossas abas fecham. Teste executar o programa agora, e clique em um dos botões de fechar para ver as abas se fechando.
+
+== A classe EnhancedNotebook ==
+
+Para simplificar o trabalho de lidar com as novas abas, que tal criar uma classe herdando de '''gtk.Notebook'''? Vamos declarar, nessa classe, o método '''insert_page_with_close_button()''' análogo ao método '''gtk.Notebook.insert_page()'''.
+
+{{{#!python
+import gtk
+import tablabel
+
+class EnhancedNotebook(gtk.Notebook):
+    def __init__(self):
+        gtk.Notebook.__init__(self)
+
+    def insert_page_with_close_button(self, child, tab_text, position=-1):
+        # Note that we give the text in a string, not a widget
+        label = tablabel.TabLabel(tab_text, self, child)
+        self.insert_page(child, label, position)
+}}}
+
+Salvemos essa classe em '''enhanced.py'''. Agora, podemos ter uma nova versão do programa:
+
+{{{#!python
+import gtk
+from enhanced import EnhancedNotebook
+
+window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+notebook = EnhancedNotebook()
+this_content = gtk.Label('Configura\nIsso')
+notebook.insert_page_with_close_button(this_content, "Isso")
+that_content = gtk.Label('Configura\nAquilo')
+notebook.insert_page_with_close_button(that_content, "Aquilo")
+window.add(notebook)
+window.show_all()
+}}}
+
+Bem mais elegante, não? Podem-se fazer outros métodos, também, correspondentes aos '''gtk.Notebook.append_page()''', '''gtk.Notebook.prepend_page()''' etc.
+
+== Melhorias estéticas ==
+
+Nossa nova classe está funcionando a contento. Entretanto, quem quer que já tenha utilizado alguma aplicação em GTK+ com abas notará que os botões são bem feinhos. Veja, por exemplo, a diferença entre nossas abas e as abas do [http://www.gnome.org/projects/gedit/ gedit]:
+
+attachment:diferenca-botoes.png
+
+A primeira coisa que podemos fazer para melhorar a aparência é tirar a borda (ou ''relief'') dos botões. Para isso, basta utilizar o método '''[http://www.pygtk.org/docs/pygtk/class-gtkbutton.html#method-gtkbutton--set-relief gtk.Button.set_relief()]''' do botão da aba:
+
+{{{#!python
+self.button = gtk.Button()
+image = gtk.image_new_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+self.button.add(image)
+self.button.set_relief(gtk.RELIEF_NONE)
+}}}
+
+Considerando o quanto a construção do botão de fechar está ficando complicada, vamos declarar um método '''tablabel.TabLabel.get_close_button()''' só para criá-lo:
+
+{{{#!python
+def __init__(self, label_text, notebook, widgeet):
+    # ...
+    self.button = self.get_close_button()
+    # ...
+
+def get_close_button(self):
+    button = gtk.Button()
+    image = gtk.image_new_from_stock(gtk.STOCK_CLOSE,
+                gtk.ICON_SIZE_MENU)
+    button.add(image)
+    button.set_relief(gtk.RELIEF_NONE)
+    button.connect('clicked', self.on_button_clicked)
+    return button
+}}}
+
+A melhoria é evidente...
+
+attachment:diferenca-botoes2.png
+
+...mas os botões ainda continuam grandes demais. Um bom tamanho seria algo como uns oito ''pixels'' maior que o ícone está dentro deles. Entretanto, nós não sabemos, nem temos como recuperar as dimensões de um '''[http://www.pygtk.org/docs/pygtk/class-gtkimage.html gtk.Image]''' que contenha um ícone de ''stock''. O que sabemos sobre o tal ícone é que o tamanho dele é definido pela constante '''[http://www.pygtk.org/docs/pygtk/gtk-constants.html#gtk-icon-size-constants gtk.ICON_SIZE_MENU]''', que ''não'' é o tamanho em ''pixels''.
+
+Para recuperar as dimensões de um ícone a partir das constatnes '''gtk.ICON_SIZE_*''', nós utilizamos a função '''[http://www.pygtk.org/docs/pygtk/class-gtkiconsource.html#function-gtk--icon-size-lookup gtk.icon_size_lookup()]'''. Essa função espera como argumento uma constante '''gtk.ICON_SIZE_*''' e retorna uma tupla contendo a largura e a altura do ícone. Uma vez que tenhamos obtido esses valores, basta requerir que o botão os adote, através do método '''[http://www.pygtk.org/docs/pygtk/class-gtkwidget.html#method-gtkwidget--set-size-request gtk.Button.set_size_request()]'''. Assim, podemos fazer um novo método '''tablabel.TabLabel.get_close_button()''':
+
+{{{#!python
+def get_close_button(self):
+    button = gtk.Button()
+    # Add icon and remove "visible borders"
+    image = gtk.image_new_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
+    button.add(image)
+    button.set_relief(gtk.RELIEF_NONE)
+    # Change size
+    width, height = gtk.icon_size_lookup(image.get_pixel_size())
+    button.set_size_request(width+4, height+4)
+    # Connect callback
+    button.connect('clicked', self.on_button_clicked)
+    return button
+}}}
+
+As nossas abas, agora, estão assim:
+
+attachment:diferenca-botoes3.png
+
+É bem verdade que as abas agora são maiores, mas já estão mais bonitas. Infelizmente, reduzir os botões ainda mais acaba truncando os ícones. Se alguém souber como reduzir um pouco mais o botão sem truncar os ícones, me avise :)
+
+== Acrescentando setas de rolagem e lidando com alinhamento de rótulos ==
+
+Se você está procurando por páginas de '''gtk.Notebook''' que possuam botões de fechar, é provável que você vá adicionar e remover páginas arbitrariamente ao ''notebook''. Se adicionarmos muitas páginas, as abas podem forçar a janela a crescer demais.
+
+attachment:grande-demais-menor.png
+
+A solução é habilitar as barras de rolagem de abas no notebook. Isso é bastante simples: basta usar o método '''[http://www.pygtk.org/docs/pygtk/class-gtknotebook.html#method-gtknotebook--set-scrollable gtk.Notebook.set_scrollable()]'''. Assim, conseguimos o novo método '''enhanced.EnhancedNotebook.__init__()''' abaixo:
+
+{{{#!python
+class EnhancedNotebook(gtk.Notebook):
+    def __init__(self):
+        gtk.Notebook.__init__(self)
+        self.set_scrollable(True)
+}}}
+
+Com essa pequena linha, conseguimos uma melhora considerável:
+
+attachment:nao-grande.png
+
+== Últimos retoques ==
+
+Nosso '''EnhancedNotebook''' está ''quase'' pronto. Para terminar, vamos chamar a atenção para um detalhe chato que pode passar despercebido.
+
+Veja o ''screenshot'' abaixo. Nele, fizemos uma combinação de abas e tamanho da janela específica para deixar claro o ponto: a posição do rótulo e do botão de fechar podem variar muito de acordo com o tamanho da aba. Seria melhor, porém, que o rótulo ficasse sempre numa posição à esquerda, e o botão sempre numa posição à direita.
+
+attachment:abas-distorcidas.png
+
+Pois bem, os deslocamentos ocorrem porque os ''widgets'' por padrão tentam dividir o espaço todo que lhes for disponível, expandindo para ocupá-lo ao máximo. Nos ''widgets'' '''gtk.Label''', o texto por padrão tenta ficar no centro do rótulo. Nos ''widgets'' '''gtk.Button''', o objeto dentro do botão (no caso, uma imagem) faz o mesmo.
+
+Para cada ''widget'', há uma solução. No caso do rótulo, basta usar o método '''[http://www.pygtk.org/docs/pygtk/class-gtkmisc.html#method-gtkmisc--set-alignment gtk.Label.set_alignment()]''', que define o alinhamento do texto.
+
+Esse método espera dois argumentos. O primeiro argumento definirá o alinhamento horizontal do texto do rótulo: se o valor desse primeiro argumento for 0, o texto ficará alinhado à esquerda; se o valor for 1, ficará alinhado à direita; se for 0,5 (o valor padrão para os '''gtk.Label'''), ficará centralizado[[FootNote(Em verdade, pode-se escolher qualquer valor entre zero e um, que o texto será alinhado nessa posição, relativamente ao tamanho do ''widget''. Sugerimos que estude melhor esse método, para que pegue a exata idéia de seu funcionamento.)]]. O segundo argumento define o alinhamento vertical: se seu valor for zero, o texto ficará junto ao topo do '''gtk.Label'''; se for 1, ficará colado à base; se for 0,5, o texto ficará exatamente no meio do ''widget'', verticalmente. Nosso interesse é que o texto fique alinhado à esquerda horizontalmente, mas no meio, verticalmente. Faremos isso, então, no método '''tablabel.TabLabel.__init__()''':
+
+{{{#!python
+class TabLabel(gtk.HBox):
+    def __init__(self, label_text, notebook, widget):
+        gtk.HBox.__init__(self)
+        self.notebook = notebook
+        self.widget = widget
+        self.button = self.get_close_button()
+        self.label = gtk.Label(label_text)
+        # Changing label alignment
+        self.label.set_alignment(0, 0.5)
+        self.pack_start(self.label)
+        self.pack_start(self.button)
+        self.show_all()
+}}}
+
+Quanto ao botão, nos interessa simplesmente que ele não mude de tamanho. O método '''gtk.Button.set_size_request()''' não nos serve nesse caso, mas podemos empacotá-lo de modo que ele não se expanda. Podemos aproveitar e já empacotá-lo ao final do '''gtk.HBox''', de modo que fique sempre à direita. Para isso, basta substituir a linha
+
+{{{#!python
+self.pack_start(self.button)
+}}}
+
+do '''tablabel.TabLabel.__init__()''' por
+
+{{{#!python
+self.pack_end(self.button, expand=False)
+}}}
+
+Enfim, para deixar as abas realmente elegantes, ainda sugerimos que se adicionte um pequeno ''padding'' no empacotamento (algo como três ''pixels''). 
+
+
+== Conclusão ==
+
+Você veio aqui atrás de como adicionar botões de fechar em abas de '''gtk.Notebook''', e encontrou um texto gigante falando de detalhes obscuros do processo de criar esses botões... Pois bem, se você leu até aqui, eis o seu prêmio! O código abaixo oferece um ''notebook'' cujas páginas podem ser fechadas através do botãozinho de fechar em suas abas. Pode copiar, colar em um arquivo e usar. É o resultado final desse artigo.
+
+{{{#!python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import gtk
+
+class TabLabel(gtk.HBox):
+    """ 
+    Widget used as label for gtk.Notebook page tabs with close buttons. 
+    """
+
+    def __init__(self, label_text, notebook, widget):
+        """ 
+        Creates all widgets needed for labeling and closing the tab.
+
+        label_text
+            A string containg the label text.
+
+        notebook
+            The gtk.Notebook instance which will contain the "closable"
+            pages.
+
+        widget
+            The widget to be added to the gtk.Notebook page. 
+        """
+        gtk.HBox.__init__(self)
+        # Received
+        self.notebook = notebook
+        self.widget = widget
+        # Creating
+        self.button = self.get_close_button()
+        self.label = gtk.Label(label_text)
+        self.label.set_alignment(0, 0.5)
+        # Packing
+        self.pack_start(self.label, padding=3)
+        self.pack_end(self.button, expand=False, padding=3)
+        # Showing
+        self.show_all()
+
+    def get_close_button(self):
+        """ 
+        Returns a button configured to be used as a close button.
+        """
+        button = gtk.Button()
+        # Adding image, removing relief
+        image = gtk.image_new_from_stock(gtk.STOCK_CLOSE,
+                gtk.ICON_SIZE_MENU)
+        button.add(image)
+        button.set_relief(gtk.RELIEF_NONE)
+        # Changing size
+        width, height = gtk.icon_size_lookup(
+                gtk.ICON_SIZE_MENU)
+        button.set_size_request(width+8, height+8)
+        # Connecting callback
+        button.connect('clicked', self.on_button_clicked)
+        return button
+
+    def on_button_clicked(self, button):
+        """ 
+        Callback method to be connected to the 'clicked' close 
+        button signal.
+
+        button
+            Clicked button. Argument required by signal.
+        """
+        position = self.notebook.page_num(self.widget)
+        self.notebook.remove_page(position)
+
+class EnhancedNotebook(gtk.Notebook):
+    """ 
+    An enhanced gtk.Notebook class, which provides a method for 
+    adding pages
+    which can be closed using a close button in its label.
+    """
+
+    def __init__(self):
+        gtk.Notebook.__init__(self)
+        self.set_scrollable(True)
+
+    def insert_page_with_close_button(self, child, tab_text, position=-1):
+        """ 
+        Adds a new closable page.
+
+        child
+            The widget to be added in the page.
+
+        tab_text
+            A string containing the text to be shown in the tab label.
+
+        position
+            The position where the page will be inserted: first, 
+            second etc. By 
+            default, the tab is inserted at the end of the notebook. 
+            You can
+            explicit it giving -1 as this argument.
+        """
+        # Note that we give the text in a string, not a widget
+        label = TabLabel(tab_text, self, child)
+        self.insert_page(child, label, position)
+}}}
+
+E, para nos despedirmos, um último ''screenshot'', mostrando o resultado final:
+
+attachment:parfait.png

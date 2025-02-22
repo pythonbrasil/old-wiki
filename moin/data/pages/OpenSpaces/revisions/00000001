@@ -1,0 +1,74 @@
+= Open Spaces =
+
+== O que são? ==
+
+Os Open Spaces surgiram da constatação de que, pra muita gente, a melhor
+parte de conferências como pycon, FISL etc são as "conversas de
+corredor". Ou seja, quando você começa a bater papo, daí surge um assunto
+particularmente interessante, mais uma meia dúzia de pessoas em volta se
+juntam e dali sai uma excelente discussão. Nada tinha sido programado,
+ninguém usou slides, microfones ou palcos, mas a conversa foi sobre o que
+*você* queria conversar. Os Open Spaces são a tentativa de "regulamentar"
+essas conversas, e tirar o máximo de proveito possível delas, sem
+engessá-las. O Bruce Eckel, que já tinha falado disso várias vezes no blog
+dele, discutiu e ajudou a montar o proto-open spaces que fizemos na
+pyconbrasil do ano passado, no Rio.
+
+== Como funcionam? ==
+
+A idéia é ter alguns espaços físicos distintos (podem ser várias salas,
+várias mesas em uma sala, vários ambientes em um mesmo local, o importante é
+que um não atrapalhe o outro) e um local bem visível e acessível (como um
+quadro-branco, por exemplo) onde possam ser anotados os temas das discussões
+e seus respectivos horários.
+
+Quem estiver interessado em conversar sobre um determinado assunto (digamos,
+metaclasses em Python), vai até o quadro, escolhe um horário que lhe for
+conveniente e um espaço vago naquele horário, e gruda um post-it dizendo,
+por exemplo, "Metaclasses -- Pedro Werneck" (ou seja, o assunto, e quem
+sugeriu). Notem que *não* é uma palestra do Werneck sobre
+Metaclasses. Teoricamente, ele pode nem mesmo saber como funcionam
+metaclasses, mas está interessado em conversar a respeito. 
+
+Desse modo, os espaços e horários vão sendo preenchidos.  Como são post-its,
+horários podem ser mudados, conforme necessário. Por exemplo, se o rbp tinha
+colado um post-it dizendo "Python 3000 -- rbp" no mesmo horário em que o
+werneck depois escolheu pra conversar sobre metaclasses, mas ele também quer
+falar sobre metaclasses, pode mudar o horário da conversa sobre py3k, ou
+conversar com o werneck e rearranjarem o horário. Ou podem chegar à
+conclusão de que vão juntar ambas as discussões e falar de como as
+metaclasses estão funcionando em Python 3000.
+
+E, ao longo do dia, as pessoas vão olhando no quadro o que está acontecendo
+e vão se juntando aos grupos que lhes interessam. Não precisa se registrar,
+não precisa ter nenhuma grau prévio de conhecimento, basta chegar na
+conversa. E o oposto também vale: se a conversa não está te interessando,
+use a "regra das pernas" (numa adaptação livre do original, "rule of two
+feet"): vá pra outro lugar! Não só não é considerado falta de educação sair
+no meio da conversa, é encorajado, se você não está interessado. É melhor
+pra você, obviamente, e é melhor pro grupo, que não fica com gente dispersa,
+com conversas paralelas ou lendo email, drenando a energia da conversa.
+
+Todo mundo pode sugerir tópicos, todo mundo pode se juntar a qualquer
+conversa, todo mundo pode sair de qualquer conversa, a qualquer momento.
+
+== Como fazer um evento Open Spaces dar certo? ==
+
+É essencial entender que os open spaces *fazem parte da grade normal
+do evento*! Em alguns eventos em que se tentou utlizar open spaces
+(incluindo a pyconbrasil 2008), eles foram tratados como cidadãos de segunda
+classe. A "grade oficial" de palestras estava grudada nas paredes, era
+anunciada em microfones, estava no site de eventos, e os open spaces eram
+uma salinha num canto, em que a maioria das pessoas não sabia direito o que
+estava acontecendo. Os open spaces acabaram, naturalmente, ficando meio
+vazios, e ainda assim quem participou saiu muito satisfeito.
+
+Ficou claro, então, que os open
+spaces devem ser integrados à grade regular do evento. A única diferença é
+que é uma grade mutante e, até por isso, precisa ser mais chamativa. Então,
+por exemplo, o intervalo entre palestras regulares (se o evento não for
+completamente de open spaces) pode (e deve) ser usado para anunciar o que
+está acontecendo naquele momento nos open spaces, e o que vai começar em breve;
+o site do evento deve ser atualizado sempre que possível para refletir o
+estado atual da grade dos open spaces; e assim por diante, de acordo com as
+características do evento.

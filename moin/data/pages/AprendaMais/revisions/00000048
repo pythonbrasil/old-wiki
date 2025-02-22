@@ -1,0 +1,153 @@
+##acl All:read AdminGroup:read,write,delete,revert,admin
+
+<<HTML(<div id="special_page">)>>
+
+É chegado o momento de aprender mais sobre essa grande linguagem de programação , o todo poderoso Python e é nessa hora que você vai perceber como Python dispões de uma vasta documentação disponível na Internet. É muito importante que você leia com muita atenção a seleção abaixo , sendo que todas foram muito bem avaliadas e selecionadas pela nossa equipe de grandes desenvolvedores , mas aqui é apenas um aperitivo porque você pode encontrar muito mais do que isso em uma rápida busca pela Internet ou em nossa página sobre DocumentacaoPython.
+
+Uma das coisas que mais chama atenção para quem está desejando iniciar no mundo da programação com a escolha de Python como linguagem principal é a legibilidade que ela oferece, sendo que se a pessoa não tem qualquer tipo de conhecimento sobre programação poderá ser capaz de entender pelo menos alguns trechos do que o código está fazendo.
+
+
+== Comece por aqui ==
+
+Os dois tutoriais mais elogiados que temos em língua portuguesa são o AprendaProgramar do Luciano Ramalho (versão [[http://www.pythonbrasil.com.br/moin.cgi/DocumentacaoPython?action=AttachFile&do=get&target=Aprenda_a_Programar-Luciano_Ramalho.pdf|pdf]]) e o [[http://www.pythonbrasil.com.br/moin.cgi/DocumentacaoPython?action=AttachFile&do=get&target=python24.pdf|Tutorial Python]] escrito pelo GuidoVanRossum (versão em [[http://docs.python.org/|inglês]]).
+
+== Livros ==
+
+=== Português ===
+
+{{attachment:9788575224803.gif|Introdução à programação com Python|height=170}} '''[[IntroducaoaProgramacaocomPython|Introdução à programação com Python]]'''
+
+Este livro é orientado ao iniciante em programação. Os conceitos básicos de programação, como expressões, variáveis, repetições, decisões, listas, funções e arquivos, são apresentados um a um com exemplos e exercícios tudo para acelerar o seu crescimento como desenvolvedor. A obra visa explorar a programação de computadores como ferramenta do dia a dia. Ela pode ser lida durante um curso de introdução à programação de computadores e usada como guia de estudo para autodidatas. [[IntroducaoaProgramacaocomPython|Resenha]]
+
+
+<<BR>>
+
+{{attachment:9788575222478.jpg|Capa Python e Django|height=170}} '''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=9788575222478|Python E Django - Desenvolvimento Agil De Aplicaçoes Web]]'''
+
+Introdução à linguagem Python e ao framework Django. Esse livro foi escrito para atender à demanda de desenvolvedores de aplicações Web que usam outras linguagens de programação e querem aprender a usar Python e Django para melhorar sua produtividade. Para os desenvolvedores que tem site ou blog ,ou pretende ter um , este livro é altamente recomendado.
+
+<<BR>>
+
+{{attachment:aprendendo.png}} '''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=857780013X|Aprendendo Python]]'''
+
+Tradução do livro '''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=0596002815|Learning Python]]''' esse é, sem a menor sombra de dúvidas, o melhor livro sobre Python publicado em língua portuguesa.
+
+<<BR>>
+
+{{attachment:mergulhando.png|Mergulhando no Python|height=170}} '''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=8576080931|Mergulhando no Python]]'''
+
+Tradução do livro Dive Into Python. O original em inglês é bastante recomendado - muito útil para aqueles que já sabem programar e que gostam de livros que possuem uma abordagem mais prática. Pode ser comprado ''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=1590593561|aqui]]'' e também está [[http://diveintopython.org|disponível gratuitamente online]]. Já a tradução para português possui muitos erros (inclusive na grafia da linguagem) que podem prejudicar o aprendizado de novatos em Python. [[MergulhandoNoPython|Resenha]]
+
+<<BR>>
+
+{{attachment:guia.png}} '''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=8576081067|Python - Guia de bolso]]'''
+
+Esse guia é muito útil naqueles momentos de dúvida sobre alguma característica da linguagem. Este livro é tradução do livro ''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=0596009402|Python - Pocket Reference]]''. Ressalva: Essa tradução possui erros que podem prejudicar o aprendizado de novatos em Python.
+
+<<BR>>
+
+{{attachment:pybook_thumb.jpg}} '''[[http://ark4n.files.wordpress.com/2009/05/python_para_desenvolvedores.pdf|Python Para Desenvolvedores]]'''
+
+Excelente livro do Luiz Eduardo Borges sobre Python. Aprenda a forma Pythonica de programar.
+[[http://ark4n.files.wordpress.com/2010/01/python_para_desenvolvedores_2ed.pdf| Segunda edição]] - revisada e ampliada.
+
+<<BR>>
+
+{{attachment:comp_cient.jpg}} ''[[http://www.lulu.com/content/616789|Computação Científica com Python]]''
+
+Livro escrito pelo professor Flávio Coelho destinado ao uso científico de Python. Osvaldo Santana fez uma ''[[http://pythonologia.org/2007/09/14/computacao-cientifica-com-python/|review]]'' do livro.
+
+<<BR>>
+
+{{attachment:9788575223321.gif}} ''[[http://www.novatec.com.br/livros/python-cookbook|Python Cookbook]]''
+
+Neste livro, você encontrará receitas completas para mais de uma dúzia de tópicos que abordam a parte essencial da linguagem Python, bem como tarefas comuns a uma ampla variedade de áreas de aplicação.  
+
+<<BR>>
+
+
+=== Inglês ===
+
+{{attachment:learning.png}}
+'''[[http://www.livrariacultura.com.br/scripts/cultura/externo/index.asp?id_link=4092&tipo=2&isbn=0596002815|Learning Python]]'''
+
+Sem dúvida este é o melhor livro para quem está interessado em aprender Python. Completo, com uma linguagem simples e fácil além de uma ótima estrutura.
+
+<<BR>>
+
+==== Python Books ====
+
+'''[[http://pythonbooks.revolunet.com/|Python Books]]''': Uma coletânea de diversos livros sobre Python abordando vários campos de atuação, seja através de aplicações web, desktop ou mobile. 
+
+== Documentação On-line ==
+
+Se o que você procura é documentação on-line para aprender Python você estará bem servido. Dê uma olhada com atenção na nossa página com DocumentacaoPython que está repleta de excelentes tutoriais, cursos e artigos dos mais diversos tipos.
+
+== Python na Educação ==
+
+Se você é professor, coordenador de curso ou estudante é esta procurando argumentos para usar Python na sua escola, faculdade ou Universidade, acesse PythonNaEducacao.
+
+Conheça um pouco mais sobre a utilização de Python nas universidades e como o mercado de trabalho está recebendo essa novidade. [[http://blog.pycursos.com/python-nas-universidades-e-o-mercado-de-trabalho/|link]]
+
+== Aprendendo Python de forma interativa ==
+
+ * [[https://pythonmonk.com/|PythonMonk]]
+ * [[http://www.codecademy.com/pt/tracks/python|Codeacademy]]
+ * [[http://www.learnpython.org/|Learn Python]]
+
+== Lista de Exercícios ==
+
+Para testar e aprimorar o seu conhecimento você pode acessar a página com uma ListaDeExercicios. Os exercícios estão divididos em categorias e procuram obedecer uma ordem de dificuldade crescente.
+
+== Vídeos On-line ==
+
+A grande maioria dos screencasts disponíveis atualmente foram produzidos em inglês. Para aqueles que possuem um bom conhecimento do idioma segue um breve resumo desse material:
+
+ * [[http://showmedo.com/videos/python|ShowMeDo]] - O melhor repositório de tutoriais Python em vídeo.
+ * [[https://www.youtube.com/channel/UCiHcO19LYSkbuCYgnRHI-2g|YouTube]] - O '''canal oficial''' da Comunidade Python brasileira no YouTube.
+ * [[https://www.youtube.com/channel/UCcE2EClxLEy3ksYrmrkXACw|YouTube]] - Canal da Comunidade Python Minas Gerais no YouTube.
+ * [[http://www.youtube.com/results?search_type=search_videos&search_query=python%20-monty&search_sort=relevance&search_category=26&page=2|YouTube]] - Existem dezenas de vídeo sobre Python no site YouTube. Ignore os vídeos que falam sobre pitóns.
+ * [[http://ericstk.wordpress.com/2013/08/19/video-aulas-gratuitas-de-python/|Vídeo aulas gratuitas de Python]] - Um apanhado de vídeo aulas gratuitas que temos disponíveis pela internet, com conteúdo de alta qualidade tanto no idioma brasileiro como no americano.
+
+== Podcast ==
+
+No Brasil está crescendo o número de podcasts sobre tecnologia, e Python não poderia ficar de fora, e se caso você tenha interesse em conhecer mais, ouça alguns:
+
+ * [[http://www.castalio.info/luciano-ramalho-oficinas-turing/|Castalio.info - Luciano Ramalho]]
+ * [[http://www.castalio.info/henrique-bastos-welcome-to-the-django/|Castalio.info - Henrique Bastos]]
+ * [[http://www.castalio.info/marcelo-hashimoto-polly-twitter-client/|Castalio.info - Marcelo Hashimoto]]
+ * [[http://www.grokpodcast.com/2010/10/20/episodio-6-a-linguagem-python-parte-1/|Grok Podcast - Henrique Bastos - Python - Pt.1]]
+ * [[http://www.grokpodcast.com/2010/10/28/episodio-7-a-linguagem-python-parte-2/|Grok Podcast - Henrique Bastos - Python - Pt.2]]
+ * [[http://www.grokpodcast.com/2010/12/01/episodio-12-django-o-framework-web-para-perfeccionistas/|Grok Podcast - Henrique Bastos - Django]]
+ * [[http://roundup.lincolnloop.com/|Django Round-Up]] - Inglês
+
+== Cursos ==
+
+{{attachment:simples.png}} '''[[http://www.simplesconsultoria.com.br|Simples Consultoria]]'''
+
+Pioneira e a única empresa certificada para ministrar os treinamentos oficiais da Zope Corp. no Brasil ela oferece treinamentos em Plone, Zope e Python para sua empresa. A Simples também apoia este site e as comunidades Python.
+
+<<BR>>
+
+{{attachment:visie.png}} '''[[http://www.visie.com.br|Visie]]'''
+
+A Visie é uma das mais renomadas empresas brasileiras na área de treinamentos para desenvolvimento Web. Eles possuem treinamento nas mais diversas tecnologias para desenvolvimento Web, entre elas Python
+
+<<BR>>
+
+{{attachment:wttd-banner-apyb.png|Aprenda Python e Django na Prática}} '''[[http://welcometothedjango.com.br/|Welcome to the Django]]'''
+
+Welcome to the Django é um curso prático de Python e Django com foco nas melhores práticas para o desenvolvimeto ágil de aplicações web.
+
+<<BR>>
+
+=== Cursos de Python 2013 ===
+
+[[http://ericstk.wordpress.com/2013/07/25/curso-de-python-qual-escolher|link]]
+
+
+----
+
+Agora que você já sabe como aprender mais sobre Python, EnvolvaSe.
+
+<<HTML(</div>)>>

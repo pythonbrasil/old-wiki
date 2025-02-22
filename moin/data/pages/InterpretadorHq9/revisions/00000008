@@ -1,0 +1,261 @@
+  HQ9+ é uma linguagem "esotérica" criada por Cliff L. Biffle. Ela tem esse nome por causa de seus quatro(e únicos) operadores(H, Q, 9 e +). A idéia é criar uma linguagem perfeita para iniciantes, que possa executar os exemplos/exercícios mais típicos para eles sem muito sofrimento. Mais sobre isso em http://www.cliff.biffle.org/esoterica/hq9plus.html.
+
+==== Os quatro operadores ====
+
+ *H - "Hello, world!" na stdout.
+ *Q - mostra todo o código digitado desde o início do interpretador.
+ *9 - Letra de "99 garrafas de cerveja no muro".
+ *+ - incrementa em um o contador iniciado em 0 junto do interpretador.
+
+
+Numa tarde, com excesso de tempo livre, eu tive uma idéia: eu ia escrever um interpretador. Essa é a primeira versão, estruturada:
+
+{{{
+#!python
+#! /usr/bin/env python
+
+"""Interpretador HQ9+
+
+HQ9+ e uma linguagem de programacao "esoterica", criada por Cliff L. Biffle
+(http://www.cliff.biffle.org/esoterica/hq9plus.html)
+Essa e uma versao python do interpretador."""
+
+__author__ = "Carlos KNIGHTSTALKER M. dos Santos (knightslayer@gmail.com)"
+__coauthor__ = "Eduardo 'EdCrypt' de Oliveira Padoan (eduardo.padoan@gmail.com)"
+
+def main():
+    counter = 0
+    end = False
+    
+    def inccounter(): counter += 1 # nested scopes
+    
+    def finalize(): end = True
+    
+    while not end:
+        comm = raw_input('! - >')
+
+        runtime.append(comm)
+        
+        for c in comm:
+            try:
+                {'H': H,
+                 'Q': Q,
+                 '9': nine,
+                 '+': inccounter,
+                 '!': finalize}[c.upper()]() # dictionary dispatch
+            except KeyError:
+                print u'\tComando não reconhecido: "%s"' %(c)
+            else:
+                if c == '+':
+                    print counter
+                elif c == '!':
+                    break
+
+def H():
+    print "Hello, world!!" # eu me recuso a traduzir isso!!!
+
+
+def Q():
+    print '\n'.join([elem for elem in runtime])
+
+
+def nine(n=99):
+    '''Yeah, I always do the things in "the hardest way", so
+       why can't I put it in verbose mode ?) '''
+    
+    def bottles(n):
+        if n > 99:
+            return '%s garrafas de cerveja' %(str(n))
+        elif n > 19:
+            if n%10 != 0:
+                return "%s e %s garrafas de cerveja" %(tenths[str(n)[0]], ones[str(n)[1]].lower())
+            else:
+                return "%s garrafas de cerveja" %(tenths[str(n)[0]])
+        elif n > 9:
+            return "%s garrafas de cerveja" %(tenths['1'][int(str(n)[1])])
+        elif n > 1:
+            return "%s garrafas de cerveja" %(ones[str(n)])
+        else:
+            return "Uma garrafa de cerveja"
+
+    for x in range(n):
+        print "%s no muro, " %(bottles(n-x))
+        print "%s no muro, " %(bottles(n-x))
+        print "%s." %(bottles(n-x))
+        print "Derrube uma, comece de novo, "
+    print "Nao sobrou nenhuma garrafa de cerveja no muro..."
+
+
+if __name__ == "__main__":
+    runtime = []
+    tenths = {'1': ['Dez', 
+                    'Onze', 
+                    'Doze', 
+                    'Treze', 
+                    'Quatorze',
+                    'Quinze', 
+                    'Dezesseis', 
+                    'Dezessete', 
+                    'Dezoito',
+                    'Dezenove'],
+            '2': 'Vinte',
+            '3': 'Trinta',
+            '4': 'Quarenta',
+            '5': 'Cinquenta',
+            '6': 'Sessenta',
+            '7': 'Setenta',
+            '8': 'Oitenta',
+            '9': 'Noventa'}
+    
+    ones={'1': 'Uma',
+          '2': 'Duas',
+          '3': 'Tres',
+          '4': 'Quatro',
+          '5': 'Cinco',
+          '6': 'Seis',
+          '7': 'Sete',
+          '8': 'Oito',
+          '9': 'Nove'}
+
+    print "\tInterpretador HQ9+\nPython powered(http://www.python.org)" 
+    main()
+}}}
+
+Um amigo, EduardoDeOliveiraPadoan, fez a modificação para por as rotinas numa hash.
+
+
+Tempos depois, tive outra bela idéia: fazer isso orientado a objetos.
+
+{{{
+#!python
+#! /usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+
+"""
+Interpretador HQ9+
+
+HQ9+ e uma linguagem de programacao "esoterica", criada por Cliff L. Biffle
+(http://www.cliff.biffle.org/esoterica/hq9plus.html)
+Essa e uma versao orientada a objetos em python do interpretador.
+"""
+
+__author__ = "Carlos KNIGHTSTALKER M. dos Santos ( knighslayer@gmail.com )"
+__licence__ = "GNU General Public Licence[http://www.opensource.org, http://www.gnu.org]"
+
+__coauthor__ = ("Eduardo de O. Padoan", "Added Hashes", "eduardo.padoan@gmail.com")
+
+import sys
+
+class HQ9Plus:
+    '''A classe base do interpretador de comandos HQ9+'''
+
+    def __init__(self):
+        '''Isso inicia o interpretador de comandos'''
+        self.counter = 0
+        self.runtime = []
+        self.tenths = {'1' : ['Dez',
+                              'Onze',
+                              'Doze',
+                              'Treze',
+                              'Quatorze',
+                              'Quinze',
+                              'Dezesseis',
+                              'Dezessete',
+                              'Dezoito',
+                              'Dezenove'],
+                       '2' : 'Vinte',
+                       '3' : 'Trinta',
+                       '4' : 'Quarenta',
+                       '5' : 'Cinquenta',
+                       '6' : 'Sessenta',
+                       '7' : 'Setenta',
+                       '8' : 'Oitenta',
+                       '9' : 'Noventa'
+                       }
+        self.ones = {'1' : 'Uma',
+                     '2' : 'Duas',
+                     '3' : 'Tres',
+                     '4' : 'Quatro',
+                     '5' : 'Cinco',
+                     '6' : 'Seis',
+                     '7' : 'Sete',
+                     '8' : 'Oito',
+                     '9' : 'Nove'
+                     }
+                     
+    def H(self):
+        '''Mostra "Hello, world!" na stdout'''
+        print "Hello, world!"  # eu me recuso a traduzir isso!!!1
+
+    def Q(self):
+        '''Faz as Quines(i.e.: mostra tudo que foi submetido
+        ao interpretador'''
+        print '\n'.join([elem for elem in self.runtime])
+
+    def _bottles(self, n):
+        '''Retorna o numero de garrafas.'''
+        if n > 99:
+            return '%s garrafas de cerveja' %(str(n))
+        elif (n > 19) and (n < 100):
+            if (n % 10) != 0:
+                return "%s e %s garrafas de cerveja" %(self.tenths[str(n)[0]], self.ones[str(n)[1]].lower())
+            else:
+                return "%s garrafas de cerveja" %(self.tenths[str(n)[0]])
+        elif (n > 9) and (n < 20):
+            return "%s garrafas de cerveja" %(self.tenths['1'][int(str(n)[1])])
+        elif (n > 1) and (n < 10):
+            return "%s garrafas de cerveja" %(self.ones[str(n)])
+        elif n == 1:
+            return "Uma garrafa de cerveja"
+
+    def nine(self, n=99):
+        '''Mostra a letra de "99 garrafas de cerveja no muro".
+        Por extenso, logico...'''
+
+        for i in xrange(n):
+            print ("%s no muro, " %(self._bottles(n - i))) * 2
+            print "%s." %(self._bottles(n - i))
+            print "Derrube uma, comece de novo, "
+            
+        print "Nao ha mais nenhuma garrafa de cerveja no muro..."
+
+    def plus(self):
+        '''Incrementa o contador e mostra seu valor na stdout.'''
+        self.counter += 1
+        print self.counter
+
+    def run(self, com):
+        '''Roda um comando
+        'com' e uma string'''
+        
+        self.runtime.append(com)
+
+        for c in com:
+            if c == '!':
+                sys.exit(0)
+            try:
+                {'H' : self.H,
+                 'Q' : self.Q,
+                 '9' : self.nine,
+                 '+' : self.plus}[c.upper()]()
+            except KeyError:
+                print '\tComando nao-reconhecido: %s' %(c)
+                
+
+
+if __name__ == "__main__":
+
+    hq = HQ9Plus()
+    terminate = 0
+
+    print "\tInterpretador HQ9+\nPython powered(http://www.python.org)"
+    
+    while not terminate:
+        hq.run(raw_input('! - > '))
+}}}
+
+CarlosMoraisDosSantos
+
+P.S.1: Não, eu não bebo cerveja. Pelo menos não tantas.
+
+P.S.2: Yeah, eu sei que o código tá tosco, sinta-se à vontade para alterá-lo. Inclua um atributo co-author no código também :).

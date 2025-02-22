@@ -1,0 +1,27 @@
+##master-page:HomepageTemplate
+#format wiki
+#language en
+= Sérgio Berlotto =
+
+== Contatos ==
+Email: <<MailTo(sergio.berlotto AT gmail DOT com)>>
+## You can even more obfuscate your email address by adding more uppercase letters followed by a leading and trailing blank.
+
+Msn: berlottocdd@hotmail.com
+
+Site: [[http://www.berlotto.blog.br|http://www.berlotto.blog.br]]
+
+Comunidade Ning: [[http://pythonbr.ning.com|http://pythonbr.ning.com]]
+
+== Profissional ==
+Desenvolvedor desde 1999.
+
+Usuário Linux desde 2004 mais um menos ...
+
+Conhecimento nas linguagens: Java, PHP, Visual Basic
+
+Conhecimentos mais recentes: Shell Script, Python, Django
+
+
+----
+CategoryHomepage

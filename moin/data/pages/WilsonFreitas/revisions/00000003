@@ -1,0 +1,26 @@
+= Wilson Freitas =
+
+|| homepage || http://wilson.econofisica.com.br         ||
+|| nickname || wnf                                      ||
+|| email    || wilson@econofisica.com.br                ||
+|| icq      || 58722484                                 ||
+|| yahoo    || wilson_n_freitas                         ||
+|| msn      || wndf@hotmail.com                         ||
+
+== Histórias de um físico que não gostava de computadores ==
+
+Bem, diferentemente da maioria dos aficcionados pelos computadores eu comecei a programar a poquissimo tempo. Na realidade até 1998 eu não encarava a idéia de ter que trabalhar com computadores. É aqui que essa história começa.
+
+Eu fazia Física na UERJ e gostava de fazer contas, resolver equações , resolver problemas de Mecânica Analítica, Mecânica Quântica, Teoria de Clássica de Campos, Algebra Tensorial e por ai vai. Pra resolver esses problemas não precisava de computadores, somente de lápis e papel, na realidade muito papel. Dessa forma os computadores para mim eram muito desinteressantes, já que nem de jogar eu gosto - como já falei antes eu só gostava de fazer contas. Era o mais puro nerd de Física, só falava de Física, mas mesmo assim eu tinha namorada :) .
+
+Em 1999 me tornei bolsista do Centro Brasileiro de Pesquisas Físicas (CBPF) e lá eu vi o que era Física de verdade e Física de verdade só se faz com computadores e com muitos computadores - no CBPF tinha uma grande rede Sun/Solaris co todo suporte para processamento paralelo e distribuído - não da pra fazer contas na mão, a Física de verdade não é exata :( . Nesse ano eu aprendi FORTRAN, o meu primeiro programa foi pra gerar os pontos de uma parábola - na verdade era uma curva de densidade para ocupação de elétrons em um sítio metálico, isso não tem importância. Esse foi també o meu primeiro contato com o UNIX, esse programa foi compilado no Solaris - com f77 - e usei o grande xmgr para visualizar os pontos. O melhor de toda essa história foi que ganhei a minha senha no computador e com isso poderia ficar navegando na internet -eu não tinha computador em casa.
+
+Os anos se passaram, eu comprei o meu computador e obviamente instalei Linux em casa, foi o Conectiva que veio na primeira edição da Revista do Linux - aqui ocorreu a primeira mudança de regime. O Universo em torno do Linux foi uma grande descoberta, fiquei muito motivado com tantas coisas para aprender. Lembro-me que fiquei muito exitado com as linguagens de script, primeiro o csh, no Solaris e depois o bash, definitivamente, no Linux. Já estava familiarizado com o ambiente e com a linguagem, FORTRAN, e realmente não sentia necessidade de mudar - também não sabia para onde mudar, os Físicos adoram FORTRAN e são completamente agnóticos a outras linguangens, se bem que uns hoje já usam C.
+
+Em 2000 minha namorada ficou grávida do meu primeiro filho Pedro, foi ai que tomei a decisão mais importante da minha vida. Eu tenho que arrumar um emprego. Foi quando muidei de bolsista de Física para bolsista técnico e fui programar em Java. Nesse ano fiz um curso de processamento de dados na PUC só pra botar alguma coisa no cúrriculo, e nesse curso eu vi o santo graal, vi programação estruturada e isso me fez ver o lixo que era FORTRAN e o lixo de código que eu escrevia. Em paralelo ao curso eu li o livro Java para leigos e comecei a fazer applets em Java. No final desse ano arrumei um emprego em uma .COM que usava JSP e SERVLETS - note que eu não sabia absolutamente nada de Internet e tinha acabado de aprender a programar. Aqui ocoreu a segunda mudança de regime, eu vi o que eu tinha e o que eu precisava ter, o gap era imenso. Baixei todo tipo de documentação e código disponível e digeri como um alucinado. Em 3 meses comecei a me sentir confiante, com 1 ano eu já era o desenvolvedor com mais responsabilidades e já tinha passado ou estudado todo o sistema. Eu era o cara.
+
+Nesse meio tempo eu conheci Python, sempre achei que precisava saber uma liguagem de script e Perl é horrível. Mesmo assim não dei muita importância, fiz uns pequenos programinhas rodei uns exemplos e ficou nisso. Na época Java era muito mais atraente $$.
+
+Mais anos se passaram continuei estudando Java e Python - impressionante como nunca desisti de Python. Até que em 2004 resolvi me rebelar e voltar as minhas origens, sair do mercado de TI - que é uma titica - e voltar para a faculdade fazer o mestrado em Física - Simulações em Sistemas Complexos aplicadas ao Merdado Financeiro. O mais importante em toda essa revolução - a terceira mudança de regime - é que eu vi que Java é uma grande mentira. Adotei Python definitivamente como linguagem primária para solução de meus problemas - na verdade uso C para fazer as simulações, em Python elas ficam muito lentas - e me tornei um forte ativista da liguagem.
+
+Costumo dizer que ao entender Python eu vi a luz. É tão poderosa quanto as Equações de Maxwell do Eletromagnetismo :).

@@ -1,0 +1,60 @@
+Este é o ponto de entrada do NossoLivro, um esforço colaborativo de escrita
+de um livro de Python à N-mãos inteiramente em Português e totalmente brazuca.
+
+Para discutir sobre temas relacionados ao NossoLivro, encaminhe-se para NossoLivroDiscussao. 
+
+[[TableOfContents]]
+
+= 1.0 Basicão =
+
+ * HistoriaDoPython
+ * Arquitetura
+ * ModosDeExecucao
+ * Passeando no ModoInterativo
+ * Sintaxe da Linguagem
+ * Estruturas de Dados Nativas
+  * Tuplas
+  * Listas
+  * Dicionários
+ * Estruturas de Dados Adicionais
+ * Vetores
+ * Conjuntos
+
+= 2.0 Para Quem já está Cobra =
+
+ * GuiaDeEstilo
+ * Depuração
+ * ModulosPacotes
+ * Programação Funcional (ProgramacaoFuncional PythonFuncional PrincipiosFuncionais)
+ * [http://www.pythonbrasil.com.br/moin.cgi/IntroPython#head-df7e82f9f4edc4028db1ffe855314588b1c4851c List Comprehensions]
+ * [http://www.pythonbrasil.com.br/moin.cgi/IntroPython#head-df7e82f9f4edc4028db1ffe855314588b1c4851c Generator Expressions]
+  * UsandoGenerators
+ * [http://pythonbrasil.com.br/moin.cgi/ProgramacaoOrientadaObjetoPython Orientação a Objetos]
+ * CodificacaoDeStrings
+ * Descriptors e Properties
+ * Design Patterns e Python
+ * Sobrescrevendo Operadores
+ * [http://www.pythonbrasil.com.br/moin.cgi/TestDrivenDevelopment UnitTests]
+ * DocTest
+ * DistUtils
+
+= 3.0 Pajés, Gurus e Xamãs =
+
+ * AspectosFormaisDaLinguagemPython
+ * Iterators
+ * Decorators
+ * Metaclasses
+
+= 4.0 Uma Aplicação de Cabo a Rabo =
+
+ * Descrição da Aplicação
+ * Selecionando um Framework (Django, TurboGears, outro framework?)
+ * Modelo Relacional
+ * Mapeamento Objeto Relacional
+ * Camada de Controle
+ * Camada de Visão
+ * Adicionando Firulas
+  * Web Services
+  * Criando uma Interface para Desktop
+
+= Bibliografia, Referências e Links =

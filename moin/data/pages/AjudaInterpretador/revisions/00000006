@@ -1,0 +1,144 @@
+Vou deixar algumas dicas das ferramentas que eu uso quando
+estou bisbilhotando algum módulo que não conheço.
+
+= O print é seu amigo =
+Use e abuse, se não sabe o que é ''coisa'' então {{{print coisa}}}.
+{{{
+>>> x = dir
+>>> print x
+<built-in function dir>
+}}}
+
+x é um alias para a função dir.
+
+= O dir é seu amigo =
+O dir lista os símbolos públicos de um módulo, geralmente
+contém uma listagem de classes, funções e variáveis
+para serem usadas pelo programador.
+
+{{{
+>>> import thread
+>>> dir(thread)
+['LockType', '__doc__', '__name__', 'allocate', 'allocate_lock', 'error', 'exit', 'exit_thread', 'get_ident', 'interrupt_main', 'start_new', 'start_new_thread']>>>
+}}}
+
+Tirando os símbolos do Python ({{{__doc__}}} e {{{__name__}}}),
+esta é lista do que eu tenho disponível para mexer com o módulo ''thread''.
+
+= coisa.__doc__ é seu amigo =
+
+Para que serve mesmo o módulo thread?
+{{{
+>>> print thread.__doc__
+This module provides primitive operations to write multi-threaded programs.
+The 'threading' module provides a more convenient interface.
+}}}
+
+Ok, é para manipular threads de uma maneira "primitiva" (baixo-nível).
+Tem uma dica para eu usar o módulo ''threading'', que seria mais amigável.
+
+E o que é o símbolo ''start_new'' nesse módulo?
+{{{#!python
+>>> print thread.start_new
+<built-in function start_new>
+}}}
+
+Uma função, e o que ela faz mesmo?
+
+{{{
+>>> print thread.start_new.__doc__
+start_new_thread(function, args[, kwargs])
+(start_new() is an obsolete synonym)
+ 
+Start a new thread and return its identifier.  The thread will call the
+function with positional arguments from the tuple args and keyword arguments
+taken from the optional dictionary kwargs.  The thread exits when the
+function returns; the return value is ignored.  The thread will also exit
+when the function raises an unhandled exception; a stack trace will be
+printed unless the exception is SystemExit.
+}}}
+
+Hmm legal, eu sei os argumentos que a função utiliza e tenho a descrição
+completa dela, tem até uma dica que essa função é obsoleta! Eu deveria
+usar ''start_new_thread''.
+
+= O help é seu amigo =
+
+Existe uma forma mais amigável de obter ajuda no interpretador (só disponível
+nas versões 2 do Python) é utilizando o comando ''help''. O {{{help(coisa)}}}
+exibe a saída igual a uma manpage do Unix de ''coisa'',
+contém resumo, descrição, parâmetros, hierarquia de classes, variáveis
+e outros componentes, muito informativo e útil.
+
+De volta ao módulo thread...
+{{{
+>>> help(thread)
+
+Help on built-in module thread:
+ 
+NAME
+    thread
+ 
+FILE
+    (built-in)
+ 
+DESCRIPTION
+    This module provides primitive operations to write multi-threaded programs.
+    The 'threading' module provides a more convenient interface.
+ 
+CLASSES
+    exceptions.Exception
+        error
+    __builtin__.object
+        lock
+...
+}}}
+
+No caso de eu usar o comando {{{help(thread.start_new_thread}}}
+eu vou obter o mesmo que o comando {{{print thread.start_new_thread.__doc__}}}.
+
+= O pydoc é seu amigo =
+
+O pydoc é o help disponível no prompt do sistema! Infelizmente
+as distribuições Linux (o FreeBSD costuma deixar disponível)
+não costumam por este utilitário em um ''/bin'' do sistema,
+mas é fácil resolver isso:
+{{{
+# ln -sf /usr/lib/python2.3/pydoc.py /usr/local/bin/pydoc
+}}}
+
+Não esqueça de trocar o ''python2.3'' com a versão do seu Python.
+Agora é fácil obter ajuda de qualquer módulo,
+é só chamar {{{pydoc thread}}} ou então {{{pydoc thread.start_new_thread}}}.
+
+Com o pydoc é possível também procurar por uma palavra-chave em toda
+a documentação dos módulos, digamos que eu queria procurar por ''shell'', eu faço:
+
+{{{
+$ pydoc -k shell
+commands - Execute shell commands via os.popen() and return status, output.
+fnmatch - Filename matching with shell patterns.
+idlelib.PyShell
+idlelib.ScriptBinding - Extension to execute code outside the Python shell window.
+shlex - A lexical analyzer class for simple shell-like syntaxes.
+}}}
+
+Uma listagem completa de módulos que fazem referência ao termo shell.
+
+O pydoc é capaz de fazer mais coisas ainda! Não troque de canal, não saia da sua
+cadeira. Se você usar
+{{{
+$ pydoc -p 8000
+}}}
+
+e abrir o seu browser favorito no endereço {{{localhost:8000}}} e então... sim, 
+toda a documentação dos módulos Python de forma organizada e clicável no
+seu browser!
+
+= Outros amigos =
+  * http://docs.python.org/lib/lib.html
+  * TabCompleta
+
+----
+
+RudaMoura
